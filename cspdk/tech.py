@@ -33,6 +33,7 @@ def get_layer_stack(
     thickness_nitride: float = 300 * nm,
     zmin_heater: float = 1.1,
     thickness_heater: float = 700 * nm,
+    zmin_metal: float = 1.1,
     thickness_metal: float = 700 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
@@ -41,12 +42,11 @@ def get_layer_stack(
 
     Args:
         thickness_wg: waveguide thickness in um.
+        thickness_nitride: nitride thickness in um.
         zmin_heater: TiN heater.
         thickness_heater: TiN thickness.
-        zmin_metal2: metal2.
-        thickness_metal2: metal2 thickness.
-        substrate_thickness: substrate thickness in um.
-        box_thickness: bottom oxide thickness in um.
+        zmin_metal: metal thickness in um.
+        thickness_metal: metal2 thickness.
     """
 
     return LayerStack(
@@ -80,15 +80,15 @@ def get_layer_stack(
             ),
             heater=LayerLevel(
                 layer=LAYER.HEATER,
-                thickness=750e-3,
+                thickness=thickness_heater,
                 zmin=zmin_heater,
                 material="TiN",
                 info={"mesh_order": 1},
             ),
-            metal2=LayerLevel(
+            metal=LayerLevel(
                 layer=LAYER.PAD,
                 thickness=thickness_metal,
-                zmin=zmin_heater + thickness_heater,
+                zmin=zmin_metal + thickness_metal,
                 material="Aluminum",
                 info={"mesh_order": 2},
             ),
