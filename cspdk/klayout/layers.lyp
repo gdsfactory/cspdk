@@ -52,6 +52,23 @@
   <source>4/0@1</source>
  </properties>
  <properties>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I3</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRA 6/0</name>
+  <source>6/0@1</source>
+ </properties>
+ <properties>
   <frame-color>#ebc634</frame-color>
   <fill-color>#ebc634</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -69,8 +86,8 @@
   <source>39/0@1</source>
  </properties>
  <properties>
-  <frame-color>#008080</frame-color>
-  <fill-color>#800057</fill-color>
+  <frame-color/>
+  <fill-color>#008080</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I3</dither-pattern>

@@ -18,6 +18,13 @@ LayerViews:
     transparent: true
     width: 1
     color: "cyan"
+  GRA:
+    layer: [6, 0]
+    layer_in_name: true
+    hatch_pattern: coarsely dotted
+    transparent: true
+    width: 1
+    color: "blue"
   HEATER:
     layer: [39, 0]
     layer_in_name: true
@@ -26,8 +33,7 @@ LayerViews:
   PAD:
     layer: [41, 0]
     layer_in_name: true
-    frame_color: "teal"
-    fill_color: "#800057"
+    fill_color: "teal"
     hatch_pattern: coarsely dotted
   FLOORPLAN:
     layer: [99, 0]
