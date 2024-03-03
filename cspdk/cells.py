@@ -3,7 +3,7 @@ from functools import partial
 import gdsfactory as gf
 
 from cspdk.config import PATH
-from cspdk.tech import xs_rc, xs_ro, xs_sc, xs_so
+from cspdk.tech import LAYER, xs_rc, xs_ro, xs_sc, xs_so
 
 ################
 # Adapted from gdsfactory generic PDK
@@ -112,37 +112,79 @@ import_gds = partial(gf.import_gds, gdsdir=gdsdir)
 
 
 @gf.cell
-def CORNERSTONE_MPW_SOI_220nm_GDSII_Template() -> gf.Component:
+def packaging_MPW_SOI220() -> gf.Component:
     """Returns CORNERSTONE_MPW_SOI_220nm_GDSII_Template fixed cell."""
-    return import_gds("CORNERSTONE MPW SOI 220nm GDSII Template.gds")
+    c = gf.Component()
+    _ = c << import_gds("Cell0_SOI220_Full_1550nm_Packaging_Template.gds")
+
+    # Add optical ports
+    x0 = -4925 + 2.827
+    y0 = 1650
+    pitch = 250
+    ngratings = 14
+    for i in range(ngratings):
+        c.add_port(
+            name=f"W{i}",
+            center=(x0, y0 - i * pitch),
+            width=0.45,
+            orientation=0,
+            layer=LAYER.WG,
+        )
+
+    for i in range(ngratings):
+        c.add_port(
+            name=f"E{i}",
+            center=(-x0, y0 - i * pitch),
+            width=0.45,
+            orientation=180,
+            layer=LAYER.WG,
+        )
+
+    # Add electrical ports
+    x0 = -4615
+    y0 = 2200
+    pitch = 300
+    npads = 31
+    for i in range(npads):
+        c.add_port(
+            name=f"N{i}",
+            center=(x0 + i * pitch, y0),
+            width=150,
+            orientation=270,
+            layer=LAYER.PAD,
+        )
+
+    for i in range(npads):
+        c.add_port(
+            name=f"S{i}",
+            center=(x0 + i * pitch, -y0),
+            width=150,
+            orientation=90,
+            layer=LAYER.PAD,
+        )
+    return c
 
 
 @gf.cell
-def Flip_Chip_Bonding_Example() -> gf.Component:
-    """Returns Flip_Chip_Bonding_Example fixed cell."""
-    return import_gds("Flip_Chip_Bonding_Example.gds")
-
-
-@gf.cell
-def Heater() -> gf.Component:
+def heater() -> gf.Component:
     """Returns Heater fixed cell."""
     return import_gds("Heater.gds")
 
 
 @gf.cell
-def SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing() -> gf.Component:
+def crossing_so() -> gf.Component:
     """Returns SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     return import_gds("SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
 
 
 @gf.cell
-def SOI220nm_1550nm_TE_RIB_Waveguide_Crossing() -> gf.Component:
+def crossing_rc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     return import_gds("SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
 
 
 @gf.cell
-def SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing() -> gf.Component:
+def crossing_sc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     return import_gds("SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
 
@@ -153,5 +195,5 @@ if __name__ == "__main__":
     # ref.center = (0, 0)
     # run.center = (0, 0)
     # c = gc_rectangular_ro()
-    c = CORNERSTONE_MPW_SOI_220nm_GDSII_Template()
-    c.show()
+    c = packaging_MPW_SOI220()
+    c.show(show_ports=True)
