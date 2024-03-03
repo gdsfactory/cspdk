@@ -1,6 +1,6 @@
-# CornerStone Photonics PDK 0.0.1
+# CornerStone PDK 0.0.1
 
-CornerStone PDK
+[CornerStone](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
 
 ## Installation
 
