@@ -15,7 +15,6 @@ nm = 1e-3
 class LayerMapCornerstone(LayerMap):
     WG: Layer = (3, 0)
     SLAB: Layer = (5, 0)
-    WG_rib: Layer = (4, 0)
     FLOORPLAN: Layer = (99, 0)
     HEATER: Layer = (39, 0)
     GRA: Layer = (6, 0)

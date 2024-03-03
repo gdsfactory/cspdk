@@ -8,6 +8,30 @@ from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
 ################
 # Adapted from gdsfactory generic PDK
 ################
+
+################
+# Waveguides
+################
+
+straight_sc = partial(gf.c.straight, cross_section=xs_sc)
+straight_so = partial(gf.c.straight, cross_section=xs_so)
+straight_rc = partial(gf.c.straight, cross_section=xs_rc)
+straight_ro = partial(gf.c.straight, cross_section=xs_ro)
+straight_nc = partial(gf.c.straight, cross_section=xs_nc)
+straight_no = partial(gf.c.straight, cross_section=xs_no)
+
+
+bend_sc = partial(gf.c.bend_euler, cross_section=xs_sc)
+bend_so = partial(gf.c.bend_euler, cross_section=xs_so)
+bend_rc = partial(gf.c.bend_euler, cross_section=xs_rc)
+bend_ro = partial(gf.c.bend_euler, cross_section=xs_ro)
+bend_nc = partial(gf.c.bend_euler, cross_section=xs_nc)
+bend_no = partial(gf.c.bend_euler, cross_section=xs_no)
+
+
+################
+# MMIs
+################
 _mmi1x2 = partial(gf.components.mmi1x2, width_mmi=6, length_taper=20, width_taper=1.5)
 _mmi2x2 = partial(gf.components.mmi2x2, width_mmi=6, length_taper=20, width_taper=1.5)
 
@@ -184,10 +208,8 @@ gc_rectangular_no = partial(
 )
 
 ################
-# Imported from Cornerstone MPW SOI 220nm GDSII Template
+# Packaging
 ################
-gdsdir = PATH.gds
-import_gds = partial(gf.import_gds, gdsdir=gdsdir)
 
 pad = partial(gf.components.pad, layer=LAYER.PAD)
 
@@ -278,6 +300,36 @@ die_rc = partial(die_nc, grating_coupler=gc_rectangular_rc, cross_section=xs_rc)
 die_ro = partial(die_nc, grating_coupler=gc_rectangular_ro, cross_section=xs_ro)
 
 
+################
+# Transitions
+################
+
+trans_sc_rc20 = partial(
+    gf.c.taper_strip_to_ridge,
+    cross_section=xs_sc,
+    length=10,
+    w_slab2=10.45,
+    width1=0.45,
+    width2=0.45,
+    layer_wg=LAYER.WG,
+    layer_slab=LAYER.SLAB,
+)
+
+trans_sc_rc10 = partial(
+    gf.c.taper_cross_section_linear,
+    cross_section1=xs_sc,
+    cross_section2=xs_rc,
+    length=10,
+)
+
+
+################
+# Imported from Cornerstone MPW SOI 220nm GDSII Template
+################
+gdsdir = PATH.gds
+import_gds = partial(gf.import_gds, gdsdir=gdsdir)
+
+
 @gf.cell
 def heater() -> gf.Component:
     """Returns Heater fixed cell."""
@@ -303,6 +355,10 @@ def crossing_sc() -> gf.Component:
 
 
 if __name__ == "__main__":
+    c = gf.Component()
+    w = c << straight_rc()
+    t = c << trans_sc_rc10()
+    t.connect("o2", w.ports["o1"])
     # ref = c << SOI220nm_1550nm_TE_RIB_2x1_MMI()
     # ref.mirror()
     # ref.center = (0, 0)
@@ -311,5 +367,5 @@ if __name__ == "__main__":
     # c = packaging_MPW_SOI220()
     # c = gc_rectangular_no()
     # c = packaging_MPW_nc()
-    c = die_nc()
+    # c = die_nc()
     c.show(show_ports=True)
