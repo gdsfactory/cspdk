@@ -1,9 +1,4 @@
-"""Technology definitions.
-
-- LayerStack
-- cross_sections (xs_)
-- constants (WIDTH, CLADDING_OFFSET ...)
-"""
+"""Technology definitions."""
 import sys
 from functools import partial
 
@@ -21,11 +16,13 @@ class LayerMapCornerstone(LayerMap):
     WG: Layer = (3, 0)
     SLAB: Layer = (5, 0)
     WG_rib: Layer = (4, 0)
-    CELL: Layer = (99, 0)
+    FLOORPLAN: Layer = (99, 0)
     HEATER: Layer = (39, 0)
     GRA: Layer = (6, 0)
     LBL: Layer = (100, 0)
     PAD: Layer = (41, 0)
+    NITRIDE: Layer = (203, 0)
+    NITRIDE_ETCH: Layer = (204, 0)
 
 
 LAYER = LayerMapCornerstone()
@@ -33,6 +30,7 @@ LAYER = LayerMapCornerstone()
 
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
+    thickness_nitride: float = 300 * nm,
     zmin_heater: float = 1.1,
     thickness_heater: float = 700 * nm,
     thickness_metal: float = 700 * nm,
@@ -58,6 +56,24 @@ def get_layer_stack(
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
+                info={"mesh_order": 1},
+                sidewall_angle=10,
+                width_to_z=0.5,
+            ),
+            nitride=LayerLevel(
+                layer=LAYER.NITRIDE,
+                thickness=thickness_nitride,
+                zmin=0.0,
+                material="sin",
+                info={"mesh_order": 2},
+                sidewall_angle=10,
+                width_to_z=0.5,
+            ),
+            nitride_etch=LayerLevel(
+                layer=LAYER.NITRIDE_ETCH,
+                thickness=thickness_nitride,
+                zmin=0.0,
+                material="sin",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -104,6 +120,10 @@ xf_rc = partial(
 )
 xf_ro = partial(xf_rc, width=0.40)
 
+xf_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
+xf_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
+
+
 xf_sc_heater_metal = partial(
     gf.cross_section.strip_heater_metal,
     layer=LAYER.WG,
@@ -129,6 +149,9 @@ xs_sc = xf_sc()
 xs_rc = xf_rc()
 xs_so = xf_so()
 xs_ro = xf_ro()
+xs_nc = xf_nc()
+xs_no = xf_no()
+
 xs_sc_heater_metal = xf_sc_heater_metal()
 xs_metal_routing = metal_routing()
 xs_heater_metal = heater_metal()
