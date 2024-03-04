@@ -23,41 +23,12 @@ jobs:
           pip install pre-commit
           pre-commit run -a
   test_code:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      max-parallel: 12
-      matrix:
-        python-version: ["3.11"]
-        os: [ubuntu-latest]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: "pip"
-          cache-dependency-path: pyproject.toml
-      - name: Install dependencies
-        run: |
-          make dev
-      - name: Test with pytest
-        run: pytest
-  test_code_coverage:
     runs-on: ubuntu-latest
+    container: ghcr.io/gdsfactory/gdsfactory:main
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
       - name: Install dependencies
         run: |
-          make dev
+          make install
       - name: Test with pytest
-        run: |
-          pytest --cov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+        run: pytest tests/
