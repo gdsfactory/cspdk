@@ -112,8 +112,7 @@ xf_rc = partial(
     gf.cross_section.strip,
     layer=LAYER.WG,
     width=0.45,
-    cladding_layers=cladding_layers_rib,
-    cladding_offsets=cladding_offsets_rib,
+    sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
     radius=25,
     radius_min=25,
 )
@@ -121,6 +120,11 @@ xf_ro = partial(xf_rc, width=0.40)
 
 xf_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
 xf_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
+
+xf_rc_tip = partial(
+    gf.cross_section.strip,
+    sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
+)
 
 
 xf_sc_heater_metal = partial(
@@ -150,6 +154,7 @@ xs_so = xf_so()
 xs_ro = xf_ro()
 xs_nc = xf_nc()
 xs_no = xf_no()
+xs_rc_tip = xf_rc_tip()
 
 xs_sc_heater_metal = xf_sc_heater_metal()
 xs_metal_routing = metal_routing()

@@ -3,7 +3,7 @@ from functools import partial
 import gdsfactory as gf
 
 from cspdk.config import PATH
-from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
+from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_rc_tip, xs_ro, xs_sc, xs_so
 
 ################
 # Adapted from gdsfactory generic PDK
@@ -28,6 +28,28 @@ bend_ro = partial(gf.c.bend_euler, cross_section=xs_ro)
 bend_nc = partial(gf.c.bend_euler, cross_section=xs_nc)
 bend_no = partial(gf.c.bend_euler, cross_section=xs_no)
 
+################
+# Transitions
+################
+
+trans_sc_rc10 = partial(
+    gf.c.taper_cross_section_linear,
+    cross_section1=xs_rc_tip,
+    cross_section2=xs_rc,
+    length=10,
+)
+trans_sc_rc20 = partial(
+    gf.c.taper_cross_section_linear,
+    cross_section1=xs_rc_tip,
+    cross_section2=xs_rc,
+    length=20,
+)
+trans_sc_rc50 = partial(
+    gf.c.taper_cross_section_linear,
+    cross_section1=xs_rc_tip,
+    cross_section2=xs_rc,
+    length=50,
+)
 
 ################
 # MMIs
@@ -301,29 +323,6 @@ die_ro = partial(die_nc, grating_coupler=gc_rectangular_ro, cross_section=xs_ro)
 
 
 ################
-# Transitions
-################
-
-trans_sc_rc20 = partial(
-    gf.c.taper_strip_to_ridge,
-    cross_section=xs_sc,
-    length=10,
-    w_slab2=10.45,
-    width1=0.45,
-    width2=0.45,
-    layer_wg=LAYER.WG,
-    layer_slab=LAYER.SLAB,
-)
-
-trans_sc_rc10 = partial(
-    gf.c.taper_cross_section_linear,
-    cross_section1=xs_sc,
-    cross_section2=xs_rc,
-    length=10,
-)
-
-
-################
 # Imported from Cornerstone MPW SOI 220nm GDSII Template
 ################
 gdsdir = PATH.gds
@@ -355,10 +354,11 @@ def crossing_sc() -> gf.Component:
 
 
 if __name__ == "__main__":
-    c = gf.Component()
-    w = c << straight_rc()
-    t = c << trans_sc_rc10()
-    t.connect("o2", w.ports["o1"])
+    c = mmi1x2_rc()
+    # c = gf.Component()
+    # w = c << straight_rc()
+    # t = c << trans_sc_rc10()
+    # t.connect("o2", w.ports["o1"])
     # ref = c << SOI220nm_1550nm_TE_RIB_2x1_MMI()
     # ref.mirror()
     # ref.center = (0, 0)
