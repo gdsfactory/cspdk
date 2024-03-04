@@ -14,7 +14,8 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory==7.16.0"
+  "gdsfactory==7.16.0",
+  "gplugins[sax]>=0.9,<1"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]

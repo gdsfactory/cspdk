@@ -7,6 +7,96 @@ Cells
 =============================
 
 
+bend_nc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_nc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_nc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
+bend_no
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_no
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_no(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
+bend_rc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_rc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_rc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
+bend_ro
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_ro
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_ro(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
+bend_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_sc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
+bend_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_so(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c.plot()
+
+
+
 crossing_rc
 ----------------------------------------------------
 
@@ -453,4 +543,139 @@ pad
   import cspdk
 
   c = cspdk.cells.pad(size=(100.0, 100.0), layer=(41, 0), port_inclusion=0)
+  c.plot()
+
+
+
+straight_nc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_nc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_nc(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+straight_no
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_no
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_no(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+straight_rc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_rc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_rc(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+straight_ro
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_ro
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_ro(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+straight_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_sc(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+straight_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.straight_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.straight_so(length=10.0, npoints=2, add_pins=True)
+  c.plot()
+
+
+
+trans_sc_rc10
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.trans_sc_rc10
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.trans_sc_rc10(length=10, npoints=2, linear=True, width_type='sine')
+  c.plot()
+
+
+
+trans_sc_rc20
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.trans_sc_rc20
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.trans_sc_rc20(length=20, npoints=2, linear=True, width_type='sine')
+  c.plot()
+
+
+
+trans_sc_rc50
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.trans_sc_rc50
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.trans_sc_rc50(length=50, npoints=2, linear=True, width_type='sine')
   c.plot()
