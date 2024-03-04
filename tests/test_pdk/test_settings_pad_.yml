@@ -1,0 +1,24 @@
+function: pad
+info:
+  layer:
+  - 41
+  - 0
+  size:
+  - 100.0
+  - 100.0
+  xsize: 100.0
+  ysize: 100.0
+module: gdsfactory.components.pad
+name: pad_layer41__0
+settings:
+  bbox_layers: null
+  bbox_offsets: null
+  layer:
+  - 41
+  - 0
+  port_inclusion: 0
+  port_orientation: null
+  post_process: null
+  size:
+  - 100.0
+  - 100.0

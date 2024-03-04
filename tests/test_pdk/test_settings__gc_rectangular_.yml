@@ -1,0 +1,27 @@
+function: grating_coupler_rectangular
+info:
+  fiber_angle: 10
+  polarization: te
+  wavelength: 1.55
+module: gdsfactory.components.grating_coupler_rectangular
+name: grating_coupler_rectangular_fcb0b7aa
+settings:
+  cross_section: xs_sc
+  fiber_angle: 10
+  fill_factor: 0.5
+  layer_grating:
+  - 6
+  - 0
+  layer_slab:
+  - 3
+  - 0
+  length_taper: 350
+  n_periods: 30
+  period: 0.75
+  polarization: te
+  slab_offset: 0
+  slab_xmin: -1.0
+  taper:
+    function: taper
+  wavelength: 1.55
+  width_grating: 11.0
