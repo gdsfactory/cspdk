@@ -12,13 +12,12 @@ from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_rc_tip, xs_ro, xs_sc, xs_s
 ################
 # Waveguides
 ################
-
-straight_sc = partial(gf.c.straight, cross_section=xs_sc)
-straight_so = partial(gf.c.straight, cross_section=xs_so)
-straight_rc = partial(gf.c.straight, cross_section=xs_rc)
-straight_ro = partial(gf.c.straight, cross_section=xs_ro)
-straight_nc = partial(gf.c.straight, cross_section=xs_nc)
-straight_no = partial(gf.c.straight, cross_section=xs_no)
+straight_sc = partial(gf.c.straight, cross_section=xs_sc, info={"model": "straight_sc"})
+straight_so = partial(gf.c.straight, cross_section=xs_so, info={"model": "straight_so"})
+straight_rc = partial(gf.c.straight, cross_section=xs_rc, info={"model": "straight_rc"})
+straight_ro = partial(gf.c.straight, cross_section=xs_ro, info={"model": "straight_ro"})
+straight_nc = partial(gf.c.straight, cross_section=xs_nc, info={"model": "straight_nc"})
+straight_no = partial(gf.c.straight, cross_section=xs_no, info={"model": "straight_no"})
 
 
 bend_sc = partial(gf.c.bend_euler, cross_section=xs_sc)
@@ -228,6 +227,25 @@ gc_rectangular_no = partial(
     layer_slab=LAYER.NITRIDE,
     slab_offset=0,
 )
+################
+# MZI
+################
+
+mzi_sc = partial(
+    gf.c.mzi,
+    straight=straight_sc,
+    cross_section=xs_sc,
+    combiner=mmi1x2_sc,
+    splitter=mmi1x2_sc,
+)
+mzi_so = partial(
+    gf.c.mzi,
+    straight=straight_so,
+    cross_section=xs_so,
+    combiner=mmi1x2_sc,
+    splitter=mmi1x2_sc,
+)
+
 
 ################
 # Packaging
@@ -354,7 +372,7 @@ def crossing_sc() -> gf.Component:
 
 
 if __name__ == "__main__":
-    c = mmi1x2_rc()
+    c = straight_sc()
     # c = gf.Component()
     # w = c << straight_rc()
     # t = c << trans_sc_rc10()
