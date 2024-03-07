@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from functools import lru_cache, partial
+from functools import cache, partial
 
 import jax
 import jax.numpy as jnp
 import sax
 from gplugins.sax.models import bend, coupler, grating_coupler, straight
+
+from cspdk.tech import LAYER
 
 nm = 1e-3
 
@@ -14,7 +16,7 @@ nm = 1e-3
 ################
 
 
-@lru_cache(maxsize=None)
+@cache
 def _2port(p1, p2):
     @jax.jit
     def _2port(wl=1.5):
@@ -24,7 +26,7 @@ def _2port(p1, p2):
     return _2port
 
 
-@lru_cache(maxsize=None)
+@cache
 def _3port(p1, p2, p3):
     @jax.jit
     def _3port(wl=1.5):
@@ -40,7 +42,7 @@ def _3port(p1, p2, p3):
     return _3port
 
 
-@lru_cache(maxsize=None)
+@cache
 def _4port(p1, p2, p3, p4):
     @jax.jit
     def _4port(wl=1.5):
@@ -70,6 +72,72 @@ straight_ro = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
 straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 
+
+def _layer_eq(layer1, layer2):
+    return (int(layer1[0]) == int(layer2[0])) and (int(layer1[1]) == int(layer2[1]))
+
+
+def _check_cross_section(cross_section):
+    if isinstance(cross_section, str):
+        return cross_section
+    err = ValueError(f"Unknown cross section {cross_section}")
+    if _layer_eq(cross_section["sections"][0]["layer"], LAYER.WG):
+        if len(cross_section["sections"]) > 1:
+            if cross_section["sections"][0]["width"] == 0.45:
+                return "xs_rc"
+            elif cross_section["sections"][0]["width"] == 0.40:
+                return "xs_ro"
+            else:
+                raise err
+        elif cross_section["sections"][0]["width"] == 0.45:
+            return "xs_sc"
+        elif cross_section["sections"][0]["width"] == 0.40:
+            return "xs_so"
+        else:
+            raise err
+    elif _layer_eq(cross_section["sections"][0]["layer"], LAYER.NITRIDE):
+        if cross_section["sections"][0]["width"] == 1.20:
+            return "xs_nc"
+        elif cross_section["sections"][0]["width"] == 0.95:
+            return "xs_no"
+        else:
+            raise err
+    else:
+        raise err
+
+
+@partial(jax.jit, static_argnames=["cross_section"])
+def _straight(
+    *,
+    wl: float = 1.55,
+    length: float = 10.0,
+    loss: float = 0.0,
+    cross_section="xs_sc",
+):
+    print(cross_section)
+    if _check_cross_section(cross_section) == "xs_sc":
+        print("straight_sc")
+        return straight_sc(wl=wl, length=length, loss=loss)
+    elif _check_cross_section(cross_section) == "xs_so":
+        print("straight_so")
+        return straight_so(wl=wl, length=length, loss=loss)
+    elif _check_cross_section(cross_section) == "xs_rc":
+        print("straight_rc")
+        return straight_rc(wl=wl, length=length, loss=loss)
+    elif _check_cross_section(cross_section) == "xs_ro":
+        print("straight_ro")
+        return straight_ro(wl=wl, length=length, loss=loss)
+    elif _check_cross_section(cross_section) == "xs_nc":
+        print("straight_nc")
+        return straight_nc(wl=wl, length=length, loss=loss)
+    elif _check_cross_section(cross_section) == "xs_no":
+        print("straight_no")
+        return straight_no(wl=wl, length=length, loss=loss)
+    else:
+        raise ValueError(f"Invalid cross section: Got: {cross_section}")
+
+
+_bend_euler = partial(bend, loss=0.03)
 bend_sc = partial(bend, loss=0.03)
 bend_so = partial(bend, loss=0.03)
 bend_rc = partial(bend, loss=0.03)
@@ -146,12 +214,14 @@ models = dict(
     _2port=_2port("o1", "o2"),
     _3port=_3port("o1", "o2", "o3"),
     _4port=_4port("o1", "o2", "o3", "o4"),
+    straight=_straight,
     straight_sc=straight_sc,
     straight_so=straight_so,
     straight_rc=straight_rc,
     straight_ro=straight_ro,
     straight_nc=straight_nc,
     straight_no=straight_no,
+    bend_euler=_bend_euler,
     bend_sc=bend_sc,
     bend_so=bend_so,
     bend_rc=bend_rc,
