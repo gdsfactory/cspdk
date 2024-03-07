@@ -13,6 +13,7 @@ name: pad_layer41__0
 settings:
   bbox_layers: null
   bbox_offsets: null
+  info: null
   layer:
   - 41
   - 0

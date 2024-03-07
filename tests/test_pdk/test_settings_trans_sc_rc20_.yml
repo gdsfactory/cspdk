@@ -102,6 +102,7 @@ settings:
     start_straight_length: 0.01
     taper_length: 10.0
     width_wide: null
+  info: null
   length: 20
   linear: true
   npoints: 2

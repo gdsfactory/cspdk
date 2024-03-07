@@ -52,3 +52,13 @@ LayerViews:
     layer_in_name: true
     color: "black"
     hatch_pattern: hollow
+  LABEL_SETTINGS:
+    layer: [100, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  LABEL_INSTANCE:
+    layer: [101, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow

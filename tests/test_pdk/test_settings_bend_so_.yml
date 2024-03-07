@@ -13,8 +13,6 @@ info:
 module: gdsfactory.components.bend_euler
 name: bend_euler_3cf176fc
 settings:
-  add_bbox: null
-  add_pins: true
   angle: 90.0
   cross_section:
     add_pins_function_module: gdsfactory.add_pins
@@ -52,10 +50,9 @@ settings:
     taper_length: 10.0
     width_wide: null
   direction: ccw
-  layer: null
+  info: null
   npoints: null
   p: 0.5
   post_process: null
   radius: null
-  width: null
   with_arc_floorplan: true

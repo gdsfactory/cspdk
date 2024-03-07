@@ -43,6 +43,7 @@ settings:
     width_wide: null
   fiber_angle: 10
   fill_factor: 0.5
+  info: null
   layer_grating:
   - 6
   - 0
@@ -53,6 +54,7 @@ settings:
   n_periods: 60
   period: 0.63
   polarization: te
+  post_process: null
   slab_offset: 0
   slab_xmin: -1.0
   taper:

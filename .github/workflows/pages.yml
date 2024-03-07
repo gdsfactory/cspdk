@@ -1,6 +1,7 @@
-name: Build docs
+name: build docs
 
 on:
+  pull_request:
   push:
     branches:
       - main
@@ -16,7 +17,7 @@ jobs:
       - name: Installing the library
         shell: bash -l {0}
         run: |
-          make dev
+          make install
       - name: make docs
         run: |
           make docs

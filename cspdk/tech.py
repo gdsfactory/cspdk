@@ -23,6 +23,10 @@ class LayerMapCornerstone(LayerMap):
     NITRIDE: Layer = (203, 0)
     NITRIDE_ETCH: Layer = (204, 0)
 
+    # labels for gdsfactory
+    LABEL_SETTINGS: Layer = (100, 0)
+    LABEL_INSTANCE: Layer = (101, 0)
+
 
 LAYER = LayerMapCornerstone()
 
