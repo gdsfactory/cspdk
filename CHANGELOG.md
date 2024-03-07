@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 0.3.0
+
+- [improve models](https://github.com/gdsfactory/cspdk/pull/8)
+
 ## 0.2.0
 
 - add models [#5](https://github.com/gdsfactory/cspdk/pull/5)
