@@ -2,6 +2,7 @@ function: bend_euler
 info:
   dy: 10.0
   length: 16.637
+  model: bend_so
   radius: 10.0
   radius_min: 7.061
   route_info_length: 16.637
@@ -11,7 +12,7 @@ info:
   route_info_xs_so_length: 16.637
   width: 0.4
 module: gdsfactory.components.bend_euler
-name: bend_euler_3cf176fc
+name: bend_euler_6e289358
 settings:
   angle: 90.0
   cross_section:
@@ -50,7 +51,8 @@ settings:
     taper_length: 10.0
     width_wide: null
   direction: ccw
-  info: null
+  info:
+    model: bend_so
   npoints: null
   p: 0.5
   post_process: null
