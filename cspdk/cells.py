@@ -1,4 +1,4 @@
-from functools import partial
+from functools import partial, wraps
 
 import gdsfactory as gf
 
@@ -21,7 +21,14 @@ straight_nc = partial(_straight, cross_section=xs_nc, info={"model": "straight_n
 straight_no = partial(_straight, cross_section=xs_no, info={"model": "straight_no"})
 
 
-_bend_euler = gf.components.bend_euler
+@wraps(gf.components.bend_euler)
+def _bend_euler(info=None, **kwargs):
+    c = gf.components.bend_euler(**kwargs)
+    if info is not None:
+        c.info.update(info)
+    return c
+
+
 bend_sc = partial(_bend_euler, cross_section=xs_sc, info={"model": "bend_sc"})
 bend_so = partial(_bend_euler, cross_section=xs_so, info={"model": "bend_so"})
 bend_rc = partial(_bend_euler, cross_section=xs_rc, info={"model": "bend_rc"})
@@ -300,8 +307,8 @@ mzi_so = partial(
     gf.c.mzi,
     straight=straight_so,
     cross_section=xs_so,
-    combiner=mmi1x2_sc,
-    splitter=mmi1x2_sc,
+    combiner=mmi1x2_so,
+    splitter=mmi1x2_so,
 )
 mzi_rc = partial(
     gf.c.mzi,
