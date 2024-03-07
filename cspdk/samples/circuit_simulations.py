@@ -6,7 +6,7 @@ import cspdk
 from cspdk.models import models
 
 if __name__ == "__main__":
-    c = cspdk.cells.mzi_sc(delta_length=20)
+    c = cspdk.cells.mzi_nc(delta_length=20)
     netlist = c.get_netlist()
     circuit, _ = sax.circuit(netlist, models=models)
     wl = jnp.linspace(1.5, 1.6)

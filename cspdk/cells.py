@@ -18,6 +18,7 @@ straight_rc = partial(gf.c.straight, cross_section=xs_rc, info={"model": "straig
 straight_ro = partial(gf.c.straight, cross_section=xs_ro, info={"model": "straight_ro"})
 straight_nc = partial(gf.c.straight, cross_section=xs_nc, info={"model": "straight_nc"})
 straight_no = partial(gf.c.straight, cross_section=xs_no, info={"model": "straight_no"})
+straight = straight_sc
 
 
 bend_sc = partial(gf.c.bend_euler, cross_section=xs_sc)
@@ -244,6 +245,35 @@ mzi_so = partial(
     cross_section=xs_so,
     combiner=mmi1x2_sc,
     splitter=mmi1x2_sc,
+)
+mzi_rc = partial(
+    gf.c.mzi,
+    straight=straight_rc,
+    cross_section=xs_rc,
+    combiner=mmi1x2_rc,
+    splitter=mmi1x2_rc,
+)
+mzi_ro = partial(
+    gf.c.mzi,
+    straight=straight_ro,
+    cross_section=xs_ro,
+    combiner=mmi1x2_ro,
+    splitter=mmi1x2_ro,
+)
+
+mzi_nc = partial(
+    gf.c.mzi,
+    straight=straight_nc,
+    cross_section=xs_nc,
+    combiner=mmi1x2_nc,
+    splitter=mmi1x2_nc,
+)
+mzi_no = partial(
+    gf.c.mzi,
+    straight=straight_no,
+    cross_section=xs_no,
+    combiner=mmi1x2_no,
+    splitter=mmi1x2_no,
 )
 
 

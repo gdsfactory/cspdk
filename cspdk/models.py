@@ -23,16 +23,15 @@ straight_ro = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
 straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 
-
-gc_rectangular_sc = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.55)
-gc_rectangular_so = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.31)
-
 bend_sc = partial(bend, loss=0.03)
 bend_so = partial(bend, loss=0.03)
 bend_rc = partial(bend, loss=0.03)
 bend_ro = partial(bend, loss=0.03)
 bend_nc = partial(bend, loss=0.03)
 bend_no = partial(bend, loss=0.03)
+
+gc_rectangular_sc = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.55)
+gc_rectangular_so = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.31)
 
 
 models = dict(
@@ -47,7 +46,6 @@ models = dict(
     coupler=coupler,
     gc_rectangular_sc=gc_rectangular_sc,
     gc_rectangular_so=gc_rectangular_so,
-    grating_coupler=grating_coupler,
     mmi1x2=mmi1x2,
     mmi2x2=mmi2x2,
     phase_shifter=phase_shifter,
