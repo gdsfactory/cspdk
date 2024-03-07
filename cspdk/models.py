@@ -119,7 +119,6 @@ trans_sc_rc50 = _2port("o1", "o2")
 
 def _mmi_amp(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
     max_power = 10 ** (-abs(loss_dB) / 10)
-    print(max_power)
     f = 1 / wl
     f0 = 1 / wl0
     f1 = 1 / (wl0 + fwhm / 2)
