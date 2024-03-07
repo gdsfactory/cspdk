@@ -1,4 +1,4 @@
-# CornerStone PDK 0.2.0
+# CornerStone PDK 0.3.0
 
 [CornerStone](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
 
