@@ -114,24 +114,17 @@ def _straight(
     loss: float = 0.0,
     cross_section="xs_sc",
 ):
-    print(cross_section)
     if _check_cross_section(cross_section) == "xs_sc":
-        print("straight_sc")
         return straight_sc(wl=wl, length=length, loss=loss)
     elif _check_cross_section(cross_section) == "xs_so":
-        print("straight_so")
         return straight_so(wl=wl, length=length, loss=loss)
     elif _check_cross_section(cross_section) == "xs_rc":
-        print("straight_rc")
         return straight_rc(wl=wl, length=length, loss=loss)
     elif _check_cross_section(cross_section) == "xs_ro":
-        print("straight_ro")
         return straight_ro(wl=wl, length=length, loss=loss)
     elif _check_cross_section(cross_section) == "xs_nc":
-        print("straight_nc")
         return straight_nc(wl=wl, length=length, loss=loss)
     elif _check_cross_section(cross_section) == "xs_no":
-        print("straight_no")
         return straight_no(wl=wl, length=length, loss=loss)
     else:
         raise ValueError(f"Invalid cross section: Got: {cross_section}")
