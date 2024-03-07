@@ -12,64 +12,80 @@ from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_rc_tip, xs_ro, xs_sc, xs_s
 ################
 # Waveguides
 ################
-_straight = gf.components.straight
-straight_sc = partial(_straight, cross_section=xs_sc, info={"model": "straight_sc"})
-straight_so = partial(_straight, cross_section=xs_so, info={"model": "straight_so"})
-straight_rc = partial(_straight, cross_section=xs_rc, info={"model": "straight_rc"})
-straight_ro = partial(_straight, cross_section=xs_ro, info={"model": "straight_ro"})
-straight_nc = partial(_straight, cross_section=xs_nc, info={"model": "straight_nc"})
-straight_no = partial(_straight, cross_section=xs_no, info={"model": "straight_no"})
+
+straight = gf.components.straight
+straight_sc = partial(straight, cross_section=xs_sc, info={"model": "straight_sc"})
+straight_so = partial(straight, cross_section=xs_so, info={"model": "straight_so"})
+straight_rc = partial(straight, cross_section=xs_rc, info={"model": "straight_rc"})
+straight_ro = partial(straight, cross_section=xs_ro, info={"model": "straight_ro"})
+straight_nc = partial(straight, cross_section=xs_nc, info={"model": "straight_nc"})
+straight_no = partial(straight, cross_section=xs_no, info={"model": "straight_no"})
 
 
 @wraps(gf.components.bend_euler)
-def _bend_euler(info=None, **kwargs):
+def bend_euler(info=None, **kwargs):
     c = gf.components.bend_euler(**kwargs)
     if info is not None:
         c.info.update(info)
     return c
 
 
-bend_sc = partial(_bend_euler, cross_section=xs_sc, info={"model": "bend_sc"})
-bend_so = partial(_bend_euler, cross_section=xs_so, info={"model": "bend_so"})
-bend_rc = partial(_bend_euler, cross_section=xs_rc, info={"model": "bend_rc"})
-bend_ro = partial(_bend_euler, cross_section=xs_ro, info={"model": "bend_ro"})
-bend_nc = partial(_bend_euler, cross_section=xs_nc, info={"model": "bend_nc"})
-bend_no = partial(_bend_euler, cross_section=xs_no, info={"model": "bend_no"})
+bend_sc = partial(bend_euler, cross_section=xs_sc, info={"model": "bend_sc"})
+bend_so = partial(bend_euler, cross_section=xs_so, info={"model": "bend_so"})
+bend_rc = partial(bend_euler, cross_section=xs_rc, info={"model": "bend_rc"})
+bend_ro = partial(bend_euler, cross_section=xs_ro, info={"model": "bend_ro"})
+bend_nc = partial(bend_euler, cross_section=xs_nc, info={"model": "bend_nc"})
+bend_no = partial(bend_euler, cross_section=xs_no, info={"model": "bend_no"})
 
 ################
 # Transitions
 ################
+
+taper = gf.components.taper
+taper_cross_section = gf.c.taper_cross_section
+
 trans_sc_rc10 = partial(
-    gf.c.taper_cross_section_linear,
+    taper_cross_section,
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=10,
+    linear=True,
+    npoints=2,
     info={"model": "trans_sc_rc10"},
 )
 trans_sc_rc20 = partial(
-    gf.c.taper_cross_section_linear,
+    taper_cross_section,
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=20,
+    linear=True,
+    npoints=2,
     info={"model": "trans_sc_rc20"},
 )
 trans_sc_rc50 = partial(
-    gf.c.taper_cross_section_linear,
+    taper_cross_section,
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=50,
+    linear=True,
+    npoints=2,
     info={"model": "trans_sc_rc50"},
 )
 
 ################
 # MMIs
 ################
+
+mmi1x2 = gf.components.mmi1x2
+mmi2x2 = gf.components.mmi2x2
+
 _mmi1x2 = partial(
     gf.components.mmi1x2,
     width_mmi=6,
     length_taper=20,
     width_taper=1.5,
 )
+
 _mmi2x2 = partial(
     gf.components.mmi2x2,
     width_mmi=6,
@@ -213,7 +229,7 @@ mmi2x2_nc = partial(
 
 
 @gf.cell
-def _gc_rectangular(
+def gc_rectangular(
     n_periods=30,
     fill_factor=0.5,
     length_taper=350,
@@ -239,14 +255,14 @@ def _gc_rectangular(
 
 
 gc_rectangular_so = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.5,
     cross_section=xs_so,
     n_periods=80,
     info={"model": "gc_rectangular_so"},
 )
 gc_rectangular_ro = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.5,
     cross_section=xs_ro,
     n_periods=80,
@@ -254,7 +270,7 @@ gc_rectangular_ro = partial(
 )
 
 gc_rectangular_sc = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.63,
     cross_section=xs_sc,
     fiber_angle=10,
@@ -262,7 +278,7 @@ gc_rectangular_sc = partial(
     info={"model": "gc_rectangular_sc"},
 )
 gc_rectangular_rc = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.5,
     cross_section=xs_rc,
     n_periods=60,
@@ -270,7 +286,7 @@ gc_rectangular_rc = partial(
 )
 
 gc_rectangular_nc = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.66,
     cross_section=xs_nc,
     length_taper=200,
@@ -281,7 +297,7 @@ gc_rectangular_nc = partial(
     info={"model": "gc_rectangular_nc"},
 )
 gc_rectangular_no = partial(
-    _gc_rectangular,
+    gc_rectangular,
     period=0.964,
     cross_section=xs_no,
     length_taper=200,
@@ -296,29 +312,31 @@ gc_rectangular_no = partial(
 # MZI
 ################
 
+mzi = gf.c.mzi
+
 mzi_sc = partial(
-    gf.c.mzi,
+    mzi,
     straight=straight_sc,
     cross_section=xs_sc,
     combiner=mmi1x2_sc,
     splitter=mmi1x2_sc,
 )
 mzi_so = partial(
-    gf.c.mzi,
+    mzi,
     straight=straight_so,
     cross_section=xs_so,
     combiner=mmi1x2_so,
     splitter=mmi1x2_so,
 )
 mzi_rc = partial(
-    gf.c.mzi,
+    mzi,
     straight=straight_rc,
     cross_section=xs_rc,
     combiner=mmi1x2_rc,
     splitter=mmi1x2_rc,
 )
 mzi_ro = partial(
-    gf.c.mzi,
+    mzi,
     straight=straight_ro,
     cross_section=xs_ro,
     combiner=mmi1x2_ro,
@@ -466,7 +484,9 @@ _import_gds = partial(gf.import_gds, gdsdir=gdsdir)
 @gf.cell
 def heater() -> gf.Component:
     """Returns Heater fixed cell."""
-    return _import_gds("Heater.gds")
+    heater = _import_gds("Heater.gds")
+    heater.name = "heater"
+    return heater
 
 
 @gf.cell

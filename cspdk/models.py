@@ -7,7 +7,7 @@ import jax.numpy as jnp
 import sax
 from gplugins.sax.models import bend, grating_coupler, straight
 
-from cspdk.tech import LAYER
+from cspdk.tech import check_cross_section
 
 nm = 1e-3
 
@@ -73,39 +73,6 @@ straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
 straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 
 
-def _layer_eq(layer1, layer2):
-    return (int(layer1[0]) == int(layer2[0])) and (int(layer1[1]) == int(layer2[1]))
-
-
-def _check_cross_section(cross_section):
-    if isinstance(cross_section, str):
-        return cross_section
-    err = ValueError(f"Unknown cross section {cross_section}")
-    if _layer_eq(cross_section["sections"][0]["layer"], LAYER.WG):
-        if len(cross_section["sections"]) > 1:
-            if cross_section["sections"][0]["width"] == 0.45:
-                return "xs_rc"
-            elif cross_section["sections"][0]["width"] == 0.40:
-                return "xs_ro"
-            else:
-                raise err
-        elif cross_section["sections"][0]["width"] == 0.45:
-            return "xs_sc"
-        elif cross_section["sections"][0]["width"] == 0.40:
-            return "xs_so"
-        else:
-            raise err
-    elif _layer_eq(cross_section["sections"][0]["layer"], LAYER.NITRIDE):
-        if cross_section["sections"][0]["width"] == 1.20:
-            return "xs_nc"
-        elif cross_section["sections"][0]["width"] == 0.95:
-            return "xs_no"
-        else:
-            raise err
-    else:
-        raise err
-
-
 def _straight(
     *,
     wl: float = 1.55,
@@ -113,17 +80,17 @@ def _straight(
     loss: float = 0.0,
     cross_section="xs_sc",
 ):
-    if _check_cross_section(cross_section) == "xs_sc":
+    if check_cross_section(cross_section) == "xs_sc":
         return straight_sc(wl=wl, length=length, loss=loss)
-    elif _check_cross_section(cross_section) == "xs_so":
+    elif check_cross_section(cross_section) == "xs_so":
         return straight_so(wl=wl, length=length, loss=loss)
-    elif _check_cross_section(cross_section) == "xs_rc":
+    elif check_cross_section(cross_section) == "xs_rc":
         return straight_rc(wl=wl, length=length, loss=loss)
-    elif _check_cross_section(cross_section) == "xs_ro":
+    elif check_cross_section(cross_section) == "xs_ro":
         return straight_ro(wl=wl, length=length, loss=loss)
-    elif _check_cross_section(cross_section) == "xs_nc":
+    elif check_cross_section(cross_section) == "xs_nc":
         return straight_nc(wl=wl, length=length, loss=loss)
-    elif _check_cross_section(cross_section) == "xs_no":
+    elif check_cross_section(cross_section) == "xs_no":
         return straight_no(wl=wl, length=length, loss=loss)
     else:
         raise ValueError(f"Invalid cross section: Got: {cross_section}")
@@ -189,6 +156,7 @@ def mmi2x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3, shift=0.005):
     )
 
 
+mmi1x2 = mmi1x2
 mmi1x2_rc = mmi1x2
 mmi1x2_sc = mmi1x2
 mmi1x2_ro = mmi1x2
@@ -196,6 +164,7 @@ mmi1x2_so = mmi1x2
 mmi1x2_no = mmi1x2
 mmi1x2_nc = mmi1x2
 
+mmi2x2 = mmi2x2
 mmi2x2_nc = mmi2x2
 mmi2x2_no = mmi2x2
 mmi2x2_so = mmi2x2
@@ -209,6 +178,22 @@ mmi2x2_sc = mmi2x2
 
 _gco = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.31)
 _gcc = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.55)
+
+
+def _gc(
+    *,
+    wl: float = 1.55,
+    reflection: float = 0.0,
+    reflection_fiber: float = 0.0,
+    cross_section="xs_so",
+):
+    cross_section = check_cross_section(cross_section)
+    if cross_section.endswith("o"):
+        return _gco(wl=wl, reflection=reflection, reflection_fiber=reflection_fiber)
+    else:
+        return _gcc(wl=wl, reflection=reflection, reflection_fiber=reflection_fiber)
+
+
 gc_rectangular_so = _gco
 gc_rectangular_ro = _gco
 gc_rectangular_no = _gco
@@ -220,6 +205,8 @@ gc_rectangular_nc = _gcc
 ################
 # Crossings
 ################
+
+
 @jax.jit
 def _crossing(wl=1.5):
     wl = jnp.asarray(wl)
@@ -247,6 +234,7 @@ models = dict(
     _2port=_2port("o1", "o2"),
     _3port=_3port("o1", "o2", "o3"),
     _4port=_4port("o1", "o2", "o3", "o4"),
+    taper=_straight,
     straight=_straight,
     straight_sc=straight_sc,
     straight_so=straight_so,
@@ -264,24 +252,28 @@ models = dict(
     trans_sc_rc10=trans_sc_rc10,
     trans_sc_rc20=trans_sc_rc20,
     trans_sc_rc50=trans_sc_rc50,
+    mmi1x2=mmi1x2,
     mmi1x2_rc=mmi1x2_rc,
-    mmi2x2_rc=mmi2x2_rc,
     mmi1x2_sc=mmi1x2_sc,
-    mmi2x2_sc=mmi2x2_sc,
     mmi1x2_ro=mmi1x2_ro,
-    mmi2x2_ro=mmi2x2_ro,
     mmi1x2_so=mmi1x2_so,
-    mmi2x2_so=mmi2x2_so,
     mmi1x2_no=mmi1x2_no,
-    mmi2x2_no=mmi2x2_no,
     mmi1x2_nc=mmi1x2_nc,
+    mmi2x2=mmi2x2,
+    mmi2x2_rc=mmi2x2_rc,
+    mmi2x2_sc=mmi2x2_sc,
+    mmi2x2_ro=mmi2x2_ro,
+    mmi2x2_so=mmi2x2_so,
+    mmi2x2_no=mmi2x2_no,
     mmi2x2_nc=mmi2x2_nc,
+    gc_rectangular=_gc,
     gc_rectangular_so=gc_rectangular_so,
     gc_rectangular_ro=gc_rectangular_ro,
     gc_rectangular_no=gc_rectangular_no,
     gc_rectangular_sc=gc_rectangular_sc,
     gc_rectangular_rc=gc_rectangular_rc,
     gc_rectangular_nc=gc_rectangular_nc,
+    crossing=_crossing,
     crossing_so=crossing_so,
     crossing_rc=crossing_rc,
     crossing_sc=crossing_sc,
