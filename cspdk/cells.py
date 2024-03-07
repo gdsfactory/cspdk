@@ -42,15 +42,32 @@ bend_no = partial(bend_euler, cross_section=xs_no, info={"model": "bend_no"})
 ################
 
 taper = gf.components.taper
-taper_cross_section = gf.c.taper_cross_section
+
+
+@gf.cell
+def taper_cross_section(
+    cross_section1=xs_rc_tip,
+    cross_section2=xs_rc,
+    length: float = 10,
+    npoints: int = 2,
+    linear: bool = True,
+    **kwargs,
+) -> gf.Component:
+    return gf.components.taper_cross_section(
+        cross_section1=cross_section1,
+        cross_section2=cross_section2,
+        length=length,
+        npoints=npoints,
+        linear=linear,
+        **kwargs,
+    ).flatten()
+
 
 trans_sc_rc10 = partial(
     taper_cross_section,
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=10,
-    linear=True,
-    npoints=2,
     info={"model": "trans_sc_rc10"},
 )
 trans_sc_rc20 = partial(
@@ -58,8 +75,6 @@ trans_sc_rc20 = partial(
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=20,
-    linear=True,
-    npoints=2,
     info={"model": "trans_sc_rc20"},
 )
 trans_sc_rc50 = partial(
@@ -67,8 +82,6 @@ trans_sc_rc50 = partial(
     cross_section1=xs_rc_tip,
     cross_section2=xs_rc,
     length=50,
-    linear=True,
-    npoints=2,
     info={"model": "trans_sc_rc50"},
 )
 
@@ -312,7 +325,7 @@ gc_rectangular_no = partial(
 # MZI
 ################
 
-mzi = gf.c.mzi
+mzi = gf.components.mzi
 
 mzi_sc = partial(
     mzi,
@@ -344,14 +357,14 @@ mzi_ro = partial(
 )
 
 mzi_nc = partial(
-    gf.c.mzi,
+    gf.components.mzi,
     straight=straight_nc,
     cross_section=xs_nc,
     combiner=mmi1x2_nc,
     splitter=mmi1x2_nc,
 )
 mzi_no = partial(
-    gf.c.mzi,
+    gf.components.mzi,
     straight=straight_no,
     cross_section=xs_no,
     combiner=mmi1x2_no,
@@ -393,14 +406,14 @@ def die_nc(
     """
     c = gf.Component()
 
-    fp = c << gf.c.rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
+    fp = c << gf.components.rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
 
     # Add optical ports
     x0 = -4925 + 2.827
     y0 = 1650
     grating_coupler = grating_coupler()
 
-    grating_coupler_array = gf.c.grating_coupler_array(
+    grating_coupler_array = gf.components.grating_coupler_array(
         grating_coupler=grating_coupler,
         n=ngratings,
         pitch=grating_pitch,
