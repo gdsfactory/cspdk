@@ -12,26 +12,26 @@ from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_rc_tip, xs_ro, xs_sc, xs_s
 ################
 # Waveguides
 ################
-straight_sc = partial(gf.c.straight, cross_section=xs_sc, info={"model": "straight_sc"})
-straight_so = partial(gf.c.straight, cross_section=xs_so, info={"model": "straight_so"})
-straight_rc = partial(gf.c.straight, cross_section=xs_rc, info={"model": "straight_rc"})
-straight_ro = partial(gf.c.straight, cross_section=xs_ro, info={"model": "straight_ro"})
-straight_nc = partial(gf.c.straight, cross_section=xs_nc, info={"model": "straight_nc"})
-straight_no = partial(gf.c.straight, cross_section=xs_no, info={"model": "straight_no"})
-straight = straight_sc
+straight = gf.components.straight
+straight_sc = partial(straight, cross_section=xs_sc, info={"model": "straight_sc"})
+straight_so = partial(straight, cross_section=xs_so, info={"model": "straight_so"})
+straight_rc = partial(straight, cross_section=xs_rc, info={"model": "straight_rc"})
+straight_ro = partial(straight, cross_section=xs_ro, info={"model": "straight_ro"})
+straight_nc = partial(straight, cross_section=xs_nc, info={"model": "straight_nc"})
+straight_no = partial(straight, cross_section=xs_no, info={"model": "straight_no"})
 
 
-bend_sc = partial(gf.c.bend_euler, cross_section=xs_sc)
-bend_so = partial(gf.c.bend_euler, cross_section=xs_so)
-bend_rc = partial(gf.c.bend_euler, cross_section=xs_rc)
-bend_ro = partial(gf.c.bend_euler, cross_section=xs_ro)
-bend_nc = partial(gf.c.bend_euler, cross_section=xs_nc)
-bend_no = partial(gf.c.bend_euler, cross_section=xs_no)
+bend_euler = gf.components.bend_euler
+bend_sc = partial(bend_euler, cross_section=xs_sc, info={"model": "bend_sc"})
+bend_so = partial(bend_euler, cross_section=xs_so, info={"model": "bend_so"})
+bend_rc = partial(bend_euler, cross_section=xs_rc, info={"model": "bend_rc"})
+bend_ro = partial(bend_euler, cross_section=xs_ro, info={"model": "bend_ro"})
+bend_nc = partial(bend_euler, cross_section=xs_nc, info={"model": "bend_nc"})
+bend_no = partial(bend_euler, cross_section=xs_no, info={"model": "bend_no"})
 
 ################
 # Transitions
 ################
-
 trans_sc_rc10 = partial(
     gf.c.taper_cross_section_linear,
     cross_section1=xs_rc_tip,
@@ -280,7 +280,6 @@ mzi_no = partial(
 ################
 # Packaging
 ################
-
 pad = partial(gf.components.pad, layer=LAYER.PAD)
 
 
