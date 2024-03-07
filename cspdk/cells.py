@@ -373,35 +373,82 @@ die_ro = partial(die_nc, grating_coupler=gc_rectangular_ro, cross_section=xs_ro)
 # Imported from Cornerstone MPW SOI 220nm GDSII Template
 ################
 gdsdir = PATH.gds
-import_gds = partial(gf.import_gds, gdsdir=gdsdir)
+_import_gds = partial(gf.import_gds, gdsdir=gdsdir)
 
 
 @gf.cell
 def heater() -> gf.Component:
     """Returns Heater fixed cell."""
-    return import_gds("Heater.gds")
+    return _import_gds("Heater.gds")
 
 
 @gf.cell
 def crossing_so() -> gf.Component:
     """Returns SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    return import_gds("SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
+    c = gf.Component()
+    _ = c << _import_gds("SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
+
+    xc = 493.47
+    dx = 8.47 / 2
+    x = xc - dx
+    xl = xc - 2 * dx
+    xr = xc
+    yb = -dx
+    yt = +dx
+
+    c.add_port("o1", orientation=180, center=(xl, 0), width=0.4, layer=LAYER.WG)
+    c.add_port("o2", orientation=90, center=(x, yt), width=0.4, layer=LAYER.WG)
+    c.add_port("o3", orientation=0, center=(xr, 0), width=0.4, layer=LAYER.WG)
+    c.add_port("o4", orientation=270, center=(x, yb), width=0.4, layer=LAYER.WG)
+    return c
 
 
 @gf.cell
 def crossing_rc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
-    return import_gds("SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
+    c = gf.Component()
+    _ = c << _import_gds("SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
+    xc = 404.24
+    dx = 9.24 / 2
+    x = xc - dx
+    xl = xc - 2 * dx
+    xr = xc
+    yb = -dx
+    yt = +dx
+    width = 0.45
+
+    c.add_port("o1", orientation=180, center=(xl, 0), width=width, layer=LAYER.WG)
+    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
+    c.add_port("o3", orientation=0, center=(xr, 0), width=width, layer=LAYER.WG)
+    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
+    return c
 
 
 @gf.cell
 def crossing_sc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    return import_gds("SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
+    c = gf.Component()
+    _ = c << _import_gds("SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
+    xc = 494.24
+    yc = 800
+    dx = 9.24 / 2
+    x = xc - dx
+    xl = xc - 2 * dx
+    xr = xc
+    yb = yc - dx
+    yt = yc + dx
+    width = 0.45
+
+    c.add_port("o1", orientation=180, center=(xl, yc), width=width, layer=LAYER.WG)
+    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
+    c.add_port("o3", orientation=0, center=(xr, yc), width=width, layer=LAYER.WG)
+    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
+    return c
 
 
 if __name__ == "__main__":
-    c = straight_sc()
+    # c = straight_sc()
+    c = crossing_sc()
     # c = gf.Component()
     # w = c << straight_rc()
     # t = c << trans_sc_rc10()
