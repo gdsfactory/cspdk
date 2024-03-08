@@ -170,36 +170,24 @@ cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 def check_cross_section(cross_section):
+    pdk = gf.get_active_pdk()
     if isinstance(cross_section, str):
-        return cross_section
-    err = ValueError(f"Unknown cross section {cross_section}")
-    if _layer_eq(cross_section["sections"][0]["layer"], LAYER.WG):
-        if len(cross_section["sections"]) > 1:
-            if cross_section["sections"][0]["width"] == 0.45:
-                return "xs_rc"
-            elif cross_section["sections"][0]["width"] == 0.40:
-                return "xs_ro"
-            else:
-                raise err
-        elif cross_section["sections"][0]["width"] == 0.45:
-            return "xs_sc"
-        elif cross_section["sections"][0]["width"] == 0.40:
-            return "xs_so"
+        if cross_section in pdk.cross_sections:
+            return cross_section
         else:
-            raise err
-    elif _layer_eq(cross_section["sections"][0]["layer"], LAYER.NITRIDE):
-        if cross_section["sections"][0]["width"] == 1.20:
-            return "xs_nc"
-        elif cross_section["sections"][0]["width"] == 0.95:
-            return "xs_no"
-        else:
-            raise err
+            raise ValueError(f"Invalid cross section: {cross_section}")
+    elif isinstance(cross_section, gf.CrossSection):
+        pass
+    elif isinstance(cross_section, dict):
+        cross_section = gf.CrossSection(**cross_section)
     else:
-        raise err
+        raise ValueError(f"Invalid cross section: {cross_section}")
 
+    for k, v in pdk.cross_sections.items():
+        if cross_section == v:
+            return k
 
-def _layer_eq(layer1, layer2):
-    return (int(layer1[0]) == int(layer2[0])) and (int(layer1[1]) == int(layer2[1]))
+    raise ValueError(f"Invalid cross section: {cross_section}")
 
 
 if __name__ == "__main__":
