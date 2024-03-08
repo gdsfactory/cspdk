@@ -1,0 +1,965 @@
+connections:
+  bend_euler_1,o1: cp1,o3
+  bend_euler_1,o2: syl,o1
+  bend_euler_2,o1: syl,o2
+  bend_euler_2,o2: sxb,o1
+  bend_euler_3,o1: cp1,o2
+  bend_euler_3,o2: sytl,o1
+  bend_euler_4,o1: sxt,o1
+  bend_euler_4,o2: sytl,o2
+  bend_euler_5,o1: straight_5,o2
+  bend_euler_5,o2: straight_6,o1
+  bend_euler_6,o1: straight_6,o2
+  bend_euler_6,o2: straight_7,o1
+  bend_euler_7,o1: straight_8,o2
+  bend_euler_7,o2: straight_9,o1
+  bend_euler_8,o1: straight_9,o2
+  bend_euler_8,o2: straight_10,o1
+  cp2,o2: straight_7,o2
+  cp2,o3: straight_10,o2
+  straight_5,o1: sxt,o2
+  straight_8,o1: sxb,o2
+instances:
+  bend_euler_1:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section: xs_ro
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_2:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section: xs_ro
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_3:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section: xs_ro
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_4:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section: xs_ro
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_5:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_6:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_7:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  bend_euler_8:
+    component: bend_euler
+    info:
+      dy: 25.0
+      length: 41.592
+      radius: 25.0
+      radius_min: 17.652
+      route_info_length: 41.592
+      route_info_n_bend_90: 1.0
+      route_info_type: xs_ro
+      route_info_weight: 41.592
+      route_info_xs_ro_length: 41.592
+      width: 0.4
+    settings:
+      angle: 90.0
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      direction: ccw
+      info: null
+      npoints: null
+      p: 0.5
+      post_process: null
+      radius: null
+      with_arc_floorplan: true
+  cp1:
+    component: mmi1x2
+    info:
+      model: mmi2x2_ro
+    settings:
+      cross_section: xs_ro
+      gap_mmi: 1.55
+      info:
+        model: mmi2x2_ro
+      length_mmi: 40.8
+      length_taper: 20
+      post_process: null
+      taper:
+        function: taper
+      width: null
+      width_mmi: 6
+      width_taper: 1.5
+  cp2:
+    component: mmi1x2
+    info:
+      model: mmi2x2_ro
+    settings:
+      cross_section: xs_ro
+      gap_mmi: 1.55
+      info:
+        model: mmi2x2_ro
+      length_mmi: 40.8
+      length_taper: 20
+      post_process: null
+      taper:
+        function: taper
+      width: null
+      width_mmi: 6
+      width_taper: 1.5
+  straight_10:
+    component: straight
+    info:
+      length: 0.01
+      route_info_length: 0.01
+      route_info_type: xs_ro
+      route_info_weight: 0.01
+      route_info_xs_ro_length: 0.01
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 0.01
+      npoints: 2
+      post_process: null
+  straight_5:
+    component: straight
+    info:
+      length: 0.01
+      route_info_length: 0.01
+      route_info_type: xs_ro
+      route_info_weight: 0.01
+      route_info_xs_ro_length: 0.01
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 0.01
+      npoints: 2
+      post_process: null
+  straight_6:
+    component: straight
+    info:
+      length: 2.0
+      route_info_length: 2.0
+      route_info_type: xs_ro
+      route_info_weight: 2.0
+      route_info_xs_ro_length: 2.0
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 2.0
+      npoints: 2
+      post_process: null
+  straight_7:
+    component: straight
+    info:
+      length: 0.01
+      route_info_length: 0.01
+      route_info_type: xs_ro
+      route_info_weight: 0.01
+      route_info_xs_ro_length: 0.01
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 0.01
+      npoints: 2
+      post_process: null
+  straight_8:
+    component: straight
+    info:
+      length: 0.01
+      route_info_length: 0.01
+      route_info_type: xs_ro
+      route_info_weight: 0.01
+      route_info_xs_ro_length: 0.01
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 0.01
+      npoints: 2
+      post_process: null
+  straight_9:
+    component: straight
+    info:
+      length: 7.0
+      route_info_length: 7.0
+      route_info_type: xs_ro
+      route_info_weight: 7.0
+      route_info_xs_ro_length: 7.0
+      width: 0.4
+    settings:
+      cross_section:
+        add_pins_function_module: gdsfactory.add_pins
+        add_pins_function_name: null
+        auto_widen: false
+        auto_widen_minimum_length: 200.0
+        bbox_layers: null
+        bbox_offsets: null
+        components_along_path: []
+        gap: 3.0
+        info: {}
+        min_length: 0.01
+        radius: 25.0
+        radius_min: 25.0
+        sections:
+        - hidden: false
+          insets: null
+          layer:
+          - 3
+          - 0
+          name: _default
+          offset: 0.0
+          offset_function: null
+          port_names:
+          - o1
+          - o2
+          port_types:
+          - optical
+          - optical
+          simplify: null
+          width: 0.4
+          width_function: null
+        - hidden: false
+          insets: null
+          layer: SLAB
+          name: slab
+          offset: 0
+          offset_function: null
+          port_names:
+          - null
+          - null
+          port_types:
+          - optical
+          - optical
+          simplify: 0.05
+          width: 10.45
+          width_function: null
+        taper_length: 10.0
+        width_wide: null
+      info: null
+      length: 7.0
+      npoints: 2
+      post_process: null
+  sxb:
+    component: straight
+    info:
+      length: 0.1
+      route_info_length: 0.1
+      route_info_type: xs_ro
+      route_info_weight: 0.1
+      route_info_xs_ro_length: 0.1
+      width: 0.4
+    settings:
+      cross_section: xs_ro
+      info: null
+      length: 0.1
+      npoints: 2
+      post_process: null
+  sxt:
+    component: straight
+    info:
+      length: 0.1
+      route_info_length: 0.1
+      route_info_type: xs_ro
+      route_info_weight: 0.1
+      route_info_xs_ro_length: 0.1
+      width: 0.4
+    settings:
+      cross_section: xs_ro
+      info: null
+      length: 0.1
+      npoints: 2
+      post_process: null
+  syl:
+    component: straight
+    info:
+      length: 7.0
+      route_info_length: 7.0
+      route_info_type: xs_ro
+      route_info_weight: 7.0
+      route_info_xs_ro_length: 7.0
+      width: 0.4
+    settings:
+      cross_section: xs_ro
+      info: null
+      length: 7.0
+      npoints: 2
+      post_process: null
+  sytl:
+    component: straight
+    info:
+      length: 2.0
+      route_info_length: 2.0
+      route_info_type: xs_ro
+      route_info_weight: 2.0
+      route_info_xs_ro_length: 2.0
+      width: 0.4
+    settings:
+      cross_section: xs_ro
+      info: null
+      length: 2.0
+      npoints: 2
+      post_process: null
+name: mzi_89161ff8
+placements:
+  bend_euler_1:
+    mirror: true
+    rotation: 0
+    x: 60.8
+    y: -1.525
+  bend_euler_2:
+    mirror: 0
+    rotation: 270
+    x: 85.8
+    y: -33.525
+  bend_euler_3:
+    mirror: 0
+    rotation: 0
+    x: 60.8
+    y: 1.525
+  bend_euler_4:
+    mirror: 0
+    rotation: 180
+    x: 110.8
+    y: 53.525
+  bend_euler_5:
+    mirror: true
+    rotation: 0
+    x: 110.91
+    y: 53.525
+  bend_euler_6:
+    mirror: 0
+    rotation: 270
+    x: 135.91
+    y: 26.525
+  bend_euler_7:
+    mirror: 0
+    rotation: 0
+    x: 110.91
+    y: -58.525
+  bend_euler_8:
+    mirror: true
+    rotation: 90
+    x: 135.91
+    y: -26.525
+  cp1:
+    mirror: 0
+    rotation: 0
+    x: 0.0
+    y: 0.0
+  cp2:
+    mirror: true
+    rotation: 180
+    x: 221.72
+    y: 0.0
+  straight_10:
+    mirror: 0
+    rotation: 0
+    x: 160.91
+    y: -1.525
+  straight_5:
+    mirror: 0
+    rotation: 0
+    x: 110.9
+    y: 53.525
+  straight_6:
+    mirror: 0
+    rotation: 270
+    x: 135.91
+    y: 28.525
+  straight_7:
+    mirror: 0
+    rotation: 0
+    x: 160.91
+    y: 1.525
+  straight_8:
+    mirror: 0
+    rotation: 0
+    x: 110.9
+    y: -58.525
+  straight_9:
+    mirror: 0
+    rotation: 90
+    x: 135.91
+    y: -33.525
+  sxb:
+    mirror: 0
+    rotation: 0
+    x: 110.8
+    y: -58.525
+  sxt:
+    mirror: 0
+    rotation: 0
+    x: 110.8
+    y: 53.525
+  syl:
+    mirror: 0
+    rotation: 270
+    x: 85.8
+    y: -26.525
+  sytl:
+    mirror: 0
+    rotation: 90
+    x: 85.8
+    y: 26.525
+ports:
+  o1: cp1,o1
+  o2: cp2,o1

@@ -1,0 +1,11 @@
+function: taper_cross_section
+info:
+  length: 10
+module: cspdk.cells
+name: taper_cross_section
+settings:
+  cross_section1: xs_rc_tip
+  cross_section2: xs_rc
+  length: 10
+  linear: true
+  npoints: 2

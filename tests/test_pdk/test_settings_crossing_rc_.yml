@@ -1,5 +1,5 @@
-function: crossing_rc
+function: ''
 info: {}
-module: cspdk.cells
+module: ''
 name: crossing_rc
 settings: {}
