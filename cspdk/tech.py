@@ -2,11 +2,12 @@
 
 import sys
 from functools import partial
+from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
-from gdsfactory.typings import Layer
+from gdsfactory.typings import ConnectivitySpec, Layer
 
 from cspdk.config import PATH
 
@@ -207,9 +208,7 @@ if __name__ == "__main__":
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     LAYER_VIEWS.to_lyp(PATH.lyp)
 
-    connectivity = [
-        ("HEATER", "HEATER", "PAD"),
-    ]
+    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 
     t = KLayoutTechnology(
         name="Cornerstone",
