@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.4.0
+
+- Add netlist tests [#11](https://github.com/gdsfactory/cspdk/pull/11)
+- more minor fixes [#9](https://github.com/gdsfactory/cspdk/pull/9)
+
 ## 0.3.0
 
 - [improve models](https://github.com/gdsfactory/cspdk/pull/8)
