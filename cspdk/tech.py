@@ -2,11 +2,12 @@
 
 import sys
 from functools import partial
+from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
-from gdsfactory.typings import Layer
+from gdsfactory.typings import ConnectivitySpec, Layer
 
 from cspdk.config import PATH
 
@@ -168,15 +169,34 @@ xs_heater_metal = heater_metal()
 cross_sections = get_cross_sections(sys.modules[__name__])
 
 
+def check_cross_section(cross_section):
+    pdk = gf.get_active_pdk()
+    if isinstance(cross_section, str):
+        if cross_section in pdk.cross_sections:
+            return cross_section
+        else:
+            raise ValueError(f"Invalid cross section: {cross_section}")
+    elif isinstance(cross_section, gf.CrossSection):
+        pass
+    elif isinstance(cross_section, dict):
+        cross_section = gf.CrossSection(**cross_section)
+    else:
+        raise ValueError(f"Invalid cross section: {cross_section}")
+
+    for k, v in pdk.cross_sections.items():
+        if cross_section == v:
+            return k
+
+    raise ValueError(f"Invalid cross section: {cross_section}")
+
+
 if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     LAYER_VIEWS.to_lyp(PATH.lyp)
 
-    connectivity = [
-        ("HEATER", "HEATER", "PAD"),
-    ]
+    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 
     t = KLayoutTechnology(
         name="Cornerstone",
@@ -186,3 +206,7 @@ if __name__ == "__main__":
         connectivity=connectivity,
     )
     t.write_tech(tech_dir=PATH.klayout)
+
+if __name__ == "__main__":
+    print(xs_rc.sections)
+    print(type(LAYER.NITRIDE), LAYER.NITRIDE)
