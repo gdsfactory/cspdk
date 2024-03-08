@@ -228,7 +228,17 @@ crossing_sc = _crossing
 ################
 pad = _2port("o1", "o2")  # dummy model
 heater = _2port("o1", "o2")  # dummy model
+rectangle = _2port("o1", "o2")  # dummy model
 
+
+def grating_coupler_array(n=6):
+    ports = tuple([f"o{i}" for i in range(n + n % 2)])
+    return sax.models.passthru(num_links=(n + n % 2) // 2, ports=ports)()
+
+
+################
+# Models Dict
+################
 models = dict(
     _2port=_2port("o1", "o2"),
     _3port=_3port("o1", "o2", "o3"),
@@ -279,4 +289,6 @@ models = dict(
     crossing_sc=crossing_sc,
     pad=pad,
     heater=heater,
+    rectangle=rectangle,
+    grating_coupler_array=grating_coupler_array,
 )

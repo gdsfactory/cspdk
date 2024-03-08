@@ -357,14 +357,14 @@ mzi_ro = partial(
 )
 
 mzi_nc = partial(
-    gf.components.mzi,
+    mzi,
     straight=straight_nc,
     cross_section="xs_nc",
     combiner=mmi1x2_nc,
     splitter=mmi1x2_nc,
 )
 mzi_no = partial(
-    gf.components.mzi,
+    mzi,
     straight=straight_no,
     cross_section="xs_no",
     combiner=mmi1x2_no,
@@ -375,9 +375,17 @@ mzi_no = partial(
 ################
 # Packaging
 ################
+
 pad = partial(
     gf.components.pad,
     layer=LAYER.PAD,
+)
+
+rectangle = partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
+grating_coupler_array = partial(
+    gf.components.grating_coupler_array,
+    cross_section="xs_nc",
+    grating_coupler=gc_rectangular_nc,
 )
 
 
@@ -406,28 +414,27 @@ def die_nc(
     """
     c = gf.Component()
 
-    fp = c << gf.components.rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
+    fp = c << rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
 
     # Add optical ports
     x0 = -4925 + 2.827
     y0 = 1650
-    grating_coupler = grating_coupler()
 
-    grating_coupler_array = gf.components.grating_coupler_array(
-        grating_coupler=grating_coupler,
+    gca = grating_coupler_array(
+        grating_coupler=grating_coupler(),
         n=ngratings,
         pitch=grating_pitch,
         with_loopback=True,
         rotation=90,
         cross_section=cross_section,  # type: ignore
     )
-    left = c << grating_coupler_array
+    left = c << gca
     left.rotate(90)
     left.xmax = x0
     left.y = fp.y
     c.add_ports(left.ports, prefix="W")
 
-    right = c << grating_coupler_array
+    right = c << gca
     right.rotate(-90)
     right.xmax = -x0
     right.y = fp.y
