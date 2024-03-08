@@ -14,21 +14,21 @@ from cspdk.tech import LAYER
 ################
 
 straight = gf.components.straight
-straight_sc = partial(straight, cross_section="xs_sc", info={"model": "straight_sc"})
-straight_so = partial(straight, cross_section="xs_so", info={"model": "straight_so"})
-straight_rc = partial(straight, cross_section="xs_rc", info={"model": "straight_rc"})
-straight_ro = partial(straight, cross_section="xs_ro", info={"model": "straight_ro"})
-straight_nc = partial(straight, cross_section="xs_nc", info={"model": "straight_nc"})
-straight_no = partial(straight, cross_section="xs_no", info={"model": "straight_no"})
+straight_sc = partial(straight, cross_section="xs_sc")
+straight_so = partial(straight, cross_section="xs_so")
+straight_rc = partial(straight, cross_section="xs_rc")
+straight_ro = partial(straight, cross_section="xs_ro")
+straight_nc = partial(straight, cross_section="xs_nc")
+straight_no = partial(straight, cross_section="xs_no")
 
 
 bend_euler = gf.components.bend_euler
-bend_sc = partial(bend_euler, cross_section="xs_sc", info={"model": "bend_sc"})
-bend_so = partial(bend_euler, cross_section="xs_so", info={"model": "bend_so"})
-bend_rc = partial(bend_euler, cross_section="xs_rc", info={"model": "bend_rc"})
-bend_ro = partial(bend_euler, cross_section="xs_ro", info={"model": "bend_ro"})
-bend_nc = partial(bend_euler, cross_section="xs_nc", info={"model": "bend_nc"})
-bend_no = partial(bend_euler, cross_section="xs_no", info={"model": "bend_no"})
+bend_sc = partial(bend_euler, cross_section="xs_sc")
+bend_so = partial(bend_euler, cross_section="xs_so")
+bend_rc = partial(bend_euler, cross_section="xs_rc")
+bend_ro = partial(bend_euler, cross_section="xs_ro")
+bend_nc = partial(bend_euler, cross_section="xs_nc")
+bend_no = partial(bend_euler, cross_section="xs_no")
 
 ################
 # Transitions
