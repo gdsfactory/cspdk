@@ -1,0 +1,203 @@
+connections: {}
+instances:
+  gc_rectangular_1:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+  gc_rectangular_2:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+  gc_rectangular_3:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+  gc_rectangular_4:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+  gc_rectangular_5:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+  gc_rectangular_6:
+    component: gc_rectangular
+    info:
+      fiber_angle: 20
+      model: gc_rectangular_nc
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: xs_nc
+      fiber_angle: 20
+      fill_factor: 0.5
+      info:
+        model: gc_rectangular_nc
+      layer_grating:
+      - 204
+      - 0
+      layer_slab:
+      - 203
+      - 0
+      length_taper: 200
+      n_periods: 30
+      period: 0.66
+      slab_offset: 0
+name: grating_coupler_array_516b0540
+placements:
+  gc_rectangular_1:
+    mirror: 0
+    rotation: 0
+    x: -109.735
+    y: 0.0
+  gc_rectangular_2:
+    mirror: 0
+    rotation: 0
+    x: 17.265
+    y: 0.0
+  gc_rectangular_3:
+    mirror: 0
+    rotation: 0
+    x: 144.265
+    y: 0.0
+  gc_rectangular_4:
+    mirror: 0
+    rotation: 0
+    x: 271.265
+    y: 0.0
+  gc_rectangular_5:
+    mirror: 0
+    rotation: 0
+    x: 398.265
+    y: 0.0
+  gc_rectangular_6:
+    mirror: 0
+    rotation: 0
+    x: 525.265
+    y: 0.0
+ports:
+  o1: gc_rectangular_1,o1
+  o2: gc_rectangular_2,o1
+  o3: gc_rectangular_3,o1
+  o4: gc_rectangular_4,o1
+  o5: gc_rectangular_5,o1
+  o6: gc_rectangular_6,o1
+warnings:
+  optical:
+    unconnected_ports:
+    - message: 6 unconnected optical ports!
+      ports:
+      - gc_rectangular_1,o2
+      - gc_rectangular_2,o2
+      - gc_rectangular_3,o2
+      - gc_rectangular_4,o2
+      - gc_rectangular_5,o2
+      - gc_rectangular_6,o2
+      values:
+      - - 99.917
+        - 0.0
+      - - 226.917
+        - 0.0
+      - - 353.917
+        - 0.0
+      - - 480.917
+        - 0.0
+      - - 607.917
+        - 0.0
+      - - 734.917
+        - 0.0

@@ -8,6 +8,8 @@ Pipfile
 *.so
 *.fsp
 
+tests/gds_ref/*.oas
+
 # Distribution / packaging
 .Python
 build/
