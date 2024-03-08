@@ -2,7 +2,6 @@ function: bend_euler
 info:
   dy: 25.0
   length: 41.592
-  model: bend_nc
   radius: 25.0
   radius_min: 17.652
   route_info_length: 41.592
@@ -12,13 +11,12 @@ info:
   route_info_xs_nc_length: 41.592
   width: 1.2
 module: gdsfactory.components.bend_euler
-name: bend_euler_7f96af8c
+name: bend_euler_cross_sectionxs_nc
 settings:
   angle: 90.0
   cross_section: xs_nc
   direction: ccw
-  info:
-    model: bend_nc
+  info: null
   npoints: null
   p: 0.5
   post_process: null

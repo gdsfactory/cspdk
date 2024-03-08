@@ -1,7 +1,7 @@
 function: mzi
 info: {}
 module: gdsfactory.components.mzi
-name: mzi_950eed3b
+name: mzi_c087d0b3
 settings:
   add_electrical_ports_bot: true
   add_optical_ports_arms: false
@@ -10,8 +10,6 @@ settings:
     module: gdsfactory.components.bend_euler
     settings:
       cross_section: xs_nc
-      info:
-        model: bend_nc
   combiner:
     function: mmi1x2
     module: gdsfactory.components.mmi1x2
@@ -56,8 +54,6 @@ settings:
     module: gdsfactory.components.straight
     settings:
       cross_section: xs_nc
-      info:
-        model: straight_nc
   straight_x_bot: null
   straight_x_top: null
   straight_y: null

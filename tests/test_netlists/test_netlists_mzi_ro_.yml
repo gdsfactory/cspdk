@@ -25,7 +25,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -38,8 +37,7 @@ instances:
       angle: 90.0
       cross_section: xs_ro
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -50,7 +48,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -63,8 +60,7 @@ instances:
       angle: 90.0
       cross_section: xs_ro
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -75,7 +71,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -88,8 +83,7 @@ instances:
       angle: 90.0
       cross_section: xs_ro
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -100,7 +94,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -113,8 +106,7 @@ instances:
       angle: 90.0
       cross_section: xs_ro
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -125,7 +117,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -185,8 +176,7 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -197,7 +187,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -257,8 +246,7 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -269,7 +257,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -329,8 +316,7 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -341,7 +327,6 @@ instances:
     info:
       dy: 25.0
       length: 41.592
-      model: bend_ro
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -401,8 +386,7 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info:
-        model: bend_ro
+      info: null
       npoints: null
       p: 0.5
       post_process: null
@@ -446,7 +430,6 @@ instances:
     component: straight
     info:
       length: 0.01
-      model: straight_ro
       route_info_length: 0.01
       route_info_type: xs_ro
       route_info_weight: 0.01
@@ -501,8 +484,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 0.01
       npoints: 2
       post_process: null
@@ -510,7 +492,6 @@ instances:
     component: straight
     info:
       length: 0.01
-      model: straight_ro
       route_info_length: 0.01
       route_info_type: xs_ro
       route_info_weight: 0.01
@@ -565,8 +546,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 0.01
       npoints: 2
       post_process: null
@@ -574,7 +554,6 @@ instances:
     component: straight
     info:
       length: 2.0
-      model: straight_ro
       route_info_length: 2.0
       route_info_type: xs_ro
       route_info_weight: 2.0
@@ -629,8 +608,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 2.0
       npoints: 2
       post_process: null
@@ -638,7 +616,6 @@ instances:
     component: straight
     info:
       length: 0.01
-      model: straight_ro
       route_info_length: 0.01
       route_info_type: xs_ro
       route_info_weight: 0.01
@@ -693,8 +670,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 0.01
       npoints: 2
       post_process: null
@@ -702,7 +678,6 @@ instances:
     component: straight
     info:
       length: 0.01
-      model: straight_ro
       route_info_length: 0.01
       route_info_type: xs_ro
       route_info_weight: 0.01
@@ -757,8 +732,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 0.01
       npoints: 2
       post_process: null
@@ -766,7 +740,6 @@ instances:
     component: straight
     info:
       length: 7.0
-      model: straight_ro
       route_info_length: 7.0
       route_info_type: xs_ro
       route_info_weight: 7.0
@@ -821,8 +794,7 @@ instances:
           width_function: null
         taper_length: 10.0
         width_wide: null
-      info:
-        model: straight_ro
+      info: null
       length: 7.0
       npoints: 2
       post_process: null
@@ -830,7 +802,6 @@ instances:
     component: straight
     info:
       length: 0.1
-      model: straight_ro
       route_info_length: 0.1
       route_info_type: xs_ro
       route_info_weight: 0.1
@@ -838,8 +809,7 @@ instances:
       width: 0.4
     settings:
       cross_section: xs_ro
-      info:
-        model: straight_ro
+      info: null
       length: 0.1
       npoints: 2
       post_process: null
@@ -847,7 +817,6 @@ instances:
     component: straight
     info:
       length: 0.1
-      model: straight_ro
       route_info_length: 0.1
       route_info_type: xs_ro
       route_info_weight: 0.1
@@ -855,8 +824,7 @@ instances:
       width: 0.4
     settings:
       cross_section: xs_ro
-      info:
-        model: straight_ro
+      info: null
       length: 0.1
       npoints: 2
       post_process: null
@@ -864,7 +832,6 @@ instances:
     component: straight
     info:
       length: 7.0
-      model: straight_ro
       route_info_length: 7.0
       route_info_type: xs_ro
       route_info_weight: 7.0
@@ -872,8 +839,7 @@ instances:
       width: 0.4
     settings:
       cross_section: xs_ro
-      info:
-        model: straight_ro
+      info: null
       length: 7.0
       npoints: 2
       post_process: null
@@ -881,7 +847,6 @@ instances:
     component: straight
     info:
       length: 2.0
-      model: straight_ro
       route_info_length: 2.0
       route_info_type: xs_ro
       route_info_weight: 2.0
@@ -889,12 +854,11 @@ instances:
       width: 0.4
     settings:
       cross_section: xs_ro
-      info:
-        model: straight_ro
+      info: null
       length: 2.0
       npoints: 2
       post_process: null
-name: mzi_ac7ff72c
+name: mzi_89161ff8
 placements:
   bend_euler_1:
     mirror: true

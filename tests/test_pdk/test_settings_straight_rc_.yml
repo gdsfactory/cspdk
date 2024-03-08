@@ -1,18 +1,16 @@
 function: straight
 info:
   length: 10.0
-  model: straight_rc
   route_info_length: 10.0
   route_info_type: xs_rc
   route_info_weight: 10.0
   route_info_xs_rc_length: 10.0
   width: 0.45
 module: gdsfactory.components.straight
-name: straight_5343c37f
+name: straight_cross_sectionxs_rc
 settings:
   cross_section: xs_rc
-  info:
-    model: straight_rc
+  info: null
   length: 10.0
   npoints: 2
   post_process: null
