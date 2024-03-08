@@ -38,7 +38,8 @@ instances:
       angle: 90.0
       cross_section: xs_no
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -62,7 +63,8 @@ instances:
       angle: 90.0
       cross_section: xs_no
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -86,7 +88,8 @@ instances:
       angle: 90.0
       cross_section: xs_no
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -110,7 +113,8 @@ instances:
       angle: 90.0
       cross_section: xs_no
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -121,6 +125,7 @@ instances:
     info:
       dy: 25.0
       length: 41.592
+      model: bend_no
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -165,7 +170,8 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -176,6 +182,7 @@ instances:
     info:
       dy: 25.0
       length: 41.592
+      model: bend_no
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -220,7 +227,8 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -231,6 +239,7 @@ instances:
     info:
       dy: 25.0
       length: 41.592
+      model: bend_no
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -275,7 +284,8 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -286,6 +296,7 @@ instances:
     info:
       dy: 25.0
       length: 41.592
+      model: bend_no
       radius: 25.0
       radius_min: 17.652
       route_info_length: 41.592
@@ -330,7 +341,8 @@ instances:
         taper_length: 10.0
         width_wide: null
       direction: ccw
-      info: null
+      info:
+        model: bend_no
       npoints: null
       p: 0.5
       post_process: null
@@ -734,7 +746,7 @@ instances:
       length: 2.0
       npoints: 2
       post_process: null
-name: mzi_780383d6
+name: mzi_cc8f144b
 placements:
   bend_euler_1:
     mirror: true

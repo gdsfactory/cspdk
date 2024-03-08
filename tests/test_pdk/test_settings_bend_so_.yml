@@ -12,12 +12,13 @@ info:
   route_info_xs_so_length: 16.637
   width: 0.4
 module: gdsfactory.components.bend_euler
-name: bend_euler_cross_sectionxs_so
+name: bend_euler_f76eb32c
 settings:
   angle: 90.0
   cross_section: xs_so
   direction: ccw
-  info: null
+  info:
+    model: bend_so
   npoints: null
   p: 0.5
   post_process: null

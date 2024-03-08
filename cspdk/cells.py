@@ -1,4 +1,4 @@
-from functools import partial, wraps
+from functools import partial
 
 import gdsfactory as gf
 
@@ -22,14 +22,7 @@ straight_nc = partial(straight, cross_section="xs_nc", info={"model": "straight_
 straight_no = partial(straight, cross_section="xs_no", info={"model": "straight_no"})
 
 
-@wraps(gf.components.bend_euler)
-def bend_euler(info=None, **kwargs):
-    c = gf.components.bend_euler(**kwargs)
-    if info is not None:
-        c.info.update(info)
-    return c
-
-
+bend_euler = gf.components.bend_euler
 bend_sc = partial(bend_euler, cross_section="xs_sc", info={"model": "bend_sc"})
 bend_so = partial(bend_euler, cross_section="xs_so", info={"model": "bend_so"})
 bend_rc = partial(bend_euler, cross_section="xs_rc", info={"model": "bend_rc"})
@@ -330,6 +323,7 @@ mzi = gf.components.mzi
 mzi_sc = partial(
     mzi,
     straight=straight_sc,
+    bend=bend_sc,
     cross_section="xs_sc",
     combiner=mmi1x2_sc,
     splitter=mmi1x2_sc,
@@ -337,6 +331,7 @@ mzi_sc = partial(
 mzi_so = partial(
     mzi,
     straight=straight_so,
+    bend=bend_so,
     cross_section="xs_so",
     combiner=mmi1x2_so,
     splitter=mmi1x2_so,
@@ -344,6 +339,7 @@ mzi_so = partial(
 mzi_rc = partial(
     mzi,
     straight=straight_rc,
+    bend=bend_rc,
     cross_section="xs_rc",
     combiner=mmi1x2_rc,
     splitter=mmi1x2_rc,
@@ -351,6 +347,7 @@ mzi_rc = partial(
 mzi_ro = partial(
     mzi,
     straight=straight_ro,
+    bend=bend_ro,
     cross_section="xs_ro",
     combiner=mmi1x2_ro,
     splitter=mmi1x2_ro,
@@ -359,12 +356,14 @@ mzi_ro = partial(
 mzi_nc = partial(
     mzi,
     straight=straight_nc,
+    bend=bend_nc,
     cross_section="xs_nc",
     combiner=mmi1x2_nc,
     splitter=mmi1x2_nc,
 )
 mzi_no = partial(
     mzi,
+    bend=bend_no,
     straight=straight_no,
     cross_section="xs_no",
     combiner=mmi1x2_no,

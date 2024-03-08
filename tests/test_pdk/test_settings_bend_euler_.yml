@@ -2,7 +2,6 @@ function: bend_euler
 info:
   dy: 10.0
   length: 16.637
-  model: bend_sc
   radius: 10.0
   radius_min: 7.061
   route_info_length: 16.637

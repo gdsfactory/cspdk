@@ -1,12 +1,17 @@
 function: mzi
 info: {}
 module: gdsfactory.components.mzi
-name: mzi_a301f618
+name: mzi_09166285
 settings:
   add_electrical_ports_bot: true
   add_optical_ports_arms: false
   bend:
     function: bend_euler
+    module: gdsfactory.components.bend_euler
+    settings:
+      cross_section: xs_sc
+      info:
+        model: bend_sc
   combiner:
     function: mmi1x2
     module: gdsfactory.components.mmi1x2

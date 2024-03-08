@@ -12,12 +12,13 @@ info:
   route_info_xs_sc_length: 16.637
   width: 0.45
 module: gdsfactory.components.bend_euler
-name: bend_euler
+name: bend_euler_2be53e03
 settings:
   angle: 90.0
   cross_section: xs_sc
   direction: ccw
-  info: null
+  info:
+    model: bend_sc
   npoints: null
   p: 0.5
   post_process: null
