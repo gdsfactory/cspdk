@@ -61,21 +61,18 @@ trans_sc_rc10 = partial(
     cross_section1="xs_rc_tip",
     cross_section2="xs_rc",
     length=10,
-    info={"model": "trans_sc_rc10"},
 )
 trans_sc_rc20 = partial(
     taper_cross_section,
     cross_section1="xs_rc_tip",
     cross_section2="xs_rc",
     length=20,
-    info={"model": "trans_sc_rc20"},
 )
 trans_sc_rc50 = partial(
     taper_cross_section,
     cross_section1="xs_rc_tip",
     cross_section2="xs_rc",
     length=50,
-    info={"model": "trans_sc_rc50"},
 )
 
 ################
@@ -107,14 +104,12 @@ mmi1x2_rc = partial(
     length_mmi=32.7,
     gap_mmi=1.64,
     cross_section="xs_rc",
-    info={"model": "mmi1x2_rc"},
 )
 mmi2x2_rc = partial(
     _mmi2x2,
     length_mmi=44.8,
     gap_mmi=0.53,
     cross_section="xs_rc",
-    info={"model": "mmi2x2_rc"},
 )
 ################
 # MMIs strip cband
@@ -124,14 +119,12 @@ mmi1x2_sc = partial(
     length_mmi=31.8,
     gap_mmi=1.64,
     cross_section="xs_sc",
-    info={"model": "mmi1x2_sc"},
 )
 mmi2x2_sc = partial(
     _mmi2x2,
     length_mmi=42.5,
     gap_mmi=0.5,
     cross_section="xs_sc",
-    info={"model": "mmi2x2_sc"},
 )
 ################
 # MMIs rib oband
@@ -141,14 +134,12 @@ mmi1x2_ro = partial(
     length_mmi=40.8,
     gap_mmi=1.55,
     cross_section="xs_ro",
-    info={"model": "mmi2x2_ro"},
 )
 mmi2x2_ro = partial(
     _mmi2x2,
     length_mmi=55,
     gap_mmi=0.53,
     cross_section="xs_ro",
-    info={"model": "mmi2x2_ro"},
 )
 ################
 # MMIs strip oband
@@ -158,14 +149,12 @@ mmi1x2_so = partial(
     length_mmi=40.1,
     gap_mmi=1.55,
     cross_section="xs_so",
-    info={"model": "mmi1x2_so"},
 )
 mmi2x2_so = partial(
     _mmi2x2,
     length_mmi=53.5,
     gap_mmi=0.53,
     cross_section="xs_so",
-    info={"model": "mmi2x2_so"},
 )
 
 ################
@@ -192,13 +181,11 @@ mmi1x2_no = partial(
     _mmi1x2_nitride_oband,
     length_mmi=42,
     cross_section="xs_no",
-    info={"model": "mmi1x2_no"},
 )
 mmi2x2_no = partial(
     _mmi2x2_nitride_oband,
     length_mmi=126,
     cross_section="xs_no",
-    info={"model": "mmi2x2_no"},
 )
 
 ################
@@ -220,13 +207,11 @@ mmi1x2_nc = partial(
     _mmi1x2_nitride_cband,
     length_mmi=64.7,
     cross_section="xs_nc",
-    info={"model": "mmi1x2_nc"},
 )
 mmi2x2_nc = partial(
     _mmi2x2_nitride_cband,
     length_mmi=232,
     cross_section="xs_nc",
-    info={"model": "mmi2x2_nc"},
 )
 
 ##############################
@@ -243,7 +228,6 @@ def gc_rectangular(
     layer_grating=LAYER.GRA,
     layer_slab=LAYER.WG,
     slab_offset=0,
-    info=None,
     **kwargs,
 ) -> gf.Component:
     c = gf.components.grating_coupler_rectangular(
@@ -254,7 +238,6 @@ def gc_rectangular(
         layer_grating=layer_grating,
         layer_slab=layer_slab,
         slab_offset=slab_offset,
-        info=info,
         **kwargs,
     ).flatten()
     return c
@@ -265,14 +248,12 @@ gc_rectangular_so = partial(
     period=0.5,
     cross_section="xs_so",
     n_periods=80,
-    info={"model": "gc_rectangular_so"},
 )
 gc_rectangular_ro = partial(
     gc_rectangular,
     period=0.5,
     cross_section="xs_ro",
     n_periods=80,
-    info={"model": "gc_rectangular_ro"},
 )
 
 gc_rectangular_sc = partial(
@@ -281,14 +262,12 @@ gc_rectangular_sc = partial(
     cross_section="xs_sc",
     fiber_angle=10,
     n_periods=60,
-    info={"model": "gc_rectangular_sc"},
 )
 gc_rectangular_rc = partial(
     gc_rectangular,
     period=0.5,
     cross_section="xs_rc",
     n_periods=60,
-    info={"model": "gc_rectangular_rc"},
 )
 
 gc_rectangular_nc = partial(
@@ -300,7 +279,6 @@ gc_rectangular_nc = partial(
     layer_grating=LAYER.NITRIDE_ETCH,
     layer_slab=LAYER.NITRIDE,
     slab_offset=0,
-    info={"model": "gc_rectangular_nc"},
 )
 gc_rectangular_no = partial(
     gc_rectangular,
@@ -311,7 +289,6 @@ gc_rectangular_no = partial(
     layer_grating=LAYER.NITRIDE_ETCH,
     layer_slab=LAYER.NITRIDE,
     slab_offset=0,
-    info={"model": "gc_rectangular_no"},
 )
 
 ################
