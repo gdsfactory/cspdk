@@ -8,7 +8,6 @@ name: gc_rectangular
 settings:
   fiber_angle: 10
   fill_factor: 0.5
-  info: null
   layer_grating:
   - 6
   - 0

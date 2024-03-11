@@ -1,28 +1,13 @@
 function: grating_coupler_array
 info: {}
 module: gdsfactory.components.grating_coupler_array
-name: grating_coupler_array_516b0540
+name: grating_coupler_array_2612704c
 settings:
   bend:
     function: bend_euler
   cross_section: xs_nc
   grating_coupler:
-    function: gc_rectangular
-    module: cspdk.cells
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      info:
-        model: gc_rectangular_nc
-      layer_grating:
-      - 204
-      - 0
-      layer_slab:
-      - 203
-      - 0
-      length_taper: 200
-      period: 0.66
-      slab_offset: 0
+    function: gc_rectangular_nc
   grating_coupler_spacing: 0.0
   n: 6
   pitch: 127.0

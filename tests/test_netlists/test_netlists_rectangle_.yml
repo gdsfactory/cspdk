@@ -4,7 +4,6 @@ instances:
     component: compass
     info: {}
     settings:
-      info: null
       layer:
       - 99
       - 0
@@ -15,7 +14,6 @@ instances:
       - 0
       - -90
       port_type: electrical
-      post_process: null
       size:
       - 4.0
       - 2.0

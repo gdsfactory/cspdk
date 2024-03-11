@@ -1,0 +1,15 @@
+function: gc_elliptical_sc
+info:
+  period: 0.6759999999999999
+  polarization: te
+  wavelength: 1.53
+module: cspdk.cells
+name: gc_elliptical_sc
+settings:
+  cross_section: xs_sc
+  fiber_angle: 15
+  grating_line_width: 0.343
+  layer_trench:
+  - 6
+  - 0
+  wavelength: 1.53

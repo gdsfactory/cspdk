@@ -1,59 +1,55 @@
 function: mzi
 info: {}
 module: gdsfactory.components.mzi
-name: mzi_c087d0b3
+name: mzi_8ca5b9fc
 settings:
   add_electrical_ports_bot: true
   add_optical_ports_arms: false
   bend:
-    function: bend_euler
-    module: gdsfactory.components.bend_euler
-    settings:
-      cross_section: xs_nc
+    function: bend_nc
   combiner:
-    function: mmi1x2
-    module: gdsfactory.components.mmi1x2
-    settings:
-      cross_section: xs_nc
-      gap: 0.4
-      info:
-        model: mmi1x2_nc
-      length_mmi: 64.7
-      length_taper: 50
-      width_mmi: 12
-      width_taper: 5.5
-  cross_section: xs_nc
+    function: mmi1x2_nc
+  cross_section:
+    bbox_layers: null
+    bbox_offsets: null
+    components_along_path: []
+    radius: 25.0
+    radius_min: 5.0
+    sections:
+    - hidden: false
+      insets: null
+      layer:
+      - 203
+      - 0
+      name: _default
+      offset: 0.0
+      offset_function: null
+      port_names:
+      - o1
+      - o2
+      port_types:
+      - optical
+      - optical
+      simplify: null
+      width: 1.2
+      width_function: null
   cross_section_x_bot: null
   cross_section_x_top: null
   delta_length: 10.0
   extend_ports_straight_x: null
-  info: null
   length_x: 0.1
   length_y: 2.0
+  min_length: 0.01
   mirror_bot: false
   nbends: 2
   port_e0_combiner: o3
   port_e0_splitter: o3
   port_e1_combiner: o2
   port_e1_splitter: o2
-  post_process: null
   splitter:
-    function: mmi1x2
-    module: gdsfactory.components.mmi1x2
-    settings:
-      cross_section: xs_nc
-      gap: 0.4
-      info:
-        model: mmi1x2_nc
-      length_mmi: 64.7
-      length_taper: 50
-      width_mmi: 12
-      width_taper: 5.5
+    function: mmi1x2_nc
   straight:
-    function: straight
-    module: gdsfactory.components.straight
-    settings:
-      cross_section: xs_nc
+    function: straight_nc
   straight_x_bot: null
   straight_x_top: null
   straight_y: null
