@@ -8,24 +8,9 @@ instances:
         function: bend_euler
       cross_section: xs_sc
       grating_coupler:
-        function: gc_rectangular
+        function: gc_rectangular_sc
         module: cspdk.cells
-        settings:
-          cross_section: xs_sc
-          fiber_angle: 10
-          fill_factor: 0.5
-          info:
-            model: gc_rectangular_sc
-          layer_grating:
-          - 6
-          - 0
-          layer_slab:
-          - 3
-          - 0
-          length_taper: 350
-          n_periods: 60
-          period: 0.63
-          slab_offset: 0
+        settings: {}
       grating_coupler_spacing: 0.0
       n: 14
       pitch: 250
@@ -40,24 +25,9 @@ instances:
         function: bend_euler
       cross_section: xs_sc
       grating_coupler:
-        function: gc_rectangular
+        function: gc_rectangular_sc
         module: cspdk.cells
-        settings:
-          cross_section: xs_sc
-          fiber_angle: 10
-          fill_factor: 0.5
-          info:
-            model: gc_rectangular_sc
-          layer_grating:
-          - 6
-          - 0
-          layer_slab:
-          - 3
-          - 0
-          length_taper: 350
-          n_periods: 60
-          period: 0.63
-          slab_offset: 0
+        settings: {}
       grating_coupler_spacing: 0.0
       n: 14
       pitch: 250
@@ -78,13 +48,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -102,13 +70,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -126,13 +92,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -150,13 +114,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -174,13 +136,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -198,13 +158,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -222,13 +180,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -246,13 +202,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -270,13 +224,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -294,13 +246,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -318,13 +268,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -342,13 +290,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -366,13 +312,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -390,13 +334,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -414,13 +356,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -438,13 +378,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -462,13 +400,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -486,13 +422,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -510,13 +444,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -534,13 +466,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -558,13 +488,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -582,13 +510,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -606,13 +532,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -630,13 +554,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -654,13 +576,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -678,13 +598,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -702,13 +620,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -726,13 +642,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -750,13 +664,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -774,13 +686,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -798,13 +708,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -822,13 +730,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -846,13 +752,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -870,13 +774,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -894,13 +796,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -918,13 +818,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -942,13 +840,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -966,13 +862,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -990,13 +884,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1014,13 +906,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1038,13 +928,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1062,13 +950,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1086,13 +972,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1110,13 +994,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1134,13 +1016,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1158,13 +1038,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1182,13 +1060,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1206,13 +1082,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1230,13 +1104,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1254,13 +1126,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1278,13 +1148,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1302,13 +1170,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1326,13 +1192,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1350,13 +1214,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1374,13 +1236,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1398,13 +1258,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1422,13 +1280,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1446,13 +1302,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1470,13 +1324,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1494,13 +1346,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1518,13 +1368,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1542,13 +1390,11 @@ instances:
     settings:
       bbox_layers: null
       bbox_offsets: null
-      info: null
       layer:
       - 41
       - 0
       port_inclusion: 0
       port_orientation: null
-      post_process: null
       size:
       - 100.0
       - 100.0
@@ -1572,7 +1418,7 @@ instances:
       size:
       - 11470
       - 4900
-name: die_nc_987d18dd
+name: die_nc_d6e6d745
 placements:
   grating_coupler_array_1:
     mirror: 0

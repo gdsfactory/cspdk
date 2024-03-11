@@ -16,8 +16,8 @@ PDK = Pdk(
     layers=dict(LAYER),
     layer_stack=LAYER_STACK,
     layer_views=LAYER_VIEWS,
+    models=models,
 )
-PDK.__dict__["models"] = models
 PDK.activate()
 
 __all__ = [

@@ -1,18 +1,11 @@
 function: die_nc
 info: {}
 module: cspdk.cells
-name: die_nc_3fd6c807
+name: die_nc_f5ecb8f5
 settings:
   cross_section: xs_ro
   grating_coupler:
-    function: gc_rectangular
-    module: cspdk.cells
-    settings:
-      cross_section: xs_ro
-      info:
-        model: gc_rectangular_ro
-      n_periods: 80
-      period: 0.5
+    function: gc_rectangular_ro
   grating_pitch: 250
   ngratings: 14
   npads: 31
