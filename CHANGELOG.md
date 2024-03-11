@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.5.0
+
+- remove info from cells [#12](https://github.com/gdsfactory/cspdk/pull/12)
+
+
 ## 0.4.0
 
 - Add netlist tests [#11](https://github.com/gdsfactory/cspdk/pull/11)
