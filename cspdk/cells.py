@@ -1,9 +1,13 @@
 from functools import partial
 
 import gdsfactory as gf
+from gdsfactory.typings import CrossSectionSpec, LayerSpec
 
+from cspdk import tech
 from cspdk.config import PATH
 from cspdk.tech import LAYER
+
+cell = gf.cell
 
 ################
 # Adapted from gdsfactory generic PDK
@@ -13,22 +17,71 @@ from cspdk.tech import LAYER
 # Waveguides
 ################
 
-straight = gf.components.straight
-straight_sc = partial(straight, cross_section="xs_sc")
-straight_so = partial(straight, cross_section="xs_so")
-straight_rc = partial(straight, cross_section="xs_rc")
-straight_ro = partial(straight, cross_section="xs_ro")
-straight_nc = partial(straight, cross_section="xs_nc")
-straight_no = partial(straight, cross_section="xs_no")
+_straight = gf.components.straight
 
 
-bend_euler = gf.components.bend_euler
-bend_sc = partial(bend_euler, cross_section="xs_sc")
-bend_so = partial(bend_euler, cross_section="xs_so")
-bend_rc = partial(bend_euler, cross_section="xs_rc")
-bend_ro = partial(bend_euler, cross_section="xs_ro")
-bend_nc = partial(bend_euler, cross_section="xs_nc")
-bend_no = partial(bend_euler, cross_section="xs_no")
+@cell
+def straight_sc(cross_section="xs_sc", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+@cell
+def straight_so(cross_section="xs_so", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+@cell
+def straight_rc(cross_section="xs_rc", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+@cell
+def straight_ro(cross_section="xs_ro", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+@cell
+def straight_nc(cross_section="xs_nc", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+@cell
+def straight_no(cross_section="xs_no", **kwargs):
+    return _straight(cross_section=cross_section, **kwargs)
+
+
+_bend_euler = gf.components.bend_euler
+
+
+@cell
+def bend_sc(cross_section="xs_sc", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
+
+@cell
+def bend_so(cross_section="xs_so", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
+
+@cell
+def bend_rc(cross_section="xs_rc", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
+
+@cell
+def bend_ro(cross_section="xs_ro", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
+
+@cell
+def bend_nc(cross_section="xs_nc", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
+
+@cell
+def bend_no(cross_section="xs_no", **kwargs):
+    return _bend_euler(cross_section=cross_section, **kwargs)
+
 
 ################
 # Transitions
@@ -99,63 +152,110 @@ _mmi2x2 = partial(
 ################
 # MMIs rib cband
 ################
-mmi1x2_rc = partial(
+_mmi1x2_rc = partial(
     _mmi1x2,
     length_mmi=32.7,
     gap_mmi=1.64,
     cross_section="xs_rc",
 )
-mmi2x2_rc = partial(
+_mmi2x2_rc = partial(
     _mmi2x2,
     length_mmi=44.8,
     gap_mmi=0.53,
     cross_section="xs_rc",
 )
+
+
+@cell
+def mmi1x2_rc():
+    return _mmi1x2_rc()
+
+
+@cell
+def mmi2x2_rc():
+    return _mmi2x2_rc()
+
+
 ################
 # MMIs strip cband
 ################
-mmi1x2_sc = partial(
+_mmi1x2_sc = partial(
     _mmi1x2,
     length_mmi=31.8,
     gap_mmi=1.64,
     cross_section="xs_sc",
 )
-mmi2x2_sc = partial(
+_mmi2x2_sc = partial(
     _mmi2x2,
     length_mmi=42.5,
     gap_mmi=0.5,
     cross_section="xs_sc",
 )
+
+
+@gf.cell
+def mmi1x2_sc():
+    return _mmi1x2_sc()
+
+
+@gf.cell
+def mmi2x2_sc():
+    return _mmi2x2_sc()
+
+
 ################
 # MMIs rib oband
 ################
-mmi1x2_ro = partial(
+_mmi1x2_ro = partial(
     _mmi1x2,
     length_mmi=40.8,
     gap_mmi=1.55,
     cross_section="xs_ro",
 )
-mmi2x2_ro = partial(
+_mmi2x2_ro = partial(
     _mmi2x2,
     length_mmi=55,
     gap_mmi=0.53,
     cross_section="xs_ro",
 )
+
+
+@gf.cell
+def mmi1x2_ro():
+    return _mmi1x2_ro()
+
+
+@gf.cell
+def mmi2x2_ro():
+    return _mmi2x2_ro()
+
+
 ################
 # MMIs strip oband
 ################
-mmi1x2_so = partial(
+_mmi1x2_so = partial(
     _mmi1x2,
     length_mmi=40.1,
     gap_mmi=1.55,
     cross_section="xs_so",
 )
-mmi2x2_so = partial(
+_mmi2x2_so = partial(
     _mmi2x2,
     length_mmi=53.5,
     gap_mmi=0.53,
     cross_section="xs_so",
 )
+
+
+@gf.cell
+def mmi1x2_so():
+    return _mmi1x2_so()
+
+
+@gf.cell
+def mmi2x2_so():
+    return _mmi2x2_so()
+
 
 ################
 # Nitride MMIs oband
@@ -165,28 +265,30 @@ _mmi1x2_nitride_oband = partial(
     width_mmi=12,
     length_taper=50,
     width_taper=5.5,
-    gap=0.4,
+    gap_mmi=0.4,
     cross_section="xs_no",
+    length_mmi=42,
 )
 _mmi2x2_nitride_oband = partial(
     gf.components.mmi2x2,
     width_mmi=12,
     length_taper=50,
     width_taper=5.5,
-    gap=0.4,
+    gap_mmi=0.4,
     cross_section="xs_no",
+    length_mmi=126,
 )
 
-mmi1x2_no = partial(
-    _mmi1x2_nitride_oband,
-    length_mmi=42,
-    cross_section="xs_no",
-)
-mmi2x2_no = partial(
-    _mmi2x2_nitride_oband,
-    length_mmi=126,
-    cross_section="xs_no",
-)
+
+@gf.cell
+def mmi1x2_no():
+    return _mmi1x2_nitride_oband()
+
+
+@gf.cell
+def mmi2x2_no():
+    return _mmi2x2_nitride_oband()
+
 
 ################
 # Nitride MMIs cband
@@ -196,23 +298,90 @@ _mmi1x2_nitride_cband = partial(
     _mmi1x2_nitride_oband,
     length_taper=50,
     cross_section="xs_nc",
+    length_mmi=64.7,
 )
 _mmi2x2_nitride_cband = partial(
     _mmi2x2_nitride_oband,
     length_taper=50,
     cross_section="xs_nc",
+    length_mmi=232,
 )
 
-mmi1x2_nc = partial(
-    _mmi1x2_nitride_cband,
-    length_mmi=64.7,
-    cross_section="xs_nc",
-)
-mmi2x2_nc = partial(
-    _mmi2x2_nitride_cband,
-    length_mmi=232,
-    cross_section="xs_nc",
-)
+
+@gf.cell
+def mmi1x2_nc():
+    return _mmi1x2_nitride_cband()
+
+
+@gf.cell
+def mmi2x2_nc():
+    return _mmi2x2_nitride_cband()
+
+
+##############################
+# Evanescent couplers
+##############################
+
+
+@cell
+def coupler_sc(gap: float = 0.236, length: float = 20, cross_section="xs_sc", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
+
+@cell
+def coupler_so(gap: float = 0.236, length: float = 20, cross_section="xs_so", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
+
+@cell
+def coupler_rc(gap: float = 0.236, length: float = 20, cross_section="xs_rc", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
+
+@cell
+def coupler_ro(gap: float = 0.236, length: float = 20, cross_section="xs_ro", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
+
+@cell
+def coupler_nc(gap: float = 0.4, length: float = 20, cross_section="xs_nc", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
+
+@cell
+def coupler_no(gap: float = 0.4, length: float = 20, cross_section="xs_no", **kwargs):
+    return gf.components.coupler(
+        gap=gap,
+        length=length,
+        cross_section=cross_section,
+        **kwargs,
+    )
+
 
 ##############################
 # grating couplers Rectangular
@@ -243,34 +412,34 @@ def gc_rectangular(
     return c
 
 
-gc_rectangular_so = partial(
+_gc_rectangular_so = partial(
     gc_rectangular,
     period=0.5,
     cross_section="xs_so",
     n_periods=80,
 )
-gc_rectangular_ro = partial(
+_gc_rectangular_ro = partial(
     gc_rectangular,
     period=0.5,
     cross_section="xs_ro",
     n_periods=80,
 )
 
-gc_rectangular_sc = partial(
+_gc_rectangular_sc = partial(
     gc_rectangular,
     period=0.63,
     cross_section="xs_sc",
     fiber_angle=10,
     n_periods=60,
 )
-gc_rectangular_rc = partial(
+_gc_rectangular_rc = partial(
     gc_rectangular,
     period=0.5,
     cross_section="xs_rc",
     n_periods=60,
 )
 
-gc_rectangular_nc = partial(
+_gc_rectangular_nc = partial(
     gc_rectangular,
     period=0.66,
     cross_section="xs_nc",
@@ -280,7 +449,7 @@ gc_rectangular_nc = partial(
     layer_slab=LAYER.NITRIDE,
     slab_offset=0,
 )
-gc_rectangular_no = partial(
+_gc_rectangular_no = partial(
     gc_rectangular,
     period=0.964,
     cross_section="xs_no",
@@ -290,6 +459,76 @@ gc_rectangular_no = partial(
     layer_slab=LAYER.NITRIDE,
     slab_offset=0,
 )
+
+
+@cell
+def gc_rectangular_so():
+    return _gc_rectangular_so()
+
+
+@cell
+def gc_rectangular_ro():
+    return _gc_rectangular_ro()
+
+
+@cell
+def gc_rectangular_sc():
+    return _gc_rectangular_sc()
+
+
+@cell
+def gc_rectangular_rc():
+    return _gc_rectangular_rc()
+
+
+@cell
+def gc_rectangular_nc():
+    return _gc_rectangular_nc()
+
+
+@cell
+def gc_rectangular_no():
+    return _gc_rectangular_no()
+
+
+##############################
+# grating couplers elliptical
+##############################
+
+
+@gf.cell
+def gc_elliptical_sc(
+    grating_line_width: float = 0.343,
+    cross_section: CrossSectionSpec = "xs_sc",
+    fiber_angle: float = 15,
+    layer_trench: LayerSpec = LAYER.GRA,
+    wavelength: float = 1.53,
+) -> gf.Component:
+    return gf.components.grating_coupler_elliptical_trenches(
+        grating_line_width=grating_line_width,
+        cross_section=cross_section,
+        fiber_angle=fiber_angle,
+        layer_trench=layer_trench,
+        wavelength=wavelength,
+    )
+
+
+@gf.cell
+def gc_elliptical_so(
+    grating_line_width: float = 0.343,
+    cross_section: CrossSectionSpec = "xs_so",
+    fiber_angle: float = 15,
+    layer_trench: LayerSpec = LAYER.GRA,
+    wavelength: float = 1.31,
+) -> gf.Component:
+    return gf.components.grating_coupler_elliptical_trenches(
+        grating_line_width=grating_line_width,
+        cross_section=cross_section,
+        fiber_angle=fiber_angle,
+        layer_trench=layer_trench,
+        wavelength=wavelength,
+    )
+
 
 ################
 # MZI
@@ -334,7 +573,7 @@ mzi_nc = partial(
     mzi,
     straight=straight_nc,
     bend=bend_nc,
-    cross_section="xs_nc",
+    cross_section=tech.xs_nc,
     combiner=mmi1x2_nc,
     splitter=mmi1x2_nc,
 )
@@ -556,4 +795,8 @@ if __name__ == "__main__":
     #    if name in ['partial', '_import_gds']:
     #        continue
     #    print(name, func())
-    print(help(gf.components.grating_coupler_rectangular))
+    # print(help(gf.components.grating_coupler_rectangular))
+    # c = straight_sc(cross_section="xs_nc")
+    # c = gc_elliptical_sc()
+    c = coupler_nc()
+    c.show()
