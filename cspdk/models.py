@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from functools import cache, partial
 
 import jax
@@ -19,7 +20,7 @@ nm = 1e-3
 @cache
 def _2port(p1, p2):
     @jax.jit
-    def _2port(wl=1.5):
+    def _2port(wl=1.5) -> sax.SDict:
         wl = jnp.asarray(wl)
         return sax.reciprocal({(p1, p2): jnp.ones_like(wl)})
 
@@ -29,7 +30,7 @@ def _2port(p1, p2):
 @cache
 def _3port(p1, p2, p3):
     @jax.jit
-    def _3port(wl=1.5):
+    def _3port(wl=1.5) -> sax.SDict:
         wl = jnp.asarray(wl)
         thru = jnp.ones_like(wl) / jnp.sqrt(2)
         return sax.reciprocal(
@@ -45,7 +46,7 @@ def _3port(p1, p2, p3):
 @cache
 def _4port(p1, p2, p3, p4):
     @jax.jit
-    def _4port(wl=1.5):
+    def _4port(wl=1.5) -> sax.SDict:
         wl = jnp.asarray(wl)
         thru = jnp.ones_like(wl) / jnp.sqrt(2)
         cross = 1j * thru
@@ -62,15 +63,8 @@ def _4port(p1, p2, p3, p4):
 
 
 ################
-# Waveguides
+# Straights
 ################
-
-straight_sc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_so = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
-straight_rc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_ro = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
-straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 
 
 def _straight(
@@ -79,7 +73,7 @@ def _straight(
     length: float = 10.0,
     loss: float = 0.0,
     cross_section="xs_sc",
-):
+) -> sax.SDict:
     if check_cross_section(cross_section) == "xs_sc":
         return straight_sc(wl=wl, length=length, loss=loss)
     elif check_cross_section(cross_section) == "xs_so":
@@ -96,21 +90,35 @@ def _straight(
         raise ValueError(f"Invalid cross section: Got: {cross_section}")
 
 
+straight_sc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
+straight_so = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
+straight_rc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
+straight_ro = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
+straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
+straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
+
+################
+# Bends
+################
+
+_bend_s = _straight
 _bend_euler = partial(bend, loss=0.03)
-bend_sc = partial(bend, loss=0.03)
-bend_so = partial(bend, loss=0.03)
-bend_rc = partial(bend, loss=0.03)
-bend_ro = partial(bend, loss=0.03)
-bend_nc = partial(bend, loss=0.03)
-bend_no = partial(bend, loss=0.03)
+bend_sc = partial(_bend_euler, loss=0.03)
+bend_so = partial(_bend_euler, loss=0.03)
+bend_rc = partial(_bend_euler, loss=0.03)
+bend_ro = partial(_bend_euler, loss=0.03)
+bend_nc = partial(_bend_euler, loss=0.03)
+bend_no = partial(_bend_euler, loss=0.03)
 
 ################
 # Transitions
 ################
 
-trans_sc_rc10 = _2port("o1", "o2")
-trans_sc_rc20 = _2port("o1", "o2")
-trans_sc_rc50 = _2port("o1", "o2")
+_taper = _straight
+_taper_cross_section = _taper
+trans_sc_rc10 = partial(_taper_cross_section, length=10.0)
+trans_sc_rc20 = partial(_taper_cross_section, length=20.0)
+trans_sc_rc50 = partial(_taper_cross_section, length=50.0)
 
 ################
 # MMIs
@@ -132,7 +140,7 @@ def _mmi_amp(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
     return amp
 
 
-def mmi1x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
+def _mmi1x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3) -> sax.SDict:
     thru = _mmi_amp(wl=wl, wl0=wl0, fwhm=fwhm, loss_dB=loss_dB)
     return sax.reciprocal(
         {
@@ -142,7 +150,7 @@ def mmi1x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
     )
 
 
-def mmi2x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3, shift=0.005):
+def _mmi2x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3, shift=0.005) -> sax.SDict:
     thru = _mmi_amp(wl=wl, wl0=wl0, fwhm=fwhm, loss_dB=loss_dB)
     cross = 1j * _mmi_amp(wl=wl, wl0=wl0 + shift, fwhm=fwhm, loss_dB=loss_dB)
     return sax.reciprocal(
@@ -155,50 +163,85 @@ def mmi2x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3, shift=0.005):
     )
 
 
-mmi1x2 = mmi1x2
-mmi1x2_rc = mmi1x2
-mmi1x2_sc = mmi1x2
-mmi1x2_ro = mmi1x2
-mmi1x2_so = mmi1x2
-mmi1x2_no = mmi1x2
-mmi1x2_nc = mmi1x2
+_mmi1x2_o = partial(_mmi1x2, wl0=1.31)
+_mmi1x2_c = partial(_mmi1x2, wl0=1.55)
+_mmi2x2_o = partial(_mmi2x2, wl0=1.31)
+_mmi2x2_c = partial(_mmi2x2, wl0=1.55)
 
-mmi2x2 = mmi2x2
-mmi2x2_nc = mmi2x2
-mmi2x2_no = mmi2x2
-mmi2x2_so = mmi2x2
-mmi2x2_ro = mmi2x2
-mmi2x2_rc = mmi2x2
-mmi2x2_sc = mmi2x2
+mmi1x2_rc = _mmi1x2_c
+mmi1x2_sc = _mmi1x2_c
+mmi1x2_nc = _mmi1x2_c
+mmi1x2_ro = _mmi1x2_o
+mmi1x2_so = _mmi1x2_o
+mmi1x2_no = _mmi1x2_o
+
+mmi2x2_rc = _mmi2x2_c
+mmi2x2_sc = _mmi2x2_c
+mmi2x2_nc = _mmi2x2_c
+mmi2x2_ro = _mmi2x2_o
+mmi2x2_so = _mmi2x2_o
+mmi2x2_no = _mmi2x2_o
+
+##############################
+# Evanescent couplers
+##############################
+
+_coupler = _mmi2x2
+_coupler_o = partial(_coupler, wl0=1.31)
+_coupler_c = partial(_coupler, wl0=1.55)
+coupler_sc = _coupler_c
+coupler_rc = _coupler_c
+coupler_nc = _coupler_c
+coupler_so = _coupler_o
+coupler_ro = _coupler_o
+coupler_no = _coupler_o
 
 ##############################
 # grating couplers Rectangular
 ##############################
 
-_gco = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.31)
-_gcc = partial(grating_coupler, loss=6, bandwidth=35 * nm, wl0=1.55)
 
-
-def _gc(
+def _gc_rectangular(
     *,
     wl: float = 1.55,
     reflection: float = 0.0,
     reflection_fiber: float = 0.0,
-    cross_section="xs_so",
-):
-    cross_section = check_cross_section(cross_section)
-    if cross_section.endswith("o"):
-        return _gco(wl=wl, reflection=reflection, reflection_fiber=reflection_fiber)
-    else:
-        return _gcc(wl=wl, reflection=reflection, reflection_fiber=reflection_fiber)
+    loss=0.0,
+    wavelength=1.55,
+    bandwidth: float = 40 * nm,
+) -> sax.SDict:
+    return grating_coupler(
+        wl=wl,
+        wl0=wavelength,
+        reflection=reflection,
+        reflection_fiber=reflection_fiber,
+        loss=loss,
+        bandwidth=bandwidth,
+    )
 
 
-gc_rectangular_so = _gco
-gc_rectangular_ro = _gco
-gc_rectangular_no = _gco
-gc_rectangular_sc = _gcc
-gc_rectangular_rc = _gcc
-gc_rectangular_nc = _gcc
+_gcro = partial(_gc_rectangular, loss=6, bandwidth=35 * nm, wavelength=1.31)
+_gcrc = partial(_gc_rectangular, loss=6, bandwidth=35 * nm, wavelength=1.55)
+gc_rectangular_sc = _gcrc
+gc_rectangular_so = _gcro
+gc_rectangular_rc = _gcrc
+gc_rectangular_ro = _gcro
+gc_rectangular_nc = _gcrc
+gc_rectangular_no = _gcro
+
+##############################
+# grating couplers Elliptical
+##############################
+
+_gc_elliptical = _gc_rectangular
+_gceo = partial(_gc_elliptical, loss=6, bandwidth=35 * nm, wavelength=1.31)
+_gcec = partial(_gc_elliptical, loss=6, bandwidth=35 * nm, wavelength=1.55)
+gc_elliptical_sc = _gcec
+gc_elliptical_so = _gceo
+gc_elliptical_rc = _gcec
+gc_elliptical_ro = _gceo
+gc_elliptical_nc = _gcec
+gc_elliptical_no = _gceo
 
 
 ################
@@ -207,7 +250,7 @@ gc_rectangular_nc = _gcc
 
 
 @jax.jit
-def _crossing(wl=1.5):
+def _crossing(wl=1.5) -> sax.SDict:
     wl = jnp.asarray(wl)
     one = jnp.ones_like(wl)
     return sax.reciprocal(
@@ -224,71 +267,22 @@ crossing_sc = _crossing
 
 
 ################
-# Dummies
-################
-pad = _2port("o1", "o2")  # dummy model
-heater = _2port("o1", "o2")  # dummy model
-rectangle = _2port("o1", "o2")  # dummy model
-
-
-def grating_coupler_array(n=6):
-    ports = tuple([f"o{i}" for i in range(n + n % 2)])
-    return sax.models.passthru(num_links=(n + n % 2) // 2, ports=ports)()
-
-
-################
 # Models Dict
 ################
-models = dict(
-    _2port=_2port("o1", "o2"),
-    _3port=_3port("o1", "o2", "o3"),
-    _4port=_4port("o1", "o2", "o3", "o4"),
-    straight=_straight,
-    straight_sc=straight_sc,
-    straight_so=straight_so,
-    straight_rc=straight_rc,
-    straight_ro=straight_ro,
-    straight_nc=straight_nc,
-    straight_no=straight_no,
-    bend_euler=_bend_euler,
-    bend_sc=bend_sc,
-    bend_so=bend_so,
-    bend_rc=bend_rc,
-    bend_ro=bend_ro,
-    bend_nc=bend_nc,
-    bend_no=bend_no,
-    taper=_straight,
-    taper_cross_section=_straight,
-    trans_sc_rc10=_straight,
-    trans_sc_rc20=_straight,
-    trans_sc_rc50=_straight,
-    mmi1x2=mmi1x2,
-    mmi1x2_rc=mmi1x2_rc,
-    mmi1x2_sc=mmi1x2_sc,
-    mmi1x2_ro=mmi1x2_ro,
-    mmi1x2_so=mmi1x2_so,
-    mmi1x2_no=mmi1x2_no,
-    mmi1x2_nc=mmi1x2_nc,
-    mmi2x2=mmi2x2,
-    mmi2x2_rc=mmi2x2_rc,
-    mmi2x2_sc=mmi2x2_sc,
-    mmi2x2_ro=mmi2x2_ro,
-    mmi2x2_so=mmi2x2_so,
-    mmi2x2_no=mmi2x2_no,
-    mmi2x2_nc=mmi2x2_nc,
-    gc_rectangular=_gc,
-    gc_rectangular_so=gc_rectangular_so,
-    gc_rectangular_ro=gc_rectangular_ro,
-    gc_rectangular_no=gc_rectangular_no,
-    gc_rectangular_sc=gc_rectangular_sc,
-    gc_rectangular_rc=gc_rectangular_rc,
-    gc_rectangular_nc=gc_rectangular_nc,
-    crossing=_crossing,
-    crossing_so=crossing_so,
-    crossing_rc=crossing_rc,
-    crossing_sc=crossing_sc,
-    pad=pad,
-    heater=heater,
-    rectangle=rectangle,
-    grating_coupler_array=grating_coupler_array,
-)
+
+
+def get_models():
+    models = {}
+    for name, func in list(globals().items()):
+        if not callable(func):
+            continue
+        _func = func
+        while isinstance(_func, partial):
+            _func = _func.func
+        try:
+            sig = inspect.signature(_func)
+        except ValueError:
+            continue
+        if str(sig.return_annotation) == "sax.SDict":
+            models[name] = func
+    return models

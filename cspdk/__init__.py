@@ -4,9 +4,10 @@ from gdsfactory.pdk import Pdk
 
 from cspdk import cells, config, tech
 from cspdk.config import PATH
-from cspdk.models import models
+from cspdk.models import get_models
 from cspdk.tech import LAYER, LAYER_STACK, LAYER_VIEWS
 
+_models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 PDK = Pdk(
@@ -16,7 +17,7 @@ PDK = Pdk(
     layers=dict(LAYER),
     layer_stack=LAYER_STACK,
     layer_views=LAYER_VIEWS,
-    models=models,
+    models=_models,
 )
 PDK.activate()
 
