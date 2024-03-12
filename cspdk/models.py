@@ -6,7 +6,8 @@ from functools import partial
 import jax
 import jax.numpy as jnp
 import sax
-from gplugins.sax.models import bend, grating_coupler, straight
+from gplugins.sax.models import bend as __bend
+from gplugins.sax.models import straight as __straight
 
 from cspdk.tech import check_cross_section
 
@@ -25,35 +26,30 @@ def _straight(
     loss: float = 0.0,
     cross_section="xs_sc",
 ) -> sax.SDict:
-    if check_cross_section(cross_section) == "xs_sc":
-        return straight_sc(wl=wl, length=length, loss=loss)
-    elif check_cross_section(cross_section) == "xs_so":
-        return straight_so(wl=wl, length=length, loss=loss)
-    elif check_cross_section(cross_section) == "xs_rc":
-        return straight_rc(wl=wl, length=length, loss=loss)
-    elif check_cross_section(cross_section) == "xs_ro":
-        return straight_ro(wl=wl, length=length, loss=loss)
-    elif check_cross_section(cross_section) == "xs_nc":
-        return straight_nc(wl=wl, length=length, loss=loss)
-    elif check_cross_section(cross_section) == "xs_no":
-        return straight_no(wl=wl, length=length, loss=loss)
+    if check_cross_section(cross_section).endswith("o"):
+        return __straight(wl=wl, length=length, loss=loss, wl0=1.31, neff=2.4, ng=4.2)
     else:
-        raise ValueError(f"Invalid cross section: Got: {cross_section}")
+        return __straight(wl=wl, length=length, loss=loss, wl0=1.55, neff=2.4, ng=4.2)
 
 
-straight_sc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_so = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
-straight_rc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_ro = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
-straight_nc = partial(straight, wl0=1.55, neff=2.4, ng=4.2)
-straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
+straight_sc = partial(_straight, cross_section="xs_sc")
+straight_so = partial(_straight, cross_section="xs_so")
+straight_rc = partial(_straight, cross_section="xs_rc")
+straight_ro = partial(_straight, cross_section="xs_ro")
+straight_nc = partial(_straight, cross_section="xs_nc")
+straight_no = partial(_straight, cross_section="xs_no")
 
 ################
 # Bends
 ################
 
 _bend_s = _straight
-_bend = partial(bend, loss=0.03)
+
+
+def _bend(wl: float = 1.5, length: float = 20.0, loss: float = 0.03) -> sax.SDict:
+    return __bend(wl=wl, length=length, loss=loss)
+
+
 bend_sc = partial(_bend, loss=0.03)
 bend_so = partial(_bend, loss=0.03)
 bend_rc = partial(_bend, loss=0.03)
@@ -161,6 +157,8 @@ def _gc_rectangular(
     wavelength=1.55,
     bandwidth: float = 40 * nm,
 ) -> sax.SDict:
+    from gplugins.sax.models import grating_coupler
+
     return grating_coupler(
         wl=wl,
         wl0=wavelength,
