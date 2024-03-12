@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import inspect
-from functools import cache, partial
+from functools import partial
 
 import jax
 import jax.numpy as jnp
@@ -11,55 +11,6 @@ from gplugins.sax.models import bend, grating_coupler, straight
 from cspdk.tech import check_cross_section
 
 nm = 1e-3
-
-################
-# PassThrus
-################
-
-
-@cache
-def _2port(p1, p2):
-    @jax.jit
-    def _2port(wl=1.5) -> sax.SDict:
-        wl = jnp.asarray(wl)
-        return sax.reciprocal({(p1, p2): jnp.ones_like(wl)})
-
-    return _2port
-
-
-@cache
-def _3port(p1, p2, p3):
-    @jax.jit
-    def _3port(wl=1.5) -> sax.SDict:
-        wl = jnp.asarray(wl)
-        thru = jnp.ones_like(wl) / jnp.sqrt(2)
-        return sax.reciprocal(
-            {
-                (p1, p2): thru,
-                (p1, p3): thru,
-            }
-        )
-
-    return _3port
-
-
-@cache
-def _4port(p1, p2, p3, p4):
-    @jax.jit
-    def _4port(wl=1.5) -> sax.SDict:
-        wl = jnp.asarray(wl)
-        thru = jnp.ones_like(wl) / jnp.sqrt(2)
-        cross = 1j * thru
-        return sax.reciprocal(
-            {
-                (p1, p4): thru,
-                (p2, p3): thru,
-                (p1, p3): cross,
-                (p2, p4): cross,
-            }
-        )
-
-    return _4port
 
 
 ################
@@ -102,13 +53,13 @@ straight_no = partial(straight, wl0=1.31, neff=2.4, ng=4.2)
 ################
 
 _bend_s = _straight
-_bend_euler = partial(bend, loss=0.03)
-bend_sc = partial(_bend_euler, loss=0.03)
-bend_so = partial(_bend_euler, loss=0.03)
-bend_rc = partial(_bend_euler, loss=0.03)
-bend_ro = partial(_bend_euler, loss=0.03)
-bend_nc = partial(_bend_euler, loss=0.03)
-bend_no = partial(_bend_euler, loss=0.03)
+_bend = partial(bend, loss=0.03)
+bend_sc = partial(_bend, loss=0.03)
+bend_so = partial(_bend, loss=0.03)
+bend_rc = partial(_bend, loss=0.03)
+bend_ro = partial(_bend, loss=0.03)
+bend_nc = partial(_bend, loss=0.03)
+bend_no = partial(_bend, loss=0.03)
 
 ################
 # Transitions
