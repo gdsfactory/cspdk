@@ -1,18 +1,23 @@
 from __future__ import annotations
 
 import inspect
+from collections.abc import Callable
 from functools import partial
 
 import jax
 import jax.numpy as jnp
 import sax
+from gdsfactory.typings import CrossSectionSpec
 from gplugins.sax.models import bend as __bend
 from gplugins.sax.models import straight as __straight
+from numpy.typing import NDArray
 
 from cspdk.tech import check_cross_section
 
 nm = 1e-3
 
+FloatArray = NDArray[jnp.floating]
+Float = float | FloatArray
 
 ################
 # Straights
@@ -21,15 +26,29 @@ nm = 1e-3
 
 def _straight(
     *,
-    wl: float = 1.55,
-    length: float = 10.0,
-    loss: float = 0.0,
-    cross_section="xs_sc",
+    wl: Float = 1.55,
+    length: Float = 10.0,
+    loss: Float = 0.0,
+    cross_section: CrossSectionSpec = "xs_sc",
 ) -> sax.SDict:
     if check_cross_section(cross_section).endswith("o"):
-        return __straight(wl=wl, length=length, loss=loss, wl0=1.31, neff=2.4, ng=4.2)
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.31,
+            neff=2.4,
+            ng=4.2,
+        )
     else:
-        return __straight(wl=wl, length=length, loss=loss, wl0=1.55, neff=2.4, ng=4.2)
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.55,
+            neff=2.4,
+            ng=4.2,
+        )
 
 
 straight_sc = partial(_straight, cross_section="xs_sc")
@@ -46,8 +65,12 @@ straight_no = partial(_straight, cross_section="xs_no")
 _bend_s = _straight
 
 
-def _bend(wl: float = 1.5, length: float = 20.0, loss: float = 0.03) -> sax.SDict:
-    return __bend(wl=wl, length=length, loss=loss)
+def _bend(wl: Float = 1.5, length: Float = 20.0, loss: Float = 0.03) -> sax.SDict:
+    return __bend(
+        wl=wl,  # type: ignore
+        length=length,  # type: ignore
+        loss=loss,  # type: ignore
+    )
 
 
 bend_sc = partial(_bend, loss=0.03)
@@ -72,7 +95,9 @@ trans_sc_rc50 = partial(_taper_cross_section, length=50.0)
 ################
 
 
-def _mmi_amp(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
+def _mmi_amp(
+    wl: Float = 1.55, wl0: Float = 1.55, fwhm: Float = 0.2, loss_dB: Float = 0.3
+):
     max_power = 10 ** (-abs(loss_dB) / 10)
     f = 1 / wl
     f0 = 1 / wl0
@@ -87,7 +112,9 @@ def _mmi_amp(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3):
     return amp
 
 
-def _mmi1x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3) -> sax.SDict:
+def _mmi1x2(
+    wl: Float = 1.55, wl0: Float = 1.55, fwhm: Float = 0.2, loss_dB: Float = 0.3
+) -> sax.SDict:
     thru = _mmi_amp(wl=wl, wl0=wl0, fwhm=fwhm, loss_dB=loss_dB)
     return sax.reciprocal(
         {
@@ -97,7 +124,13 @@ def _mmi1x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3) -> sax.SDict:
     )
 
 
-def _mmi2x2(wl=1.55, wl0=1.55, fwhm=0.2, loss_dB=0.3, shift=0.005) -> sax.SDict:
+def _mmi2x2(
+    wl: Float = 1.55,
+    wl0: Float = 1.55,
+    fwhm: Float = 0.2,
+    loss_dB: Float = 0.3,
+    shift: Float = 0.005,
+) -> sax.SDict:
     thru = _mmi_amp(wl=wl, wl0=wl0, fwhm=fwhm, loss_dB=loss_dB)
     cross = 1j * _mmi_amp(wl=wl, wl0=wl0 + shift, fwhm=fwhm, loss_dB=loss_dB)
     return sax.reciprocal(
@@ -150,22 +183,22 @@ coupler_no = _coupler_o
 
 def _gc_rectangular(
     *,
-    wl: float = 1.55,
-    reflection: float = 0.0,
-    reflection_fiber: float = 0.0,
+    wl: Float = 1.55,
+    reflection: Float = 0.0,
+    reflection_fiber: Float = 0.0,
     loss=0.0,
     wavelength=1.55,
-    bandwidth: float = 40 * nm,
+    bandwidth: Float = 40 * nm,
 ) -> sax.SDict:
     from gplugins.sax.models import grating_coupler
 
     return grating_coupler(
-        wl=wl,
+        wl=wl,  # type: ignore
         wl0=wavelength,
-        reflection=reflection,
-        reflection_fiber=reflection_fiber,
+        reflection=reflection,  # type: ignore
+        reflection_fiber=reflection_fiber,  # type: ignore
         loss=loss,
-        bandwidth=bandwidth,
+        bandwidth=bandwidth,  # type: ignore
     )
 
 
@@ -199,9 +232,8 @@ gc_elliptical_no = _gceo
 
 
 @jax.jit
-def _crossing(wl=1.5) -> sax.SDict:
-    wl = jnp.asarray(wl)
-    one = jnp.ones_like(wl)
+def _crossing(wl: Float = 1.5) -> sax.SDict:
+    one = jnp.ones_like(jnp.asarray(wl))
     return sax.reciprocal(
         {
             ("o1", "o3"): one,
@@ -220,7 +252,7 @@ crossing_sc = _crossing
 ################
 
 
-def get_models():
+def get_models() -> dict[str, Callable[..., sax.SDict]]:
     models = {}
     for name, func in list(globals().items()):
         if not callable(func):

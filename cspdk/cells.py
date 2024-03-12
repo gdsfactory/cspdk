@@ -1,7 +1,8 @@
 from functools import partial
+from typing import Any
 
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec, LayerSpec
+from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
 from cspdk.config import PATH
 from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
@@ -12,7 +13,10 @@ from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
 
 
 @gf.cell
-def _straight(length=10.0, cross_section="xs_sc") -> gf.Component:
+def _straight(
+    length: float = 10.0,
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
     return gf.components.straight(
         length=length,
         cross_section=cross_section,
@@ -20,7 +24,7 @@ def _straight(length=10.0, cross_section="xs_sc") -> gf.Component:
 
 
 @gf.cell
-def straight_sc(length=10.0, **kwargs):
+def straight_sc(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _straight(
@@ -30,7 +34,7 @@ def straight_sc(length=10.0, **kwargs):
 
 
 @gf.cell
-def straight_so(length=10.0, **kwargs):
+def straight_so(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _straight(
@@ -40,7 +44,7 @@ def straight_so(length=10.0, **kwargs):
 
 
 @gf.cell
-def straight_rc(length=10.0, **kwargs):
+def straight_rc(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _straight(
@@ -50,7 +54,7 @@ def straight_rc(length=10.0, **kwargs):
 
 
 @gf.cell
-def straight_ro(length=10.0, **kwargs):
+def straight_ro(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _straight(
@@ -60,7 +64,7 @@ def straight_ro(length=10.0, **kwargs):
 
 
 @gf.cell
-def straight_nc(length=10.0, **kwargs):
+def straight_nc(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _straight(
@@ -70,7 +74,7 @@ def straight_nc(length=10.0, **kwargs):
 
 
 @gf.cell
-def straight_no(length=10.0, **kwargs):
+def straight_no(length: float = 10.0, **kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _straight(
@@ -86,10 +90,10 @@ def straight_no(length=10.0, **kwargs):
 
 @gf.cell
 def _bend_s(
-    size=(11.0, 1.8),
-    cross_section="xs_sc",
+    size: tuple[float, float] = (11.0, 1.8),
+    cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-):
+) -> gf.Component:
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
@@ -106,7 +110,7 @@ def _bend(
     npoints: int | None = None,
     direction: str = "ccw",
     cross_section: CrossSectionSpec = "xs_sc",
-):
+) -> gf.Component:
     return gf.components.bend_euler(
         radius=radius,
         angle=angle,
@@ -121,12 +125,18 @@ def _bend(
 @gf.cell
 def wire_corner(
     cross_section: CrossSectionSpec = "xs_metal_routing",
-):
+) -> gf.Component:
     return gf.components.wire_corner(cross_section=cross_section)
 
 
+def _float(x: Any) -> float:
+    return float(x)
+
+
 @gf.cell
-def bend_sc(radius=xs_sc.radius, angle=90.0, **kwargs):
+def bend_sc(
+    radius: float = _float(xs_sc.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _bend(
@@ -137,7 +147,9 @@ def bend_sc(radius=xs_sc.radius, angle=90.0, **kwargs):
 
 
 @gf.cell
-def bend_so(radius=xs_so.radius, angle=90.0, **kwargs):
+def bend_so(
+    radius: float = _float(xs_so.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _bend(
@@ -148,7 +160,9 @@ def bend_so(radius=xs_so.radius, angle=90.0, **kwargs):
 
 
 @gf.cell
-def bend_rc(radius=xs_rc.radius, angle=90.0, **kwargs):
+def bend_rc(
+    radius: float = _float(xs_rc.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _bend(
@@ -159,7 +173,9 @@ def bend_rc(radius=xs_rc.radius, angle=90.0, **kwargs):
 
 
 @gf.cell
-def bend_ro(radius=xs_ro.radius, angle=90.0, **kwargs):
+def bend_ro(
+    radius: float = _float(xs_ro.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _bend(
@@ -170,7 +186,9 @@ def bend_ro(radius=xs_ro.radius, angle=90.0, **kwargs):
 
 
 @gf.cell
-def bend_nc(radius=xs_nc.radius, angle=90.0, **kwargs):
+def bend_nc(
+    radius: float = _float(xs_nc.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _bend(
@@ -181,7 +199,9 @@ def bend_nc(radius=xs_nc.radius, angle=90.0, **kwargs):
 
 
 @gf.cell
-def bend_no(radius=xs_no.radius, angle=90.0, **kwargs):
+def bend_no(
+    radius: float = _float(xs_no.radius), angle: float = 90.0, **kwargs
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _bend(
@@ -204,7 +224,7 @@ def _taper(
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-):
+) -> gf.Component:
     return gf.components.taper(
         length=length,
         width1=width1,
@@ -216,42 +236,78 @@ def _taper(
 
 
 @gf.cell
-def taper_sc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_sc(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_so(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_so(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_rc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_rc(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_ro(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_ro(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_nc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_nc(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_no(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+def taper_no(
+    length: float = 10.0,
+    width1: float = 0.5,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    **kwargs,
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
@@ -260,8 +316,8 @@ def taper_no(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
 @gf.cell
 def _taper_cross_section(
     length: float = 10,
-    cross_section1="xs_rc_tip",
-    cross_section2="xs_rc",
+    cross_section1: str = "xs_rc_tip",
+    cross_section2: str = "xs_rc",
     linear: bool = True,
     **kwargs,
 ) -> gf.Component:
@@ -277,7 +333,7 @@ def _taper_cross_section(
 
 
 @gf.cell
-def trans_sc_rc10():
+def trans_sc_rc10() -> gf.Component:
     return _taper_cross_section(
         length=10,
         cross_section1="xs_rc_tip",
@@ -286,7 +342,7 @@ def trans_sc_rc10():
 
 
 @gf.cell
-def trans_sc_rc20():
+def trans_sc_rc20() -> gf.Component:
     return _taper_cross_section(
         length=20,
         cross_section1="xs_rc_tip",
@@ -295,7 +351,7 @@ def trans_sc_rc20():
 
 
 @gf.cell
-def trans_sc_rc50():
+def trans_sc_rc50() -> gf.Component:
     return _taper_cross_section(
         length=50,
         cross_section1="xs_rc_tip",
@@ -310,12 +366,12 @@ def trans_sc_rc50():
 
 @gf.cell
 def _mmi1x2(
-    width_mmi=6.0,
-    width_taper=1.5,
-    length_taper=20.0,
-    cross_section="xs_sc",
+    width_mmi: float = 6.0,
+    width_taper: float = 1.5,
+    length_taper: float = 20.0,
+    cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-):
+) -> gf.Component:
     return gf.components.mmi1x2(
         width_mmi=width_mmi,
         length_taper=length_taper,
@@ -327,12 +383,12 @@ def _mmi1x2(
 
 @gf.cell
 def _mmi2x2(
-    width_mmi=6.0,
-    width_taper=1.5,
-    length_taper=20.0,
-    cross_section="xs_sc",
+    width_mmi: float = 6.0,
+    width_taper: float = 1.5,
+    length_taper: float = 20.0,
+    cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-):
+) -> gf.Component:
     return gf.components.mmi1x2(
         width_mmi=width_mmi,
         length_taper=length_taper,
@@ -348,7 +404,7 @@ def _mmi2x2(
 
 
 @gf.cell
-def mmi1x2_rc(**kwargs):
+def mmi1x2_rc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _mmi1x2(
@@ -359,7 +415,7 @@ def mmi1x2_rc(**kwargs):
 
 
 @gf.cell
-def mmi2x2_rc(**kwargs):
+def mmi2x2_rc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _mmi2x2(
@@ -375,7 +431,7 @@ def mmi2x2_rc(**kwargs):
 
 
 @gf.cell
-def mmi1x2_sc(**kwargs):
+def mmi1x2_sc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _mmi1x2(
@@ -386,7 +442,7 @@ def mmi1x2_sc(**kwargs):
 
 
 @gf.cell
-def mmi2x2_sc(**kwargs):
+def mmi2x2_sc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _mmi2x2(
@@ -402,7 +458,7 @@ def mmi2x2_sc(**kwargs):
 
 
 @gf.cell
-def mmi1x2_ro(**kwargs):
+def mmi1x2_ro(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _mmi1x2(
@@ -413,7 +469,7 @@ def mmi1x2_ro(**kwargs):
 
 
 @gf.cell
-def mmi2x2_ro(**kwargs):
+def mmi2x2_ro(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _mmi2x2(
@@ -429,7 +485,7 @@ def mmi2x2_ro(**kwargs):
 
 
 @gf.cell
-def mmi1x2_so(**kwargs):
+def mmi1x2_so(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _mmi1x2(
@@ -440,7 +496,7 @@ def mmi1x2_so(**kwargs):
 
 
 @gf.cell
-def mmi2x2_so(**kwargs):
+def mmi2x2_so(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _mmi2x2(
@@ -456,7 +512,7 @@ def mmi2x2_so(**kwargs):
 
 
 @gf.cell
-def mmi1x2_no(**kwargs):
+def mmi1x2_no(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _mmi1x2(
@@ -470,7 +526,7 @@ def mmi1x2_no(**kwargs):
 
 
 @gf.cell
-def mmi2x2_no(**kwargs):
+def mmi2x2_no(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _mmi2x2(
@@ -489,7 +545,7 @@ def mmi2x2_no(**kwargs):
 
 
 @gf.cell
-def mmi1x2_nc(**kwargs):
+def mmi1x2_nc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _mmi1x2(
@@ -503,7 +559,7 @@ def mmi1x2_nc(**kwargs):
 
 
 @gf.cell
-def mmi2x2_nc(**kwargs):
+def mmi2x2_nc(**kwargs) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _mmi2x2(
@@ -523,12 +579,12 @@ def mmi2x2_nc(**kwargs):
 
 @gf.cell
 def _coupler_symmetric(
-    bend=_bend_s,
-    gap=0.234,
-    dx=10.0,
-    dy=4.0,
-    cross_section="xs_sc",
-):
+    bend: ComponentSpec = _bend_s,
+    gap: float = 0.234,
+    dx: float = 10.0,
+    dy: float = 4.0,
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
     return gf.components.coupler_symmetric(
         bend=bend,
         gap=gap,
@@ -540,11 +596,11 @@ def _coupler_symmetric(
 
 @gf.cell
 def _coupler_straight(
-    length=10.0,
-    gap=0.27,
-    straight=_straight,
-    cross_section="xs_sc",
-):
+    length: float = 10.0,
+    gap: float = 0.27,
+    straight: ComponentSpec = _straight,
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
     return gf.components.coupler_straight(
         length=length,
         gap=gap,
@@ -555,14 +611,14 @@ def _coupler_straight(
 
 @gf.cell
 def _coupler(
-    gap=0.236,
-    length=20.0,
-    coupler_symmetric=_coupler_symmetric,
-    coupler_straight=_coupler_straight,
-    dx=10.0,
-    dy=4.0,
-    cross_section="xs_sc",
-):
+    gap: float = 0.236,
+    length: float = 20.0,
+    coupler_symmetric: ComponentSpec = _coupler_symmetric,
+    coupler_straight: ComponentSpec = _coupler_straight,
+    dx: float = 10.0,
+    dy: float = 4.0,
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
     return gf.components.coupler(
         gap=gap,
         length=length,
@@ -576,12 +632,12 @@ def _coupler(
 
 @gf.cell
 def coupler_sc(
-    gap=0.236,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.236,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _coupler(
@@ -595,12 +651,12 @@ def coupler_sc(
 
 @gf.cell
 def coupler_so(
-    gap=0.236,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.236,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _coupler(
@@ -614,12 +670,12 @@ def coupler_so(
 
 @gf.cell
 def coupler_rc(
-    gap=0.236,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.236,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _coupler(
@@ -633,12 +689,12 @@ def coupler_rc(
 
 @gf.cell
 def coupler_ro(
-    gap=0.236,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.236,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _coupler(
@@ -652,12 +708,12 @@ def coupler_ro(
 
 @gf.cell
 def coupler_nc(
-    gap=0.4,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.4,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _coupler(
@@ -671,12 +727,12 @@ def coupler_nc(
 
 @gf.cell
 def coupler_no(
-    gap=0.4,
-    length=20.0,
-    dx=10.0,
-    dy=4.0,
+    gap: float = 0.4,
+    length: float = 20.0,
+    dx: float = 10.0,
+    dy: float = 4.0,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _coupler(
@@ -695,20 +751,20 @@ def coupler_no(
 
 @gf.cell
 def _gc_rectangular(
-    n_periods=30,
-    fill_factor=0.5,
-    length_taper=350,
-    fiber_angle=10,
-    layer_grating=LAYER.GRA,
-    layer_slab=LAYER.WG,
-    slab_offset=0,
-    period=0.75,
-    width_grating=11.0,
-    polarization="te",
-    wavelength=1.55,
-    taper=_taper,
-    slab_xmin=-1.0,
-    cross_section="xs_sc",
+    n_periods: int = 30,
+    fill_factor: float = 0.5,
+    length_taper: float = 350.0,
+    fiber_angle: float = 10.0,
+    layer_grating: LayerSpec = LAYER.GRA,
+    layer_slab: LayerSpec = LAYER.WG,
+    slab_offset: float = 0.0,
+    period: float = 0.75,
+    width_grating: float = 11.0,
+    polarization: str = "te",
+    wavelength: float = 1.55,
+    taper: ComponentSpec = _taper,
+    slab_xmin: float = -1.0,
+    cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     c = gf.components.grating_coupler_rectangular(
         n_periods=n_periods,
@@ -730,7 +786,7 @@ def _gc_rectangular(
 
 
 @gf.cell
-def gc_rectangular_so():
+def gc_rectangular_so() -> gf.Component:
     return _gc_rectangular(
         period=0.5,
         cross_section="xs_so",
@@ -739,7 +795,7 @@ def gc_rectangular_so():
 
 
 @gf.cell
-def gc_rectangular_ro():
+def gc_rectangular_ro() -> gf.Component:
     return _gc_rectangular(
         period=0.5,
         cross_section="xs_ro",
@@ -748,7 +804,7 @@ def gc_rectangular_ro():
 
 
 @gf.cell
-def gc_rectangular_sc():
+def gc_rectangular_sc() -> gf.Component:
     return _gc_rectangular(
         period=0.63,
         cross_section="xs_sc",
@@ -758,7 +814,7 @@ def gc_rectangular_sc():
 
 
 @gf.cell
-def gc_rectangular_rc():
+def gc_rectangular_rc() -> gf.Component:
     return _gc_rectangular(
         period=0.5,
         cross_section="xs_rc",
@@ -767,7 +823,7 @@ def gc_rectangular_rc():
 
 
 @gf.cell
-def gc_rectangular_nc():
+def gc_rectangular_nc() -> gf.Component:
     return _gc_rectangular(
         period=0.66,
         cross_section="xs_nc",
@@ -780,7 +836,7 @@ def gc_rectangular_nc():
 
 
 @gf.cell
-def gc_rectangular_no():
+def gc_rectangular_no() -> gf.Component:
     return _gc_rectangular(
         period=0.964,
         cross_section="xs_no",
@@ -809,11 +865,11 @@ def _gc_elliptical(
     neff: float = 2.638,
     ncladding: float = 1.443,
     layer_trench: LayerSpec = LAYER.GRA,
-    p_start: int = 26,
+    p_start: float = 26.0,
     n_periods: int = 30,
     end_straight_length: float = 0.2,
     cross_section: CrossSectionSpec = "xs_sc",
-):
+) -> gf.Component:
     return gf.components.grating_coupler_elliptical_trenches(
         polarization=polarization,
         taper_length=taper_length,
@@ -876,13 +932,13 @@ def _mzi(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
-    cross_section="xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc",
     add_electrical_ports_bot: bool = True,
-    bend=_bend,
-    straight=_straight,
-    splitter=_mmi1x2,
-    combiner=_mmi2x2,
-):
+    bend: ComponentSpec = _bend,
+    straight: ComponentSpec = _straight,
+    splitter: ComponentSpec = _mmi1x2,
+    combiner: ComponentSpec = _mmi2x2,
+) -> gf.Component:
     return gf.components.mzi(
         delta_length=delta_length,
         length_y=length_y,
@@ -918,7 +974,7 @@ def mzi_sc(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
     return _mzi(
@@ -941,7 +997,7 @@ def mzi_so(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
     return _mzi(
@@ -964,7 +1020,7 @@ def mzi_rc(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
     return _mzi(
@@ -987,7 +1043,7 @@ def mzi_ro(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
     return _mzi(
@@ -1010,7 +1066,7 @@ def mzi_nc(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
     return _mzi(
@@ -1033,7 +1089,7 @@ def mzi_no(
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
-):
+) -> gf.Component:
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
     return _mzi(
@@ -1056,13 +1112,13 @@ def mzi_no(
 
 @gf.cell
 def _pad(
-    size=(100.0, 100.0),
-    layer=LAYER.PAD,
-    bbox_layers=None,
-    bbox_offsets=None,
-    port_inclusion=0,
-    port_orientation=None,
-):
+    size: tuple[float, float] = (100.0, 100.0),
+    layer: LayerSpec = LAYER.PAD,
+    bbox_layers: None = None,
+    bbox_offsets: None = None,
+    port_inclusion: float = 0.0,
+    port_orientation: None = None,
+) -> gf.Component:
     return gf.components.pad(
         size=size,
         layer=layer,
@@ -1075,14 +1131,14 @@ def _pad(
 
 @gf.cell
 def _rectangle(
-    size=(4.0, 2.0),
-    layer=LAYER.FLOORPLAN,
-    centered=False,
-    port_type="electrical",
-    port_orientations=(180, 90, 0, -90),
-    round_corners_east_west=False,
-    round_corners_north_south=False,
-):
+    size: tuple[float, float] = (4.0, 2.0),
+    layer: LayerSpec = LAYER.FLOORPLAN,
+    centered: bool = False,
+    port_type: str = "electrical",
+    port_orientations: tuple[float, float, float, float] = (180.0, 90.0, 0.0, -90.0),
+    round_corners_east_west: bool = False,
+    round_corners_north_south: bool = False,
+) -> gf.Component:
     return gf.components.rectangle(
         size=size,
         layer=layer,
@@ -1096,16 +1152,16 @@ def _rectangle(
 
 @gf.cell
 def _grating_coupler_array(
-    pitch=127.0,
-    n=6,
-    port_name="o1",
-    rotation=0,
-    with_loopback=False,
-    bend=_bend,
-    grating_coupler_spacing=0.0,
-    grating_coupler=gc_rectangular_nc,
-    cross_section="xs_nc",
-):
+    pitch: float = 127.0,
+    n: int = 6,
+    port_name: str = "o1",
+    rotation: float = 0.0,
+    with_loopback: bool = False,
+    bend: ComponentSpec = _bend,
+    grating_coupler_spacing: float = 0.0,
+    grating_coupler: ComponentSpec = gc_rectangular_nc,
+    cross_section: CrossSectionSpec = "xs_nc",
+) -> gf.Component:
     return gf.components.grating_coupler_array(
         pitch=pitch,
         n=n,
@@ -1121,13 +1177,13 @@ def _grating_coupler_array(
 
 @gf.cell
 def _die(
-    size=(11470, 4900),
-    ngratings=14,
-    npads=31,
-    grating_pitch=250,
-    pad_pitch=300,
-    grating_coupler=gc_rectangular_nc,
-    cross_section="xs_nc",
+    size: tuple[float, float] = (11470.0, 4900.0),
+    ngratings: int = 14,
+    npads: int = 31,
+    grating_pitch: float = 250.0,
+    pad_pitch: float = 300.0,
+    grating_coupler: ComponentSpec = gc_rectangular_nc,
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     c = gf.Component()
 
@@ -1185,7 +1241,7 @@ def _die(
 
 
 @gf.cell
-def die_nc():
+def die_nc() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_nc,
         cross_section="xs_nc",
@@ -1193,7 +1249,7 @@ def die_nc():
 
 
 @gf.cell
-def die_no():
+def die_no() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_no,
         cross_section="xs_no",
@@ -1201,7 +1257,7 @@ def die_no():
 
 
 @gf.cell
-def die_sc():
+def die_sc() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_sc,
         cross_section="xs_sc",
@@ -1209,7 +1265,7 @@ def die_sc():
 
 
 @gf.cell
-def die_so():
+def die_so() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_so,
         cross_section="xs_so",
@@ -1217,7 +1273,7 @@ def die_so():
 
 
 @gf.cell
-def die_rc():
+def die_rc() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_rc,
         cross_section="xs_rc",
@@ -1225,7 +1281,7 @@ def die_rc():
 
 
 @gf.cell
-def die_ro():
+def die_ro() -> gf.Component:
     return _die(
         grating_coupler=gc_rectangular_ro,
         cross_section="xs_ro",
