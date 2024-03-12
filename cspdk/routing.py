@@ -4,7 +4,7 @@ from gdsfactory.routing import get_route
 from gdsfactory.routing.factories import routing_strategy
 
 from cspdk import cells
-from cspdk.cells import wire_corner
+from cspdk.cells import _bend, _straight, _taper, wire_corner
 
 
 def get_routing_strategies():
@@ -22,12 +22,12 @@ def get_routing_strategies():
 def get_routing_strategies_for_cross_section(cross_section):
     suffix = ""
     if "_" in cross_section:
-        suffix = cross_section.split("_")[-1]
-    straight = getattr(cells, f"straight_{suffix}", cells.straight_sc)
-    bend = getattr(cells, f"bend_{suffix}", cells.straight_sc)
-    taper = getattr(cells, f"taper_{suffix}", cells.straight_sc)
-    if suffix:
-        suffix = f"_{suffix}"
+        suffix = f"_{cross_section.split('_')[-1]}"
+    else:
+        cross_section = "xs_sc"
+    straight = getattr(cells, f"straight{suffix}", _straight)
+    bend = getattr(cells, f"bend{suffix}", _bend)
+    taper = getattr(cells, f"taper{suffix}", _taper)
     return {
         f"get_bundle{suffix}": partial(
             routing_strategy["get_bundle"],
@@ -83,4 +83,4 @@ def get_routing_strategies_for_cross_section(cross_section):
 
 
 if __name__ == "__main__":
-    print(list(get_routing_strategies()))
+    print(get_routing_strategies()["get_bundle"])
