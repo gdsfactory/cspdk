@@ -98,7 +98,7 @@ def _bend_s(
 
 
 @gf.cell
-def _bend_euler(
+def _bend(
     radius: float | None = None,
     angle: float = 90.0,
     p: float = 0.5,
@@ -119,10 +119,17 @@ def _bend_euler(
 
 
 @gf.cell
+def wire_corner(
+    cross_section: CrossSectionSpec = "xs_metal_routing",
+):
+    return gf.components.wire_corner(cross_section=cross_section)
+
+
+@gf.cell
 def bend_sc(radius=xs_sc.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_sc"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -133,7 +140,7 @@ def bend_sc(radius=xs_sc.radius, angle=90.0, **kwargs):
 def bend_so(radius=xs_so.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_so"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -144,7 +151,7 @@ def bend_so(radius=xs_so.radius, angle=90.0, **kwargs):
 def bend_rc(radius=xs_rc.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_rc"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -155,7 +162,7 @@ def bend_rc(radius=xs_rc.radius, angle=90.0, **kwargs):
 def bend_ro(radius=xs_ro.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_ro"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -166,7 +173,7 @@ def bend_ro(radius=xs_ro.radius, angle=90.0, **kwargs):
 def bend_nc(radius=xs_nc.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_nc"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -177,7 +184,7 @@ def bend_nc(radius=xs_nc.radius, angle=90.0, **kwargs):
 def bend_no(radius=xs_no.radius, angle=90.0, **kwargs):
     if "cross_section" not in kwargs:
         kwargs["cross_section"] = "xs_no"
-    return _bend_euler(
+    return _bend(
         radius=radius,
         angle=angle,
         **kwargs,
@@ -829,7 +836,7 @@ def _mzi(
     length_x: float = 0.1,
     cross_section="xs_sc",
     add_electrical_ports_bot: bool = True,
-    bend=_bend_euler,
+    bend=_bend,
     straight=_straight,
     splitter=_mmi1x2,
     combiner=_mmi2x2,
@@ -1052,7 +1059,7 @@ def _grating_coupler_array(
     port_name="o1",
     rotation=0,
     with_loopback=False,
-    bend=_bend_euler,
+    bend=_bend,
     grating_coupler_spacing=0.0,
     grating_coupler=gc_rectangular_nc,
     cross_section="xs_nc",

@@ -5,6 +5,7 @@ from gdsfactory.pdk import Pdk
 from cspdk import cells, config, tech
 from cspdk.config import PATH
 from cspdk.models import get_models
+from cspdk.routing import routing_strategies
 from cspdk.tech import LAYER, LAYER_STACK, LAYER_VIEWS
 
 _models = get_models()
@@ -18,6 +19,7 @@ PDK = Pdk(
     layer_stack=LAYER_STACK,
     layer_views=LAYER_VIEWS,
     models=_models,
+    routing_strategies=routing_strategies,
 )
 PDK.activate()
 
