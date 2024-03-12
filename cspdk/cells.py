@@ -1142,6 +1142,7 @@ def _die(
     return c
 
 
+@gf.cell
 def die_nc():
     return _die(
         grating_coupler=gc_rectangular_nc,
@@ -1149,6 +1150,7 @@ def die_nc():
     )
 
 
+@gf.cell
 def die_no():
     return _die(
         grating_coupler=gc_rectangular_no,
@@ -1156,6 +1158,7 @@ def die_no():
     )
 
 
+@gf.cell
 def die_sc():
     return _die(
         grating_coupler=gc_rectangular_sc,
@@ -1163,6 +1166,7 @@ def die_sc():
     )
 
 
+@gf.cell
 def die_so():
     return _die(
         grating_coupler=gc_rectangular_so,
@@ -1170,6 +1174,7 @@ def die_so():
     )
 
 
+@gf.cell
 def die_rc():
     return _die(
         grating_coupler=gc_rectangular_rc,
@@ -1177,6 +1182,7 @@ def die_rc():
     )
 
 
+@gf.cell
 def die_ro():
     return _die(
         grating_coupler=gc_rectangular_ro,
