@@ -23,7 +23,7 @@ license = {file = "LICENSE"}
 name = "cspdk"
 readme = "README.md"
 requires-python = ">=3.10"
-version = "0.5.0"
+version = "0.6.0"
 
 [project.optional-dependencies]
 dev = [
@@ -101,7 +101,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "0.5.0"
+current = "0.6.0"
 # Example of a semver regexp.
 # Make sure this matches current_version before
 # using tbump
