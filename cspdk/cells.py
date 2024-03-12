@@ -389,7 +389,7 @@ def _mmi2x2(
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
 ) -> gf.Component:
-    return gf.components.mmi1x2(
+    return gf.components.mmi2x2(
         width_mmi=width_mmi,
         length_taper=length_taper,
         width_taper=width_taper,
