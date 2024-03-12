@@ -216,6 +216,48 @@ def _taper(
 
 
 @gf.cell
+def taper_sc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_sc"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
+def taper_so(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_so"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
+def taper_rc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_rc"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
+def taper_ro(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_ro"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
+def taper_nc(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_nc"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
+def taper_no(length=10.0, width1=0.5, width2=None, port=None, **kwargs):
+    if "cross_section" not in kwargs:
+        kwargs["cross_section"] = "xs_no"
+    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
+
+
+@gf.cell
 def _taper_cross_section(
     length: float = 10,
     cross_section1="xs_rc_tip",
