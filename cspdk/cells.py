@@ -89,7 +89,7 @@ def straight_no(length: float = 10.0, **kwargs) -> gf.Component:
 
 
 @gf.cell
-def _bend_s(
+def bend_s(
     size: tuple[float, float] = (11.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
@@ -579,7 +579,7 @@ def mmi2x2_nc(**kwargs) -> gf.Component:
 
 @gf.cell
 def _coupler_symmetric(
-    bend: ComponentSpec = _bend_s,
+    bend: ComponentSpec = bend_s,
     gap: float = 0.234,
     dx: float = 10.0,
     dy: float = 4.0,
@@ -1111,7 +1111,7 @@ def mzi_no(
 
 
 @gf.cell
-def _pad(
+def pad(
     size: tuple[float, float] = (100.0, 100.0),
     layer: LayerSpec = LAYER.PAD,
     bbox_layers: None = None,
@@ -1130,7 +1130,7 @@ def _pad(
 
 
 @gf.cell
-def _rectangle(
+def rectangle(
     size: tuple[float, float] = (4.0, 2.0),
     layer: LayerSpec = LAYER.FLOORPLAN,
     centered: bool = False,
@@ -1151,7 +1151,7 @@ def _rectangle(
 
 
 @gf.cell
-def _grating_coupler_array(
+def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
     port_name: str = "o1",
@@ -1187,13 +1187,13 @@ def _die(
 ) -> gf.Component:
     c = gf.Component()
 
-    fp = c << _rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
+    fp = c << rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
 
     # Add optical ports
     x0 = -4925 + 2.827
     y0 = 1650
 
-    gca = _grating_coupler_array(
+    gca = grating_coupler_array(
         n=ngratings,
         pitch=grating_pitch,
         with_loopback=True,
@@ -1216,7 +1216,7 @@ def _die(
     # Add electrical ports
     x0 = -4615
     y0 = 2200
-    pad = _pad()
+    pad = pad()
 
     for i in range(npads):
         pad_ref = c << pad

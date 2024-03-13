@@ -62,7 +62,7 @@ straight_no = partial(_straight, cross_section="xs_no")
 # Bends
 ################
 
-_bend_s = _straight
+bend_s = _straight
 
 
 def _bend(wl: Float = 1.5, length: Float = 20.0, loss: Float = 0.03) -> sax.SDict:
