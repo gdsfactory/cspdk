@@ -169,27 +169,6 @@ xs_heater_metal = heater_metal()
 cross_sections = get_cross_sections(sys.modules[__name__])
 
 
-def check_cross_section(cross_section):
-    pdk = gf.get_active_pdk()
-    if isinstance(cross_section, str):
-        if cross_section in pdk.cross_sections:
-            return cross_section
-        else:
-            raise ValueError(f"Invalid cross section: {cross_section}")
-    elif isinstance(cross_section, gf.CrossSection):
-        pass
-    elif isinstance(cross_section, dict):
-        cross_section = gf.CrossSection(**cross_section)
-    else:
-        raise ValueError(f"Invalid cross section: {cross_section}")
-
-    for k, v in pdk.cross_sections.items():
-        if cross_section == v:
-            return k
-
-    raise ValueError(f"Invalid cross section: {cross_section}")
-
-
 if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 

@@ -7,12 +7,12 @@ from functools import partial
 import jax
 import jax.numpy as jnp
 import sax
+from gdsfactory.pdk import get_cross_section_name
 from gdsfactory.typings import CrossSectionSpec
 from gplugins.sax.models import bend as __bend
+from gplugins.sax.models import grating_coupler
 from gplugins.sax.models import straight as __straight
 from numpy.typing import NDArray
-
-from cspdk.tech import check_cross_section
 
 nm = 1e-3
 
@@ -31,7 +31,7 @@ def _straight(
     loss: Float = 0.0,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> sax.SDict:
-    if check_cross_section(cross_section).endswith("o"):
+    if get_cross_section_name(cross_section).endswith("o"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -190,8 +190,6 @@ def _gc_rectangular(
     wavelength=1.55,
     bandwidth: Float = 40 * nm,
 ) -> sax.SDict:
-    from gplugins.sax.models import grating_coupler
-
     return grating_coupler(
         wl=wl,  # type: ignore
         wl0=wavelength,
@@ -250,8 +248,6 @@ crossing_sc = _crossing
 ################
 # Models Dict
 ################
-
-
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     models = {}
     for name, func in list(globals().items()):
