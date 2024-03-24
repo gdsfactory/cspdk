@@ -1,3 +1,4 @@
+"""Silicon rib mode solver."""
 import gplugins.tidy3d as gt
 
 nm = 1e-3
