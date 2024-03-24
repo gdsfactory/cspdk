@@ -1,33 +1,9 @@
-function: mzi
+function: mzi_so
 info: {}
-module: gdsfactory.components.mzi
-name: mzi_aa89e145
+module: cspdk.cells
+name: mzi_so
 settings:
   add_electrical_ports_bot: true
-  add_optical_ports_arms: false
-  bend:
-    function: bend_so
-  combiner:
-    function: mmi1x2_so
-  cross_section: xs_so
-  cross_section_x_bot: null
-  cross_section_x_top: null
   delta_length: 10.0
-  extend_ports_straight_x: null
   length_x: 0.1
   length_y: 2.0
-  min_length: 0.01
-  mirror_bot: false
-  nbends: 2
-  port_e0_combiner: o3
-  port_e0_splitter: o3
-  port_e1_combiner: o2
-  port_e1_splitter: o2
-  splitter:
-    function: mmi1x2_so
-  straight:
-    function: straight_so
-  straight_x_bot: null
-  straight_x_top: null
-  straight_y: null
-  with_splitter: true

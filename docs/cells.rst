@@ -17,7 +17,7 @@ bend_nc
 
   import cspdk
 
-  c = cspdk.cells.bend_nc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_nc(radius=25.0, angle=90.0)
   c.plot()
 
 
@@ -32,7 +32,7 @@ bend_no
 
   import cspdk
 
-  c = cspdk.cells.bend_no(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_no(radius=25.0, angle=90.0)
   c.plot()
 
 
@@ -47,7 +47,7 @@ bend_rc
 
   import cspdk
 
-  c = cspdk.cells.bend_rc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_rc(radius=25.0, angle=90.0)
   c.plot()
 
 
@@ -62,7 +62,22 @@ bend_ro
 
   import cspdk
 
-  c = cspdk.cells.bend_ro(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_ro(radius=25.0, angle=90.0)
+  c.plot()
+
+
+
+bend_s
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.bend_s
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.bend_s(size=(11.0, 1.8), cross_section='xs_sc')
   c.plot()
 
 
@@ -77,7 +92,7 @@ bend_sc
 
   import cspdk
 
-  c = cspdk.cells.bend_sc(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_sc(radius=10.0, angle=90.0)
   c.plot()
 
 
@@ -92,7 +107,97 @@ bend_so
 
   import cspdk
 
-  c = cspdk.cells.bend_so(angle=90.0, p=0.5, with_arc_floorplan=True, direction='ccw', add_pins=True)
+  c = cspdk.cells.bend_so(radius=10.0, angle=90.0)
+  c.plot()
+
+
+
+coupler_nc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_nc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_nc(gap=0.4, length=20.0, dx=10.0, dy=4.0)
+  c.plot()
+
+
+
+coupler_no
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_no
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_no(gap=0.4, length=20.0, dx=10.0, dy=4.0)
+  c.plot()
+
+
+
+coupler_rc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_rc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_rc(gap=0.236, length=20.0, dx=10.0, dy=4.0)
+  c.plot()
+
+
+
+coupler_ro
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_ro
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_ro(gap=0.236, length=20.0, dx=10.0, dy=4.0)
+  c.plot()
+
+
+
+coupler_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_sc(gap=0.236, length=20.0, dx=10.0, dy=4.0)
+  c.plot()
+
+
+
+coupler_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.coupler_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.coupler_so(gap=0.236, length=20.0, dx=10.0, dy=4.0)
   c.plot()
 
 
@@ -152,7 +257,7 @@ die_nc
 
   import cspdk
 
-  c = cspdk.cells.die_nc(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_nc()
   c.plot()
 
 
@@ -167,7 +272,7 @@ die_no
 
   import cspdk
 
-  c = cspdk.cells.die_no(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_no()
   c.plot()
 
 
@@ -182,7 +287,7 @@ die_rc
 
   import cspdk
 
-  c = cspdk.cells.die_rc(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_rc()
   c.plot()
 
 
@@ -197,7 +302,7 @@ die_ro
 
   import cspdk
 
-  c = cspdk.cells.die_ro(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_ro()
   c.plot()
 
 
@@ -212,7 +317,7 @@ die_sc
 
   import cspdk
 
-  c = cspdk.cells.die_sc(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_sc()
   c.plot()
 
 
@@ -227,7 +332,37 @@ die_so
 
   import cspdk
 
-  c = cspdk.cells.die_so(size=(11470, 4900), ngratings=14, npads=31, grating_pitch=250, pad_pitch=300)
+  c = cspdk.cells.die_so()
+  c.plot()
+
+
+
+gc_elliptical_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.gc_elliptical_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.gc_elliptical_sc(grating_line_width=0.343, fiber_angle=15, wavelength=1.53)
+  c.plot()
+
+
+
+gc_elliptical_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.gc_elliptical_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.gc_elliptical_so(grating_line_width=0.343, fiber_angle=15, wavelength=1.31)
   c.plot()
 
 
@@ -242,7 +377,7 @@ gc_rectangular_nc
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_nc(n_periods=30, period=0.66, fill_factor=0.5, width_grating=11.0, length_taper=200, polarization='te', wavelength=1.55, layer_slab=(203, 0), layer_grating=(204, 0), fiber_angle=20, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_nc()
   c.plot()
 
 
@@ -257,7 +392,7 @@ gc_rectangular_no
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_no(n_periods=30, period=0.964, fill_factor=0.5, width_grating=11.0, length_taper=200, polarization='te', wavelength=1.55, layer_slab=(203, 0), layer_grating=(204, 0), fiber_angle=20, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_no()
   c.plot()
 
 
@@ -272,7 +407,7 @@ gc_rectangular_rc
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_rc(n_periods=60, period=0.5, fill_factor=0.5, width_grating=11.0, length_taper=350, polarization='te', wavelength=1.55, layer_slab=(3, 0), layer_grating=(6, 0), fiber_angle=10, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_rc()
   c.plot()
 
 
@@ -287,7 +422,7 @@ gc_rectangular_ro
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_ro(n_periods=80, period=0.5, fill_factor=0.5, width_grating=11.0, length_taper=350, polarization='te', wavelength=1.55, layer_slab=(3, 0), layer_grating=(6, 0), fiber_angle=10, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_ro()
   c.plot()
 
 
@@ -302,7 +437,7 @@ gc_rectangular_sc
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_sc(n_periods=60, period=0.63, fill_factor=0.5, width_grating=11.0, length_taper=350, polarization='te', wavelength=1.55, layer_slab=(3, 0), layer_grating=(6, 0), fiber_angle=10, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_sc()
   c.plot()
 
 
@@ -317,7 +452,22 @@ gc_rectangular_so
 
   import cspdk
 
-  c = cspdk.cells.gc_rectangular_so(n_periods=80, period=0.5, fill_factor=0.5, width_grating=11.0, length_taper=350, polarization='te', wavelength=1.55, layer_slab=(3, 0), layer_grating=(6, 0), fiber_angle=10, slab_xmin=-1.0, slab_offset=0)
+  c = cspdk.cells.gc_rectangular_so()
+  c.plot()
+
+
+
+grating_coupler_array
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.grating_coupler_array
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.grating_coupler_array(pitch=127.0, n=6, port_name='o1', rotation=0.0, with_loopback=False, grating_coupler_spacing=0.0, cross_section='xs_nc')
   c.plot()
 
 
@@ -337,21 +487,6 @@ heater
 
 
 
-import_gds
-----------------------------------------------------
-
-.. autofunction:: cspdk.cells.import_gds
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.cells.import_gds(read_metadata=False, read_metadata_json=False, keep_name_short=False, unique_names=True, max_name_length=250)
-  c.plot()
-
-
-
 mmi1x2_nc
 ----------------------------------------------------
 
@@ -362,7 +497,7 @@ mmi1x2_nc
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_nc(width_taper=5.5, length_taper=50, length_mmi=64.7, width_mmi=12, gap_mmi=0.25, with_bbox=True)
+  c = cspdk.cells.mmi1x2_nc()
   c.plot()
 
 
@@ -377,7 +512,7 @@ mmi1x2_no
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_no(width_taper=5.5, length_taper=50, length_mmi=42, width_mmi=12, gap_mmi=0.25, with_bbox=True)
+  c = cspdk.cells.mmi1x2_no()
   c.plot()
 
 
@@ -392,7 +527,7 @@ mmi1x2_rc
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_rc(width_taper=1.5, length_taper=20, length_mmi=32.7, width_mmi=6, gap_mmi=1.64, with_bbox=True)
+  c = cspdk.cells.mmi1x2_rc()
   c.plot()
 
 
@@ -407,7 +542,7 @@ mmi1x2_ro
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_ro(width_taper=1.5, length_taper=20, length_mmi=40.8, width_mmi=6, gap_mmi=1.55, with_bbox=True)
+  c = cspdk.cells.mmi1x2_ro()
   c.plot()
 
 
@@ -422,7 +557,7 @@ mmi1x2_sc
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_sc(width_taper=1.5, length_taper=20, length_mmi=31.8, width_mmi=6, gap_mmi=1.64, with_bbox=True)
+  c = cspdk.cells.mmi1x2_sc()
   c.plot()
 
 
@@ -437,7 +572,7 @@ mmi1x2_so
 
   import cspdk
 
-  c = cspdk.cells.mmi1x2_so(width_taper=1.5, length_taper=20, length_mmi=40.1, width_mmi=6, gap_mmi=1.55, with_bbox=True)
+  c = cspdk.cells.mmi1x2_so()
   c.plot()
 
 
@@ -452,7 +587,7 @@ mmi2x2_nc
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_nc(width_taper=5.5, length_taper=50, length_mmi=232, width_mmi=12, gap_mmi=0.25, with_bbox=True)
+  c = cspdk.cells.mmi2x2_nc()
   c.plot()
 
 
@@ -467,7 +602,7 @@ mmi2x2_no
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_no(width_taper=5.5, length_taper=50, length_mmi=126, width_mmi=12, gap_mmi=0.25, with_bbox=True)
+  c = cspdk.cells.mmi2x2_no()
   c.plot()
 
 
@@ -482,7 +617,7 @@ mmi2x2_rc
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_rc(width_taper=1.5, length_taper=20, length_mmi=44.8, width_mmi=6, gap_mmi=0.53, with_bbox=True)
+  c = cspdk.cells.mmi2x2_rc()
   c.plot()
 
 
@@ -497,7 +632,7 @@ mmi2x2_ro
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_ro(width_taper=1.5, length_taper=20, length_mmi=55, width_mmi=6, gap_mmi=0.53, with_bbox=True)
+  c = cspdk.cells.mmi2x2_ro()
   c.plot()
 
 
@@ -512,7 +647,7 @@ mmi2x2_sc
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_sc(width_taper=1.5, length_taper=20, length_mmi=42.5, width_mmi=6, gap_mmi=0.5, with_bbox=True)
+  c = cspdk.cells.mmi2x2_sc()
   c.plot()
 
 
@@ -527,7 +662,97 @@ mmi2x2_so
 
   import cspdk
 
-  c = cspdk.cells.mmi2x2_so(width_taper=1.5, length_taper=20, length_mmi=53.5, width_mmi=6, gap_mmi=0.53, with_bbox=True)
+  c = cspdk.cells.mmi2x2_so()
+  c.plot()
+
+
+
+mzi_nc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_nc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_nc(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c.plot()
+
+
+
+mzi_no
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_no
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_no(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c.plot()
+
+
+
+mzi_rc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_rc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_rc(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c.plot()
+
+
+
+mzi_ro
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_ro
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_ro(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c.plot()
+
+
+
+mzi_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_sc(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c.plot()
+
+
+
+mzi_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.mzi_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.mzi_so(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
   c.plot()
 
 
@@ -542,7 +767,22 @@ pad
 
   import cspdk
 
-  c = cspdk.cells.pad(size=(100.0, 100.0), layer=(41, 0), port_inclusion=0)
+  c = cspdk.cells.pad(size=(100.0, 100.0), layer=(41, 0), port_inclusion=0.0)
+  c.plot()
+
+
+
+rectangle
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.rectangle
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.rectangle(size=(4.0, 2.0), layer=(99, 0), centered=False, port_type='electrical', port_orientations=(180.0, 90.0, 0.0, -90.0), round_corners_east_west=False, round_corners_north_south=False)
   c.plot()
 
 
@@ -557,7 +797,7 @@ straight_nc
 
   import cspdk
 
-  c = cspdk.cells.straight_nc(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_nc(length=10.0)
   c.plot()
 
 
@@ -572,7 +812,7 @@ straight_no
 
   import cspdk
 
-  c = cspdk.cells.straight_no(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_no(length=10.0)
   c.plot()
 
 
@@ -587,7 +827,7 @@ straight_rc
 
   import cspdk
 
-  c = cspdk.cells.straight_rc(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_rc(length=10.0)
   c.plot()
 
 
@@ -602,7 +842,7 @@ straight_ro
 
   import cspdk
 
-  c = cspdk.cells.straight_ro(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_ro(length=10.0)
   c.plot()
 
 
@@ -617,7 +857,7 @@ straight_sc
 
   import cspdk
 
-  c = cspdk.cells.straight_sc(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_sc(length=10.0)
   c.plot()
 
 
@@ -632,7 +872,97 @@ straight_so
 
   import cspdk
 
-  c = cspdk.cells.straight_so(length=10.0, npoints=2, add_pins=True)
+  c = cspdk.cells.straight_so(length=10.0)
+  c.plot()
+
+
+
+taper_nc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_nc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_nc(length=10.0, width1=0.5)
+  c.plot()
+
+
+
+taper_no
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_no
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_no(length=10.0, width1=0.5)
+  c.plot()
+
+
+
+taper_rc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_rc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_rc(length=10.0, width1=0.5)
+  c.plot()
+
+
+
+taper_ro
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_ro
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_ro(length=10.0, width1=0.5)
+  c.plot()
+
+
+
+taper_sc
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_sc
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_sc(length=10.0, width1=0.5)
+  c.plot()
+
+
+
+taper_so
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.taper_so
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.taper_so(length=10.0, width1=0.5)
   c.plot()
 
 
@@ -647,7 +977,7 @@ trans_sc_rc10
 
   import cspdk
 
-  c = cspdk.cells.trans_sc_rc10(length=10, npoints=2, linear=True, width_type='sine')
+  c = cspdk.cells.trans_sc_rc10()
   c.plot()
 
 
@@ -662,7 +992,7 @@ trans_sc_rc20
 
   import cspdk
 
-  c = cspdk.cells.trans_sc_rc20(length=20, npoints=2, linear=True, width_type='sine')
+  c = cspdk.cells.trans_sc_rc20()
   c.plot()
 
 
@@ -677,5 +1007,20 @@ trans_sc_rc50
 
   import cspdk
 
-  c = cspdk.cells.trans_sc_rc50(length=50, npoints=2, linear=True, width_type='sine')
+  c = cspdk.cells.trans_sc_rc50()
+  c.plot()
+
+
+
+wire_corner
+----------------------------------------------------
+
+.. autofunction:: cspdk.cells.wire_corner
+
+.. plot::
+  :include-source:
+
+  import cspdk
+
+  c = cspdk.cells.wire_corner(cross_section='xs_metal_routing')
   c.plot()

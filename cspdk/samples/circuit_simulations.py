@@ -3,11 +3,12 @@ import matplotlib.pyplot as plt
 import sax
 
 import cspdk
-from cspdk.models import models
+from cspdk import PDK
 
 if __name__ == "__main__":
     c = cspdk.cells.mzi_sc(delta_length=20)
     netlist = c.get_netlist()
+    models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
     wl = jnp.linspace(1.5, 1.6)
 

@@ -1,0 +1,11 @@
+function: coupler_sc
+info:
+  length: 10.192
+  min_bend_radius: 11.701
+module: cspdk.cells
+name: coupler_sc
+settings:
+  dx: 10.0
+  dy: 4.0
+  gap: 0.236
+  length: 20.0

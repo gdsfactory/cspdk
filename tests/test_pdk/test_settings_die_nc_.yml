@@ -2,21 +2,4 @@ function: die_nc
 info: {}
 module: cspdk.cells
 name: die_nc
-settings:
-  cross_section: xs_nc
-  grating_coupler:
-    function: gc_rectangular_nc
-  grating_pitch: 250
-  ngratings: 14
-  npads: 31
-  pad:
-    function: pad
-    module: gdsfactory.components.pad
-    settings:
-      layer:
-      - 41
-      - 0
-  pad_pitch: 300
-  size:
-  - 11470
-  - 4900
+settings: {}

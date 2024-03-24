@@ -34,7 +34,9 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_so
+      radius: 10.0
   bend_so_2:
     component: bend_so
     info:
@@ -49,7 +51,9 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_so
+      radius: 10.0
   bend_so_3:
     component: bend_so
     info:
@@ -64,7 +68,9 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_so
+      radius: 10.0
   bend_so_4:
     component: bend_so
     info:
@@ -79,7 +85,9 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_so
+      radius: 10.0
   bend_so_5:
     component: bend_so
     info:
@@ -94,6 +102,7 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -118,6 +127,7 @@ instances:
           simplify: null
           width: 0.4
           width_function: null
+      radius: 10.0
   bend_so_6:
     component: bend_so
     info:
@@ -132,6 +142,7 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -156,6 +167,7 @@ instances:
           simplify: null
           width: 0.4
           width_function: null
+      radius: 10.0
   bend_so_7:
     component: bend_so
     info:
@@ -170,6 +182,7 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -194,6 +207,7 @@ instances:
           simplify: null
           width: 0.4
           width_function: null
+      radius: 10.0
   bend_so_8:
     component: bend_so
     info:
@@ -208,6 +222,7 @@ instances:
       route_info_xs_so_length: 16.637
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -232,6 +247,7 @@ instances:
           simplify: null
           width: 0.4
           width_function: null
+      radius: 10.0
   cp1:
     component: mmi1x2_so
     info: {}
@@ -498,7 +514,7 @@ instances:
     settings:
       cross_section: xs_so
       length: 2.0
-name: mzi_aa89e145
+name: mzi_so
 placements:
   bend_so_1:
     mirror: true

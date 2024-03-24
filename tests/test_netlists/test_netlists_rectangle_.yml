@@ -9,15 +9,15 @@ instances:
       - 0
       port_inclusion: 0.0
       port_orientations:
-      - 180
-      - 90
-      - 0
-      - -90
+      - 180.0
+      - 90.0
+      - 0.0
+      - -90.0
       port_type: electrical
       size:
       - 4.0
       - 2.0
-name: rectangle_layer99__0
+name: rectangle
 placements:
   compass_1:
     mirror: 0

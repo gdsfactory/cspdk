@@ -1,24 +1,8 @@
-function: gc_rectangular
+function: gc_rectangular_rc
 info:
-  fiber_angle: 10
-  model: gc_rectangular_rc
+  fiber_angle: 10.0
   polarization: te
   wavelength: 1.55
 module: cspdk.cells
-name: gc_rectangular_fb469c22
-settings:
-  cross_section: xs_rc
-  fiber_angle: 10
-  fill_factor: 0.5
-  info:
-    model: gc_rectangular_rc
-  layer_grating:
-  - 6
-  - 0
-  layer_slab:
-  - 3
-  - 0
-  length_taper: 350
-  n_periods: 60
-  period: 0.5
-  slab_offset: 0
+name: gc_rectangular_rc
+settings: {}

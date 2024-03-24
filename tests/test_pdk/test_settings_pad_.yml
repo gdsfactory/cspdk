@@ -8,15 +8,15 @@ info:
   - 100.0
   xsize: 100.0
   ysize: 100.0
-module: gdsfactory.components.pad
-name: pad_layer41__0
+module: cspdk.cells
+name: pad
 settings:
   bbox_layers: null
   bbox_offsets: null
   layer:
   - 41
   - 0
-  port_inclusion: 0
+  port_inclusion: 0.0
   port_orientation: null
   size:
   - 100.0

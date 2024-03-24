@@ -1,18 +1,5 @@
-function: mmi2x2
-info:
-  model: mmi2x2_rc
-module: gdsfactory.components.mmi2x2
-name: mmi2x2_5b5ea321
-settings:
-  cross_section: xs_rc
-  gap_mmi: 0.53
-  info:
-    model: mmi2x2_rc
-  length_mmi: 44.8
-  length_taper: 20
-  post_process: null
-  taper:
-    function: taper
-  width: null
-  width_mmi: 6
-  width_taper: 1.5
+function: mmi2x2_rc
+info: {}
+module: cspdk.cells
+name: mmi2x2_rc
+settings: {}
