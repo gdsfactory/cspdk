@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.7.0
+
+- Update gdsfactory [#15](https://github.com/gdsfactory/cspdk/pull/15)
+- Add routing strategies for specific cross sections [#14](https://github.com/gdsfactory/cspdk/pull/14)
+
 ## 0.5.0
 
 - remove info from cells [#12](https://github.com/gdsfactory/cspdk/pull/12)
