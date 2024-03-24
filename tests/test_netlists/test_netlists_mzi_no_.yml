@@ -34,7 +34,9 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section: xs_no
+      radius: 25.0
   bend_no_2:
     component: bend_no
     info:
@@ -49,7 +51,9 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section: xs_no
+      radius: 25.0
   bend_no_3:
     component: bend_no
     info:
@@ -64,7 +68,9 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section: xs_no
+      radius: 25.0
   bend_no_4:
     component: bend_no
     info:
@@ -79,7 +85,9 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section: xs_no
+      radius: 25.0
   bend_no_5:
     component: bend_no
     info:
@@ -94,6 +102,7 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -118,6 +127,7 @@ instances:
           simplify: null
           width: 0.95
           width_function: null
+      radius: 25.0
   bend_no_6:
     component: bend_no
     info:
@@ -132,6 +142,7 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -156,6 +167,7 @@ instances:
           simplify: null
           width: 0.95
           width_function: null
+      radius: 25.0
   bend_no_7:
     component: bend_no
     info:
@@ -170,6 +182,7 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -194,6 +207,7 @@ instances:
           simplify: null
           width: 0.95
           width_function: null
+      radius: 25.0
   bend_no_8:
     component: bend_no
     info:
@@ -208,6 +222,7 @@ instances:
       route_info_xs_no_length: 41.592
       width: 0.95
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -232,6 +247,7 @@ instances:
           simplify: null
           width: 0.95
           width_function: null
+      radius: 25.0
   cp1:
     component: mmi1x2_no
     info: {}
@@ -498,7 +514,7 @@ instances:
     settings:
       cross_section: xs_no
       length: 2.0
-name: mzi_477efba7
+name: mzi_no
 placements:
   bend_no_1:
     mirror: true

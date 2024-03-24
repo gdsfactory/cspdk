@@ -1,10 +1,10 @@
 function: grating_coupler_array
 info: {}
-module: gdsfactory.components.grating_coupler_array
-name: grating_coupler_array_2612704c
+module: cspdk.cells
+name: grating_coupler_array
 settings:
   bend:
-    function: bend_euler
+    function: _bend
   cross_section: xs_nc
   grating_coupler:
     function: gc_rectangular_nc
@@ -12,5 +12,5 @@ settings:
   n: 6
   pitch: 127.0
   port_name: o1
-  rotation: 0
+  rotation: 0.0
   with_loopback: false

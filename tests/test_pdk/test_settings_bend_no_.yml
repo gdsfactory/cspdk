@@ -1,4 +1,4 @@
-function: bend_euler
+function: bend_no
 info:
   dy: 25.0
   length: 41.592
@@ -10,15 +10,8 @@ info:
   route_info_weight: 41.592
   route_info_xs_no_length: 41.592
   width: 0.95
-module: gdsfactory.components.bend_euler
-name: bend_euler_cross_sectionxs_no
+module: cspdk.cells
+name: bend_no
 settings:
   angle: 90.0
-  cross_section: xs_no
-  direction: ccw
-  info: null
-  npoints: null
-  p: 0.5
-  post_process: null
-  radius: null
-  with_arc_floorplan: true
+  radius: 25.0

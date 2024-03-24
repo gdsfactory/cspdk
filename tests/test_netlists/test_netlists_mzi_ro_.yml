@@ -34,7 +34,9 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_ro
+      radius: 25.0
   bend_ro_2:
     component: bend_ro
     info:
@@ -49,7 +51,9 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_ro
+      radius: 25.0
   bend_ro_3:
     component: bend_ro
     info:
@@ -64,7 +68,9 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_ro
+      radius: 25.0
   bend_ro_4:
     component: bend_ro
     info:
@@ -79,7 +85,9 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section: xs_ro
+      radius: 25.0
   bend_ro_5:
     component: bend_ro
     info:
@@ -94,6 +102,7 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -133,6 +142,7 @@ instances:
           simplify: 0.05
           width: 10.45
           width_function: null
+      radius: 25.0
   bend_ro_6:
     component: bend_ro
     info:
@@ -147,6 +157,7 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -186,6 +197,7 @@ instances:
           simplify: 0.05
           width: 10.45
           width_function: null
+      radius: 25.0
   bend_ro_7:
     component: bend_ro
     info:
@@ -200,6 +212,7 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -239,6 +252,7 @@ instances:
           simplify: 0.05
           width: 10.45
           width_function: null
+      radius: 25.0
   bend_ro_8:
     component: bend_ro
     info:
@@ -253,6 +267,7 @@ instances:
       route_info_xs_ro_length: 41.592
       width: 0.4
     settings:
+      angle: 90.0
       cross_section:
         bbox_layers: null
         bbox_offsets: null
@@ -292,6 +307,7 @@ instances:
           simplify: 0.05
           width: 10.45
           width_function: null
+      radius: 25.0
   cp1:
     component: mmi1x2_ro
     info: {}
@@ -648,7 +664,7 @@ instances:
     settings:
       cross_section: xs_ro
       length: 2.0
-name: mzi_a1077554
+name: mzi_ro
 placements:
   bend_ro_1:
     mirror: true

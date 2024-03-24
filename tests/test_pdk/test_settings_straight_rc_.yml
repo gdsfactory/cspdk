@@ -1,4 +1,4 @@
-function: straight
+function: straight_rc
 info:
   length: 10.0
   route_info_length: 10.0
@@ -6,11 +6,7 @@ info:
   route_info_weight: 10.0
   route_info_xs_rc_length: 10.0
   width: 0.45
-module: gdsfactory.components.straight
-name: straight_cross_sectionxs_rc
+module: cspdk.cells
+name: straight_rc
 settings:
-  cross_section: xs_rc
-  info: null
   length: 10.0
-  npoints: 2
-  post_process: null

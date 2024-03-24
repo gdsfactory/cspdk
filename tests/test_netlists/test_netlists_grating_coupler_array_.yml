@@ -42,7 +42,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings: {}
-name: grating_coupler_array_2612704c
+name: grating_coupler_array
 placements:
   gc_rectangular_nc_1:
     mirror: 0

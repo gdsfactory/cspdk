@@ -865,7 +865,7 @@ def _gc_elliptical(
     neff: float = 2.638,
     ncladding: float = 1.443,
     layer_trench: LayerSpec = LAYER.GRA,
-    p_start: float = 26.0,
+    p_start: int = 26,
     n_periods: int = 30,
     end_straight_length: float = 0.2,
     cross_section: CrossSectionSpec = "xs_sc",
@@ -1184,6 +1184,7 @@ def _die(
     pad_pitch: float = 300.0,
     grating_coupler: ComponentSpec = gc_rectangular_nc,
     cross_section: CrossSectionSpec = "xs_nc",
+    pad: ComponentSpec = pad,
 ) -> gf.Component:
     c = gf.Component()
 
@@ -1367,9 +1368,11 @@ def crossing_sc() -> gf.Component:
 
 
 if __name__ == "__main__":
-    for name, func in list(globals().items()):
-        if not callable(func):
-            continue
-        if name in ["partial", "_import_gds"]:
-            continue
-        print(name, func())
+    c = die_sc()
+    c.show()
+    # for name, func in list(globals().items()):
+    #     if not callable(func):
+    #         continue
+    #     if name in ["partial", "_import_gds"]:
+    #         continue
+    #     print(name, func())

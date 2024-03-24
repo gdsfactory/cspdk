@@ -5,15 +5,13 @@ instances:
     info: {}
     settings:
       bend:
-        function: bend_euler
+        function: _bend
       cross_section: xs_so
       grating_coupler:
         function: gc_rectangular_so
-        module: cspdk.cells
-        settings: {}
       grating_coupler_spacing: 0.0
       n: 14
-      pitch: 250
+      pitch: 250.0
       port_name: o1
       rotation: 90
       with_loopback: true
@@ -22,15 +20,13 @@ instances:
     info: {}
     settings:
       bend:
-        function: bend_euler
+        function: _bend
       cross_section: xs_so
       grating_coupler:
         function: gc_rectangular_so
-        module: cspdk.cells
-        settings: {}
       grating_coupler_spacing: 0.0
       n: 14
-      pitch: 250
+      pitch: 250.0
       port_name: o1
       rotation: 90
       with_loopback: true
@@ -51,7 +47,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -73,7 +69,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -95,7 +91,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -117,7 +113,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -139,7 +135,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -161,7 +157,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -183,7 +179,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -205,7 +201,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -227,7 +223,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -249,7 +245,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -271,7 +267,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -293,7 +289,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -315,7 +311,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -337,7 +333,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -359,7 +355,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -381,7 +377,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -403,7 +399,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -425,7 +421,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -447,7 +443,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -469,7 +465,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -491,7 +487,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -513,7 +509,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -535,7 +531,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -557,7 +553,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -579,7 +575,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -601,7 +597,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -623,7 +619,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -645,7 +641,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -667,7 +663,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -689,7 +685,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -711,7 +707,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -733,7 +729,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -755,7 +751,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -777,7 +773,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -799,7 +795,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -821,7 +817,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -843,7 +839,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -865,7 +861,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -887,7 +883,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -909,7 +905,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -931,7 +927,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -953,7 +949,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -975,7 +971,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -997,7 +993,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1019,7 +1015,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1041,7 +1037,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1063,7 +1059,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1085,7 +1081,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1107,7 +1103,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1129,7 +1125,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1151,7 +1147,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1173,7 +1169,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1195,7 +1191,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1217,7 +1213,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1239,7 +1235,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1261,7 +1257,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1283,7 +1279,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1305,7 +1301,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1327,7 +1323,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1349,7 +1345,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1371,7 +1367,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1393,7 +1389,7 @@ instances:
       layer:
       - 41
       - 0
-      port_inclusion: 0
+      port_inclusion: 0.0
       port_orientation: null
       size:
       - 100.0
@@ -1408,17 +1404,17 @@ instances:
       - 99
       - 0
       port_orientations:
-      - 180
-      - 90
-      - 0
-      - -90
+      - 180.0
+      - 90.0
+      - 0.0
+      - -90.0
       port_type: electrical
       round_corners_east_west: false
       round_corners_north_south: false
       size:
-      - 11470
-      - 4900
-name: die_nc_e3bfbc92
+      - 11470.0
+      - 4900.0
+name: die_so
 placements:
   grating_coupler_array_1:
     mirror: 0

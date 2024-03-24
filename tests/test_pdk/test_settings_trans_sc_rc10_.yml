@@ -1,4 +1,4 @@
-function: taper_cross_section
+function: trans_sc_rc10
 info:
   length: 10
   route_info_length: 10.0
@@ -7,10 +7,5 @@ info:
   route_info_xs_rc_tip_length: 10.0
   route_info_xs_rc_tip_taper_length: 10
 module: cspdk.cells
-name: taper_cross_section
-settings:
-  cross_section1: xs_rc_tip
-  cross_section2: xs_rc
-  length: 10
-  linear: true
-  npoints: 2
+name: trans_sc_rc10
+settings: {}
