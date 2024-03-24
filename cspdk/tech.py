@@ -35,6 +35,7 @@ LAYER = LayerMapCornerstone()
 
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
+    thickness_slab: float = 100 * nm,
     thickness_nitride: float = 300 * nm,
     zmin_heater: float = 1.1,
     thickness_heater: float = 700 * nm,
@@ -59,6 +60,15 @@ def get_layer_stack(
             core=LayerLevel(
                 layer=LAYER.WG,
                 thickness=thickness_wg,
+                zmin=0.0,
+                material="si",
+                info={"mesh_order": 1},
+                sidewall_angle=10,
+                width_to_z=0.5,
+            ),
+            slab=LayerLevel(
+                layer=LAYER.SLAB,
+                thickness=thickness_slab,
                 zmin=0.0,
                 material="si",
                 info={"mesh_order": 1},
