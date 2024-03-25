@@ -31,14 +31,50 @@ def _straight(
     loss: Float = 0.0,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> sax.SDict:
-    if get_cross_section_name(cross_section).endswith("o"):
+    if get_cross_section_name(cross_section).endswith("so"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
             loss=loss,  # type: ignore
             wl0=1.31,
-            neff=2.4,
-            ng=4.2,
+            neff=2.52,
+            ng=4.33,
+        )
+    elif get_cross_section_name(cross_section).endswith("nc"):
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.55,
+            neff=1.6,
+            ng=1.94,
+        )
+    elif get_cross_section_name(cross_section).endswith("no"):
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.31,
+            neff=1.63,
+            ng=2.00,
+        )
+    elif get_cross_section_name(cross_section).endswith("rc"):
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.55,
+            neff=2.38,
+            ng=4.30,
+        )
+    elif get_cross_section_name(cross_section).endswith("ro"):
+        return __straight(
+            wl=wl,  # type: ignore
+            length=length,  # type: ignore
+            loss=loss,  # type: ignore
+            wl0=1.31,
+            neff=2.72,
+            ng=3.98,
         )
     else:
         return __straight(
@@ -46,8 +82,8 @@ def _straight(
             length=length,  # type: ignore
             loss=loss,  # type: ignore
             wl0=1.55,
-            neff=2.4,
-            ng=4.2,
+            neff=2.38,
+            ng=4.30,
         )
 
 
@@ -108,8 +144,7 @@ def _mmi_amp(
     sigma = _fwhm / (2 * jnp.sqrt(2 * jnp.log(2)))
     power = jnp.exp(-((f - f0) ** 2) / (2 * sigma**2))
     power = max_power * power / power.max() / 2
-    amp = jnp.sqrt(power)
-    return amp
+    return jnp.sqrt(power)
 
 
 def _mmi1x2(
