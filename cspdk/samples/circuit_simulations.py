@@ -6,11 +6,13 @@ import cspdk
 from cspdk import PDK
 
 if __name__ == "__main__":
-    c = cspdk.cells.mzi_sc(delta_length=20)
+    c = cspdk.cells.mzi_sc(delta_length=100)
+    c.show()
+    c.plot_netlist()
     netlist = c.get_netlist()
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
-    wl = jnp.linspace(1.5, 1.6)
+    wl = jnp.linspace(1.5, 1.6, 256)
 
     S = circuit(wl=wl)
     plt.figure(figsize=(14, 4))
