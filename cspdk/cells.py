@@ -1307,7 +1307,6 @@ def heater() -> gf.Component:
 def crossing_so() -> gf.Component:
     """Returns SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = _import_gds("SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
-    c.name = "crossing_so"
 
     xc = 493.47
     dx = 8.47 / 2
@@ -1328,7 +1327,6 @@ def crossing_so() -> gf.Component:
 def crossing_rc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = _import_gds("SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
-    c.name = "crossing_rc"
     xc = 404.24
     dx = 9.24 / 2
     x = xc - dx
@@ -1349,7 +1347,6 @@ def crossing_rc() -> gf.Component:
 def crossing_sc() -> gf.Component:
     """Returns SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = _import_gds("SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
-    c.name = "crossing_sc"
     xc = 494.24
     yc = 800
     dx = 9.24 / 2
@@ -1368,7 +1365,8 @@ def crossing_sc() -> gf.Component:
 
 
 if __name__ == "__main__":
-    c = die_sc()
+    # c = die_sc()
+    c = crossing_sc()
     c.show()
     # for name, func in list(globals().items()):
     #     if not callable(func):
