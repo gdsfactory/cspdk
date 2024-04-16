@@ -7,6 +7,8 @@ Pipfile
 # C extensions
 *.so
 *.fsp
+tests/gds_ref/*.oas
+
 
 tests/gds_ref/*.oas
 
