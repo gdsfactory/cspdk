@@ -209,12 +209,63 @@ get_route_ro = partial(gf.routing.get_route, **_settings_ro)
 get_route_nc = partial(gf.routing.get_route, **_settings_nc)
 get_route_no = partial(gf.routing.get_route, **_settings_no)
 
+get_route_from_steps_sc = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_sc,
+)
+get_route_from_steps_so = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_so,
+)
+get_route_from_steps_rc = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_rc,
+)
+get_route_from_steps_ro = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_ro,
+)
+get_route_from_steps_nc = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_nc,
+)
+get_route_from_steps_no = partial(
+    gf.routing.get_route_from_steps,
+    **_settings_no,
+)
+
+
 get_bundle_sc = partial(gf.routing.get_bundle, **_settings_sc)
 get_bundle_so = partial(gf.routing.get_bundle, **_settings_so)
 get_bundle_rc = partial(gf.routing.get_bundle, **_settings_rc)
 get_bundle_ro = partial(gf.routing.get_bundle, **_settings_ro)
 get_bundle_nc = partial(gf.routing.get_bundle, **_settings_nc)
 get_bundle_no = partial(gf.routing.get_bundle, **_settings_no)
+
+get_bundle_from_steps_sc = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_sc,
+)
+get_bundle_from_steps_so = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_so,
+)
+get_bundle_from_steps_rc = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_rc,
+)
+get_bundle_from_steps_ro = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_ro,
+)
+get_bundle_from_steps_nc = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_nc,
+)
+get_bundle_from_steps_no = partial(
+    gf.routing.get_bundle_from_steps,
+    **_settings_no,
+)
 
 
 routing_strategies = dict(
@@ -224,11 +275,24 @@ routing_strategies = dict(
     get_route_ro=get_route_ro,
     get_route_nc=get_route_nc,
     get_route_no=get_route_no,
+    get_route_from_steps_sc=get_route_from_steps_sc,
+    get_route_from_steps_so=get_route_from_steps_so,
+    get_route_from_steps_rc=get_route_from_steps_rc,
+    get_route_from_steps_ro=get_route_from_steps_ro,
+    get_route_from_steps_nc=get_route_from_steps_nc,
+    get_route_from_steps_no=get_route_from_steps_no,
     get_bundle_sc=get_bundle_sc,
     get_bundle_so=get_bundle_so,
     get_bundle_rc=get_bundle_rc,
     get_bundle_ro=get_bundle_ro,
     get_bundle_nc=get_bundle_nc,
+    get_bundle_no=get_bundle_no,
+    get_bundle_from_steps_sc=get_bundle_from_steps_sc,
+    get_bundle_from_steps_so=get_bundle_from_steps_so,
+    get_bundle_from_steps_rc=get_bundle_from_steps_rc,
+    get_bundle_from_steps_ro=get_bundle_from_steps_ro,
+    get_bundle_from_steps_nc=get_bundle_from_steps_nc,
+    get_bundle_from_steps_no=get_bundle_from_steps_no,
 )
 
 
