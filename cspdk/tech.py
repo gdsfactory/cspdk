@@ -178,6 +178,59 @@ xs_heater_metal = heater_metal()
 
 cross_sections = get_cross_sections(sys.modules[__name__])
 
+############################
+# Routing functions
+############################
+
+_settings_sc = dict(
+    straight="straight_sc", cross_section=xs_sc, bend="bend_sc", taper="taper_sc"
+)
+_settings_so = dict(
+    straight="straight_so", cross_section=xs_so, bend="bend_so", taper="taper_so"
+)
+_settings_rc = dict(
+    straight="straight_rc", cross_section=xs_rc, bend="bend_rc", taper="taper_rc"
+)
+_settings_ro = dict(
+    straight="straight_ro", cross_section=xs_ro, bend="bend_ro", taper="taper_ro"
+)
+_settings_nc = dict(
+    straight="straight_nc", cross_section=xs_nc, bend="bend_nc", taper="taper_nc"
+)
+_settings_no = dict(
+    straight="straight_no", cross_section=xs_no, bend="bend_no", taper="taper_no"
+)
+
+
+get_route_sc = partial(gf.routing.get_route, **_settings_sc)
+get_route_so = partial(gf.routing.get_route, **_settings_so)
+get_route_rc = partial(gf.routing.get_route, **_settings_rc)
+get_route_ro = partial(gf.routing.get_route, **_settings_ro)
+get_route_nc = partial(gf.routing.get_route, **_settings_nc)
+get_route_no = partial(gf.routing.get_route, **_settings_no)
+
+get_bundle_sc = partial(gf.routing.get_bundle, **_settings_sc)
+get_bundle_so = partial(gf.routing.get_bundle, **_settings_so)
+get_bundle_rc = partial(gf.routing.get_bundle, **_settings_rc)
+get_bundle_ro = partial(gf.routing.get_bundle, **_settings_ro)
+get_bundle_nc = partial(gf.routing.get_bundle, **_settings_nc)
+get_bundle_no = partial(gf.routing.get_bundle, **_settings_no)
+
+
+routing_strategies = dict(
+    get_route_sc=get_route_sc,
+    get_route_so=get_route_so,
+    get_route_rc=get_route_rc,
+    get_route_ro=get_route_ro,
+    get_route_nc=get_route_nc,
+    get_route_no=get_route_no,
+    get_bundle_sc=get_bundle_sc,
+    get_bundle_so=get_bundle_so,
+    get_bundle_rc=get_bundle_rc,
+    get_bundle_ro=get_bundle_ro,
+    get_bundle_nc=get_bundle_nc,
+)
+
 
 if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology

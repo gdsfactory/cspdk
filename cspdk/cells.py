@@ -1364,6 +1364,9 @@ def crossing_sc() -> gf.Component:
     return c
 
 
+array = gf.components.array
+
+
 if __name__ == "__main__":
     # c = die_sc()
     c = crossing_sc()
