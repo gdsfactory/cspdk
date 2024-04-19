@@ -300,7 +300,7 @@ if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
-    LAYER_VIEWS.to_lyp(PATH.lyp)
+    # LAYER_VIEWS.to_lyp(PATH.lyp)
 
     connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 

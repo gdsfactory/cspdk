@@ -6,7 +6,7 @@ import cspdk
 from cspdk import PDK
 
 if __name__ == "__main__":
-    c = cspdk.cells.mzi_sc(delta_length=100)
+    c = cspdk.cells.mzi_sc(delta_length=10)
     c.show()
     c.plot_netlist()
     netlist = c.get_netlist()
