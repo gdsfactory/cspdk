@@ -6,8 +6,7 @@ from cspdk import cells, config, tech
 from cspdk.cells import _bend, _straight, _taper
 from cspdk.config import PATH
 from cspdk.models import get_models
-from cspdk.routing import get_routing_strategies
-from cspdk.tech import LAYER, LAYER_STACK, LAYER_VIEWS
+from cspdk.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
 _models = get_models()
 _cells = get_cells(cells)
@@ -19,7 +18,6 @@ _cells.update(
     }
 )
 _cross_sections = get_cross_sections(tech)
-_routing_strategies = get_routing_strategies()
 PDK = Pdk(
     name="cornerstone",
     cells=_cells,
@@ -28,7 +26,7 @@ PDK = Pdk(
     layer_stack=LAYER_STACK,
     layer_views=LAYER_VIEWS,
     models=_models,
-    routing_strategies=_routing_strategies,
+    routing_strategies=routing_strategies,
 )
 PDK.activate()
 
