@@ -1728,7 +1728,7 @@ def _die(
 
 @gf.cell
 def die_nc() -> gf.Component:
-    """The standard die template for nitride, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for nitride, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
@@ -1741,7 +1741,7 @@ def die_nc() -> gf.Component:
 
 @gf.cell
 def die_no() -> gf.Component:
-    """The standard die template for nitride, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for nitride, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
@@ -1754,7 +1754,7 @@ def die_no() -> gf.Component:
 
 @gf.cell
 def die_sc() -> gf.Component:
-    """The standard die template for strip, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for strip, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
@@ -1767,7 +1767,7 @@ def die_sc() -> gf.Component:
 
 @gf.cell
 def die_so() -> gf.Component:
-    """The standard die template for strip, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for strip, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
@@ -1780,7 +1780,7 @@ def die_so() -> gf.Component:
 
 @gf.cell
 def die_rc() -> gf.Component:
-    """The standard die template for rib, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for rib, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
@@ -1793,7 +1793,7 @@ def die_rc() -> gf.Component:
 
 @gf.cell
 def die_ro() -> gf.Component:
-    """The standard die template for rib, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split betweent the top and bottom.
+    """The standard die template for rib, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
