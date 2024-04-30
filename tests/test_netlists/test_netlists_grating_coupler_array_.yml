@@ -82,9 +82,9 @@ ports:
   o5: gc_rectangular_nc_5,o1
   o6: gc_rectangular_nc_6,o1
 warnings:
-  optical:
+  vertical_te:
     unconnected_ports:
-    - message: 6 unconnected optical ports!
+    - message: 6 unconnected vertical_te ports!
       ports:
       - gc_rectangular_nc_1,o2
       - gc_rectangular_nc_2,o2
