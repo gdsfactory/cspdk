@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.7.1
+
+- update gplugins to 0.13 [#27](https://github.com/gdsfactory/cspdk/pull/27)
+- update gdsfactory to 7.25.0
+
 ## 0.7.0
 
 - Update gdsfactory [#15](https://github.com/gdsfactory/cspdk/pull/15)
