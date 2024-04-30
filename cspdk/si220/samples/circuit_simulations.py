@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sax
 
 import cspdk
-from cspdk import PDK
+from cspdk.si220 import PDK
 
 if __name__ == "__main__":
     c = cspdk.cells.mzi_sc(delta_length=100)

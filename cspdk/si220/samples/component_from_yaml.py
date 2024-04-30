@@ -1,6 +1,6 @@
 sample_pads = """
 name: pads
-pdk: cspdk
+pdk: cspdk.si220
 
 instances:
     bl:

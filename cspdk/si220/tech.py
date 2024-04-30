@@ -9,7 +9,7 @@ from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
 from gdsfactory.typings import ConnectivitySpec, Layer
 
-from cspdk.config import PATH
+from cspdk.si220.config import PATH
 
 nm = 1e-3
 

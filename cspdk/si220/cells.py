@@ -4,8 +4,8 @@ from typing import Any
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
-from cspdk.config import PATH
-from cspdk.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
+from cspdk.si220.config import PATH
+from cspdk.si220.tech import LAYER, xs_nc, xs_no, xs_rc, xs_ro, xs_sc, xs_so
 
 ################
 # Straights

@@ -3,15 +3,14 @@ import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import sax
 
-import cspdk
-from cspdk import PDK
+from cspdk.si220 import PDK, cells, tech
 
 if __name__ == "__main__":
     c = gf.Component()
-    mzi1 = c << cspdk.cells.mzi_sc(delta_length=10)
-    mzi2 = c << cspdk.cells.mzi_sc(delta_length=100)
+    mzi1 = c << cells.mzi_sc(delta_length=10)
+    mzi2 = c << cells.mzi_sc(delta_length=100)
     mzi2.move((200, 200))
-    route = cspdk.tech.get_route_sc(mzi1.ports["o2"], mzi2.ports["o1"])
+    route = tech.get_route_sc(mzi1.ports["o2"], mzi2.ports["o1"])
     c.add(route.references)
     c.add_port(name="o1", port=mzi1.ports["o1"])
     c.add_port(name="o2", port=mzi2.ports["o2"])
