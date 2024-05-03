@@ -4,7 +4,7 @@ import pytest
 from gdsfactory.difftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 
-from cspdk import PDK
+from cspdk.extra import PDK
 
 cells = PDK.cells
 

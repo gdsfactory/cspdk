@@ -1,7 +1,7 @@
 import inspect
 
-from cspdk import _cells as cells
-from cspdk.config import PATH
+from cspdk.si220 import _cells as cells
+from cspdk.si220.config import PATH
 
 filepath = PATH.repo / "docs" / "cells.rst"
 
@@ -15,10 +15,7 @@ with open(filepath, "w+") as f:
     f.write(
         """
 
-Here are the components available in the PDK
-
-
-Cells
+Cells Si220
 =============================
 """
     )
@@ -43,7 +40,7 @@ Cells
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.cells.{name}
+.. autofunction:: cspdk.si220.cells.{name}
 
 """
             )
@@ -54,14 +51,14 @@ Cells
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.cells.{name}
+.. autofunction:: cspdk.si220.cells.{name}
 
 .. plot::
   :include-source:
 
   import cspdk
 
-  c = cspdk.cells.{name}({kwargs})
+  c = cspdk.si220.cells.{name}({kwargs})
   c.plot()
 
 """
