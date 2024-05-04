@@ -19,36 +19,6 @@ array
 
 
 
-bend_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.bend_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.bend_nc(radius=25.0, angle=90.0)
-  c.plot()
-
-
-
-bend_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.bend_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.bend_no(radius=25.0, angle=90.0)
-  c.plot()
-
-
-
 bend_rc
 ----------------------------------------------------
 
@@ -120,36 +90,6 @@ bend_so
   import cspdk
 
   c = cspdk.si220.cells.bend_so(radius=10.0, angle=90.0)
-  c.plot()
-
-
-
-coupler_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.coupler_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.coupler_nc(gap=0.4, length=20.0, dx=10.0, dy=4.0)
-  c.plot()
-
-
-
-coupler_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.coupler_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.coupler_no(gap=0.4, length=20.0, dx=10.0, dy=4.0)
   c.plot()
 
 
@@ -259,36 +199,6 @@ crossing_so
 
 
 
-die_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.die_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.die_nc()
-  c.plot()
-
-
-
-die_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.die_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.die_no()
-  c.plot()
-
-
-
 die_rc
 ----------------------------------------------------
 
@@ -379,36 +289,6 @@ gc_elliptical_so
 
 
 
-gc_rectangular_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.gc_rectangular_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.gc_rectangular_nc()
-  c.plot()
-
-
-
-gc_rectangular_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.gc_rectangular_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.gc_rectangular_no()
-  c.plot()
-
-
-
 gc_rectangular_rc
 ----------------------------------------------------
 
@@ -479,7 +359,7 @@ grating_coupler_array
 
   import cspdk
 
-  c = cspdk.si220.cells.grating_coupler_array(pitch=127.0, n=6, port_name='o1', rotation=0.0, with_loopback=False, grating_coupler_spacing=0.0, cross_section='xs_nc')
+  c = cspdk.si220.cells.grating_coupler_array(pitch=127.0, n=6, port_name='o1', rotation=0.0, with_loopback=False, grating_coupler_spacing=0.0, cross_section='xs_sc')
   c.plot()
 
 
@@ -495,36 +375,6 @@ heater
   import cspdk
 
   c = cspdk.si220.cells.heater()
-  c.plot()
-
-
-
-mmi1x2_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mmi1x2_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mmi1x2_nc()
-  c.plot()
-
-
-
-mmi1x2_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mmi1x2_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mmi1x2_no()
   c.plot()
 
 
@@ -589,36 +439,6 @@ mmi1x2_so
 
 
 
-mmi2x2_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mmi2x2_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mmi2x2_nc()
-  c.plot()
-
-
-
-mmi2x2_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mmi2x2_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mmi2x2_no()
-  c.plot()
-
-
-
 mmi2x2_rc
 ----------------------------------------------------
 
@@ -675,36 +495,6 @@ mmi2x2_so
   import cspdk
 
   c = cspdk.si220.cells.mmi2x2_so()
-  c.plot()
-
-
-
-mzi_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mzi_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mzi_nc(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
-  c.plot()
-
-
-
-mzi_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.mzi_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.mzi_no(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
   c.plot()
 
 
@@ -799,36 +589,6 @@ rectangle
 
 
 
-straight_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.straight_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.straight_nc(length=10.0)
-  c.plot()
-
-
-
-straight_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.straight_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.straight_no(length=10.0)
-  c.plot()
-
-
-
 straight_rc
 ----------------------------------------------------
 
@@ -885,36 +645,6 @@ straight_so
   import cspdk
 
   c = cspdk.si220.cells.straight_so(length=10.0)
-  c.plot()
-
-
-
-taper_nc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.taper_nc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.taper_nc(length=10.0, width1=0.5)
-  c.plot()
-
-
-
-taper_no
-----------------------------------------------------
-
-.. autofunction:: cspdk.si220.cells.taper_no
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si220.cells.taper_no(length=10.0, width1=0.5)
   c.plot()
 
 

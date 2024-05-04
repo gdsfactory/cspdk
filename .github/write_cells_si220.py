@@ -3,7 +3,7 @@ import inspect
 from cspdk.si220 import _cells as cells
 from cspdk.si220.config import PATH
 
-filepath = PATH.repo / "docs" / "cells.rst"
+filepath = PATH.repo / "docs" / "cells_si220.rst"
 
 skip = {}
 

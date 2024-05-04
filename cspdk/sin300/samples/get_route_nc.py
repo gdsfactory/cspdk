@@ -1,4 +1,4 @@
-"""`get_route` returns a Manhattan route between two ports. """
+"""`get_route` returns a Manhattan route between two ports."""
 
 import gdsfactory as gf
 
