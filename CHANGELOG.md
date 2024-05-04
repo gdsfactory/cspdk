@@ -2,10 +2,17 @@
 
 <!-- towncrier release notes start -->
 
-## 0.7.1
+## 0.8.0
 
-- update gplugins to 0.13 [#27](https://github.com/gdsfactory/cspdk/pull/27)
-- update gdsfactory to 7.25.0
+- add si500nm pdk [#32](https://github.com/gdsfactory/cspdk/pull/32)
+- Add logo [#28](https://github.com/gdsfactory/cspdk/pull/28)
+- better docs [#31](https://github.com/gdsfactory/cspdk/pull/31)
+- make CORNERSTONE package support all the different pdks [#29](https://github.com/gdsfactory/cspdk/pull/29)
+- update gplugins [#27](https://github.com/gdsfactory/cspdk/pull/27)
+- Better docs [#24](https://github.com/gdsfactory/cspdk/pull/24)
+- simplify routing [#22](https://github.com/gdsfactory/cspdk/pull/22)
+- update gdsfactory and gplugins [#21](https://github.com/gdsfactory/cspdk/pull/21)
+- Improve models [#16](https://github.com/gdsfactory/cspdk/pull/16)
 
 ## 0.7.0
 
