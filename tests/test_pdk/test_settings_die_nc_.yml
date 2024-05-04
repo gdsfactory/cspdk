@@ -1,5 +1,0 @@
-function: die_nc
-info: {}
-module: cspdk.cells
-name: die_nc
-settings: {}

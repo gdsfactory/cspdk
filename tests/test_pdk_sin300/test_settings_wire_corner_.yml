@@ -1,0 +1,8 @@
+function: wire_corner
+info:
+  dy: 10.0
+  length: 10.0
+module: cspdk.sin300.cells
+name: wire_corner$1
+settings:
+  cross_section: xs_metal_routing

@@ -1,9 +1,0 @@
-function: mzi_so
-info: {}
-module: cspdk.cells
-name: mzi_so
-settings:
-  add_electrical_ports_bot: true
-  delta_length: 10.0
-  length_x: 0.1
-  length_y: 2.0

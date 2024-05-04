@@ -1,0 +1,16 @@
+function: grating_coupler_array
+info: {}
+module: cspdk.si220.cells
+name: grating_coupler_array
+settings:
+  bend:
+    function: _bend
+  cross_section: xs_sc
+  grating_coupler:
+    function: gc_rectangular_sc
+  grating_coupler_spacing: 0.0
+  n: 6
+  pitch: 127.0
+  port_name: o1
+  rotation: 0.0
+  with_loopback: false

@@ -1,0 +1,5 @@
+function: die_rc
+info: {}
+module: cspdk.si220.cells
+name: die_rc
+settings: {}

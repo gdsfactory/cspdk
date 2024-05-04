@@ -1,0 +1,11 @@
+function: coupler_nc
+info:
+  length: 10.102
+  min_bend_radius: 15.665
+module: cspdk.sin300.cells
+name: coupler_nc
+settings:
+  dx: 10.0
+  dy: 4.0
+  gap: 0.4
+  length: 20.0

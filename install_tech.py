@@ -14,6 +14,9 @@ def remove_path_or_dir(dest: pathlib.Path):
 
 def make_link(src, dest, overwrite: bool = True) -> None:
     dest = pathlib.Path(dest)
+    if not src.exists():
+        raise FileNotFoundError(f"{src} does not exist")
+
     if dest.exists() and not overwrite:
         print(f"{dest} already exists")
         return
@@ -33,8 +36,13 @@ if __name__ == "__main__":
     klayout_folder = "KLayout" if sys.platform == "win32" else ".klayout"
     cwd = pathlib.Path(__file__).resolve().parent
     home = pathlib.Path.home()
-    src = cwd / "cspdk" / "klayout"
     dest_folder = home / klayout_folder / "tech"
     dest_folder.mkdir(exist_ok=True, parents=True)
-    dest = dest_folder / "cspdk"
+
+    src = cwd / "cspdk" / "si220" / "klayout"
+    dest = dest_folder / "cspdk_si220"
+    make_link(src=src, dest=dest)
+
+    src = cwd / "cspdk" / "sin300" / "klayout"
+    dest = dest_folder / "cspdk_sin300"
     make_link(src=src, dest=dest)

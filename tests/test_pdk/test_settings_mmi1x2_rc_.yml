@@ -1,5 +1,0 @@
-function: mmi1x2_rc
-info: {}
-module: cspdk.cells
-name: mmi1x2_rc
-settings: {}
