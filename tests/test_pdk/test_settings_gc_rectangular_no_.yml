@@ -1,8 +1,0 @@
-function: gc_rectangular_no
-info:
-  fiber_angle: 20
-  polarization: te
-  wavelength: 1.55
-module: cspdk.cells
-name: gc_rectangular_no
-settings: {}

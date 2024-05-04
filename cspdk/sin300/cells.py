@@ -4,8 +4,8 @@ from typing import Any
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
-from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER, xs_rc, xs_ro, xs_sc, xs_so
+from cspdk.sin300.config import PATH
+from cspdk.sin300.tech import LAYER, xs_nc, xs_no
 
 ################
 # Straights
@@ -15,7 +15,7 @@ from cspdk.si220.tech import LAYER, xs_rc, xs_ro, xs_sc, xs_so
 @gf.cell
 def _straight(
     length: float = 10.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.straight(
         length=length,
@@ -24,8 +24,8 @@ def _straight(
 
 
 @gf.cell
-def straight_sc(length: float = 10.0, **kwargs) -> gf.Component:
-    """Straight waveguide in strip, c-band.
+def straight_nc(length: float = 10.0, **kwargs) -> gf.Component:
+    """Straight waveguide in nitride, c-band.
 
     Args:
         length (float, optional): The length of the waveguide. Defaults to 10.0.
@@ -34,7 +34,7 @@ def straight_sc(length: float = 10.0, **kwargs) -> gf.Component:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _straight(
         length=length,
         **kwargs,
@@ -42,8 +42,8 @@ def straight_sc(length: float = 10.0, **kwargs) -> gf.Component:
 
 
 @gf.cell
-def straight_so(length: float = 10.0, **kwargs) -> gf.Component:
-    """Straight waveguide in strip, o-band.
+def straight_no(length: float = 10.0, **kwargs) -> gf.Component:
+    """Straight waveguide in nitride, o-band.
 
     Args:
         length (float, optional): The length of the waveguide. Defaults to 10.0.
@@ -52,43 +52,7 @@ def straight_so(length: float = 10.0, **kwargs) -> gf.Component:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
-    return _straight(
-        length=length,
-        **kwargs,
-    )
-
-
-@gf.cell
-def straight_rc(length: float = 10.0, **kwargs) -> gf.Component:
-    """Straight waveguide in rib, c-band.
-
-    Args:
-        length (float, optional): The length of the waveguide. Defaults to 10.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
-    return _straight(
-        length=length,
-        **kwargs,
-    )
-
-
-@gf.cell
-def straight_ro(length: float = 10.0, **kwargs) -> gf.Component:
-    """Straight waveguide in rib, o-band.
-
-    Args:
-        length (float, optional): The length of the waveguide. Defaults to 10.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
+        kwargs["cross_section"] = "xs_no"
     return _straight(
         length=length,
         **kwargs,
@@ -103,14 +67,14 @@ def straight_ro(length: float = 10.0, **kwargs) -> gf.Component:
 @gf.cell
 def bend_s(
     size: tuple[float, float] = (11.0, 1.8),
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> gf.Component:
     """An S-bend.
 
     Args:
         size (tuple[float, float], optional): The size of the s-bend, in x and y. Defaults to (11.0, 1.8).
-        cross_section (CrossSectionSpec, optional): the bend cross-section. Defaults to "xs_sc" (strip, c-band).
+        cross_section (CrossSectionSpec, optional): the bend cross-section. Defaults to "xs_nc" (nitride, c-band).
 
     Returns:
         gf.Component: the component
@@ -130,7 +94,7 @@ def _bend(
     with_arc_floorplan: bool = True,
     npoints: int | None = None,
     direction: str = "ccw",
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.bend_euler(
         radius=radius,
@@ -163,10 +127,10 @@ def _float(x: Any) -> float:
 
 
 @gf.cell
-def bend_sc(
-    radius: float = _float(xs_sc.radius), angle: float = 90.0, **kwargs
+def bend_nc(
+    radius: float = _float(xs_nc.radius), angle: float = 90.0, **kwargs
 ) -> gf.Component:
-    """An euler bend in strip, c-band.
+    """An euler bend in nitride, c-band.
 
     Args:
         radius (float, optional): the radius of the bend. Defaults to the PDK's default value for that cross-section.
@@ -176,7 +140,7 @@ def bend_sc(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _bend(
         radius=radius,
         angle=angle,
@@ -185,10 +149,10 @@ def bend_sc(
 
 
 @gf.cell
-def bend_so(
-    radius: float = _float(xs_so.radius), angle: float = 90.0, **kwargs
+def bend_no(
+    radius: float = _float(xs_no.radius), angle: float = 90.0, **kwargs
 ) -> gf.Component:
-    """An euler bend in strip, o-band.
+    """An euler bend in nitride, o-band.
 
     Args:
         radius (float, optional): the radius of the bend. Defaults to the PDK's default value for that cross-section.
@@ -198,51 +162,7 @@ def bend_so(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
-    return _bend(
-        radius=radius,
-        angle=angle,
-        **kwargs,
-    )
-
-
-@gf.cell
-def bend_rc(
-    radius: float = _float(xs_rc.radius), angle: float = 90.0, **kwargs
-) -> gf.Component:
-    """An euler bend in rib, c-band.
-
-    Args:
-        radius (float, optional): the radius of the bend. Defaults to the PDK's default value for that cross-section.
-        angle (float, optional): the angle of the bend. Defaults to 90.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
-    return _bend(
-        radius=radius,
-        angle=angle,
-        **kwargs,
-    )
-
-
-@gf.cell
-def bend_ro(
-    radius: float = _float(xs_ro.radius), angle: float = 90.0, **kwargs
-) -> gf.Component:
-    """An euler bend in rib, o-band.
-
-    Args:
-        radius (float, optional): the radius of the bend. Defaults to the PDK's default value for that cross-section.
-        angle (float, optional): the angle of the bend. Defaults to 90.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
+        kwargs["cross_section"] = "xs_no"
     return _bend(
         radius=radius,
         angle=angle,
@@ -261,7 +181,7 @@ def _taper(
     width1: float = 0.5,
     width2: float | None = None,
     port: gf.Port | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> gf.Component:
     return gf.components.taper(
@@ -275,14 +195,14 @@ def _taper(
 
 
 @gf.cell
-def taper_sc(
+def taper_nc(
     length: float = 10.0,
     width1: float = 0.5,
     width2: float | None = None,
     port: gf.Port | None = None,
     **kwargs,
 ) -> gf.Component:
-    """A width taper in strip, c-band.
+    """A width taper in nitride, c-band.
 
     Args:
         length (float, optional): the length of the taper, in um. Defaults to 10.0.
@@ -294,19 +214,19 @@ def taper_sc(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
 
 
 @gf.cell
-def taper_so(
+def taper_no(
     length: float = 10.0,
     width1: float = 0.5,
     width2: float | None = None,
     port: gf.Port | None = None,
     **kwargs,
 ) -> gf.Component:
-    """A width taper in strip, o-band.
+    """A width taper in nitride, o-band.
 
     Args:
         length (float, optional): the length of the taper, in um. Defaults to 10.0.
@@ -318,117 +238,8 @@ def taper_so(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
+        kwargs["cross_section"] = "xs_no"
     return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
-
-
-@gf.cell
-def taper_rc(
-    length: float = 10.0,
-    width1: float = 0.5,
-    width2: float | None = None,
-    port: gf.Port | None = None,
-    **kwargs,
-) -> gf.Component:
-    """A width taper in rib, c-band.
-
-    Args:
-        length (float, optional): the length of the taper, in um. Defaults to 10.0.
-        width1 (float, optional): the width of the taper input, in um. Defaults to 0.5.
-        width2 (float | None, optional): the width of the taper output, in um. Defaults to None.
-        port (gf.Port | None, optional): if given, starts from the port's width and transitions to width1. Defaults to None.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
-    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
-
-
-@gf.cell
-def taper_ro(
-    length: float = 10.0,
-    width1: float = 0.5,
-    width2: float | None = None,
-    port: gf.Port | None = None,
-    **kwargs,
-) -> gf.Component:
-    """A width taper in rib, o-band.
-
-    Args:
-        length (float, optional): the length of the taper, in um. Defaults to 10.0.
-        width1 (float, optional): the width of the taper input, in um. Defaults to 0.5.
-        width2 (float | None, optional): the width of the taper output, in um. Defaults to None.
-        port (gf.Port | None, optional): if given, starts from the port's width and transitions to width1. Defaults to None.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
-    return _taper(length=length, width1=width1, width2=width2, port=port, **kwargs)
-
-
-@gf.cell
-def _taper_cross_section(
-    length: float = 10,
-    cross_section1: str = "xs_rc_tip",
-    cross_section2: str = "xs_rc",
-    linear: bool = True,
-    **kwargs,
-) -> gf.Component:
-    if linear:
-        kwargs["npoints"] = 2
-    return gf.components.taper_cross_section(
-        length=length,
-        cross_section1=cross_section1,
-        cross_section2=cross_section2,
-        linear=linear,
-        **kwargs,
-    ).flatten()
-
-
-@gf.cell
-def trans_sc_rc10() -> gf.Component:
-    """A 10um-long strip-rib transition in c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _taper_cross_section(
-        length=10,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
-    )
-
-
-@gf.cell
-def trans_sc_rc20() -> gf.Component:
-    """A 20um-long strip-rib transition in c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _taper_cross_section(
-        length=20,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
-    )
-
-
-@gf.cell
-def trans_sc_rc50() -> gf.Component:
-    """A 50um-long strip-rib transition in c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _taper_cross_section(
-        length=50,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
-    )
 
 
 ################
@@ -441,7 +252,7 @@ def _mmi1x2(
     width_mmi: float = 6.0,
     width_taper: float = 1.5,
     length_taper: float = 20.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> gf.Component:
     return gf.components.mmi1x2(
@@ -458,7 +269,7 @@ def _mmi2x2(
     width_mmi: float = 6.0,
     width_taper: float = 1.5,
     length_taper: float = 20.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> gf.Component:
     return gf.components.mmi2x2(
@@ -471,149 +282,87 @@ def _mmi2x2(
 
 
 ################
-# MMIs rib cband
+# Nitride MMIs oband
 ################
 
 
 @gf.cell
-def mmi1x2_rc(**kwargs) -> gf.Component:
-    """A 1x2 MMI in rib, c-band.
+def mmi1x2_no(**kwargs) -> gf.Component:
+    """A 1x2 MMI in nitride, o-band.
 
     Returns:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
+        kwargs["cross_section"] = "xs_no"
     return _mmi1x2(
-        length_mmi=32.7,
-        gap_mmi=1.64,
+        width_mmi=12.0,
+        length_taper=50.0,
+        width_taper=5.5,
+        gap_mmi=0.4,
+        length_mmi=42.0,
         **kwargs,
     )
 
 
 @gf.cell
-def mmi2x2_rc(**kwargs) -> gf.Component:
-    """A 2x2 MMI in rib, c-band.
+def mmi2x2_no(**kwargs) -> gf.Component:
+    """A 2x2 MMI in nitride, o-band.
 
     Returns:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
+        kwargs["cross_section"] = "xs_no"
     return _mmi2x2(
-        length_mmi=44.8,
-        gap_mmi=0.53,
+        width_mmi=12.0,
+        length_taper=50.0,
+        width_taper=5.5,
+        gap_mmi=0.4,
+        length_mmi=126.0,
         **kwargs,
     )
 
 
 ################
-# MMIs strip cband
+# Nitride MMIs cband
 ################
 
 
 @gf.cell
-def mmi1x2_sc(**kwargs) -> gf.Component:
-    """A 1x2 MMI in strip, c-band.
+def mmi1x2_nc(**kwargs) -> gf.Component:
+    """A 1x2 MMI in nitride, c-band.
 
     Returns:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _mmi1x2(
-        length_mmi=31.8,
-        gap_mmi=1.64,
+        width_mmi=12.0,
+        length_taper=50.0,
+        width_taper=5.5,
+        gap_mmi=0.4,
+        length_mmi=64.7,
         **kwargs,
     )
 
 
 @gf.cell
-def mmi2x2_sc(**kwargs) -> gf.Component:
-    """A 2x2 MMI in rib, c-band.
+def mmi2x2_nc(**kwargs) -> gf.Component:
+    """A 2x2 MMI in nitride, c-band.
 
     Returns:
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _mmi2x2(
-        length_mmi=42.5,
-        gap_mmi=0.5,
-        **kwargs,
-    )
-
-
-################
-# MMIs rib oband
-################
-
-
-@gf.cell
-def mmi1x2_ro(**kwargs) -> gf.Component:
-    """A 1x2 MMI in rib, o-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
-    return _mmi1x2(
-        length_mmi=40.8,
-        gap_mmi=1.55,
-        **kwargs,
-    )
-
-
-@gf.cell
-def mmi2x2_ro(**kwargs) -> gf.Component:
-    """A 2x2 MMI in rib, o-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
-    return _mmi2x2(
-        length_mmi=55.0,
-        gap_mmi=0.53,
-        **kwargs,
-    )
-
-
-################
-# MMIs strip oband
-################
-
-
-@gf.cell
-def mmi1x2_so(**kwargs) -> gf.Component:
-    """A 1x2 MMI in strip, o-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
-    return _mmi1x2(
-        length_mmi=40.1,
-        gap_mmi=1.55,
-        **kwargs,
-    )
-
-
-@gf.cell
-def mmi2x2_so(**kwargs) -> gf.Component:
-    """A 2x2 MMI in strip, o-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
-    return _mmi2x2(
-        length_mmi=53.5,
-        gap_mmi=0.53,
+        width_mmi=12.0,
+        length_taper=50.0,
+        width_taper=5.5,
+        gap_mmi=0.4,
+        length_mmi=232.0,
         **kwargs,
     )
 
@@ -629,7 +378,7 @@ def _coupler_symmetric(
     gap: float = 0.234,
     dx: float = 10.0,
     dy: float = 4.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.coupler_symmetric(
         bend=bend,
@@ -643,9 +392,9 @@ def _coupler_symmetric(
 @gf.cell
 def _coupler_straight(
     length: float = 10.0,
-    gap: float = 0.27,
+    gap: float = 0.4,
     straight: ComponentSpec = _straight,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.coupler_straight(
         length=length,
@@ -663,7 +412,7 @@ def _coupler(
     coupler_straight: ComponentSpec = _coupler_straight,
     dx: float = 10.0,
     dy: float = 4.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.coupler(
         gap=gap,
@@ -677,17 +426,17 @@ def _coupler(
 
 
 @gf.cell
-def coupler_sc(
-    gap: float = 0.236,
+def coupler_nc(
+    gap: float = 0.4,
     length: float = 20.0,
     dx: float = 10.0,
     dy: float = 4.0,
     **kwargs,
 ) -> gf.Component:
-    """A symmetric coupler in strip, c-band.
+    """A symmetric coupler in nitride, c-band.
 
     Args:
-        gap (float, optional): the coupling gap, in um. Defaults to 0.236.
+        gap (float, optional): the coupling gap, in um. Defaults to 0.4.
         length (float, optional): the length of the coupling section, in um. Defaults to 20.0.
         dx (float, optional): the port-to-port horizontal spacing. Defaults to 10.0.
         dy (float, optional): the port-to-port vertical spacing. Defaults to 4.0.
@@ -696,7 +445,7 @@ def coupler_sc(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _coupler(
         gap=gap,
         length=length,
@@ -707,17 +456,17 @@ def coupler_sc(
 
 
 @gf.cell
-def coupler_so(
-    gap: float = 0.236,
+def coupler_no(
+    gap: float = 0.4,
     length: float = 20.0,
     dx: float = 10.0,
     dy: float = 4.0,
     **kwargs,
 ) -> gf.Component:
-    """A symmetric coupler in strip, o-band.
+    """A symmetric coupler in nitride, o-band.
 
     Args:
-        gap (float, optional): the coupling gap, in um. Defaults to 0.236.
+        gap (float, optional): the coupling gap, in um. Defaults to 0.4.
         length (float, optional): the length of the coupling section, in um. Defaults to 20.0.
         dx (float, optional): the port-to-port horizontal spacing. Defaults to 10.0.
         dy (float, optional): the port-to-port vertical spacing. Defaults to 4.0.
@@ -726,67 +475,7 @@ def coupler_so(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
-    return _coupler(
-        gap=gap,
-        length=length,
-        dx=dx,
-        dy=dy,
-        **kwargs,
-    )
-
-
-@gf.cell
-def coupler_rc(
-    gap: float = 0.236,
-    length: float = 20.0,
-    dx: float = 10.0,
-    dy: float = 4.0,
-    **kwargs,
-) -> gf.Component:
-    """A symmetric coupler in rib, c-band.
-
-    Args:
-        gap (float, optional): the coupling gap, in um. Defaults to 0.236.
-        length (float, optional): the length of the coupling section, in um. Defaults to 20.0.
-        dx (float, optional): the port-to-port horizontal spacing. Defaults to 10.0.
-        dy (float, optional): the port-to-port vertical spacing. Defaults to 4.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
-    return _coupler(
-        gap=gap,
-        length=length,
-        dx=dx,
-        dy=dy,
-        **kwargs,
-    )
-
-
-@gf.cell
-def coupler_ro(
-    gap: float = 0.236,
-    length: float = 20.0,
-    dx: float = 10.0,
-    dy: float = 4.0,
-    **kwargs,
-) -> gf.Component:
-    """A symmetric coupler in rib, o-band.
-
-    Args:
-        gap (float, optional): the coupling gap, in um. Defaults to 0.236.
-        length (float, optional): the length of the coupling section, in um. Defaults to 20.0.
-        dx (float, optional): the port-to-port horizontal spacing. Defaults to 10.0.
-        dy (float, optional): the port-to-port vertical spacing. Defaults to 4.0.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
+        kwargs["cross_section"] = "xs_no"
     return _coupler(
         gap=gap,
         length=length,
@@ -816,7 +505,7 @@ def _gc_rectangular(
     wavelength: float = 1.55,
     taper: ComponentSpec = _taper,
     slab_xmin: float = -1.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     c = gf.components.grating_coupler_rectangular(
         n_periods=n_periods,
@@ -838,59 +527,38 @@ def _gc_rectangular(
 
 
 @gf.cell
-def gc_rectangular_so() -> gf.Component:
-    """A rectangular grating coupler in strip, o-band.
+def gc_rectangular_nc() -> gf.Component:
+    """A rectangular grating coupler in nitride, c-band.
 
     Returns:
         gf.Component: the component
     """
     return _gc_rectangular(
-        period=0.5,
-        cross_section="xs_so",
-        n_periods=80,
+        period=0.66,
+        cross_section="xs_nc",
+        length_taper=200,
+        fiber_angle=20,
+        layer_grating=LAYER.NITRIDE_ETCH,
+        layer_slab=LAYER.NITRIDE,
+        slab_offset=0,
     )
 
 
 @gf.cell
-def gc_rectangular_ro() -> gf.Component:
-    """A rectangular grating coupler in rib, o-band.
+def gc_rectangular_no() -> gf.Component:
+    """A rectangular grating coupler in nitride, o-band.
 
     Returns:
         gf.Component: the component
     """
     return _gc_rectangular(
-        period=0.5,
-        cross_section="xs_ro",
-        n_periods=80,
-    )
-
-
-@gf.cell
-def gc_rectangular_sc() -> gf.Component:
-    """A rectangular grating coupler in strip, c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _gc_rectangular(
-        period=0.63,
-        cross_section="xs_sc",
-        fiber_angle=10,
-        n_periods=60,
-    )
-
-
-@gf.cell
-def gc_rectangular_rc() -> gf.Component:
-    """A rectangular grating coupler in rib, c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _gc_rectangular(
-        period=0.5,
-        cross_section="xs_rc",
-        n_periods=60,
+        period=0.964,
+        cross_section="xs_no",
+        length_taper=200,
+        fiber_angle=20,
+        layer_grating=LAYER.NITRIDE_ETCH,
+        layer_slab=LAYER.NITRIDE,
+        slab_offset=0,
     )
 
 
@@ -906,15 +574,15 @@ def _gc_elliptical(
     taper_angle: float = 30.0,
     trenches_extra_angle: float = 9.0,
     wavelength: float = 1.53,
-    fiber_angle: float = 15.0,
+    fiber_angle: float = 20.0,
     grating_line_width: float = 0.343,
-    neff: float = 2.638,
+    neff: float = 1.6,
     ncladding: float = 1.443,
     layer_trench: LayerSpec = LAYER.GRA,
     p_start: int = 26,
     n_periods: int = 30,
     end_straight_length: float = 0.2,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     return gf.components.grating_coupler_elliptical_trenches(
         polarization=polarization,
@@ -935,45 +603,54 @@ def _gc_elliptical(
 
 
 @gf.cell
-def gc_elliptical_sc(
+def gc_elliptical_nc(
     grating_line_width: float = 0.343,
-    fiber_angle: float = 15,
+    fiber_angle: float = 20,
     wavelength: float = 1.53,
+    neff: float = 1.6,
+    cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> gf.Component:
     """An elliptical grating coupler in strip, c-band.
 
     Args:
-        grating_line_width (float, optional): the grating line width, in um. Defaults to 0.343.
-        fiber_angle (float, optional): the fiber angle, in degrees. Defaults to 15.
-        wavelength (float, optional): the center wavelength, in um. Defaults to 1.53.
+        grating_line_width: the grating line width, in um. Defaults to 0.343.
+        fiber_angle: the fiber angle, in degrees. Defaults to 15.
+        wavelength: the center wavelength, in um. Defaults to 1.53.
+        neff: the effective index of the waveguide. Defaults to 1.6.
+        cross_section: the cross-section. Defaults to "xs_nc".
 
     Returns:
         gf.Component: the component
     """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
     return _gc_elliptical(
         grating_line_width=grating_line_width,
         fiber_angle=fiber_angle,
         wavelength=wavelength,
+        cross_section=cross_section,
+        neff=neff,
         **kwargs,
     )
 
 
 @gf.cell
-def gc_elliptical_so(
+def gc_elliptical_no(
     grating_line_width: float = 0.343,
-    fiber_angle: float = 15,
+    fiber_angle: float = 20,
     wavelength: float = 1.31,
+    neff: float = 1.63,
+    cross_section: CrossSectionSpec = "xs_no",
     **kwargs,
 ) -> gf.Component:
     """An elliptical grating coupler in strip, o-band.
 
     Args:
-        grating_line_width (float, optional): the grating line width, in um. Defaults to 0.343.
-        fiber_angle (float, optional): the fiber angle, in degrees. Defaults to 15.
-        wavelength (float, optional): the center wavelength, in um. Defaults to 1.31.
+        grating_line_width: the grating line width, in um. Defaults to 0.343.
+        fiber_angle: the fiber angle, in degrees. Defaults to 15.
+        wavelength: the center wavelength, in um. Defaults to 1.31.
+        neff: the effective index of the waveguide. Defaults to 1.63.
+        cross_section: the cross-section. Defaults to "xs_no".
+
 
     Returns:
         gf.Component: the component
@@ -984,6 +661,8 @@ def gc_elliptical_so(
         grating_line_width=grating_line_width,
         fiber_angle=fiber_angle,
         wavelength=wavelength,
+        neff=neff,
+        cross_section=cross_section,
         **kwargs,
     )
 
@@ -998,7 +677,7 @@ def _mzi(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_nc",
     add_electrical_ports_bot: bool = True,
     bend: ComponentSpec = _bend,
     straight: ComponentSpec = _straight,
@@ -1034,14 +713,14 @@ def _mzi(
 
 
 @gf.cell
-def mzi_sc(
+def mzi_nc(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
 ) -> gf.Component:
-    """A Mach-Zehnder Interferometer (MZI) in strip, c-band.
+    """A Mach-Zehnder Interferometer (MZI) in nitride, c-band.
 
     Args:
         delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
@@ -1053,29 +732,29 @@ def mzi_sc(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
+        kwargs["cross_section"] = "xs_nc"
     return _mzi(
         delta_length=delta_length,
         length_y=length_y,
         length_x=length_x,
         add_electrical_ports_bot=add_electrical_ports_bot,
-        straight=straight_sc,
-        bend=bend_sc,
-        combiner=mmi1x2_sc,
-        splitter=mmi1x2_sc,
+        straight=straight_nc,
+        bend=bend_nc,
+        combiner=mmi1x2_nc,
+        splitter=mmi1x2_nc,
         **kwargs,
     )
 
 
 @gf.cell
-def mzi_so(
+def mzi_no(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
     **kwargs,
 ) -> gf.Component:
-    """A Mach-Zehnder Interferometer (MZI) in strip, o-band.
+    """A Mach-Zehnder Interferometer (MZI) in nitride, o-band.
 
     Args:
         delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
@@ -1087,84 +766,16 @@ def mzi_so(
         gf.Component: the component
     """
     if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
+        kwargs["cross_section"] = "xs_no"
     return _mzi(
         delta_length=delta_length,
         length_y=length_y,
         length_x=length_x,
         add_electrical_ports_bot=add_electrical_ports_bot,
-        straight=straight_so,
-        bend=bend_so,
-        combiner=mmi1x2_so,
-        splitter=mmi1x2_so,
-        **kwargs,
-    )
-
-
-@gf.cell
-def mzi_rc(
-    delta_length: float = 10.0,
-    length_y: float = 2.0,
-    length_x: float = 0.1,
-    add_electrical_ports_bot: bool = True,
-    **kwargs,
-) -> gf.Component:
-    """A Mach-Zehnder Interferometer (MZI) in rib, c-band.
-
-    Args:
-        delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
-        length_y (float, optional): the common vertical length, in um. Defaults to 2.0.
-        length_x (float, optional): the common horizontal length, in um. Defaults to 0.1.
-        add_electrical_ports_bot (bool, optional): if true, adds electrical ports to the bottom. Defaults to True.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_rc"
-    return _mzi(
-        delta_length=delta_length,
-        length_y=length_y,
-        length_x=length_x,
-        add_electrical_ports_bot=add_electrical_ports_bot,
-        straight=straight_rc,
-        bend=bend_rc,
-        combiner=mmi1x2_rc,
-        splitter=mmi1x2_rc,
-        **kwargs,
-    )
-
-
-@gf.cell
-def mzi_ro(
-    delta_length: float = 10.0,
-    length_y: float = 2.0,
-    length_x: float = 0.1,
-    add_electrical_ports_bot: bool = True,
-    **kwargs,
-) -> gf.Component:
-    """A Mach-Zehnder Interferometer (MZI) in rib, o-band.
-
-    Args:
-        delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
-        length_y (float, optional): the common vertical length, in um. Defaults to 2.0.
-        length_x (float, optional): the common horizontal length, in um. Defaults to 0.1.
-        add_electrical_ports_bot (bool, optional): if true, adds electrical ports to the bottom. Defaults to True.
-
-    Returns:
-        gf.Component: the component
-    """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_ro"
-    return _mzi(
-        delta_length=delta_length,
-        length_y=length_y,
-        length_x=length_x,
-        add_electrical_ports_bot=add_electrical_ports_bot,
-        straight=straight_ro,
-        bend=bend_ro,
-        combiner=mmi1x2_ro,
-        splitter=mmi1x2_ro,
+        bend=bend_no,
+        straight=straight_no,
+        combiner=mmi1x2_no,
+        splitter=mmi1x2_no,
         **kwargs,
     )
 
@@ -1250,8 +861,8 @@ def grating_coupler_array(
     with_loopback: bool = False,
     bend: ComponentSpec = _bend,
     grating_coupler_spacing: float = 0.0,
-    grating_coupler: ComponentSpec = gc_rectangular_sc,
-    cross_section: CrossSectionSpec = "xs_sc",
+    grating_coupler: ComponentSpec = gc_rectangular_nc,
+    cross_section: CrossSectionSpec = "xs_nc",
 ) -> gf.Component:
     """An array of grating couplers.
 
@@ -1263,8 +874,8 @@ def grating_coupler_array(
         with_loopback (bool, optional): if True, adds a loopback. Defaults to False.
         bend (ComponentSpec, optional): the bend to be used for the loopback. Defaults to _bend.
         grating_coupler_spacing (float, optional): the spacing to be used in the loopback. Defaults to 0.0.
-        grating_coupler (ComponentSpec, optional): the grating coupler component to use.
-        cross_section (CrossSectionSpec, optional): the cross section to be used for routing in the loopback.
+        grating_coupler (ComponentSpec, optional): the grating coupler component to use. Defaults to gc_rectangular_nc.
+        cross_section (CrossSectionSpec, optional): the cross section to be used for routing in the loopback. Defaults to "xs_nc".
 
     Returns:
         gf.Component: the component
@@ -1289,8 +900,8 @@ def _die(
     npads: int = 31,
     grating_pitch: float = 250.0,
     pad_pitch: float = 300.0,
-    grating_coupler: ComponentSpec = gc_rectangular_sc,
-    cross_section: CrossSectionSpec = "xs_sc",
+    grating_coupler: ComponentSpec = gc_rectangular_nc,
+    cross_section: CrossSectionSpec = "xs_nc",
     pad: ComponentSpec = pad,
 ) -> gf.Component:
     c = gf.Component()
@@ -1349,54 +960,28 @@ def _die(
 
 
 @gf.cell
-def die_sc() -> gf.Component:
-    """The standard die template for strip, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
+def die_nc() -> gf.Component:
+    """The standard die template for nitride, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
     """
     return _die(
-        grating_coupler=gc_rectangular_sc,
-        cross_section="xs_sc",
+        grating_coupler=gc_rectangular_nc,
+        cross_section="xs_nc",
     )
 
 
 @gf.cell
-def die_so() -> gf.Component:
-    """The standard die template for strip, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
+def die_no() -> gf.Component:
+    """The standard die template for nitride, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
 
     Returns:
         gf.Component: the component
     """
     return _die(
-        grating_coupler=gc_rectangular_so,
-        cross_section="xs_so",
-    )
-
-
-@gf.cell
-def die_rc() -> gf.Component:
-    """The standard die template for rib, c-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _die(
-        grating_coupler=gc_rectangular_rc,
-        cross_section="xs_rc",
-    )
-
-
-@gf.cell
-def die_ro() -> gf.Component:
-    """The standard die template for rib, o-band. This has 24 grating couplers, split evenly between the left and right sides of the chip and 62 electrical pads split between the top and bottom.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _die(
-        grating_coupler=gc_rectangular_ro,
-        cross_section="xs_ro",
+        grating_coupler=gc_rectangular_no,
+        cross_section="xs_no",
     )
 
 
@@ -1406,81 +991,11 @@ def die_ro() -> gf.Component:
 _import_gds = partial(gf.import_gds, gdsdir=PATH.gds)
 
 
-@gf.cell
-def heater() -> gf.Component:
-    """Heater fixed cell."""
-    heater = _import_gds("Heater.gds")
-    heater.name = "heater"
-    return heater
-
-
-@gf.cell
-def crossing_so() -> gf.Component:
-    """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    c = _import_gds("SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
-
-    xc = 493.47
-    dx = 8.47 / 2
-    x = xc - dx
-    xl = xc - 2 * dx
-    xr = xc
-    yb = -dx
-    yt = +dx
-
-    c.add_port("o1", orientation=180, center=(xl, 0), width=0.4, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=0.4, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, 0), width=0.4, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=0.4, layer=LAYER.WG)
-    return c
-
-
-@gf.cell
-def crossing_rc() -> gf.Component:
-    """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
-    c = _import_gds("SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
-    xc = 404.24
-    dx = 9.24 / 2
-    x = xc - dx
-    xl = xc - 2 * dx
-    xr = xc
-    yb = -dx
-    yt = +dx
-    width = 0.45
-
-    c.add_port("o1", orientation=180, center=(xl, 0), width=width, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, 0), width=width, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
-    return c
-
-
-@gf.cell
-def crossing_sc() -> gf.Component:
-    """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    c = _import_gds("SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
-    xc = 494.24
-    yc = 800
-    dx = 9.24 / 2
-    x = xc - dx
-    xl = xc - 2 * dx
-    xr = xc
-    yb = yc - dx
-    yt = yc + dx
-    width = 0.45
-
-    c.add_port("o1", orientation=180, center=(xl, yc), width=width, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, yc), width=width, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
-    return c
-
-
 array = gf.components.array
 
 
 if __name__ == "__main__":
-    # c = die_sc()
-    c = crossing_sc()
+    c = taper_nc()
     c.show()
     # for name, func in list(globals().items()):
     #     if not callable(func):

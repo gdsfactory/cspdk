@@ -1,25 +1,11 @@
 LayerViews:
-  WG:
-    layer: [3, 0]
+  NITRIDE:
+    layer: [203, 0]
     layer_in_name: true
-    width: 1
-    color: "#ff9d9d"
+    color: "orange"
     hatch_pattern: coarsely dotted
-  SLAB:
-    layer: [5, 0]
-    layer_in_name: true
-    hatch_pattern: coarsely dotted
-    width: 1
-    color: "silver"
-  RIB:
-    layer: [4, 0]
-    layer_in_name: true
-    hatch_pattern: coarsely dotted
-    transparent: true
-    width: 1
-    color: "cyan"
-  GRA:
-    layer: [6, 0]
+  NITRIDE_ETCH:
+    layer: [204, 0]
     layer_in_name: true
     hatch_pattern: coarsely dotted
     transparent: true

@@ -1,5 +1,0 @@
-function: heater
-info: {}
-module: cspdk.cells
-name: heater$1
-settings: {}

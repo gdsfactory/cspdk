@@ -22,8 +22,6 @@ class LayerMapCornerstone(LayerMap):
     GRA: Layer = (6, 0)
     LBL: Layer = (100, 0)
     PAD: Layer = (41, 0)
-    NITRIDE: Layer = (203, 0)
-    NITRIDE_ETCH: Layer = (204, 0)
 
     # labels for gdsfactory
     LABEL_SETTINGS: Layer = (100, 0)
@@ -36,7 +34,6 @@ LAYER = LayerMapCornerstone()
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
     thickness_slab: float = 100 * nm,
-    thickness_nitride: float = 300 * nm,
     zmin_heater: float = 1.1,
     thickness_heater: float = 700 * nm,
     zmin_metal: float = 1.1,
@@ -48,7 +45,7 @@ def get_layer_stack(
 
     Args:
         thickness_wg: waveguide thickness in um.
-        thickness_nitride: nitride thickness in um.
+        thickness_slab: slab thickness in um.
         zmin_heater: TiN heater.
         thickness_heater: TiN thickness.
         zmin_metal: metal thickness in um.
@@ -71,24 +68,6 @@ def get_layer_stack(
                 thickness=thickness_slab,
                 zmin=0.0,
                 material="si",
-                info={"mesh_order": 1},
-                sidewall_angle=10,
-                width_to_z=0.5,
-            ),
-            nitride=LayerLevel(
-                layer=LAYER.NITRIDE,
-                thickness=thickness_nitride,
-                zmin=0.0,
-                material="sin",
-                info={"mesh_order": 2},
-                sidewall_angle=10,
-                width_to_z=0.5,
-            ),
-            nitride_etch=LayerLevel(
-                layer=LAYER.NITRIDE_ETCH,
-                thickness=thickness_nitride,
-                zmin=0.0,
-                material="sin",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -133,10 +112,6 @@ xf_rc = partial(
     radius_min=25,
 )
 xf_ro = partial(xf_rc, width=0.40)
-
-xf_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
-xf_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
-
 xf_rc_tip = partial(
     gf.cross_section.strip,
     sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
@@ -168,8 +143,6 @@ xs_sc = xf_sc()
 xs_rc = xf_rc()
 xs_so = xf_so()
 xs_ro = xf_ro()
-xs_nc = xf_nc()
-xs_no = xf_no()
 xs_rc_tip = xf_rc_tip()
 
 xs_sc_heater_metal = xf_sc_heater_metal()
@@ -194,20 +167,11 @@ _settings_rc = dict(
 _settings_ro = dict(
     straight="straight_ro", cross_section=xs_ro, bend="bend_ro", taper="taper_ro"
 )
-_settings_nc = dict(
-    straight="straight_nc", cross_section=xs_nc, bend="bend_nc", taper="taper_nc"
-)
-_settings_no = dict(
-    straight="straight_no", cross_section=xs_no, bend="bend_no", taper="taper_no"
-)
-
 
 get_route_sc = partial(gf.routing.get_route, **_settings_sc)
 get_route_so = partial(gf.routing.get_route, **_settings_so)
 get_route_rc = partial(gf.routing.get_route, **_settings_rc)
 get_route_ro = partial(gf.routing.get_route, **_settings_ro)
-get_route_nc = partial(gf.routing.get_route, **_settings_nc)
-get_route_no = partial(gf.routing.get_route, **_settings_no)
 
 get_route_from_steps_sc = partial(
     gf.routing.get_route_from_steps,
@@ -225,22 +189,11 @@ get_route_from_steps_ro = partial(
     gf.routing.get_route_from_steps,
     **_settings_ro,
 )
-get_route_from_steps_nc = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_nc,
-)
-get_route_from_steps_no = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_no,
-)
-
 
 get_bundle_sc = partial(gf.routing.get_bundle, **_settings_sc)
 get_bundle_so = partial(gf.routing.get_bundle, **_settings_so)
 get_bundle_rc = partial(gf.routing.get_bundle, **_settings_rc)
 get_bundle_ro = partial(gf.routing.get_bundle, **_settings_ro)
-get_bundle_nc = partial(gf.routing.get_bundle, **_settings_nc)
-get_bundle_no = partial(gf.routing.get_bundle, **_settings_no)
 
 get_bundle_from_steps_sc = partial(
     gf.routing.get_bundle_from_steps,
@@ -258,14 +211,6 @@ get_bundle_from_steps_ro = partial(
     gf.routing.get_bundle_from_steps,
     **_settings_ro,
 )
-get_bundle_from_steps_nc = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_nc,
-)
-get_bundle_from_steps_no = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_no,
-)
 
 
 routing_strategies = dict(
@@ -273,26 +218,18 @@ routing_strategies = dict(
     get_route_so=get_route_so,
     get_route_rc=get_route_rc,
     get_route_ro=get_route_ro,
-    get_route_nc=get_route_nc,
-    get_route_no=get_route_no,
     get_route_from_steps_sc=get_route_from_steps_sc,
     get_route_from_steps_so=get_route_from_steps_so,
     get_route_from_steps_rc=get_route_from_steps_rc,
     get_route_from_steps_ro=get_route_from_steps_ro,
-    get_route_from_steps_nc=get_route_from_steps_nc,
-    get_route_from_steps_no=get_route_from_steps_no,
     get_bundle_sc=get_bundle_sc,
     get_bundle_so=get_bundle_so,
     get_bundle_rc=get_bundle_rc,
     get_bundle_ro=get_bundle_ro,
-    get_bundle_nc=get_bundle_nc,
-    get_bundle_no=get_bundle_no,
     get_bundle_from_steps_sc=get_bundle_from_steps_sc,
     get_bundle_from_steps_so=get_bundle_from_steps_so,
     get_bundle_from_steps_rc=get_bundle_from_steps_rc,
     get_bundle_from_steps_ro=get_bundle_from_steps_ro,
-    get_bundle_from_steps_nc=get_bundle_from_steps_nc,
-    get_bundle_from_steps_no=get_bundle_from_steps_no,
 )
 
 
@@ -305,7 +242,7 @@ if __name__ == "__main__":
     connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 
     t = KLayoutTechnology(
-        name="Cornerstone",
+        name="Cornerstone_si220",
         layer_map=dict(LAYER),
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
@@ -315,4 +252,3 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     print(xs_rc.sections)
-    print(type(LAYER.NITRIDE), LAYER.NITRIDE)

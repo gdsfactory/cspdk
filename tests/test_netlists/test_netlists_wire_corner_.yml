@@ -1,6 +1,0 @@
-connections: {}
-instances: {}
-name: wire_corner$1
-placements: {}
-ports:
-  e1: e2
