@@ -1,0 +1,12 @@
+function: taper_ro
+info:
+  length: 10.0
+  width1: 0.5
+  width2: 0.5
+module: cspdk.si220.cells
+name: taper_ro
+settings:
+  length: 10.0
+  port: null
+  width1: 0.5
+  width2: null

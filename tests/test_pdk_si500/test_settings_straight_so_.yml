@@ -1,0 +1,12 @@
+function: straight_so
+info:
+  length: 10.0
+  route_info_length: 10.0
+  route_info_type: xs_so
+  route_info_weight: 10.0
+  route_info_xs_so_length: 10.0
+  width: 0.4
+module: cspdk.si220.cells
+name: straight_so
+settings:
+  length: 10.0
