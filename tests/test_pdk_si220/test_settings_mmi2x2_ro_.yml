@@ -1,0 +1,5 @@
+function: mmi2x2_ro
+info: {}
+module: cspdk.si220.cells
+name: mmi2x2_ro
+settings: {}

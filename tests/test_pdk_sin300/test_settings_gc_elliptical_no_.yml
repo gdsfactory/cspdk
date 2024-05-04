@@ -1,0 +1,13 @@
+function: gc_elliptical_no
+info:
+  period: 1.153
+  polarization: te
+  wavelength: 1.31
+module: cspdk.sin300.cells
+name: gc_elliptical_no
+settings:
+  cross_section: xs_no
+  fiber_angle: 20
+  grating_line_width: 0.343
+  neff: 1.63
+  wavelength: 1.31

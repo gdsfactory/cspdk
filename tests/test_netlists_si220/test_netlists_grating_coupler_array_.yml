@@ -1,0 +1,107 @@
+connections: {}
+instances:
+  gc_rectangular_sc_1:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_sc_2:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_sc_3:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_sc_4:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_sc_5:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_sc_6:
+    component: gc_rectangular_sc
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+name: grating_coupler_array
+placements:
+  gc_rectangular_sc_1:
+    mirror: 0
+    rotation: 0
+    x: -193.743
+    y: 0.0
+  gc_rectangular_sc_2:
+    mirror: 0
+    rotation: 0
+    x: -66.743
+    y: 0.0
+  gc_rectangular_sc_3:
+    mirror: 0
+    rotation: 0
+    x: 60.257
+    y: 0.0
+  gc_rectangular_sc_4:
+    mirror: 0
+    rotation: 0
+    x: 187.257
+    y: 0.0
+  gc_rectangular_sc_5:
+    mirror: 0
+    rotation: 0
+    x: 314.257
+    y: 0.0
+  gc_rectangular_sc_6:
+    mirror: 0
+    rotation: 0
+    x: 441.257
+    y: 0.0
+ports:
+  o1: gc_rectangular_sc_1,o1
+  o2: gc_rectangular_sc_2,o1
+  o3: gc_rectangular_sc_3,o1
+  o4: gc_rectangular_sc_4,o1
+  o5: gc_rectangular_sc_5,o1
+  o6: gc_rectangular_sc_6,o1
+warnings:
+  vertical_te:
+    unconnected_ports:
+    - message: 6 unconnected vertical_te ports!
+      ports:
+      - gc_rectangular_sc_1,o2
+      - gc_rectangular_sc_2,o2
+      - gc_rectangular_sc_3,o2
+      - gc_rectangular_sc_4,o2
+      - gc_rectangular_sc_5,o2
+      - gc_rectangular_sc_6,o2
+      values:
+      - - 174.921
+        - 0.0
+      - - 301.921
+        - 0.0
+      - - 428.921
+        - 0.0
+      - - 555.921
+        - 0.0
+      - - 682.921
+        - 0.0
+      - - 809.921
+        - 0.0

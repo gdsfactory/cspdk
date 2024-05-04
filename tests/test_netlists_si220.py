@@ -8,6 +8,12 @@ from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si220 import PDK
 
+
+@pytest.fixture(autouse=True)
+def activate_pdk():
+    PDK.activate()
+
+
 cells = PDK.cells
 skip_test = set()
 cell_names = cells.keys() - skip_test

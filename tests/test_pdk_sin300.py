@@ -6,10 +6,14 @@ from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.sin300 import PDK
 
+
+@pytest.fixture(autouse=True)
+def activate_pdk():
+    PDK.activate()
+
+
 cells = PDK.cells
-
 skip_test = {"import_gds"}
-
 cell_names = set(cells.keys()) - set(skip_test)
 cell_names = [name for name in cell_names if not name.startswith("_")]
 dirpath = (

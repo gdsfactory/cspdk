@@ -1,0 +1,5 @@
+function: die_no
+info: {}
+module: cspdk.sin300.cells
+name: die_no
+settings: {}

@@ -655,8 +655,6 @@ def gc_elliptical_no(
     Returns:
         gf.Component: the component
     """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_so"
     return _gc_elliptical(
         grating_line_width=grating_line_width,
         fiber_angle=fiber_angle,
