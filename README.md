@@ -21,6 +21,8 @@ pip install cspdk --upgrade
 
 Then you need to restart Klayout to make sure the new technology installed appears.
 
+You can download the [code](https://github.com/gdsfactory/cspdk/archive/refs/heads/main.zip) and examples.
+
 ### Installation for developers
 
 For developers you need to `git clone` the GitHub repository, fork it, git add, git commit, git push and merge request your changes.
