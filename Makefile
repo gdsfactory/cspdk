@@ -22,6 +22,8 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs:
+	python .github/write_cells_si220.py
+	python .github/write_cells_sin300.py
 	jb build docs
 
 .PHONY: drc doc docs
