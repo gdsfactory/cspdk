@@ -12,5 +12,6 @@ parts:
   - caption: Reference
     chapters:
       - file: cells_si220
+      - file: cells_si500
       - file: cells_sin300
       - file: changelog

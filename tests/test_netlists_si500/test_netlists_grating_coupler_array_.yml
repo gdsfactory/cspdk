@@ -1,0 +1,107 @@
+connections: {}
+instances:
+  gc_rectangular_rc_1:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_rc_2:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_rc_3:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_rc_4:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_rc_5:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+  gc_rectangular_rc_6:
+    component: gc_rectangular_rc
+    info:
+      fiber_angle: 10.0
+      polarization: te
+      wavelength: 1.55
+    settings: {}
+name: grating_coupler_array
+placements:
+  gc_rectangular_rc_1:
+    mirror: 0
+    rotation: 0
+    x: -194.57
+    y: 0.0
+  gc_rectangular_rc_2:
+    mirror: 0
+    rotation: 0
+    x: -67.57
+    y: 0.0
+  gc_rectangular_rc_3:
+    mirror: 0
+    rotation: 0
+    x: 59.43
+    y: 0.0
+  gc_rectangular_rc_4:
+    mirror: 0
+    rotation: 0
+    x: 186.43
+    y: 0.0
+  gc_rectangular_rc_5:
+    mirror: 0
+    rotation: 0
+    x: 313.43
+    y: 0.0
+  gc_rectangular_rc_6:
+    mirror: 0
+    rotation: 0
+    x: 440.43
+    y: 0.0
+ports:
+  o1: gc_rectangular_rc_1,o1
+  o2: gc_rectangular_rc_2,o1
+  o3: gc_rectangular_rc_3,o1
+  o4: gc_rectangular_rc_4,o1
+  o5: gc_rectangular_rc_5,o1
+  o6: gc_rectangular_rc_6,o1
+warnings:
+  vertical_te:
+    unconnected_ports:
+    - message: 6 unconnected vertical_te ports!
+      ports:
+      - gc_rectangular_rc_1,o2
+      - gc_rectangular_rc_2,o2
+      - gc_rectangular_rc_3,o2
+      - gc_rectangular_rc_4,o2
+      - gc_rectangular_rc_5,o2
+      - gc_rectangular_rc_6,o2
+      values:
+      - - 172.3165
+        - 0.0
+      - - 299.3165
+        - 0.0
+      - - 426.3165
+        - 0.0
+      - - 553.3165
+        - 0.0
+      - - 680.3165
+        - 0.0
+      - - 807.3165
+        - 0.0

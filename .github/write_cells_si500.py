@@ -1,9 +1,9 @@
 import inspect
 
-from cspdk.si220 import _cells as cells
-from cspdk.si220.config import PATH
+from cspdk.si500 import _cells as cells
+from cspdk.si500.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_si220.rst"
+filepath = PATH.repo / "docs" / "cells_si500.rst"
 
 skip = {}
 
@@ -15,7 +15,7 @@ with open(filepath, "w+") as f:
     f.write(
         """
 
-Cells Si SOI 220nm
+Cells Si SOI 500nm
 =============================
 """
     )
@@ -40,7 +40,7 @@ Cells Si SOI 220nm
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si500.cells.{name}
 
 """
             )
@@ -51,14 +51,14 @@ Cells Si SOI 220nm
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si500.cells.{name}
 
 .. plot::
   :include-source:
 
   import cspdk
 
-  c = cspdk.si220.cells.{name}({kwargs})
+  c = cspdk.si500.cells.{name}({kwargs})
   c.plot()
 
 """
