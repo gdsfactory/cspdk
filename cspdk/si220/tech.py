@@ -27,6 +27,11 @@ class LayerMapCornerstone(LayerMap):
     LABEL_SETTINGS: Layer = (100, 0)
     LABEL_INSTANCE: Layer = (101, 0)
 
+    STRIP_INTENT: Layer = (200, 1)
+    RIB_INTENT: Layer = (201, 1)
+    NITRIDE_INTENT: Layer = (202, 1)
+    PAD_INTENT: Layer = (203, 1)
+
 
 LAYER = LayerMapCornerstone()
 
@@ -100,36 +105,74 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 cladding_layers_rib = (LAYER.SLAB,)
 cladding_offsets_rib = (5,)
 
-xf_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
+
+def _create_cross_section_function(
+    intent_layer: Layer,
+    physical_layer: Layer,
+    default_width: float,
+    other_section_settings: list[dict] | None = None,
+    base_function: callable = gf.cross_section.strip,
+    **kwargs,
+):
+    def cs_func(layer=intent_layer, width=default_width):
+        physical_layer_section = gf.Section(
+            width=width, layer=physical_layer, name="wg_physical"
+        )
+        if other_section_settings:
+            other_sections = [
+                gf.Section(**section_settings)
+                for section_settings in other_section_settings
+            ]
+        else:
+            other_sections = []
+        sections = [physical_layer_section] + other_sections
+        return base_function(width=width, layer=layer, sections=sections, **kwargs)
+
+    return cs_func
+
+
+xf_sc = _create_cross_section_function(
+    intent_layer=LAYER.STRIP_INTENT,
+    physical_layer=LAYER.WG,
+    default_width=0.45,
+)
+
 xf_so = partial(xf_sc, width=0.40)
 
-xf_rc = partial(
-    gf.cross_section.strip,
-    layer=LAYER.WG,
-    width=0.45,
-    sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
+xf_rc = _create_cross_section_function(
+    intent_layer=LAYER.RIB_INTENT,
+    physical_layer=LAYER.WG,
+    default_width=0.45,
+    other_section_settings=[
+        dict(width=10.45, layer="SLAB", name="slab", simplify=50 * nm)
+    ],
     radius=25,
     radius_min=25,
 )
 xf_ro = partial(xf_rc, width=0.40)
-xf_rc_tip = partial(
-    gf.cross_section.strip,
-    sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
+xf_rc_tip = _create_cross_section_function(
+    intent_layer=LAYER.STRIP_INTENT,
+    physical_layer=LAYER.WG,
+    default_width=0.45,
+    other_section_settings=[dict(width=0.2, layer="SLAB", name="slab")],
 )
 
 
-xf_sc_heater_metal = partial(
-    gf.cross_section.strip_heater_metal,
-    layer=LAYER.WG,
-    heater_width=2.5,
+xf_sc_heater_metal = _create_cross_section_function(
+    intent_layer=LAYER.STRIP_INTENT,
+    physical_layer=LAYER.WG,
+    default_width=0.45,
+    base_function=gf.cross_section.strip_heater_metal,
     layer_heater=LAYER.HEATER,
-    width=0.45,
+    heater_width=2.5,
 )
 
-metal_routing = partial(
-    gf.cross_section.cross_section,
-    layer=LAYER.PAD,
-    width=10.0,
+
+metal_routing = _create_cross_section_function(
+    intent_layer=LAYER.PAD_INTENT,
+    physical_layer=LAYER.PAD,
+    default_width=10.0,
+    base_function=gf.cross_section.cross_section,
     port_names=gf.cross_section.port_names_electrical,
     port_types=gf.cross_section.port_types_electrical,
     radius=None,
@@ -151,6 +194,10 @@ xs_heater_metal = heater_metal()
 
 cross_sections = get_cross_sections(sys.modules[__name__])
 
+# def get_layer_transitions():
+#     lt = {
+
+#     }
 ############################
 # Routing functions
 ############################

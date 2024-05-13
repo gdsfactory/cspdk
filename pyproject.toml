@@ -37,6 +37,11 @@ docs = [
   "matplotlib",
   "jupyter-book==1.0.0"
 ]
+sim = [
+  "tidy3d",
+  "meshio",
+  "meshwell"
+]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
