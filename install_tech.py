@@ -27,7 +27,7 @@ def make_link(src, dest, overwrite: bool = True) -> None:
     try:
         os.symlink(src, dest, target_is_directory=True)
     except OSError:
-        shutil.copy(src, dest)
+        shutil.copytree(src, dest)
     print("link made:")
     print(f"From: {src}")
     print(f"To:   {dest}")
