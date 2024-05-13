@@ -1,4 +1,4 @@
-# CornerStone PDK 0.8.1
+# CornerStone PDK 0.8.2
 
 ![](https://i.imgur.com/V5Ukc6j.png)
 
