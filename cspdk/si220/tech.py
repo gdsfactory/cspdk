@@ -249,6 +249,3 @@ if __name__ == "__main__":
         connectivity=connectivity,
     )
     t.write_tech(tech_dir=PATH.klayout)
-
-if __name__ == "__main__":
-    print(xs_rc.sections)
