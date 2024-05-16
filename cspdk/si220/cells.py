@@ -818,7 +818,7 @@ def _gc_rectangular(
     slab_xmin: float = -1.0,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
-    c = gf.components.grating_coupler_rectangular(
+    return gf.components.grating_coupler_rectangular(
         n_periods=n_periods,
         fill_factor=fill_factor,
         length_taper=length_taper,
@@ -834,7 +834,6 @@ def _gc_rectangular(
         slab_xmin=slab_xmin,
         cross_section=cross_section,
     ).flatten()
-    return c
 
 
 @gf.cell
@@ -1479,8 +1478,8 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    # c = die_sc()
-    c = crossing_sc()
+    c = die_sc()
+    # c = crossing_sc()
     c.show()
     # for name, func in list(globals().items()):
     #     if not callable(func):
