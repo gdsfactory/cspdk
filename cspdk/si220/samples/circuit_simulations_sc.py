@@ -5,7 +5,7 @@ import sax
 from cspdk.si220 import PDK, cells
 
 if __name__ == "__main__":
-    c = cells.mzi_sc(delta_length=100)
+    c = cells.mzi_sc(delta_length=50)
     c.show()
     c.plot_netlist()
     netlist = c.get_netlist()
