@@ -1038,6 +1038,7 @@ def mzi_sc(
     length_y: float = 2.0,
     length_x: float = 0.1,
     add_electrical_ports_bot: bool = True,
+    cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
 ) -> gf.Component:
     """A Mach-Zehnder Interferometer (MZI) in strip, c-band.
@@ -1051,8 +1052,6 @@ def mzi_sc(
     Returns:
         gf.Component: the component
     """
-    if "cross_section" not in kwargs:
-        kwargs["cross_section"] = "xs_sc"
     return _mzi(
         delta_length=delta_length,
         length_y=length_y,
@@ -1062,6 +1061,7 @@ def mzi_sc(
         bend=bend_sc,
         combiner=mmi1x2_sc,
         splitter=mmi1x2_sc,
+        cross_section=cross_section,
         **kwargs,
     )
 
@@ -1478,7 +1478,7 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = die_sc()
+    c = mzi_sc()
     # c = crossing_sc()
     c.show()
     # for name, func in list(globals().items()):

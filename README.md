@@ -1,8 +1,8 @@
-# CornerStone PDK 0.8.2
+# CORNERSTONE PDK 0.8.2
 
 ![](https://i.imgur.com/V5Ukc6j.png)
 
-[CornerStone](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
+[CORNERSTONE](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
 
 ## Installation
 
