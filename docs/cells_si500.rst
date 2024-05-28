@@ -44,7 +44,7 @@ bend_s
 
   import cspdk
 
-  c = cspdk.si500.cells.bend_s(size=(11.0, 1.8), cross_section='xs_sc')
+  c = cspdk.si500.cells.bend_s(size=(11.0, 1.8), cross_section='xs_rc')
   c.plot()
 
 
@@ -60,21 +60,6 @@ coupler_rc
   import cspdk
 
   c = cspdk.si500.cells.coupler_rc(gap=0.236, length=20.0, dx=10.0, dy=4.0)
-  c.plot()
-
-
-
-crossing_rc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si500.cells.crossing_rc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si500.cells.crossing_rc()
   c.plot()
 
 
