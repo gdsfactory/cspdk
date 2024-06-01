@@ -5,7 +5,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
 from cspdk.sin300.config import PATH
-from cspdk.sin300.tech import LAYER, xs_nc, xs_no
+from cspdk.sin300.tech import LAYER, TECH
 
 ################
 # Straights
@@ -128,7 +128,7 @@ def _float(x: Any) -> float:
 
 @gf.cell
 def bend_nc(
-    radius: float = _float(xs_nc.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_nc, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in nitride, c-band.
 
@@ -150,7 +150,7 @@ def bend_nc(
 
 @gf.cell
 def bend_no(
-    radius: float = _float(xs_no.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_no, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in nitride, o-band.
 

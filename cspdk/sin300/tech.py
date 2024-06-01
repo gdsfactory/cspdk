@@ -30,7 +30,15 @@ class LayerMapCornerstone(LayerMap):
     LABEL_INSTANCE: Layer = (101, 0)
 
 
-LAYER = LayerMapCornerstone()
+LAYER = LayerMapCornerstone
+
+
+class Tech:
+    radius_nc = 25
+    radius_no = 25
+
+
+TECH = Tech()
 
 
 def get_layer_stack(
@@ -97,10 +105,10 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 ############################
 # Cross-sections functions
 ############################
-xf_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
-xf_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
+xs_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
+xs_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
 
-xf_nc_heater_metal = partial(
+xs_nc_heater_metal = partial(
     gf.cross_section.strip_heater_metal,
     layer=LAYER.NITRIDE,
     heater_width=2.5,
@@ -116,17 +124,7 @@ metal_routing = partial(
     port_types=gf.cross_section.port_types_electrical,
     radius=None,
 )
-heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
-
-############################
-# Cross-sections
-############################
-xs_nc = xf_nc()
-xs_no = xf_no()
-
-xs_sc_heater_metal = xf_nc_heater_metal()
-xs_metal_routing = metal_routing()
-xs_heater_metal = heater_metal()
+xs_heater_metal = heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
 
 cross_sections = get_cross_sections(sys.modules[__name__])
 
@@ -134,46 +132,25 @@ cross_sections = get_cross_sections(sys.modules[__name__])
 # Routing functions
 ############################
 _settings_nc = dict(
-    straight="straight_nc", cross_section=xs_nc, bend="bend_nc", taper="taper_nc"
+    straight="straight_nc", cross_section="xs_nc", bend="bend_nc", taper="taper_nc"
 )
 _settings_no = dict(
-    straight="straight_no", cross_section=xs_no, bend="bend_no", taper="taper_no"
+    straight="straight_no", cross_section="xs_no", bend="bend_no", taper="taper_no"
 )
 
-get_route_nc = partial(gf.routing.get_route, **_settings_nc)
-get_route_no = partial(gf.routing.get_route, **_settings_no)
+route_single_nc = partial(gf.routing.route_single, **_settings_nc)
+route_single_no = partial(gf.routing.route_single, **_settings_no)
 
-get_route_from_steps_nc = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_nc,
-)
-get_route_from_steps_no = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_no,
-)
 
-get_bundle_nc = partial(gf.routing.get_bundle, **_settings_nc)
-get_bundle_no = partial(gf.routing.get_bundle, **_settings_no)
-
-get_bundle_from_steps_nc = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_nc,
-)
-get_bundle_from_steps_no = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_no,
-)
+route_bundle_nc = partial(gf.routing.route_bundle, **_settings_nc)
+route_bundle_no = partial(gf.routing.route_bundle, **_settings_no)
 
 
 routing_strategies = dict(
-    get_route_nc=get_route_nc,
-    get_route_no=get_route_no,
-    get_route_from_steps_nc=get_route_from_steps_nc,
-    get_route_from_steps_no=get_route_from_steps_no,
-    get_bundle_nc=get_bundle_nc,
-    get_bundle_no=get_bundle_no,
-    get_bundle_from_steps_nc=get_bundle_from_steps_nc,
-    get_bundle_from_steps_no=get_bundle_from_steps_no,
+    route_single_nc=route_single_nc,
+    route_single_no=route_single_no,
+    route_bundle_nc=route_bundle_nc,
+    route_bundle_no=route_bundle_no,
 )
 
 
@@ -187,7 +164,7 @@ if __name__ == "__main__":
 
     t = KLayoutTechnology(
         name="Cornerstone_sin300",
-        layer_map=dict(LAYER),
+        layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
         connectivity=connectivity,

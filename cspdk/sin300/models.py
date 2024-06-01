@@ -7,8 +7,6 @@ from functools import partial
 import gplugins.sax.models as sm
 import jax.numpy as jnp
 import sax
-from gdsfactory.pdk import get_cross_section_name
-from gdsfactory.typings import CrossSectionSpec
 from gplugins.sax.models import bend as __bend
 from gplugins.sax.models import straight as __straight
 from numpy.typing import NDArray
@@ -28,9 +26,9 @@ def _straight(
     wl: Float = 1.55,
     length: Float = 10.0,
     loss: Float = 0.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: str = "xs_sc",
 ) -> sax.SDict:
-    if get_cross_section_name(cross_section).endswith("nc"):
+    if cross_section.endswith("nc"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -39,7 +37,7 @@ def _straight(
             neff=1.6,
             ng=1.94,
         )
-    elif get_cross_section_name(cross_section).endswith("no"):
+    elif cross_section.endswith("no"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore

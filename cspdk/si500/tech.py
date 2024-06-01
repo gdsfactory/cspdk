@@ -28,7 +28,15 @@ class LayerMapCornerstone(LayerMap):
     LABEL_INSTANCE: Layer = (101, 0)
 
 
-LAYER = LayerMapCornerstone()
+LAYER = LayerMapCornerstone
+
+
+class Tech:
+    radius_rc = 25
+    radius_ro = 25
+
+
+TECH = Tech()
 
 
 def get_layer_stack(
@@ -100,7 +108,7 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 cladding_layers_rib = (LAYER.SLAB,)
 cladding_offsets_rib = (5,)
 
-xf_rc = partial(
+xs_rc = partial(
     gf.cross_section.strip,
     layer=LAYER.WG,
     width=0.45,
@@ -108,8 +116,8 @@ xf_rc = partial(
     radius=25,
     radius_min=25,
 )
-xf_ro = partial(xf_rc, width=0.40)
-xf_rc_tip = partial(
+xs_ro = partial(xs_rc, width=0.40)
+xs_rc_tip = partial(
     gf.cross_section.strip,
     sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
 )
@@ -123,15 +131,7 @@ metal_routing = partial(
     port_types=gf.cross_section.port_types_electrical,
     radius=None,
 )
-heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
-
-############################
-# Cross-sections
-############################
-xs_rc = xf_rc()
-xs_rc_tip = xf_rc_tip()
-xs_metal_routing = metal_routing()
-xs_heater_metal = heater_metal()
+xs_heater_metal = heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
 cross_sections = get_cross_sections(sys.modules[__name__])
 
 ############################
@@ -139,27 +139,15 @@ cross_sections = get_cross_sections(sys.modules[__name__])
 ############################
 
 _settings_rc = dict(
-    straight="straight_rc", cross_section=xs_rc, bend="bend_rc", taper="taper_rc"
+    straight="straight_rc", cross_section="xs_rc", bend="bend_rc", taper="taper_rc"
 )
 
-get_route_rc = partial(gf.routing.get_route, **_settings_rc)
-
-get_route_from_steps_rc = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_rc,
-)
-get_bundle_rc = partial(gf.routing.get_bundle, **_settings_rc)
-
-get_bundle_from_steps_rc = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_rc,
-)
+route_single_rc = partial(gf.routing.route_single, **_settings_rc)
+route_bundle_rc = partial(gf.routing.route_bundle, **_settings_rc)
 
 routing_strategies = dict(
-    get_route_rc=get_route_rc,
-    get_route_from_steps_rc=get_route_from_steps_rc,
-    get_bundle_rc=get_bundle_rc,
-    get_bundle_from_steps_rc=get_bundle_from_steps_rc,
+    route_single_rc=route_single_rc,
+    route_bundle_rc=route_bundle_rc,
 )
 
 
@@ -173,7 +161,7 @@ if __name__ == "__main__":
 
     t = KLayoutTechnology(
         name="Cornerstone_si500",
-        layer_map=dict(LAYER),
+        layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
         connectivity=connectivity,

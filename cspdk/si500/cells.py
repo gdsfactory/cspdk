@@ -5,7 +5,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
 from cspdk.si500.config import PATH
-from cspdk.si500.tech import LAYER, xs_rc
+from cspdk.si500.tech import LAYER, TECH
 
 ################
 # Straights
@@ -110,7 +110,7 @@ def _float(x: Any) -> float:
 
 @gf.cell
 def bend_rc(
-    radius: float = _float(xs_rc.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_rc, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in rib, c-band.
 
@@ -369,7 +369,7 @@ def _gc_rectangular(
         fill_factor=fill_factor,
         length_taper=length_taper,
         fiber_angle=fiber_angle,
-        layer_grating=layer_grating,
+        layer=layer_grating,
         layer_slab=layer_slab,
         slab_offset=slab_offset,
         period=period,
@@ -379,7 +379,7 @@ def _gc_rectangular(
         taper=taper,
         slab_xmin=slab_xmin,
         cross_section=cross_section,
-    ).flatten()
+    )
 
 
 @gf.cell
@@ -559,8 +559,6 @@ def rectangle(
     centered: bool = False,
     port_type: str = "electrical",
     port_orientations: tuple[float, float, float, float] = (180.0, 90.0, 0.0, -90.0),
-    round_corners_east_west: bool = False,
-    round_corners_north_south: bool = False,
 ) -> gf.Component:
     """A simple rectangle on the given layer.
 
@@ -570,8 +568,6 @@ def rectangle(
         centered (bool, optional): if true, the rectangle's origin will be placed at the center (otherwise it will be bottom-left). Defaults to False.
         port_type (str, optional): the port type for ports automatically added to edges of the rectangle. Defaults to "electrical".
         port_orientations (tuple[float, float, float, float], optional): orientations of the ports to be automatically added. Defaults to (180.0, 90.0, 0.0, -90.0).
-        round_corners_east_west (bool, optional): if True, circles are added to the east and west edges, forming a horizontal pill shape. Defaults to False.
-        round_corners_north_south (bool, optional): if True, circles are added to the north and south edges, forming a vertical pill shape. Defaults to False.
 
     Returns:
         gf.Component: the component
@@ -582,8 +578,6 @@ def rectangle(
         centered=centered,
         port_type=port_type,
         port_orientations=port_orientations,
-        round_corners_east_west=round_corners_east_west,
-        round_corners_north_south=round_corners_north_south,
     )
 
 
@@ -595,7 +589,6 @@ def grating_coupler_array(
     rotation: float = 0.0,
     with_loopback: bool = False,
     bend: ComponentSpec = _bend,
-    grating_coupler_spacing: float = 0.0,
     grating_coupler: ComponentSpec = gc_rectangular_rc,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
@@ -608,7 +601,7 @@ def grating_coupler_array(
         rotation (float, optional): rotation of the grating couplers, in degrees. Defaults to 0.0.
         with_loopback (bool, optional): if True, adds a loopback. Defaults to False.
         bend (ComponentSpec, optional): the bend to be used for the loopback. Defaults to _bend.
-        grating_coupler_spacing (float, optional): the spacing to be used in the loopback. Defaults to 0.0.
+        pitch (float, optional): the spacing to be used in the loopback. Defaults to 0.0.
         grating_coupler (ComponentSpec, optional): the grating coupler component to use.
         cross_section (CrossSectionSpec, optional): the cross section to be used for routing in the loopback.
 
@@ -621,8 +614,6 @@ def grating_coupler_array(
         port_name=port_name,
         rotation=rotation,
         with_loopback=with_loopback,
-        bend=bend,
-        grating_coupler_spacing=grating_coupler_spacing,
         grating_coupler=grating_coupler,
         cross_section=cross_section,
     )

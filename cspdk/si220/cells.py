@@ -5,7 +5,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
 from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER, xs_rc, xs_ro, xs_sc, xs_so
+from cspdk.si220.tech import LAYER, TECH
 
 ################
 # Straights
@@ -163,9 +163,7 @@ def _float(x: Any) -> float:
 
 
 @gf.cell
-def bend_sc(
-    radius: float = _float(xs_sc.radius), angle: float = 90.0, **kwargs
-) -> gf.Component:
+def bend_sc(radius: float = 5, angle: float = 90.0, **kwargs) -> gf.Component:
     """An euler bend in strip, c-band.
 
     Args:
@@ -186,7 +184,7 @@ def bend_sc(
 
 @gf.cell
 def bend_so(
-    radius: float = _float(xs_so.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_so, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in strip, o-band.
 
@@ -208,7 +206,7 @@ def bend_so(
 
 @gf.cell
 def bend_rc(
-    radius: float = _float(xs_rc.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_rc, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in rib, c-band.
 
@@ -230,7 +228,7 @@ def bend_rc(
 
 @gf.cell
 def bend_ro(
-    radius: float = _float(xs_ro.radius), angle: float = 90.0, **kwargs
+    radius: float = TECH.radius_ro, angle: float = 90.0, **kwargs
 ) -> gf.Component:
     """An euler bend in rib, o-band.
 
