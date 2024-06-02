@@ -1,5 +1,1299 @@
 connections: {}
-instances: {}
+instances:
+  _taper_L350_W0p45_W10_P_bd86be28_175000_0:
+    component: _taper
+    info:
+      length: 350
+      width1: 0.45
+      width2: 10
+    settings:
+      cross_section: xs_rc
+      length: 350
+      port_names:
+      - o1
+      - o2
+      port_types:
+      - optical
+      - optical
+      width1: 0.45
+      width2: 10
+      with_bbox: true
+      with_two_ports: true
+  rectangle_S0p285_10_L6__69aa653b_350142_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_350712_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_351282_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_351852_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_352422_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_352992_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_353562_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_354132_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_354702_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_355272_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_355842_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_356412_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_356982_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_357552_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_358122_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_358692_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_359262_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_359832_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_360402_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_360972_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_361542_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_362112_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_362682_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_363252_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_363822_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_364392_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_364962_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_365532_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_366102_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_366672_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_367242_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_367812_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_368382_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_368952_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_369522_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_370092_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_370662_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_371232_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_371802_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_372372_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_372942_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_373512_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_374082_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_374652_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_375222_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_375792_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_376362_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_376932_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_377502_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_378072_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_378642_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_379212_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_379782_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_380352_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_380922_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_381492_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_382062_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_382632_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_383202_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
+  rectangle_S0p285_10_L6__69aa653b_383772_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer:
+      - 6
+      - 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.285
+      - 10
 name: gc_rectangular_rc
-placements: {}
-ports: {}
+placements:
+  _taper_L350_W0p45_W10_P_bd86be28_175000_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  rectangle_S0p285_10_L6__69aa653b_350142_0:
+    mirror: false
+    rotation: 0
+    x: 349.999
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_350712_0:
+    mirror: false
+    rotation: 0
+    x: 350.569
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_351282_0:
+    mirror: false
+    rotation: 0
+    x: 351.139
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_351852_0:
+    mirror: false
+    rotation: 0
+    x: 351.709
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_352422_0:
+    mirror: false
+    rotation: 0
+    x: 352.279
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_352992_0:
+    mirror: false
+    rotation: 0
+    x: 352.849
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_353562_0:
+    mirror: false
+    rotation: 0
+    x: 353.419
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_354132_0:
+    mirror: false
+    rotation: 0
+    x: 353.989
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_354702_0:
+    mirror: false
+    rotation: 0
+    x: 354.559
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_355272_0:
+    mirror: false
+    rotation: 0
+    x: 355.129
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_355842_0:
+    mirror: false
+    rotation: 0
+    x: 355.699
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_356412_0:
+    mirror: false
+    rotation: 0
+    x: 356.269
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_356982_0:
+    mirror: false
+    rotation: 0
+    x: 356.839
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_357552_0:
+    mirror: false
+    rotation: 0
+    x: 357.409
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_358122_0:
+    mirror: false
+    rotation: 0
+    x: 357.979
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_358692_0:
+    mirror: false
+    rotation: 0
+    x: 358.549
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_359262_0:
+    mirror: false
+    rotation: 0
+    x: 359.119
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_359832_0:
+    mirror: false
+    rotation: 0
+    x: 359.689
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_360402_0:
+    mirror: false
+    rotation: 0
+    x: 360.259
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_360972_0:
+    mirror: false
+    rotation: 0
+    x: 360.829
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_361542_0:
+    mirror: false
+    rotation: 0
+    x: 361.399
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_362112_0:
+    mirror: false
+    rotation: 0
+    x: 361.969
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_362682_0:
+    mirror: false
+    rotation: 0
+    x: 362.539
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_363252_0:
+    mirror: false
+    rotation: 0
+    x: 363.109
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_363822_0:
+    mirror: false
+    rotation: 0
+    x: 363.679
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_364392_0:
+    mirror: false
+    rotation: 0
+    x: 364.249
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_364962_0:
+    mirror: false
+    rotation: 0
+    x: 364.819
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_365532_0:
+    mirror: false
+    rotation: 0
+    x: 365.389
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_366102_0:
+    mirror: false
+    rotation: 0
+    x: 365.959
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_366672_0:
+    mirror: false
+    rotation: 0
+    x: 366.529
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_367242_0:
+    mirror: false
+    rotation: 0
+    x: 367.099
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_367812_0:
+    mirror: false
+    rotation: 0
+    x: 367.669
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_368382_0:
+    mirror: false
+    rotation: 0
+    x: 368.239
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_368952_0:
+    mirror: false
+    rotation: 0
+    x: 368.809
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_369522_0:
+    mirror: false
+    rotation: 0
+    x: 369.379
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_370092_0:
+    mirror: false
+    rotation: 0
+    x: 369.949
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_370662_0:
+    mirror: false
+    rotation: 0
+    x: 370.519
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_371232_0:
+    mirror: false
+    rotation: 0
+    x: 371.089
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_371802_0:
+    mirror: false
+    rotation: 0
+    x: 371.659
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_372372_0:
+    mirror: false
+    rotation: 0
+    x: 372.229
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_372942_0:
+    mirror: false
+    rotation: 0
+    x: 372.799
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_373512_0:
+    mirror: false
+    rotation: 0
+    x: 373.369
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_374082_0:
+    mirror: false
+    rotation: 0
+    x: 373.939
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_374652_0:
+    mirror: false
+    rotation: 0
+    x: 374.509
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_375222_0:
+    mirror: false
+    rotation: 0
+    x: 375.079
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_375792_0:
+    mirror: false
+    rotation: 0
+    x: 375.649
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_376362_0:
+    mirror: false
+    rotation: 0
+    x: 376.219
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_376932_0:
+    mirror: false
+    rotation: 0
+    x: 376.789
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_377502_0:
+    mirror: false
+    rotation: 0
+    x: 377.359
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_378072_0:
+    mirror: false
+    rotation: 0
+    x: 377.929
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_378642_0:
+    mirror: false
+    rotation: 0
+    x: 378.499
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_379212_0:
+    mirror: false
+    rotation: 0
+    x: 379.069
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_379782_0:
+    mirror: false
+    rotation: 0
+    x: 379.639
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_380352_0:
+    mirror: false
+    rotation: 0
+    x: 380.209
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_380922_0:
+    mirror: false
+    rotation: 0
+    x: 380.779
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_381492_0:
+    mirror: false
+    rotation: 0
+    x: 381.349
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_382062_0:
+    mirror: false
+    rotation: 0
+    x: 381.919
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_382632_0:
+    mirror: false
+    rotation: 0
+    x: 382.489
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_383202_0:
+    mirror: false
+    rotation: 0
+    x: 383.059
+    y: -5
+  rectangle_S0p285_10_L6__69aa653b_383772_0:
+    mirror: false
+    rotation: 0
+    x: 383.629
+    y: -5
+ports:
+  o1: _taper_L350_W0p45_W10_P_bd86be28_175000_0,o1
+warnings:
+  optical:
+    unconnected_ports:
+    - message: 1 unconnected optical ports!
+      ports:
+      - _taper_L350_W0p45_W10_P_bd86be28_175000_0,o2
+      values:
+      - - 350000
+        - 0

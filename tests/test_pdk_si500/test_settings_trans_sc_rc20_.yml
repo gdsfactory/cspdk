@@ -1,11 +1,13 @@
-function: trans_sc_rc20
 info:
   length: 20
-  route_info_length: 20.0
-  route_info_type: xs_rc_tip
-  route_info_weight: 20.0
-  route_info_xs_rc_tip_length: 20.0
-  route_info_xs_rc_tip_taper_length: 20
-module: cspdk.si220.cells
-name: trans_sc_rc20
-settings: {}
+name: taper_strip_to_ridge_L2_86c6ede0
+settings:
+  cross_section: xs_sc
+  layer_slab: 1
+  layer_wg: 0
+  length: 20
+  use_slab_port: false
+  w_slab1: 0.2
+  w_slab2: 10.45
+  width1: 0.5
+  width2: 0.5

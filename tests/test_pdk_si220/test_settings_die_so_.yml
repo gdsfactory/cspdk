@@ -1,5 +1,13 @@
-function: die_so
 info: {}
-module: cspdk.si220.cells
-name: die_so
-settings: {}
+name: _die_S11470_4900_N14_N3_62a5c754
+settings:
+  cross_section: xs_so
+  grating_coupler: gc_rectangular_so
+  grating_pitch: 250
+  ngratings: 14
+  npads: 31
+  pad: pad
+  pad_pitch: 300
+  size:
+  - 11470
+  - 4900

@@ -11,6 +11,9 @@ tests/gds_ref/*.oas
 tests/gds_ref_si220/*.oas
 tests/gds_ref_si500/*.oas
 tests/gds_ref_sin300/*.oas
+cspdk/si220/gds/*.oas
+cspdk/si500/gds/*.oas
+cspdk/sin300/gds/*.oas
 
 
 tests/gds_ref/*.oas

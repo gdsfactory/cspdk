@@ -1,5 +1,3 @@
-function: crossing_so
 info: {}
-module: cspdk.si220.cells
 name: crossing_so
 settings: {}

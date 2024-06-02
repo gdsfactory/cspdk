@@ -1,11 +1,12 @@
-function: coupler_sc
 info:
   length: 10.192
-  min_bend_radius: 11.701
-module: cspdk.si220.cells
-name: coupler_sc
+  min_bend_radius: 11.695
+name: coupler_G0p234_L20_CSco_ef554ec6
 settings:
-  dx: 10.0
-  dy: 4.0
-  gap: 0.236
-  length: 20.0
+  coupler_straight: coupler_straight
+  coupler_symmetric: coupler_symmetric
+  cross_section: xs_sc
+  dx: 10
+  dy: 4
+  gap: 0.234
+  length: 20

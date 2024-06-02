@@ -29,7 +29,7 @@ placements:
 routes:
     electrical:
         settings:
-            cross_section: xs_metal_routing
+            cross_section: metal_routing
             separation: 20
             width: 10
             path_length_match_loops: 2

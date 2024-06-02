@@ -1,12 +1,12 @@
-function: straight_rc
 info:
-  length: 10.0
-  route_info_length: 10.0
-  route_info_type: xs_rc
-  route_info_weight: 10.0
-  route_info_xs_rc_length: 10.0
+  length: 10
+  route_info_length: 10
+  route_info_type: xs_94b23b70
+  route_info_weight: 10
+  route_info_xs_94b23b70_length: 10
   width: 0.45
-module: cspdk.si220.cells
-name: straight_rc
+name: straight_L10_N2_CSxs_rc
 settings:
-  length: 10.0
+  cross_section: xs_rc
+  length: 10
+  npoints: 2

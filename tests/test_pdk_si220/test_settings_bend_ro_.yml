@@ -1,17 +1,18 @@
-function: bend_ro
 info:
-  dy: 25.0
+  dy: 25
   length: 41.592
-  radius: 25.0
-  radius_min: 17.652
+  min_bend_radius: 17.652
+  radius: 25
   route_info_length: 41.592
-  route_info_n_bend_90: 1.0
-  route_info_type: xs_ro
+  route_info_min_bend_radius: 17.652
+  route_info_n_bend_90: 1
+  route_info_type: xs_60958123
   route_info_weight: 41.592
-  route_info_xs_ro_length: 41.592
-  width: 0.4
-module: cspdk.si220.cells
-name: bend_ro
+  route_info_xs_60958123_length: 41.592
+name: bend_euler_RNone_A90_P0_e45badad
 settings:
-  angle: 90.0
-  radius: 25.0
+  allow_min_radius_violation: false
+  angle: 90
+  cross_section: xs_ro
+  p: 0.5
+  with_arc_floorplan: true

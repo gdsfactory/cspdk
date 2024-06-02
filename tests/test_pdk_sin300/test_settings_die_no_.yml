@@ -1,5 +1,13 @@
-function: die_no
 info: {}
-module: cspdk.sin300.cells
-name: die_no
-settings: {}
+name: _die_S11470_4900_N14_N3_f54ca669
+settings:
+  cross_section: xs_no
+  grating_coupler: grating_coupler_rectangular_no
+  grating_pitch: 250
+  ngratings: 14
+  npads: 31
+  pad: pad
+  pad_pitch: 300
+  size:
+  - 11470
+  - 4900

@@ -1,5 +1,13 @@
-function: die_sc
 info: {}
-module: cspdk.si220.cells
-name: die_sc
-settings: {}
+name: _die_S11470_4900_N14_N3_db437099
+settings:
+  cross_section: xs_sc
+  grating_coupler: gc_rectangular_sc
+  grating_pitch: 250
+  ngratings: 14
+  npads: 31
+  pad: pad
+  pad_pitch: 300
+  size:
+  - 11470
+  - 4900

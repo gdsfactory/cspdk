@@ -129,7 +129,6 @@ xs_sc_heater_metal = partial(
     layer_heater=LAYER.HEATER,
     width=0.45,
 )
-
 metal_routing = partial(
     gf.cross_section.cross_section,
     layer=LAYER.PAD,
