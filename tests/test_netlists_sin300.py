@@ -39,8 +39,9 @@ def test_netlists(
     if check:
         data_regression.check(n)
 
+    c.delete()
     yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
-    c2 = gf.read.from_yaml(yaml_str, name=c.name)
+    c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
     d = jsondiff.diff(n, n2)
     assert len(d) == 0, d

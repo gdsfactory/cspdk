@@ -1132,7 +1132,7 @@ def mzi_ro(
 @gf.cell
 def pad(
     size: tuple[float, float] = (100.0, 100.0),
-    layer: LayerSpec = LAYER.PAD,
+    layer: LayerSpec = "PAD",
     bbox_layers: None = None,
     bbox_offsets: None = None,
     port_inclusion: float = 0.0,
@@ -1190,42 +1190,16 @@ def rectangle(
     )
 
 
-@gf.cell
-def grating_coupler_array(
-    pitch: float = 127.0,
-    n: int = 6,
-    port_name: str = "o1",
-    rotation: float = -90,
-    with_loopback: bool = False,
-    grating_coupler_spacing: float = 0.0,
-    grating_coupler: ComponentSpec = gc_rectangular_sc,
-    cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    """An array of grating couplers.
-
-    Args:
-        pitch (float, optional): the center-center pitch between grating couplers. Defaults to 127.0.
-        n (int, optional): the number of grating couplers to place. Defaults to 6.
-        port_name (str, optional): the routing port of the grating coupler to be placed. Defaults to "o1".
-        rotation (float, optional): rotation of the grating couplers, in degrees. Defaults to 0.0.
-        with_loopback (bool, optional): if True, adds a loopback. Defaults to False.
-        bend (ComponentSpec, optional): the bend to be used for the loopback. Defaults to _bend.
-        grating_coupler_spacing (float, optional): the spacing to be used in the loopback. Defaults to 0.0.
-        grating_coupler (ComponentSpec, optional): the grating coupler component to use.
-        cross_section (CrossSectionSpec, optional): the cross section to be used for routing in the loopback.
-
-    Returns:
-        gf.Component: the component
-    """
-    return gf.components.grating_coupler_array(
-        pitch=pitch,
-        n=n,
-        port_name=port_name,
-        rotation=rotation,
-        with_loopback=with_loopback,
-        grating_coupler=grating_coupler,
-        cross_section=cross_section,
-    )
+grating_coupler_array = partial(
+    gf.components.grating_coupler_array,
+    pitch=127,
+    n=6,
+    port_name="o1",
+    rotation=-90,
+    with_loopback=False,
+    grating_coupler="gc_rectangular_sc",
+    cross_section="xs_sc",
+)
 
 
 @gf.cell
@@ -1235,9 +1209,9 @@ def _die(
     npads: int = 31,
     grating_pitch: float = 250.0,
     pad_pitch: float = 300.0,
-    grating_coupler: ComponentSpec = gc_rectangular_sc,
+    grating_coupler: ComponentSpec = "gc_rectangular_sc",
     cross_section: CrossSectionSpec = "xs_sc",
-    pad: ComponentSpec = pad,
+    pad: ComponentSpec = "pad",
 ) -> gf.Component:
     c = gf.Component()
 
@@ -1257,24 +1231,24 @@ def _die(
     left = c << gca
     left.drotate(-90)
     left.dxmax = x0
-    left.dy = fp.y
+    left.dy = fp.dy
     c.add_ports(left.ports, prefix="W")
 
     right = c << gca
     right.drotate(+90)
     right.dxmax = -x0
-    right.dy = fp.y
+    right.dy = fp.dy
     c.add_ports(right.ports, prefix="E")
 
     # Add electrical ports
     x0 = -4615
     y0 = 2200
-    pad = pad()
+    pad = gf.get_component(pad)
 
     for i in range(npads):
         pad_ref = c << pad
         pad_ref.dxmin = x0 + i * pad_pitch
-        pad_ref.ymin = y0
+        pad_ref.dymin = y0
         c.add_port(
             name=f"N{i}",
             port=pad_ref.ports["e4"],
@@ -1424,8 +1398,8 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = die_sc()
-    # c = mzi_rc()
+    # c = die_sc()
+    c = mzi_rc()
     # c = trans_sc_rc20()
     # c = crossing_sc()
     c.show()
