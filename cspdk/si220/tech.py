@@ -106,8 +106,6 @@ TECH = Tech()
 ############################
 # Cross-sections functions
 ############################
-cladding_layers_rib = (LAYER.SLAB,)
-cladding_offsets_rib = (5,)
 
 xs_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
 xs_so = partial(xs_sc, width=0.40)
@@ -116,17 +114,12 @@ xs_rc = partial(
     gf.cross_section.strip,
     layer=LAYER.WG,
     width=0.45,
-    sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
-    # cladding_layers=(LAYER.SLAB,),
-    # cladding_offsets=(5,),
+    bbox_layers=(LAYER.SLAB,),
+    bbox_offsets=(5,),
     radius=25,
     radius_min=25,
 )
 xs_ro = partial(xs_rc, width=0.40)
-xs_rc_tip = partial(
-    gf.cross_section.strip,
-    sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
-)
 
 
 xs_sc_heater_metal = partial(

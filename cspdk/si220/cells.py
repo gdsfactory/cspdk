@@ -367,35 +367,15 @@ def taper_ro(
 
 
 @gf.cell
-def _taper_cross_section(
-    length: float = 10,
-    cross_section1: str = "xs_rc_tip",
-    cross_section2: str = "xs_rc",
-    linear: bool = True,
-    **kwargs,
-) -> gf.Component:
-    if linear:
-        kwargs["npoints"] = 2
-    return gf.components.taper_cross_section(
-        length=length,
-        cross_section1=cross_section1,
-        cross_section2=cross_section2,
-        linear=linear,
-        **kwargs,
-    ).flatten()
-
-
-@gf.cell
 def trans_sc_rc10() -> gf.Component:
-    """A 10um-long strip-rib transition in c-band.
-
-    Returns:
-        gf.Component: the component
-    """
-    return _taper_cross_section(
+    """A 10um-long strip-rib transition in c-band."""
+    return gf.c.taper_strip_to_ridge(
         length=10,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
+        w_slab1=0.2,
+        w_slab2=10.45,
+        cross_section="xs_sc",
+        layer_wg=LAYER.WG,
+        layer_slab=LAYER.SLAB,
     )
 
 
@@ -406,10 +386,13 @@ def trans_sc_rc20() -> gf.Component:
     Returns:
         gf.Component: the component
     """
-    return _taper_cross_section(
+    return gf.c.taper_strip_to_ridge(
         length=20,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
+        w_slab1=0.2,
+        w_slab2=10.45,
+        cross_section="xs_sc",
+        layer_wg=LAYER.WG,
+        layer_slab=LAYER.SLAB,
     )
 
 
@@ -420,10 +403,13 @@ def trans_sc_rc50() -> gf.Component:
     Returns:
         gf.Component: the component
     """
-    return _taper_cross_section(
+    return gf.c.taper_strip_to_ridge(
         length=50,
-        cross_section1="xs_rc_tip",
-        cross_section2="xs_rc",
+        w_slab1=0.2,
+        w_slab2=10.45,
+        cross_section="xs_sc",
+        layer_wg=LAYER.WG,
+        layer_slab=LAYER.SLAB,
     )
 
 
@@ -797,39 +783,23 @@ def coupler_ro(
 ##############################
 
 
-@gf.cell
-def _gc_rectangular(
-    n_periods: int = 30,
-    fill_factor: float = 0.5,
-    length_taper: float = 350.0,
-    fiber_angle: float = 10.0,
-    layer_grating: LayerSpec = LAYER.GRA,
-    layer_slab: LayerSpec = LAYER.WG,
-    slab_offset: float = 0.0,
-    period: float = 0.75,
-    width_grating: float = 11.0,
-    polarization: str = "te",
-    wavelength: float = 1.55,
-    taper: ComponentSpec = _taper,
-    slab_xmin: float = -1.0,
-    cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.components.grating_coupler_rectangular(
-        n_periods=n_periods,
-        fill_factor=fill_factor,
-        length_taper=length_taper,
-        fiber_angle=fiber_angle,
-        layer_grating=layer_grating,
-        layer_slab=layer_slab,
-        slab_offset=slab_offset,
-        period=period,
-        width_grating=width_grating,
-        polarization=polarization,
-        wavelength=wavelength,
-        taper=taper,
-        slab_xmin=slab_xmin,
-        cross_section=cross_section,
-    ).flatten()
+_gc_rectangular = partial(
+    gf.components.grating_coupler_rectangular,
+    n_periods=30,
+    fill_factor=0.5,
+    length_taper=350.0,
+    fiber_angle=10.0,
+    layer_grating=LAYER.GRA,
+    layer_slab=LAYER.WG,
+    slab_offset=0.0,
+    period=0.75,
+    width_grating=11.0,
+    polarization="te",
+    wavelength=1.55,
+    taper=_taper,
+    slab_xmin=-1.0,
+    cross_section="xs_sc",
+)
 
 
 @gf.cell
@@ -1166,7 +1136,7 @@ def pad(
     bbox_layers: None = None,
     bbox_offsets: None = None,
     port_inclusion: float = 0.0,
-    port_orientation: None = None,
+    port_orientation: float = 0,
 ) -> gf.Component:
     """An electrical pad.
 
@@ -1198,8 +1168,6 @@ def rectangle(
     centered: bool = False,
     port_type: str = "electrical",
     port_orientations: tuple[float, float, float, float] = (180.0, 90.0, 0.0, -90.0),
-    round_corners_east_west: bool = False,
-    round_corners_north_south: bool = False,
 ) -> gf.Component:
     """A simple rectangle on the given layer.
 
@@ -1209,8 +1177,6 @@ def rectangle(
         centered (bool, optional): if true, the rectangle's origin will be placed at the center (otherwise it will be bottom-left). Defaults to False.
         port_type (str, optional): the port type for ports automatically added to edges of the rectangle. Defaults to "electrical".
         port_orientations (tuple[float, float, float, float], optional): orientations of the ports to be automatically added. Defaults to (180.0, 90.0, 0.0, -90.0).
-        round_corners_east_west (bool, optional): if True, circles are added to the east and west edges, forming a horizontal pill shape. Defaults to False.
-        round_corners_north_south (bool, optional): if True, circles are added to the north and south edges, forming a vertical pill shape. Defaults to False.
 
     Returns:
         gf.Component: the component
@@ -1221,8 +1187,6 @@ def rectangle(
         centered=centered,
         port_type=port_type,
         port_orientations=port_orientations,
-        round_corners_east_west=round_corners_east_west,
-        round_corners_north_south=round_corners_north_south,
     )
 
 
@@ -1231,9 +1195,8 @@ def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
     port_name: str = "o1",
-    rotation: float = 0.0,
+    rotation: float = -90,
     with_loopback: bool = False,
-    bend: ComponentSpec = _bend,
     grating_coupler_spacing: float = 0.0,
     grating_coupler: ComponentSpec = gc_rectangular_sc,
     cross_section: CrossSectionSpec = "xs_sc",
@@ -1260,8 +1223,6 @@ def grating_coupler_array(
         port_name=port_name,
         rotation=rotation,
         with_loopback=with_loopback,
-        bend=bend,
-        grating_coupler_spacing=grating_coupler_spacing,
         grating_coupler=grating_coupler,
         cross_section=cross_section,
     )
@@ -1290,18 +1251,17 @@ def _die(
         n=ngratings,
         pitch=grating_pitch,
         with_loopback=True,
-        rotation=90,
         grating_coupler=grating_coupler,
         cross_section=cross_section,
     )
     left = c << gca
-    left.drotate(90)
+    left.drotate(-90)
     left.dxmax = x0
     left.dy = fp.y
     c.add_ports(left.ports, prefix="W")
 
     right = c << gca
-    right.drotate(-90)
+    right.drotate(+90)
     right.dxmax = -x0
     right.dy = fp.y
     c.add_ports(right.ports, prefix="E")
@@ -1464,8 +1424,9 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
+    c = die_sc()
     # c = mzi_rc()
-    c = trans_sc_rc20()
+    # c = trans_sc_rc20()
     # c = crossing_sc()
     c.show()
     # for name, func in list(globals().items()):
