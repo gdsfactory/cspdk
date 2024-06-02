@@ -647,13 +647,13 @@ def _die(
         cross_section=cross_section,
     )
     left = c << gca
-    left.rotate(90)
+    left.drotate(90)
     left.xmax = x0
     left.y = fp.y
     c.add_ports(left.ports, prefix="W")
 
     right = c << gca
-    right.rotate(-90)
+    right.drotate(-90)
     right.xmax = -x0
     right.y = fp.y
     c.add_ports(right.ports, prefix="E")
