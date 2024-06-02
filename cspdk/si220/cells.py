@@ -14,12 +14,12 @@ from cspdk.si220.tech import LAYER, TECH
 
 @gf.cell
 def _straight(
-    length: float = 10.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    length: float = 10.0, cross_section: CrossSectionSpec = "xs_sc", **kwargs
 ) -> gf.Component:
     return gf.components.straight(
         length=length,
         cross_section=cross_section,
+        **kwargs,
     )
 
 
@@ -129,7 +129,6 @@ def _bend(
     p: float = 0.5,
     with_arc_floorplan: bool = True,
     npoints: int | None = None,
-    direction: str = "ccw",
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     return gf.components.bend_euler(
@@ -138,7 +137,6 @@ def _bend(
         p=p,
         with_arc_floorplan=with_arc_floorplan,
         npoints=npoints,
-        direction=direction,
         cross_section=cross_section,
     )
 
@@ -996,7 +994,6 @@ def _mzi(
     length_y: float = 2.0,
     length_x: float = 0.1,
     cross_section: CrossSectionSpec = "xs_sc",
-    add_electrical_ports_bot: bool = True,
     bend: ComponentSpec = _bend,
     straight: ComponentSpec = _straight,
     splitter: ComponentSpec = _mmi1x2,
@@ -1024,9 +1021,7 @@ def _mzi(
         cross_section_x_bot=cross_section,
         mirror_bot=False,
         add_optical_ports_arms=False,
-        add_electrical_ports_bot=add_electrical_ports_bot,
         min_length=0.01,
-        extend_ports_straight_x=None,
     )
 
 
@@ -1054,7 +1049,6 @@ def mzi_sc(
         delta_length=delta_length,
         length_y=length_y,
         length_x=length_x,
-        add_electrical_ports_bot=add_electrical_ports_bot,
         straight=straight_sc,
         bend=bend_sc,
         combiner=mmi1x2_sc,
@@ -1069,7 +1063,6 @@ def mzi_so(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
-    add_electrical_ports_bot: bool = True,
     **kwargs,
 ) -> gf.Component:
     """A Mach-Zehnder Interferometer (MZI) in strip, o-band.
@@ -1078,7 +1071,6 @@ def mzi_so(
         delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
         length_y (float, optional): the common vertical length, in um. Defaults to 2.0.
         length_x (float, optional): the common horizontal length, in um. Defaults to 0.1.
-        add_electrical_ports_bot (bool, optional): if true, adds electrical ports to the bottom. Defaults to True.
 
     Returns:
         gf.Component: the component
@@ -1089,7 +1081,6 @@ def mzi_so(
         delta_length=delta_length,
         length_y=length_y,
         length_x=length_x,
-        add_electrical_ports_bot=add_electrical_ports_bot,
         straight=straight_so,
         bend=bend_so,
         combiner=mmi1x2_so,
@@ -1103,7 +1094,6 @@ def mzi_rc(
     delta_length: float = 10.0,
     length_y: float = 2.0,
     length_x: float = 0.1,
-    add_electrical_ports_bot: bool = True,
     **kwargs,
 ) -> gf.Component:
     """A Mach-Zehnder Interferometer (MZI) in rib, c-band.
@@ -1112,7 +1102,6 @@ def mzi_rc(
         delta_length (float, optional): the length differential between the two arms. Defaults to 10.0.
         length_y (float, optional): the common vertical length, in um. Defaults to 2.0.
         length_x (float, optional): the common horizontal length, in um. Defaults to 0.1.
-        add_electrical_ports_bot (bool, optional): if true, adds electrical ports to the bottom. Defaults to True.
 
     Returns:
         gf.Component: the component
@@ -1123,7 +1112,6 @@ def mzi_rc(
         delta_length=delta_length,
         length_y=length_y,
         length_x=length_x,
-        add_electrical_ports_bot=add_electrical_ports_bot,
         straight=straight_rc,
         bend=bend_rc,
         combiner=mmi1x2_rc,
@@ -1307,15 +1295,15 @@ def _die(
         cross_section=cross_section,
     )
     left = c << gca
-    left.rotate(90)
-    left.xmax = x0
-    left.y = fp.y
+    left.drotate(90)
+    left.dxmax = x0
+    left.dy = fp.y
     c.add_ports(left.ports, prefix="W")
 
     right = c << gca
-    right.rotate(-90)
-    right.xmax = -x0
-    right.y = fp.y
+    right.drotate(-90)
+    right.dxmax = -x0
+    right.dy = fp.y
     c.add_ports(right.ports, prefix="E")
 
     # Add electrical ports
@@ -1325,7 +1313,7 @@ def _die(
 
     for i in range(npads):
         pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
+        pad_ref.dxmin = x0 + i * pad_pitch
         pad_ref.ymin = y0
         c.add_port(
             name=f"N{i}",
@@ -1334,8 +1322,8 @@ def _die(
 
     for i in range(npads):
         pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
-        pad_ref.ymax = -y0
+        pad_ref.dxmin = x0 + i * pad_pitch
+        pad_ref.dymax = -y0
         c.add_port(
             name=f"S{i}",
             port=pad_ref.ports["e2"],
@@ -1476,7 +1464,8 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = mzi_sc()
+    # c = mzi_rc()
+    c = trans_sc_rc20()
     # c = crossing_sc()
     c.show()
     # for name, func in list(globals().items()):

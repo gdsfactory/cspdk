@@ -8,7 +8,7 @@ if __name__ == "__main__":
     c = gf.Component("sample_connect")
     mmi1 = c << cells.mmi1x2_sc()
     mmi2 = c << cells.mmi1x2_sc()
-    mmi2.move((500, 50))
+    mmi2.dmove((500, 50))
 
     route = tech.get_route_sc(
         mmi1.ports["o3"],

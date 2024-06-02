@@ -117,6 +117,8 @@ xs_rc = partial(
     layer=LAYER.WG,
     width=0.45,
     sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
+    # cladding_layers=(LAYER.SLAB,),
+    # cladding_offsets=(5,),
     radius=25,
     radius_min=25,
 )

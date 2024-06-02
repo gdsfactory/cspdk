@@ -919,15 +919,15 @@ def _die(
         cross_section=cross_section,
     )
     left = c << gca
-    left.rotate(90)
-    left.xmax = x0
-    left.y = fp.y
+    left.drotate(90)
+    left.dxmax = x0
+    left.dy = fp.y
     c.add_ports(left.ports, prefix="W")
 
     right = c << gca
-    right.rotate(-90)
-    right.xmax = -x0
-    right.y = fp.y
+    right.drotate(-90)
+    right.dxmax = -x0
+    right.dy = fp.y
     c.add_ports(right.ports, prefix="E")
 
     # Add electrical ports
@@ -937,7 +937,7 @@ def _die(
 
     for i in range(npads):
         pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
+        pad_ref.dxmin = x0 + i * pad_pitch
         pad_ref.ymin = y0
         c.add_port(
             name=f"N{i}",
@@ -946,8 +946,8 @@ def _die(
 
     for i in range(npads):
         pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
-        pad_ref.ymax = -y0
+        pad_ref.dxmin = x0 + i * pad_pitch
+        pad_ref.dymax = -y0
         c.add_port(
             name=f"S{i}",
             port=pad_ref.ports["e2"],

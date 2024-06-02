@@ -9,7 +9,7 @@ if __name__ == "__main__":
     c = gf.Component()
     mzi1 = c << cells.mzi_sc(delta_length=10)
     mzi2 = c << cells.mzi_sc(delta_length=100)
-    mzi2.move((200, 200))
+    mzi2.dmove((200, 200))
     route = tech.get_route_sc(mzi1.ports["o2"], mzi2.ports["o1"])
     c.add(route.references)
     c.add_port(name="o1", port=mzi1.ports["o1"])
