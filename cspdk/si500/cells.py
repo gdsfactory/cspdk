@@ -19,7 +19,7 @@ straight_rc = partial(straight, cross_section="xs_rc")
 ################
 
 
-bend_s = partial(gf.components.bend_s, size=(11.0, 1.8), cross_section="xs_rc")
+bend_s = partial(gf.components.bend_s, size=(20.0, 1.8), cross_section="xs_rc")
 wire_corner = partial(gf.components.wire_corner, cross_section="metal_routing")
 bend_euler = partial(gf.components.bend_euler, cross_section="xs_rc")
 bend_rc = partial(bend_euler, cross_section="xs_rc")
@@ -64,10 +64,10 @@ mmi2x2_rc = partial(mmi2x2, length_mmi=50.2, gap_mmi=0.4)
 
 
 coupler = partial(
-    gf.c.coupler, gap=0.234, length=20.0, dx=10.0, dy=4.0, cross_section="xs_rc"
+    gf.c.coupler, gap=0.234, length=20.0, dx=15.0, dy=4.0, cross_section="xs_rc"
 )
-coupler_rc = partial(coupler, cross_section="xs_rc", dx=15, dy=4.0)
-coupler_ro = partial(coupler, cross_section="xs_ro", dx=15, dy=4.0)
+coupler_rc = partial(coupler, cross_section="xs_rc")
+coupler_ro = partial(coupler, cross_section="xs_ro")
 
 ##############################
 # grating couplers Rectangular
@@ -234,5 +234,5 @@ die_rc = partial(
 array = gf.components.array
 
 if __name__ == "__main__":
-    c = die_rc()
+    c = bend_s()
     c.show()

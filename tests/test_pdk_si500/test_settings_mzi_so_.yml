@@ -1,5 +1,5 @@
 info: {}
-name: mzi_DL10_LY2_LX0p1_BFbe_8c609c71
+name: mzi_DL10_LY2_LX0p1_BFbe_ff7d0ba1
 settings:
   add_optical_ports_arms: false
   auto_rename_ports: true
@@ -14,7 +14,7 @@ settings:
   nbends: 2
   port_e0_combiner: o4
   port_e0_splitter: o3
-  port_e1_combiner: o2
+  port_e1_combiner: o3
   port_e1_splitter: o2
   splitter: Fmmi1x2_Mgdsfactorypcomponentspmmi1x2_SCSxs_so_WM6_WT1p5_LT20_LM40p1_GM1p55
   straight: Fstraight_Mgdsfactorypcomponentspstraight_SCSxs_so

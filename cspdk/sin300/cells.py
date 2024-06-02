@@ -135,7 +135,6 @@ grating_coupler_elliptical_trenches = partial(
     polarization="te",
     taper_length=16.6,
     taper_angle=30.0,
-    trenches_extra_angle=9.0,
     wavelength=1.55,
     fiber_angle=20.0,
     grating_line_width=0.343,
@@ -151,10 +150,12 @@ grating_coupler_elliptical_trenches = partial(
 grating_coupler_elliptical_trenches_nc = partial(
     grating_coupler_elliptical_trenches,
     cross_section="xs_nc",
+    grating_line_width=0.66 / 2,
 )
 
 grating_coupler_elliptical_trenches_no = partial(
     grating_coupler_elliptical_trenches,
+    grating_line_width=0.964 / 2,
     cross_section="xs_no",
 )
 
@@ -165,8 +166,8 @@ grating_coupler_elliptical_trenches_no = partial(
 
 
 mzi = partial(gf.components.mzi, cross_section="xs_nc")
-mzi_nc = partial(mzi, combiner=mmi1x2_nc, cross_section="xs_nc")
-mzi_no = partial(mzi, combiner=mmi1x2_nc, cross_section="xs_no")
+mzi_nc = partial(mzi, splitter=mmi1x2_nc, cross_section="xs_nc")
+mzi_no = partial(mzi, splitter=mmi1x2_no, cross_section="xs_no")
 
 
 ################
@@ -277,5 +278,5 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = die_nc()
+    c = mzi_no()
     c.show()

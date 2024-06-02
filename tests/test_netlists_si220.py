@@ -51,6 +51,8 @@ def test_netlists(
 
 if __name__ == "__main__":
     component_type = "grating_coupler_rectangular_so"
+    component_type = "mzi_so"
+    component_type = "wire_corner"
     # c  = 'die_so'
     # test_netlists(c, None, False)
     c = cells[component_type]()

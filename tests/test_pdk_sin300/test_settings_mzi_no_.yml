@@ -1,9 +1,20 @@
-function: mzi_no
 info: {}
-module: cspdk.sin300.cells
-name: mzi_no
+name: mzi_DL10_LY2_LX0p1_Bben_fee9b6bc
 settings:
-  add_electrical_ports_bot: true
-  delta_length: 10.0
+  add_optical_ports_arms: false
+  auto_rename_ports: true
+  bend: bend_euler
+  cross_section: xs_no
+  delta_length: 10
   length_x: 0.1
-  length_y: 2.0
+  length_y: 2
+  min_length: 0.01
+  mirror_bot: false
+  nbends: 2
+  port_e0_combiner: o3
+  port_e0_splitter: o3
+  port_e1_combiner: o2
+  port_e1_splitter: o2
+  splitter: Fmmi1x2_Mgdsfactorypcomponentspmmi1x2_SCSxs_no_WM12_WT5p5_LT50_LM42_GM0p4
+  straight: straight
+  with_splitter: true

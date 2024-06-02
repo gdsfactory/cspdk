@@ -2,12 +2,12 @@ info:
   period: 1.401
   polarization: te
   wavelength: 1.55
-name: grating_coupler_ellipti_c315e849
+name: grating_coupler_ellipti_fed3ced5
 settings:
   cross_section: xs_nc
   end_straight_length: 0.2
   fiber_angle: 20
-  grating_line_width: 0.343
+  grating_line_width: 0.33
   layer_trench: 4
   n_periods: 30
   ncladding: 1.443
