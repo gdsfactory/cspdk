@@ -50,4 +50,18 @@ def test_netlists(
 
 
 if __name__ == "__main__":
-    test_netlists("die_sc", None, False)
+    component_type = "grating_coupler_rectangular_so"
+    # c  = 'die_so'
+    # test_netlists(c, None, False)
+    c = cells[component_type]()
+    n = c.get_netlist()
+
+    c.delete()
+    yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
+    c2 = gf.read.from_yaml(yaml_str)
+    c2.show()
+    n2 = c2.get_netlist()
+    n.pop("warnings", None)
+    n2.pop("warnings", None)
+    d = jsondiff.diff(n, n2)
+    assert len(d) == 0, d

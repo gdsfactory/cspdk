@@ -223,7 +223,7 @@ mzi_so = partial(
     combiner=mmi2x2_so,
     port_e1_splitter="o2",
     port_e0_splitter="o3",
-    port_e1_combiner="o2",
+    port_e1_combiner="o3",
     port_e0_combiner="o4",
     cross_section="xs_so",
 )
@@ -432,5 +432,5 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = coupler_ro()
+    c = mzi_so()
     c.show()

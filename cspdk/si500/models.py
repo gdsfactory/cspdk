@@ -26,7 +26,7 @@ def _straight(
     wl: Float = 1.55,
     length: Float = 10.0,
     loss: Float = 0.0,
-    cross_section: str = "xs_sc",
+    cross_section: str = "xs_rc",
 ) -> sax.SDict:
     if cross_section.endswith("so"):
         return __straight(
@@ -84,7 +84,7 @@ def _straight(
         )
 
 
-straight_sc = partial(_straight, cross_section="xs_sc")
+straight_sc = partial(_straight, cross_section="xs_rc")
 straight_so = partial(_straight, cross_section="xs_so")
 straight_rc = partial(_straight, cross_section="xs_rc")
 straight_ro = partial(_straight, cross_section="xs_ro")

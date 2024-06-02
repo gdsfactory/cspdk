@@ -1,8 +1,8 @@
 info: {}
-name: grating_coupler_array_G_14ea3bc7
+name: grating_coupler_array_G_6eb7d8a9
 settings:
   centered: true
-  cross_section: xs_sc
+  cross_section: xs_nc
   grating_coupler: grating_coupler_rectangular_nc
   n: 6
   pitch: 127

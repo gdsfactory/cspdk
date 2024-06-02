@@ -2,9 +2,9 @@ info:
   length: 10
   width1: 0.5
   width2: 0.5
-name: taper_L10_W0p5_WNone_PN_b27c3ef5
+name: taper_L10_W0p5_WNone_PN_227769f1
 settings:
-  cross_section: xs_sc
+  cross_section: xs_so
   length: 10
   port_names:
   - o1

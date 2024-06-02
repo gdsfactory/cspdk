@@ -1,0 +1,13 @@
+info:
+  length: 10
+name: taper_strip_to_ridge_L1_de62262e
+settings:
+  cross_section: xs_sc
+  layer_slab: 1
+  layer_wg: 0
+  length: 10
+  use_slab_port: false
+  w_slab1: 0.2
+  w_slab2: 10.45
+  width1: 0.5
+  width2: 0.5

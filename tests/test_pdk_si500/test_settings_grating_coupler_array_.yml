@@ -1,9 +1,9 @@
 info: {}
-name: grating_coupler_array_G_3e0331b9
+name: grating_coupler_array_G_5b73080f
 settings:
   centered: true
   cross_section: xs_sc
-  grating_coupler: gc_rectangular_sc
+  grating_coupler: grating_coupler_rectangular_sc
   n: 6
   pitch: 127
   port_name: o1

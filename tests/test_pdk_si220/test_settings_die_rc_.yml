@@ -1,8 +1,8 @@
 info: {}
-name: _die_S11470_4900_N14_N3_b52064c0
+name: _die_S11470_4900_N14_N3_e632fdae
 settings:
   cross_section: xs_rc
-  grating_coupler: gc_rectangular_rc
+  grating_coupler: grating_coupler_rectangular_rc
   grating_pitch: 250
   ngratings: 14
   npads: 31

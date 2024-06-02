@@ -1,0 +1,20 @@
+info:
+  period: 0.579
+  polarization: te
+  wavelength: 1.31
+name: grating_coupler_ellipti_9d7a8578
+settings:
+  cross_section: xs_so
+  end_straight_length: 0.2
+  fiber_angle: 15
+  grating_line_width: 0.25
+  layer_trench: 4
+  n_periods: 30
+  ncladding: 1.443
+  neff: 2.638
+  p_start: 26
+  polarization: te
+  taper_angle: 30
+  taper_length: 16.6
+  trenches_extra_angle: 9
+  wavelength: 1.31

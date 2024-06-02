@@ -5,7 +5,7 @@ info:
   route_info_weight: 10
   route_info_xs_484df70d_length: 10
   width: 0.95
-name: straight_no_L10
+name: straight_L10_N2_CSxs_no
 settings:
   cross_section: xs_no
   length: 10

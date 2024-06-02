@@ -1,5 +1,5 @@
 info: {}
-name: mmi2x2_nc
+name: mmi2x2_WNone_WT5p5_LT50_23cee3ba
 settings:
   cross_section: xs_nc
   gap_mmi: 0.4

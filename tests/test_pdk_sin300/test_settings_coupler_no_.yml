@@ -1,12 +1,12 @@
 info:
-  length: 10.139
-  min_bend_radius: 13.525
-name: coupler_G0p234_L20_CSco_edf30727
+  length: 15.094
+  min_bend_radius: 29.632
+name: coupler_G0p234_L20_CSco_08afffc5
 settings:
   coupler_straight: coupler_straight
   coupler_symmetric: coupler_symmetric
   cross_section: xs_no
-  dx: 10
+  dx: 15
   dy: 4
   gap: 0.234
   length: 20

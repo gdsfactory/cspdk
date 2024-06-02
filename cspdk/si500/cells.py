@@ -10,7 +10,7 @@ from cspdk.si500.tech import LAYER
 ################
 
 
-straight = partial(gf.components.straight, cross_section="xs_sc")
+straight = partial(gf.components.straight, cross_section="xs_rc")
 straight_rc = partial(straight, cross_section="xs_rc")
 
 
@@ -29,7 +29,7 @@ bend_rc = partial(bend_euler, cross_section="xs_rc")
 ################
 
 
-taper = taper_sc = partial(
+taper = taper_rc = partial(
     gf.components.taper, cross_section="xs_rc", length=10.0, width1=0.5, width2=None
 )
 taper_rc = partial(
@@ -64,7 +64,7 @@ mmi2x2_rc = partial(mmi2x2, length_mmi=50.2, gap_mmi=0.4)
 
 
 coupler = partial(
-    gf.c.coupler, gap=0.234, length=20.0, dx=10.0, dy=4.0, cross_section="xs_sc"
+    gf.c.coupler, gap=0.234, length=20.0, dx=10.0, dy=4.0, cross_section="xs_rc"
 )
 coupler_rc = partial(coupler, cross_section="xs_rc", dx=15, dy=4.0)
 coupler_ro = partial(coupler, cross_section="xs_ro", dx=15, dy=4.0)
