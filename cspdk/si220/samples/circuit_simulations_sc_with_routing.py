@@ -14,8 +14,8 @@ if __name__ == "__main__":
     c.add_port(name="o1", port=mzi1.ports["o1"])
     c.add_port(name="o2", port=mzi2.ports["o2"])
     c.show()
-    c.plot_netlist(flat=True)
     netlist = c.get_netlist(recursive=True)
+    c.plot_netlist(recursive=True)
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
     wl = jnp.linspace(1.5, 1.6, 256)

@@ -432,5 +432,6 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = mzi_so()
+    c = array()
+    c.get_netlist()
     c.show()

@@ -84,6 +84,7 @@ def _straight(
         )
 
 
+straight = _straight
 straight_sc = partial(_straight, cross_section="xs_sc")
 straight_so = partial(_straight, cross_section="xs_so")
 straight_rc = partial(_straight, cross_section="xs_rc")
@@ -105,6 +106,7 @@ def _bend(wl: Float = 1.5, length: Float = 20.0, loss: Float = 0.03) -> sax.SDic
     )
 
 
+bend_euler = _bend
 bend_sc = partial(_bend, loss=0.03)
 bend_so = partial(_bend, loss=0.03)
 bend_rc = partial(_bend, loss=0.03)
@@ -125,13 +127,13 @@ trans_sc_rc50 = partial(_taper_cross_section, length=50.0)
 ################
 # MMIs
 ################
-_mmi1x2 = sm.mmi1x2
-_mmi2x2 = sm.mmi2x2
+mmi1x2 = sm.mmi1x2
+mmi2x2 = sm.mmi2x2
 
-_mmi1x2_o = partial(_mmi1x2, wl0=1.31)
-_mmi1x2_c = partial(_mmi1x2, wl0=1.55)
-_mmi2x2_o = partial(_mmi2x2, wl0=1.31)
-_mmi2x2_c = partial(_mmi2x2, wl0=1.55)
+_mmi1x2_o = partial(mmi1x2, wl0=1.31)
+_mmi1x2_c = partial(mmi1x2, wl0=1.55)
+_mmi2x2_o = partial(mmi2x2, wl0=1.31)
+_mmi2x2_c = partial(mmi2x2, wl0=1.55)
 
 mmi1x2_rc = _mmi1x2_c
 mmi1x2_sc = _mmi1x2_c
@@ -151,7 +153,7 @@ mmi2x2_no = _mmi2x2_o
 # Evanescent couplers
 ##############################
 
-_coupler = _mmi2x2
+_coupler = mmi2x2
 _coupler_o = partial(_coupler, wl0=1.31)
 _coupler_c = partial(_coupler, wl0=1.55)
 coupler_sc = _coupler_c
