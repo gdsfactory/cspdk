@@ -1,4 +1,3 @@
-connections: {}
 instances:
   grating_coupler_rectang_1e504932_-190500_-109735:
     component: grating_coupler_rectangular
@@ -10,8 +9,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -31,8 +30,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -52,8 +51,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -73,8 +72,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -94,8 +93,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -115,8 +114,8 @@ instances:
       cross_section: xs_nc
       fiber_angle: 20
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 8
+      layer_grating: 41
+      layer_slab: 40
       length_taper: 200
       n_periods: 30
       period: 0.66
@@ -126,6 +125,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
+links: []
 name: grating_coupler_array_G_6eb7d8a9
 placements:
   grating_coupler_rectang_1e504932_-190500_-109735:

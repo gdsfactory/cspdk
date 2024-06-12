@@ -1,22 +1,3 @@
-connections:
-  bend_euler_RNone_A90_P0_bdf8712b_118420_-47675,o1: straight_L0p02_N2_CSxs_nc_W1p2_105610_-59875,o1
-  bend_euler_RNone_A90_P0_bdf8712b_118420_-47675,o2: straight_L7_N2_CSxs_nc_W1p2_130620_-31375,o1
-  bend_euler_RNone_A90_P0_bdf8712b_118420_42675,o1: straight_L0p02_N2_CSxs_nc_W1p2_105610_54875,o1
-  bend_euler_RNone_A90_P0_bdf8712b_118420_42675,o2: straight_L2_N2_CSxs_nc_W1p2_130620_28875,o1
-  bend_euler_RNone_A90_P0_bdf8712b_142820_-15075,o1: straight_L7_N2_CSxs_nc_W1p2_130620_-31375,o2
-  bend_euler_RNone_A90_P0_bdf8712b_142820_-15075,o2: cp2,o3
-  bend_euler_RNone_A90_P0_bdf8712b_142820_15075,o1: straight_L2_N2_CSxs_nc_W1p2_130620_28875,o2
-  bend_euler_RNone_A90_P0_bdf8712b_142820_15075,o2: cp2,o2
-  bend_euler_RNone_A90_P0_bdf8712b_68300_-15075,o1: cp1,o3
-  bend_euler_RNone_A90_P0_bdf8712b_68300_-15075,o2: syl,o1
-  bend_euler_RNone_A90_P0_bdf8712b_68300_15075,o1: cp1,o2
-  bend_euler_RNone_A90_P0_bdf8712b_68300_15075,o2: sytl,o1
-  bend_euler_RNone_A90_P0_bdf8712b_92700_-47675,o1: syl,o2
-  bend_euler_RNone_A90_P0_bdf8712b_92700_-47675,o2: sxb,o1
-  bend_euler_RNone_A90_P0_bdf8712b_92700_42675,o1: sxt,o1
-  bend_euler_RNone_A90_P0_bdf8712b_92700_42675,o2: sytl,o2
-  straight_L0p02_N2_CSxs_nc_W1p2_105610_-59875,o2: sxb,o2
-  straight_L0p02_N2_CSxs_nc_W1p2_105610_54875,o2: sxt,o2
 instances:
   bend_euler_RNone_A90_P0_bdf8712b_118420_-47675:
     component: bend_euler
@@ -302,6 +283,43 @@ instances:
       cross_section: xs_nc
       length: 2
       npoints: 2
+links:
+- - bend_euler_RNone_A90_P0_bdf8712b_118420_-47675,o1
+  - straight_L0p02_N2_CSxs_nc_W1p2_105610_-59875,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_118420_-47675,o2
+  - straight_L7_N2_CSxs_nc_W1p2_130620_-31375,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_118420_42675,o1
+  - straight_L0p02_N2_CSxs_nc_W1p2_105610_54875,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_118420_42675,o2
+  - straight_L2_N2_CSxs_nc_W1p2_130620_28875,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_142820_-15075,o1
+  - straight_L7_N2_CSxs_nc_W1p2_130620_-31375,o2
+- - bend_euler_RNone_A90_P0_bdf8712b_142820_-15075,o2
+  - cp2,o3
+- - bend_euler_RNone_A90_P0_bdf8712b_142820_15075,o1
+  - straight_L2_N2_CSxs_nc_W1p2_130620_28875,o2
+- - bend_euler_RNone_A90_P0_bdf8712b_142820_15075,o2
+  - cp2,o2
+- - bend_euler_RNone_A90_P0_bdf8712b_68300_-15075,o1
+  - cp1,o3
+- - bend_euler_RNone_A90_P0_bdf8712b_68300_-15075,o2
+  - syl,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_68300_15075,o1
+  - cp1,o2
+- - bend_euler_RNone_A90_P0_bdf8712b_68300_15075,o2
+  - sytl,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_92700_-47675,o1
+  - syl,o2
+- - bend_euler_RNone_A90_P0_bdf8712b_92700_-47675,o2
+  - sxb,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_92700_42675,o1
+  - sxt,o1
+- - bend_euler_RNone_A90_P0_bdf8712b_92700_42675,o2
+  - sytl,o2
+- - straight_L0p02_N2_CSxs_nc_W1p2_105610_-59875,o2
+  - sxb,o2
+- - straight_L0p02_N2_CSxs_nc_W1p2_105610_54875,o2
+  - sxt,o2
 name: mzi_DL10_LY2_LX0p1_Bben_1b3c81e9
 placements:
   bend_euler_RNone_A90_P0_bdf8712b_118420_-47675:

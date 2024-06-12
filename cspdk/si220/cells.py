@@ -1,7 +1,6 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 from cspdk.si220.config import PATH
 from cspdk.si220.tech import LAYER
@@ -10,7 +9,10 @@ from cspdk.si220.tech import LAYER
 # Straights
 ################
 
-straight = partial(gf.components.straight, cross_section="xs_sc")
+straight = gf.cell(
+    partial(gf.components.straight, cross_section="xs_sc"), basename="straight_cs"
+)
+# straight = gf.cell(partial(gf.components.straight, cross_section="xs_sc"), basename='straight')
 straight_sc = partial(straight, cross_section="xs_sc")
 straight_so = partial(straight, cross_section="xs_so")
 straight_rc = partial(straight, cross_section="xs_rc")
@@ -261,95 +263,35 @@ grating_coupler_array = partial(
     cross_section="xs_sc",
 )
 
-
-@gf.cell
-def _die(
-    size: tuple[float, float] = (11470.0, 4900.0),
-    ngratings: int = 14,
-    npads: int = 31,
-    grating_pitch: float = 250.0,
-    pad_pitch: float = 300.0,
-    grating_coupler: ComponentSpec = "grating_coupler_rectangular_sc",
-    cross_section: CrossSectionSpec = "xs_sc",
-    pad: ComponentSpec = "pad",
-) -> gf.Component:
-    """A die with grating couplers and pads.
-
-    Args:
-        size: the size of the die, in um.
-        ngratings: the number of grating couplers.
-        npads: the number of pads.
-        grating_pitch: the pitch of the grating couplers, in um.
-        pad_pitch: the pitch of the pads, in um.
-        grating_coupler: the grating coupler component.
-        cross_section: the cross section.
-        pad: the pad component.
-    """
-    c = gf.Component()
-
-    fp = c << rectangle(size=size, layer=LAYER.FLOORPLAN, centered=True)
-
-    # Add optical ports
-    x0 = -4925 + 2.827
-    y0 = 1650
-
-    gca = grating_coupler_array(
-        n=ngratings,
-        pitch=grating_pitch,
-        with_loopback=True,
-        grating_coupler=grating_coupler,
-        cross_section=cross_section,
-    )
-    left = c << gca
-    left.drotate(-90)
-    left.dxmax = x0
-    left.dy = fp.dy
-    c.add_ports(left.ports, prefix="W")
-
-    right = c << gca
-    right.drotate(+90)
-    right.dxmax = -x0
-    right.dy = fp.dy
-    c.add_ports(right.ports, prefix="E")
-
-    # Add electrical ports
-    x0 = -4615
-    y0 = 2200
-    pad = gf.get_component(pad)
-
-    for i in range(npads):
-        pad_ref = c << pad
-        pad_ref.dxmin = x0 + i * pad_pitch
-        pad_ref.dymin = y0
-        c.add_port(
-            name=f"N{i}",
-            port=pad_ref.ports["e4"],
-        )
-
-    for i in range(npads):
-        pad_ref = c << pad
-        pad_ref.dxmin = x0 + i * pad_pitch
-        pad_ref.dymax = -y0
-        c.add_port(
-            name=f"S{i}",
-            port=pad_ref.ports["e2"],
-        )
-
-    c.auto_rename_ports()
-    return c
-
+_die = partial(
+    gf.c.die_with_pads,
+    layer_floorplan=LAYER.FLOORPLAN,
+    size=(11470.0, 4900.0),
+    ngratings=14,
+    npads=31,
+    grating_pitch=250.0,
+    pad_pitch=300.0,
+)
 
 die_sc = partial(
-    _die, grating_coupler="grating_coupler_rectangular_sc", cross_section="xs_sc"
+    _die,
+    grating_coupler="grating_coupler_rectangular_sc",
+    cross_section="xs_sc",
 )
 die_so = partial(
-    _die, grating_coupler="grating_coupler_rectangular_so", cross_section="xs_so"
+    _die,
+    grating_coupler="grating_coupler_rectangular_so",
+    cross_section="xs_so",
 )
 die_rc = partial(
-    _die, grating_coupler="grating_coupler_rectangular_rc", cross_section="xs_rc"
+    _die,
+    grating_coupler="grating_coupler_rectangular_rc",
+    cross_section="xs_rc",
 )
 die_ro = partial(
-    _die, grating_coupler="grating_coupler_rectangular_ro", cross_section="xs_ro"
+    _die,
+    grating_coupler="grating_coupler_rectangular_ro",
+    cross_section="xs_ro",
 )
 
 
@@ -432,6 +374,7 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = array()
-    c.get_netlist()
+    c = straight()
+    print(c.function_name)
+    # c.get_netlist()
     c.show()

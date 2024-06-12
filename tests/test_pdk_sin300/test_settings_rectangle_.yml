@@ -2,7 +2,7 @@ info: {}
 name: rectangle_S4_2_LFLOORPL_e2ba67fc
 settings:
   centered: false
-  layer: 2
+  layer: 45
   port_orientations:
   - 180
   - 90

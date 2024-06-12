@@ -1,22 +1,3 @@
-connections:
-  bend_euler_RNone_A90_P0_836efce1_56912_-6458,o1: cp1,o3
-  bend_euler_RNone_A90_P0_836efce1_56912_-6458,o2: syl,o1
-  bend_euler_RNone_A90_P0_836efce1_56912_6457,o1: cp1,o2
-  bend_euler_RNone_A90_P0_836efce1_56912_6457,o2: sytl,o1
-  bend_euler_RNone_A90_P0_836efce1_66687_-23683,o1: syl,o2
-  bend_euler_RNone_A90_P0_836efce1_66687_-23683,o2: sxb,o1
-  bend_euler_RNone_A90_P0_836efce1_66687_18682,o1: sxt,o1
-  bend_euler_RNone_A90_P0_836efce1_66687_18682,o2: sytl,o2
-  bend_euler_RNone_A90_P0_836efce1_77032_-23683,o1: straight_L0p02_N2_CSxs_sc_W0p45_71910_-28570,o1
-  bend_euler_RNone_A90_P0_836efce1_77032_-23683,o2: straight_L7p57_N2_CSxs_sc_W0p45_81920_-14785,o1
-  bend_euler_RNone_A90_P0_836efce1_77032_18682,o1: straight_L0p02_N2_CSxs_sc_W0p45_71910_23570,o1
-  bend_euler_RNone_A90_P0_836efce1_77032_18682,o2: straight_L2p57_N2_CSxs_sc_W0p45_81920_12285,o1
-  bend_euler_RNone_A90_P0_836efce1_86807_-5888,o1: straight_L7p57_N2_CSxs_sc_W0p45_81920_-14785,o2
-  bend_euler_RNone_A90_P0_836efce1_86807_-5888,o2: cp2,o4
-  bend_euler_RNone_A90_P0_836efce1_86807_5887,o1: straight_L2p57_N2_CSxs_sc_W0p45_81920_12285,o2
-  bend_euler_RNone_A90_P0_836efce1_86807_5887,o2: cp2,o3
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_-28570,o2: sxb,o2
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_23570,o2: sxt,o2
 instances:
   bend_euler_RNone_A90_P0_836efce1_56912_-6458:
     component: bend_euler
@@ -194,7 +175,7 @@ instances:
       taper: taper
       width_mmi: 6
       width_taper: 1.5
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_-28570:
+  straight_cs_L0p02_N2_CS_b93005ab_71910_-28570:
     component: straight
     info:
       length: 0.02
@@ -208,7 +189,7 @@ instances:
       length: 0.02
       npoints: 2
       width: 0.45
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_23570:
+  straight_cs_L0p02_N2_CS_b93005ab_71910_23570:
     component: straight
     info:
       length: 0.02
@@ -222,7 +203,7 @@ instances:
       length: 0.02
       npoints: 2
       width: 0.45
-  straight_L2p57_N2_CSxs_sc_W0p45_81920_12285:
+  straight_cs_L2p57_N2_CS_9e6d4040_81920_12285:
     component: straight
     info:
       length: 2.57
@@ -236,7 +217,7 @@ instances:
       length: 2.57
       npoints: 2
       width: 0.45
-  straight_L7p57_N2_CSxs_sc_W0p45_81920_-14785:
+  straight_cs_L7p57_N2_CS_a79060b7_81920_-14785:
     component: straight
     info:
       length: 7.57
@@ -302,7 +283,44 @@ instances:
       cross_section: xs_sc
       length: 2
       npoints: 2
-name: mzi_DL10_LY2_LX0p1_BFbe_9662d622
+links:
+- - bend_euler_RNone_A90_P0_836efce1_56912_-6458,o1
+  - cp1,o3
+- - bend_euler_RNone_A90_P0_836efce1_56912_-6458,o2
+  - syl,o1
+- - bend_euler_RNone_A90_P0_836efce1_56912_6457,o1
+  - cp1,o2
+- - bend_euler_RNone_A90_P0_836efce1_56912_6457,o2
+  - sytl,o1
+- - bend_euler_RNone_A90_P0_836efce1_66687_-23683,o1
+  - syl,o2
+- - bend_euler_RNone_A90_P0_836efce1_66687_-23683,o2
+  - sxb,o1
+- - bend_euler_RNone_A90_P0_836efce1_66687_18682,o1
+  - sxt,o1
+- - bend_euler_RNone_A90_P0_836efce1_66687_18682,o2
+  - sytl,o2
+- - bend_euler_RNone_A90_P0_836efce1_77032_-23683,o1
+  - straight_cs_L0p02_N2_CS_b93005ab_71910_-28570,o1
+- - bend_euler_RNone_A90_P0_836efce1_77032_-23683,o2
+  - straight_cs_L7p57_N2_CS_a79060b7_81920_-14785,o1
+- - bend_euler_RNone_A90_P0_836efce1_77032_18682,o1
+  - straight_cs_L0p02_N2_CS_b93005ab_71910_23570,o1
+- - bend_euler_RNone_A90_P0_836efce1_77032_18682,o2
+  - straight_cs_L2p57_N2_CS_9e6d4040_81920_12285,o1
+- - bend_euler_RNone_A90_P0_836efce1_86807_-5888,o1
+  - straight_cs_L7p57_N2_CS_a79060b7_81920_-14785,o2
+- - bend_euler_RNone_A90_P0_836efce1_86807_-5888,o2
+  - cp2,o4
+- - bend_euler_RNone_A90_P0_836efce1_86807_5887,o1
+  - straight_cs_L2p57_N2_CS_9e6d4040_81920_12285,o2
+- - bend_euler_RNone_A90_P0_836efce1_86807_5887,o2
+  - cp2,o3
+- - straight_cs_L0p02_N2_CS_b93005ab_71910_-28570,o2
+  - sxb,o2
+- - straight_cs_L0p02_N2_CS_b93005ab_71910_23570,o2
+  - sxt,o2
+name: mzi_DL10_LY2_LX0p1_BFbe_7967d40c
 placements:
   bend_euler_RNone_A90_P0_836efce1_56912_-6458:
     mirror: true
@@ -354,22 +372,22 @@ placements:
     rotation: 180
     x: 154.42
     y: 0
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_-28570:
+  straight_cs_L0p02_N2_CS_b93005ab_71910_-28570:
     mirror: false
     rotation: 180
     x: 71.92
     y: -28.57
-  straight_L0p02_N2_CSxs_sc_W0p45_71910_23570:
+  straight_cs_L0p02_N2_CS_b93005ab_71910_23570:
     mirror: true
     rotation: 180
     x: 71.92
     y: 23.57
-  straight_L2p57_N2_CSxs_sc_W0p45_81920_12285:
+  straight_cs_L2p57_N2_CS_9e6d4040_81920_12285:
     mirror: true
     rotation: 270
     x: 81.92
     y: 13.57
-  straight_L7p57_N2_CSxs_sc_W0p45_81920_-14785:
+  straight_cs_L7p57_N2_CS_a79060b7_81920_-14785:
     mirror: false
     rotation: 90
     x: 81.92

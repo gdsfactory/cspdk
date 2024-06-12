@@ -7,8 +7,8 @@ settings:
   cross_section: xs_sc
   fiber_angle: 10
   fill_factor: 0.5
-  layer_grating: 4
-  layer_slab: 0
+  layer_grating: 9
+  layer_slab: 5
   length_taper: 350
   n_periods: 30
   period: 0.63

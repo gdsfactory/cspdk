@@ -1,5 +1,5 @@
-connections: {}
 instances: {}
-name: straight_L10_N2_CSxs_ro
+links: []
+name: straight_cs_L10_N2_CSxs_ro
 placements: {}
 ports: {}

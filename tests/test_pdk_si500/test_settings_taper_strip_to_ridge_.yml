@@ -3,8 +3,8 @@ info:
 name: taper_strip_to_ridge_L1_de62262e
 settings:
   cross_section: xs_sc
-  layer_slab: 1
-  layer_wg: 0
+  layer_slab: 8
+  layer_wg: 5
   length: 10
   use_slab_port: false
   w_slab1: 0.2

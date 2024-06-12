@@ -6,7 +6,13 @@ from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import get_cross_sections
-from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
+from gdsfactory.technology import (
+    LayerLevel,
+    LayerMap,
+    LayerStack,
+    LayerViews,
+    LogicalLayer,
+)
 from gdsfactory.typings import ConnectivitySpec, Layer
 
 from cspdk.si500.config import PATH
@@ -63,7 +69,7 @@ def get_layer_stack(
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LAYER.WG,
+                layer=LogicalLayer(layer=LAYER.WG),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
@@ -72,7 +78,7 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             slab=LayerLevel(
-                layer=LAYER.SLAB,
+                layer=LogicalLayer(layer=LAYER.SLAB),
                 thickness=thickness_slab,
                 zmin=0.0,
                 material="si",
@@ -81,14 +87,14 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             heater=LayerLevel(
-                layer=LAYER.HEATER,
+                layer=LogicalLayer(layer=LAYER.HEATER),
                 thickness=thickness_heater,
                 zmin=zmin_heater,
                 material="TiN",
                 info={"mesh_order": 1},
             ),
             metal=LayerLevel(
-                layer=LAYER.PAD,
+                layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
                 material="Aluminum",
@@ -167,6 +173,3 @@ if __name__ == "__main__":
         connectivity=connectivity,
     )
     t.write_tech(tech_dir=PATH.klayout)
-
-if __name__ == "__main__":
-    print(xs_rc.sections)

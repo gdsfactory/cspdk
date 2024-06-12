@@ -1,9 +1,12 @@
 info: {}
-name: _die_S11470_4900_N14_N3_922976af
+name: die_with_pads_S11470_49_3c93ad9b
 settings:
   cross_section: xs_nc
+  edge_to_grating_distance: 150
+  edge_to_pad_distance: 150
   grating_coupler: grating_coupler_rectangular_nc
   grating_pitch: 250
+  layer_floorplan: 45
   ngratings: 14
   npads: 31
   pad: pad

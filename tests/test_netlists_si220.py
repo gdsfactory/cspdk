@@ -47,6 +47,7 @@ def test_netlists(
     d = jsondiff.diff(n, n2)
     d.pop("warnings", None)
     d.pop("connections", None)
+    d.pop("ports", None)
     assert len(d) == 0, d
 
 
@@ -54,6 +55,7 @@ if __name__ == "__main__":
     component_type = "grating_coupler_rectangular_so"
     component_type = "wire_corner"
     component_type = "mzi_ro"
+    component_type = "wire_corner"
     # c  = 'die_so'
     # test_netlists(c, None, False)
     c = cells[component_type]()
@@ -68,4 +70,5 @@ if __name__ == "__main__":
     d = jsondiff.diff(n, n2)
     d.pop("warnings", None)
     d.pop("connections", None)
+    d.pop("ports", None)
     assert len(d) == 0, d

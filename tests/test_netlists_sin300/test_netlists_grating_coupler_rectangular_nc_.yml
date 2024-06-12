@@ -1,5 +1,5 @@
-connections: {}
 instances: {}
+links: []
 name: grating_coupler_rectang_1e504932
 placements: {}
 ports: {}

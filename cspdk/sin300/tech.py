@@ -6,7 +6,13 @@ from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import get_cross_sections
-from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
+from gdsfactory.technology import (
+    LayerLevel,
+    LayerMap,
+    LayerStack,
+    LayerViews,
+    LogicalLayer,
+)
 from gdsfactory.typings import ConnectivitySpec, Layer
 
 from cspdk.sin300.config import PATH
@@ -63,7 +69,7 @@ def get_layer_stack(
     return LayerStack(
         layers=dict(
             nitride=LayerLevel(
-                layer=LAYER.NITRIDE,
+                layer=LogicalLayer(layer=LAYER.NITRIDE),
                 thickness=thickness_nitride,
                 zmin=0.0,
                 material="sin",
@@ -72,7 +78,7 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             nitride_etch=LayerLevel(
-                layer=LAYER.NITRIDE_ETCH,
+                layer=LogicalLayer(layer=LAYER.NITRIDE_ETCH),
                 thickness=thickness_nitride,
                 zmin=0.0,
                 material="sin",
@@ -81,14 +87,14 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             heater=LayerLevel(
-                layer=LAYER.HEATER,
+                layer=LogicalLayer(layer=LAYER.HEATER),
                 thickness=thickness_heater,
                 zmin=zmin_heater,
                 material="TiN",
                 info={"mesh_order": 1},
             ),
             metal=LayerLevel(
-                layer=LAYER.PAD,
+                layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
                 material="Aluminum",
