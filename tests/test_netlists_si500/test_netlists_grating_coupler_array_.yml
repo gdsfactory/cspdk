@@ -1,5 +1,5 @@
 instances:
-  grating_coupler_rectang_ce4c928f_-190500_-191957:
+  grating_coupler_rectang_ce4c928f_-190500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -20,7 +20,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-  grating_coupler_rectang_ce4c928f_-317500_-191957:
+  grating_coupler_rectang_ce4c928f_-317500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -41,7 +41,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-  grating_coupler_rectang_ce4c928f_-63500_-191957:
+  grating_coupler_rectang_ce4c928f_-63500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -62,7 +62,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-  grating_coupler_rectang_ce4c928f_190500_-191957:
+  grating_coupler_rectang_ce4c928f_190500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -83,7 +83,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-  grating_coupler_rectang_ce4c928f_317500_-191957:
+  grating_coupler_rectang_ce4c928f_317500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -104,7 +104,7 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-  grating_coupler_rectang_ce4c928f_63500_-191957:
+  grating_coupler_rectang_ce4c928f_63500_-191959:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -125,67 +125,67 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-links: []
 name: grating_coupler_array_G_50fdf2c0
+nets: []
 placements:
-  grating_coupler_rectang_ce4c928f_-190500_-191957:
+  grating_coupler_rectang_ce4c928f_-190500_-191959:
     mirror: false
     rotation: 270
     x: -190.5
     y: 0
-  grating_coupler_rectang_ce4c928f_-317500_-191957:
+  grating_coupler_rectang_ce4c928f_-317500_-191959:
     mirror: false
     rotation: 270
     x: -317.5
     y: 0
-  grating_coupler_rectang_ce4c928f_-63500_-191957:
+  grating_coupler_rectang_ce4c928f_-63500_-191959:
     mirror: false
     rotation: 270
     x: -63.5
     y: 0
-  grating_coupler_rectang_ce4c928f_190500_-191957:
+  grating_coupler_rectang_ce4c928f_190500_-191959:
     mirror: false
     rotation: 270
     x: 190.5
     y: 0
-  grating_coupler_rectang_ce4c928f_317500_-191957:
+  grating_coupler_rectang_ce4c928f_317500_-191959:
     mirror: false
     rotation: 270
     x: 317.5
     y: 0
-  grating_coupler_rectang_ce4c928f_63500_-191957:
+  grating_coupler_rectang_ce4c928f_63500_-191959:
     mirror: false
     rotation: 270
     x: 63.5
     y: 0
 ports:
-  o0: grating_coupler_rectang_ce4c928f_-317500_-191957,o1
-  o1: grating_coupler_rectang_ce4c928f_-190500_-191957,o1
-  o2: grating_coupler_rectang_ce4c928f_-63500_-191957,o1
-  o3: grating_coupler_rectang_ce4c928f_63500_-191957,o1
-  o4: grating_coupler_rectang_ce4c928f_190500_-191957,o1
-  o5: grating_coupler_rectang_ce4c928f_317500_-191957,o1
+  o0: grating_coupler_rectang_ce4c928f_-317500_-191959,o1
+  o1: grating_coupler_rectang_ce4c928f_-190500_-191959,o1
+  o2: grating_coupler_rectang_ce4c928f_-63500_-191959,o1
+  o3: grating_coupler_rectang_ce4c928f_63500_-191959,o1
+  o4: grating_coupler_rectang_ce4c928f_190500_-191959,o1
+  o5: grating_coupler_rectang_ce4c928f_317500_-191959,o1
 warnings:
   vertical_te:
     unconnected_ports:
     - message: 6 unconnected vertical_te ports!
       ports:
-      - grating_coupler_rectang_ce4c928f_-317500_-191957,o2
-      - grating_coupler_rectang_ce4c928f_-190500_-191957,o2
-      - grating_coupler_rectang_ce4c928f_-63500_-191957,o2
-      - grating_coupler_rectang_ce4c928f_63500_-191957,o2
-      - grating_coupler_rectang_ce4c928f_190500_-191957,o2
-      - grating_coupler_rectang_ce4c928f_317500_-191957,o2
+      - grating_coupler_rectang_ce4c928f_-317500_-191959,o2
+      - grating_coupler_rectang_ce4c928f_-190500_-191959,o2
+      - grating_coupler_rectang_ce4c928f_-63500_-191959,o2
+      - grating_coupler_rectang_ce4c928f_63500_-191959,o2
+      - grating_coupler_rectang_ce4c928f_190500_-191959,o2
+      - grating_coupler_rectang_ce4c928f_317500_-191959,o2
       values:
       - - -317500
-        - -371886
+        - -366890
       - - -190500
-        - -371886
+        - -366890
       - - -63500
-        - -371886
+        - -366890
       - - 63500
-        - -371886
+        - -366890
       - - 190500
-        - -371886
+        - -366890
       - - 317500
-        - -371886
+        - -366890

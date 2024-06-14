@@ -125,8 +125,8 @@ instances:
       taper: taper
       wavelength: 1.55
       width_grating: 11
-links: []
 name: grating_coupler_array_G_5b73080f
+nets: []
 placements:
   grating_coupler_rectang_549b0438_-190500_-193743:
     mirror: false

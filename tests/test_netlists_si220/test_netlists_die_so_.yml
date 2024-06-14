@@ -970,8 +970,8 @@ instances:
       size:
       - 11470
       - 4900
-links: []
 name: die_with_pads_S11470_49_5113a27a
+nets: []
 placements:
   grating_coupler_array_G_b77e6e09_-5374925_0:
     mirror: false
