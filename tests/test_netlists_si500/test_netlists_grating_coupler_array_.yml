@@ -9,8 +9,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -30,8 +30,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -51,8 +51,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -72,8 +72,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -93,8 +93,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -114,8 +114,8 @@ instances:
       cross_section: xs_rc
       fiber_angle: 10
       fill_factor: 0.5
-      layer_grating: 9
-      layer_slab: 5
+      layer_grating: GRA
+      layer_slab: WG
       length_taper: 350
       n_periods: 60
       period: 0.57

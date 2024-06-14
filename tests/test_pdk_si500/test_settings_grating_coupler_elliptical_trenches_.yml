@@ -8,7 +8,7 @@ settings:
   end_straight_length: 0.2
   fiber_angle: 15
   grating_line_width: 0.315
-  layer_trench: 9
+  layer_trench: GRA
   n_periods: 30
   ncladding: 1.443
   neff: 2.638

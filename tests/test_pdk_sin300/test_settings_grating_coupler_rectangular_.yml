@@ -7,8 +7,8 @@ settings:
   cross_section: xs_nc
   fiber_angle: 20
   fill_factor: 0.5
-  layer_grating: 41
-  layer_slab: 40
+  layer_grating: NITRIDE_ETCH
+  layer_slab: NITRIDE
   length_taper: 200
   n_periods: 30
   period: 0.75
