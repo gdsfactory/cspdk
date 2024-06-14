@@ -1,9 +1,21 @@
-function: mzi_sc
 info: {}
-module: cspdk.si220.cells
-name: mzi_sc
+name: mzi_DL10_LY2_LX0p1_BFbe_7967d40c
 settings:
-  add_electrical_ports_bot: true
-  delta_length: 10.0
+  add_optical_ports_arms: false
+  auto_rename_ports: true
+  bend: Fbend_euler_Mgdsfactorypcomponentspbend_euler_SCSxs_sc
+  combiner: Fmmi2x2_Mgdsfactorypcomponentspmmi2x2_SCSxs_sc_WM6_WT1p5_LT20_LM42p5_GM0p5
+  cross_section: xs_sc
+  delta_length: 10
   length_x: 0.1
-  length_y: 2.0
+  length_y: 2
+  min_length: 0.01
+  mirror_bot: false
+  nbends: 2
+  port_e0_combiner: o4
+  port_e0_splitter: o3
+  port_e1_combiner: o3
+  port_e1_splitter: o2
+  splitter: Fmmi1x2_Mgdsfactorypcomponentspmmi1x2_SCSxs_sc_WM6_WT1p5_LT20_LM31p8_GM1p64
+  straight: Fwrapper_autocell_Mfunctools_SCSxs_sc
+  with_splitter: true

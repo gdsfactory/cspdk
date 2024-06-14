@@ -1,0 +1,11 @@
+info: {}
+name: mmi2x2_WNone_WT5p5_LT50_f3606768
+settings:
+  cross_section: xs_nc
+  gap_mmi: 0.25
+  length_mmi: 5.5
+  length_taper: 50
+  straight: straight
+  taper: taper
+  width_mmi: 12
+  width_taper: 5.5

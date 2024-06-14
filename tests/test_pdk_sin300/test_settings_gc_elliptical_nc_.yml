@@ -1,13 +1,20 @@
-function: gc_elliptical_nc
 info:
   period: 1.383
   polarization: te
   wavelength: 1.53
-module: cspdk.sin300.cells
-name: gc_elliptical_nc
+name: gc_elliptical_nc_GLW0p3_00e0f57a
 settings:
   cross_section: xs_nc
+  end_straight_length: 0.2
   fiber_angle: 20
   grating_line_width: 0.343
+  layer_trench: 4
+  n_periods: 30
+  ncladding: 1.443
   neff: 1.6
+  p_start: 26
+  polarization: te
+  taper_angle: 30
+  taper_length: 16.6
+  trenches_extra_angle: 9
   wavelength: 1.53

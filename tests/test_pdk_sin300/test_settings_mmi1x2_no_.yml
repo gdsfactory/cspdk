@@ -1,5 +1,11 @@
-function: mmi1x2_no
 info: {}
-module: cspdk.sin300.cells
-name: mmi1x2_no
-settings: {}
+name: mmi1x2_WNone_WT5p5_LT50_b85ada54
+settings:
+  cross_section: xs_no
+  gap_mmi: 0.4
+  length_mmi: 42
+  length_taper: 50
+  straight: straight
+  taper: taper
+  width_mmi: 12
+  width_taper: 5.5

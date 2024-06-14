@@ -1,5 +1,11 @@
-function: mmi2x2_ro
 info: {}
-module: cspdk.si220.cells
-name: mmi2x2_ro
-settings: {}
+name: mmi2x2_WNone_WT1p5_LT20_cd086eb5
+settings:
+  cross_section: xs_ro
+  gap_mmi: 0.53
+  length_mmi: 55
+  length_taper: 20
+  straight: straight
+  taper: taper
+  width_mmi: 6
+  width_taper: 1.5

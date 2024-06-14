@@ -1,16 +1,12 @@
-function: grating_coupler_array
 info: {}
-module: cspdk.sin300.cells
-name: grating_coupler_array
+name: grating_coupler_array_G_6eb7d8a9
 settings:
-  bend:
-    function: _bend
+  centered: true
   cross_section: xs_nc
-  grating_coupler:
-    function: gc_rectangular_nc
-  grating_coupler_spacing: 0.0
+  grating_coupler: grating_coupler_rectangular_nc
   n: 6
-  pitch: 127.0
+  pitch: 127
   port_name: o1
-  rotation: 0.0
+  rotation: -90
+  straight_to_grating_spacing: 10
   with_loopback: false

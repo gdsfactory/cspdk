@@ -1,8 +1,20 @@
-function: gc_rectangular_sc
 info:
   fiber_angle: 10
   polarization: te
   wavelength: 1.55
-module: cspdk.si220.cells
 name: gc_rectangular_sc
-settings: {}
+settings:
+  cross_section: xs_sc
+  fiber_angle: 10
+  fill_factor: 0.5
+  layer_grating: 4
+  layer_slab: 0
+  length_taper: 350
+  n_periods: 60
+  period: 0.63
+  polarization: te
+  slab_offset: 0
+  slab_xmin: -1
+  taper: taper
+  wavelength: 1.55
+  width_grating: 11

@@ -1,5 +1,1179 @@
 connections: {}
-instances: {}
+instances:
+  rectangle_S0p315_11_LGR_ecc5f5d2_350158_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_350788_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_351418_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_352048_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_352678_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_353308_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_353938_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_354568_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_355198_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_355828_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_356458_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_357088_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_357718_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_358348_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_358978_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_359608_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_360238_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_360868_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_361498_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_362128_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_362758_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_363388_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_364018_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_364648_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_365278_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_365908_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_366538_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_367168_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_367798_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_368428_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_369058_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_369688_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_370318_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_370948_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_371578_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_372208_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_372838_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_373468_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_374098_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_374728_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_375358_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_375988_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_376618_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_377248_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_377878_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_378508_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_379138_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_379768_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_380398_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_381028_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_381658_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_382288_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_382918_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_383548_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_384178_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_384808_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_385438_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_386068_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_386698_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  rectangle_S0p315_11_LGR_ecc5f5d2_387328_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: false
+      layer: 4
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      size:
+      - 0.315
+      - 11
+  taper_L350_W0p45_W11_PN_5e12f21e_175000_0:
+    component: taper
+    info:
+      length: 350
+      width1: 0.45
+      width2: 11
+    settings:
+      cross_section: xs_sc
+      length: 350
+      port_names:
+      - o1
+      - o2
+      port_types:
+      - optical
+      - optical
+      width1: 0.45
+      width2: 11
+      with_bbox: true
+      with_two_ports: true
 name: gc_rectangular_sc
-placements: {}
-ports: {}
+placements:
+  rectangle_S0p315_11_LGR_ecc5f5d2_350158_0:
+    mirror: false
+    rotation: 0
+    x: 350
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_350788_0:
+    mirror: false
+    rotation: 0
+    x: 350.63
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_351418_0:
+    mirror: false
+    rotation: 0
+    x: 351.26
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_352048_0:
+    mirror: false
+    rotation: 0
+    x: 351.89
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_352678_0:
+    mirror: false
+    rotation: 0
+    x: 352.52
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_353308_0:
+    mirror: false
+    rotation: 0
+    x: 353.15
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_353938_0:
+    mirror: false
+    rotation: 0
+    x: 353.78
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_354568_0:
+    mirror: false
+    rotation: 0
+    x: 354.41
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_355198_0:
+    mirror: false
+    rotation: 0
+    x: 355.04
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_355828_0:
+    mirror: false
+    rotation: 0
+    x: 355.67
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_356458_0:
+    mirror: false
+    rotation: 0
+    x: 356.3
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_357088_0:
+    mirror: false
+    rotation: 0
+    x: 356.93
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_357718_0:
+    mirror: false
+    rotation: 0
+    x: 357.56
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_358348_0:
+    mirror: false
+    rotation: 0
+    x: 358.19
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_358978_0:
+    mirror: false
+    rotation: 0
+    x: 358.82
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_359608_0:
+    mirror: false
+    rotation: 0
+    x: 359.45
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_360238_0:
+    mirror: false
+    rotation: 0
+    x: 360.08
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_360868_0:
+    mirror: false
+    rotation: 0
+    x: 360.71
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_361498_0:
+    mirror: false
+    rotation: 0
+    x: 361.34
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_362128_0:
+    mirror: false
+    rotation: 0
+    x: 361.97
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_362758_0:
+    mirror: false
+    rotation: 0
+    x: 362.6
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_363388_0:
+    mirror: false
+    rotation: 0
+    x: 363.23
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_364018_0:
+    mirror: false
+    rotation: 0
+    x: 363.86
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_364648_0:
+    mirror: false
+    rotation: 0
+    x: 364.49
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_365278_0:
+    mirror: false
+    rotation: 0
+    x: 365.12
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_365908_0:
+    mirror: false
+    rotation: 0
+    x: 365.75
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_366538_0:
+    mirror: false
+    rotation: 0
+    x: 366.38
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_367168_0:
+    mirror: false
+    rotation: 0
+    x: 367.01
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_367798_0:
+    mirror: false
+    rotation: 0
+    x: 367.64
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_368428_0:
+    mirror: false
+    rotation: 0
+    x: 368.27
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_369058_0:
+    mirror: false
+    rotation: 0
+    x: 368.9
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_369688_0:
+    mirror: false
+    rotation: 0
+    x: 369.53
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_370318_0:
+    mirror: false
+    rotation: 0
+    x: 370.16
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_370948_0:
+    mirror: false
+    rotation: 0
+    x: 370.79
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_371578_0:
+    mirror: false
+    rotation: 0
+    x: 371.42
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_372208_0:
+    mirror: false
+    rotation: 0
+    x: 372.05
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_372838_0:
+    mirror: false
+    rotation: 0
+    x: 372.68
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_373468_0:
+    mirror: false
+    rotation: 0
+    x: 373.31
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_374098_0:
+    mirror: false
+    rotation: 0
+    x: 373.94
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_374728_0:
+    mirror: false
+    rotation: 0
+    x: 374.57
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_375358_0:
+    mirror: false
+    rotation: 0
+    x: 375.2
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_375988_0:
+    mirror: false
+    rotation: 0
+    x: 375.83
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_376618_0:
+    mirror: false
+    rotation: 0
+    x: 376.46
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_377248_0:
+    mirror: false
+    rotation: 0
+    x: 377.09
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_377878_0:
+    mirror: false
+    rotation: 0
+    x: 377.72
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_378508_0:
+    mirror: false
+    rotation: 0
+    x: 378.35
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_379138_0:
+    mirror: false
+    rotation: 0
+    x: 378.98
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_379768_0:
+    mirror: false
+    rotation: 0
+    x: 379.61
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_380398_0:
+    mirror: false
+    rotation: 0
+    x: 380.24
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_381028_0:
+    mirror: false
+    rotation: 0
+    x: 380.87
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_381658_0:
+    mirror: false
+    rotation: 0
+    x: 381.5
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_382288_0:
+    mirror: false
+    rotation: 0
+    x: 382.13
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_382918_0:
+    mirror: false
+    rotation: 0
+    x: 382.76
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_383548_0:
+    mirror: false
+    rotation: 0
+    x: 383.39
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_384178_0:
+    mirror: false
+    rotation: 0
+    x: 384.02
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_384808_0:
+    mirror: false
+    rotation: 0
+    x: 384.65
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_385438_0:
+    mirror: false
+    rotation: 0
+    x: 385.28
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_386068_0:
+    mirror: false
+    rotation: 0
+    x: 385.91
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_386698_0:
+    mirror: false
+    rotation: 0
+    x: 386.54
+    y: -5.5
+  rectangle_S0p315_11_LGR_ecc5f5d2_387328_0:
+    mirror: false
+    rotation: 0
+    x: 387.17
+    y: -5.5
+  taper_L350_W0p45_W11_PN_5e12f21e_175000_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports:
+  o1: taper_L350_W0p45_W11_PN_5e12f21e_175000_0,o1
+warnings:
+  optical:
+    unconnected_ports:
+    - message: 1 unconnected optical ports!
+      ports:
+      - taper_L350_W0p45_W11_PN_5e12f21e_175000_0,o2
+      values:
+      - - 350000
+        - 0

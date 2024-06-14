@@ -1,11 +1,20 @@
-function: gc_elliptical_sc
 info:
-  period: 0.6759999999999999
+  period: 0.676
   polarization: te
   wavelength: 1.53
-module: cspdk.si220.cells
-name: gc_elliptical_sc
+name: gc_elliptical_sc_GLW0p3_724c8e26
 settings:
+  cross_section: xs_sc
+  end_straight_length: 0.2
   fiber_angle: 15
   grating_line_width: 0.343
+  layer_trench: 4
+  n_periods: 30
+  ncladding: 1.443
+  neff: 2.638
+  p_start: 26
+  polarization: te
+  taper_angle: 30
+  taper_length: 16.6
+  trenches_extra_angle: 9
   wavelength: 1.53

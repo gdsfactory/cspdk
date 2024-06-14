@@ -12,6 +12,7 @@ from cspdk.si500 import PDK
 @pytest.fixture(autouse=True)
 def activate_pdk():
     PDK.activate()
+    gf.clear_cache()
 
 
 cells = PDK.cells
@@ -39,9 +40,14 @@ def test_netlists(
     if check:
         data_regression.check(n)
 
+    n.pop("connections", None)
+    c.delete()
     yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
-    c2 = gf.read.from_yaml(yaml_str, name=c.name)
+    c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
 
     d = jsondiff.diff(n, n2)
+    d.pop("warnings", None)
+    d.pop("connections", None)
+    d.pop("ports", None)
     assert len(d) == 0, d

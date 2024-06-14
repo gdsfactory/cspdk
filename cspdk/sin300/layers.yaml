@@ -24,7 +24,7 @@ LayerViews:
   FLOORPLAN:
     layer: [99, 0]
     layer_in_name: true
-    color: "black"
+    color: "green"
     hatch_pattern: hollow
   LABEL_SETTINGS:
     layer: [100, 0]

@@ -1,0 +1,20 @@
+info:
+  fiber_angle: 20
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_rectang_71e4ebaa
+settings:
+  cross_section: xs_no
+  fiber_angle: 20
+  fill_factor: 0.5
+  layer_grating: NITRIDE_ETCH
+  layer_slab: NITRIDE
+  length_taper: 200
+  n_periods: 30
+  period: 0.964
+  polarization: te
+  slab_offset: 0
+  slab_xmin: -1
+  taper: taper
+  wavelength: 1.55
+  width_grating: 11

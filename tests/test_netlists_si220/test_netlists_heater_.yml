@@ -1,5 +1,5 @@
-connections: {}
 instances: {}
-name: heater$1
+name: heater
+nets: []
 placements: {}
 ports: {}

@@ -1,2597 +1,2158 @@
-connections: {}
 instances:
-  grating_coupler_array_1:
+  grating_coupler_array_G_718c80bf_-5444665_0:
     component: grating_coupler_array
     info: {}
-    settings:
-      bend:
-        function: _bend
-      cross_section: xs_nc
-      grating_coupler:
-        function: gc_rectangular_nc
-      grating_coupler_spacing: 0.0
-      n: 14
-      pitch: 250.0
-      port_name: o1
-      rotation: 90
-      with_loopback: true
-  grating_coupler_array_2:
-    component: grating_coupler_array
-    info: {}
-    settings:
-      bend:
-        function: _bend
-      cross_section: xs_nc
-      grating_coupler:
-        function: gc_rectangular_nc
-      grating_coupler_spacing: 0.0
-      n: 14
-      pitch: 250.0
-      port_name: o1
-      rotation: 90
-      with_loopback: true
-  pad_1:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_10:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_11:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_12:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_13:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_14:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_15:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_16:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_17:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_18:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_19:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_2:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_20:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_21:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_22:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_23:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_24:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_25:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_26:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_27:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_28:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_29:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_3:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_30:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_31:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_32:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_33:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_34:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_35:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_36:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_37:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_38:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_39:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_4:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_40:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_41:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_42:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_43:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_44:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_45:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_46:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_47:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_48:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_49:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_5:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_50:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_51:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_52:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_53:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_54:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_55:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_56:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_57:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_58:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_59:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_6:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_60:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_61:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_62:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_7:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_8:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  pad_9:
-    component: pad
-    info:
-      layer:
-      - 41
-      - 0
-      size:
-      - 100.0
-      - 100.0
-      xsize: 100.0
-      ysize: 100.0
-    settings:
-      bbox_layers: null
-      bbox_offsets: null
-      layer:
-      - 41
-      - 0
-      port_inclusion: 0.0
-      port_orientation: null
-      size:
-      - 100.0
-      - 100.0
-  rectangle_1:
-    component: rectangle
-    info:
-      area: 56203000.0
     settings:
       centered: true
-      layer:
-      - 99
-      - 0
-      port_orientations:
-      - 180.0
-      - 90.0
-      - 0.0
-      - -90.0
-      port_type: electrical
-      round_corners_east_west: false
-      round_corners_north_south: false
+      cross_section: xs_nc
+      grating_coupler: grating_coupler_rectangular_nc
+      n: 14
+      pitch: 250
+      port_name: o1
+      rotation: -90
+      straight_to_grating_spacing: 10
+      with_loopback: true
+  grating_coupler_array_G_718c80bf_5444665_0:
+    component: grating_coupler_array
+    info: {}
+    settings:
+      centered: true
+      cross_section: xs_nc
+      grating_coupler: grating_coupler_rectangular_nc
+      n: 14
+      pitch: 250
+      port_name: o1
+      rotation: -90
+      straight_to_grating_spacing: 10
+      with_loopback: true
+  pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000:
+    component: pad
+    info:
       size:
-      - 11470.0
-      - 4900.0
-name: die_nc
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 100
+      - 100
+  rectangle_S11470_4900_L_e2400442_0_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: true
+      layer: FLOORPLAN
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: electrical
+      size:
+      - 11470
+      - 4900
+name: die_with_pads_S11470_49_3c93ad9b
+nets: []
 placements:
-  grating_coupler_array_1:
-    mirror: 0
-    rotation: 90
-    x: -4962.969
-    y: -1625.0
-  grating_coupler_array_2:
-    mirror: 0
+  grating_coupler_array_G_718c80bf_-5444665_0:
+    mirror: false
     rotation: 270
-    x: 4677.093
-    y: 1625.0
-  pad_1:
-    mirror: 0
+    x: -5329.93
+    y: 0
+  grating_coupler_array_G_718c80bf_5444665_0:
+    mirror: false
+    rotation: 90
+    x: 5329.93
+    y: 0
+  pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000:
+    mirror: false
     rotation: 0
-    x: -4565.0
-    y: 2250.0
-  pad_10:
-    mirror: 0
+    x: -1150
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000:
+    mirror: false
     rotation: 0
-    x: -1865.0
-    y: 2250.0
-  pad_11:
-    mirror: 0
+    x: -1150
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000:
+    mirror: false
     rotation: 0
-    x: -1565.0
-    y: 2250.0
-  pad_12:
-    mirror: 0
+    x: -1450
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000:
+    mirror: false
     rotation: 0
-    x: -1265.0
-    y: 2250.0
-  pad_13:
-    mirror: 0
+    x: -1450
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000:
+    mirror: false
     rotation: 0
-    x: -965.0
-    y: 2250.0
-  pad_14:
-    mirror: 0
+    x: -1750
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000:
+    mirror: false
     rotation: 0
-    x: -665.0
-    y: 2250.0
-  pad_15:
-    mirror: 0
+    x: -1750
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000:
+    mirror: false
     rotation: 0
-    x: -365.0
-    y: 2250.0
-  pad_16:
-    mirror: 0
+    x: -2050
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000:
+    mirror: false
     rotation: 0
-    x: -65.0
-    y: 2250.0
-  pad_17:
-    mirror: 0
+    x: -2050
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000:
+    mirror: false
     rotation: 0
-    x: 235.0
-    y: 2250.0
-  pad_18:
-    mirror: 0
+    x: -2350
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000:
+    mirror: false
     rotation: 0
-    x: 535.0
-    y: 2250.0
-  pad_19:
-    mirror: 0
+    x: -2350
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000:
+    mirror: false
     rotation: 0
-    x: 835.0
-    y: 2250.0
-  pad_2:
-    mirror: 0
+    x: -250
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000:
+    mirror: false
     rotation: 0
-    x: -4265.0
-    y: 2250.0
-  pad_20:
-    mirror: 0
+    x: -250
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000:
+    mirror: false
     rotation: 0
-    x: 1135.0
-    y: 2250.0
-  pad_21:
-    mirror: 0
+    x: -2650
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000:
+    mirror: false
     rotation: 0
-    x: 1435.0
-    y: 2250.0
-  pad_22:
-    mirror: 0
+    x: -2650
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000:
+    mirror: false
     rotation: 0
-    x: 1735.0
-    y: 2250.0
-  pad_23:
-    mirror: 0
+    x: -2950
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000:
+    mirror: false
     rotation: 0
-    x: 2035.0
-    y: 2250.0
-  pad_24:
-    mirror: 0
+    x: -2950
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000:
+    mirror: false
     rotation: 0
-    x: 2335.0
-    y: 2250.0
-  pad_25:
-    mirror: 0
+    x: -3250
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000:
+    mirror: false
     rotation: 0
-    x: 2635.0
-    y: 2250.0
-  pad_26:
-    mirror: 0
+    x: -3250
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000:
+    mirror: false
     rotation: 0
-    x: 2935.0
-    y: 2250.0
-  pad_27:
-    mirror: 0
+    x: -3550
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000:
+    mirror: false
     rotation: 0
-    x: 3235.0
-    y: 2250.0
-  pad_28:
-    mirror: 0
+    x: -3550
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000:
+    mirror: false
     rotation: 0
-    x: 3535.0
-    y: 2250.0
-  pad_29:
-    mirror: 0
+    x: -3850
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000:
+    mirror: false
     rotation: 0
-    x: 3835.0
-    y: 2250.0
-  pad_3:
-    mirror: 0
+    x: -3850
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000:
+    mirror: false
     rotation: 0
-    x: -3965.0
-    y: 2250.0
-  pad_30:
-    mirror: 0
+    x: -4150
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000:
+    mirror: false
     rotation: 0
-    x: 4135.0
-    y: 2250.0
-  pad_31:
-    mirror: 0
+    x: -4150
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000:
+    mirror: false
     rotation: 0
-    x: 4435.0
-    y: 2250.0
-  pad_32:
-    mirror: 0
+    x: -4450
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000:
+    mirror: false
     rotation: 0
-    x: -4565.0
-    y: -2250.0
-  pad_33:
-    mirror: 0
+    x: -4450
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000:
+    mirror: false
     rotation: 0
-    x: -4265.0
-    y: -2250.0
-  pad_34:
-    mirror: 0
+    x: -550
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000:
+    mirror: false
     rotation: 0
-    x: -3965.0
-    y: -2250.0
-  pad_35:
-    mirror: 0
+    x: -550
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000:
+    mirror: false
     rotation: 0
-    x: -3665.0
-    y: -2250.0
-  pad_36:
-    mirror: 0
+    x: -850
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000:
+    mirror: false
     rotation: 0
-    x: -3365.0
-    y: -2250.0
-  pad_37:
-    mirror: 0
+    x: -850
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000:
+    mirror: false
     rotation: 0
-    x: -3065.0
-    y: -2250.0
-  pad_38:
-    mirror: 0
+    x: 1250
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000:
+    mirror: false
     rotation: 0
-    x: -2765.0
-    y: -2250.0
-  pad_39:
-    mirror: 0
+    x: 1250
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000:
+    mirror: false
     rotation: 0
-    x: -2465.0
-    y: -2250.0
-  pad_4:
-    mirror: 0
+    x: 1550
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000:
+    mirror: false
     rotation: 0
-    x: -3665.0
-    y: 2250.0
-  pad_40:
-    mirror: 0
+    x: 1550
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000:
+    mirror: false
     rotation: 0
-    x: -2165.0
-    y: -2250.0
-  pad_41:
-    mirror: 0
+    x: 1850
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000:
+    mirror: false
     rotation: 0
-    x: -1865.0
-    y: -2250.0
-  pad_42:
-    mirror: 0
+    x: 1850
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000:
+    mirror: false
     rotation: 0
-    x: -1565.0
-    y: -2250.0
-  pad_43:
-    mirror: 0
+    x: 2150
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000:
+    mirror: false
     rotation: 0
-    x: -1265.0
-    y: -2250.0
-  pad_44:
-    mirror: 0
+    x: 2150
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000:
+    mirror: false
     rotation: 0
-    x: -965.0
-    y: -2250.0
-  pad_45:
-    mirror: 0
+    x: 2450
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000:
+    mirror: false
     rotation: 0
-    x: -665.0
-    y: -2250.0
-  pad_46:
-    mirror: 0
+    x: 2450
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000:
+    mirror: false
     rotation: 0
-    x: -365.0
-    y: -2250.0
-  pad_47:
-    mirror: 0
+    x: 2750
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000:
+    mirror: false
     rotation: 0
-    x: -65.0
-    y: -2250.0
-  pad_48:
-    mirror: 0
+    x: 2750
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000:
+    mirror: false
     rotation: 0
-    x: 235.0
-    y: -2250.0
-  pad_49:
-    mirror: 0
+    x: 3050
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000:
+    mirror: false
     rotation: 0
-    x: 535.0
-    y: -2250.0
-  pad_5:
-    mirror: 0
+    x: 3050
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000:
+    mirror: false
     rotation: 0
-    x: -3365.0
-    y: 2250.0
-  pad_50:
-    mirror: 0
+    x: 3350
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000:
+    mirror: false
     rotation: 0
-    x: 835.0
-    y: -2250.0
-  pad_51:
-    mirror: 0
+    x: 3350
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000:
+    mirror: false
     rotation: 0
-    x: 1135.0
-    y: -2250.0
-  pad_52:
-    mirror: 0
+    x: 350
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000:
+    mirror: false
     rotation: 0
-    x: 1435.0
-    y: -2250.0
-  pad_53:
-    mirror: 0
+    x: 350
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000:
+    mirror: false
     rotation: 0
-    x: 1735.0
-    y: -2250.0
-  pad_54:
-    mirror: 0
+    x: 3650
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000:
+    mirror: false
     rotation: 0
-    x: 2035.0
-    y: -2250.0
-  pad_55:
-    mirror: 0
+    x: 3650
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000:
+    mirror: false
     rotation: 0
-    x: 2335.0
-    y: -2250.0
-  pad_56:
-    mirror: 0
+    x: 3950
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000:
+    mirror: false
     rotation: 0
-    x: 2635.0
-    y: -2250.0
-  pad_57:
-    mirror: 0
+    x: 3950
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000:
+    mirror: false
     rotation: 0
-    x: 2935.0
-    y: -2250.0
-  pad_58:
-    mirror: 0
+    x: 4250
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000:
+    mirror: false
     rotation: 0
-    x: 3235.0
-    y: -2250.0
-  pad_59:
-    mirror: 0
+    x: 4250
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000:
+    mirror: false
     rotation: 0
-    x: 3535.0
-    y: -2250.0
-  pad_6:
-    mirror: 0
+    x: 4550
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000:
+    mirror: false
     rotation: 0
-    x: -3065.0
-    y: 2250.0
-  pad_60:
-    mirror: 0
+    x: 4550
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000:
+    mirror: false
     rotation: 0
-    x: 3835.0
-    y: -2250.0
-  pad_61:
-    mirror: 0
+    x: 50
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000:
+    mirror: false
     rotation: 0
-    x: 4135.0
-    y: -2250.0
-  pad_62:
-    mirror: 0
+    x: 50
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000:
+    mirror: false
     rotation: 0
-    x: 4435.0
-    y: -2250.0
-  pad_7:
-    mirror: 0
+    x: 650
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000:
+    mirror: false
     rotation: 0
-    x: -2765.0
-    y: 2250.0
-  pad_8:
-    mirror: 0
+    x: 650
+    y: 2250
+  pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000:
+    mirror: false
     rotation: 0
-    x: -2465.0
-    y: 2250.0
-  pad_9:
-    mirror: 0
+    x: 950
+    y: -2250
+  pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000:
+    mirror: false
     rotation: 0
-    x: -2165.0
-    y: 2250.0
-  rectangle_1:
-    mirror: 0
+    x: 950
+    y: 2250
+  rectangle_S11470_4900_L_e2400442_0_0:
+    mirror: false
     rotation: 0
-    x: 0.0
-    y: 0.0
+    x: 0
+    y: 0
 ports:
-  e1: pad_32,e2
-  e10: pad_41,e2
-  e11: pad_42,e2
-  e12: pad_43,e2
-  e13: pad_44,e2
-  e14: pad_45,e2
-  e15: pad_46,e2
-  e16: pad_47,e2
-  e17: pad_48,e2
-  e18: pad_49,e2
-  e19: pad_50,e2
-  e2: pad_33,e2
-  e20: pad_51,e2
-  e21: pad_52,e2
-  e22: pad_53,e2
-  e23: pad_54,e2
-  e24: pad_55,e2
-  e25: pad_56,e2
-  e26: pad_57,e2
-  e27: pad_58,e2
-  e28: pad_59,e2
-  e29: pad_60,e2
-  e3: pad_34,e2
-  e30: pad_61,e2
-  e31: pad_62,e2
-  e32: pad_31,e4
-  e33: pad_30,e4
-  e34: pad_29,e4
-  e35: pad_28,e4
-  e36: pad_27,e4
-  e37: pad_26,e4
-  e38: pad_25,e4
-  e39: pad_24,e4
-  e4: pad_35,e2
-  e40: pad_23,e4
-  e41: pad_22,e4
-  e42: pad_21,e4
-  e43: pad_20,e4
-  e44: pad_19,e4
-  e45: pad_18,e4
-  e46: pad_17,e4
-  e47: pad_16,e4
-  e48: pad_15,e4
-  e49: pad_14,e4
-  e5: pad_36,e2
-  e50: pad_13,e4
-  e51: pad_12,e4
-  e52: pad_11,e4
-  e53: pad_10,e4
-  e54: pad_9,e4
-  e55: pad_8,e4
-  e56: pad_7,e4
-  e57: pad_6,e4
-  e58: pad_5,e4
-  e59: pad_4,e4
-  e6: pad_37,e2
-  e60: pad_3,e4
-  e61: pad_2,e4
-  e62: pad_1,e4
-  e7: pad_38,e2
-  e8: pad_39,e2
-  e9: pad_40,e2
-  o1: grating_coupler_array_2,o13
-  o10: grating_coupler_array_2,o4
-  o11: grating_coupler_array_2,o3
-  o12: grating_coupler_array_2,o2
-  o13: grating_coupler_array_1,o13
-  o14: grating_coupler_array_1,o12
-  o15: grating_coupler_array_1,o11
-  o16: grating_coupler_array_1,o10
-  o17: grating_coupler_array_1,o9
-  o18: grating_coupler_array_1,o8
-  o19: grating_coupler_array_1,o7
-  o2: grating_coupler_array_2,o12
-  o20: grating_coupler_array_1,o6
-  o21: grating_coupler_array_1,o5
-  o22: grating_coupler_array_1,o4
-  o23: grating_coupler_array_1,o3
-  o24: grating_coupler_array_1,o2
-  o3: grating_coupler_array_2,o11
-  o4: grating_coupler_array_2,o10
-  o5: grating_coupler_array_2,o9
-  o6: grating_coupler_array_2,o8
-  o7: grating_coupler_array_2,o7
-  o8: grating_coupler_array_2,o6
-  o9: grating_coupler_array_2,o5
+  e1: pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000,e2
+  e10: pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000,e2
+  e11: pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000,e2
+  e12: pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000,e2
+  e13: pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000,e2
+  e14: pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000,e2
+  e15: pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000,e2
+  e16: pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000,e2
+  e17: pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000,e2
+  e18: pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000,e2
+  e19: pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000,e2
+  e2: pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000,e2
+  e20: pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000,e2
+  e21: pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000,e2
+  e22: pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000,e2
+  e23: pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000,e2
+  e24: pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000,e2
+  e25: pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000,e2
+  e26: pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000,e2
+  e27: pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000,e2
+  e28: pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000,e2
+  e29: pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000,e2
+  e3: pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000,e2
+  e30: pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000,e2
+  e31: pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000,e2
+  e32: pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000,e4
+  e33: pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000,e4
+  e34: pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000,e4
+  e35: pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000,e4
+  e36: pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000,e4
+  e37: pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000,e4
+  e38: pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000,e4
+  e39: pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000,e4
+  e4: pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000,e2
+  e40: pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000,e4
+  e41: pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000,e4
+  e42: pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000,e4
+  e43: pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000,e4
+  e44: pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000,e4
+  e45: pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000,e4
+  e46: pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000,e4
+  e47: pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000,e4
+  e48: pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000,e4
+  e49: pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000,e4
+  e5: pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000,e2
+  e50: pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000,e4
+  e51: pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000,e4
+  e52: pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000,e4
+  e53: pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000,e4
+  e54: pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000,e4
+  e55: pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000,e4
+  e56: pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000,e4
+  e57: pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000,e4
+  e58: pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000,e4
+  e59: pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000,e4
+  e6: pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000,e2
+  e60: pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000,e4
+  e61: pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000,e4
+  e62: pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000,e4
+  e7: pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000,e2
+  e8: pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000,e2
+  e9: pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000,e2
+  o1: grating_coupler_array_G_718c80bf_5444665_0,o0
+  o10: grating_coupler_array_G_718c80bf_5444665_0,o9
+  o11: grating_coupler_array_G_718c80bf_5444665_0,o10
+  o12: grating_coupler_array_G_718c80bf_5444665_0,o11
+  o13: grating_coupler_array_G_718c80bf_5444665_0,o12
+  o14: grating_coupler_array_G_718c80bf_5444665_0,o13
+  o15: grating_coupler_array_G_718c80bf_-5444665_0,o0
+  o16: grating_coupler_array_G_718c80bf_-5444665_0,o1
+  o17: grating_coupler_array_G_718c80bf_-5444665_0,o2
+  o18: grating_coupler_array_G_718c80bf_-5444665_0,o3
+  o19: grating_coupler_array_G_718c80bf_-5444665_0,o4
+  o2: grating_coupler_array_G_718c80bf_5444665_0,o1
+  o20: grating_coupler_array_G_718c80bf_-5444665_0,o5
+  o21: grating_coupler_array_G_718c80bf_-5444665_0,o6
+  o22: grating_coupler_array_G_718c80bf_-5444665_0,o7
+  o23: grating_coupler_array_G_718c80bf_-5444665_0,o8
+  o24: grating_coupler_array_G_718c80bf_-5444665_0,o9
+  o25: grating_coupler_array_G_718c80bf_-5444665_0,o10
+  o26: grating_coupler_array_G_718c80bf_-5444665_0,o11
+  o27: grating_coupler_array_G_718c80bf_-5444665_0,o12
+  o28: grating_coupler_array_G_718c80bf_-5444665_0,o13
+  o3: grating_coupler_array_G_718c80bf_5444665_0,o2
+  o4: grating_coupler_array_G_718c80bf_5444665_0,o3
+  o5: grating_coupler_array_G_718c80bf_5444665_0,o4
+  o6: grating_coupler_array_G_718c80bf_5444665_0,o5
+  o7: grating_coupler_array_G_718c80bf_5444665_0,o6
+  o8: grating_coupler_array_G_718c80bf_5444665_0,o7
+  o9: grating_coupler_array_G_718c80bf_5444665_0,o8
 warnings:
   electrical:
     unconnected_ports:
     - message: 190 unconnected electrical ports!
       ports:
-      - rectangle_1,e1
-      - rectangle_1,e2
-      - rectangle_1,e3
-      - rectangle_1,e4
-      - pad_1,e1
-      - pad_1,e2
-      - pad_1,e3
-      - pad_2,e1
-      - pad_2,e2
-      - pad_2,e3
-      - pad_3,e1
-      - pad_3,e2
-      - pad_3,e3
-      - pad_4,e1
-      - pad_4,e2
-      - pad_4,e3
-      - pad_5,e1
-      - pad_5,e2
-      - pad_5,e3
-      - pad_6,e1
-      - pad_6,e2
-      - pad_6,e3
-      - pad_7,e1
-      - pad_7,e2
-      - pad_7,e3
-      - pad_8,e1
-      - pad_8,e2
-      - pad_8,e3
-      - pad_9,e1
-      - pad_9,e2
-      - pad_9,e3
-      - pad_10,e1
-      - pad_10,e2
-      - pad_10,e3
-      - pad_11,e1
-      - pad_11,e2
-      - pad_11,e3
-      - pad_12,e1
-      - pad_12,e2
-      - pad_12,e3
-      - pad_13,e1
-      - pad_13,e2
-      - pad_13,e3
-      - pad_14,e1
-      - pad_14,e2
-      - pad_14,e3
-      - pad_15,e1
-      - pad_15,e2
-      - pad_15,e3
-      - pad_16,e1
-      - pad_16,e2
-      - pad_16,e3
-      - pad_17,e1
-      - pad_17,e2
-      - pad_17,e3
-      - pad_18,e1
-      - pad_18,e2
-      - pad_18,e3
-      - pad_19,e1
-      - pad_19,e2
-      - pad_19,e3
-      - pad_20,e1
-      - pad_20,e2
-      - pad_20,e3
-      - pad_21,e1
-      - pad_21,e2
-      - pad_21,e3
-      - pad_22,e1
-      - pad_22,e2
-      - pad_22,e3
-      - pad_23,e1
-      - pad_23,e2
-      - pad_23,e3
-      - pad_24,e1
-      - pad_24,e2
-      - pad_24,e3
-      - pad_25,e1
-      - pad_25,e2
-      - pad_25,e3
-      - pad_26,e1
-      - pad_26,e2
-      - pad_26,e3
-      - pad_27,e1
-      - pad_27,e2
-      - pad_27,e3
-      - pad_28,e1
-      - pad_28,e2
-      - pad_28,e3
-      - pad_29,e1
-      - pad_29,e2
-      - pad_29,e3
-      - pad_30,e1
-      - pad_30,e2
-      - pad_30,e3
-      - pad_31,e1
-      - pad_31,e2
-      - pad_31,e3
-      - pad_32,e1
-      - pad_32,e3
-      - pad_32,e4
-      - pad_33,e1
-      - pad_33,e3
-      - pad_33,e4
-      - pad_34,e1
-      - pad_34,e3
-      - pad_34,e4
-      - pad_35,e1
-      - pad_35,e3
-      - pad_35,e4
-      - pad_36,e1
-      - pad_36,e3
-      - pad_36,e4
-      - pad_37,e1
-      - pad_37,e3
-      - pad_37,e4
-      - pad_38,e1
-      - pad_38,e3
-      - pad_38,e4
-      - pad_39,e1
-      - pad_39,e3
-      - pad_39,e4
-      - pad_40,e1
-      - pad_40,e3
-      - pad_40,e4
-      - pad_41,e1
-      - pad_41,e3
-      - pad_41,e4
-      - pad_42,e1
-      - pad_42,e3
-      - pad_42,e4
-      - pad_43,e1
-      - pad_43,e3
-      - pad_43,e4
-      - pad_44,e1
-      - pad_44,e3
-      - pad_44,e4
-      - pad_45,e1
-      - pad_45,e3
-      - pad_45,e4
-      - pad_46,e1
-      - pad_46,e3
-      - pad_46,e4
-      - pad_47,e1
-      - pad_47,e3
-      - pad_47,e4
-      - pad_48,e1
-      - pad_48,e3
-      - pad_48,e4
-      - pad_49,e1
-      - pad_49,e3
-      - pad_49,e4
-      - pad_50,e1
-      - pad_50,e3
-      - pad_50,e4
-      - pad_51,e1
-      - pad_51,e3
-      - pad_51,e4
-      - pad_52,e1
-      - pad_52,e3
-      - pad_52,e4
-      - pad_53,e1
-      - pad_53,e3
-      - pad_53,e4
-      - pad_54,e1
-      - pad_54,e3
-      - pad_54,e4
-      - pad_55,e1
-      - pad_55,e3
-      - pad_55,e4
-      - pad_56,e1
-      - pad_56,e3
-      - pad_56,e4
-      - pad_57,e1
-      - pad_57,e3
-      - pad_57,e4
-      - pad_58,e1
-      - pad_58,e3
-      - pad_58,e4
-      - pad_59,e1
-      - pad_59,e3
-      - pad_59,e4
-      - pad_60,e1
-      - pad_60,e3
-      - pad_60,e4
-      - pad_61,e1
-      - pad_61,e3
-      - pad_61,e4
-      - pad_62,e1
-      - pad_62,e3
-      - pad_62,e4
+      - rectangle_S11470_4900_L_e2400442_0_0,e1
+      - rectangle_S11470_4900_L_e2400442_0_0,e2
+      - rectangle_S11470_4900_L_e2400442_0_0,e3
+      - rectangle_S11470_4900_L_e2400442_0_0,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000,e2
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000,e4
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000,e1
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000,e3
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000,e4
       values:
-      - - -5735.0
-        - 0.0
-      - - 0.0
-        - 2450.0
-      - - 5735.0
-        - 0.0
-      - - 0.0
-        - -2450.0
-      - - -4615.0
-        - 2250.0
-      - - -4565.0
-        - 2300.0
-      - - -4515.0
-        - 2250.0
-      - - -4315.0
-        - 2250.0
-      - - -4265.0
-        - 2300.0
-      - - -4215.0
-        - 2250.0
-      - - -4015.0
-        - 2250.0
-      - - -3965.0
-        - 2300.0
-      - - -3915.0
-        - 2250.0
-      - - -3715.0
-        - 2250.0
-      - - -3665.0
-        - 2300.0
-      - - -3615.0
-        - 2250.0
-      - - -3415.0
-        - 2250.0
-      - - -3365.0
-        - 2300.0
-      - - -3315.0
-        - 2250.0
-      - - -3115.0
-        - 2250.0
-      - - -3065.0
-        - 2300.0
-      - - -3015.0
-        - 2250.0
-      - - -2815.0
-        - 2250.0
-      - - -2765.0
-        - 2300.0
-      - - -2715.0
-        - 2250.0
-      - - -2515.0
-        - 2250.0
-      - - -2465.0
-        - 2300.0
-      - - -2415.0
-        - 2250.0
-      - - -2215.0
-        - 2250.0
-      - - -2165.0
-        - 2300.0
-      - - -2115.0
-        - 2250.0
-      - - -1915.0
-        - 2250.0
-      - - -1865.0
-        - 2300.0
-      - - -1815.0
-        - 2250.0
-      - - -1615.0
-        - 2250.0
-      - - -1565.0
-        - 2300.0
-      - - -1515.0
-        - 2250.0
-      - - -1315.0
-        - 2250.0
-      - - -1265.0
-        - 2300.0
-      - - -1215.0
-        - 2250.0
-      - - -1015.0
-        - 2250.0
-      - - -965.0
-        - 2300.0
-      - - -915.0
-        - 2250.0
-      - - -715.0
-        - 2250.0
-      - - -665.0
-        - 2300.0
-      - - -615.0
-        - 2250.0
-      - - -415.0
-        - 2250.0
-      - - -365.0
-        - 2300.0
-      - - -315.0
-        - 2250.0
-      - - -115.0
-        - 2250.0
-      - - -65.0
-        - 2300.0
-      - - -15.0
-        - 2250.0
-      - - 185.0
-        - 2250.0
-      - - 235.0
-        - 2300.0
-      - - 285.0
-        - 2250.0
-      - - 485.0
-        - 2250.0
-      - - 535.0
-        - 2300.0
-      - - 585.0
-        - 2250.0
-      - - 785.0
-        - 2250.0
-      - - 835.0
-        - 2300.0
-      - - 885.0
-        - 2250.0
-      - - 1085.0
-        - 2250.0
-      - - 1135.0
-        - 2300.0
-      - - 1185.0
-        - 2250.0
-      - - 1385.0
-        - 2250.0
-      - - 1435.0
-        - 2300.0
-      - - 1485.0
-        - 2250.0
-      - - 1685.0
-        - 2250.0
-      - - 1735.0
-        - 2300.0
-      - - 1785.0
-        - 2250.0
-      - - 1985.0
-        - 2250.0
-      - - 2035.0
-        - 2300.0
-      - - 2085.0
-        - 2250.0
-      - - 2285.0
-        - 2250.0
-      - - 2335.0
-        - 2300.0
-      - - 2385.0
-        - 2250.0
-      - - 2585.0
-        - 2250.0
-      - - 2635.0
-        - 2300.0
-      - - 2685.0
-        - 2250.0
-      - - 2885.0
-        - 2250.0
-      - - 2935.0
-        - 2300.0
-      - - 2985.0
-        - 2250.0
-      - - 3185.0
-        - 2250.0
-      - - 3235.0
-        - 2300.0
-      - - 3285.0
-        - 2250.0
-      - - 3485.0
-        - 2250.0
-      - - 3535.0
-        - 2300.0
-      - - 3585.0
-        - 2250.0
-      - - 3785.0
-        - 2250.0
-      - - 3835.0
-        - 2300.0
-      - - 3885.0
-        - 2250.0
-      - - 4085.0
-        - 2250.0
-      - - 4135.0
-        - 2300.0
-      - - 4185.0
-        - 2250.0
-      - - 4385.0
-        - 2250.0
-      - - 4435.0
-        - 2300.0
-      - - 4485.0
-        - 2250.0
-      - - -4615.0
-        - -2250.0
-      - - -4515.0
-        - -2250.0
-      - - -4565.0
-        - -2300.0
-      - - -4315.0
-        - -2250.0
-      - - -4215.0
-        - -2250.0
-      - - -4265.0
-        - -2300.0
-      - - -4015.0
-        - -2250.0
-      - - -3915.0
-        - -2250.0
-      - - -3965.0
-        - -2300.0
-      - - -3715.0
-        - -2250.0
-      - - -3615.0
-        - -2250.0
-      - - -3665.0
-        - -2300.0
-      - - -3415.0
-        - -2250.0
-      - - -3315.0
-        - -2250.0
-      - - -3365.0
-        - -2300.0
-      - - -3115.0
-        - -2250.0
-      - - -3015.0
-        - -2250.0
-      - - -3065.0
-        - -2300.0
-      - - -2815.0
-        - -2250.0
-      - - -2715.0
-        - -2250.0
-      - - -2765.0
-        - -2300.0
-      - - -2515.0
-        - -2250.0
-      - - -2415.0
-        - -2250.0
-      - - -2465.0
-        - -2300.0
-      - - -2215.0
-        - -2250.0
-      - - -2115.0
-        - -2250.0
-      - - -2165.0
-        - -2300.0
-      - - -1915.0
-        - -2250.0
-      - - -1815.0
-        - -2250.0
-      - - -1865.0
-        - -2300.0
-      - - -1615.0
-        - -2250.0
-      - - -1515.0
-        - -2250.0
-      - - -1565.0
-        - -2300.0
-      - - -1315.0
-        - -2250.0
-      - - -1215.0
-        - -2250.0
-      - - -1265.0
-        - -2300.0
-      - - -1015.0
-        - -2250.0
-      - - -915.0
-        - -2250.0
-      - - -965.0
-        - -2300.0
-      - - -715.0
-        - -2250.0
-      - - -615.0
-        - -2250.0
-      - - -665.0
-        - -2300.0
-      - - -415.0
-        - -2250.0
-      - - -315.0
-        - -2250.0
-      - - -365.0
-        - -2300.0
-      - - -115.0
-        - -2250.0
-      - - -15.0
-        - -2250.0
-      - - -65.0
-        - -2300.0
-      - - 185.0
-        - -2250.0
-      - - 285.0
-        - -2250.0
-      - - 235.0
-        - -2300.0
-      - - 485.0
-        - -2250.0
-      - - 585.0
-        - -2250.0
-      - - 535.0
-        - -2300.0
-      - - 785.0
-        - -2250.0
-      - - 885.0
-        - -2250.0
-      - - 835.0
-        - -2300.0
-      - - 1085.0
-        - -2250.0
-      - - 1185.0
-        - -2250.0
-      - - 1135.0
-        - -2300.0
-      - - 1385.0
-        - -2250.0
-      - - 1485.0
-        - -2250.0
-      - - 1435.0
-        - -2300.0
-      - - 1685.0
-        - -2250.0
-      - - 1785.0
-        - -2250.0
-      - - 1735.0
-        - -2300.0
-      - - 1985.0
-        - -2250.0
-      - - 2085.0
-        - -2250.0
-      - - 2035.0
-        - -2300.0
-      - - 2285.0
-        - -2250.0
-      - - 2385.0
-        - -2250.0
-      - - 2335.0
-        - -2300.0
-      - - 2585.0
-        - -2250.0
-      - - 2685.0
-        - -2250.0
-      - - 2635.0
-        - -2300.0
-      - - 2885.0
-        - -2250.0
-      - - 2985.0
-        - -2250.0
-      - - 2935.0
-        - -2300.0
-      - - 3185.0
-        - -2250.0
-      - - 3285.0
-        - -2250.0
-      - - 3235.0
-        - -2300.0
-      - - 3485.0
-        - -2250.0
-      - - 3585.0
-        - -2250.0
-      - - 3535.0
-        - -2300.0
-      - - 3785.0
-        - -2250.0
-      - - 3885.0
-        - -2250.0
-      - - 3835.0
-        - -2300.0
-      - - 4085.0
-        - -2250.0
-      - - 4185.0
-        - -2250.0
-      - - 4135.0
-        - -2300.0
-      - - 4385.0
-        - -2250.0
-      - - 4485.0
-        - -2250.0
-      - - 4435.0
-        - -2300.0
+      - - -5735000
+        - 0
+      - - 0
+        - 2450000
+      - - 5735000
+        - 0
+      - - 0
+        - -2450000
+      - - -4500000
+        - 2250000
+      - - -4450000
+        - 2300000
+      - - -4400000
+        - 2250000
+      - - -4200000
+        - 2250000
+      - - -4150000
+        - 2300000
+      - - -4100000
+        - 2250000
+      - - -3900000
+        - 2250000
+      - - -3850000
+        - 2300000
+      - - -3800000
+        - 2250000
+      - - -3600000
+        - 2250000
+      - - -3550000
+        - 2300000
+      - - -3500000
+        - 2250000
+      - - -3300000
+        - 2250000
+      - - -3250000
+        - 2300000
+      - - -3200000
+        - 2250000
+      - - -3000000
+        - 2250000
+      - - -2950000
+        - 2300000
+      - - -2900000
+        - 2250000
+      - - -2700000
+        - 2250000
+      - - -2650000
+        - 2300000
+      - - -2600000
+        - 2250000
+      - - -2400000
+        - 2250000
+      - - -2350000
+        - 2300000
+      - - -2300000
+        - 2250000
+      - - -2100000
+        - 2250000
+      - - -2050000
+        - 2300000
+      - - -2000000
+        - 2250000
+      - - -1800000
+        - 2250000
+      - - -1750000
+        - 2300000
+      - - -1700000
+        - 2250000
+      - - -1500000
+        - 2250000
+      - - -1450000
+        - 2300000
+      - - -1400000
+        - 2250000
+      - - -1200000
+        - 2250000
+      - - -1150000
+        - 2300000
+      - - -1100000
+        - 2250000
+      - - -900000
+        - 2250000
+      - - -850000
+        - 2300000
+      - - -800000
+        - 2250000
+      - - -600000
+        - 2250000
+      - - -550000
+        - 2300000
+      - - -500000
+        - 2250000
+      - - -300000
+        - 2250000
+      - - -250000
+        - 2300000
+      - - -200000
+        - 2250000
+      - - 0
+        - 2250000
+      - - 50000
+        - 2300000
+      - - 100000
+        - 2250000
+      - - 300000
+        - 2250000
+      - - 350000
+        - 2300000
+      - - 400000
+        - 2250000
+      - - 600000
+        - 2250000
+      - - 650000
+        - 2300000
+      - - 700000
+        - 2250000
+      - - 900000
+        - 2250000
+      - - 950000
+        - 2300000
+      - - 1000000
+        - 2250000
+      - - 1200000
+        - 2250000
+      - - 1250000
+        - 2300000
+      - - 1300000
+        - 2250000
+      - - 1500000
+        - 2250000
+      - - 1550000
+        - 2300000
+      - - 1600000
+        - 2250000
+      - - 1800000
+        - 2250000
+      - - 1850000
+        - 2300000
+      - - 1900000
+        - 2250000
+      - - 2100000
+        - 2250000
+      - - 2150000
+        - 2300000
+      - - 2200000
+        - 2250000
+      - - 2400000
+        - 2250000
+      - - 2450000
+        - 2300000
+      - - 2500000
+        - 2250000
+      - - 2700000
+        - 2250000
+      - - 2750000
+        - 2300000
+      - - 2800000
+        - 2250000
+      - - 3000000
+        - 2250000
+      - - 3050000
+        - 2300000
+      - - 3100000
+        - 2250000
+      - - 3300000
+        - 2250000
+      - - 3350000
+        - 2300000
+      - - 3400000
+        - 2250000
+      - - 3600000
+        - 2250000
+      - - 3650000
+        - 2300000
+      - - 3700000
+        - 2250000
+      - - 3900000
+        - 2250000
+      - - 3950000
+        - 2300000
+      - - 4000000
+        - 2250000
+      - - 4200000
+        - 2250000
+      - - 4250000
+        - 2300000
+      - - 4300000
+        - 2250000
+      - - 4500000
+        - 2250000
+      - - 4550000
+        - 2300000
+      - - 4600000
+        - 2250000
+      - - -4500000
+        - -2250000
+      - - -4400000
+        - -2250000
+      - - -4450000
+        - -2300000
+      - - -4200000
+        - -2250000
+      - - -4100000
+        - -2250000
+      - - -4150000
+        - -2300000
+      - - -3900000
+        - -2250000
+      - - -3800000
+        - -2250000
+      - - -3850000
+        - -2300000
+      - - -3600000
+        - -2250000
+      - - -3500000
+        - -2250000
+      - - -3550000
+        - -2300000
+      - - -3300000
+        - -2250000
+      - - -3200000
+        - -2250000
+      - - -3250000
+        - -2300000
+      - - -3000000
+        - -2250000
+      - - -2900000
+        - -2250000
+      - - -2950000
+        - -2300000
+      - - -2700000
+        - -2250000
+      - - -2600000
+        - -2250000
+      - - -2650000
+        - -2300000
+      - - -2400000
+        - -2250000
+      - - -2300000
+        - -2250000
+      - - -2350000
+        - -2300000
+      - - -2100000
+        - -2250000
+      - - -2000000
+        - -2250000
+      - - -2050000
+        - -2300000
+      - - -1800000
+        - -2250000
+      - - -1700000
+        - -2250000
+      - - -1750000
+        - -2300000
+      - - -1500000
+        - -2250000
+      - - -1400000
+        - -2250000
+      - - -1450000
+        - -2300000
+      - - -1200000
+        - -2250000
+      - - -1100000
+        - -2250000
+      - - -1150000
+        - -2300000
+      - - -900000
+        - -2250000
+      - - -800000
+        - -2250000
+      - - -850000
+        - -2300000
+      - - -600000
+        - -2250000
+      - - -500000
+        - -2250000
+      - - -550000
+        - -2300000
+      - - -300000
+        - -2250000
+      - - -200000
+        - -2250000
+      - - -250000
+        - -2300000
+      - - 0
+        - -2250000
+      - - 100000
+        - -2250000
+      - - 50000
+        - -2300000
+      - - 300000
+        - -2250000
+      - - 400000
+        - -2250000
+      - - 350000
+        - -2300000
+      - - 600000
+        - -2250000
+      - - 700000
+        - -2250000
+      - - 650000
+        - -2300000
+      - - 900000
+        - -2250000
+      - - 1000000
+        - -2250000
+      - - 950000
+        - -2300000
+      - - 1200000
+        - -2250000
+      - - 1300000
+        - -2250000
+      - - 1250000
+        - -2300000
+      - - 1500000
+        - -2250000
+      - - 1600000
+        - -2250000
+      - - 1550000
+        - -2300000
+      - - 1800000
+        - -2250000
+      - - 1900000
+        - -2250000
+      - - 1850000
+        - -2300000
+      - - 2100000
+        - -2250000
+      - - 2200000
+        - -2250000
+      - - 2150000
+        - -2300000
+      - - 2400000
+        - -2250000
+      - - 2500000
+        - -2250000
+      - - 2450000
+        - -2300000
+      - - 2700000
+        - -2250000
+      - - 2800000
+        - -2250000
+      - - 2750000
+        - -2300000
+      - - 3000000
+        - -2250000
+      - - 3100000
+        - -2250000
+      - - 3050000
+        - -2300000
+      - - 3300000
+        - -2250000
+      - - 3400000
+        - -2250000
+      - - 3350000
+        - -2300000
+      - - 3600000
+        - -2250000
+      - - 3700000
+        - -2250000
+      - - 3650000
+        - -2300000
+      - - 3900000
+        - -2250000
+      - - 4000000
+        - -2250000
+      - - 3950000
+        - -2300000
+      - - 4200000
+        - -2250000
+      - - 4300000
+        - -2250000
+      - - 4250000
+        - -2300000
+      - - 4500000
+        - -2250000
+      - - 4600000
+        - -2250000
+      - - 4550000
+        - -2300000
   vertical_dc:
     unconnected_ports:
     - message: 62 unconnected vertical_dc ports!
       ports:
-      - pad_1,pad
-      - pad_2,pad
-      - pad_3,pad
-      - pad_4,pad
-      - pad_5,pad
-      - pad_6,pad
-      - pad_7,pad
-      - pad_8,pad
-      - pad_9,pad
-      - pad_10,pad
-      - pad_11,pad
-      - pad_12,pad
-      - pad_13,pad
-      - pad_14,pad
-      - pad_15,pad
-      - pad_16,pad
-      - pad_17,pad
-      - pad_18,pad
-      - pad_19,pad
-      - pad_20,pad
-      - pad_21,pad
-      - pad_22,pad
-      - pad_23,pad
-      - pad_24,pad
-      - pad_25,pad
-      - pad_26,pad
-      - pad_27,pad
-      - pad_28,pad
-      - pad_29,pad
-      - pad_30,pad
-      - pad_31,pad
-      - pad_32,pad
-      - pad_33,pad
-      - pad_34,pad
-      - pad_35,pad
-      - pad_36,pad
-      - pad_37,pad
-      - pad_38,pad
-      - pad_39,pad
-      - pad_40,pad
-      - pad_41,pad
-      - pad_42,pad
-      - pad_43,pad
-      - pad_44,pad
-      - pad_45,pad
-      - pad_46,pad
-      - pad_47,pad
-      - pad_48,pad
-      - pad_49,pad
-      - pad_50,pad
-      - pad_51,pad
-      - pad_52,pad
-      - pad_53,pad
-      - pad_54,pad
-      - pad_55,pad
-      - pad_56,pad
-      - pad_57,pad
-      - pad_58,pad
-      - pad_59,pad
-      - pad_60,pad
-      - pad_61,pad
-      - pad_62,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4450000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-4150000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3850000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3550000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-3250000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2950000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2650000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2350000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-2050000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1750000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1450000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-1150000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-850000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-550000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_-250000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_50000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_350000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_650000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_950000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1250000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1550000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_1850000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2150000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2450000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_2750000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3050000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3350000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3650000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_3950000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_4250000_-2250000,pad
+      - pad_S100_100_LPAD_BLNon_30fba49c_4550000_-2250000,pad
       values:
-      - - -4565.0
-        - 2250.0
-      - - -4265.0
-        - 2250.0
-      - - -3965.0
-        - 2250.0
-      - - -3665.0
-        - 2250.0
-      - - -3365.0
-        - 2250.0
-      - - -3065.0
-        - 2250.0
-      - - -2765.0
-        - 2250.0
-      - - -2465.0
-        - 2250.0
-      - - -2165.0
-        - 2250.0
-      - - -1865.0
-        - 2250.0
-      - - -1565.0
-        - 2250.0
-      - - -1265.0
-        - 2250.0
-      - - -965.0
-        - 2250.0
-      - - -665.0
-        - 2250.0
-      - - -365.0
-        - 2250.0
-      - - -65.0
-        - 2250.0
-      - - 235.0
-        - 2250.0
-      - - 535.0
-        - 2250.0
-      - - 835.0
-        - 2250.0
-      - - 1135.0
-        - 2250.0
-      - - 1435.0
-        - 2250.0
-      - - 1735.0
-        - 2250.0
-      - - 2035.0
-        - 2250.0
-      - - 2335.0
-        - 2250.0
-      - - 2635.0
-        - 2250.0
-      - - 2935.0
-        - 2250.0
-      - - 3235.0
-        - 2250.0
-      - - 3535.0
-        - 2250.0
-      - - 3835.0
-        - 2250.0
-      - - 4135.0
-        - 2250.0
-      - - 4435.0
-        - 2250.0
-      - - -4565.0
-        - -2250.0
-      - - -4265.0
-        - -2250.0
-      - - -3965.0
-        - -2250.0
-      - - -3665.0
-        - -2250.0
-      - - -3365.0
-        - -2250.0
-      - - -3065.0
-        - -2250.0
-      - - -2765.0
-        - -2250.0
-      - - -2465.0
-        - -2250.0
-      - - -2165.0
-        - -2250.0
-      - - -1865.0
-        - -2250.0
-      - - -1565.0
-        - -2250.0
-      - - -1265.0
-        - -2250.0
-      - - -965.0
-        - -2250.0
-      - - -665.0
-        - -2250.0
-      - - -365.0
-        - -2250.0
-      - - -65.0
-        - -2250.0
-      - - 235.0
-        - -2250.0
-      - - 535.0
-        - -2250.0
-      - - 835.0
-        - -2250.0
-      - - 1135.0
-        - -2250.0
-      - - 1435.0
-        - -2250.0
-      - - 1735.0
-        - -2250.0
-      - - 2035.0
-        - -2250.0
-      - - 2335.0
-        - -2250.0
-      - - 2635.0
-        - -2250.0
-      - - 2935.0
-        - -2250.0
-      - - 3235.0
-        - -2250.0
-      - - 3535.0
-        - -2250.0
-      - - 3835.0
-        - -2250.0
-      - - 4135.0
-        - -2250.0
-      - - 4435.0
-        - -2250.0
+      - - -4450000
+        - 2250000
+      - - -4150000
+        - 2250000
+      - - -3850000
+        - 2250000
+      - - -3550000
+        - 2250000
+      - - -3250000
+        - 2250000
+      - - -2950000
+        - 2250000
+      - - -2650000
+        - 2250000
+      - - -2350000
+        - 2250000
+      - - -2050000
+        - 2250000
+      - - -1750000
+        - 2250000
+      - - -1450000
+        - 2250000
+      - - -1150000
+        - 2250000
+      - - -850000
+        - 2250000
+      - - -550000
+        - 2250000
+      - - -250000
+        - 2250000
+      - - 50000
+        - 2250000
+      - - 350000
+        - 2250000
+      - - 650000
+        - 2250000
+      - - 950000
+        - 2250000
+      - - 1250000
+        - 2250000
+      - - 1550000
+        - 2250000
+      - - 1850000
+        - 2250000
+      - - 2150000
+        - 2250000
+      - - 2450000
+        - 2250000
+      - - 2750000
+        - 2250000
+      - - 3050000
+        - 2250000
+      - - 3350000
+        - 2250000
+      - - 3650000
+        - 2250000
+      - - 3950000
+        - 2250000
+      - - 4250000
+        - 2250000
+      - - 4550000
+        - 2250000
+      - - -4450000
+        - -2250000
+      - - -4150000
+        - -2250000
+      - - -3850000
+        - -2250000
+      - - -3550000
+        - -2250000
+      - - -3250000
+        - -2250000
+      - - -2950000
+        - -2250000
+      - - -2650000
+        - -2250000
+      - - -2350000
+        - -2250000
+      - - -2050000
+        - -2250000
+      - - -1750000
+        - -2250000
+      - - -1450000
+        - -2250000
+      - - -1150000
+        - -2250000
+      - - -850000
+        - -2250000
+      - - -550000
+        - -2250000
+      - - -250000
+        - -2250000
+      - - 50000
+        - -2250000
+      - - 350000
+        - -2250000
+      - - 650000
+        - -2250000
+      - - 950000
+        - -2250000
+      - - 1250000
+        - -2250000
+      - - 1550000
+        - -2250000
+      - - 1850000
+        - -2250000
+      - - 2150000
+        - -2250000
+      - - 2450000
+        - -2250000
+      - - 2750000
+        - -2250000
+      - - 3050000
+        - -2250000
+      - - 3350000
+        - -2250000
+      - - 3650000
+        - -2250000
+      - - 3950000
+        - -2250000
+      - - 4250000
+        - -2250000
+      - - 4550000
+        - -2250000

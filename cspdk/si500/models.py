@@ -7,8 +7,6 @@ from functools import partial
 import gplugins.sax.models as sm
 import jax.numpy as jnp
 import sax
-from gdsfactory.pdk import get_cross_section_name
-from gdsfactory.typings import CrossSectionSpec
 from gplugins.sax.models import bend as __bend
 from gplugins.sax.models import straight as __straight
 from numpy.typing import NDArray
@@ -28,9 +26,9 @@ def _straight(
     wl: Float = 1.55,
     length: Float = 10.0,
     loss: Float = 0.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: str = "xs_rc",
 ) -> sax.SDict:
-    if get_cross_section_name(cross_section).endswith("so"):
+    if cross_section.endswith("so"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -39,7 +37,7 @@ def _straight(
             neff=2.52,
             ng=4.33,
         )
-    elif get_cross_section_name(cross_section).endswith("nc"):
+    elif cross_section.endswith("nc"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -48,7 +46,7 @@ def _straight(
             neff=1.6,
             ng=1.94,
         )
-    elif get_cross_section_name(cross_section).endswith("no"):
+    elif cross_section.endswith("no"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -57,7 +55,7 @@ def _straight(
             neff=1.63,
             ng=2.00,
         )
-    elif get_cross_section_name(cross_section).endswith("rc"):
+    elif cross_section.endswith("rc"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -66,7 +64,7 @@ def _straight(
             neff=2.38,
             ng=4.30,
         )
-    elif get_cross_section_name(cross_section).endswith("ro"):
+    elif cross_section.endswith("ro"):
         return __straight(
             wl=wl,  # type: ignore
             length=length,  # type: ignore
@@ -86,7 +84,7 @@ def _straight(
         )
 
 
-straight_sc = partial(_straight, cross_section="xs_sc")
+straight_sc = partial(_straight, cross_section="xs_rc")
 straight_so = partial(_straight, cross_section="xs_so")
 straight_rc = partial(_straight, cross_section="xs_rc")
 straight_ro = partial(_straight, cross_section="xs_ro")

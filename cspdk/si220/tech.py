@@ -6,7 +6,13 @@ from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import get_cross_sections
-from gdsfactory.technology import LayerLevel, LayerMap, LayerStack, LayerViews
+from gdsfactory.technology import (
+    LayerLevel,
+    LayerMap,
+    LayerStack,
+    LayerViews,
+    LogicalLayer,
+)
 from gdsfactory.typings import ConnectivitySpec, Layer
 
 from cspdk.si220.config import PATH
@@ -28,7 +34,7 @@ class LayerMapCornerstone(LayerMap):
     LABEL_INSTANCE: Layer = (101, 0)
 
 
-LAYER = LayerMapCornerstone()
+LAYER = LayerMapCornerstone
 
 
 def get_layer_stack(
@@ -55,7 +61,7 @@ def get_layer_stack(
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LAYER.WG,
+                layer=LogicalLayer(layer=LAYER.WG),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
@@ -64,7 +70,7 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             slab=LayerLevel(
-                layer=LAYER.SLAB,
+                layer=LogicalLayer(layer=LAYER.SLAB),
                 thickness=thickness_slab,
                 zmin=0.0,
                 material="si",
@@ -73,14 +79,14 @@ def get_layer_stack(
                 width_to_z=0.5,
             ),
             heater=LayerLevel(
-                layer=LAYER.HEATER,
+                layer=LogicalLayer(layer=LAYER.HEATER),
                 thickness=thickness_heater,
                 zmin=zmin_heater,
                 material="TiN",
                 info={"mesh_order": 1},
             ),
             metal=LayerLevel(
-                layer=LAYER.PAD,
+                layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
                 material="Aluminum",
@@ -94,38 +100,41 @@ LAYER_STACK = get_layer_stack()
 LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
+class Tech:
+    radius_sc = 5
+    radius_so = 5
+    radius_rc = 25
+    radius_ro = 25
+
+
+TECH = Tech()
+
 ############################
 # Cross-sections functions
 ############################
-cladding_layers_rib = (LAYER.SLAB,)
-cladding_offsets_rib = (5,)
 
-xf_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
-xf_so = partial(xf_sc, width=0.40)
+xs_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
+xs_so = partial(xs_sc, width=0.40)
 
-xf_rc = partial(
+xs_rc = partial(
     gf.cross_section.strip,
     layer=LAYER.WG,
     width=0.45,
-    sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
+    bbox_layers=(LAYER.SLAB,),
+    bbox_offsets=(5,),
     radius=25,
     radius_min=25,
 )
-xf_ro = partial(xf_rc, width=0.40)
-xf_rc_tip = partial(
-    gf.cross_section.strip,
-    sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
-)
+xs_ro = partial(xs_rc, width=0.40)
 
 
-xf_sc_heater_metal = partial(
+xs_sc_heater_metal = partial(
     gf.cross_section.strip_heater_metal,
     layer=LAYER.WG,
     heater_width=2.5,
     layer_heater=LAYER.HEATER,
     width=0.45,
 )
-
 metal_routing = partial(
     gf.cross_section.cross_section,
     layer=LAYER.PAD,
@@ -135,20 +144,6 @@ metal_routing = partial(
     radius=None,
 )
 heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
-
-############################
-# Cross-sections
-############################
-xs_sc = xf_sc()
-xs_rc = xf_rc()
-xs_so = xf_so()
-xs_ro = xf_ro()
-xs_rc_tip = xf_rc_tip()
-
-xs_sc_heater_metal = xf_sc_heater_metal()
-xs_metal_routing = metal_routing()
-xs_heater_metal = heater_metal()
-
 cross_sections = get_cross_sections(sys.modules[__name__])
 
 ############################
@@ -156,80 +151,46 @@ cross_sections = get_cross_sections(sys.modules[__name__])
 ############################
 
 _settings_sc = dict(
-    straight="straight_sc", cross_section=xs_sc, bend="bend_sc", taper="taper_sc"
+    straight="straight_sc",
+    cross_section=xs_sc,
+    bend="bend_sc",
 )
 _settings_so = dict(
-    straight="straight_so", cross_section=xs_so, bend="bend_so", taper="taper_so"
+    straight="straight_so",
+    cross_section=xs_so,
+    bend="bend_so",
 )
 _settings_rc = dict(
-    straight="straight_rc", cross_section=xs_rc, bend="bend_rc", taper="taper_rc"
+    straight="straight_rc",
+    cross_section=xs_rc,
+    bend="bend_rc",
 )
 _settings_ro = dict(
-    straight="straight_ro", cross_section=xs_ro, bend="bend_ro", taper="taper_ro"
+    straight="straight_ro",
+    cross_section=xs_ro,
+    bend="bend_ro",
 )
 
-get_route_sc = partial(gf.routing.get_route, **_settings_sc)
-get_route_so = partial(gf.routing.get_route, **_settings_so)
-get_route_rc = partial(gf.routing.get_route, **_settings_rc)
-get_route_ro = partial(gf.routing.get_route, **_settings_ro)
+route_single_sc = partial(gf.routing.route_single, **_settings_sc)
+route_single_so = partial(gf.routing.route_single, **_settings_so)
+route_single_rc = partial(gf.routing.route_single, **_settings_rc)
+route_single_ro = partial(gf.routing.route_single, **_settings_ro)
 
-get_route_from_steps_sc = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_sc,
-)
-get_route_from_steps_so = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_so,
-)
-get_route_from_steps_rc = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_rc,
-)
-get_route_from_steps_ro = partial(
-    gf.routing.get_route_from_steps,
-    **_settings_ro,
-)
-
-get_bundle_sc = partial(gf.routing.get_bundle, **_settings_sc)
-get_bundle_so = partial(gf.routing.get_bundle, **_settings_so)
-get_bundle_rc = partial(gf.routing.get_bundle, **_settings_rc)
-get_bundle_ro = partial(gf.routing.get_bundle, **_settings_ro)
-
-get_bundle_from_steps_sc = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_sc,
-)
-get_bundle_from_steps_so = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_so,
-)
-get_bundle_from_steps_rc = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_rc,
-)
-get_bundle_from_steps_ro = partial(
-    gf.routing.get_bundle_from_steps,
-    **_settings_ro,
-)
+route_bundle_sc = partial(gf.routing.route_bundle, **_settings_sc)
+route_bundle_so = partial(gf.routing.route_bundle, **_settings_so)
+route_bundle_rc = partial(gf.routing.route_bundle, **_settings_rc)
+route_bundle_ro = partial(gf.routing.route_bundle, **_settings_ro)
 
 
 routing_strategies = dict(
-    get_route_sc=get_route_sc,
-    get_route_so=get_route_so,
-    get_route_rc=get_route_rc,
-    get_route_ro=get_route_ro,
-    get_route_from_steps_sc=get_route_from_steps_sc,
-    get_route_from_steps_so=get_route_from_steps_so,
-    get_route_from_steps_rc=get_route_from_steps_rc,
-    get_route_from_steps_ro=get_route_from_steps_ro,
-    get_bundle_sc=get_bundle_sc,
-    get_bundle_so=get_bundle_so,
-    get_bundle_rc=get_bundle_rc,
-    get_bundle_ro=get_bundle_ro,
-    get_bundle_from_steps_sc=get_bundle_from_steps_sc,
-    get_bundle_from_steps_so=get_bundle_from_steps_so,
-    get_bundle_from_steps_rc=get_bundle_from_steps_rc,
-    get_bundle_from_steps_ro=get_bundle_from_steps_ro,
+    route_single_sc=route_single_sc,
+    route_single_so=route_single_so,
+    route_single_rc=route_single_rc,
+    route_single_ro=route_single_ro,
+    route_bundle_sc=route_bundle_sc,
+    route_bundle_so=route_bundle_so,
+    route_bundle_rc=route_bundle_rc,
+    route_bundle_ro=route_bundle_ro,
 )
 
 
@@ -243,7 +204,7 @@ if __name__ == "__main__":
 
     t = KLayoutTechnology(
         name="Cornerstone_si220",
-        layer_map=dict(LAYER),
+        layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
         connectivity=connectivity,

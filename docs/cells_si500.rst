@@ -29,7 +29,7 @@ bend_rc
 
   import cspdk
 
-  c = cspdk.si500.cells.bend_rc(radius=25.0, angle=90.0)
+  c = cspdk.si500.cells.bend_rc(radius=25, angle=90.0)
   c.plot()
 
 
@@ -44,7 +44,7 @@ bend_s
 
   import cspdk
 
-  c = cspdk.si500.cells.bend_s(size=(11.0, 1.8), cross_section='xs_sc')
+  c = cspdk.si500.cells.bend_s(size=(11.0, 1.8), cross_section='xs_rc')
   c.plot()
 
 
@@ -60,21 +60,6 @@ coupler_rc
   import cspdk
 
   c = cspdk.si500.cells.coupler_rc(gap=0.236, length=20.0, dx=10.0, dy=4.0)
-  c.plot()
-
-
-
-crossing_rc
-----------------------------------------------------
-
-.. autofunction:: cspdk.si500.cells.crossing_rc
-
-.. plot::
-  :include-source:
-
-  import cspdk
-
-  c = cspdk.si500.cells.crossing_rc()
   c.plot()
 
 
@@ -119,7 +104,7 @@ grating_coupler_array
 
   import cspdk
 
-  c = cspdk.si500.cells.grating_coupler_array(pitch=127.0, n=6, port_name='o1', rotation=0.0, with_loopback=False, grating_coupler_spacing=0.0, cross_section='xs_sc')
+  c = cspdk.si500.cells.grating_coupler_array(pitch=127.0, n=6, port_name='o1', rotation=0.0, with_loopback=False, cross_section='xs_sc')
   c.plot()
 
 
@@ -164,7 +149,7 @@ mzi_rc
 
   import cspdk
 
-  c = cspdk.si500.cells.mzi_rc(delta_length=10.0, length_y=2.0, length_x=0.1, add_electrical_ports_bot=True)
+  c = cspdk.si500.cells.mzi_rc(delta_length=10.0, length_y=2.0, length_x=0.1)
   c.plot()
 
 
@@ -179,7 +164,7 @@ pad
 
   import cspdk
 
-  c = cspdk.si500.cells.pad(size=(100.0, 100.0), layer=(41, 0), port_inclusion=0.0)
+  c = cspdk.si500.cells.pad(size=(100.0, 100.0), layer=<LayerMapCornerstone.PAD: 6>, port_inclusion=0.0)
   c.plot()
 
 
@@ -194,7 +179,7 @@ rectangle
 
   import cspdk
 
-  c = cspdk.si500.cells.rectangle(size=(4.0, 2.0), layer=(99, 0), centered=False, port_type='electrical', port_orientations=(180.0, 90.0, 0.0, -90.0), round_corners_east_west=False, round_corners_north_south=False)
+  c = cspdk.si500.cells.rectangle(size=(4.0, 2.0), layer=<LayerMapCornerstone.FLOORPLAN: 2>, centered=False, port_type='electrical', port_orientations=(180.0, 90.0, 0.0, -90.0))
   c.plot()
 
 
@@ -239,5 +224,5 @@ wire_corner
 
   import cspdk
 
-  c = cspdk.si500.cells.wire_corner(cross_section='xs_metal_routing')
+  c = cspdk.si500.cells.wire_corner(cross_section='metal_routing')
   c.plot()

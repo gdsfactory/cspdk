@@ -1,12 +1,17 @@
-function: taper_rc
 info:
-  length: 10.0
+  length: 10
   width1: 0.5
   width2: 0.5
-module: cspdk.si220.cells
-name: taper_rc
+name: taper_L10_W0p5_WNone_PN_c801b777
 settings:
-  length: 10.0
-  port: null
+  cross_section: xs_rc
+  length: 10
+  port_names:
+  - o1
+  - o2
+  port_types:
+  - optical
+  - optical
   width1: 0.5
-  width2: null
+  with_bbox: true
+  with_two_ports: true

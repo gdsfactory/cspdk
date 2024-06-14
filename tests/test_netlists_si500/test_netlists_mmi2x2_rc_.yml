@@ -1,5 +1,5 @@
-connections: {}
 instances: {}
-name: mmi2x2_rc
+name: mmi2x2_WNone_WT1p5_LT20_05db2088
+nets: []
 placements: {}
 ports: {}

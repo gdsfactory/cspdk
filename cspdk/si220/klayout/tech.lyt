@@ -86,7 +86,6 @@
    <boundary-layer>0</boundary-layer>
    <boundary-datatype>0</boundary-datatype>
    <boundary-name>BORDER</boundary-name>
-   <layer-map>layer_map()</layer-map>
    <create-other-layers>true</create-other-layers>
   </mebes>
   <dxf>
@@ -156,7 +155,5 @@
  </writer-options>
  <connectivity>
   <connection>HEATER,HEATER,PAD</connection>
-  <symbols>HEATER='39/0'</symbols>
-  <symbols>PAD='41/0'</symbols>
  </connectivity>
 </technology>

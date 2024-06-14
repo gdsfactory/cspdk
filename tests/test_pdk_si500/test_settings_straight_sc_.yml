@@ -1,12 +1,12 @@
-function: straight_sc
 info:
-  length: 10.0
-  route_info_length: 10.0
-  route_info_type: xs_sc
-  route_info_weight: 10.0
-  route_info_xs_sc_length: 10.0
+  length: 10
+  route_info_length: 10
+  route_info_type: xs_3edc2673
+  route_info_weight: 10
+  route_info_xs_3edc2673_length: 10
   width: 0.45
-module: cspdk.si220.cells
-name: straight_sc
+name: straight_cs_L10_N2_CSxs_sc
 settings:
-  length: 10.0
+  cross_section: xs_sc
+  length: 10
+  npoints: 2
