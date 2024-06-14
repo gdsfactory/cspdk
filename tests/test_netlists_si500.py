@@ -12,6 +12,7 @@ from cspdk.si500 import PDK
 @pytest.fixture(autouse=True)
 def activate_pdk():
     PDK.activate()
+    gf.clear_cache()
 
 
 cells = PDK.cells
