@@ -7,8 +7,6 @@ from functools import partial
 import gplugins.sax.models as sm
 import jax.numpy as jnp
 import sax
-from gplugins.sax.models import bend as __bend
-from gplugins.sax.models import straight as __straight
 from numpy.typing import NDArray
 
 nm = 1e-3
@@ -20,113 +18,288 @@ Float = float | FloatArray
 # Straights
 ################
 
+straight_nc = partial(
+    sm.straight,
+    length=10.0,
+    loss=0.0,
+    wl0=1.55,
+    neff=1.60,
+    ng=1.95,
+)
 
-def _straight(
+straight_no = partial(
+    sm.straight,
+    length=10.0,
+    loss=0.0,
+    wl0=1.31,
+    neff=1.63,
+    ng=2.00,
+)
+
+
+def straight(
     *,
     wl: Float = 1.55,
-    length: Float = 10.0,
-    loss: Float = 0.0,
-    cross_section: str = "xs_sc",
+    length: float = 10.0,
+    loss: float = 0.0,
+    cross_section: str = "xs_nc",
 ) -> sax.SDict:
-    if cross_section.endswith("nc"):
-        return __straight(
-            wl=wl,  # type: ignore
-            length=length,  # type: ignore
-            loss=loss,  # type: ignore
-            wl0=1.55,
-            neff=1.6,
-            ng=1.94,
-        )
-    elif cross_section.endswith("no"):
-        return __straight(
-            wl=wl,  # type: ignore
-            length=length,  # type: ignore
-            loss=loss,  # type: ignore
-            wl0=1.31,
-            neff=1.63,
-            ng=2.00,
-        )
-    else:
-        return __straight(
-            wl=wl,  # type: ignore
-            length=length,  # type: ignore
-            loss=loss,  # type: ignore
-            wl0=1.55,
-            neff=2.38,
-            ng=4.30,
-        )
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": straight_nc,
+        "xs_no": straight_no,
+    }
+    f = fs[cross_section]
+    return f(
+        wl=wl,  # type: ignore
+        length=length,
+        loss=loss,
+    )
 
-
-straight_nc = partial(_straight, cross_section="xs_nc")
-straight_no = partial(_straight, cross_section="xs_no")
 
 ################
 # Bends
 ################
-bend_s = _straight
 
 
-def _bend(wl: Float = 1.5, length: Float = 20.0, loss: Float = 0.03) -> sax.SDict:
-    return __bend(
-        wl=wl,  # type: ignore
-        length=length,  # type: ignore
-        loss=loss,  # type: ignore
+def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+    wl = jnp.asarray(wl)  # type: ignore
+    zero = jnp.zeros_like(wl)
+    return {"e1": zero, "e2": zero}  # type: ignore
+
+
+def bend_s(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss: float = 0.03,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
+    return straight(
+        wl=wl,
+        length=length,
+        loss=loss,
+        cross_section=cross_section,
     )
 
 
-bend_nc = partial(_bend, loss=0.03)
-bend_no = partial(_bend, loss=0.03)
+def bend_euler(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss: float = 0.03,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
+    return straight(
+        wl=wl,
+        length=length,
+        loss=loss,
+        cross_section=cross_section,
+    )
+
+
+bend_nc = partial(bend_euler, cross_section="xs_nc")
+bend_no = partial(bend_euler, cross_section="xs_no")
+
+
+################
+# Transitions
+################
+
+
+def taper(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss: float = 0.0,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
+    # TODO: take width1 and width2 into account.
+    return straight(
+        wl=wl,
+        length=length,
+        loss=loss,
+        cross_section=cross_section,
+    )
+
+
+taper_nc = partial(taper, cross_section="xs_no", length=10.0)
+taper_no = partial(taper, cross_section="xs_no", length=10.0)
 
 
 ################
 # MMIs
 ################
-_mmi1x2 = sm.mmi1x2
-_mmi2x2 = sm.mmi2x2
 
-_mmi1x2_o = partial(_mmi1x2, wl0=1.31)
-_mmi1x2_c = partial(_mmi1x2, wl0=1.55)
-_mmi2x2_o = partial(_mmi2x2, wl0=1.31)
-_mmi2x2_c = partial(_mmi2x2, wl0=1.55)
+mmi1x2_nc = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
+mmi1x2_no = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
 
-mmi1x2_nc = _mmi1x2_c
-mmi1x2_no = _mmi1x2_o
 
-mmi2x2_nc = _mmi2x2_c
-mmi2x2_no = _mmi2x2_o
+def mmi1x2(
+    wl: Float = 1.55,
+    loss_dB: Float = 0.3,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": mmi1x2_nc,
+        "xs_no": mmi1x2_no,
+    }
+    f = fs[cross_section]
+    return f(
+        wl=wl,
+        loss_dB=loss_dB,
+    )
+
+
+mmi2x2_nc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+mmi2x2_no = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+
+
+def mmi2x2(
+    wl: Float = 1.55,
+    loss_dB: Float = 0.3,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": mmi2x2_nc,
+        "xs_no": mmi2x2_no,
+    }
+    f = fs[cross_section]
+    return f(
+        wl=wl,
+        loss_dB=loss_dB,
+    )
+
 
 ##############################
 # Evanescent couplers
 ##############################
 
-_coupler = _mmi2x2
-_coupler_o = partial(_coupler, wl0=1.31)
-_coupler_c = partial(_coupler, wl0=1.55)
-coupler_nc = _coupler_c
-coupler_no = _coupler_o
+
+def coupler_straight() -> sax.SDict:
+    # we should not need this model...
+    raise NotImplementedError("No model for 'coupler_straight'")
+
+
+def coupler_symmetric() -> sax.SDict:
+    # we should not need this model...
+    raise NotImplementedError("No model for 'coupler_symmetric'")
+
+
+coupler_nc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+coupler_no = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+
+
+def coupler(
+    wl: Float = 1.55,
+    loss_dB: Float = 0.3,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # TODO: take more coupler arguments into account
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": coupler_nc,
+        "xs_no": coupler_no,
+    }
+    f = fs[cross_section]
+    return f(
+        wl=wl,
+        loss_dB=loss_dB,
+    )
+
 
 ##############################
 # grating couplers Rectangular
 ##############################
-_gc_rectangular = sm.grating_coupler
-_gcro = partial(_gc_rectangular, loss=6, bandwidth=35 * nm, wavelength=1.31)
-_gcrc = partial(_gc_rectangular, loss=6, bandwidth=35 * nm, wavelength=1.55)
-gc_rectangular_nc = _gcrc
-gc_rectangular_no = _gcro
+
+grating_coupler_rectangular_no = partial(
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+)
+
+grating_coupler_rectangular_nc = partial(
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+)
+
+
+def grating_coupler_rectangular(
+    wl: Float = 1.55,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # TODO: take more grating_coupler_rectangular arguments into account
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": grating_coupler_rectangular_nc,
+        "xs_no": grating_coupler_rectangular_no,
+    }
+    f = fs[cross_section]
+    return f(wl=wl)  # type: ignore
+
 
 ##############################
 # grating couplers Elliptical
 ##############################
-_gc_elliptical = _gc_rectangular
-_gceo = partial(_gc_elliptical, loss=6, bandwidth=35 * nm, wavelength=1.31)
-_gcec = partial(_gc_elliptical, loss=6, bandwidth=35 * nm, wavelength=1.55)
-gc_elliptical_nc = _gcec
-gc_elliptical_no = _gceo
+
+grating_coupler_elliptical_no = partial(
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+)
+
+grating_coupler_elliptical_nc = partial(
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+)
+
+
+def grating_coupler_elliptical(
+    wl: Float = 1.55,
+    bandwidth: float = 35e-3,
+    cross_section="xs_nc",
+) -> sax.SDict:
+    # TODO: take more grating_coupler_elliptical arguments into account
+    wl = jnp.asarray(wl)  # type: ignore
+    fs = {
+        "xs_nc": grating_coupler_elliptical_nc,
+        "xs_no": grating_coupler_elliptical_no,
+    }
+    f = fs[cross_section]
+    return f(
+        wl=wl,  # type: ignore
+        bandwidth=bandwidth,
+    )
+
+
+################
+# MZI
+################
+
+# MZIs don't need models. They're composite components.
+
+################
+# Packaging
+################
+
+# No packaging models
+
+################
+# Imported
+################
+
+
+def heater() -> sax.SDict:
+    raise NotImplementedError("No model for 'heater'")
+
+
+crossing_no = sm.crossing
 
 
 ################
 # Models Dict
 ################
+
+
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     models = {}
     for name, func in list(globals().items()):
@@ -139,6 +312,15 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
             sig = inspect.signature(_func)
         except ValueError:
             continue
-        if str(sig.return_annotation) == "sax.SDict":
+        if str(sig.return_annotation).lower().split(".")[-1] == "sdict":
             models[name] = func
     return models
+
+
+if __name__ == "__main__":
+    print(list(get_models()))
+    for name, model in get_models().items():
+        try:
+            print(name, model())
+        except NotImplementedError:
+            continue

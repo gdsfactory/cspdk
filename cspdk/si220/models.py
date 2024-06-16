@@ -93,7 +93,7 @@ def bend_s(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss: float = 0.03,
     cross_section="xs_sc",
 ) -> sax.SDict:
     # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
@@ -109,7 +109,7 @@ def bend_euler(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss: float = 0.03,
     cross_section="xs_sc",
 ) -> sax.SDict:
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
@@ -274,6 +274,7 @@ def coupler(
 ##############################
 # grating couplers Rectangular
 ##############################
+
 grating_coupler_rectangular_so = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
 )
