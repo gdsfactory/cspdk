@@ -66,7 +66,11 @@ taper = base_cell(
 )
 
 taper_rc = partial(
-    gf.components.taper, cross_section="xs_rc", length=10.0, width1=0.5, width2=None
+    taper,
+    cross_section="xs_rc",
+    length=10.0,
+    width1=0.5,
+    width2=None,
 )
 
 ################

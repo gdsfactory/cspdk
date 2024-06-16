@@ -7,6 +7,11 @@ from kfactory import KCell
 
 F = TypeVar("F", bound=Callable[..., gf.Component] | partial[KCell])
 
+# NOTE: in an upcoming version of kfactory cells will have a cell.factory_name
+# property we'll have to start using that property everywhere in gdsfactory in
+# stead of cell.function_name or cell.__name__ to ensure cells of partials get
+# correctly registered. For now this slight hack works as well.
+
 
 def base_cell(name: str, func: F, /) -> F:
     if not isinstance(name, str):
@@ -21,5 +26,12 @@ def base_cell(name: str, func: F, /) -> F:
             f"or partial being decorated. The given argument {func!r} "
             "is not callable."
         )
+
+    # this will ensure the .function_name attribute is correctly set.
     func.__name__ = name  # type: ignore
+
+    # this is for testing purposes only. We want to ensure all partials
+    # in the Pdk are partials of a base cell.
+    func._base_cell = True  # type: ignore
+
     return gf.cell(func)  # type: ignore

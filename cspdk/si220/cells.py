@@ -64,18 +64,10 @@ taper = base_cell(
         width2=None,
     ),
 )
-taper_sc = partial(
-    gf.components.taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None
-)
-taper_so = partial(
-    gf.components.taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None
-)
-taper_rc = partial(
-    gf.components.taper, cross_section="xs_rc", length=10.0, width1=0.5, width2=None
-)
-taper_ro = partial(
-    gf.components.taper, cross_section="xs_ro", length=10.0, width1=0.5, width2=None
-)
+taper_sc = partial(taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None)
+taper_so = partial(taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None)
+taper_rc = partial(taper, cross_section="xs_rc", length=10.0, width1=0.5, width2=None)
+taper_ro = partial(taper, cross_section="xs_ro", length=10.0, width1=0.5, width2=None)
 
 
 taper_strip_to_ridge = base_cell(

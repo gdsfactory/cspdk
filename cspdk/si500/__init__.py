@@ -20,7 +20,7 @@ def get_pdk():
     pdk = Pdk(
         name="cornerstone_si500",
         cells=_cells,
-        cross_sections=_cross_sections,
+        cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
