@@ -35,6 +35,8 @@ def activate_pdk():
     pdk.activate()
 
 
+PDK = get_pdk()
+
 __all__ = [
     "LAYER",
     "LAYER_STACK",

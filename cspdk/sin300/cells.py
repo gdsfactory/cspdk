@@ -320,6 +320,7 @@ die = base_cell(
         grating_pitch=250.0,
         grating_coupler="grating_coupler_rectangular_nc",
         pad_pitch=300.0,
+        cross_section="xs_nc",
     ),
 )
 
