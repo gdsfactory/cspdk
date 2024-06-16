@@ -1,7 +1,10 @@
 import gdsfactory as gf
 import pytest
 
-from cspdk.si220 import activate_pdk
+from cspdk.si500 import activate_pdk
+
+# from cspdk.si220 import activate_pdk
+
 
 activate_pdk()
 cells = list(gf.get_active_pdk().cells)

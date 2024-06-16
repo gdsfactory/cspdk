@@ -1,9 +1,11 @@
 from collections.abc import Callable
+from functools import partial
 from typing import TypeVar
 
 import gdsfactory as gf
+from kfactory import KCell
 
-F = TypeVar("F", bound=Callable[..., gf.Component])
+F = TypeVar("F", bound=Callable[..., gf.Component] | partial[KCell])
 
 
 def base_cell(name: str, func: F, /) -> F:
@@ -19,5 +21,5 @@ def base_cell(name: str, func: F, /) -> F:
             f"or partial being decorated. The given argument {func!r} "
             "is not callable."
         )
-    func.__name__ = name
-    return gf.cell(func)
+    func.__name__ = name  # type: ignore
+    return gf.cell(func)  # type: ignore

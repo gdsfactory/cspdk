@@ -151,7 +151,7 @@ coupler_symmetric = base_cell(
     ),
 )
 
-# FIXME: (needs gdsfactory fix): gf.c.coupler should probably accept a bend_s
+# TODO: (needs gdsfactory fix): gf.c.coupler should probably accept a bend_s
 # argument that's passed into coupler_symmetric factory....
 
 coupler = base_cell(
@@ -247,8 +247,8 @@ grating_coupler_rectangular_ro = partial(
 # grating couplers elliptical
 ##############################
 
-grating_coupler_elliptical_trenches = base_cell(
-    "grating_coupler_elliptical_trenches",
+grating_coupler_elliptical = base_cell(
+    "grating_coupler_elliptical",
     partial(
         gf.components.grating_coupler_elliptical_trenches,
         polarization="te",
@@ -268,15 +268,15 @@ grating_coupler_elliptical_trenches = base_cell(
     ),
 )
 
-grating_coupler_elliptical_trenches_sc = partial(
-    grating_coupler_elliptical_trenches,
+grating_coupler_elliptical_sc = partial(
+    grating_coupler_elliptical,
     grating_line_width=0.315,
     wavelength=1.55,
     cross_section="xs_sc",
 )
 
 grating_coupler_elliptical_trenches_so = partial(
-    grating_coupler_elliptical_trenches,
+    grating_coupler_elliptical,
     grating_line_width=0.250,
     wavelength=1.31,
     cross_section="xs_so",
@@ -287,24 +287,27 @@ grating_coupler_elliptical_trenches_so = partial(
 # MZI
 ################
 
-# FIXME: (needs gdsfactory fix) currently function arguments need to be
+# TODO: (needs gdsfactory fix) currently function arguments need to be
 # supplied as ComponentSpec strings, because when supplied as function they get
 # serialized weirdly in the netlist
 
-mzi = partial(
-    gf.components.mzi,
-    delta_length=10.0,
-    length_y=2.0,
-    length_x=0.1,
-    port_e1_splitter="o2",
-    port_e0_splitter="o3",
-    port_e1_combiner="o3",
-    port_e0_combiner="o4",
-    bend="bend_sc",
-    straight="straight_sc",
-    splitter="mmi1x2_sc",
-    combiner="mmi2x2_sc",
-    cross_section="xs_sc",
+mzi = base_cell(
+    "mzi",
+    partial(
+        gf.components.mzi,
+        delta_length=10.0,
+        length_y=2.0,
+        length_x=0.1,
+        port_e1_splitter="o2",
+        port_e0_splitter="o3",
+        port_e1_combiner="o3",
+        port_e0_combiner="o4",
+        bend="bend_sc",
+        straight="straight_sc",
+        splitter="mmi1x2_sc",
+        combiner="mmi2x2_sc",
+        cross_section="xs_sc",
+    ),
 )
 
 mzi_sc = partial(
