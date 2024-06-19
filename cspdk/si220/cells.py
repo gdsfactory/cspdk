@@ -293,7 +293,7 @@ def taper_strip_to_ridge(
     w_slab1: float = 0.2,
     w_slab2: float = 10.45,
     layer_wg: LayerSpec = "WG",
-    layer_slab: LayerSpec = "SLAB90",
+    layer_slab: LayerSpec = LAYER.SLAB,
     cross_section: CrossSectionSpec = "strip",
     use_slab_port: bool = False,
     **kwargs,
