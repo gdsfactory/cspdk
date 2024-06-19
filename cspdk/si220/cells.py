@@ -7,7 +7,6 @@ from gdsfactory.components.grating_coupler_elliptical import grating_tooth_point
 from gdsfactory.port import Port
 from gdsfactory.typings import Component, ComponentSpec, CrossSectionSpec, LayerSpec
 
-from cspdk.base_cell import base_cell
 from cspdk.si220.config import PATH
 from cspdk.si220.tech import LAYER
 
@@ -966,23 +965,20 @@ grating_coupler_elliptical_trenches_so = partial(
 # supplied as ComponentSpec strings, because when supplied as function they get
 # serialized weirdly in the netlist
 
-mzi = base_cell(
-    "mzi",
-    partial(
-        gf.components.mzi,
-        delta_length=10.0,
-        length_y=2.0,
-        length_x=0.1,
-        port_e1_splitter="o2",
-        port_e0_splitter="o3",
-        port_e1_combiner="o3",
-        port_e0_combiner="o4",
-        bend="bend_sc",
-        straight="straight_sc",
-        splitter="mmi1x2_sc",
-        combiner="mmi2x2_sc",
-        cross_section="xs_sc",
-    ),
+mzi = partial(
+    gf.components.mzi,
+    delta_length=10.0,
+    length_y=2.0,
+    length_x=0.1,
+    port_e1_splitter="o2",
+    port_e0_splitter="o3",
+    port_e1_combiner="o3",
+    port_e0_combiner="o4",
+    bend="bend_sc",
+    straight="straight_sc",
+    splitter="mmi1x2_sc",
+    combiner="mmi2x2_sc",
+    cross_section="xs_sc",
 )
 
 mzi_sc = partial(
@@ -1027,37 +1023,29 @@ mzi_ro = partial(
 ################
 
 
-pad = base_cell("pad", partial(gf.c.pad, layer="PAD", size=(100.0, 100.0)))
-rectangle = base_cell(
-    "rectangle", partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
-)
-grating_coupler_array = base_cell(
-    "grating_coupler_array",
-    partial(
-        gf.components.grating_coupler_array,
-        pitch=127,
-        n=6,
-        port_name="o1",
-        rotation=-90,
-        with_loopback=False,
-        grating_coupler="grating_coupler_rectangular_sc",
-        cross_section="xs_sc",
-    ),
+pad = partial(gf.c.pad, layer="PAD", size=(100.0, 100.0))
+rectangle = partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
+grating_coupler_array = partial(
+    gf.components.grating_coupler_array,
+    pitch=127,
+    n=6,
+    port_name="o1",
+    rotation=-90,
+    with_loopback=False,
+    grating_coupler="grating_coupler_rectangular_sc",
+    cross_section="xs_sc",
 )
 
-die = base_cell(
-    "die",
-    partial(
-        gf.c.die_with_pads,
-        layer_floorplan=LAYER.FLOORPLAN,
-        size=(11470.0, 4900.0),
-        ngratings=14,
-        npads=31,
-        grating_pitch=250.0,
-        pad_pitch=300.0,
-        grating_coupler="grating_coupler_rectangular_sc",
-        cross_section="xs_sc",
-    ),
+die = partial(
+    gf.c.die_with_pads,
+    layer_floorplan=LAYER.FLOORPLAN,
+    size=(11470.0, 4900.0),
+    ngratings=14,
+    npads=31,
+    grating_pitch=250.0,
+    pad_pitch=300.0,
+    grating_coupler="grating_coupler_rectangular_sc",
+    cross_section="xs_sc",
 )
 
 die_sc = partial(
