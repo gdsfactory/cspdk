@@ -152,29 +152,13 @@ instances:
       p: 0.5
       with_arc_floorplan: true
   cp1:
-    component: mmi1x2
+    component: mmi1x2_ro
     info: {}
-    settings:
-      cross_section: xs_ro
-      gap_mmi: 1.55
-      length_mmi: 40.8
-      length_taper: 20
-      straight: straight
-      taper: taper
-      width_mmi: 6
-      width_taper: 1.5
+    settings: {}
   cp2:
-    component: mmi2x2
+    component: mmi2x2_ro
     info: {}
-    settings:
-      cross_section: xs_ro
-      gap_mmi: 0.53
-      length_mmi: 55
-      length_taper: 20
-      straight: straight
-      taper: taper
-      width_mmi: 6
-      width_taper: 1.5
+    settings: {}
   straight_L2p51000000000_39f1c889_140920_27270:
     component: straight
     info:

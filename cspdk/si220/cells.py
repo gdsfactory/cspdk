@@ -367,206 +367,61 @@ trans_sc_rc50 = partial(taper_strip_to_ridge, length=50)
 ################
 # MMIs
 ################
-@gf.cell
-def mmi1x2(
-    width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 20.0,
-    length_mmi: float = 5.5,
-    width_mmi: float = 6.0,
-    gap_mmi: float = 0.25,
-    taper: ComponentSpec = taper,
-    straight: ComponentSpec = straight,
-    cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
-    r"""1x2 MultiMode Interferometer (MMI).
 
-    Args:
-        width: input and output straight width. Defaults to cross_section width.
-        width_taper: interface between input straights and mmi region.
-        length_taper: into the mmi region.
-        length_mmi: in x direction.
-        width_mmi: in y direction.
-        gap_mmi:  gap between tapered wg.
-        taper: taper function.
-        straight: straight function.
-        cross_section: specification (CrossSection, string or dict).
-
-
-    .. code::
-
-               length_mmi
-                <------>
-                ________
-               |        |
-               |         \__
-               |          __  o2
-            __/          /_ _ _ _
-         o1 __          | _ _ _ _| gap_mmi
-              \          \__
-               |          __  o3
-               |         /
-               |________|
-
-             <->
-        length_taper
-
-    """
-    c = Component()
-    gap_mmi = gf.snap.snap_to_grid(gap_mmi, grid_factor=2)
-    x = gf.get_cross_section(cross_section)
-    xs_mmi = gf.get_cross_section(cross_section, width=width_mmi)
-    width = width or x.width
-
-    _taper = gf.get_component(
-        taper,
-        length=length_taper,
-        width1=width,
-        width2=width_taper,
-        cross_section=cross_section,
-    )
-
-    a = gap_mmi / 2 + width_taper / 2
-    _ = c << gf.get_component(straight, length=length_mmi, cross_section=xs_mmi)
-
-    ports = [
-        gf.Port(
-            "o1",
-            orientation=180,
-            center=(0, 0),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o2",
-            orientation=0,
-            center=(+length_mmi, +a),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o3",
-            orientation=0,
-            center=(+length_mmi, -a),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-    ]
-
-    for port in ports:
-        taper_ref = c << _taper
-        taper_ref.connect(port="o2", other=port, allow_width_mismatch=True)
-        c.add_port(name=port.name, port=taper_ref.ports["o1"])
-
-    c.flatten()
-    return c
-
-
-mmi1x2_sc = partial(mmi1x2, length_mmi=31.8, gap_mmi=1.64, cross_section="xs_sc")
-mmi1x2_so = partial(mmi1x2, length_mmi=40.1, gap_mmi=1.55, cross_section="xs_so")
-mmi1x2_rc = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="xs_rc")
-mmi1x2_ro = partial(mmi1x2, length_mmi=40.8, gap_mmi=1.55, cross_section="xs_ro")
+_mmi1x2 = partial(
+    gf.components.mmi1x2,
+    cross_section="xs_sc",
+    width_mmi=6.0,
+    width_taper=1.5,
+    length_taper=20.0,
+)
+_mmi2x2 = partial(
+    gf.components.mmi2x2,
+    cross_section="xs_sc",
+    width_mmi=6.0,
+    width_taper=1.5,
+    length_taper=20.0,
+)
 
 
 @gf.cell
-def mmi2x2(
-    width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 20.0,
-    length_mmi: float = 5.5,
-    width_mmi: float = 6.0,
-    gap_mmi: float = 0.25,
-    taper: ComponentSpec = taper,
-    straight: ComponentSpec = straight,
-    cross_section: CrossSectionSpec = "strip",
-) -> Component:
-    r"""Mmi 2x2.
-
-    Args:
-        width: input and output straight width.
-        width_taper: interface between input straights and mmi region.
-        length_taper: into the mmi region.
-        length_mmi: in x direction.
-        width_mmi: in y direction.
-        gap_mmi: (width_taper + gap between tapered wg)/2.
-        taper: taper function.
-        straight: straight function.
-        cross_section: spec.
+def mmi1x2_sc() -> gf.Component:
+    return _mmi1x2(length_mmi=31.8, gap_mmi=1.64, cross_section="xs_sc")
 
 
-    .. code::
-
-                   length_mmi
-                    <------>
-                    ________
-                   |        |
-                __/          \__
-            o2  __            __  o3
-                  \          /_ _ _ _
-                  |         | _ _ _ _| gap_mmi
-                __/          \__
-            o1  __            __  o4
-                  \          /
-                   |________|
-
-                 <->
-            length_taper
-
-    """
-    c = gf.Component()
-    gap_mmi = gf.snap.snap_to_grid(gap_mmi, grid_factor=2)
-    w_taper = width_taper
-    x = gf.get_cross_section(cross_section)
-    width = width or x.width
-
-    _taper = gf.get_component(
-        taper,
-        length=length_taper,
-        width1=width,
-        width2=w_taper,
-        cross_section=cross_section,
-    )
-
-    a = gap_mmi / 2 + width_taper / 2
-    _ = c << gf.get_component(
-        straight, length=length_mmi, width=width_mmi, cross_section=cross_section
-    )
-
-    ports = [
-        gf.Port("o1", orientation=180, center=(0, -a), width=w_taper, cross_section=x),
-        gf.Port("o2", orientation=180, center=(0, +a), width=w_taper, cross_section=x),
-        gf.Port(
-            "o3",
-            orientation=0,
-            center=(length_mmi, +a),
-            width=w_taper,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o4",
-            orientation=0,
-            center=(length_mmi, -a),
-            width=w_taper,
-            cross_section=x,
-        ),
-    ]
-
-    for port in ports:
-        taper_ref = c << _taper
-        taper_ref.connect(port="o2", other=port, allow_width_mismatch=True)
-        c.add_port(name=port.name, port=taper_ref.ports["o1"])
-
-    c.flatten()
-    return c
+@gf.cell
+def mmi1x2_so() -> gf.Component:
+    return _mmi1x2(length_mmi=40.1, gap_mmi=1.55, cross_section="xs_so")
 
 
-mmi2x2_sc = partial(mmi2x2, length_mmi=42.5, gap_mmi=0.5, cross_section="xs_sc")
-mmi2x2_so = partial(mmi2x2, length_mmi=53.5, gap_mmi=0.53, cross_section="xs_so")
-mmi2x2_rc = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="xs_rc")
-mmi2x2_ro = partial(mmi2x2, length_mmi=55.0, gap_mmi=0.53, cross_section="xs_ro")
+@gf.cell
+def mmi1x2_rc() -> gf.Component:
+    return _mmi1x2(length_mmi=32.7, gap_mmi=1.64, cross_section="xs_rc")
+
+
+@gf.cell
+def mmi1x2_ro() -> gf.Component:
+    return _mmi1x2(length_mmi=40.8, gap_mmi=1.55, cross_section="xs_ro")
+
+
+@gf.cell
+def mmi2x2_sc() -> gf.Component:
+    return _mmi2x2(length_mmi=42.5, gap_mmi=0.5, cross_section="xs_sc")
+
+
+@gf.cell
+def mmi2x2_so() -> gf.Component:
+    return _mmi2x2(length_mmi=53.5, gap_mmi=0.53, cross_section="xs_so")
+
+
+@gf.cell
+def mmi2x2_rc() -> gf.Component:
+    return _mmi2x2(length_mmi=44.8, gap_mmi=0.53, cross_section="xs_rc")
+
+
+@gf.cell
+def mmi2x2_ro() -> gf.Component:
+    return _mmi2x2(length_mmi=55.0, gap_mmi=0.53, cross_section="xs_ro")
 
 
 ##############################
@@ -1036,7 +891,7 @@ grating_coupler_array = partial(
     cross_section="xs_sc",
 )
 
-die = partial(
+_die = partial(
     gf.c.die_with_pads,
     layer_floorplan=LAYER.FLOORPLAN,
     size=(11470.0, 4900.0),
@@ -1048,26 +903,25 @@ die = partial(
     cross_section="xs_sc",
 )
 
-die_sc = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_sc",
-    cross_section="xs_sc",
-)
-die_so = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_so",
-    cross_section="xs_so",
-)
-die_rc = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_rc",
-    cross_section="xs_rc",
-)
-die_ro = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_ro",
-    cross_section="xs_ro",
-)
+
+@gf.cell
+def die_sc():
+    return _die(grating_coupler="grating_coupler_rectangular_sc", cross_section="xs_sc")
+
+
+@gf.cell
+def die_so():
+    return _die(grating_coupler="grating_coupler_rectangular_so", cross_section="xs_so")
+
+
+@gf.cell
+def die_rc():
+    return _die(grating_coupler="grating_coupler_rectangular_rc", cross_section="xs_rc")
+
+
+@gf.cell
+def die_ro():
+    return _die(grating_coupler="grating_coupler_rectangular_ro", cross_section="xs_ro")
 
 
 ################
@@ -1151,7 +1005,7 @@ array = gf.components.array
 
 
 if __name__ == "__main__":
-    c = straight()
+    c = mmi1x2_sc()
     print(c.function_name)
     # c.get_netlist()
     c.show()

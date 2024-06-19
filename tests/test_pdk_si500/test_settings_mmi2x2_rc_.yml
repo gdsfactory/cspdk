@@ -1,11 +1,3 @@
 info: {}
-name: mmi2x2_WNone_WT1p5_LT20_3d9bc54d
-settings:
-  cross_section: xs_rc
-  gap_mmi: 0.53
-  length_mmi: 44.8
-  length_taper: 20
-  straight: straight
-  taper: taper
-  width_mmi: 6
-  width_taper: 1.5
+name: mmi2x2_rc
+settings: {}

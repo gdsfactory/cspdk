@@ -96,7 +96,7 @@ def wire_corner(
 
 @gf.cell
 def bend_s(
-    size: tuple[float, float] = (11.0, 1.8),
+    size: tuple[float, float] = (20.0, 1.8),
     npoints: int = 99,
     cross_section: CrossSectionSpec = "xs_rc",
     allow_min_radius_violation: bool = False,
@@ -472,7 +472,7 @@ def coupler(
     gap: float = 0.236,
     length: float = 20.0,
     dy: float = 4.0,
-    dx: float = 10.0,
+    dx: float = 15.0,
     cross_section: CrossSectionSpec = "strip",
 ) -> Component:
     r"""Symmetric coupler.
@@ -804,20 +804,20 @@ mzi = base_cell(
         port_e0_splitter="o3",
         port_e1_combiner="o3",
         port_e0_combiner="o4",
-        bend="bend_rc",
-        straight="straight_rc",
-        splitter="mmi1x2_rc",
-        combiner="mmi2x2_rc",
+        bend="bend_euler",
+        straight="straight",
+        splitter="mmi1x2",
+        combiner="mmi2x2",
         cross_section="xs_rc",
     ),
 )
 
 mzi_rc = partial(
     mzi,
-    bend="bend_rc",
-    straight="straight_rc",
-    splitter="mmi1x2_rc",
-    combiner="mmi2x2_rc",
+    bend="bend_euler",
+    straight="straight",
+    splitter="mmi1x2",
+    combiner="mmi2x2",
     cross_section="xs_rc",
 )
 
@@ -835,29 +835,30 @@ grating_coupler_array = partial(
     port_name="o1",
     rotation=-90,
     with_loopback=False,
-    grating_coupler="grating_coupler_rectangular_rc",
+    grating_coupler="grating_coupler_rectangular",
     cross_section="xs_rc",
 )
 
 
-die = partial(
+_die = partial(
     gf.c.die_with_pads,
     layer_floorplan=LAYER.FLOORPLAN,
     size=(11470.0, 4900.0),
     ngratings=14,
     npads=31,
     grating_pitch=250.0,
-    grating_coupler="grating_coupler_rectangular_rc",
+    grating_coupler="grating_coupler_rectangular",
     pad_pitch=300.0,
     cross_section="xs_rc",
 )
-die_rc = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_rc",
-    cross_section="xs_rc",
-)
+
+
+def die():
+    return _die(grating_coupler="grating_coupler_rectangular_sc", cross_section="xs_sc")
+
+
 array = partial(gf.components.array)
 
 if __name__ == "__main__":
-    c = grating_coupler_elliptical()
+    c = coupler()
     c.show()

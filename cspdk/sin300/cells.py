@@ -97,7 +97,7 @@ def wire_corner(
 
 @gf.cell
 def bend_s(
-    size: tuple[float, float] = (11.0, 1.8),
+    size: tuple[float, float] = (15.0, 1.8),
     npoints: int = 99,
     cross_section: CrossSectionSpec = "xs_nc",
     allow_min_radius_violation: bool = False,
@@ -342,7 +342,7 @@ def coupler(
     gap: float = 0.236,
     length: float = 20.0,
     dy: float = 4.0,
-    dx: float = 10.0,
+    dx: float = 20.0,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
     r"""Symmetric coupler.
@@ -545,36 +545,32 @@ grating_coupler_array = base_cell(
 )
 
 
-die = base_cell(
-    "die",
-    partial(
-        gf.c.die_with_pads,
-        layer_floorplan=LAYER.FLOORPLAN,
-        size=(11470.0, 4900.0),
-        ngratings=14,
-        npads=31,
-        grating_pitch=250.0,
-        grating_coupler="grating_coupler_rectangular_nc",
-        pad_pitch=300.0,
-        cross_section="xs_nc",
-    ),
-)
-
-die_nc = partial(
-    die,
+_die = partial(
+    gf.c.die_with_pads,
+    layer_floorplan=LAYER.FLOORPLAN,
+    size=(11470.0, 4900.0),
+    ngratings=14,
+    npads=31,
+    grating_pitch=250.0,
     grating_coupler="grating_coupler_rectangular_nc",
+    pad_pitch=300.0,
     cross_section="xs_nc",
 )
-die_no = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_no",
-    cross_section="xs_no",
-)
+
+
+@gf.cell
+def die_nc():
+    return _die(grating_coupler="grating_coupler_rectangular_nc", cross_section="xs_nc")
+
+
+@gf.cell
+def die_no():
+    return _die(grating_coupler="grating_coupler_rectangular_no", cross_section="xs_no")
 
 
 array = base_cell("array", partial(gf.components.array))
 
 
 if __name__ == "__main__":
-    c = mzi_no()
+    c = coupler()
     c.show()

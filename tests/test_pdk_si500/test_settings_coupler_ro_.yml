@@ -1,12 +1,10 @@
 info:
   length: 15.133
-  min_bend_radius: 25.022
-name: coupler_G0p234_L20_CSco_7bf6c802
+  min_bend_radius: 25.036
+name: coupler_G0p236_L20_D4_D_4da8fff6
 settings:
-  coupler_straight: coupler_straight
-  coupler_symmetric: coupler_symmetric
   cross_section: xs_ro
   dx: 15
   dy: 4
-  gap: 0.234
+  gap: 0.236
   length: 20

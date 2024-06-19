@@ -1,8 +1,8 @@
 info:
   length: 20
-name: taper_strip_to_ridge_L2_86c6ede0
+name: taper_strip_to_ridge_L2_2c45872a
 settings:
-  cross_section: xs_sc
+  cross_section: strip
   layer_slab: SLAB
   layer_wg: WG
   length: 20
