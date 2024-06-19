@@ -1,10 +1,10 @@
 info: {}
-name: mzi_DL10_LY2_LX0p1_BFbe_7967d40c
+name: mzi_DL10_LY2_LX0p1_Bben_edfbb3a7
 settings:
   add_optical_ports_arms: false
   auto_rename_ports: true
-  bend: Fbend_euler_Mgdsfactorypcomponentspbend_euler_SCSxs_sc
-  combiner: Fmmi2x2_Mgdsfactorypcomponentspmmi2x2_SCSxs_sc_WM6_WT1p5_LT20_LM42p5_GM0p5
+  bend: bend_sc
+  combiner: mmi2x2_sc
   cross_section: xs_sc
   delta_length: 10
   length_x: 0.1
@@ -16,6 +16,6 @@ settings:
   port_e0_splitter: o3
   port_e1_combiner: o3
   port_e1_splitter: o2
-  splitter: Fmmi1x2_Mgdsfactorypcomponentspmmi1x2_SCSxs_sc_WM6_WT1p5_LT20_LM31p8_GM1p64
-  straight: Fwrapper_autocell_Mfunctools_SCSxs_sc
+  splitter: mmi1x2_sc
+  straight: straight_sc
   with_splitter: true

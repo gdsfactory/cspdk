@@ -164,12 +164,12 @@ instances:
       width_mmi: 12
       width_taper: 5.5
   cp2:
-    component: mmi1x2
+    component: mmi2x2
     info: {}
     settings:
       cross_section: xs_nc
       gap_mmi: 0.4
-      length_mmi: 64.7
+      length_mmi: 232
       length_taper: 50
       straight: straight
       taper: taper
@@ -283,7 +283,7 @@ instances:
       cross_section: xs_nc
       length: 2
       npoints: 2
-name: mzi_DL10_LY2_LX0p1_Bben_67e4c6b7
+name: mzi_DL10_LY2_LX0p1_Bben_14d525c5
 nets:
 - p1: bend_euler_RNone_A90_P0_bdf8712b_127500_-15150,o1
   p2: cp1,o3
@@ -312,11 +312,11 @@ nets:
 - p1: bend_euler_RNone_A90_P0_bdf8712b_202020_-15150,o1
   p2: straight_L7_N2_CSxs_nc_W1p2_189820_-31450,o2
 - p1: bend_euler_RNone_A90_P0_bdf8712b_202020_-15150,o2
-  p2: cp2,o3
+  p2: cp2,o4
 - p1: bend_euler_RNone_A90_P0_bdf8712b_202020_15150,o1
   p2: straight_L2_N2_CSxs_nc_W1p2_189820_28950,o2
 - p1: bend_euler_RNone_A90_P0_bdf8712b_202020_15150,o2
-  p2: cp2,o2
+  p2: cp2,o3
 - p1: straight_L0p02_N2_CSxs_nc_W1p2_164810_-59950,o2
   p2: sxb,o2
 - p1: straight_L0p02_N2_CSxs_nc_W1p2_164810_54950,o2
@@ -370,7 +370,7 @@ placements:
   cp2:
     mirror: true
     rotation: 180
-    x: 329.52
+    x: 496.82
     y: 0
   straight_L0p02_N2_CSxs_nc_W1p2_164810_-59950:
     mirror: false
@@ -414,4 +414,5 @@ placements:
     y: 27.95
 ports:
   o1: cp1,o1
-  o2: cp2,o1
+  o2: cp2,o2
+  o3: cp2,o1
