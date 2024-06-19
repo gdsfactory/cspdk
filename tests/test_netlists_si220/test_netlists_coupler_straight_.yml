@@ -1,0 +1,45 @@
+instances:
+  straight_L10_N2_CSxs_sc_5000_0:
+    component: straight
+    info:
+      length: 10
+      route_info_length: 10
+      route_info_type: xs_3edc2673
+      route_info_weight: 10
+      route_info_xs_3edc2673_length: 10
+      width: 0.45
+    settings:
+      cross_section: xs_sc
+      length: 10
+      npoints: 2
+  straight_L10_N2_CSxs_sc_5000_720:
+    component: straight
+    info:
+      length: 10
+      route_info_length: 10
+      route_info_type: xs_3edc2673
+      route_info_weight: 10
+      route_info_xs_3edc2673_length: 10
+      width: 0.45
+    settings:
+      cross_section: xs_sc
+      length: 10
+      npoints: 2
+name: coupler_straight_L10_G0_0dab0f27
+nets: []
+placements:
+  straight_L10_N2_CSxs_sc_5000_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  straight_L10_N2_CSxs_sc_5000_720:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0.72
+ports:
+  o1: straight_L10_N2_CSxs_sc_5000_0,o1
+  o2: straight_L10_N2_CSxs_sc_5000_720,o1
+  o3: straight_L10_N2_CSxs_sc_5000_720,o2
+  o4: straight_L10_N2_CSxs_sc_5000_0,o2

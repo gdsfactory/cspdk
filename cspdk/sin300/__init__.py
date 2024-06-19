@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from gdsfactory.config import CONF
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.get_factories import get_cells
 from gdsfactory.pdk import Pdk
@@ -12,6 +13,8 @@ from cspdk.sin300.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategie
 _models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
+
+CONF.pdk = "cspdk.sin300"
 
 
 @lru_cache

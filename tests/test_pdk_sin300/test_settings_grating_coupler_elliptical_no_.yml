@@ -1,0 +1,20 @@
+info:
+  period: 1.401
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_ellipti_cfcda3d0
+settings:
+  cross_section: xs_no
+  end_straight_length: 0.2
+  fiber_angle: 20
+  grating_line_width: 0.482
+  layer_trench: GRA
+  n_periods: 30
+  ncladding: 1.443
+  neff: 1.6
+  p_start: 26
+  polarization: te
+  taper_angle: 30
+  taper_length: 16.6
+  trenches_extra_angle: 9
+  wavelength: 1.55

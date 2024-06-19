@@ -113,7 +113,7 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-xs_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
+strip = xs_sc = partial(gf.cross_section.strip, layer=LAYER.WG, width=0.45)
 xs_so = partial(xs_sc, width=0.40)
 
 xs_rc = partial(

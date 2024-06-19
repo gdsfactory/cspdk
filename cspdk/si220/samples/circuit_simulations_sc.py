@@ -7,8 +7,8 @@ from cspdk.si220 import PDK, cells
 if __name__ == "__main__":
     c = cells.mzi_sc(delta_length=50)
     c.show()
-    c.plot_netlist()
     netlist = c.get_netlist()
+    c.plot_netlist()
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
     wl = jnp.linspace(1.5, 1.6, 256)

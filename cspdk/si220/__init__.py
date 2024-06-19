@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from gdsfactory.config import CONF
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.get_factories import get_cells
 from gdsfactory.pdk import Pdk
@@ -13,10 +14,12 @@ _models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 
+CONF.pdk = "cspdk.si220"
+
 
 @lru_cache
 def get_pdk() -> Pdk:
-    pdk = Pdk(
+    return Pdk(
         name="cornerstone_si220",
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
@@ -26,7 +29,6 @@ def get_pdk() -> Pdk:
         models=_models,
         routing_strategies=routing_strategies,
     )
-    return pdk
 
 
 def activate_pdk():
