@@ -154,27 +154,11 @@ instances:
   cp1:
     component: mmi1x2
     info: {}
-    settings:
-      cross_section: xs_rc
-      gap_mmi: 1.47
-      length_mmi: 37.5
-      length_taper: 20
-      straight: straight
-      taper: taper
-      width_mmi: 6
-      width_taper: 1.5
+    settings: {}
   cp2:
     component: mmi2x2
     info: {}
-    settings:
-      cross_section: strip
-      gap_mmi: 0.4
-      length_mmi: 5.5
-      length_taper: 50.2
-      straight: straight
-      taper: taper
-      width_mmi: 6
-      width_taper: 1.5
+    settings: {}
   straight_L2p535_N2_CSxs_rc_W0p45_137095_27217:
     component: straight
     info:
@@ -283,7 +267,7 @@ instances:
       cross_section: xs_rc
       length: 2
       npoints: 2
-name: mzi_DL10_LY2_LX0p1_Bben_e1083f31
+name: mzi_rc_DL10_LY2_LX0p1
 nets:
 - p1: bend_euler_RNone_A90_P0_14653c05_127207_-48598,o1
   p2: straight_L4p495_N2_CSxs_rc_W0p45_109847_-58485,o1

@@ -426,12 +426,12 @@ _grating_coupler_rectangular = partial(
 
 
 @gf.cell
-def grating_coupler_rectangular_nc():
+def grating_coupler_rectangular_nc() -> gf.Component:
     return _grating_coupler_rectangular(period=0.66, cross_section="xs_nc")
 
 
 @gf.cell
-def grating_coupler_rectangular_no():
+def grating_coupler_rectangular_no() -> gf.Component:
     return _grating_coupler_rectangular(period=0.964, cross_section="xs_no")
 
 
@@ -458,14 +458,14 @@ _grating_coupler_elliptical = partial(
 
 
 @gf.cell
-def grating_coupler_elliptical_nc():
+def grating_coupler_elliptical_nc() -> gf.Component:
     return _grating_coupler_elliptical(
         cross_section="xs_nc", grating_line_width=0.66 / 2
     )
 
 
 @gf.cell
-def grating_coupler_elliptical_no():
+def grating_coupler_elliptical_no() -> gf.Component:
     return _grating_coupler_elliptical(
         grating_line_width=0.964 / 2, cross_section="xs_no"
     )
@@ -542,20 +542,33 @@ def pad(size=(100.0, 100.0)) -> gf.Component:
 
 rectangle = partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
 
+_grating_coupler_array = partial(
+    gf.components.grating_coupler_array,
+    port_name="o1",
+    rotation=-90,
+    with_loopback=False,
+    centered=True,
+)
 
-def grating_coupler_array() -> gf.Component:
-    return gf.components.grating_coupler_array(
-        pitch=127,
-        n=6,
-        port_name="o1",
-        rotation=-90,
-        with_loopback=False,
-        grating_coupler="grating_coupler_rectangular_nc",
-        cross_section="xs_nc",
+
+@gf.cell
+def grating_coupler_array(
+    pitch=127,
+    n=6,
+    grating_coupler="grating_coupler_rectangular_nc",
+    cross_section="xs_nc",
+    **kwargs,
+) -> gf.Component:
+    return _grating_coupler_array(
+        pitch=pitch,
+        n=n,
+        grating_coupler=grating_coupler,
+        cross_section=cross_section,
+        **kwargs,
     )
 
 
-_die = partial(
+_die_nc = partial(
     gf.c.die_with_pads,
     layer_floorplan=LAYER.FLOORPLAN,
     size=(11470.0, 4900.0),
@@ -566,21 +579,24 @@ _die = partial(
     pad_pitch=300.0,
     cross_section="xs_nc",
 )
+_die_no = partial(
+    _die_nc, grating_coupler="grating_coupler_rectangular_no", cross_section="xs_no"
+)
 
 
 @gf.cell
-def die_nc():
-    return _die(grating_coupler="grating_coupler_rectangular_nc", cross_section="xs_nc")
+def die_nc() -> gf.Component:
+    return _die_nc()
 
 
 @gf.cell
-def die_no():
-    return _die(grating_coupler="grating_coupler_rectangular_no", cross_section="xs_no")
+def die_no() -> gf.Component:
+    return _die_no()
 
 
 array = partial(gf.components.array)
 
 
 if __name__ == "__main__":
-    c = coupler()
+    c = die_nc()
     c.show()

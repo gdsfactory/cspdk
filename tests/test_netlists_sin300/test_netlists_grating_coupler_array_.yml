@@ -1,181 +1,97 @@
 instances:
-  grating_coupler_rectang_1e504932_-190500_-109735:
-    component: grating_coupler_rectangular
+  grating_coupler_rectangular_nc_-190500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-  grating_coupler_rectang_1e504932_-317500_-109735:
-    component: grating_coupler_rectangular
+    settings: {}
+  grating_coupler_rectangular_nc_-317500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-  grating_coupler_rectang_1e504932_-63500_-109735:
-    component: grating_coupler_rectangular
+    settings: {}
+  grating_coupler_rectangular_nc_-63500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-  grating_coupler_rectang_1e504932_190500_-109735:
-    component: grating_coupler_rectangular
+    settings: {}
+  grating_coupler_rectangular_nc_190500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-  grating_coupler_rectang_1e504932_317500_-109735:
-    component: grating_coupler_rectangular
+    settings: {}
+  grating_coupler_rectangular_nc_317500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-  grating_coupler_rectang_1e504932_63500_-109735:
-    component: grating_coupler_rectangular
+    settings: {}
+  grating_coupler_rectangular_nc_63500_-109735:
+    component: grating_coupler_rectangular_nc
     info:
       fiber_angle: 20
       polarization: te
       wavelength: 1.55
-    settings:
-      cross_section: xs_nc
-      fiber_angle: 20
-      fill_factor: 0.5
-      layer_grating: NITRIDE_ETCH
-      layer_slab: NITRIDE
-      length_taper: 200
-      n_periods: 30
-      period: 0.66
-      polarization: te
-      slab_offset: 0
-      slab_xmin: -1
-      taper: taper
-      wavelength: 1.55
-      width_grating: 11
-name: grating_coupler_array_G_6eb7d8a9
+    settings: {}
+name: grating_coupler_array_P_532e6dcb
 nets: []
 placements:
-  grating_coupler_rectang_1e504932_-190500_-109735:
+  grating_coupler_rectangular_nc_-190500_-109735:
     mirror: false
     rotation: 270
     x: -190.5
     y: 0
-  grating_coupler_rectang_1e504932_-317500_-109735:
+  grating_coupler_rectangular_nc_-317500_-109735:
     mirror: false
     rotation: 270
     x: -317.5
     y: 0
-  grating_coupler_rectang_1e504932_-63500_-109735:
+  grating_coupler_rectangular_nc_-63500_-109735:
     mirror: false
     rotation: 270
     x: -63.5
     y: 0
-  grating_coupler_rectang_1e504932_190500_-109735:
+  grating_coupler_rectangular_nc_190500_-109735:
     mirror: false
     rotation: 270
     x: 190.5
     y: 0
-  grating_coupler_rectang_1e504932_317500_-109735:
+  grating_coupler_rectangular_nc_317500_-109735:
     mirror: false
     rotation: 270
     x: 317.5
     y: 0
-  grating_coupler_rectang_1e504932_63500_-109735:
+  grating_coupler_rectangular_nc_63500_-109735:
     mirror: false
     rotation: 270
     x: 63.5
     y: 0
 ports:
-  o0: grating_coupler_rectang_1e504932_-317500_-109735,o1
-  o1: grating_coupler_rectang_1e504932_-190500_-109735,o1
-  o2: grating_coupler_rectang_1e504932_-63500_-109735,o1
-  o3: grating_coupler_rectang_1e504932_63500_-109735,o1
-  o4: grating_coupler_rectang_1e504932_190500_-109735,o1
-  o5: grating_coupler_rectang_1e504932_317500_-109735,o1
+  o0: grating_coupler_rectangular_nc_-317500_-109735,o1
+  o1: grating_coupler_rectangular_nc_-190500_-109735,o1
+  o2: grating_coupler_rectangular_nc_-63500_-109735,o1
+  o3: grating_coupler_rectangular_nc_63500_-109735,o1
+  o4: grating_coupler_rectangular_nc_190500_-109735,o1
+  o5: grating_coupler_rectangular_nc_317500_-109735,o1
 warnings:
   vertical_te:
     unconnected_ports:
     - message: 6 unconnected vertical_te ports!
       ports:
-      - grating_coupler_rectang_1e504932_-317500_-109735,o2
-      - grating_coupler_rectang_1e504932_-190500_-109735,o2
-      - grating_coupler_rectang_1e504932_-63500_-109735,o2
-      - grating_coupler_rectang_1e504932_63500_-109735,o2
-      - grating_coupler_rectang_1e504932_190500_-109735,o2
-      - grating_coupler_rectang_1e504932_317500_-109735,o2
+      - grating_coupler_rectangular_nc_-317500_-109735,o2
+      - grating_coupler_rectangular_nc_-190500_-109735,o2
+      - grating_coupler_rectangular_nc_-63500_-109735,o2
+      - grating_coupler_rectangular_nc_63500_-109735,o2
+      - grating_coupler_rectangular_nc_190500_-109735,o2
+      - grating_coupler_rectangular_nc_317500_-109735,o2
       values:
       - - -317500
         - -209652

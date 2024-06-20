@@ -152,29 +152,13 @@ instances:
       p: 0.5
       with_arc_floorplan: true
   cp1:
-    component: mmi1x2
+    component: mmi1x2_nc
     info: {}
-    settings:
-      cross_section: xs_nc
-      gap_mmi: 0.4
-      length_mmi: 64.7
-      length_taper: 50
-      straight: straight
-      taper: taper
-      width_mmi: 12
-      width_taper: 5.5
+    settings: {}
   cp2:
-    component: mmi2x2
+    component: mmi2x2_nc
     info: {}
-    settings:
-      cross_section: xs_nc
-      gap_mmi: 0.4
-      length_mmi: 232
-      length_taper: 50
-      straight: straight
-      taper: taper
-      width_mmi: 12
-      width_taper: 5.5
+    settings: {}
   straight_L0p02_N2_CSxs_nc_W1p2_164810_-59950:
     component: straight
     info:
@@ -283,7 +267,7 @@ instances:
       cross_section: xs_nc
       length: 2
       npoints: 2
-name: mzi_DL10_LY2_LX0p1_Bben_14d525c5
+name: mzi_nc_DL10_LY2_LX0p1
 nets:
 - p1: bend_euler_RNone_A90_P0_bdf8712b_127500_-15150,o1
   p2: cp1,o3

@@ -1,11 +1,9 @@
 from functools import partial
 
 import gdsfactory as gf
-import numpy as np
 from gdsfactory.components.bend_euler import _bend_euler
-from gdsfactory.components.grating_coupler_elliptical import grating_tooth_points
 from gdsfactory.port import Port
-from gdsfactory.typings import Component, ComponentSpec, CrossSectionSpec, LayerSpec
+from gdsfactory.typings import Component, CrossSectionSpec
 
 from cspdk.si500.tech import LAYER
 
@@ -403,258 +401,48 @@ def coupler(
 # grating couplers Rectangular
 ##############################
 @gf.cell
-def grating_coupler_rectangular(
-    n_periods: int = 60,
-    period: float = 0.57,
-    fill_factor: float = 0.5,
-    width_grating: float = 11.0,
-    length_taper: float = 350.0,
-    polarization: str = "te",
-    wavelength: float = 1.55,
-    taper: ComponentSpec = taper,
-    layer_slab: LayerSpec | None = LAYER.WG,
-    layer_grating: LayerSpec | None = LAYER.GRA,
-    fiber_angle: float = 10,
-    slab_xmin: float = -1.0,
-    slab_offset: float = 0.0,
-    cross_section: CrossSectionSpec = "xs_rc",
-    **kwargs,
-) -> Component:
-    r"""Grating coupler with rectangular shapes (not elliptical).
-
-    Needs longer taper than elliptical.
-    Grating teeth are straight.
-    For a focusing grating take a look at grating_coupler_elliptical.
-
-    Args:
-        n_periods: number of grating teeth.
-        period: grating pitch.
-        fill_factor: ratio of grating width vs gap.
-        width_grating: 11.
-        length_taper: 150.
-        polarization: 'te' or 'tm'.
-        wavelength: in um.
-        taper: function.
-        layer_slab: layer that protects the slab under the grating.
-        layer_grating: layer for the grating.
-        fiber_angle: in degrees.
-        slab_xmin: where 0 is at the start of the taper.
-        slab_offset: from edge of grating to edge of the slab.
-        cross_section: for input waveguide port.
-        kwargs: cross_section settings.
-
-    .. code::
-
-        side view
-                      fiber
-
-                   /  /  /  /
-                  /  /  /  /
-
-                _|-|_|-|_|-|___ layer
-                   layer_slab |
-            o1  ______________|
-
-
-        top view     _________
-                    /| | | | |
-                   / | | | | |
-                  /taper_angle
-                 /_ _| | | | |
-        wg_width |   | | | | |
-                 \   | | | | |
-                  \  | | | | |
-                   \ | | | | |
-                    \|_|_|_|_|
-                 <-->
-                taper_length
-    """
-    xs = gf.get_cross_section(cross_section, **kwargs)
-    wg_width = xs.width
-    layer = layer_grating or xs.layer
-
-    c = Component()
-    taper_ref = c << gf.get_component(
-        taper,
-        length=length_taper,
-        width2=width_grating,
-        width1=wg_width,
-        cross_section=cross_section,
+def grating_coupler_rectangular() -> Component:
+    """Grating coupler with rectangular shapes (not elliptical) for 10 deg angle and TE."""
+    return gf.c.grating_coupler_rectangular(
+        n_periods=60,
+        period=0.57,
+        fill_factor=0.5,
+        width_grating=11.0,
+        length_taper=350.0,
+        polarization="te",
+        wavelength=1.55,
+        taper=taper,
+        layer_slab=LAYER.WG,
+        layer_grating=LAYER.GRA,
+        fiber_angle=10,
+        slab_xmin=-1.0,
+        slab_offset=0.0,
+        cross_section="xs_rc",
     )
-
-    c.add_port(port=taper_ref.ports["o1"], name="o1")
-    x0 = taper_ref.dxmax
-
-    for i in range(n_periods):
-        xsize = gf.snap.snap_to_grid(period * fill_factor)
-        cgrating = c.add_ref(
-            rectangle(size=(xsize, width_grating), layer=layer, port_type=None)
-        )
-        cgrating.dxmin = gf.snap.snap_to_grid(x0 + i * period)
-        cgrating.dy = 0
-
-    c.info["polarization"] = polarization
-    c.info["wavelength"] = wavelength
-    c.info["fiber_angle"] = fiber_angle
-
-    if layer_slab:
-        slab_xmin += length_taper
-        slab_xsize = cgrating.dxmax + slab_offset
-        slab_ysize = c.dysize + 2 * slab_offset
-        yslab = slab_ysize / 2
-        c.add_polygon(
-            [
-                (slab_xmin, yslab),
-                (slab_xsize, yslab),
-                (slab_xsize, -yslab),
-                (slab_xmin, -yslab),
-            ],
-            layer_slab,
-        )
-    xs.add_bbox(c)
-    xport = np.round((x0 + cgrating.dx) / 2, 3)
-    c.add_port(
-        name="o2",
-        port_type=f"vertical_{polarization}",
-        center=(xport, 0),
-        orientation=0,
-        width=width_grating,
-        layer=layer,
-    )
-    c.flatten()
-    return c
 
 
 ##############################
 # grating couplers elliptical
 ##############################
-
-
 @gf.cell
-def grating_coupler_elliptical(
-    polarization: str = "te",
-    taper_length: float = 16.6,
-    taper_angle: float = 30.0,
-    trenches_extra_angle: float = 9.0,
-    wavelength: float = 1.53,
-    fiber_angle: float = 15.0,
-    grating_line_width: float = 0.315,
-    neff: float = 2.638,  # tooth effective index
-    ncladding: float = 1.443,  # cladding index
-    layer_trench: LayerSpec | None = LAYER.GRA,
-    p_start: int = 26,
-    n_periods: int = 30,
-    end_straight_length: float = 0.2,
-    cross_section: CrossSectionSpec = "strip",
-    **kwargs,
-) -> Component:
-    r"""Returns Grating coupler with defined trenches.
-
-    Some foundries define the grating coupler by a shallow etch step (trenches)
-    Others define the slab that they keep (see grating_coupler_elliptical)
-
-    Args:
-        polarization: 'te' or 'tm'.
-        taper_length: taper length from straight I/O.
-        taper_angle: grating flare angle.
-        trenches_extra_angle: extra angle for the trenches.
-        wavelength: grating transmission central wavelength.
-        fiber_angle: fibre polish angle in degrees.
-        grating_line_width: of the 220 ridge.
-        neff: tooth effective index.
-        ncladding: cladding index.
-        layer_trench: for the trench.
-        p_start: first tooth.
-        n_periods: number of grating teeth.
-        end_straight_length: at the end of straight.
-        cross_section: cross_section spec.
-        kwargs: cross_section settings.
-
-
-    .. code::
-
-                      fiber
-
-                   /  /  /  /
-                  /  /  /  /
-                _|-|_|-|_|-|___
-        WG  o1  ______________|
-
-    """
-    xs = gf.get_cross_section(cross_section, **kwargs)
-    wg_width = xs.width
-    layer = xs.layer
-
-    # Compute some ellipse parameters
-    sthc = np.sin(fiber_angle * np.pi / 180)
-    d = neff**2 - ncladding**2 * sthc**2
-    a1 = wavelength * neff / d
-    b1 = wavelength / np.sqrt(d)
-    x1 = wavelength * ncladding * sthc / d
-
-    a1 = round(a1, 3)
-    b1 = round(b1, 3)
-    x1 = round(x1, 3)
-
-    period = float(a1 + x1)
-    trench_line_width = period - grating_line_width
-
-    c = gf.Component()
-
-    # Make each grating line
-    for p in range(p_start, p_start + n_periods + 1):
-        pts = grating_tooth_points(
-            p * a1,
-            p * b1,
-            p * x1,
-            width=trench_line_width,
-            taper_angle=taper_angle + trenches_extra_angle,
-        )
-        c.add_polygon(pts, layer_trench)
-
-    # Make the taper
-    p_taper = p_start - 1
-    p_taper_eff = p_taper
-    a_taper = a1 * p_taper_eff
-    # b_taper = b1 * p_taper_eff
-    x_taper = x1 * p_taper_eff
-    x_output = a_taper + x_taper - taper_length + grating_line_width / 2
-
-    xmax = x_output + taper_length + n_periods * period + 3
-    y = wg_width / 2 + np.tan(taper_angle / 2 * np.pi / 180) * xmax
-    pts = [
-        (x_output, -wg_width / 2),
-        (x_output, +wg_width / 2),
-        (xmax, +y),
-        (xmax + end_straight_length, +y),
-        (xmax + end_straight_length, -y),
-        (xmax, -y),
-    ]
-    c.add_polygon(pts, layer)
-
-    c.add_port(
-        name="o1",
-        center=(x_output, 0),
-        width=wg_width,
-        orientation=180,
-        layer=layer,
-        cross_section=xs,
+def grating_coupler_elliptical() -> Component:
+    """Returns Grating coupler with defined trenches."""
+    return gf.c.grating_coupler_elliptical_trenches(
+        polarization="te",
+        taper_length=16.6,
+        taper_angle=30.0,
+        trenches_extra_angle=9.0,
+        wavelength=1.53,
+        fiber_angle=15.0,
+        grating_line_width=0.315,
+        neff=2.638,
+        ncladding=1.443,
+        layer_trench=LAYER.GRA,
+        p_start=26,
+        n_periods=30,
+        end_straight_length=0.2,
+        cross_section="strip",
     )
-    c.info["period"] = float(np.round(period, 3))
-    c.info["polarization"] = polarization
-    c.info["wavelength"] = wavelength
-    xs.add_bbox(c)
-
-    x = np.round(taper_length + period * n_periods / 2, 3)
-    c.add_port(
-        name="o2",
-        center=(x, 0),
-        width=10,
-        orientation=0,
-        layer=layer,
-        port_type=f"vertical_{polarization}",
-    )
-    return c
 
 
 ################
@@ -705,16 +493,31 @@ def pad(size=(100.0, 100.0)) -> gf.Component:
 
 
 rectangle = partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
-grating_coupler_array = partial(
+
+_grating_coupler_array = partial(
     gf.components.grating_coupler_array,
-    pitch=127,
-    n=6,
     port_name="o1",
     rotation=-90,
     with_loopback=False,
+    centered=True,
+)
+
+
+@gf.cell
+def grating_coupler_array(
+    pitch=127,
+    n=6,
     grating_coupler="grating_coupler_rectangular",
     cross_section="xs_rc",
-)
+    **kwargs,
+) -> gf.Component:
+    return _grating_coupler_array(
+        pitch=pitch,
+        n=n,
+        grating_coupler=grating_coupler,
+        cross_section=cross_section,
+        **kwargs,
+    )
 
 
 _die = partial(
@@ -730,12 +533,13 @@ _die = partial(
 )
 
 
-def die():
-    return _die(grating_coupler="grating_coupler_rectangular_sc", cross_section="xs_sc")
+@gf.cell
+def die() -> gf.Component:
+    return _die(grating_coupler="grating_coupler_rectangular", cross_section="xs_rc")
 
 
 array = partial(gf.components.array)
 
 if __name__ == "__main__":
-    c = coupler()
+    c = grating_coupler_array()
     c.show()
