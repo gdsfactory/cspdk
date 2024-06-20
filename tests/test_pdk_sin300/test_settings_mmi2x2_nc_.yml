@@ -1,11 +1,3 @@
 info: {}
-name: mmi2x2_WNone_WT5p5_LT50_23cee3ba
-settings:
-  cross_section: xs_nc
-  gap_mmi: 0.4
-  length_mmi: 232
-  length_taper: 50
-  straight: straight
-  taper: taper
-  width_mmi: 12
-  width_taper: 5.5
+name: mmi2x2_nc
+settings: {}

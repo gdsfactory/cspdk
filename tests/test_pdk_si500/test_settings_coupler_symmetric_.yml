@@ -1,0 +1,10 @@
+info:
+  length: 10.192
+  min_bend_radius: 11.695
+name: coupler_symmetric_Bbend_68f5befa
+settings:
+  bend: bend_s
+  cross_section: xs_sc
+  dx: 10
+  dy: 4
+  gap: 0.234

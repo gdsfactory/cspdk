@@ -114,7 +114,7 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 cladding_layers_rib = (LAYER.SLAB,)
 cladding_offsets_rib = (5,)
 
-xs_rc = partial(
+strip = xs_rc = partial(
     gf.cross_section.strip,
     layer=LAYER.WG,
     width=0.45,

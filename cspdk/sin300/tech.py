@@ -111,7 +111,9 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 ############################
 # Cross-sections functions
 ############################
-xs_nc = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25)
+strip = xs_nc = partial(
+    gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25
+)
 xs_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
 
 xs_nc_heater_metal = partial(

@@ -1,12 +1,8 @@
 info:
   length: 50
-name: taper_strip_to_ridge_L5_1dd783ed
+name: taper_strip_to_ridge_L5_7d243f91
 settings:
-  cross_section: xs_sc
-  layer_slab: SLAB
-  layer_wg: WG
   length: 50
-  use_slab_port: false
   w_slab1: 0.2
   w_slab2: 10.45
   width1: 0.5

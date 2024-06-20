@@ -1,0 +1,6 @@
+info:
+  period: 1.401
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_elliptical_nc
+settings: {}

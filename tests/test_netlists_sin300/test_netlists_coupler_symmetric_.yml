@@ -1,0 +1,59 @@
+instances:
+  bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359:
+    component: bend_s
+    info:
+      end_angle: 0
+      length: 15.078
+      min_bend_radius: 32.392
+      route_info_length: 15.078
+      route_info_min_bend_radius: 32.392
+      route_info_n_bend_s: 1
+      route_info_type: xs_927557f2
+      route_info_weight: 15.078
+      route_info_xs_927557f2_length: 15.078
+      start_angle: 0
+    settings:
+      allow_min_radius_violation: false
+      cross_section: xs_nc
+      npoints: 99
+      size:
+      - 15
+      - 1.283
+  bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358:
+    component: bend_s
+    info:
+      end_angle: 0
+      length: 15.078
+      min_bend_radius: 32.392
+      route_info_length: 15.078
+      route_info_min_bend_radius: 32.392
+      route_info_n_bend_s: 1
+      route_info_type: xs_927557f2
+      route_info_weight: 15.078
+      route_info_xs_927557f2_length: 15.078
+      start_angle: 0
+    settings:
+      allow_min_radius_violation: false
+      cross_section: xs_nc
+      npoints: 99
+      size:
+      - 15
+      - 1.283
+name: coupler_symmetric_Bbend_094383ee
+nets: []
+placements:
+  bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359:
+    mirror: true
+    rotation: 0
+    x: 0
+    y: -0.717
+  bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0.717
+ports:
+  o1: bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359,o1
+  o2: bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358,o1
+  o3: bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358,o2
+  o4: bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359,o2
