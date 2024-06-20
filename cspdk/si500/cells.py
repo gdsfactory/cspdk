@@ -7,7 +7,6 @@ from gdsfactory.components.grating_coupler_elliptical import grating_tooth_point
 from gdsfactory.port import Port
 from gdsfactory.typings import Component, ComponentSpec, CrossSectionSpec, LayerSpec
 
-from cspdk.base_cell import base_cell
 from cspdk.si500.tech import LAYER
 
 ################
@@ -273,115 +272,22 @@ def taper(
 # MMIs
 ################
 @gf.cell
-def mmi1x2(
-    width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 20.0,
-    length_mmi: float = 37.5,
-    width_mmi: float = 6.0,
-    gap_mmi: float = 1.47,
-    taper: ComponentSpec = taper,
-    straight: ComponentSpec = straight,
-    cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
-    r"""1x2 MultiMode Interferometer (MMI).
-
-    Args:
-        width: input and output straight width. Defaults to cross_section width.
-        width_taper: interface between input straights and mmi region.
-        length_taper: into the mmi region.
-        length_mmi: in x direction.
-        width_mmi: in y direction.
-        gap_mmi:  gap between tapered wg.
-        taper: taper function.
-        straight: straight function.
-        cross_section: specification (CrossSection, string or dict).
-
-
-    .. code::
-
-               length_mmi
-                <------>
-                ________
-               |        |
-               |         \__
-               |          __  o2
-            __/          /_ _ _ _
-         o1 __          | _ _ _ _| gap_mmi
-              \          \__
-               |          __  o3
-               |         /
-               |________|
-
-             <->
-        length_taper
-
-    """
-    c = Component()
-    gap_mmi = gf.snap.snap_to_grid(gap_mmi, grid_factor=2)
-    x = gf.get_cross_section(cross_section)
-    xs_mmi = gf.get_cross_section(cross_section, width=width_mmi)
-    width = width or x.width
-
-    _taper = gf.get_component(
-        taper,
-        length=length_taper,
-        width1=width,
-        width2=width_taper,
-        cross_section=cross_section,
+def mmi1x2() -> Component:
+    """1x2 MultiMode Interferometer (MMI)."""
+    return gf.c.mmi1x2(
+        width_taper=1.5,
+        length_taper=20.0,
+        length_mmi=37.5,
+        width_mmi=6.0,
+        gap_mmi=1.47,
+        taper=taper,
+        straight=straight,
+        cross_section="xs_rc",
     )
-
-    a = gap_mmi / 2 + width_taper / 2
-    _ = c << gf.get_component(straight, length=length_mmi, cross_section=xs_mmi)
-
-    ports = [
-        gf.Port(
-            "o1",
-            orientation=180,
-            center=(0, 0),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o2",
-            orientation=0,
-            center=(+length_mmi, +a),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o3",
-            orientation=0,
-            center=(+length_mmi, -a),
-            width=width_taper,
-            layer=x.layer,
-            cross_section=x,
-        ),
-    ]
-
-    for port in ports:
-        taper_ref = c << _taper
-        taper_ref.connect(port="o2", other=port, allow_width_mismatch=True)
-        c.add_port(name=port.name, port=taper_ref.ports["o1"])
-
-    c.flatten()
-    return c
 
 
 @gf.cell
-def mmi2x2(
-    width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 50.2,
-    length_mmi: float = 5.5,
-    width_mmi: float = 6.0,
-    gap_mmi: float = 0.4,
-    taper: ComponentSpec = taper,
-    straight: ComponentSpec = straight,
-    cross_section: CrossSectionSpec = "strip",
-) -> Component:
+def mmi2x2() -> Component:
     r"""Mmi 2x2.
 
     Args:
@@ -415,51 +321,17 @@ def mmi2x2(
             length_taper
 
     """
-    c = gf.Component()
-    gap_mmi = gf.snap.snap_to_grid(gap_mmi, grid_factor=2)
-    w_taper = width_taper
-    x = gf.get_cross_section(cross_section)
-    width = width or x.width
-
-    _taper = gf.get_component(
-        taper,
-        length=length_taper,
-        width1=width,
-        width2=w_taper,
-        cross_section=cross_section,
+    return gf.c.mmi2x2(
+        width=None,
+        width_taper=1.5,
+        length_taper=50.2,
+        length_mmi=5.5,
+        width_mmi=6.0,
+        gap_mmi=0.4,
+        taper=taper,
+        straight=straight,
+        cross_section="xs_rc",
     )
-
-    a = gap_mmi / 2 + width_taper / 2
-    _ = c << gf.get_component(
-        straight, length=length_mmi, width=width_mmi, cross_section=cross_section
-    )
-
-    ports = [
-        gf.Port("o1", orientation=180, center=(0, -a), width=w_taper, cross_section=x),
-        gf.Port("o2", orientation=180, center=(0, +a), width=w_taper, cross_section=x),
-        gf.Port(
-            "o3",
-            orientation=0,
-            center=(length_mmi, +a),
-            width=w_taper,
-            cross_section=x,
-        ),
-        gf.Port(
-            "o4",
-            orientation=0,
-            center=(length_mmi, -a),
-            width=w_taper,
-            cross_section=x,
-        ),
-    ]
-
-    for port in ports:
-        taper_ref = c << _taper
-        taper_ref.connect(port="o2", other=port, allow_width_mismatch=True)
-        c.add_port(name=port.name, port=taper_ref.ports["o1"])
-
-    c.flatten()
-    return c
 
 
 ##############################
@@ -789,31 +661,15 @@ def grating_coupler_elliptical(
 # MZI
 ################
 
-# TODO: (needs gdsfactory fix) currently function arguments need to be
-# supplied as ComponentSpec strings, because when supplied as function they get
-# serialized weirdly in the netlist
-
-mzi = base_cell(
-    "mzi",
-    partial(
-        gf.components.mzi,
-        delta_length=10.0,
-        length_y=2.0,
-        length_x=0.1,
-        port_e1_splitter="o2",
-        port_e0_splitter="o3",
-        port_e1_combiner="o3",
-        port_e0_combiner="o4",
-        bend="bend_euler",
-        straight="straight",
-        splitter="mmi1x2",
-        combiner="mmi2x2",
-        cross_section="xs_rc",
-    ),
-)
-
-mzi_rc = partial(
-    mzi,
+_mzi = partial(
+    gf.components.mzi,
+    delta_length=10.0,
+    length_y=2.0,
+    length_x=0.1,
+    port_e1_splitter="o2",
+    port_e0_splitter="o3",
+    port_e1_combiner="o3",
+    port_e0_combiner="o4",
     bend="bend_euler",
     straight="straight",
     splitter="mmi1x2",
@@ -822,11 +678,32 @@ mzi_rc = partial(
 )
 
 
+@gf.cell
+def mzi_rc(
+    delta_length: float = 10.0,
+    length_y: float = 2.0,
+    length_x: float = 0.1,
+) -> gf.Component:
+    return _mzi(
+        bend="bend_euler",
+        straight="straight",
+        splitter="mmi1x2",
+        combiner="mmi2x2",
+        cross_section="xs_rc",
+        delta_length=delta_length,
+        length_y=length_y,
+        length_x=length_x,
+    )
+
+
 ################
 # Packaging
 ################
+@gf.cell
+def pad(size=(100.0, 100.0)) -> gf.Component:
+    return gf.c.pad(size=size, layer="PAD")
 
-pad = partial(gf.c.pad, layer="PAD", size=(100.0, 100.0))
+
 rectangle = partial(gf.components.rectangle, layer=LAYER.FLOORPLAN)
 grating_coupler_array = partial(
     gf.components.grating_coupler_array,
