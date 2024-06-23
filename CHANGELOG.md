@@ -4,6 +4,9 @@
 
 ## 0.9.1
 
+- fix tests [#47](https://github.com/gdsfactory/cspdk/pull/47)
+- update gdsfactory to 8.3.0 [#48](https://github.com/gdsfactory/cspdk/pull/48)
+
 ## 0.9.0
 
 - Gdsfactory8 [#43](https://github.com/gdsfactory/cspdk/pull/43)
