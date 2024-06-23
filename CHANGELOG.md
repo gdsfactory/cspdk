@@ -2,6 +2,18 @@
 
 <!-- towncrier release notes start -->
 
+## 0.9.1
+
+## 0.9.0
+
+- Gdsfactory8 [#43](https://github.com/gdsfactory/cspdk/pull/43)
+- add gplugins to pyproject [#46](https://github.com/gdsfactory/cspdk/pull/46)
+- Fixes remove partials [#45](https://github.com/gdsfactory/cspdk/pull/45)
+- fixing tech installation on windows [#35](https://github.com/gdsfactory/cspdk/pull/35)
+- better values for cross_section [#39](https://github.com/gdsfactory/cspdk/pull/39)
+- use approx version [#37](https://github.com/gdsfactory/cspdk/pull/37)
+- update gdsfactory [#34](https://github.com/gdsfactory/cspdk/pull/34)
+
 ## 0.8.0
 
 - add si500nm pdk [#32](https://github.com/gdsfactory/cspdk/pull/32)
