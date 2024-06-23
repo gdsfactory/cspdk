@@ -152,22 +152,22 @@ cross_sections = get_cross_sections(sys.modules[__name__])
 
 _settings_sc = dict(
     straight="straight_sc",
-    cross_section=xs_sc,
+    cross_section="xs_sc",
     bend="bend_sc",
 )
 _settings_so = dict(
     straight="straight_so",
-    cross_section=xs_so,
+    cross_section="xs_so",
     bend="bend_so",
 )
 _settings_rc = dict(
     straight="straight_rc",
-    cross_section=xs_rc,
+    cross_section="xs_rc",
     bend="bend_rc",
 )
 _settings_ro = dict(
     straight="straight_ro",
-    cross_section=xs_ro,
+    cross_section="xs_ro",
     bend="bend_ro",
 )
 
