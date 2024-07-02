@@ -14,6 +14,7 @@ from cspdk.si220.tech import LAYER
 @gf.cell
 def straight(
     length: float = 10.0,
+    width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     return gf.c.straight(length=length, cross_section=cross_section)  # type: ignore
@@ -375,6 +376,7 @@ grating_coupler_elliptical_trenches_so = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
+    bend="bend_sc",
     straight="straight",
     splitter="mmi1x2",
     combiner="mmi2x2",
@@ -384,7 +386,6 @@ def mzi(
         delta_length=delta_length,
         length_y=1.0,
         length_x=0.1,
-        bend="bend_sc",
         straight_y=None,
         straight_x_top=None,
         straight_x_bot=None,
@@ -401,6 +402,7 @@ def mzi(
         add_optical_ports_arms=False,
         min_length=10e-3,
         auto_rename_ports=True,
+        bend=bend,
         straight=straight,
         splitter=splitter,
         combiner=combiner,
@@ -481,12 +483,27 @@ def grating_coupler_array(
 @gf.cell
 def die(
     cross_section="xs_sc",
+    grating_coupler=None,
 ) -> gf.Component:
+    if grating_coupler is None:
+        if isinstance(cross_section, str):
+            xs = cross_section
+        else:
+            pdk = gf.get_active_pdk()
+            xs = pdk.get_cross_section_name(cross_section)
+        gcs = {
+            "xs_sc": "grating_coupler_rectangular_sc",
+            "xs_so": "grating_coupler_rectangular_so",
+            "xs_rc": "grating_coupler_rectangular_rc",
+            "xs_ro": "grating_coupler_rectangular_ro",
+        }
+        grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    assert grating_coupler is not None
     return gf.c.die_with_pads(  # type: ignore
         cross_section=cross_section,
         edge_to_grating_distance=150.0,
         edge_to_pad_distance=150.0,
-        grating_coupler="grating_coupler_rectangular_sc",
+        grating_coupler=grating_coupler,
         grating_pitch=250.0,
         layer_floorplan=LAYER.FLOORPLAN,
         ngratings=14,
@@ -497,26 +514,10 @@ def die(
     )
 
 
-die_sc = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_sc",
-    cross_section="xs_sc",
-)
-die_so = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_so",
-    cross_section="xs_so",
-)
-die_rc = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_rc",
-    cross_section="xs_rc",
-)
-die_ro = partial(
-    die,
-    grating_coupler="grating_coupler_rectangular_ro",
-    cross_section="xs_ro",
-)
+die_sc = partial(die, cross_section="xs_sc")
+die_so = partial(die, cross_section="xs_so")
+die_rc = partial(die, cross_section="xs_rc")
+die_ro = partial(die, cross_section="xs_ro")
 
 
 ################

@@ -183,10 +183,12 @@ route_bundle_ro = partial(gf.routing.route_bundle, **_settings_ro)
 
 
 routing_strategies = dict(
+    route_single=gf.routing.route_single,
     route_single_sc=route_single_sc,
     route_single_so=route_single_so,
     route_single_rc=route_single_rc,
     route_single_ro=route_single_ro,
+    route_bundle=gf.routing.route_bundle,
     route_bundle_sc=route_bundle_sc,
     route_bundle_so=route_bundle_so,
     route_bundle_rc=route_bundle_rc,
