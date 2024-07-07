@@ -1,6 +1,7 @@
 from functools import partial
 
 import gdsfactory as gf
+from gdsfactory.component import Component
 from gdsfactory.typings import CrossSectionSpec
 
 from cspdk.si220.config import PATH
@@ -16,9 +17,11 @@ def straight(
     length: float = 10.0,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
+) -> Component:
     kwargs = {} if width is None else {"width": width}
-    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)  # type: ignore
+    return gf.c.straight(
+        length=length, cross_section=cross_section, npoints=2, **kwargs
+    )
 
 
 straight_sc = partial(straight, cross_section="xs_sc")
@@ -32,16 +35,16 @@ straight_ro = partial(straight, cross_section="xs_ro")
 
 
 @gf.cell
-def wire_corner() -> gf.Component:
-    return gf.components.wire_corner(cross_section="metal_routing")  # type: ignore
+def wire_corner() -> Component:
+    return gf.components.wire_corner(cross_section="metal_routing")
 
 
 @gf.cell
 def bend_s(
     size: tuple[float, float] = (11.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.components.bend_s(size=size, cross_section=cross_section)  # type: ignore
+) -> Component:
+    return gf.components.bend_s(size=size, cross_section=cross_section)
 
 
 @gf.cell
@@ -51,8 +54,8 @@ def bend_euler(
     p: float = 0.5,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.components.bend_euler(  # type: ignore
+) -> Component:
+    return gf.components.bend_euler(
         radius=radius,
         angle=angle,
         p=p,
@@ -82,8 +85,8 @@ def taper(
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.taper(  # type: ignore
+) -> Component:
+    return gf.c.taper(
         length=length,
         width1=width1,
         width2=width2,
@@ -106,8 +109,8 @@ def taper_strip_to_ridge(
     w_slab1: float = 0.2,
     w_slab2: float = 10.45,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.taper_strip_to_ridge(  # type: ignore
+) -> Component:
+    return gf.c.taper_strip_to_ridge(
         length=length,
         width1=width1,
         width2=width2,
@@ -138,7 +141,7 @@ def mmi1x2(
     width_mmi=6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
+) -> Component:
     return gf.c.mmi1x2(
         width=width,
         width_taper=width_taper,
@@ -146,8 +149,8 @@ def mmi1x2(
         length_mmi=length_mmi,
         width_mmi=width_mmi,
         gap_mmi=gap_mmi,
-        taper=taper,  # type: ignore
-        straight=straight,  # type: ignore
+        taper=taper,
+        straight=straight,
         cross_section=cross_section,
     )
 
@@ -167,16 +170,16 @@ def mmi2x2(
     width_mmi: float = 6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.mmi2x2(  # type: ignore
+) -> Component:
+    return gf.c.mmi2x2(
         width=width,
         width_taper=width_taper,
         length_taper=length_taper,
         length_mmi=length_mmi,
         width_mmi=width_mmi,
         gap_mmi=gap_mmi,
-        taper=taper,  # type: ignore
-        straight=straight,  # type: ignore
+        taper=taper,
+        straight=straight,
         cross_section=cross_section,
     )
 
@@ -197,8 +200,8 @@ def coupler_straight(
     length: float = 10.0,
     gap: float = 0.27,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.coupler_straight(  # type: ignore
+) -> Component:
+    return gf.c.coupler_straight(
         length=length,
         gap=gap,
         cross_section=cross_section,
@@ -211,9 +214,9 @@ def coupler_symmetric(
     dy: float = 4.0,
     dx: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
+) -> Component:
     return gf.c.coupler_symmetric(
-        bend="bend_s",  # type: ignore
+        bend="bend_s",
         gap=gap,
         dy=dy,
         dx=dx,
@@ -228,13 +231,15 @@ def coupler(
     dy: float = 4.0,
     dx: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.coupler(  # type: ignore
+) -> Component:
+    return gf.c.coupler(
         gap=gap,
         length=length,
         dy=dy,
         dx=dx,
         cross_section=cross_section,
+        coupler_symmetric=coupler_symmetric,
+        coupler_straight=coupler_straight,
     )
 
 
@@ -272,8 +277,8 @@ def grating_coupler_rectangular(
     length_taper: float = 350.0,
     wavelength: float = 1.55,
     cross_section="xs_sc",
-) -> gf.Component:
-    return gf.c.grating_coupler_rectangular(  # type: ignore
+) -> Component:
+    return gf.c.grating_coupler_rectangular(
         n_periods=n_periods,
         period=period,
         fill_factor=0.5,
@@ -281,7 +286,7 @@ def grating_coupler_rectangular(
         length_taper=length_taper,
         polarization="te",
         wavelength=wavelength,
-        taper=taper,  # type: ignore
+        taper=taper,
         layer_slab=LAYER.WG,
         layer_grating=LAYER.GRA,
         fiber_angle=10.0,
@@ -331,8 +336,8 @@ def grating_coupler_elliptical(
     wavelength: float = 1.53,
     grating_line_width=0.315,
     cross_section="xs_sc",
-) -> gf.Component:
-    return gf.c.grating_coupler_elliptical_trenches(  # type: ignore
+) -> Component:
+    return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
         wavelength=wavelength,
         grating_line_width=grating_line_width,
@@ -382,8 +387,8 @@ def mzi(
     splitter="mmi1x2",
     combiner="mmi2x2",
     cross_section: CrossSectionSpec = "xs_sc",
-) -> gf.Component:
-    return gf.c.mzi(  # type: ignore
+) -> Component:
+    return gf.c.mzi(
         delta_length=delta_length,
         length_y=1.0,
         length_x=0.1,
@@ -453,13 +458,13 @@ mzi_ro = partial(
 
 
 @gf.cell
-def pad() -> gf.Component:
-    return gf.c.pad(layer="PAD", size=(100.0, 100.0))  # type: ignore
+def pad() -> Component:
+    return gf.c.pad(layer="PAD", size=(100.0, 100.0))
 
 
 @gf.cell
-def rectangle() -> gf.Component:
-    return gf.c.rectangle(layer=LAYER.FLOORPLAN)  # type: ignore
+def rectangle() -> Component:
+    return gf.c.rectangle(layer=LAYER.FLOORPLAN)
 
 
 @gf.cell
@@ -467,9 +472,9 @@ def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
     cross_section="xs_sc",
-) -> gf.Component:
+) -> Component:
     return gf.c.grating_coupler_array(
-        grating_coupler=grating_coupler_elliptical,  # type: ignore
+        grating_coupler=grating_coupler_elliptical,
         pitch=pitch,
         n=n,
         with_loopback=False,
@@ -485,7 +490,7 @@ def grating_coupler_array(
 def die(
     cross_section="xs_sc",
     grating_coupler=None,
-) -> gf.Component:
+) -> Component:
     if grating_coupler is None:
         if isinstance(cross_section, str):
             xs = cross_section
@@ -500,7 +505,7 @@ def die(
         }
         grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
     assert grating_coupler is not None
-    return gf.c.die_with_pads(  # type: ignore
+    return gf.c.die_with_pads(
         cross_section=cross_section,
         edge_to_grating_distance=150.0,
         edge_to_pad_distance=150.0,
@@ -527,7 +532,7 @@ die_ro = partial(die, cross_section="xs_ro")
 
 
 @gf.cell
-def heater() -> gf.Component:
+def heater() -> Component:
     """Heater fixed cell."""
     heater = gf.import_gds(PATH.gds / "Heater.gds")
     heater.name = "heater"
@@ -535,7 +540,7 @@ def heater() -> gf.Component:
 
 
 @gf.cell
-def crossing_so() -> gf.Component:
+def crossing_so() -> Component:
     """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
     c.flatten()
@@ -556,7 +561,7 @@ def crossing_so() -> gf.Component:
 
 
 @gf.cell
-def crossing_rc() -> gf.Component:
+def crossing_rc() -> Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
     c.flatten()
@@ -577,7 +582,7 @@ def crossing_rc() -> gf.Component:
 
 
 @gf.cell
-def crossing_sc() -> gf.Component:
+def crossing_sc() -> Component:
     """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
     c.flatten()
@@ -607,8 +612,8 @@ def array(
     add_ports: bool = True,
     size=None,
     centered: bool = False,
-) -> gf.Component:
-    return gf.c.array(  # type: ignore
+) -> Component:
+    return gf.c.array(
         component=component,
         spacing=spacing,
         columns=columns,
@@ -617,10 +622,3 @@ def array(
         centered=centered,
         add_ports=add_ports,
     )
-
-
-if __name__ == "__main__":
-    c = straight()
-    print(c.function_name)
-    # c.get_netlist()
-    c.show()

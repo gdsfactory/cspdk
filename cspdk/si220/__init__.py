@@ -12,6 +12,7 @@ from cspdk.si220.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
 _models = get_models()
 _cells = get_cells(cells)
+print(_cells)
 _cross_sections = get_cross_sections(tech)
 
 CONF.pdk = "cspdk.si220"
