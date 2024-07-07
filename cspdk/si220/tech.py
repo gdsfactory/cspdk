@@ -119,25 +119,21 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-DEFAULT_CROSS_SECTIONS = {}  # will be filled after all xss are defined.
+DEFAULT_CROSS_SECTIONS = {}  # will be filled after all cross sections are defined.
 
 
 def xs_sc(width=Tech.width_sc, radius=Tech.radius_sc, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def xs_so(width=Tech.width_so, radius=Tech.radius_so, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
@@ -146,9 +142,7 @@ def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSecti
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
@@ -157,9 +151,7 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def xs_sc_heater_metal(width=0.45, **kwargs) -> gf.CrossSection:
@@ -169,9 +161,7 @@ def xs_sc_heater_metal(width=0.45, **kwargs) -> gf.CrossSection:
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
     xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
@@ -185,17 +175,13 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
     xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTIONS:
-        return DEFAULT_CROSS_SECTIONS[xs.name]
-    return xs
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
 def get_default_cross_sections():
