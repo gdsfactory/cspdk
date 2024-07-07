@@ -154,7 +154,7 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
     return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 
-def xs_sc_heater_metal(width=0.45, **kwargs) -> gf.CrossSection:
+def xs_sc_heater_metal(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
     kwargs["layer_heater"] = kwargs.get("layer_heater", LAYER.HEATER)
@@ -180,7 +180,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
 
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
-    xs = metal_routing(width=width, **kwargs)
+    xs = metal_routing(width=width, **kwargs).copy()
     return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
 
 

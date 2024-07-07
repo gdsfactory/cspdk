@@ -1,11 +1,13 @@
 """Technology definitions."""
 
 import sys
+from collections.abc import Iterable
 from functools import partial
 from typing import cast
 
 import gdsfactory as gf
-from gdsfactory.cross_section import get_cross_sections
+from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
+from gdsfactory.routing.route_bundle import OpticalManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -13,7 +15,7 @@ from gdsfactory.technology import (
     LayerViews,
     LogicalLayer,
 )
-from gdsfactory.typings import ConnectivitySpec, Layer
+from gdsfactory.typings import ComponentSpec, ConnectivitySpec, Layer
 
 from cspdk.sin300.config import PATH
 
@@ -21,30 +23,23 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    WG: Layer = (3, 0)
-    SLAB: Layer = (5, 0)
-    FLOORPLAN: Layer = (99, 0)
-    HEATER: Layer = (39, 0)
-    GRA: Layer = (6, 0)
-    LBL: Layer = (100, 0)
-    PAD: Layer = (41, 0)
-    NITRIDE: Layer = (203, 0)
-    NITRIDE_ETCH: Layer = (204, 0)
+    # TODO: how can we make this pass type checking?
+    WG: Layer = (3, 0)  # type: ignore
+    SLAB: Layer = (5, 0)  # type: ignore
+    FLOORPLAN: Layer = (99, 0)  # type: ignore
+    HEATER: Layer = (39, 0)  # type: ignore
+    GRA: Layer = (6, 0)  # type: ignore
+    LBL: Layer = (100, 0)  # type: ignore
+    PAD: Layer = (41, 0)  # type: ignore
+    NITRIDE: Layer = (203, 0)  # type: ignore
+    NITRIDE_ETCH: Layer = (204, 0)  # type: ignore
 
     # labels for gdsfactory
-    LABEL_SETTINGS: Layer = (100, 0)
-    LABEL_INSTANCE: Layer = (101, 0)
+    LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
+    LABEL_INSTANCE: Layer = (101, 0)  # type: ignore
 
 
 LAYER = LayerMapCornerstone
-
-
-class Tech:
-    radius_nc = 25
-    radius_no = 25
-
-
-TECH = Tech()
 
 
 def get_layer_stack(
@@ -108,57 +103,195 @@ LAYER_STACK = get_layer_stack()
 LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
+class Tech:
+    radius_nc = 25
+    radius_no = 25
+    width_nc = 1.20
+    width_no = 0.95
+
+
+TECH = Tech()
+
+
 ############################
 # Cross-sections functions
 ############################
-strip = xs_nc = partial(
-    gf.cross_section.strip, layer=LAYER.NITRIDE, width=1.20, radius=25
-)
-xs_no = partial(gf.cross_section.strip, layer=LAYER.NITRIDE, width=0.95, radius=25)
 
-xs_nc_heater_metal = partial(
-    gf.cross_section.strip_heater_metal,
-    layer=LAYER.NITRIDE,
-    heater_width=2.5,
-    layer_heater=LAYER.HEATER,
-    width=1.20,
-)
+DEFAULT_CROSS_SECTIONS = {}  # will be filled after all cross sections are defined.
 
-metal_routing = partial(
-    gf.cross_section.cross_section,
-    layer=LAYER.PAD,
-    width=10.0,
-    port_names=gf.cross_section.port_names_electrical,
-    port_types=gf.cross_section.port_types_electrical,
-    radius=None,
-)
-xs_heater_metal = heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
 
-cross_sections = get_cross_sections(sys.modules[__name__])
+def xs_nc(width=Tech.width_nc, radius=Tech.radius_nc, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
+    kwargs["radius_min"] = kwargs.get("radius_min", radius)
+    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+
+
+def xs_no(width=Tech.width_no, radius=Tech.radius_no, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
+    kwargs["radius_min"] = kwargs.get("radius_min", radius)
+    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+
+
+def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
+    kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
+    kwargs["layer_heater"] = kwargs.get("layer_heater", LAYER.HEATER)
+    kwargs["radius"] = kwargs.get("radius", 0)
+    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
+    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+
+
+def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
+    kwargs["port_names"] = kwargs.get(
+        "port_names", gf.cross_section.port_names_electrical
+    )
+    kwargs["port_types"] = kwargs.get(
+        "port_types", gf.cross_section.port_types_electrical
+    )
+    kwargs["radius"] = kwargs.get("radius", 0)
+    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
+    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+
+
+def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
+    xs = metal_routing(width=width, **kwargs).copy()
+    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+
+
+def get_default_cross_sections():
+    xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
+    ret = {}
+    for k, xs in xss.items():
+        xs._name = ""
+        _k = xs.name
+        xs._name = k
+        ret[_k] = xs
+    return ret
+
+
+DEFAULT_CROSS_SECTIONS = get_default_cross_sections()
+
 
 ############################
 # Routing functions
 ############################
-_settings_nc = dict(
-    straight="straight_nc", cross_section="xs_nc", bend="bend_nc", taper="taper_nc"
-)
-_settings_no = dict(
-    straight="straight_no", cross_section="xs_no", bend="bend_no", taper="taper_no"
-)
-
-route_single_nc = partial(gf.routing.route_single, **_settings_nc)
-route_single_no = partial(gf.routing.route_single, **_settings_no)
 
 
-route_bundle_nc = partial(gf.routing.route_bundle, **_settings_nc)
-route_bundle_no = partial(gf.routing.route_bundle, **_settings_no)
+def route_single(
+    component: gf.Component,
+    port1: gf.Port,
+    port2: gf.Port,
+    start_straight_length: float = 0.0,
+    end_straight_length: float = 0.0,
+    waypoints: list[tuple[float, float]] | None = None,
+    port_type: str | None = None,
+    allow_width_mismatch: bool = False,
+    radius: float | None = None,
+    route_width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_nc",
+    straight: ComponentSpec = "straight_nc",
+    bend: ComponentSpec = "bend_nc",
+    taper: ComponentSpec = "taper_nc",
+) -> OpticalManhattanRoute:
+    return gf.routing.route_single(
+        component=component,
+        port1=port1,
+        port2=port2,
+        start_straight_length=start_straight_length,
+        end_straight_length=end_straight_length,
+        cross_section=cross_section,
+        waypoints=waypoints,
+        port_type=port_type,
+        allow_width_mismatch=allow_width_mismatch,
+        radius=radius,
+        route_width=route_width,
+        straight=straight,
+        bend=bend,
+        taper=taper,
+    )
+
+
+def route_bundle(
+    component: gf.Component,
+    ports1: list[gf.Port],
+    ports2: list[gf.Port],
+    separation: float = 3.0,
+    nort_ports: bool = False,
+    start_straight_length: float = 0.0,
+    end_straight_length: float = 0.0,
+    min_straight_taper: float = 100.0,
+    port_type: str | None = None,
+    collision_check_layers: Iterable[LayerSpec] = (),
+    on_collision: str | None = "show_error",
+    bboxes: list | None = None,
+    allow_width_mismatch: bool = False,
+    radius: float | None = None,
+    route_width: float | list[float] | None = None,
+    cross_section: CrossSectionSpec = "xs_nc",
+    straight: ComponentSpec = "straight_nc",
+    bend: ComponentSpec = "bend_nc",
+    taper: ComponentSpec = "taper_nc",
+) -> list[OpticalManhattanRoute]:
+    return gf.routing.route_bundle(
+        component=component,
+        ports1=ports1,
+        ports2=ports2,
+        separation=separation,
+        sort_ports=nort_ports,
+        start_straight_length=start_straight_length,
+        end_straight_length=end_straight_length,
+        min_straight_taper=min_straight_taper,
+        port_type=port_type,
+        collision_check_layers=tuple(collision_check_layers),
+        on_collision=on_collision,
+        bboxes=bboxes,
+        allow_width_mismatch=allow_width_mismatch,
+        radius=radius,
+        route_width=route_width,
+        cross_section=cross_section,
+        straight=straight,
+        bend=bend,
+        taper=taper,
+    )
 
 
 routing_strategies = dict(
-    route_single_nc=route_single_nc,
-    route_single_no=route_single_no,
-    route_bundle_nc=route_bundle_nc,
-    route_bundle_no=route_bundle_no,
+    route_single=route_single,
+    route_single_nc=partial(
+        route_single,
+        straight="straight_nc",
+        bend="bend_nc",
+        taper="taper_nc",
+        cross_section="xs_nc",
+    ),
+    route_single_no=partial(
+        route_single,
+        straight="straight_no",
+        bend="bend_no",
+        taper="taper_no",
+        cross_section="xs_no",
+    ),
+    route_bundle=route_bundle,
+    route_bundle_nc=partial(
+        route_bundle,
+        straight="straight_nc",
+        bend="bend_nc",
+        taper="taper_nc",
+        cross_section="xs_nc",
+    ),
+    route_bundle_no=partial(
+        route_bundle,
+        straight="straight_no",
+        bend="bend_no",
+        taper="taper_no",
+        cross_section="xs_no",
+    ),
 )
 
 
