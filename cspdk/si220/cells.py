@@ -1,7 +1,7 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, CrossSectionSpec
+from gdsfactory.typings import Component, CrossSection, CrossSectionSpec
 
 from cspdk.si220.config import PATH
 from cspdk.si220.tech import LAYER, Tech
@@ -498,8 +498,12 @@ def grating_coupler_array(
 ) -> Component:
     if isinstance(cross_section, str):
         xs = cross_section
-    else:
+    elif callable(cross_section):
+        xs = cross_section().name
+    elif isinstance(cross_section, CrossSection):
         xs = cross_section.name
+    else:
+        xs = ""
     gcs = {
         "xs_sc": "grating_coupler_rectangular_sc",
         "xs_so": "grating_coupler_rectangular_so",
@@ -521,23 +525,22 @@ def grating_coupler_array(
 
 
 @gf.cell
-def die(
-    cross_section="xs_sc",
-    grating_coupler=None,
-) -> Component:
-    if grating_coupler is None:
-        if isinstance(cross_section, str):
-            xs = cross_section
-        else:
-            xs = cross_section.name
-        gcs = {
-            "xs_sc": "grating_coupler_rectangular_sc",
-            "xs_so": "grating_coupler_rectangular_so",
-            "xs_rc": "grating_coupler_rectangular_rc",
-            "xs_ro": "grating_coupler_rectangular_ro",
-        }
-        grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    assert grating_coupler is not None
+def die(cross_section="xs_sc") -> Component:
+    if isinstance(cross_section, str):
+        xs = cross_section
+    elif callable(cross_section):
+        xs = cross_section().name
+    elif isinstance(cross_section, CrossSection):
+        xs = cross_section.name
+    else:
+        xs = ""
+    gcs = {
+        "xs_sc": "grating_coupler_rectangular_sc",
+        "xs_so": "grating_coupler_rectangular_so",
+        "xs_rc": "grating_coupler_rectangular_rc",
+        "xs_ro": "grating_coupler_rectangular_ro",
+    }
+    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.die_with_pads(
         cross_section=cross_section,
         edge_to_grating_distance=150.0,

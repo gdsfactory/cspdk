@@ -1,7 +1,7 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, CrossSectionSpec
+from gdsfactory.typings import Component, CrossSection, CrossSectionSpec
 
 from cspdk.sin300.tech import LAYER, Tech
 
@@ -371,8 +371,12 @@ def grating_coupler_array(
 ) -> Component:
     if isinstance(cross_section, str):
         xs = cross_section
-    else:
+    elif callable(cross_section):
+        xs = cross_section().name
+    elif isinstance(cross_section, CrossSection):
         xs = cross_section.name
+    else:
+        xs = ""
     gcs = {
         "xs_nc": "grating_coupler_rectangular_nc",
         "xs_no": "grating_coupler_rectangular_no",
@@ -395,8 +399,12 @@ def grating_coupler_array(
 def die(cross_section="xs_nc") -> Component:
     if isinstance(cross_section, str):
         xs = cross_section
-    else:
+    elif callable(cross_section):
+        xs = cross_section().name
+    elif isinstance(cross_section, CrossSection):
         xs = cross_section.name
+    else:
+        xs = ""
     gcs = {
         "xs_nc": "grating_coupler_rectangular_nc",
         "xs_no": "grating_coupler_rectangular_no",
