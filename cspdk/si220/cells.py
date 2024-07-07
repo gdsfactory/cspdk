@@ -1,11 +1,10 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.component import Component
-from gdsfactory.typings import CrossSectionSpec
+from gdsfactory.typings import Component, CrossSectionSpec
 
 from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER
+from cspdk.si220.tech import LAYER, Tech
 
 ################
 # Straights
@@ -81,7 +80,7 @@ bend_ro = partial(bend_euler, cross_section="xs_ro")
 @gf.cell
 def taper(
     length: float = 10.0,
-    width1: float = 0.5,
+    width1: float = Tech.width_sc,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
@@ -95,10 +94,34 @@ def taper(
     )
 
 
-taper_sc = partial(taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None)
-taper_so = partial(taper, cross_section="xs_so", length=10.0, width1=0.5, width2=None)
-taper_rc = partial(taper, cross_section="xs_rc", length=10.0, width1=0.5, width2=None)
-taper_ro = partial(taper, cross_section="xs_ro", length=10.0, width1=0.5, width2=None)
+taper_sc = partial(
+    taper,
+    cross_section="xs_sc",
+    length=10.0,
+    width1=Tech.width_sc,
+    width2=None,
+)
+taper_so = partial(
+    taper,
+    cross_section="xs_so",
+    length=10.0,
+    width1=Tech.width_so,
+    width2=None,
+)
+taper_rc = partial(
+    taper,
+    cross_section="xs_rc",
+    length=10.0,
+    width1=Tech.width_rc,
+    width2=None,
+)
+taper_ro = partial(
+    taper,
+    cross_section="xs_ro",
+    length=10.0,
+    width1=Tech.width_ro,
+    width2=None,
+)
 
 
 @gf.cell
@@ -197,7 +220,7 @@ mmi2x2_ro = partial(mmi2x2, length_mmi=55.0, gap_mmi=0.53, cross_section="xs_ro"
 
 @gf.cell
 def coupler_straight(
-    length: float = 10.0,
+    length: float = 20.0,
     gap: float = 0.27,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
@@ -333,7 +356,7 @@ grating_coupler_rectangular_ro = partial(
 
 @gf.cell
 def grating_coupler_elliptical(
-    wavelength: float = 1.53,
+    wavelength: float = 1.55,
     grating_line_width=0.315,
     cross_section="xs_sc",
 ) -> Component:
@@ -362,7 +385,7 @@ grating_coupler_elliptical_sc = partial(
     cross_section="xs_sc",
 )
 
-grating_coupler_elliptical_trenches_so = partial(
+grating_coupler_elliptical_so = partial(
     grating_coupler_elliptical,
     grating_line_width=0.250,
     wavelength=1.31,
@@ -383,9 +406,9 @@ grating_coupler_elliptical_trenches_so = partial(
 def mzi(
     delta_length: float = 10.0,
     bend="bend_sc",
-    straight="straight",
-    splitter="mmi1x2",
-    combiner="mmi2x2",
+    straight="straight_sc",
+    splitter="mmi1x2_sc",
+    combiner="mmi2x2_sc",
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     return gf.c.mzi(
@@ -459,7 +482,7 @@ mzi_ro = partial(
 
 @gf.cell
 def pad() -> Component:
-    return gf.c.pad(layer="PAD", size=(100.0, 100.0))
+    return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
 @gf.cell
@@ -473,8 +496,19 @@ def grating_coupler_array(
     n: int = 6,
     cross_section="xs_sc",
 ) -> Component:
+    if isinstance(cross_section, str):
+        xs = cross_section
+    else:
+        xs = cross_section.name
+    gcs = {
+        "xs_sc": "grating_coupler_rectangular_sc",
+        "xs_so": "grating_coupler_rectangular_so",
+        "xs_rc": "grating_coupler_rectangular_rc",
+        "xs_ro": "grating_coupler_rectangular_ro",
+    }
+    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.grating_coupler_array(
-        grating_coupler=grating_coupler_elliptical,
+        grating_coupler=grating_coupler,
         pitch=pitch,
         n=n,
         with_loopback=False,
@@ -495,8 +529,7 @@ def die(
         if isinstance(cross_section, str):
             xs = cross_section
         else:
-            pdk = gf.get_active_pdk()
-            xs = pdk.get_cross_section_name(cross_section)
+            xs = cross_section.name
         gcs = {
             "xs_sc": "grating_coupler_rectangular_sc",
             "xs_so": "grating_coupler_rectangular_so",
