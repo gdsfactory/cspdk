@@ -17,7 +17,8 @@ def straight(
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
-    return gf.c.straight(length=length, cross_section=cross_section)  # type: ignore
+    kwargs = {} if width is None else {"width": width}
+    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)  # type: ignore
 
 
 straight_sc = partial(straight, cross_section="xs_sc")
