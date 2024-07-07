@@ -15,11 +15,12 @@ def straight(
     length: float = 10.0,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_nc",
+    **kwargs,
 ) -> Component:
-    kwargs = {} if width is None else {"width": width}
-    return gf.c.straight(
-        length=length, cross_section=cross_section, npoints=2, **kwargs
-    )
+    if width is not None:
+        kwargs["width"] = width
+    kwargs["npoints"] = kwargs.get("npoints", 2)
+    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
 straight_nc = partial(straight, cross_section="xs_nc")
@@ -40,7 +41,11 @@ def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
-    return gf.components.bend_s(size=size, cross_section=cross_section)
+    return gf.components.bend_s(
+        size=size,
+        cross_section=cross_section,
+        allow_min_radius_violation=True,  # TODO: fix without this flag
+    )
 
 
 @gf.cell
@@ -133,8 +138,35 @@ def mmi1x2(
     )
 
 
-mmi1x2_nc = partial(mmi1x2, length_mmi=64.7, gap_mmi=0.4, cross_section="xs_nc")
-mmi1x2_no = partial(mmi1x2, length_mmi=42.0, gap_mmi=0.4, cross_section="xs_no")
+mmi1x2_nc = partial(mmi1x2, length_mmi=64.7, cross_section="xs_nc")
+mmi1x2_no = partial(mmi1x2, length_mmi=42.0, cross_section="xs_no")
+
+
+@gf.cell
+def mmi2x2(
+    width: float | None = None,
+    width_taper: float = 5.5,
+    length_taper: float = 232.0,
+    length_mmi: float = 5.5,
+    width_mmi: float = 12.0,
+    gap_mmi: float = 0.4,
+    cross_section: CrossSectionSpec = "xs_nc",
+) -> Component:
+    return gf.c.mmi2x2(
+        width=width,
+        width_taper=width_taper,
+        length_taper=length_taper,
+        length_mmi=length_mmi,
+        width_mmi=width_mmi,
+        gap_mmi=gap_mmi,
+        taper=taper,
+        straight=straight,
+        cross_section=cross_section,
+    )
+
+
+mmi2x2_nc = partial(mmi2x2, length_mmi=232.0, cross_section="xs_nc")
+mmi2x2_no = partial(mmi2x2, length_mmi=126.0, cross_section="xs_no")
 
 
 ##############################
@@ -359,8 +391,9 @@ def pad() -> Component:
 
 
 @gf.cell
-def rectangle() -> Component:
-    return gf.c.rectangle(layer=LAYER.FLOORPLAN)
+def rectangle(**kwargs) -> Component:
+    kwargs["layer"] = LAYER.FLOORPLAN
+    return gf.c.rectangle(**kwargs)
 
 
 @gf.cell
@@ -368,29 +401,37 @@ def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
     cross_section="xs_nc",
+    centered=True,
+    grating_coupler=None,
+    port_name="o1",
+    rotation=-90,
+    straight_to_grating_spacing=10.0,
+    with_loopback=False,
 ) -> Component:
-    if isinstance(cross_section, str):
-        xs = cross_section
-    elif callable(cross_section):
-        xs = cross_section().name
-    elif isinstance(cross_section, CrossSection):
-        xs = cross_section.name
-    else:
-        xs = ""
-    gcs = {
-        "xs_nc": "grating_coupler_rectangular_nc",
-        "xs_no": "grating_coupler_rectangular_no",
-    }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    if grating_coupler is None:
+        if isinstance(cross_section, str):
+            xs = cross_section
+        elif callable(cross_section):
+            xs = cross_section().name
+        elif isinstance(cross_section, CrossSection):
+            xs = cross_section.name
+        else:
+            xs = ""
+        gcs = {
+            "xs_nc": "grating_coupler_rectangular_nc",
+            "xs_no": "grating_coupler_rectangular_no",
+        }
+        grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    assert grating_coupler is not None
     return gf.c.grating_coupler_array(
         grating_coupler=grating_coupler,
         pitch=pitch,
         n=n,
-        with_loopback=False,
-        rotation=-90,
-        straight_to_grating_spacing=10.0,
-        port_name="o1",
-        centered=True,
+        with_loopback=with_loopback,
+        rotation=rotation,
+        straight_to_grating_spacing=straight_to_grating_spacing,
+        port_name=port_name,
+        centered=centered,
         cross_section=cross_section,
     )
 

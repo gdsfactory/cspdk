@@ -15,11 +15,12 @@ def straight(
     length: float = 10.0,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
+    **kwargs,
 ) -> Component:
-    kwargs = {} if width is None else {"width": width}
-    return gf.c.straight(
-        length=length, cross_section=cross_section, npoints=2, **kwargs
-    )
+    if width is not None:
+        kwargs["width"] = width
+    kwargs["npoints"] = kwargs.get("npoints", 2)
+    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
 straight_rc = partial(straight, cross_section="xs_rc")
@@ -41,7 +42,11 @@ def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_rc",
 ) -> Component:
-    return gf.components.bend_s(size=size, cross_section=cross_section)
+    return gf.components.bend_s(
+        size=size,
+        cross_section=cross_section,
+        allow_min_radius_violation=True,  # TODO: fix without this flag
+    )
 
 
 @gf.cell
@@ -380,8 +385,9 @@ def pad() -> Component:
 
 
 @gf.cell
-def rectangle() -> Component:
-    return gf.c.rectangle(layer=LAYER.FLOORPLAN)
+def rectangle(**kwargs) -> Component:
+    kwargs["layer"] = LAYER.FLOORPLAN
+    return gf.c.rectangle(**kwargs)
 
 
 @gf.cell
@@ -389,29 +395,37 @@ def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
     cross_section="xs_rc",
+    centered=True,
+    grating_coupler=None,
+    port_name="o1",
+    with_loopback=False,
+    rotation=-90,
+    straight_to_grating_spacing=10.0,
 ) -> Component:
-    if isinstance(cross_section, str):
-        xs = cross_section
-    elif callable(cross_section):
-        xs = cross_section().name
-    elif isinstance(cross_section, CrossSection):
-        xs = cross_section.name
-    else:
-        xs = ""
-    gcs = {
-        "xs_rc": "grating_coupler_rectangular_rc",
-        "xs_ro": "grating_coupler_rectangular_ro",
-    }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    if grating_coupler is None:
+        if isinstance(cross_section, str):
+            xs = cross_section
+        elif callable(cross_section):
+            xs = cross_section().name
+        elif isinstance(cross_section, CrossSection):
+            xs = cross_section.name
+        else:
+            xs = ""
+        gcs = {
+            "xs_rc": "grating_coupler_rectangular_rc",
+            "xs_ro": "grating_coupler_rectangular_ro",
+        }
+        grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    assert grating_coupler is not None
     return gf.c.grating_coupler_array(
         grating_coupler=grating_coupler,
         pitch=pitch,
         n=n,
-        with_loopback=False,
-        rotation=-90,
-        straight_to_grating_spacing=10.0,
-        port_name="o1",
-        centered=True,
+        with_loopback=with_loopback,
+        rotation=rotation,
+        straight_to_grating_spacing=straight_to_grating_spacing,
+        port_name=port_name,
+        centered=centered,
         cross_section=cross_section,
     )
 
