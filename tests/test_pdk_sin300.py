@@ -17,18 +17,14 @@ def activate_pdk():
 cells = PDK.cells
 skip_test = {"import_gds"}
 cell_names = set(cells.keys()) - set(skip_test)
-cell_names = [name for name in cell_names if not name.startswith("_")]
+cell_names = sorted([name for name in cell_names if not name.startswith("_")])
 dirpath = (
     pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_ref_sin300"
 )
 dirpath.mkdir(exist_ok=True, parents=True)
 
 
-@pytest.fixture(params=cell_names, scope="function")
-def component_name(request) -> str:
-    return request.param
-
-
+@pytest.mark.parametrize("component_name", cell_names)
 def test_gds(component_name: str) -> None:
     """Avoid regressions in GDS geometry shapes and layers."""
     component = cells[component_name]()

@@ -86,13 +86,17 @@ def taper(
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
-    return gf.c.taper(
+    xs = gf.get_cross_section(cross_section)
+    print(xs)
+    print(xs.name)
+    c = gf.c.taper(
         length=length,
         width1=width1,
         width2=width2,
         port=port,
         cross_section=cross_section,
     )
+    return c
 
 
 taper_sc = partial(
@@ -673,5 +677,5 @@ def array(
 
 
 if __name__ == "__main__":
-    c = die_rc()
-    c.show()
+    t = bend_euler()
+    print(t)
