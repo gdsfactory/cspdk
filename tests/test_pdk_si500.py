@@ -20,7 +20,7 @@ skip_test = {"import_gds"}
 
 cell_names = set(cells.keys()) - set(skip_test)
 cell_names = [name for name in cell_names if not name.startswith("_")]
-dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_ref_si220"
+dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_ref_si500"
 dirpath.mkdir(exist_ok=True, parents=True)
 
 
