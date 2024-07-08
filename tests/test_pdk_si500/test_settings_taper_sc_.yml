@@ -1,9 +1,9 @@
 info:
   length: 10
-  width1: 0.5
-  width2: 0.5
-name: taper_L10_W0p5_WNone_CSxs_so
+  width1: 0.45
+  width2: 0.45
+name: taper_L10_W0p45_WNone_P_8010e433
 settings:
-  cross_section: xs_so
+  cross_section: xs_sc
   length: 10
-  width1: 0.5
+  width1: 0.45

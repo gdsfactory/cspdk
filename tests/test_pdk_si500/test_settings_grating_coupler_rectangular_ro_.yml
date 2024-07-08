@@ -2,19 +2,10 @@ info:
   fiber_angle: 10
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectang_a577941b
+name: grating_coupler_rectang_f879519e
 settings:
   cross_section: xs_ro
-  fiber_angle: 10
-  fill_factor: 0.5
-  layer_grating: GRA
-  layer_slab: WG
   length_taper: 350
-  n_periods: 80
-  period: 0.5
-  polarization: te
-  slab_offset: 0
-  slab_xmin: -1
-  taper: taper
+  n_periods: 60
+  period: 0.57
   wavelength: 1.55
-  width_grating: 11

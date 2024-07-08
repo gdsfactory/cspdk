@@ -1,6 +1,5 @@
 info:
   dy: 10
   length: 10
-name: wire_corner_W10
-settings:
-  width: 10
+name: wire_corner
+settings: {}

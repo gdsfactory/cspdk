@@ -11,6 +11,7 @@ from cspdk.si500 import PDK
 
 @pytest.fixture(autouse=True)
 def activate_pdk():
+    gf.clear_cache()
     PDK.activate()
     gf.clear_cache()
 

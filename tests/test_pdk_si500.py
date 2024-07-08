@@ -5,7 +5,7 @@ import pytest
 from gdsfactory.difftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 
-from cspdk.si220 import PDK
+from cspdk.si500 import PDK
 
 
 @pytest.fixture(autouse=True)
