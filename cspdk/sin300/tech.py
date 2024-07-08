@@ -23,7 +23,6 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    # TODO: how can we make this pass type checking?
     WG: Layer = (3, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore

@@ -146,7 +146,7 @@ mmi1x2_no = partial(mmi1x2, length_mmi=42.0, cross_section="xs_no")
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 5.5,
-    length_taper: float = 232.0,
+    length_taper: float = 50.0,
     length_mmi: float = 5.5,
     width_mmi: float = 12.0,
     gap_mmi: float = 0.4,

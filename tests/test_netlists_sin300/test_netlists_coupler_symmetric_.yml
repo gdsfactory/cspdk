@@ -1,59 +1,55 @@
 instances:
-  bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359:
+  bend_s_S20_1p282_CSxs_nc_10000_-1359:
     component: bend_s
     info:
       end_angle: 0
-      length: 15.078
-      min_bend_radius: 32.392
-      route_info_length: 15.078
-      route_info_min_bend_radius: 32.392
+      length: 20.058
+      min_bend_radius: 57.149
+      route_info_length: 20.058
+      route_info_min_bend_radius: 57.149
       route_info_n_bend_s: 1
-      route_info_type: xs_927557f2
-      route_info_weight: 15.078
-      route_info_xs_927557f2_length: 15.078
+      route_info_type: xs_nc
+      route_info_weight: 20.058
+      route_info_xs_nc_length: 20.058
       start_angle: 0
     settings:
-      allow_min_radius_violation: false
       cross_section: xs_nc
-      npoints: 99
       size:
-      - 15
-      - 1.283
-  bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358:
+      - 20
+      - 1.282
+  bend_s_S20_1p282_CSxs_nc_10000_1359:
     component: bend_s
     info:
       end_angle: 0
-      length: 15.078
-      min_bend_radius: 32.392
-      route_info_length: 15.078
-      route_info_min_bend_radius: 32.392
+      length: 20.058
+      min_bend_radius: 57.149
+      route_info_length: 20.058
+      route_info_min_bend_radius: 57.149
       route_info_n_bend_s: 1
-      route_info_type: xs_927557f2
-      route_info_weight: 15.078
-      route_info_xs_927557f2_length: 15.078
+      route_info_type: xs_nc
+      route_info_weight: 20.058
+      route_info_xs_nc_length: 20.058
       start_angle: 0
     settings:
-      allow_min_radius_violation: false
       cross_section: xs_nc
-      npoints: 99
       size:
-      - 15
-      - 1.283
-name: coupler_symmetric_Bbend_094383ee
+      - 20
+      - 1.282
+name: coupler_symmetric_G0p23_c93709df
 nets: []
 placements:
-  bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359:
+  bend_s_S20_1p282_CSxs_nc_10000_-1359:
     mirror: true
     rotation: 0
     x: 0
-    y: -0.717
-  bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358:
+    y: -0.718
+  bend_s_S20_1p282_CSxs_nc_10000_1359:
     mirror: false
     rotation: 0
     x: 0
-    y: 0.717
+    y: 0.718
 ports:
-  o1: bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359,o1
-  o2: bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358,o1
-  o3: bend_s_S15_1p283_N99_CS_e6c2d469_7500_1358,o2
-  o4: bend_s_S15_1p283_N99_CS_e6c2d469_7500_-1359,o2
+  o1: bend_s_S20_1p282_CSxs_nc_10000_-1359,o1
+  o2: bend_s_S20_1p282_CSxs_nc_10000_1359,o1
+  o3: bend_s_S20_1p282_CSxs_nc_10000_1359,o2
+  o4: bend_s_S20_1p282_CSxs_nc_10000_-1359,o2
