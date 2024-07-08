@@ -1,12 +1,11 @@
 info:
   length: 10
   route_info_length: 10
-  route_info_type: xs_b483a4bd
+  route_info_type: xs_so
   route_info_weight: 10
-  route_info_xs_b483a4bd_length: 10
+  route_info_xs_so_length: 10
   width: 0.4
-name: straight_L10_N2_CSxs_so
+name: straight_L10_WNone_CSxs_so
 settings:
   cross_section: xs_so
   length: 10
-  npoints: 2

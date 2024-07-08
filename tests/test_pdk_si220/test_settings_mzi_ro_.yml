@@ -1,21 +1,9 @@
 info: {}
-name: mzi_DL10_LY2_LX0p1_Bben_e27ed222
+name: mzi_DL10_Bbend_ro_Sstra_bf2966fd
 settings:
-  add_optical_ports_arms: false
-  auto_rename_ports: true
   bend: bend_ro
   combiner: mmi2x2_ro
   cross_section: xs_ro
   delta_length: 10
-  length_x: 0.1
-  length_y: 2
-  min_length: 0.01
-  mirror_bot: false
-  nbends: 2
-  port_e0_combiner: o4
-  port_e0_splitter: o3
-  port_e1_combiner: o3
-  port_e1_splitter: o2
   splitter: mmi1x2_ro
   straight: straight_ro
-  with_splitter: true

@@ -1,3 +1,9 @@
 info: {}
-name: mmi2x2_so
-settings: {}
+name: mmi2x2_WNone_WT1p5_LT20_7a16873a
+settings:
+  cross_section: xs_so
+  gap_mmi: 0.53
+  length_mmi: 53.5
+  length_taper: 20
+  width_mmi: 6
+  width_taper: 1.5
