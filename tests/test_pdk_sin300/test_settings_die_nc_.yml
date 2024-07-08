@@ -1,3 +1,4 @@
 info: {}
-name: die_nc
-settings: {}
+name: die_CSxs_nc
+settings:
+  cross_section: xs_nc

@@ -31,6 +31,7 @@ def test_gds(component_name: str) -> None:
     difftest(component, test_name=component_name, dirpath=dirpath)
 
 
+@pytest.mark.parametrize("component_name", cell_names)
 def test_settings(component_name: str, data_regression: DataRegressionFixture) -> None:
     """Avoid regressions when exporting settings."""
     component = cells[component_name]()

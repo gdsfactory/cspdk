@@ -1,3 +1,4 @@
 info: {}
-name: die_no
-settings: {}
+name: die_CSxs_no
+settings:
+  cross_section: xs_no

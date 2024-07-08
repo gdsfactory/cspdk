@@ -4,8 +4,5 @@ info:
   - 100
   xsize: 100
   ysize: 100
-name: pad_S100_100
-settings:
-  size:
-  - 100
-  - 100
+name: pad
+settings: {}

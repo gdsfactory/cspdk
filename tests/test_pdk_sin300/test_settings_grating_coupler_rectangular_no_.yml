@@ -1,6 +1,11 @@
 info:
   fiber_angle: 20
   polarization: te
-  wavelength: 1.55
-name: grating_coupler_rectangular_no
-settings: {}
+  wavelength: 1.31
+name: grating_coupler_rectang_e34f8007
+settings:
+  cross_section: xs_no
+  length_taper: 200
+  n_periods: 30
+  period: 0.964
+  wavelength: 1.31

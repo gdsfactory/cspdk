@@ -2,5 +2,10 @@ info:
   fiber_angle: 20
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectangular_nc
-settings: {}
+name: grating_coupler_rectang_27811604
+settings:
+  cross_section: xs_nc
+  length_taper: 200
+  n_periods: 30
+  period: 0.66
+  wavelength: 1.55

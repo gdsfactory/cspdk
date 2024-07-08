@@ -24,17 +24,14 @@ dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_re
 dirpath.mkdir(exist_ok=True, parents=True)
 
 
-@pytest.fixture(params=cell_names, scope="function")
-def component_name(request) -> str:
-    return request.param
-
-
+@pytest.mark.parametrize("component_name", cell_names)
 def test_gds(component_name: str) -> None:
     """Avoid regressions in GDS geometry shapes and layers."""
     component = cells[component_name]()
     difftest(component, test_name=component_name, dirpath=dirpath)
 
 
+@pytest.mark.parametrize("component_name", cell_names)
 def test_settings(component_name: str, data_regression: DataRegressionFixture) -> None:
     """Avoid regressions when exporting settings."""
     component = cells[component_name]()
