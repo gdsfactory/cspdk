@@ -520,7 +520,9 @@ def grating_coupler_array(
             "xs_ro": "grating_coupler_rectangular_ro",
         }
         grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    assert grating_coupler is not None
+
+    if grating_coupler is None:
+        raise ValueError("grating_coupler is None")
     return gf.c.grating_coupler_array(
         grating_coupler=grating_coupler,
         pitch=pitch,
@@ -668,3 +670,8 @@ def array(
         centered=centered,
         add_ports=add_ports,
     )
+
+
+if __name__ == "__main__":
+    c = die_rc()
+    c.show()
