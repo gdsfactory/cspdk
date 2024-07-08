@@ -4,11 +4,5 @@ info:
   - 100
   xsize: 100
   ysize: 100
-name: pad_S100_100_LPAD_BLNon_30fba49c
-settings:
-  layer: PAD
-  port_inclusion: 0
-  port_orientation: 0
-  size:
-  - 100
-  - 100
+name: pad
+settings: {}

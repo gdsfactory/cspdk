@@ -1,11 +1,13 @@
 """Technology definitions."""
 
 import sys
+from collections.abc import Iterable
 from functools import partial
 from typing import cast
 
 import gdsfactory as gf
-from gdsfactory.cross_section import get_cross_sections
+from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
+from gdsfactory.routing.route_bundle import OpticalManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -13,7 +15,7 @@ from gdsfactory.technology import (
     LayerViews,
     LogicalLayer,
 )
-from gdsfactory.typings import ConnectivitySpec, Layer
+from gdsfactory.typings import ComponentSpec, ConnectivitySpec, Layer
 
 from cspdk.si500.config import PATH
 
@@ -21,28 +23,21 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    WG: Layer = (3, 0)
-    SLAB: Layer = (5, 0)
-    FLOORPLAN: Layer = (99, 0)
-    HEATER: Layer = (39, 0)
-    GRA: Layer = (6, 0)
-    LBL: Layer = (100, 0)
-    PAD: Layer = (41, 0)
+    # TODO: how can we make this pass type checking?
+    WG: Layer = (3, 0)  # type: ignore
+    SLAB: Layer = (5, 0)  # type: ignore
+    FLOORPLAN: Layer = (99, 0)  # type: ignore
+    HEATER: Layer = (39, 0)  # type: ignore
+    GRA: Layer = (6, 0)  # type: ignore
+    LBL: Layer = (100, 0)  # type: ignore
+    PAD: Layer = (41, 0)  # type: ignore
 
     # labels for gdsfactory
-    LABEL_SETTINGS: Layer = (100, 0)
-    LABEL_INSTANCE: Layer = (101, 0)
+    LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
+    LABEL_INSTANCE: Layer = (101, 0)  # type: ignore
 
 
 LAYER = LayerMapCornerstone
-
-
-class Tech:
-    radius_rc = 25
-    radius_ro = 25
-
-
-TECH = Tech()
 
 
 def get_layer_stack(
@@ -108,52 +103,219 @@ LAYER_STACK = get_layer_stack()
 LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
+class Tech:
+    radius_rc = 25
+    radius_ro = 25
+    width_rc = 0.45
+    width_ro = 0.40
+
+
+TECH = Tech()
+
+
 ############################
 # Cross-sections functions
 ############################
-cladding_layers_rib = (LAYER.SLAB,)
-cladding_offsets_rib = (5,)
 
-strip = xs_rc = partial(
-    gf.cross_section.strip,
-    layer=LAYER.WG,
-    width=0.45,
-    sections=(gf.Section(width=10.45, layer="SLAB", name="slab", simplify=50 * nm),),
-    radius=25,
-    radius_min=25,
-)
-xs_ro = partial(xs_rc, width=0.40)
-xs_rc_tip = partial(
-    gf.cross_section.strip,
-    sections=(gf.Section(width=0.2, layer="SLAB", name="slab"),),
-)
+# will be filled after all cross sections are defined:
+DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
-metal_routing = partial(
-    gf.cross_section.cross_section,
-    layer=LAYER.PAD,
-    width=10.0,
-    port_names=gf.cross_section.port_names_electrical,
-    port_types=gf.cross_section.port_types_electrical,
-    radius=None,
-)
-xs_heater_metal = heater_metal = partial(metal_routing, width=4, layer=LAYER.HEATER)
-cross_sections = get_cross_sections(sys.modules[__name__])
+def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
+    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
+    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
+    kwargs["radius_min"] = kwargs.get("radius_min", radius)
+    kwargs["sections"] = kwargs.get(
+        "sections",
+        (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
+    )
+    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
+def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
+    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
+    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
+    kwargs["radius_min"] = kwargs.get("radius_min", radius)
+    kwargs["sections"] = kwargs.get(
+        "sections",
+        (gf.Section(width=0.2, layer=LAYER.SLAB, name="slab"),),
+    )
+    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
+def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
+    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
+    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
+    kwargs["radius_min"] = kwargs.get("radius_min", radius)
+    kwargs["sections"] = kwargs.get(
+        "sections",
+        (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
+    )
+    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
+def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
+    kwargs["port_names"] = kwargs.get(
+        "port_names", gf.cross_section.port_names_electrical
+    )
+    kwargs["port_types"] = kwargs.get(
+        "port_types", gf.cross_section.port_types_electrical
+    )
+    kwargs["radius"] = kwargs.get("radius", 0)
+    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
+    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
+def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+    kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
+    xs = metal_routing(width=width, **kwargs).copy()
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
+def populate_default_cross_section_names():
+    xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
+    for k, xs in xss.items():
+        xs._name = ""
+        _k = xs.name
+        xs._name = k
+        DEFAULT_CROSS_SECTION_NAMES[_k] = xs.name
+
+
+populate_default_cross_section_names()
+
 
 ############################
 # Routing functions
 ############################
 
-_settings_rc = dict(
-    straight="straight_rc", cross_section="xs_rc", bend="bend_rc", taper="taper_rc"
-)
 
-route_single_rc = partial(gf.routing.route_single, **_settings_rc)
-route_bundle_rc = partial(gf.routing.route_bundle, **_settings_rc)
+def route_single(
+    component: gf.Component,
+    port1: gf.Port,
+    port2: gf.Port,
+    start_straight_length: float = 0.0,
+    end_straight_length: float = 0.0,
+    waypoints: list[tuple[float, float]] | None = None,
+    port_type: str | None = None,
+    allow_width_mismatch: bool = False,
+    radius: float | None = None,
+    route_width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_rc",
+    straight: ComponentSpec = "straight_rc",
+    bend: ComponentSpec = "bend_rc",
+    taper: ComponentSpec = "taper_rc",
+) -> OpticalManhattanRoute:
+    return gf.routing.route_single(
+        component=component,
+        port1=port1,
+        port2=port2,
+        start_straight_length=start_straight_length,
+        end_straight_length=end_straight_length,
+        cross_section=cross_section,
+        waypoints=waypoints,
+        port_type=port_type,
+        allow_width_mismatch=allow_width_mismatch,
+        radius=radius,
+        route_width=route_width,
+        straight=straight,
+        bend=bend,
+        taper=taper,
+    )
+
+
+def route_bundle(
+    component: gf.Component,
+    ports1: list[gf.Port],
+    ports2: list[gf.Port],
+    separation: float = 3.0,
+    sort_ports: bool = False,
+    start_straight_length: float = 0.0,
+    end_straight_length: float = 0.0,
+    min_straight_taper: float = 100.0,
+    port_type: str | None = None,
+    collision_check_layers: Iterable[LayerSpec] = (),
+    on_collision: str | None = "show_error",
+    bboxes: list | None = None,
+    allow_width_mismatch: bool = False,
+    radius: float | None = None,
+    route_width: float | list[float] | None = None,
+    cross_section: CrossSectionSpec = "xs_rc",
+    straight: ComponentSpec = "straight_rc",
+    bend: ComponentSpec = "bend_rc",
+    taper: ComponentSpec = "taper_rc",
+) -> list[OpticalManhattanRoute]:
+    return gf.routing.route_bundle(
+        component=component,
+        ports1=ports1,
+        ports2=ports2,
+        separation=separation,
+        sort_ports=sort_ports,
+        start_straight_length=start_straight_length,
+        end_straight_length=end_straight_length,
+        min_straight_taper=min_straight_taper,
+        port_type=port_type,
+        collision_check_layers=tuple(collision_check_layers),
+        on_collision=on_collision,
+        bboxes=bboxes,
+        allow_width_mismatch=allow_width_mismatch,
+        radius=radius,
+        route_width=route_width,
+        cross_section=cross_section,
+        straight=straight,
+        bend=bend,
+        taper=taper,
+    )
+
 
 routing_strategies = dict(
-    route_single_rc=route_single_rc,
-    route_bundle_rc=route_bundle_rc,
+    route_single=route_single,
+    route_single_rc=partial(
+        route_single,
+        straight="straight_rc",
+        bend="bend_rc",
+        taper="taper_rc",
+        cross_section="xs_rc",
+    ),
+    route_single_ro=partial(
+        route_single,
+        straight="straight_ro",
+        bend="bend_ro",
+        taper="taper_ro",
+        cross_section="xs_ro",
+    ),
+    route_bundle=route_bundle,
+    route_bundle_rc=partial(
+        route_bundle,
+        straight="straight_rc",
+        bend="bend_rc",
+        taper="taper_rc",
+        cross_section="xs_rc",
+    ),
+    route_bundle_ro=partial(
+        route_bundle,
+        straight="straight_ro",
+        bend="bend_ro",
+        taper="taper_ro",
+        cross_section="xs_ro",
+    ),
 )
 
 

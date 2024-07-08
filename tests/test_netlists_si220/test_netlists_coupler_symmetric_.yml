@@ -1,5 +1,5 @@
 instances:
-  bend_s_S10_1p658_N99_CS_515ef8bc_5000_-1171:
+  bend_s_S10_1p658_CSxs_sc_5000_-1171:
     component: bend_s
     info:
       end_angle: 0
@@ -8,18 +8,16 @@ instances:
       route_info_length: 10.192
       route_info_min_bend_radius: 11.695
       route_info_n_bend_s: 1
-      route_info_type: xs_3edc2673
+      route_info_type: xs_sc
       route_info_weight: 10.192
-      route_info_xs_3edc2673_length: 10.192
+      route_info_xs_sc_length: 10.192
       start_angle: 0
     settings:
-      allow_min_radius_violation: false
       cross_section: xs_sc
-      npoints: 99
       size:
       - 10
       - 1.658
-  bend_s_S10_1p658_N99_CS_515ef8bc_5000_1171:
+  bend_s_S10_1p658_CSxs_sc_5000_1171:
     component: bend_s
     info:
       end_angle: 0
@@ -28,32 +26,30 @@ instances:
       route_info_length: 10.192
       route_info_min_bend_radius: 11.695
       route_info_n_bend_s: 1
-      route_info_type: xs_3edc2673
+      route_info_type: xs_sc
       route_info_weight: 10.192
-      route_info_xs_3edc2673_length: 10.192
+      route_info_xs_sc_length: 10.192
       start_angle: 0
     settings:
-      allow_min_radius_violation: false
       cross_section: xs_sc
-      npoints: 99
       size:
       - 10
       - 1.658
-name: coupler_symmetric_Bbend_68f5befa
+name: coupler_symmetric_G0p23_035344b9
 nets: []
 placements:
-  bend_s_S10_1p658_N99_CS_515ef8bc_5000_-1171:
+  bend_s_S10_1p658_CSxs_sc_5000_-1171:
     mirror: true
     rotation: 0
     x: 0
     y: -0.342
-  bend_s_S10_1p658_N99_CS_515ef8bc_5000_1171:
+  bend_s_S10_1p658_CSxs_sc_5000_1171:
     mirror: false
     rotation: 0
     x: 0
     y: 0.342
 ports:
-  o1: bend_s_S10_1p658_N99_CS_515ef8bc_5000_-1171,o1
-  o2: bend_s_S10_1p658_N99_CS_515ef8bc_5000_1171,o1
-  o3: bend_s_S10_1p658_N99_CS_515ef8bc_5000_1171,o2
-  o4: bend_s_S10_1p658_N99_CS_515ef8bc_5000_-1171,o2
+  o1: bend_s_S10_1p658_CSxs_sc_5000_-1171,o1
+  o2: bend_s_S10_1p658_CSxs_sc_5000_1171,o1
+  o3: bend_s_S10_1p658_CSxs_sc_5000_1171,o2
+  o4: bend_s_S10_1p658_CSxs_sc_5000_-1171,o2

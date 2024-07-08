@@ -1,17 +1,9 @@
 info:
   length: 10
-  width1: 0.5
-  width2: 0.5
-name: taper_L10_W0p5_WNone_PN_19aa93b7
+  width1: 1.2
+  width2: 1.2
+name: taper_L10_W1p2_WNone_PN_5bb181aa
 settings:
-  cross_section: strip
+  cross_section: xs_nc
   length: 10
-  port_names:
-  - o1
-  - o2
-  port_types:
-  - optical
-  - optical
-  width1: 0.5
-  with_bbox: true
-  with_two_ports: true
+  width1: 1.2

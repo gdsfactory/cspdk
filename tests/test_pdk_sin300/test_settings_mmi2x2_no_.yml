@@ -1,3 +1,9 @@
 info: {}
-name: mmi2x2_no
-settings: {}
+name: mmi2x2_WNone_WT5p5_LT50_84c50782
+settings:
+  cross_section: xs_no
+  gap_mmi: 0.4
+  length_mmi: 126
+  length_taper: 50
+  width_mmi: 12
+  width_taper: 5.5

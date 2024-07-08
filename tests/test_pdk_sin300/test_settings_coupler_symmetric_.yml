@@ -1,10 +1,9 @@
 info:
-  length: 15.078
-  min_bend_radius: 32.392
-name: coupler_symmetric_Bbend_094383ee
+  length: 20.058
+  min_bend_radius: 57.149
+name: coupler_symmetric_G0p23_c93709df
 settings:
-  bend: bend_s
   cross_section: xs_nc
-  dx: 15
+  dx: 20
   dy: 4
-  gap: 0.234
+  gap: 0.236

@@ -1,6 +1,9 @@
 info: {}
-name: mzi_no_DL10_LY2_LX0p1
+name: mzi_DL10_Bbend_no_Sstra_b63ffc43
 settings:
+  bend: bend_no
+  combiner: mmi2x2_no
+  cross_section: xs_no
   delta_length: 10
-  length_x: 0.1
-  length_y: 2
+  splitter: mmi1x2_no
+  straight: straight_no

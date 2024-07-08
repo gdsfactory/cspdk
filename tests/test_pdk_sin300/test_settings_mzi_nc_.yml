@@ -1,6 +1,9 @@
 info: {}
-name: mzi_nc_DL10_LY2_LX0p1
+name: mzi_DL10_Bbend_nc_Sstra_60acb66b
 settings:
+  bend: bend_nc
+  combiner: mmi2x2_nc
+  cross_section: xs_nc
   delta_length: 10
-  length_x: 0.1
-  length_y: 2
+  splitter: mmi1x2_nc
+  straight: straight_nc

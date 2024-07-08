@@ -1,6 +1,9 @@
 info:
-  period: 1.401
+  period: 1.184
   polarization: te
-  wavelength: 1.55
-name: grating_coupler_elliptical_no
-settings: {}
+  wavelength: 1.31
+name: grating_coupler_ellipti_750523bd
+settings:
+  cross_section: xs_no
+  grating_line_width: 0.482
+  wavelength: 1.31

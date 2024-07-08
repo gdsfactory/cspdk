@@ -379,12 +379,3 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         if str(sig.return_annotation).lower().split(".")[-1] == "sdict":
             models[name] = func
     return models
-
-
-if __name__ == "__main__":
-    print(list(get_models()))
-    for name, model in get_models().items():
-        try:
-            print(name, model())
-        except NotImplementedError:
-            continue

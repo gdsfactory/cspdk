@@ -1,10 +1,10 @@
 info:
-  length: 10.192
-  min_bend_radius: 11.701
-name: coupler_G0p236_L20_D4_D_e8f9c7a8
+  length: 15.129
+  min_bend_radius: 25.392
+name: coupler_G0p236_L20_D4_D_681368b1
 settings:
-  cross_section: strip
-  dx: 10
+  cross_section: xs_rc
+  dx: 15
   dy: 4
   gap: 0.236
   length: 20

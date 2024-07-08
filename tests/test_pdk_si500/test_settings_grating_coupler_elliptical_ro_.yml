@@ -1,0 +1,9 @@
+info:
+  period: 0.579
+  polarization: te
+  wavelength: 1.31
+name: grating_coupler_ellipti_a23c09ce
+settings:
+  cross_section: xs_ro
+  grating_line_width: 0.25
+  wavelength: 1.31
