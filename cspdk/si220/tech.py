@@ -119,9 +119,8 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-DEFAULT_CROSS_SECTION_NAMES: dict[
-    str, str
-] = {}  # will be filled after all cross sections are defined.
+# will be filled after all cross sections are defined:
+DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
 def xs_sc(width=Tech.width_sc, radius=Tech.radius_sc, **kwargs) -> gf.CrossSection:
