@@ -117,7 +117,8 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-DEFAULT_CROSS_SECTIONS = {}  # will be filled after all cross sections are defined.
+# will be filled after all cross sections are defined:
+DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
 def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
@@ -130,7 +131,9 @@ def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSecti
         (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
     )
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
 
 
 def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
@@ -143,7 +146,9 @@ def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossS
         (gf.Section(width=0.2, layer=LAYER.SLAB, name="slab"),),
     )
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
 
 
 def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
@@ -156,7 +161,9 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
         (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
     )
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
 
 
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
@@ -170,27 +177,29 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
     xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
-    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
 
 
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()
-    return DEFAULT_CROSS_SECTIONS.get(xs.name, xs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
 
 
-def get_default_cross_sections():
+def populate_default_cross_section_names():
     xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
-    ret = {}
     for k, xs in xss.items():
         xs._name = ""
         _k = xs.name
         xs._name = k
-        ret[_k] = xs
-    return ret
+        DEFAULT_CROSS_SECTION_NAMES[_k] = xs.name
 
 
-DEFAULT_CROSS_SECTIONS = get_default_cross_sections()
+populate_default_cross_section_names()
 
 
 ############################
