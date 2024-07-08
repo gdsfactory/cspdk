@@ -677,5 +677,5 @@ def array(
 
 
 if __name__ == "__main__":
-    t = bend_euler()
-    print(t)
+    t = grating_coupler_rectangular_rc()
+    t.show()
