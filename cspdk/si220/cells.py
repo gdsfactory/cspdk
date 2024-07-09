@@ -86,9 +86,6 @@ def taper(
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
-    xs = gf.get_cross_section(cross_section)
-    print(xs)
-    print(xs.name)
     c = gf.c.taper(
         length=length,
         width1=width1,
