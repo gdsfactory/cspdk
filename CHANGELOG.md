@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.10.0
+
+- add docstrings [#54](https://github.com/gdsfactory/cspdk/pull/54)
+- cspdk cleanup [#51](https://github.com/gdsfactory/cspdk/pull/51)
+
 ## 0.9.2
 
 - update gdsfactory to 8.4.0 [#50](https://github.com/gdsfactory/cspdk/pull/50)
