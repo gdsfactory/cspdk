@@ -595,8 +595,6 @@ def heater() -> Component:
 def crossing_so() -> Component:
     """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
-    c.flatten()
-
     xc = 493.47
     dx = 8.47 / 2
     x = xc - dx
@@ -616,7 +614,6 @@ def crossing_so() -> Component:
 def crossing_rc() -> Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
-    c.flatten()
     xc = 404.24
     dx = 9.24 / 2
     x = xc - dx
@@ -637,7 +634,6 @@ def crossing_rc() -> Component:
 def crossing_sc() -> Component:
     """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
-    c.flatten()
     xc = 494.24
     yc = 800
     dx = 9.24 / 2
@@ -677,5 +673,5 @@ def array(
 
 
 if __name__ == "__main__":
-    t = grating_coupler_rectangular_rc()
+    t = crossing_sc()
     t.show()
