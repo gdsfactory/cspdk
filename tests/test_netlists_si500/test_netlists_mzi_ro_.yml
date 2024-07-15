@@ -1,160 +1,4 @@
 instances:
-  bend_euler_RNone_A90_P0_3e63eab5_123500_-47625:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_126000_40125:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_145800_13415:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_148300_-10915:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_73400_-11425:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_73400_11425:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_95700_-45125:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  bend_euler_RNone_A90_P0_3e63eab5_98200_42625:
-    component: bend_euler
-    info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
-      route_info_n_bend_90: 1
-      route_info_type: xs_ro
-      route_info_weight: 41.592
-      route_info_xs_ro_length: 41.592
-    settings:
-      angle: 90
-      cross_section: xs_ro
-      p: 0.5
-  cp1:
-    component: mmi1x2
-    info: {}
-    settings:
-      cross_section: xs_ro
-      gap_mmi: 1.55
-      length_mmi: 40.8
-      length_taper: 20
-      width_mmi: 6
-      width_taper: 1.5
-  cp2:
-    component: mmi2x2
-    info: {}
-    settings:
-      cross_section: xs_ro
-      gap_mmi: 0.53
-      length_mmi: 55
-      length_taper: 20
-      width_mmi: 6
-      width_taper: 1.5
   straight_L1p51_WNone_CSxs_ro_135900_26770:
     component: straight
     info:
@@ -228,90 +72,8 @@ instances:
       cross_section: xs_ro
       length: 1
 name: mzi_DL10_Bbend_ro_Sstra_bf2966fd
-nets:
-- p1: bend_euler_RNone_A90_P0_3e63eab5_123500_-47625,o1
-  p2: sxb,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_123500_-47625,o2
-  p2: straight_L6p51_WNone_CSxs_ro_135900_-29270,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_126000_40125,o1
-  p2: straight_L1p51_WNone_CSxs_ro_135900_26770,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_126000_40125,o2
-  p2: sxt,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_145800_13415,o1
-  p2: straight_L1p51_WNone_CSxs_ro_135900_26770,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_145800_13415,o2
-  p2: cp2,o3
-- p1: bend_euler_RNone_A90_P0_3e63eab5_148300_-10915,o1
-  p2: cp2,o4
-- p1: bend_euler_RNone_A90_P0_3e63eab5_148300_-10915,o2
-  p2: straight_L6p51_WNone_CSxs_ro_135900_-29270,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_73400_-11425,o1
-  p2: cp1,o3
-- p1: bend_euler_RNone_A90_P0_3e63eab5_73400_-11425,o2
-  p2: syl,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_73400_11425,o1
-  p2: cp1,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_73400_11425,o2
-  p2: sytl,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_95700_-45125,o1
-  p2: syl,o2
-- p1: bend_euler_RNone_A90_P0_3e63eab5_95700_-45125,o2
-  p2: sxb,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_98200_42625,o1
-  p2: sxt,o1
-- p1: bend_euler_RNone_A90_P0_3e63eab5_98200_42625,o2
-  p2: sytl,o2
+nets: []
 placements:
-  bend_euler_RNone_A90_P0_3e63eab5_123500_-47625:
-    mirror: false
-    rotation: 0
-    x: 110.9
-    y: -57.525
-  bend_euler_RNone_A90_P0_3e63eab5_126000_40125:
-    mirror: false
-    rotation: 90
-    x: 135.9
-    y: 27.525
-  bend_euler_RNone_A90_P0_3e63eab5_145800_13415:
-    mirror: false
-    rotation: 270
-    x: 135.9
-    y: 26.015
-  bend_euler_RNone_A90_P0_3e63eab5_148300_-10915:
-    mirror: false
-    rotation: 180
-    x: 160.9
-    y: -1.015
-  bend_euler_RNone_A90_P0_3e63eab5_73400_-11425:
-    mirror: true
-    rotation: 0
-    x: 60.8
-    y: -1.525
-  bend_euler_RNone_A90_P0_3e63eab5_73400_11425:
-    mirror: false
-    rotation: 0
-    x: 60.8
-    y: 1.525
-  bend_euler_RNone_A90_P0_3e63eab5_95700_-45125:
-    mirror: false
-    rotation: 270
-    x: 85.8
-    y: -32.525
-  bend_euler_RNone_A90_P0_3e63eab5_98200_42625:
-    mirror: false
-    rotation: 180
-    x: 110.8
-    y: 52.525
-  cp1:
-    mirror: false
-    rotation: 0
-    x: 0
-    y: 0
-  cp2:
-    mirror: true
-    rotation: 180
-    x: 235.9
-    y: 0
   straight_L1p51_WNone_CSxs_ro_135900_26770:
     mirror: false
     rotation: 90
@@ -342,7 +104,46 @@ placements:
     rotation: 90
     x: 85.8
     y: 26.525
-ports:
-  o1: cp1,o1
-  o2: cp2,o2
-  o3: cp2,o1
+ports: {}
+warnings:
+  optical:
+    unconnected_ports:
+    - message: 12 unconnected optical ports!
+      ports:
+      - straight_L1p51_WNone_CSxs_ro_135900_26770,o1
+      - straight_L1p51_WNone_CSxs_ro_135900_26770,o2
+      - straight_L6p51_WNone_CSxs_ro_135900_-29270,o1
+      - straight_L6p51_WNone_CSxs_ro_135900_-29270,o2
+      - sytl,o1
+      - sytl,o2
+      - syl,o1
+      - syl,o2
+      - sxt,o1
+      - sxt,o2
+      - sxb,o1
+      - sxb,o2
+      values:
+      - - 135900
+        - 26015
+      - - 135900
+        - 27525
+      - - 135900
+        - -32525
+      - - 135900
+        - -26015
+      - - 85800
+        - 26525
+      - - 85800
+        - 27525
+      - - 85800
+        - -26525
+      - - 85800
+        - -32525
+      - - 110800
+        - 52525
+      - - 110900
+        - 52525
+      - - 110800
+        - -57525
+      - - 110900
+        - -57525
