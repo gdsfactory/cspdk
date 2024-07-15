@@ -17,6 +17,13 @@ def straight(
     cross_section: CrossSectionSpec = "xs_nc",
     **kwargs,
 ) -> Component:
+    """a straight waveguide
+
+    Args:
+        length: the length of the waveguide
+        width: the width of the waveguide
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     if width is not None:
         kwargs["width"] = width
     kwargs["npoints"] = kwargs.get("npoints", 2)
@@ -33,6 +40,10 @@ straight_no = partial(straight, cross_section="xs_no")
 
 @gf.cell
 def wire_corner() -> Component:
+    """a wire corner
+
+    A wire corner is a bend for electrical routes.
+    """
     return gf.components.wire_corner(cross_section="metal_routing")
 
 
@@ -41,6 +52,12 @@ def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """an S-bend
+
+    Args:
+        size: the width and height of the s-bend
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
@@ -56,6 +73,15 @@ def bend_euler(
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """an euler bend
+
+    Args:
+        radius: the effective radius of the bend
+        angle: the angle of the bend (usually 90 degrees)
+        p: the fraction of the bend that's represented by a polar bend
+        width: the width of the waveguide forming the bend
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.components.bend_euler(
         radius=radius,
         angle=angle,
@@ -85,6 +111,17 @@ def taper(
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """a taper
+
+    A taper is a transition between two waveguide widths
+
+    Args:
+        length: the length of the taper
+        width1: the input width of the taper
+        width2: the output width of the taper (if not given, use port)
+        port: the port (with certain width) to taper towards (if not given, use width2)
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.taper(
         length=length,
         width1=width1,
@@ -125,6 +162,19 @@ def mmi1x2(
     gap_mmi: float = 0.4,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """an mmi1x2
+
+    An mmi1x2 is a splitter that splits a single input to two outputs
+
+    Args:
+        width: the width of the waveguides connecting at the mmi ports
+        width_taper: the width at the base of the mmi body
+        length_taper: the length of the tapers going towards the mmi body
+        length_mmi: the length of the mmi body
+        width_mmi: the width of the mmi body
+        gap_mmi: the gap between the tapers at the mmi body
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.mmi1x2(
         width=width,
         width_taper=width_taper,
@@ -152,6 +202,19 @@ def mmi2x2(
     gap_mmi: float = 0.4,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """an mmi2x2
+
+    An mmi2x2 is a 2x2 splitter
+
+    Args:
+        width: the width of the waveguides connecting at the mmi ports
+        width_taper: the width at the base of the mmi body
+        length_taper: the length of the tapers going towards the mmi body
+        length_mmi: the length of the mmi body
+        width_mmi: the width of the mmi body
+        gap_mmi: the gap between the tapers at the mmi body
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.mmi2x2(
         width=width,
         width_taper=width_taper,
@@ -180,6 +243,13 @@ def coupler_straight(
     gap: float = 0.236,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """the straight part of a coupler
+
+    Args:
+        length: the length of the straight part of the coupler
+        gap: the gap between the waveguides forming the straight part of the coupler
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.coupler_straight(
         length=length,
         gap=gap,
@@ -194,6 +264,14 @@ def coupler_symmetric(
     dx: float = 20.0,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """the part of the coupler that diverges away from each other with s-bends
+
+    Args:
+        gap: the gap between the s-bends when closest together
+        dy: the height of the s-bend
+        dx: the length of the s-bend
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.coupler_symmetric(
         bend="bend_s",
         gap=gap,
@@ -211,6 +289,17 @@ def coupler(
     dx: float = 20.0,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """a coupler
+
+    a coupler is a 2x2 splitter
+
+    Args:
+        gap: the gap between the waveguides forming the straight part of the coupler
+        length: the length of the coupler
+        dy: the height of the s-bend
+        dx: the length of the s-bend
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.coupler(
         gap=gap,
         length=length,
@@ -239,6 +328,15 @@ def grating_coupler_rectangular(
     wavelength: float = 1.55,
     cross_section="xs_nc",
 ) -> Component:
+    """A grating coupler with straight and parallel teeth
+
+    Args:
+        period: the period of the grating
+        n_periods: the number of grating teeth
+        length_taper: the length of the taper tapering up to the grating
+        wavelength: the center wavelength for which the grating is designed
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.grating_coupler_rectangular(
         n_periods=n_periods,
         period=period,
@@ -283,6 +381,13 @@ def grating_coupler_elliptical(
     grating_line_width=0.343,
     cross_section="xs_nc",
 ) -> Component:
+    """A grating coupler with curved but parallel teeth
+
+    Args:
+        wavelength: the center wavelength for which the grating is designed
+        grating_line_width: the line width of the grating
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
         wavelength=wavelength,
@@ -334,6 +439,16 @@ def mzi(
     combiner="mmi2x2_nc",
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
+    """A Mach-Zehnder Interferometer
+
+    Args:
+        delta_length: the difference in length between the upper and lower arms of the mzi
+        bend: the name of the default bend of the mzi
+        straight: the name of the default straight of the mzi
+        splitter: the name of the default splitter of the mzi
+        combiner: the name of the default combiner of the mzi
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     return gf.c.mzi(
         delta_length=delta_length,
         length_y=2.0,
@@ -387,11 +502,13 @@ mzi_no = partial(
 
 @gf.cell
 def pad() -> Component:
+    """An electrical pad"""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
 @gf.cell
 def rectangle(**kwargs) -> Component:
+    """A rectangle"""
     kwargs["layer"] = LAYER.FLOORPLAN
     return gf.c.rectangle(**kwargs)
 
@@ -408,6 +525,19 @@ def grating_coupler_array(
     straight_to_grating_spacing=10.0,
     with_loopback=False,
 ) -> Component:
+    """An array of grating couplers
+
+    Args:
+        pitch: the pitch of the grating couplers
+        n: the number of grating couplers
+        centered: if True, centers the array around the origin.
+        grating_coupler: the name of the grating coupler to use in the array.
+        port_name: port name
+        with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
+        rotation: rotation angle for each reference.
+        straight_to_grating_spacing: spacing between the last grating coupler and the loopback.
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     if grating_coupler is None:
         if isinstance(cross_section, str):
             xs = cross_section
@@ -438,6 +568,11 @@ def grating_coupler_array(
 
 @gf.cell
 def die(cross_section="xs_nc") -> Component:
+    """A die template
+
+    Args:
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
     if isinstance(cross_section, str):
         xs = cross_section
     elif callable(cross_section):
@@ -480,6 +615,17 @@ def array(
     size=None,
     centered: bool = False,
 ) -> Component:
+    """An array of components
+
+    Args:
+        component: the component of which to create an array
+        spacing: the x and y spacing by which to place the component
+        columns: the number of components to place in the x-direction
+        rows: the number of components to place in the y-direction
+        add_ports: add ports to the component
+        size: Optional x, y size. Overrides columns and rows.
+        centered: center the array around the origin.
+    """
     return gf.c.array(
         component=component,
         spacing=spacing,
