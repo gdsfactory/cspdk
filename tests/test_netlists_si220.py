@@ -11,8 +11,9 @@ from cspdk.si220.cells import wire_corner
 
 
 @pytest.fixture(autouse=True)
-def activate_pdk():
+def activate_pdk() -> None:
     PDK.activate()
+    gf.clear_cache()
 
 
 cells = PDK.cells

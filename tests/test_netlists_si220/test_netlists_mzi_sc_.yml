@@ -135,6 +135,26 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+  cp1:
+    component: mmi1x2
+    info: {}
+    settings:
+      cross_section: xs_sc
+      gap_mmi: 1.64
+      length_mmi: 31.8
+      length_taper: 20
+      width_mmi: 6
+      width_taper: 1.5
+  cp2:
+    component: mmi2x2
+    info: {}
+    settings:
+      cross_section: xs_sc
+      gap_mmi: 0.5
+      length_mmi: 42.5
+      length_taper: 20
+      width_mmi: 6
+      width_taper: 1.5
   straight_L1p57_WNone_CSxs_sc_66900_6785:
     component: straight
     info:
@@ -209,8 +229,12 @@ instances:
       length: 1
 name: mzi_DL10_Bbend_sc_Sstra_2b181802
 nets:
+- p1: bend_euler_RNone_A90_P0_7c94df4d_54412_-3958,o1
+  p2: cp1,o3
 - p1: bend_euler_RNone_A90_P0_7c94df4d_54412_-3958,o2
   p2: syl,o1
+- p1: bend_euler_RNone_A90_P0_7c94df4d_54412_3957,o1
+  p2: cp1,o2
 - p1: bend_euler_RNone_A90_P0_7c94df4d_54412_3957,o2
   p2: sytl,o1
 - p1: bend_euler_RNone_A90_P0_7c94df4d_59187_-15183,o1
@@ -229,10 +253,14 @@ nets:
   p2: straight_L1p57_WNone_CSxs_sc_66900_6785,o2
 - p1: bend_euler_RNone_A90_P0_7c94df4d_64512_10182,o2
   p2: sxt,o2
+- p1: bend_euler_RNone_A90_P0_7c94df4d_69287_-3388,o1
+  p2: cp2,o4
 - p1: bend_euler_RNone_A90_P0_7c94df4d_69287_-3388,o2
   p2: straight_L6p57_WNone_CSxs_sc_66900_-9285,o2
 - p1: bend_euler_RNone_A90_P0_7c94df4d_69287_3387,o1
   p2: straight_L1p57_WNone_CSxs_sc_66900_6785,o1
+- p1: bend_euler_RNone_A90_P0_7c94df4d_69287_3387,o2
+  p2: cp2,o3
 placements:
   bend_euler_RNone_A90_P0_7c94df4d_54412_-3958:
     mirror: true
@@ -274,6 +302,16 @@ placements:
     rotation: 270
     x: 66.9
     y: 6
+  cp1:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  cp2:
+    mirror: true
+    rotation: 180
+    x: 134.4
+    y: 0
   straight_L1p57_WNone_CSxs_sc_66900_6785:
     mirror: false
     rotation: 90
@@ -304,22 +342,7 @@ placements:
     rotation: 90
     x: 56.8
     y: 6.57
-ports: {}
-warnings:
-  optical:
-    unconnected_ports:
-    - message: 4 unconnected optical ports!
-      ports:
-      - bend_euler_RNone_A90_P0_7c94df4d_54412_-3958,o1
-      - bend_euler_RNone_A90_P0_7c94df4d_54412_3957,o1
-      - bend_euler_RNone_A90_P0_7c94df4d_69287_3387,o2
-      - bend_euler_RNone_A90_P0_7c94df4d_69287_-3388,o1
-      values:
-      - - 51800
-        - -1570
-      - - 51800
-        - 1570
-      - - 71900
-        - 1000
-      - - 71900
-        - -1000
+ports:
+  o1: cp1,o1
+  o2: cp2,o2
+  o3: cp2,o1
