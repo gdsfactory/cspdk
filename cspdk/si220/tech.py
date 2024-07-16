@@ -175,25 +175,21 @@ def xs_sc_heater_metal(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
     return xs
 
 
-def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
-    kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
-    kwargs["port_names"] = kwargs.get(
-        "port_names", gf.cross_section.port_names_electrical
-    )
-    kwargs["port_types"] = kwargs.get(
-        "port_types", gf.cross_section.port_types_electrical
-    )
-    kwargs["radius"] = kwargs.get("radius", 0)
-    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
-    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+def metal_routing(
+    width=10.0,
+    radius: float = 10,
+) -> gf.CrossSection:
+    xs = gf.cross_section.metal1(width=width, radius=radius, layer=LAYER.PAD)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
-def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
-    kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
-    xs = metal_routing(width=width, **kwargs).copy()
+def heater_metal(
+    width=4.0,
+    radius: float = 10,
+) -> gf.CrossSection:
+    xs = gf.cross_section.metal1(width=width, radius=radius, layer=LAYER.HEATER)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
@@ -269,7 +265,7 @@ def route_bundle(
     cross_section: CrossSectionSpec = "xs_sc",
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_sc",
-    taper: ComponentSpec = "taper_sc",
+    taper: ComponentSpec | None = "taper_sc",
 ) -> list[OpticalManhattanRoute]:
     return gf.routing.route_bundle(
         component=component,
@@ -353,6 +349,20 @@ routing_strategies = dict(
         taper="taper_ro",
         cross_section="xs_ro",
     ),
+    route_bundle_metal=partial(
+        route_bundle,
+        straight="straight_metal",
+        bend="bend_metal",
+        taper=None,
+        cross_section="metal_routing",
+    ),
+    route_bundle_metal_corner=partial(
+        route_bundle,
+        straight="straight_metal",
+        bend="wire_corner",
+        taper=None,
+        cross_section="metal_routing",
+    ),
 )
 
 if __name__ == "__main__":
@@ -373,6 +383,8 @@ if __name__ == "__main__":
         connectivity=connectivity,
     )
     t.write_tech(tech_dir=PATH.klayout)
-    print(DEFAULT_CROSS_SECTION_NAMES)
-    print(xs_sc() is xs_sc())
-    print(xs_sc().name, xs_sc().name)
+    # print(DEFAULT_CROSS_SECTION_NAMES)
+    # print(xs_sc() is xs_sc())
+    # print(xs_sc().name, xs_sc().name)
+    # c = gf.c.bend_euler(cross_section="metal_routing")
+    # c.pprint_ports()

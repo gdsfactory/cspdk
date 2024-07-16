@@ -10,7 +10,7 @@ from cspdk.sin300 import PDK
 
 
 @pytest.fixture(autouse=True)
-def activate_pdk():
+def activate_pdk() -> None:
     PDK.activate()
     gf.clear_cache()
 
@@ -34,13 +34,13 @@ def get_minimal_netlist(comp: gf.Component):
 
 
 def instances_without_info(net):
-    ret = {}
-    for k, v in net.get("instances", {}).items():
-        ret[k] = {
+    return {
+        k: {
             "component": v.get("component", ""),
             "settings": v.get("settings", {}),
         }
-    return ret
+        for k, v in net.get("instances", {}).items()
+    }
 
 
 @pytest.mark.parametrize("name", cells)
