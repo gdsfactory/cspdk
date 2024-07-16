@@ -28,6 +28,7 @@ straight_sc = partial(straight, cross_section="xs_sc")
 straight_so = partial(straight, cross_section="xs_so")
 straight_rc = partial(straight, cross_section="xs_rc")
 straight_ro = partial(straight, cross_section="xs_ro")
+straight_metal = partial(straight, cross_section="metal_routing")
 
 ################
 # Bends
@@ -72,6 +73,7 @@ bend_sc = partial(bend_euler, cross_section="xs_sc")
 bend_so = partial(bend_euler, cross_section="xs_so")
 bend_rc = partial(bend_euler, cross_section="xs_rc")
 bend_ro = partial(bend_euler, cross_section="xs_ro")
+bend_metal = partial(bend_euler, cross_section="metal_routing")
 
 ################
 # Transitions

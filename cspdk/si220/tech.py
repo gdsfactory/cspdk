@@ -265,7 +265,7 @@ def route_bundle(
     cross_section: CrossSectionSpec = "xs_sc",
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_sc",
-    taper: ComponentSpec = "taper_sc",
+    taper: ComponentSpec | None = "taper_sc",
 ) -> list[OpticalManhattanRoute]:
     return gf.routing.route_bundle(
         component=component,
@@ -348,6 +348,20 @@ routing_strategies = dict(
         bend="bend_ro",
         taper="taper_ro",
         cross_section="xs_ro",
+    ),
+    route_bundle_metal=partial(
+        route_bundle,
+        straight="straight_metal",
+        bend="bend_metal",
+        taper=None,
+        cross_section="metal_routing",
+    ),
+    route_bundle_metal_corner=partial(
+        route_bundle,
+        straight="straight_metal",
+        bend="wire_corner",
+        taper=None,
+        cross_section="metal_routing",
     ),
 )
 
