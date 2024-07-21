@@ -14,6 +14,7 @@ tests/gds_ref_sin300/*.oas
 cspdk/si220/gds/*.oas
 cspdk/si500/gds/*.oas
 cspdk/sin300/gds/*.oas
+cspdk/si220/samples/mask.gds
 
 
 tests/gds_ref/*.oas
