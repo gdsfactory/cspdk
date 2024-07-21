@@ -306,8 +306,6 @@ def coupler(
         dy=dy,
         dx=dx,
         cross_section=cross_section,
-        coupler_symmetric=coupler_symmetric,
-        coupler_straight=coupler_straight,
     )
 
 
