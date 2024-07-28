@@ -1,3 +1,5 @@
+"""Description: Test netlists for all cells in the PDK."""
+
 from __future__ import annotations
 
 import gdsfactory as gf
@@ -12,6 +14,7 @@ from cspdk.si220.cells import wire_corner
 
 @pytest.fixture(autouse=True)
 def activate_pdk() -> None:
+    """Activate PDK."""
     PDK.activate()
     gf.clear_cache()
 
@@ -23,6 +26,7 @@ cell_names = [name for name in cell_names if not name.startswith("_")]
 
 
 def get_minimal_netlist(comp: gf.Component):
+    """Get minimal netlist from a component."""
     net = comp.get_netlist()
 
     def _get_instance(inst):
@@ -35,6 +39,7 @@ def get_minimal_netlist(comp: gf.Component):
 
 
 def instances_without_info(net):
+    """Get instances without info."""
     ret = {}
     for k, v in net.get("instances", {}).items():
         ret[k] = {
@@ -46,6 +51,7 @@ def instances_without_info(net):
 
 @pytest.mark.parametrize("name", cells)
 def test_cell_in_pdk(name):
+    """Test that cell is in the PDK."""
     c1 = gf.Component()
     c1.add_ref(gf.get_component(name))
     net1 = get_minimal_netlist(c1)
@@ -63,7 +69,6 @@ def test_netlists(
     component_type: str,
     data_regression: DataRegressionFixture,
     check: bool = True,
-    component_factory=cells,
 ) -> None:
     """Write netlists for hierarchical circuits.
 
@@ -72,7 +77,7 @@ def test_netlists(
     Component -> netlist -> Component -> netlist
 
     """
-    c = component_factory[component_type]()
+    c = cells[component_type]()
     n = c.get_netlist()
     if check:
         data_regression.check(n)

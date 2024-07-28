@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=8.5.6",
+  "gdsfactory~=8.6.0",
   "gplugins[sax]>=1,<2"
 ]
 description = "CornerStone PDK"
@@ -68,13 +68,15 @@ ignore = [
   "C408"  # C408 Unnecessary `dict` call (rewrite as a literal)
 ]
 select = [
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  "D",  # pydocstyle
   "E",  # pycodestyle errors
-  "W",  # pycodestyle warnings
   "F",  # pyflakes
   "I",  # isort
-  "C",  # flake8-comprehensions
-  "B",  # flake8-bugbear
-  "UP"
+  "T10",  # flake8-debugger
+  "UP",  # pyupgrade
+  "W"  # pycodestyle warnings
 ]
 
 [tool.ruff.pydocstyle]
