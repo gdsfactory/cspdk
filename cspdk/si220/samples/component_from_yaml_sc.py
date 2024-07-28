@@ -1,3 +1,5 @@
+"""Sample YAML."""
+
 sample_pads = """
 name: pads
 pdk: cspdk.si220
@@ -32,7 +34,6 @@ routes:
             cross_section: metal_routing
             separation: 20
             width: 10
-            path_length_match_loops: 2
             end_straight_length: 100
         links:
             tl,e3: tr,e1

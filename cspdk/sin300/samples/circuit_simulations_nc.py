@@ -1,3 +1,5 @@
+"""Sample circuit sims."""
+
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import sax

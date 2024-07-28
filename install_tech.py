@@ -7,6 +7,7 @@ import sys
 
 
 def remove_path_or_dir(dest: pathlib.Path):
+    """Remove a path or directory."""
     if dest.is_dir():
         os.unlink(dest)
     else:
@@ -14,6 +15,7 @@ def remove_path_or_dir(dest: pathlib.Path):
 
 
 def make_link(src, dest, overwrite: bool = True) -> None:
+    """Make a symbolic link from src to dest."""
     dest = pathlib.Path(dest)
     if not src.exists():
         raise FileNotFoundError(f"{src} does not exist")

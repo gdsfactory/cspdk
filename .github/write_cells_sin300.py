@@ -1,3 +1,5 @@
+"""Write docs."""
+
 import inspect
 
 from cspdk.sin300 import _cells as cells

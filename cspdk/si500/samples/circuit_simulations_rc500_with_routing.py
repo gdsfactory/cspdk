@@ -1,3 +1,5 @@
+"""Sample circuit sims with routes."""
+
 import gdsfactory as gf
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
