@@ -20,7 +20,8 @@ CONF.pdk = "cspdk.sin300"
 
 
 @lru_cache
-def get_pdk():
+def get_pdk() -> Pdk:
+    """Return Cornerstone SiN300 PDK."""
     return Pdk(
         name="cornerstone_sin300",
         cells=_cells,
@@ -33,7 +34,8 @@ def get_pdk():
     )
 
 
-def activate_pdk():
+def activate_pdk() -> None:
+    """Activate Cornerstone SiN300 PDK."""
     pdk = get_pdk()
     pdk.activate()
 
