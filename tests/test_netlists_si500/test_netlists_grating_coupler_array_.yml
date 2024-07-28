@@ -1,5 +1,5 @@
 instances:
-  grating_coupler_rectang_2cd63619_-190500_-189600:
+  grating_coupler_rectang_2cd63619_190500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -11,7 +11,7 @@ instances:
       n_periods: 60
       period: 0.57
       wavelength: 1.55
-  grating_coupler_rectang_2cd63619_-317500_-189600:
+  grating_coupler_rectang_2cd63619_317500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -23,7 +23,7 @@ instances:
       n_periods: 60
       period: 0.57
       wavelength: 1.55
-  grating_coupler_rectang_2cd63619_-63500_-189600:
+  grating_coupler_rectang_2cd63619_63500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -35,7 +35,7 @@ instances:
       n_periods: 60
       period: 0.57
       wavelength: 1.55
-  grating_coupler_rectang_2cd63619_190500_-189600:
+  grating_coupler_rectang_2cd63619_m190500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -47,7 +47,7 @@ instances:
       n_periods: 60
       period: 0.57
       wavelength: 1.55
-  grating_coupler_rectang_2cd63619_317500_-189600:
+  grating_coupler_rectang_2cd63619_m317500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -59,7 +59,7 @@ instances:
       n_periods: 60
       period: 0.57
       wavelength: 1.55
-  grating_coupler_rectang_2cd63619_63500_-189600:
+  grating_coupler_rectang_2cd63619_m63500_m189600:
     component: grating_coupler_rectangular
     info:
       fiber_angle: 10
@@ -74,54 +74,54 @@ instances:
 name: grating_coupler_array_P_1027b0a8
 nets: []
 placements:
-  grating_coupler_rectang_2cd63619_-190500_-189600:
-    mirror: false
-    rotation: 270
-    x: -190.5
-    y: 0
-  grating_coupler_rectang_2cd63619_-317500_-189600:
-    mirror: false
-    rotation: 270
-    x: -317.5
-    y: 0
-  grating_coupler_rectang_2cd63619_-63500_-189600:
-    mirror: false
-    rotation: 270
-    x: -63.5
-    y: 0
-  grating_coupler_rectang_2cd63619_190500_-189600:
+  grating_coupler_rectang_2cd63619_190500_m189600:
     mirror: false
     rotation: 270
     x: 190.5
     y: 0
-  grating_coupler_rectang_2cd63619_317500_-189600:
+  grating_coupler_rectang_2cd63619_317500_m189600:
     mirror: false
     rotation: 270
     x: 317.5
     y: 0
-  grating_coupler_rectang_2cd63619_63500_-189600:
+  grating_coupler_rectang_2cd63619_63500_m189600:
     mirror: false
     rotation: 270
     x: 63.5
     y: 0
+  grating_coupler_rectang_2cd63619_m190500_m189600:
+    mirror: false
+    rotation: 270
+    x: -190.5
+    y: 0
+  grating_coupler_rectang_2cd63619_m317500_m189600:
+    mirror: false
+    rotation: 270
+    x: -317.5
+    y: 0
+  grating_coupler_rectang_2cd63619_m63500_m189600:
+    mirror: false
+    rotation: 270
+    x: -63.5
+    y: 0
 ports:
-  o0: grating_coupler_rectang_2cd63619_-317500_-189600,o1
-  o1: grating_coupler_rectang_2cd63619_-190500_-189600,o1
-  o2: grating_coupler_rectang_2cd63619_-63500_-189600,o1
-  o3: grating_coupler_rectang_2cd63619_63500_-189600,o1
-  o4: grating_coupler_rectang_2cd63619_190500_-189600,o1
-  o5: grating_coupler_rectang_2cd63619_317500_-189600,o1
+  o0: grating_coupler_rectang_2cd63619_m317500_m189600,o1
+  o1: grating_coupler_rectang_2cd63619_m190500_m189600,o1
+  o2: grating_coupler_rectang_2cd63619_m63500_m189600,o1
+  o3: grating_coupler_rectang_2cd63619_63500_m189600,o1
+  o4: grating_coupler_rectang_2cd63619_190500_m189600,o1
+  o5: grating_coupler_rectang_2cd63619_317500_m189600,o1
 warnings:
   vertical_te:
     unconnected_ports:
     - message: 6 unconnected vertical_te ports!
       ports:
-      - grating_coupler_rectang_2cd63619_-317500_-189600,o2
-      - grating_coupler_rectang_2cd63619_-190500_-189600,o2
-      - grating_coupler_rectang_2cd63619_-63500_-189600,o2
-      - grating_coupler_rectang_2cd63619_63500_-189600,o2
-      - grating_coupler_rectang_2cd63619_190500_-189600,o2
-      - grating_coupler_rectang_2cd63619_317500_-189600,o2
+      - grating_coupler_rectang_2cd63619_m317500_m189600,o2
+      - grating_coupler_rectang_2cd63619_m190500_m189600,o2
+      - grating_coupler_rectang_2cd63619_m63500_m189600,o2
+      - grating_coupler_rectang_2cd63619_63500_m189600,o2
+      - grating_coupler_rectang_2cd63619_190500_m189600,o2
+      - grating_coupler_rectang_2cd63619_317500_m189600,o2
       values:
       - - -317500
         - -366886

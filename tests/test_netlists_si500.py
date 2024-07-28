@@ -1,9 +1,10 @@
+"""Tests for netlists of all cells in the PDK."""
+
 from __future__ import annotations
 
 import gdsfactory as gf
 import jsondiff
 import pytest
-from omegaconf import OmegaConf
 from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si500 import PDK
@@ -11,6 +12,7 @@ from cspdk.si500 import PDK
 
 @pytest.fixture(autouse=True)
 def activate_pdk() -> None:
+    """Activate the PDK and clear the cache."""
     PDK.activate()
     gf.clear_cache()
 
@@ -22,6 +24,7 @@ cell_names = [name for name in cell_names if not name.startswith("_")]
 
 
 def get_minimal_netlist(comp: gf.Component):
+    """Get minimal netlist."""
     net = comp.get_netlist()
 
     def _get_instance(inst):
@@ -34,17 +37,19 @@ def get_minimal_netlist(comp: gf.Component):
 
 
 def instances_without_info(net):
-    ret = {}
-    for k, v in net.get("instances", {}).items():
-        ret[k] = {
+    """Get instances without info."""
+    return {
+        k: {
             "component": v.get("component", ""),
             "settings": v.get("settings", {}),
         }
-    return ret
+        for k, v in net.get("instances", {}).items()
+    }
 
 
 @pytest.mark.parametrize("name", cells)
-def test_cell_in_pdk(name):
+def test_cell_in_pdk(name) -> None:
+    """Test cell in PDK."""
     c1 = gf.Component()
     c1.add_ref(gf.get_component(name))
     net1 = get_minimal_netlist(c1)
@@ -77,8 +82,9 @@ def test_netlists(
         data_regression.check(n)
 
     n.pop("connections", None)
+    n.pop("warnings", None)
     c.delete()
-    yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
+    yaml_str = c.write_netlist(n)
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
 

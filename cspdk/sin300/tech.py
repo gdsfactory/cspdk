@@ -23,6 +23,8 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
+    """Layer map for Cornerstone technology."""
+
     WG: Layer = (3, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore
@@ -59,7 +61,6 @@ def get_layer_stack(
         zmin_metal: metal thickness in um.
         thickness_metal: metal2 thickness.
     """
-
     return LayerStack(
         layers=dict(
             nitride=LayerLevel(
@@ -103,6 +104,8 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
 class Tech:
+    """Technology parameters."""
+
     radius_nc = 25
     radius_no = 25
     width_nc = 1.20
@@ -121,6 +124,7 @@ DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
 def xs_nc(width=Tech.width_nc, radius=Tech.radius_nc, **kwargs) -> gf.CrossSection:
+    """Returns nitride cband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
@@ -130,6 +134,7 @@ def xs_nc(width=Tech.width_nc, radius=Tech.radius_nc, **kwargs) -> gf.CrossSecti
 
 
 def xs_no(width=Tech.width_no, radius=Tech.radius_no, **kwargs) -> gf.CrossSection:
+    """Returns nitride oband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
@@ -139,6 +144,7 @@ def xs_no(width=Tech.width_no, radius=Tech.radius_no, **kwargs) -> gf.CrossSecti
 
 
 def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
+    """Returns nitride cband cross-section with heater metal."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
     kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
     kwargs["layer_heater"] = kwargs.get("layer_heater", LAYER.HEATER)
@@ -151,6 +157,7 @@ def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
 
 
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
+    """Returns metal routing cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
     kwargs["port_names"] = kwargs.get(
         "port_names", gf.cross_section.port_names_electrical
@@ -167,6 +174,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
 
 
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+    """Returns heater metal cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
@@ -175,6 +183,7 @@ def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
 
 
 def populate_default_cross_section_names():
+    """Populates default cross-section names."""
     xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
     for k, xs in xss.items():
         xs._name = ""
@@ -207,6 +216,25 @@ def route_single(
     bend: ComponentSpec = "bend_nc",
     taper: ComponentSpec = "taper_nc",
 ) -> OpticalManhattanRoute:
+    """Route single optical path.
+
+    Args:
+        component: component to route.
+        port1: port1.
+        port2: port2.
+        start_straight_length: start straight length.
+        end_straight_length: end straight length.
+        waypoints: waypoints.
+        port_type: port type.
+        allow_width_mismatch: allow width mismatch.
+        radius: radius.
+        route_width: route width.
+        cross_section: cross section.
+        straight: straight component.
+        bend: bend component.
+        taper: taper component.
+
+    """
     return gf.routing.route_single(
         component=component,
         port1=port1,
@@ -246,6 +274,7 @@ def route_bundle(
     bend: ComponentSpec = "bend_nc",
     taper: ComponentSpec = "taper_nc",
 ) -> list[OpticalManhattanRoute]:
+    """Route bundle of optical paths."""
     return gf.routing.route_bundle(
         component=component,
         ports1=ports1,

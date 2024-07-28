@@ -22,7 +22,8 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    # TODO: how can we make this pass type checking?
+    """Layer map for Cornerstone technology."""
+
     WG: Layer = (3, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore
@@ -59,7 +60,6 @@ def get_layer_stack(
         zmin_metal: metal thickness in um.
         thickness_metal: metal2 thickness.
     """
-
     return LayerStack(
         layers=dict(
             core=LayerLevel(
@@ -103,6 +103,8 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
 class Tech:
+    """Technology parameters."""
+
     radius_sc = 5
     radius_so = 5
     radius_rc = 25
@@ -124,6 +126,7 @@ DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
 def xs_sc(width=Tech.width_sc, radius=Tech.radius_sc, **kwargs) -> gf.CrossSection:
+    """Returns strip Cband waveguide cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
@@ -133,6 +136,7 @@ def xs_sc(width=Tech.width_sc, radius=Tech.radius_sc, **kwargs) -> gf.CrossSecti
 
 
 def xs_so(width=Tech.width_so, radius=Tech.radius_so, **kwargs) -> gf.CrossSection:
+    """Returns strip Oband waveguide cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
@@ -142,6 +146,7 @@ def xs_so(width=Tech.width_so, radius=Tech.radius_so, **kwargs) -> gf.CrossSecti
 
 
 def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
+    """Returns rib Cband waveguide cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
@@ -153,6 +158,7 @@ def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSecti
 
 
 def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
+    """Returns rib Oband waveguide cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
@@ -164,6 +170,7 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
 
 
 def xs_sc_heater_metal(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
+    """Returns strip Cband waveguide cross-section with heater metal."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
     kwargs["layer_heater"] = kwargs.get("layer_heater", LAYER.HEATER)
@@ -179,6 +186,7 @@ def metal_routing(
     width=10.0,
     radius: float = 10,
 ) -> gf.CrossSection:
+    """Returns metal routing cross-section."""
     xs = gf.cross_section.metal1(width=width, radius=radius, layer=LAYER.PAD)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
@@ -189,13 +197,15 @@ def heater_metal(
     width=4.0,
     radius: float = 10,
 ) -> gf.CrossSection:
+    """Returns metal routing cross-section."""
     xs = gf.cross_section.metal1(width=width, radius=radius, layer=LAYER.HEATER)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
-def populate_default_cross_section_names():
+def populate_default_cross_section_names() -> None:
+    """Populates default cross-section names."""
     xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
     for k, xs in xss.items():
         xs._name = ""
@@ -228,6 +238,7 @@ def route_single(
     bend: ComponentSpec = "bend_sc",
     taper: ComponentSpec = "taper_sc",
 ) -> OpticalManhattanRoute:
+    """Route two ports with a single route."""
     return gf.routing.route_single(
         component=component,
         port1=port1,
@@ -267,6 +278,7 @@ def route_bundle(
     bend: ComponentSpec = "bend_sc",
     taper: ComponentSpec | None = "taper_sc",
 ) -> list[OpticalManhattanRoute]:
+    """Route two bundles of ports."""
     return gf.routing.route_bundle(
         component=component,
         ports1=ports1,

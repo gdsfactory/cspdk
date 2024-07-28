@@ -1,5 +1,5 @@
 instances:
-  bend_s_S20_1p282_CSxs_nc_10000_-1359:
+  bend_s_S20_1p282_CSxs_nc_10000_1359:
     component: bend_s
     info:
       end_angle: 0
@@ -17,7 +17,7 @@ instances:
       size:
       - 20
       - 1.282
-  bend_s_S20_1p282_CSxs_nc_10000_1359:
+  bend_s_S20_1p282_CSxs_nc_10000_m1359:
     component: bend_s
     info:
       end_angle: 0
@@ -38,18 +38,18 @@ instances:
 name: coupler_symmetric_G0p23_c93709df
 nets: []
 placements:
-  bend_s_S20_1p282_CSxs_nc_10000_-1359:
-    mirror: true
-    rotation: 0
-    x: 0
-    y: -0.718
   bend_s_S20_1p282_CSxs_nc_10000_1359:
     mirror: false
     rotation: 0
     x: 0
     y: 0.718
+  bend_s_S20_1p282_CSxs_nc_10000_m1359:
+    mirror: true
+    rotation: 0
+    x: 0
+    y: -0.718
 ports:
-  o1: bend_s_S20_1p282_CSxs_nc_10000_-1359,o1
+  o1: bend_s_S20_1p282_CSxs_nc_10000_m1359,o1
   o2: bend_s_S20_1p282_CSxs_nc_10000_1359,o1
   o3: bend_s_S20_1p282_CSxs_nc_10000_1359,o2
-  o4: bend_s_S20_1p282_CSxs_nc_10000_-1359,o2
+  o4: bend_s_S20_1p282_CSxs_nc_10000_m1359,o2

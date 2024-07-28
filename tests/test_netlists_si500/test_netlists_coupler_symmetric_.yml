@@ -1,5 +1,5 @@
 instances:
-  bend_s_S15_1p657_CSxs_rc_7500_-1172:
+  bend_s_S15_1p657_CSxs_rc_7500_1171:
     component: bend_s
     info:
       end_angle: 0
@@ -17,7 +17,7 @@ instances:
       size:
       - 15
       - 1.657
-  bend_s_S15_1p657_CSxs_rc_7500_1171:
+  bend_s_S15_1p657_CSxs_rc_7500_m1172:
     component: bend_s
     info:
       end_angle: 0
@@ -38,18 +38,18 @@ instances:
 name: coupler_symmetric_G0p23_aa53a358
 nets: []
 placements:
-  bend_s_S15_1p657_CSxs_rc_7500_-1172:
-    mirror: true
-    rotation: 0
-    x: 0
-    y: -0.343
   bend_s_S15_1p657_CSxs_rc_7500_1171:
     mirror: false
     rotation: 0
     x: 0
     y: 0.343
+  bend_s_S15_1p657_CSxs_rc_7500_m1172:
+    mirror: true
+    rotation: 0
+    x: 0
+    y: -0.343
 ports:
-  o1: bend_s_S15_1p657_CSxs_rc_7500_-1172,o1
+  o1: bend_s_S15_1p657_CSxs_rc_7500_m1172,o1
   o2: bend_s_S15_1p657_CSxs_rc_7500_1171,o1
   o3: bend_s_S15_1p657_CSxs_rc_7500_1171,o2
-  o4: bend_s_S15_1p657_CSxs_rc_7500_-1172,o2
+  o4: bend_s_S15_1p657_CSxs_rc_7500_m1172,o2

@@ -1,3 +1,5 @@
+"""Test the PDK components and settings."""
+
 import pathlib
 
 import gdsfactory as gf
@@ -10,6 +12,7 @@ from cspdk.si500 import PDK
 
 @pytest.fixture(autouse=True)
 def activate_pdk() -> None:
+    """Activate the PDK and clear the cache."""
     PDK.activate()
     gf.clear_cache()
 

@@ -1,3 +1,5 @@
+"""Si220 pdk."""
+
 from functools import lru_cache
 
 from gdsfactory.config import CONF
@@ -19,6 +21,7 @@ CONF.pdk = "cspdk.si220"
 
 @lru_cache
 def get_pdk() -> Pdk:
+    """Return Cornerstone PDK."""
     return Pdk(
         name="cornerstone_si220",
         cells=_cells,
@@ -31,7 +34,8 @@ def get_pdk() -> Pdk:
     )
 
 
-def activate_pdk():
+def activate_pdk() -> None:
+    """Activate Cornerstone Si220 PDK."""
     pdk = get_pdk()
     pdk.activate()
 
