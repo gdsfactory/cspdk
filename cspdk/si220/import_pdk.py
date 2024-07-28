@@ -1,4 +1,4 @@
-"""From a list of GDS files, generate a script to import the cells from a pdk"""
+"""From a list of GDS files, generate a script to import the cells from a pdk."""
 
 import gdsfactory as gf
 

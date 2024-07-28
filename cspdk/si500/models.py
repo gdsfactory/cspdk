@@ -1,3 +1,5 @@
+"""SAX models for Sparameter circuit simulations."""
+
 from __future__ import annotations
 
 import inspect
@@ -111,6 +113,7 @@ crossing_rc = csm.crossing_rc
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Return a dictionary of all models in this module."""
     models = {}
     for name, func in list(globals().items()):
         if not callable(func):

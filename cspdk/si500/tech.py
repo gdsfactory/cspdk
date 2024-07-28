@@ -23,7 +23,8 @@ nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    # TODO: how can we make this pass type checking?
+    """Layer mapping for Cornerstone technology."""
+
     WG: Layer = (3, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore
@@ -60,7 +61,6 @@ def get_layer_stack(
         zmin_metal: metal thickness in um.
         thickness_metal: metal2 thickness.
     """
-
     return LayerStack(
         layers=dict(
             core=LayerLevel(
@@ -104,6 +104,8 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
 class Tech:
+    """Technology parameters."""
+
     radius_rc = 25
     radius_ro = 25
     width_rc = 0.45
@@ -122,6 +124,7 @@ DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
 
 
 def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
+    """Returns a rib Cband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
@@ -137,6 +140,7 @@ def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSecti
 
 
 def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
+    """Returns a rib Cband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
@@ -152,6 +156,7 @@ def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossS
 
 
 def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
+    """Returns a rib Oband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
     kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
@@ -167,6 +172,7 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
 
 
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
+    """Returns a metal routing cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
     kwargs["port_names"] = kwargs.get(
         "port_names", gf.cross_section.port_names_electrical
@@ -183,6 +189,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
 
 
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+    """Returns a heater metal cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
@@ -190,7 +197,8 @@ def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
     return xs
 
 
-def populate_default_cross_section_names():
+def populate_default_cross_section_names() -> None:
+    """Populates the default cross-section names."""
     xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
     for k, xs in xss.items():
         xs._name = ""
@@ -223,6 +231,7 @@ def route_single(
     bend: ComponentSpec = "bend_rc",
     taper: ComponentSpec = "taper_rc",
 ) -> OpticalManhattanRoute:
+    """Route two ports with a single route."""
     return gf.routing.route_single(
         component=component,
         port1=port1,
@@ -262,6 +271,7 @@ def route_bundle(
     bend: ComponentSpec = "bend_rc",
     taper: ComponentSpec = "taper_rc",
 ) -> list[OpticalManhattanRoute]:
+    """Route two bundles of ports."""
     return gf.routing.route_bundle(
         component=component,
         ports1=ports1,

@@ -1,3 +1,5 @@
+"""SAX models for Sparameter circuit simulations."""
+
 from __future__ import annotations
 
 import inspect
@@ -44,6 +46,14 @@ def straight(
     loss: float = 0.0,
     cross_section: str = "xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a straight waveguide.
+
+    Args:
+        wl: Wavelength of the simulation.
+        length: Length of the waveguide.
+        loss: Loss of the waveguide.
+        cross_section: Cross section of the waveguide.
+    """
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_nc": straight_nc,
@@ -63,6 +73,7 @@ def straight(
 
 
 def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+    """Returns the S-matrix of a wire corner."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
     return {"e1": zero, "e2": zero}  # type: ignore
@@ -75,7 +86,17 @@ def bend_s(
     loss: float = 0.03,
     cross_section="xs_nc",
 ) -> sax.SDict:
-    # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
+    """Returns the S-matrix of a bend with a spline curve.
+
+    NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
+
+    Args:
+        wl: Wavelength of the simulation.
+        length: Length of the bend.
+        loss: Loss of the bend.
+        cross_section: Cross section of the bend.
+
+    """
     return straight(
         wl=wl,
         length=length,
@@ -91,7 +112,16 @@ def bend_euler(
     loss: float = 0.03,
     cross_section="xs_nc",
 ) -> sax.SDict:
-    # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
+    """Returns the S-matrix of a bend with an Euler curve.
+
+     NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
+
+    Args:
+        wl: Wavelength of the simulation.
+        length: Length of the bend.
+        loss: Loss of the bend.
+        cross_section: Cross section of the bend.
+    """
     return straight(
         wl=wl,
         length=length,
@@ -116,8 +146,17 @@ def taper(
     loss: float = 0.0,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a taper.
+
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
     # TODO: take width1 and width2 into account.
+
+    Args:
+        wl: Wavelength of the simulation.
+        length: Length of the taper.
+        loss: Loss of the taper.
+        cross_section: Cross section of the taper.
+    """
     return straight(
         wl=wl,
         length=length,
@@ -143,6 +182,13 @@ def mmi1x2(
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a 1x2 MMI.
+
+    Args:
+        wl: Wavelength of the simulation.
+        loss_dB: Loss of the MMI.
+        cross_section: Cross section of the MMI.
+    """
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_nc": mmi1x2_nc,
@@ -164,6 +210,13 @@ def mmi2x2(
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a 2x2 MMI.
+
+    Args:
+        wl: Wavelength of the simulation.
+        loss_dB: Loss of the MMI.
+        cross_section: Cross section of the MMI.
+    """
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_nc": mmi2x2_nc,
@@ -182,11 +235,13 @@ def mmi2x2(
 
 
 def coupler_straight() -> sax.SDict:
+    """Returns the S-matrix of a straight coupler."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_straight'")
 
 
 def coupler_symmetric() -> sax.SDict:
+    """Returns the S-matrix of a symmetric coupler."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_symmetric'")
 
@@ -200,7 +255,15 @@ def coupler(
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a coupler.
+
     # TODO: take more coupler arguments into account
+
+    Args:
+        wl: Wavelength of the simulation.
+        loss_dB: Loss of the coupler.
+        cross_section: Cross section of the coupler.
+    """
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_nc": coupler_nc,
@@ -230,6 +293,7 @@ def grating_coupler_rectangular(
     wl: Float = 1.55,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of a rectangular grating coupler."""
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -258,6 +322,7 @@ def grating_coupler_elliptical(
     bandwidth: float = 35e-3,
     cross_section="xs_nc",
 ) -> sax.SDict:
+    """Returns the S-matrix of an elliptical grating coupler."""
     # TODO: take more grating_coupler_elliptical arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -289,6 +354,7 @@ def grating_coupler_elliptical(
 
 
 def heater() -> sax.SDict:
+    """Returns the S-matrix of a heater."""
     raise NotImplementedError("No model for 'heater'")
 
 
@@ -301,6 +367,7 @@ crossing_no = sm.crossing
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Returns a dictionary of all models in this module."""
     models = {}
     for name, func in list(globals().items()):
         if not callable(func):

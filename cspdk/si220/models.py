@@ -1,3 +1,5 @@
+"""SAX models for Sparameter circuit simulations."""
+
 from __future__ import annotations
 
 import inspect
@@ -63,6 +65,7 @@ def straight(
     loss: float = 0.0,
     cross_section: str = "xs_sc",
 ) -> sax.SDict:
+    """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_sc": straight_sc,
@@ -84,6 +87,7 @@ def straight(
 
 
 def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+    """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
     return {"e1": zero, "e2": zero}  # type: ignore
@@ -96,6 +100,7 @@ def bend_s(
     loss: float = 0.03,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Bend S model."""
     # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
     return straight(
         wl=wl,
@@ -112,6 +117,7 @@ def bend_euler(
     loss: float = 0.03,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
     return straight(
         wl=wl,
@@ -139,6 +145,7 @@ def taper(
     loss: float = 0.0,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Taper model."""
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
     # TODO: take width1 and width2 into account.
     return straight(
@@ -162,6 +169,7 @@ def taper_strip_to_ridge(
     loss: float = 0.0,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Taper strip to ridge model."""
     # NOTE: it is assumed that `taper_strip_to_ridge` exposes it's length in its info dictionary!
     # TODO: take w_slab1 and w_slab2 into account.
     return straight(
@@ -191,6 +199,7 @@ def mmi1x2(
     loss_dB: Float = 0.3,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """MMI 1x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_sc": mmi1x2_sc,
@@ -216,6 +225,7 @@ def mmi2x2(
     loss_dB: Float = 0.3,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """MMI 2x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "xs_sc": mmi2x2_sc,
@@ -236,11 +246,13 @@ def mmi2x2(
 
 
 def coupler_straight() -> sax.SDict:
+    """Straight coupler model."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_straight'")
 
 
 def coupler_symmetric() -> sax.SDict:
+    """Symmetric coupler model."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_symmetric'")
 
@@ -256,6 +268,7 @@ def coupler(
     loss_dB: Float = 0.3,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Evanescent coupler model."""
     # TODO: take more coupler arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -290,6 +303,7 @@ def grating_coupler_rectangular(
     wl: Float = 1.55,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Grating coupler rectangular model."""
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -320,6 +334,7 @@ def grating_coupler_elliptical(
     bandwidth: float = 35e-3,
     cross_section="xs_sc",
 ) -> sax.SDict:
+    """Grating coupler elliptical model."""
     # TODO: take more grating_coupler_elliptical arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -351,6 +366,7 @@ def grating_coupler_elliptical(
 
 
 def heater() -> sax.SDict:
+    """Heater model."""
     raise NotImplementedError("No model for 'heater'")
 
 
@@ -365,6 +381,7 @@ crossing_sc = sm.crossing
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Return a dictionary of all models in this module."""
     models = {}
     for name, func in list(globals().items()):
         if not callable(func):
