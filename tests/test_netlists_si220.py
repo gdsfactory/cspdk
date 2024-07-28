@@ -5,7 +5,6 @@ from __future__ import annotations
 import gdsfactory as gf
 import jsondiff
 import pytest
-from omegaconf import OmegaConf
 from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si220 import PDK
@@ -40,13 +39,13 @@ def get_minimal_netlist(comp: gf.Component):
 
 def instances_without_info(net):
     """Get instances without info."""
-    ret = {}
-    for k, v in net.get("instances", {}).items():
-        ret[k] = {
+    return {
+        k: {
             "component": v.get("component", ""),
             "settings": v.get("settings", {}),
         }
-    return ret
+        for k, v in net.get("instances", {}).items()
+    }
 
 
 @pytest.mark.parametrize("name", cells)
@@ -83,13 +82,13 @@ def test_netlists(
         data_regression.check(n)
 
     n.pop("connections", None)
+    n.pop("warnings", None)
     c.delete()
-    yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
+    yaml_str = c.write_netlist(n)
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
     d = jsondiff.diff(n, n2)
     d.pop("warnings", None)
-    d.pop("connections", None)
     d.pop("ports", None)
     assert len(d) == 0, d
 

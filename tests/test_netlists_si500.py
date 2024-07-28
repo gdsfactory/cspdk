@@ -5,7 +5,6 @@ from __future__ import annotations
 import gdsfactory as gf
 import jsondiff
 import pytest
-from omegaconf import OmegaConf
 from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si500 import PDK
@@ -83,8 +82,9 @@ def test_netlists(
         data_regression.check(n)
 
     n.pop("connections", None)
+    n.pop("warnings", None)
     c.delete()
-    yaml_str = OmegaConf.to_yaml(n, sort_keys=True)
+    yaml_str = c.write_netlist(n)
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
 
