@@ -708,75 +708,27 @@ ring_single_so = partial(ring_single_sc, cross_section="xs_so")
 
 
 @gf.cell
-def straight_heater_metal_undercut_180_0(
-    length: float = 320.0,
-    length_undercut_spacing: float = 6.0,
-    length_undercut: float = 30.0,
-    length_straight: float = 0.1,
-    length_straight_input: float = 15.0,
-    cross_section: CrossSectionSpec = "strip",
-    cross_section_heater: CrossSectionSpec = "xs_heater",
-    cross_section_waveguide_heater: CrossSectionSpec = "xs_sc_heater",
-    cross_section_heater_undercut: CrossSectionSpec = "xs_sc_heater_undercut",
-    with_undercut: bool = True,
-    via_stack: ComponentSpec | None = "via_stack_heater_mtop",
-    port_orientation1: int | None = 180,
-    port_orientation2: int | None = 0,
-    heater_taper_length: float | None = 5.0,
-    ohms_per_square: float | None = None,
-) -> Component:
-    """Returns a thermal phase shifter.
-
-    dimensions from https://doi.org/10.1364/OE.27.010456
-
-    Args:
-        length: of the waveguide.
-        length_undercut_spacing: from undercut regions.
-        length_undercut: length of each undercut section.
-        length_straight: length of the straight waveguide.
-        length_straight_input: from input port to where trenches start.
-        cross_section: for waveguide ports.
-        cross_section_heater: for heated sections. heater metal only.
-        cross_section_waveguide_heater: for heated sections.
-        cross_section_heater_undercut: for heated sections with undercut.
-        with_undercut: isolation trenches for higher efficiency.
-        via_stack: via stack.
-        port_orientation1: left via stack port orientation.
-        port_orientation2: right via stack port orientation.
-        heater_taper_length: minimizes current concentrations from heater to via_stack.
-        ohms_per_square: to calculate resistance.
-    """
-    return gf.components.straight_heater_metal_undercut(
-        length,
-        length_undercut_spacing,
-        length_undercut,
-        length_straight,
-        length_straight_input,
-        cross_section,
-        cross_section_heater,
-        cross_section_waveguide_heater,
-        cross_section_heater_undercut,
-        with_undercut,
-        via_stack,
-        port_orientation1,
-        port_orientation2,
-        heater_taper_length,
-        ohms_per_square,
+def via_stack_heater_mtop(size=(10, 10)) -> Component:
+    """Returns a via stack for the heater."""
+    return gf.c.via_stack(
+        size=size,
+        layers=("HEATER", "PAD"),
+        vias=(None, None),
     )
 
 
 @gf.cell
-def straight_heater_metal_180_0(
+def straight_heater_metal(
     length: float = 320.0,
     length_undercut_spacing: float = 6.0,
     length_undercut: float = 30.0,
     length_straight: float = 0.1,
     length_straight_input: float = 15.0,
-    cross_section: CrossSectionSpec = "strip",
-    cross_section_heater: CrossSectionSpec = "xs_heater",
+    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section_heater: CrossSectionSpec = "heater_metal",
     cross_section_waveguide_heater: CrossSectionSpec = "xs_sc_heater",
-    cross_section_heater_undercut: CrossSectionSpec = "xs_sc_heater_undercut",
-    with_undercut: bool = False,
+    cross_section_heater_undercut: CrossSectionSpec = "xs_sc_heater",
+    with_undercut: bool = True,
     via_stack: ComponentSpec | None = "via_stack_heater_mtop",
     port_orientation1: int | None = 180,
     port_orientation2: int | None = 0,
@@ -1047,5 +999,5 @@ def array(
 
 
 if __name__ == "__main__":
-    c = ring_single_sc()
+    c = straight_heater_metal()
     c.show()

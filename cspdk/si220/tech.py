@@ -169,7 +169,7 @@ def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSecti
     return xs
 
 
-def xs_sc_heater_metal(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
+def xs_sc_heater(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
     """Returns strip Cband waveguide cross-section with heater metal."""
     kwargs["layer"] = kwargs.get("layer", LAYER.WG)
     kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
