@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 
+import gdsfactory as gf
 from gdsfactory.config import CONF
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.get_factories import get_cells
@@ -13,7 +14,7 @@ from cspdk.si220.models import get_models
 from cspdk.si220.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
 _models = get_models()
-_cells = get_cells(cells)
+_cells = get_cells([cells, gf.containers])
 _cross_sections = get_cross_sections(tech)
 
 CONF.pdk = "cspdk.si220"
