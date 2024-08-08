@@ -998,6 +998,10 @@ def array(
     )
 
 
+pack_doe = gf.c.pack_doe
+pack_doe_grid = gf.c.pack_doe_grid
+
+
 if __name__ == "__main__":
-    c = straight_heater_metal()
+    c = mzi_sc()
     c.show()
