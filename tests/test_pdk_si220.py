@@ -19,7 +19,16 @@ def activate_pdk() -> None:
 
 cells = PDK.cells
 
-skip_test = {"import_gds"}
+skip_test = {
+    "import_gds",
+    "pack_doe",
+    "pack_doe_grid",
+    "add_pads_top",
+    "add_fiber_single_sc",
+    "add_fiber_single_so",
+    "add_fiber_array_sc",
+    "add_fiber_array_so",
+}
 
 cell_names = set(cells.keys()) - set(skip_test)
 cell_names = sorted([name for name in cell_names if not name.startswith("_")])

@@ -3,7 +3,7 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, CrossSection, CrossSectionSpec
+from gdsfactory.typings import Component, ComponentSpec, CrossSection, CrossSectionSpec
 
 from cspdk.si220.config import PATH
 from cspdk.si220.tech import LAYER, Tech
@@ -69,7 +69,7 @@ def bend_s(
 
 
 @gf.cell
-def bend_euler(
+def bend_euler_sc(
     radius: float | None = None,
     angle: float = 90.0,
     p: float = 0.5,
@@ -98,11 +98,10 @@ def bend_euler(
     )
 
 
-bend_sc = partial(bend_euler, cross_section="xs_sc")
-bend_so = partial(bend_euler, cross_section="xs_so")
-bend_rc = partial(bend_euler, cross_section="xs_rc")
-bend_ro = partial(bend_euler, cross_section="xs_ro")
-bend_metal = partial(bend_euler, cross_section="metal_routing")
+bend_euler_so = partial(bend_euler_sc, cross_section="xs_so")
+bend_euler_rc = partial(bend_euler_sc, cross_section="xs_rc")
+bend_euler_ro = partial(bend_euler_sc, cross_section="xs_ro")
+bend_metal = partial(bend_euler_sc, cross_section="metal_routing")
 
 ################
 # Transitions
@@ -116,6 +115,7 @@ def taper(
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
+    **kwargs,
 ) -> Component:
     """A taper.
 
@@ -127,6 +127,7 @@ def taper(
         width2: the output width of the taper (if not given, use port).
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
+        kwargs: additional arguments to pass to the taper function.
     """
     c = gf.c.taper(
         length=length,
@@ -134,6 +135,7 @@ def taper(
         width2=width2,
         port=port,
         cross_section=cross_section,
+        **kwargs,
     )
     return c
 
@@ -527,7 +529,7 @@ grating_coupler_elliptical_so = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
-    bend="bend_sc",
+    bend="bend_euler_sc",
     straight="straight_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
@@ -573,7 +575,7 @@ def mzi(
 mzi_sc = partial(
     mzi,
     straight="straight_sc",
-    bend="bend_sc",
+    bend="bend_euler_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
     cross_section="xs_sc",
@@ -582,7 +584,7 @@ mzi_sc = partial(
 mzi_so = partial(
     mzi,
     straight="straight_so",
-    bend="bend_so",
+    bend="bend_euler_so",
     splitter="mmi1x2_so",
     combiner="mmi2x2_so",
     cross_section="xs_so",
@@ -591,7 +593,7 @@ mzi_so = partial(
 mzi_rc = partial(
     mzi,
     straight="straight_rc",
-    bend="bend_rc",
+    bend="bend_euler_rc",
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
     cross_section="xs_rc",
@@ -600,10 +602,200 @@ mzi_rc = partial(
 mzi_ro = partial(
     mzi,
     straight="straight_ro",
-    bend="bend_ro",
+    bend="bend_euler_ro",
     splitter="mmi1x2_ro",
     combiner="mmi2x2_ro",
     cross_section="xs_ro",
+)
+
+
+@gf.cell
+def coupler_ring_sc(
+    gap: float = 0.2,
+    radius: float = 5.0,
+    length_x: float = 4.0,
+    bend: ComponentSpec = "bend_euler_sc",
+    straight: ComponentSpec = "straight_sc",
+    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section_bend: CrossSectionSpec | None = None,
+    length_extension: float = 3,
+) -> Component:
+    r"""Coupler for ring.
+
+    Args:
+        gap: spacing between parallel coupled straight waveguides.
+        radius: of the bends.
+        length_x: length of the parallel coupled straight waveguides.
+        bend: 90 degrees bend spec.
+        straight: straight spec.
+        cross_section: cross_section spec.
+        cross_section_bend: optional bend cross_section spec.
+        length_extension: for the ports.
+
+    .. code::
+
+          o2            o3
+           |             |
+            \           /
+             \         /
+           ---=========---
+        o1    length_x   o4
+
+    """
+    return gf.components.coupler_ring(
+        gap,
+        radius,
+        length_x,
+        bend,
+        straight,
+        cross_section,
+        cross_section_bend,
+        length_extension,
+    )
+
+
+coupler_ring_so = partial(
+    coupler_ring_sc,
+    cross_section="xs_so",
+    bend="bend_euler_so",
+    straight="straight_so",
+)
+
+
+@gf.cell
+def ring_single_sc(
+    gap: float = 0.2,
+    radius: float = 10.0,
+    length_x: float = 4.0,
+    length_y: float = 0.6,
+    bend: ComponentSpec = "bend_euler_sc",
+    straight: ComponentSpec = "straight_sc",
+    coupler_ring: ComponentSpec = "coupler_ring_sc",
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
+    """Returns a single ring.
+
+    ring coupler (cb: bottom) connects to two vertical straights (sl: left, sr: right),
+    two bends (bl, br) and horizontal straight (wg: top)
+
+    Args:
+        gap: gap between for coupler.
+        radius: for the bend and coupler.
+        length_x: ring coupler length.
+        length_y: vertical straight length.
+        coupler_ring: ring coupler spec.
+        bend: 90 degrees bend spec.
+        straight: straight spec.
+        coupler_ring: ring coupler spec.
+        cross_section: cross_section spec.
+
+    .. code::
+
+                    xxxxxxxxxxxxx
+                xxxxx           xxxx
+              xxx                   xxx
+            xxx                       xxx
+           xx                           xxx
+           x                             xxx
+          xx                              xx▲
+          xx                              xx│length_y
+          xx                              xx▼
+          xx                             xx
+           xx          length_x          x
+            xx     ◄───────────────►    x
+             xx                       xxx
+               xx                   xxx
+                xxx──────▲─────────xxx
+                         │gap
+                 o1──────▼─────────o2
+    """
+    return gf.components.ring_single(
+        gap, radius, length_x, length_y, bend, straight, coupler_ring, cross_section
+    )
+
+
+ring_single_so = partial(
+    ring_single_sc,
+    cross_section="xs_so",
+    bend="bend_euler_so",
+    straight="straight_so",
+    coupler_ring="coupler_ring_so",
+)
+
+
+@gf.cell
+def via_stack_heater_mtop(size=(10, 10)) -> Component:
+    """Returns a via stack for the heater."""
+    return gf.c.via_stack(
+        size=size,
+        layers=("HEATER", "PAD"),
+        vias=(None, None),
+    )
+
+
+@gf.cell
+def straight_heater_metal_sc(
+    length: float = 320.0,
+    length_undercut_spacing: float = 6.0,
+    length_undercut: float = 30.0,
+    length_straight: float = 0.1,
+    length_straight_input: float = 15.0,
+    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section_heater: CrossSectionSpec = "heater_metal",
+    cross_section_waveguide_heater: CrossSectionSpec = "xs_sc_heater",
+    cross_section_heater_undercut: CrossSectionSpec = "xs_sc_heater",
+    with_undercut: bool = True,
+    via_stack: ComponentSpec | None = "via_stack_heater_mtop",
+    port_orientation1: int | None = 180,
+    port_orientation2: int | None = 0,
+    heater_taper_length: float | None = 5.0,
+    ohms_per_square: float | None = None,
+) -> Component:
+    """Returns a thermal phase shifter.
+
+    dimensions from https://doi.org/10.1364/OE.27.010456
+
+    Args:
+        length: of the waveguide.
+        length_undercut_spacing: from undercut regions.
+        length_undercut: length of each undercut section.
+        length_straight: length of the straight waveguide.
+        length_straight_input: from input port to where trenches start.
+        cross_section: for waveguide ports.
+        cross_section_heater: for heated sections. heater metal only.
+        cross_section_waveguide_heater: for heated sections.
+        cross_section_heater_undercut: for heated sections with undercut.
+        with_undercut: isolation trenches for higher efficiency.
+        via_stack: via stack.
+        port_orientation1: left via stack port orientation.
+        port_orientation2: right via stack port orientation.
+        heater_taper_length: minimizes current concentrations from heater to via_stack.
+        ohms_per_square: to calculate resistance.
+    """
+    return gf.components.straight_heater_metal_undercut(
+        length,
+        length_undercut_spacing,
+        length_undercut,
+        length_straight,
+        length_straight_input,
+        cross_section,
+        cross_section_heater,
+        cross_section_waveguide_heater,
+        cross_section_heater_undercut,
+        with_undercut,
+        via_stack,
+        port_orientation1,
+        port_orientation2,
+        heater_taper_length,
+        ohms_per_square,
+    )
+
+
+straight_heater_metal_so = partial(
+    straight_heater_metal_sc,
+    cross_section="xs_so",
+    cross_section_waveguide_heater="xs_so_heater",
+    cross_section_heater_undercut="xs_so_heater",
 )
 
 
@@ -830,6 +1022,10 @@ def array(
     )
 
 
+pack_doe = gf.c.pack_doe
+pack_doe_grid = gf.c.pack_doe_grid
+
+
 if __name__ == "__main__":
-    t = crossing_sc()
-    t.show()
+    c = straight_heater_metal_so()
+    c.show()
