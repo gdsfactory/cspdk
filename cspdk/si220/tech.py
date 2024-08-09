@@ -182,6 +182,19 @@ def xs_sc_heater(width=Tech.width_sc, **kwargs) -> gf.CrossSection:
     return xs
 
 
+def xs_so_heater(width=Tech.width_so, **kwargs) -> gf.CrossSection:
+    """Returns strip Oband waveguide cross-section with heater metal."""
+    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
+    kwargs["heater_width"] = kwargs.get("heater_width", 2.5)
+    kwargs["layer_heater"] = kwargs.get("layer_heater", LAYER.HEATER)
+    kwargs["radius"] = kwargs.get("radius", 0)
+    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
+    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
+        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    return xs
+
+
 def metal_routing(
     width=10.0,
     radius: float = 10,
@@ -235,7 +248,7 @@ def route_single(
     route_width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_sc",
+    bend: ComponentSpec = "bend_euler_sc",
     taper: ComponentSpec = "taper_sc",
 ) -> OpticalManhattanRoute:
     """Route two ports with a single route."""
@@ -275,7 +288,7 @@ def route_bundle(
     route_width: float | list[float] | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_sc",
+    bend: ComponentSpec = "bend_euler_sc",
     taper: ComponentSpec | None = "taper_sc",
 ) -> list[OpticalManhattanRoute]:
     """Route two bundles of ports."""
@@ -307,28 +320,28 @@ routing_strategies = dict(
     route_single_sc=partial(
         route_single,
         straight="straight_sc",
-        bend="bend_sc",
+        bend="bend_euler_sc",
         taper="taper_sc",
         cross_section="xs_sc",
     ),
     route_single_so=partial(
         route_single,
         straight="straight_so",
-        bend="bend_so",
+        bend="bend_euler_so",
         taper="taper_so",
         cross_section="xs_so",
     ),
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
-        bend="bend_rc",
+        bend="bend_euler_rc",
         taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
-        bend="bend_ro",
+        bend="bend_euler_ro",
         taper="taper_ro",
         cross_section="xs_ro",
     ),
@@ -336,28 +349,28 @@ routing_strategies = dict(
     route_bundle_sc=partial(
         route_bundle,
         straight="straight_sc",
-        bend="bend_sc",
+        bend="bend_euler_sc",
         taper="taper_sc",
         cross_section="xs_sc",
     ),
     route_bundle_so=partial(
         route_bundle,
         straight="straight_so",
-        bend="bend_so",
+        bend="bend_euler_so",
         taper="taper_so",
         cross_section="xs_so",
     ),
     route_bundle_rc=partial(
         route_bundle,
         straight="straight_rc",
-        bend="bend_rc",
+        bend="bend_euler_rc",
         taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_bundle_ro=partial(
         route_bundle,
         straight="straight_ro",
-        bend="bend_ro",
+        bend="bend_euler_ro",
         taper="taper_ro",
         cross_section="xs_ro",
     ),

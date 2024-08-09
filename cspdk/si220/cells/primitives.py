@@ -69,7 +69,7 @@ def bend_s(
 
 
 @gf.cell
-def bend_euler(
+def bend_euler_sc(
     radius: float | None = None,
     angle: float = 90.0,
     p: float = 0.5,
@@ -98,11 +98,10 @@ def bend_euler(
     )
 
 
-bend_sc = partial(bend_euler, cross_section="xs_sc")
-bend_so = partial(bend_euler, cross_section="xs_so")
-bend_rc = partial(bend_euler, cross_section="xs_rc")
-bend_ro = partial(bend_euler, cross_section="xs_ro")
-bend_metal = partial(bend_euler, cross_section="metal_routing")
+bend_euler_so = partial(bend_euler_sc, cross_section="xs_so")
+bend_euler_rc = partial(bend_euler_sc, cross_section="xs_rc")
+bend_euler_ro = partial(bend_euler_sc, cross_section="xs_ro")
+bend_metal = partial(bend_euler_sc, cross_section="metal_routing")
 
 ################
 # Transitions
@@ -116,6 +115,7 @@ def taper(
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
+    **kwargs,
 ) -> Component:
     """A taper.
 
@@ -127,6 +127,7 @@ def taper(
         width2: the output width of the taper (if not given, use port).
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
+        kwargs: additional arguments to pass to the taper function.
     """
     c = gf.c.taper(
         length=length,
@@ -134,6 +135,7 @@ def taper(
         width2=width2,
         port=port,
         cross_section=cross_section,
+        **kwargs,
     )
     return c
 
@@ -527,7 +529,7 @@ grating_coupler_elliptical_so = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
-    bend="bend_sc",
+    bend="bend_euler_sc",
     straight="straight_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
@@ -573,7 +575,7 @@ def mzi(
 mzi_sc = partial(
     mzi,
     straight="straight_sc",
-    bend="bend_sc",
+    bend="bend_euler_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
     cross_section="xs_sc",
@@ -582,7 +584,7 @@ mzi_sc = partial(
 mzi_so = partial(
     mzi,
     straight="straight_so",
-    bend="bend_so",
+    bend="bend_euler_so",
     splitter="mmi1x2_so",
     combiner="mmi2x2_so",
     cross_section="xs_so",
@@ -591,7 +593,7 @@ mzi_so = partial(
 mzi_rc = partial(
     mzi,
     straight="straight_rc",
-    bend="bend_rc",
+    bend="bend_euler_rc",
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
     cross_section="xs_rc",
@@ -600,7 +602,7 @@ mzi_rc = partial(
 mzi_ro = partial(
     mzi,
     straight="straight_ro",
-    bend="bend_ro",
+    bend="bend_euler_ro",
     splitter="mmi1x2_ro",
     combiner="mmi2x2_ro",
     cross_section="xs_ro",
@@ -608,12 +610,12 @@ mzi_ro = partial(
 
 
 @gf.cell
-def coupler_ring(
+def coupler_ring_sc(
     gap: float = 0.2,
     radius: float = 5.0,
     length_x: float = 4.0,
-    bend: ComponentSpec = "bend_euler",
-    straight: ComponentSpec = "straight",
+    bend: ComponentSpec = "bend_euler_sc",
+    straight: ComponentSpec = "straight_sc",
     cross_section: CrossSectionSpec = "xs_sc",
     cross_section_bend: CrossSectionSpec | None = None,
     length_extension: float = 3,
@@ -652,15 +654,23 @@ def coupler_ring(
     )
 
 
+coupler_ring_so = partial(
+    coupler_ring_sc,
+    cross_section="xs_so",
+    bend="bend_euler_so",
+    straight="straight_so",
+)
+
+
 @gf.cell
 def ring_single_sc(
     gap: float = 0.2,
     radius: float = 10.0,
     length_x: float = 4.0,
     length_y: float = 0.6,
-    bend: ComponentSpec = "bend_euler",
-    straight: ComponentSpec = "straight",
-    coupler_ring: ComponentSpec = "coupler_ring",
+    bend: ComponentSpec = "bend_euler_sc",
+    straight: ComponentSpec = "straight_sc",
+    coupler_ring: ComponentSpec = "coupler_ring_sc",
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     """Returns a single ring.
@@ -704,7 +714,13 @@ def ring_single_sc(
     )
 
 
-ring_single_so = partial(ring_single_sc, cross_section="xs_so")
+ring_single_so = partial(
+    ring_single_sc,
+    cross_section="xs_so",
+    bend="bend_euler_so",
+    straight="straight_so",
+    coupler_ring="coupler_ring_so",
+)
 
 
 @gf.cell
@@ -718,7 +734,7 @@ def via_stack_heater_mtop(size=(10, 10)) -> Component:
 
 
 @gf.cell
-def straight_heater_metal(
+def straight_heater_metal_sc(
     length: float = 320.0,
     length_undercut_spacing: float = 6.0,
     length_undercut: float = 30.0,
@@ -773,6 +789,14 @@ def straight_heater_metal(
         heater_taper_length,
         ohms_per_square,
     )
+
+
+straight_heater_metal_so = partial(
+    straight_heater_metal_sc,
+    cross_section="xs_so",
+    cross_section_waveguide_heater="xs_so_heater",
+    cross_section_heater_undercut="xs_so_heater",
+)
 
 
 ################
@@ -1003,5 +1027,5 @@ pack_doe_grid = gf.c.pack_doe_grid
 
 
 if __name__ == "__main__":
-    c = mzi_sc()
+    c = straight_heater_metal_so()
     c.show()

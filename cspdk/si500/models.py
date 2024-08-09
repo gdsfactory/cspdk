@@ -33,7 +33,7 @@ straight_rc = csm.straight_rc
 wire_corner = csm.wire_corner
 bend_s = partial(csm.bend_s, cross_section="xs_rc")
 bend_euler = partial(csm.bend_euler, cross_section="xs_rc")
-bend_rc = csm.bend_rc
+bend_euler_rc = csm.bend_euler_rc
 
 
 ################

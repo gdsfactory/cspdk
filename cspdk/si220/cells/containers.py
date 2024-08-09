@@ -183,7 +183,7 @@ add_fiber_single_so = partial(
 
 
 def add_pads_top(
-    component: ComponentSpec = "straight_heater_metal",
+    component: ComponentSpec = "straight_heater_metal_sc",
     port_names: Strs | None = None,
     component_name: str | None = None,
     cross_section: CrossSectionSpec = "metal_routing",
