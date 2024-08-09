@@ -1,0 +1,127 @@
+instances:
+  grating_coupler_ellipti_387acb4a_0_m49485:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.579
+      polarization: te
+      wavelength: 1.31
+    settings:
+      cross_section: xs_so
+      grating_line_width: 0.25
+      wavelength: 1.31
+  grating_coupler_ellipti_387acb4a_135370_39485:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.579
+      polarization: te
+      wavelength: 1.31
+    settings:
+      cross_section: xs_so
+      grating_line_width: 0.25
+      wavelength: 1.31
+  grating_coupler_ellipti_387acb4a_135370_m49485:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.579
+      polarization: te
+      wavelength: 1.31
+    settings:
+      cross_section: xs_so
+      grating_line_width: 0.25
+      wavelength: 1.31
+  straight_L10_WNone_CSxs_so_fiber_single_0_23885:
+    component: null
+    info: {}
+    settings: {}
+  straight_L21p2_N2_CSxs_so_W0p4_0_m20600:
+    component: straight
+    info:
+      length: 21.2
+      route_info_length: 21.2
+      route_info_type: xs_so
+      route_info_weight: 21.2
+      route_info_xs_so_length: 21.2
+      width: 0.4
+    settings:
+      cross_section: xs_so
+      length: 21.2
+      npoints: 2
+      width: 0.4
+  straight_L52p3999999999_9f7e528a_135370_m5000:
+    component: straight
+    info:
+      length: 52.4
+      route_info_length: 52.4
+      route_info_type: xs_so
+      route_info_weight: 52.4
+      route_info_xs_so_length: 52.4
+      width: 0.4
+    settings:
+      cross_section: xs_so
+      length: 52.4
+      npoints: 2
+name: Unnamed_119
+nets:
+- p1: grating_coupler_ellipti_387acb4a_0_m49485,o1
+  p2: straight_L21p2_N2_CSxs_so_W0p4_0_m20600,o1
+- p1: straight_L10_WNone_CSxs_so_fiber_single_0_23885,o2
+  p2: straight_L21p2_N2_CSxs_so_W0p4_0_m20600,o2
+placements:
+  grating_coupler_ellipti_387acb4a_0_m49485:
+    mirror: false
+    rotation: 270
+    x: 0
+    y: -32.6
+  grating_coupler_ellipti_387acb4a_135370_39485:
+    mirror: false
+    rotation: 90
+    x: 135.37
+    y: 22.6
+  grating_coupler_ellipti_387acb4a_135370_m49485:
+    mirror: false
+    rotation: 270
+    x: 135.37
+    y: -32.6
+  straight_L10_WNone_CSxs_so_fiber_single_0_23885:
+    mirror: false
+    rotation: 180
+    x: 0
+    y: 0
+  straight_L21p2_N2_CSxs_so_W0p4_0_m20600:
+    mirror: false
+    rotation: 90
+    x: 0
+    y: -31.2
+  straight_L52p3999999999_9f7e528a_135370_m5000:
+    mirror: false
+    rotation: 90
+    x: 135.37
+    y: -31.2
+ports: {}
+warnings:
+  optical:
+    multiple_connections:
+    - - straight_L52p3999999999_9f7e528a_135370_m5000,o1
+      - grating_coupler_ellipti_387acb4a_135370_m49485,o1
+      - vl1
+    - - straight_L52p3999999999_9f7e528a_135370_m5000,o2
+      - grating_coupler_ellipti_387acb4a_135370_39485,o1
+      - vl2
+  vertical_te:
+    multiple_connections:
+    - - straight_L10_WNone_CSxs_so_fiber_single_0_23885,v1
+      - v1
+      - v1
+    unconnected_ports:
+    - message: 3 unconnected vertical_te ports!
+      ports:
+      - grating_coupler_ellipti_387acb4a_0_m49485,o2
+      - grating_coupler_ellipti_387acb4a_135370_m49485,o2
+      - grating_coupler_ellipti_387acb4a_135370_39485,o2
+      values:
+      - - 0
+        - -57285
+      - - 135370
+        - -57285
+      - - 135370
+        - 47285

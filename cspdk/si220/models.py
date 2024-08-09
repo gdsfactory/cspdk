@@ -127,10 +127,10 @@ def bend_euler(
     )
 
 
-bend_sc = partial(bend_euler, cross_section="xs_sc")
-bend_so = partial(bend_euler, cross_section="xs_so")
-bend_rc = partial(bend_euler, cross_section="xs_rc")
-bend_ro = partial(bend_euler, cross_section="xs_ro")
+bend_euler_sc = partial(bend_euler, cross_section="xs_sc")
+bend_euler_so = partial(bend_euler, cross_section="xs_so")
+bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
+bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 
 
 ################
@@ -261,6 +261,9 @@ coupler_sc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
 coupler_rc = coupler_sc
 coupler_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 coupler_ro = coupler_so
+
+coupler_ring_sc = partial(sm.coupler, wl0=1.55)
+coupler_ring_so = partial(sm.coupler, wl0=1.31)
 
 
 def coupler(

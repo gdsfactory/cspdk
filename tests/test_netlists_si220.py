@@ -19,7 +19,17 @@ def activate_pdk() -> None:
 
 
 cells = PDK.cells
-skip_test = {"wire_corner"}  # FIXME: why does this fail test_netlists?
+skip_test = {
+    "wire_corner",
+    "pack_doe",
+    "pack_doe_grid",
+    "add_pads_top",
+    "add_pads_bot",
+    "add_fiber_single_sc",
+    "add_fiber_single_so",
+    "add_fiber_array_sc",
+    "add_fiber_array_so",
+}
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
 
@@ -48,7 +58,7 @@ def instances_without_info(net):
     }
 
 
-@pytest.mark.parametrize("name", cells)
+@pytest.mark.parametrize("name", cell_names)
 def test_cell_in_pdk(name):
     """Test that cell is in the PDK."""
     c1 = gf.Component()

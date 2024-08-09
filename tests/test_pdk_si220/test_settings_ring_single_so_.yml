@@ -1,0 +1,11 @@
+info: {}
+name: ring_single_sc_G0p2_R10_7d576c4a
+settings:
+  bend: bend_euler_so
+  coupler_ring: coupler_ring_so
+  cross_section: xs_so
+  gap: 0.2
+  length_x: 4
+  length_y: 0.6
+  radius: 10
+  straight: straight_so

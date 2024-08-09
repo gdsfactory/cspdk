@@ -1,7 +1,7 @@
 info: {}
-name: mzi_DL10_Bbend_rc_Sstra_02ff743c
+name: mzi_DL10_Bbend_euler_rc_de758620
 settings:
-  bend: bend_rc
+  bend: bend_euler_rc
   combiner: mmi2x2_rc
   cross_section: xs_rc
   delta_length: 10

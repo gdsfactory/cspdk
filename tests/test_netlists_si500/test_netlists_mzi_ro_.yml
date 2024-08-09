@@ -227,7 +227,7 @@ instances:
     settings:
       cross_section: xs_ro
       length: 1
-name: mzi_DL10_Bbend_ro_Sstra_bf2966fd
+name: mzi_DL10_Bbend_euler_ro_29a93d64
 nets:
 - p1: bend_euler_RNone_A90_P0_3e63eab5_122712_m50098,o1
   p2: sxb,o2

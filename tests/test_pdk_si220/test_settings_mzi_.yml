@@ -1,7 +1,7 @@
 info: {}
-name: mzi_DL10_Bbend_sc_Sstra_2b181802
+name: mzi_DL10_Bbend_euler_sc_1d19725f
 settings:
-  bend: bend_sc
+  bend: bend_euler_sc
   combiner: mmi2x2_sc
   cross_section: xs_sc
   delta_length: 10

@@ -228,7 +228,7 @@ def route_single(
     route_width: float | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
     straight: ComponentSpec = "straight_rc",
-    bend: ComponentSpec = "bend_rc",
+    bend: ComponentSpec = "bend_euler_rc",
     taper: ComponentSpec = "taper_rc",
 ) -> OpticalManhattanRoute:
     """Route two ports with a single route."""
@@ -268,7 +268,7 @@ def route_bundle(
     route_width: float | list[float] | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
     straight: ComponentSpec = "straight_rc",
-    bend: ComponentSpec = "bend_rc",
+    bend: ComponentSpec = "bend_euler_rc",
     taper: ComponentSpec = "taper_rc",
 ) -> list[OpticalManhattanRoute]:
     """Route two bundles of ports."""
@@ -300,14 +300,14 @@ routing_strategies = dict(
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
-        bend="bend_rc",
+        bend="bend_euler_rc",
         taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
-        bend="bend_ro",
+        bend="bend_euler_ro",
         taper="taper_ro",
         cross_section="xs_ro",
     ),
@@ -315,14 +315,14 @@ routing_strategies = dict(
     route_bundle_rc=partial(
         route_bundle,
         straight="straight_rc",
-        bend="bend_rc",
+        bend="bend_euler_rc",
         taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_bundle_ro=partial(
         route_bundle,
         straight="straight_ro",
-        bend="bend_ro",
+        bend="bend_euler_ro",
         taper="taper_ro",
         cross_section="xs_ro",
     ),

@@ -1,0 +1,10 @@
+info: {}
+name: coupler_ring_sc_G0p2_R5_a0a9c63e
+settings:
+  bend: bend_euler_so
+  cross_section: xs_so
+  gap: 0.2
+  length_extension: 3
+  length_x: 4
+  radius: 5
+  straight: straight_so
