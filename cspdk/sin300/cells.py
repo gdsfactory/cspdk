@@ -98,8 +98,8 @@ def bend_euler(
     )
 
 
-bend_nc = partial(bend_euler, cross_section="xs_nc")
-bend_no = partial(bend_euler, cross_section="xs_no")
+bend_euler_nc = partial(bend_euler, cross_section="xs_nc")
+bend_euler_no = partial(bend_euler, cross_section="xs_no")
 
 ################
 # Transitions
@@ -434,7 +434,7 @@ grating_coupler_elliptical_no = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
-    bend="bend_nc",
+    bend="bend_euler_nc",
     straight="straight_nc",
     splitter="mmi1x2_nc",
     combiner="mmi2x2_nc",
@@ -480,7 +480,7 @@ def mzi(
 mzi_nc = partial(
     mzi,
     straight="straight_nc",
-    bend="bend_nc",
+    bend="bend_euler_nc",
     splitter="mmi1x2_nc",
     combiner="mmi2x2_nc",
     cross_section="xs_nc",
@@ -489,7 +489,7 @@ mzi_nc = partial(
 mzi_no = partial(
     mzi,
     straight="straight_no",
-    bend="bend_no",
+    bend="bend_euler_no",
     splitter="mmi1x2_no",
     combiner="mmi2x2_no",
     cross_section="xs_no",

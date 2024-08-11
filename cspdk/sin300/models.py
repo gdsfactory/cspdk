@@ -130,8 +130,8 @@ def bend_euler(
     )
 
 
-bend_nc = partial(bend_euler, cross_section="xs_nc")
-bend_no = partial(bend_euler, cross_section="xs_no")
+bend_euler_nc = partial(bend_euler, cross_section="xs_nc")
+bend_euler_no = partial(bend_euler, cross_section="xs_no")
 
 
 ################

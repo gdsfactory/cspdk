@@ -51,3 +51,8 @@ __all__ = [
     "config",
     "tech",
 ]
+
+if __name__ == "__main__":
+    cells = sorted(PDK.cells)
+    for cell in cells:
+        print(cell)
