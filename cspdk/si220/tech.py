@@ -142,13 +142,14 @@ xsection = gf.xsection
 @xsection
 def xs_sc(
     width: float = TECH.width_sc,
+    layer: LayerSpec = "WG",
     radius: float = TECH.radius_sc,
     radius_min: float = TECH.radius_sc,
 ) -> CrossSection:
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(
         width=width,
-        layer="WG",
+        layer=layer,
         radius=radius,
         radius_min=radius_min,
     )
@@ -157,13 +158,14 @@ def xs_sc(
 @xsection
 def xs_so(
     width: float = TECH.width_so,
+    layer: LayerSpec = "WG",
     radius: float = TECH.radius_so,
     radius_min: float = TECH.radius_so,
 ) -> CrossSection:
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(
         width=width,
-        layer="WG",
+        layer=layer,
         radius=radius,
         radius_min=radius_min,
     )
