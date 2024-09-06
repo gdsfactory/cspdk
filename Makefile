@@ -4,17 +4,17 @@ install:
 test:
 	pytest -s tests/test_si220.py
 	pytest -s tests/test_si500.py
-	pytest -s tests/test_si300.py
+	pytest -s tests/test_sin300.py
 
 test-force-regen:
 	pytest -s tests/test_si220.py --force-regen
 	pytest -s tests/test_si500.py --force-regen
-	pytest -s tests/test_si300.py --force-regen
+	pytest -s tests/test_sin300.py --force-regen
 
 test-fail-fast:
 	pytest -s tests/test_si220.py -x
 	pytest -s tests/test_si500.py -x
-	pytest -s tests/test_si300.py -x
+	pytest -s tests/test_sin300.py -x
 
 update-pre:
 	pre-commit autoupdate --bleeding-edge
