@@ -1,0 +1,55 @@
+instances:
+  bend_s_S20_1p282_CSxs_nc_0_718:
+    component: bend_s
+    info:
+      end_angle: 0
+      length: 20.058
+      min_bend_radius: 57.149
+      route_info_length: 20.058
+      route_info_min_bend_radius: 57.149
+      route_info_n_bend_s: 1
+      route_info_type: xs_nc
+      route_info_weight: 20.058
+      route_info_xs_nc_length: 20.058
+      start_angle: 0
+    settings:
+      cross_section: xs_nc
+      size:
+      - 20
+      - 1.282
+  bend_s_S20_1p282_CSxs_nc_0_m718:
+    component: bend_s
+    info:
+      end_angle: 0
+      length: 20.058
+      min_bend_radius: 57.149
+      route_info_length: 20.058
+      route_info_min_bend_radius: 57.149
+      route_info_n_bend_s: 1
+      route_info_type: xs_nc
+      route_info_weight: 20.058
+      route_info_xs_nc_length: 20.058
+      start_angle: 0
+    settings:
+      cross_section: xs_nc
+      size:
+      - 20
+      - 1.282
+name: coupler_symmetric_G0p23_c93709df
+nets: []
+placements:
+  bend_s_S20_1p282_CSxs_nc_0_718:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0.718
+  bend_s_S20_1p282_CSxs_nc_0_m718:
+    mirror: true
+    rotation: 0
+    x: 0
+    y: -0.718
+ports:
+  o1: bend_s_S20_1p282_CSxs_nc_0_m718,o1
+  o2: bend_s_S20_1p282_CSxs_nc_0_718,o1
+  o3: bend_s_S20_1p282_CSxs_nc_0_718,o2
+  o4: bend_s_S20_1p282_CSxs_nc_0_m718,o2

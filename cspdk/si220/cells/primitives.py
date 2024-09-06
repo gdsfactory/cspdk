@@ -925,16 +925,14 @@ die_ro = partial(die, cross_section="xs_ro")
 @gf.cell
 def heater() -> Component:
     """Heater fixed cell."""
-    heater = gf.import_gds(PATH.gds / "Heater.gds").dup()
+    heater = gf.import_gds(PATH.gds / "Heater.gds")
     return heater
 
 
 @gf.cell
 def crossing_so() -> Component:
     """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    c = gf.import_gds(
-        PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds"
-    ).dup()
+    c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
     xc = 493.47
     dx = 8.47 / 2
     x = xc - dx
@@ -953,7 +951,7 @@ def crossing_so() -> Component:
 @gf.cell
 def crossing_rc() -> Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
-    c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds").dup()
+    c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
     xc = 404.24
     dx = 9.24 / 2
     x = xc - dx
@@ -973,9 +971,7 @@ def crossing_rc() -> Component:
 @gf.cell
 def crossing_sc() -> Component:
     """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    c = gf.import_gds(
-        PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds"
-    ).dup()
+    c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
     xc = 494.24
     yc = 800
     dx = 9.24 / 2

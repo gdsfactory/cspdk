@@ -1,6 +1,0 @@
-instances: {}
-name: wire_corner_W10
-nets: []
-placements: {}
-ports:
-  e1: e2
