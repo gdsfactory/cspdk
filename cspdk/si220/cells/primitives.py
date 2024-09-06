@@ -58,14 +58,16 @@ def wire_corner() -> Component:
 def bend_s(
     size: tuple[float, float] = (11.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sc",
+    **kwargs,
 ) -> Component:
     """An S-bend.
 
     Args:
         size: the width and height of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
+        kwargs: additional arguments to pass to the bend_s function.
     """
-    return gf.components.bend_s(size=size, cross_section=cross_section)
+    return gf.components.bend_s(size=size, cross_section=cross_section, **kwargs)
 
 
 @gf.cell
@@ -926,7 +928,6 @@ die_ro = partial(die, cross_section="xs_ro")
 def heater() -> Component:
     """Heater fixed cell."""
     heater = gf.import_gds(PATH.gds / "Heater.gds")
-    heater.name = "heater"
     return heater
 
 
@@ -1027,5 +1028,5 @@ pack_doe_grid = gf.c.pack_doe_grid
 
 
 if __name__ == "__main__":
-    c = straight_heater_metal_so()
+    c = coupler_symmetric()
     c.show()

@@ -1,9 +1,0 @@
-info: {}
-name: mzi_DL10_Bbend_sc_Sstra_2b181802
-settings:
-  bend: bend_sc
-  combiner: mmi2x2_sc
-  cross_section: xs_sc
-  delta_length: 10
-  splitter: mmi1x2_sc
-  straight: straight_sc

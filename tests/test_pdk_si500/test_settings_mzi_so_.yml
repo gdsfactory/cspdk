@@ -1,9 +1,0 @@
-info: {}
-name: mzi_DL10_Bbend_so_Sstra_d6395d3d
-settings:
-  bend: bend_so
-  combiner: mmi2x2_so
-  cross_section: xs_so
-  delta_length: 10
-  splitter: mmi1x2_so
-  straight: straight_so

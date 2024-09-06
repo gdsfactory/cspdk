@@ -7,7 +7,7 @@ from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
-from gdsfactory.routing.route_bundle import OpticalManhattanRoute
+from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -215,7 +215,7 @@ def route_single(
     straight: ComponentSpec = "straight_nc",
     bend: ComponentSpec = "bend_euler_nc",
     taper: ComponentSpec = "taper_nc",
-) -> OpticalManhattanRoute:
+) -> ManhattanRoute:
     """Route single optical path.
 
     Args:
@@ -273,7 +273,7 @@ def route_bundle(
     straight: ComponentSpec = "straight_nc",
     bend: ComponentSpec = "bend_euler_nc",
     taper: ComponentSpec = "taper_nc",
-) -> list[OpticalManhattanRoute]:
+) -> list[ManhattanRoute]:
     """Route bundle of optical paths."""
     return gf.routing.route_bundle(
         component=component,
