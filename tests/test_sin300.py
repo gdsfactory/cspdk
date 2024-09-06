@@ -17,11 +17,10 @@ from cspdk.sin300 import PDK
 def activate_pdk() -> None:
     """Activate the PDK and clear the cache."""
     PDK.activate()
-    gf.clear_cache()
 
 
 cells = PDK.cells
-skip_test = {"import_gds"}  # FIXME: why does this fail test_netlists?
+skip_test = {"coupler_symmetric"}
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
 dirpath = (

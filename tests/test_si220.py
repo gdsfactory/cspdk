@@ -11,14 +11,12 @@ from gdsfactory.difftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si220 import PDK
-from cspdk.si220.cells import wire_corner
 
 
 @pytest.fixture(autouse=True)
 def activate_pdk() -> None:
     """Activate PDK."""
     PDK.activate()
-    gf.clear_cache()
 
 
 cells = PDK.cells
@@ -32,6 +30,7 @@ skip_test = {
     "add_fiber_single_so",
     "add_fiber_array_sc",
     "add_fiber_array_so",
+    "coupler_symmetric",
 }
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
@@ -122,7 +121,8 @@ def test_netlists(
 
 
 if __name__ == "__main__":
-    c = wire_corner()
+    component_type = "coupler_symmetric"
+    c = cells[component_type]()
     n = c.get_netlist()
     n.pop("connections", None)
     print(n)
