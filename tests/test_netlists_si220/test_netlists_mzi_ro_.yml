@@ -1,5 +1,5 @@
 instances:
-  bend_euler_sc_RNone_A90_a1dd07b8_123525_m47650:
+  bend_euler_sc_RNone_A90_a1dd07b8_110800_52525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -16,7 +16,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_126025_40150:
+  bend_euler_sc_RNone_A90_a1dd07b8_110900_m57525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -33,7 +33,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_145775_13390:
+  bend_euler_sc_RNone_A90_a1dd07b8_135900_26015:
     component: bend_euler_sc
     info:
       dy: 25
@@ -50,7 +50,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_148275_m10890:
+  bend_euler_sc_RNone_A90_a1dd07b8_135900_27525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -67,7 +67,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_73425_11400:
+  bend_euler_sc_RNone_A90_a1dd07b8_160900_m1015:
     component: bend_euler_sc
     info:
       dy: 25
@@ -84,7 +84,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_73425_m11400:
+  bend_euler_sc_RNone_A90_a1dd07b8_60800_1525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -101,7 +101,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_95675_m45150:
+  bend_euler_sc_RNone_A90_a1dd07b8_60800_m1525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -118,7 +118,7 @@ instances:
       angle: 90
       cross_section: xs_ro
       p: 0.5
-  bend_euler_sc_RNone_A90_a1dd07b8_98175_42650:
+  bend_euler_sc_RNone_A90_a1dd07b8_85800_m32525:
     component: bend_euler_sc
     info:
       dy: 25
@@ -155,7 +155,7 @@ instances:
       length_taper: 20
       width_mmi: 6
       width_taper: 1.5
-  straight_L1p51_WNone_CSxs_ro_135900_26770:
+  straight_L1p51_WNone_CSxs_ro_135900_26015:
     component: straight
     info:
       length: 1.51
@@ -167,7 +167,7 @@ instances:
     settings:
       cross_section: xs_ro
       length: 1.51
-  straight_L6p51_WNone_CSxs_ro_135900_m29270:
+  straight_L6p51_WNone_CSxs_ro_135900_m32525:
     component: straight
     info:
       length: 6.51
@@ -229,79 +229,79 @@ instances:
       length: 1
 name: mzi_DL10_Bbend_euler_ro_29a93d64
 nets:
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_123525_m47650,o1
-  p2: sxb,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_123525_m47650,o2
-  p2: straight_L6p51_WNone_CSxs_ro_135900_m29270,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_126025_40150,o1
-  p2: straight_L1p51_WNone_CSxs_ro_135900_26770,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_126025_40150,o2
-  p2: sxt,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_145775_13390,o1
-  p2: straight_L1p51_WNone_CSxs_ro_135900_26770,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_145775_13390,o2
-  p2: cp2,o3
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_148275_m10890,o1
-  p2: cp2,o4
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_148275_m10890,o2
-  p2: straight_L6p51_WNone_CSxs_ro_135900_m29270,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_73425_11400,o1
-  p2: cp1,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_73425_11400,o2
-  p2: sytl,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_73425_m11400,o1
-  p2: cp1,o3
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_73425_m11400,o2
-  p2: syl,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_95675_m45150,o1
-  p2: syl,o2
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_95675_m45150,o2
-  p2: sxb,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_98175_42650,o1
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_110800_52525,o1
   p2: sxt,o1
-- p1: bend_euler_sc_RNone_A90_a1dd07b8_98175_42650,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_110800_52525,o2
   p2: sytl,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_110900_m57525,o1
+  p2: sxb,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_110900_m57525,o2
+  p2: straight_L6p51_WNone_CSxs_ro_135900_m32525,o1
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_135900_26015,o1
+  p2: straight_L1p51_WNone_CSxs_ro_135900_26015,o1
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_135900_26015,o2
+  p2: cp2,o3
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_135900_27525,o1
+  p2: straight_L1p51_WNone_CSxs_ro_135900_26015,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_135900_27525,o2
+  p2: sxt,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_160900_m1015,o1
+  p2: cp2,o4
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_160900_m1015,o2
+  p2: straight_L6p51_WNone_CSxs_ro_135900_m32525,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_60800_1525,o1
+  p2: cp1,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_60800_1525,o2
+  p2: sytl,o1
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_60800_m1525,o1
+  p2: cp1,o3
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_60800_m1525,o2
+  p2: syl,o1
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_85800_m32525,o1
+  p2: syl,o2
+- p1: bend_euler_sc_RNone_A90_a1dd07b8_85800_m32525,o2
+  p2: sxb,o1
 placements:
-  bend_euler_sc_RNone_A90_a1dd07b8_123525_m47650:
-    mirror: false
-    rotation: 0
-    x: 110.9
-    y: -57.525
-  bend_euler_sc_RNone_A90_a1dd07b8_126025_40150:
-    mirror: false
-    rotation: 90
-    x: 135.9
-    y: 27.525
-  bend_euler_sc_RNone_A90_a1dd07b8_145775_13390:
-    mirror: false
-    rotation: 270
-    x: 135.9
-    y: 26.015
-  bend_euler_sc_RNone_A90_a1dd07b8_148275_m10890:
-    mirror: false
-    rotation: 180
-    x: 160.9
-    y: -1.015
-  bend_euler_sc_RNone_A90_a1dd07b8_73425_11400:
-    mirror: false
-    rotation: 0
-    x: 60.8
-    y: 1.525
-  bend_euler_sc_RNone_A90_a1dd07b8_73425_m11400:
-    mirror: true
-    rotation: 0
-    x: 60.8
-    y: -1.525
-  bend_euler_sc_RNone_A90_a1dd07b8_95675_m45150:
-    mirror: false
-    rotation: 270
-    x: 85.8
-    y: -32.525
-  bend_euler_sc_RNone_A90_a1dd07b8_98175_42650:
+  bend_euler_sc_RNone_A90_a1dd07b8_110800_52525:
     mirror: false
     rotation: 180
     x: 110.8
     y: 52.525
+  bend_euler_sc_RNone_A90_a1dd07b8_110900_m57525:
+    mirror: false
+    rotation: 0
+    x: 110.9
+    y: -57.525
+  bend_euler_sc_RNone_A90_a1dd07b8_135900_26015:
+    mirror: false
+    rotation: 270
+    x: 135.9
+    y: 26.015
+  bend_euler_sc_RNone_A90_a1dd07b8_135900_27525:
+    mirror: false
+    rotation: 90
+    x: 135.9
+    y: 27.525
+  bend_euler_sc_RNone_A90_a1dd07b8_160900_m1015:
+    mirror: false
+    rotation: 180
+    x: 160.9
+    y: -1.015
+  bend_euler_sc_RNone_A90_a1dd07b8_60800_1525:
+    mirror: false
+    rotation: 0
+    x: 60.8
+    y: 1.525
+  bend_euler_sc_RNone_A90_a1dd07b8_60800_m1525:
+    mirror: true
+    rotation: 0
+    x: 60.8
+    y: -1.525
+  bend_euler_sc_RNone_A90_a1dd07b8_85800_m32525:
+    mirror: false
+    rotation: 270
+    x: 85.8
+    y: -32.525
   cp1:
     mirror: false
     rotation: 0
@@ -312,12 +312,12 @@ placements:
     rotation: 180
     x: 235.9
     y: 0
-  straight_L1p51_WNone_CSxs_ro_135900_26770:
+  straight_L1p51_WNone_CSxs_ro_135900_26015:
     mirror: false
     rotation: 90
     x: 135.9
     y: 26.015
-  straight_L6p51_WNone_CSxs_ro_135900_m29270:
+  straight_L6p51_WNone_CSxs_ro_135900_m32525:
     mirror: false
     rotation: 90
     x: 135.9

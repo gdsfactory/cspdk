@@ -1,5 +1,5 @@
 instances:
-  straight_L20_N2_CSxs_sc_10000_0:
+  straight_L20_N2_CSxs_sc_0_0:
     component: straight
     info:
       length: 20
@@ -12,7 +12,7 @@ instances:
       cross_section: xs_sc
       length: 20
       npoints: 2
-  straight_L20_N2_CSxs_sc_10000_720:
+  straight_L20_N2_CSxs_sc_0_720:
     component: straight
     info:
       length: 20
@@ -28,18 +28,18 @@ instances:
 name: coupler_straight_L20_G0_4025574b
 nets: []
 placements:
-  straight_L20_N2_CSxs_sc_10000_0:
+  straight_L20_N2_CSxs_sc_0_0:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  straight_L20_N2_CSxs_sc_10000_720:
+  straight_L20_N2_CSxs_sc_0_720:
     mirror: false
     rotation: 0
     x: 0
     y: 0.72
 ports:
-  o1: straight_L20_N2_CSxs_sc_10000_0,o1
-  o2: straight_L20_N2_CSxs_sc_10000_720,o1
-  o3: straight_L20_N2_CSxs_sc_10000_720,o2
-  o4: straight_L20_N2_CSxs_sc_10000_0,o2
+  o1: straight_L20_N2_CSxs_sc_0_0,o1
+  o2: straight_L20_N2_CSxs_sc_0_720,o1
+  o3: straight_L20_N2_CSxs_sc_0_720,o2
+  o4: straight_L20_N2_CSxs_sc_0_0,o2

@@ -2,7 +2,6 @@
 
 import pathlib
 
-import gdsfactory as gf
 import pytest
 from gdsfactory.difftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
@@ -14,7 +13,6 @@ from cspdk.si220 import PDK
 def activate_pdk() -> None:
     """Activate the PDK before running the tests."""
     PDK.activate()
-    gf.clear_cache()
 
 
 cells = PDK.cells

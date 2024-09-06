@@ -11,7 +11,7 @@ from gdsfactory.cross_section import (
     port_names_electrical,
     port_types_electrical,
 )
-from gdsfactory.routing.route_bundle import OpticalManhattanRoute
+from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -319,7 +319,7 @@ def route_single(
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_euler_sc",
     taper: ComponentSpec = "taper_sc",
-) -> OpticalManhattanRoute:
+) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
         component=component,
@@ -359,7 +359,7 @@ def route_bundle(
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_euler_sc",
     taper: ComponentSpec | None = "taper_sc",
-) -> list[OpticalManhattanRoute]:
+) -> list[ManhattanRoute]:
     """Route two bundles of ports."""
     return gf.routing.route_bundle(
         component=component,

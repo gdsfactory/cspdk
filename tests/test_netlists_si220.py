@@ -15,7 +15,6 @@ from cspdk.si220.cells import wire_corner
 def activate_pdk() -> None:
     """Activate PDK."""
     PDK.activate()
-    gf.clear_cache()
 
 
 cells = PDK.cells
@@ -93,7 +92,6 @@ def test_netlists(
 
     n.pop("connections", None)
     n.pop("warnings", None)
-    c.delete()
     yaml_str = c.write_netlist(n)
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
@@ -107,7 +105,6 @@ if __name__ == "__main__":
     c = wire_corner()
     n = c.get_netlist()
     n.pop("connections", None)
-    c.delete()
     print(n)
     c2 = gf.read.from_yaml(n)
     n2 = c2.get_netlist()

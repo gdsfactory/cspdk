@@ -7,7 +7,7 @@ from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
-from gdsfactory.routing.route_bundle import OpticalManhattanRoute
+from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -230,7 +230,7 @@ def route_single(
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
     taper: ComponentSpec = "taper_rc",
-) -> OpticalManhattanRoute:
+) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
         component=component,
@@ -270,7 +270,7 @@ def route_bundle(
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
     taper: ComponentSpec = "taper_rc",
-) -> list[OpticalManhattanRoute]:
+) -> list[ManhattanRoute]:
     """Route two bundles of ports."""
     return gf.routing.route_bundle(
         component=component,

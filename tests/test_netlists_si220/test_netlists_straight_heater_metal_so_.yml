@@ -259,7 +259,7 @@ instances:
       cross_section: xs_so_heater
       length: 15.9
       npoints: 2
-  taper_L5_W10_W4_PNone_W_9659be32_322400_0:
+  taper_L5_W10_W4_PNone_W_9659be32_324900_0:
     component: taper
     info:
       length: 5
@@ -278,7 +278,7 @@ instances:
       width2: 4
       with_bbox: true
       with_two_ports: true
-  taper_L5_W10_W4_PNone_W_9659be32_m2400_0:
+  taper_L5_W10_W4_PNone_W_9659be32_m4900_0:
     component: taper
     info:
       length: 5
@@ -390,12 +390,12 @@ nets:
 - p1: _2,o1
   p2: m2,o2
 - p1: m1,e1
-  p2: taper_L5_W10_W4_PNone_W_9659be32_m2400_0,e2
+  p2: taper_L5_W10_W4_PNone_W_9659be32_m4900_0,e2
 - p1: m2,e2
-  p2: taper_L5_W10_W4_PNone_W_9659be32_322400_0,e2
-- p1: taper_L5_W10_W4_PNone_W_9659be32_322400_0,e1
+  p2: taper_L5_W10_W4_PNone_W_9659be32_324900_0,e2
+- p1: taper_L5_W10_W4_PNone_W_9659be32_324900_0,e1
   p2: via_stack_heater_mtop_S10_10_329900_0,e1
-- p1: taper_L5_W10_W4_PNone_W_9659be32_m2400_0,e1
+- p1: taper_L5_W10_W4_PNone_W_9659be32_m4900_0,e1
   p2: via_stack_heater_mtop_S10_10_m9900_0,e3
 placements:
   H1:
@@ -498,12 +498,12 @@ placements:
     rotation: 0
     x: 304
     y: 0
-  taper_L5_W10_W4_PNone_W_9659be32_322400_0:
+  taper_L5_W10_W4_PNone_W_9659be32_324900_0:
     mirror: false
     rotation: 180
     x: 324.9
     y: 0
-  taper_L5_W10_W4_PNone_W_9659be32_m2400_0:
+  taper_L5_W10_W4_PNone_W_9659be32_m4900_0:
     mirror: false
     rotation: 0
     x: -4.9

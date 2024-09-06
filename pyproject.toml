@@ -9,13 +9,12 @@ authors = [
   {name = "gdsfactory", email = "contact@gdsfactory.com"}
 ]
 classifiers = [
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=8.7.0",
+  "gdsfactory~=8.8.7",
   "gplugins[sax]>=1,<2"
 ]
 description = "CornerStone PDK"
@@ -23,7 +22,7 @@ keywords = ["python"]
 license = {file = "LICENSE"}
 name = "cspdk"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 version = "0.11.0"
 
 [project.optional-dependencies]
