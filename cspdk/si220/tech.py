@@ -384,79 +384,90 @@ def route_bundle(
     )
 
 
+route_single_sc = partial(
+    route_single,
+    straight="straight_sc",
+    bend="bend_euler_sc",
+    taper="taper_sc",
+    cross_section="xs_sc",
+)
+route_single_so = partial(
+    route_single,
+    straight="straight_so",
+    bend="bend_euler_so",
+    taper="taper_so",
+    cross_section="xs_so",
+)
+route_single_rc = partial(
+    route_single,
+    straight="straight_rc",
+    bend="bend_euler_rc",
+    taper="taper_rc",
+    cross_section="xs_rc",
+)
+route_single_ro = partial(
+    route_single,
+    straight="straight_ro",
+    bend="bend_euler_ro",
+    taper="taper_ro",
+    cross_section="xs_ro",
+)
+route_bundle_sc = partial(
+    route_bundle,
+    straight="straight_sc",
+    bend="bend_euler_sc",
+    taper="taper_sc",
+    cross_section="xs_sc",
+)
+route_bundle_so = partial(
+    route_bundle,
+    straight="straight_so",
+    bend="bend_euler_so",
+    taper="taper_so",
+    cross_section="xs_so",
+)
+route_bundle_rc = partial(
+    route_bundle,
+    straight="straight_rc",
+    bend="bend_euler_rc",
+    taper="taper_rc",
+    cross_section="xs_rc",
+)
+route_bundle_ro = partial(
+    route_bundle,
+    straight="straight_ro",
+    bend="bend_euler_ro",
+    taper="taper_ro",
+    cross_section="xs_ro",
+)
+route_bundle_metal = partial(
+    route_bundle,
+    straight="straight_metal",
+    bend="bend_metal",
+    taper=None,
+    cross_section="metal_routing",
+)
+route_bundle_metal_corner = partial(
+    route_bundle,
+    straight="straight_metal",
+    bend="wire_corner",
+    taper=None,
+    cross_section="metal_routing",
+)
+
 routing_strategies = dict(
     route_single=route_single,
-    route_single_sc=partial(
-        route_single,
-        straight="straight_sc",
-        bend="bend_euler_sc",
-        taper="taper_sc",
-        cross_section="xs_sc",
-    ),
-    route_single_so=partial(
-        route_single,
-        straight="straight_so",
-        bend="bend_euler_so",
-        taper="taper_so",
-        cross_section="xs_so",
-    ),
-    route_single_rc=partial(
-        route_single,
-        straight="straight_rc",
-        bend="bend_euler_rc",
-        taper="taper_rc",
-        cross_section="xs_rc",
-    ),
-    route_single_ro=partial(
-        route_single,
-        straight="straight_ro",
-        bend="bend_euler_ro",
-        taper="taper_ro",
-        cross_section="xs_ro",
-    ),
     route_bundle=route_bundle,
-    route_bundle_sc=partial(
-        route_bundle,
-        straight="straight_sc",
-        bend="bend_euler_sc",
-        taper="taper_sc",
-        cross_section="xs_sc",
-    ),
-    route_bundle_so=partial(
-        route_bundle,
-        straight="straight_so",
-        bend="bend_euler_so",
-        taper="taper_so",
-        cross_section="xs_so",
-    ),
-    route_bundle_rc=partial(
-        route_bundle,
-        straight="straight_rc",
-        bend="bend_euler_rc",
-        taper="taper_rc",
-        cross_section="xs_rc",
-    ),
-    route_bundle_ro=partial(
-        route_bundle,
-        straight="straight_ro",
-        bend="bend_euler_ro",
-        taper="taper_ro",
-        cross_section="xs_ro",
-    ),
-    route_bundle_metal=partial(
-        route_bundle,
-        straight="straight_metal",
-        bend="bend_metal",
-        taper=None,
-        cross_section="metal_routing",
-    ),
-    route_bundle_metal_corner=partial(
-        route_bundle,
-        straight="straight_metal",
-        bend="wire_corner",
-        taper=None,
-        cross_section="metal_routing",
-    ),
+    route_single_sc=route_single_sc,
+    route_single_so=route_single_so,
+    route_single_rc=route_single_rc,
+    route_single_ro=route_single_ro,
+    route_bundle_sc=route_bundle_sc,
+    route_bundle_so=route_bundle_so,
+    route_bundle_rc=route_bundle_rc,
+    route_bundle_ro=route_bundle_ro,
+    route_bundle_metal=route_bundle_metal,
+    route_bundle_metal_corner=route_bundle_metal_corner,
 )
 
 if __name__ == "__main__":
