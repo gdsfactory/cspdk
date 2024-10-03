@@ -11,8 +11,8 @@ if __name__ == "__main__":
     mmi2.dmove((500, 50))
 
     route = tech.route_single_sc(
+        c,
         mmi1.ports["o3"],
         mmi2.ports["o1"],
     )
-    c.add(route.references)
     c.show()
