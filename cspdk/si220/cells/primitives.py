@@ -218,10 +218,10 @@ trans_sc_rc50 = partial(taper_strip_to_ridge, length=50)
 @gf.cell
 def mmi1x2(
     width: float | None = None,
-    width_taper=1.5,
-    length_taper=20.0,
+    width_taper: float = 1.5,
+    length_taper: float = 20.0,
     length_mmi: float = 5.5,
-    width_mmi=6.0,
+    width_mmi: float = 6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
@@ -405,11 +405,11 @@ coupler_ro = partial(
 
 @gf.cell
 def grating_coupler_rectangular(
-    period=0.315 * 2,
+    period: float = 0.315 * 2,
     n_periods: int = 30,
     length_taper: float = 350.0,
     wavelength: float = 1.55,
-    cross_section="xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     """A grating coupler with straight and parallel teeth.
 
@@ -476,8 +476,8 @@ grating_coupler_rectangular_ro = partial(
 @gf.cell
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
-    grating_line_width=0.315,
-    cross_section="xs_sc",
+    grating_line_width: float = 0.315,
+    cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     """A grating coupler with curved but parallel teeth.
 
@@ -531,10 +531,10 @@ grating_coupler_elliptical_so = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
-    bend="bend_euler_sc",
-    straight="straight_sc",
-    splitter="mmi1x2_sc",
-    combiner="mmi2x2_sc",
+    bend: ComponentSpec = "bend_euler_sc",
+    straight: ComponentSpec = "straight_sc",
+    splitter: ComponentSpec = "mmi1x2_sc",
+    combiner: ComponentSpec = "mmi2x2_sc",
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     """A Mach-Zehnder Interferometer.
@@ -726,7 +726,7 @@ ring_single_so = partial(
 
 
 @gf.cell
-def via_stack_heater_mtop(size=(10, 10)) -> Component:
+def via_stack_heater_mtop(size: tuple[float, float] = (10, 10)) -> Component:
     """Returns a via stack for the heater."""
     return gf.c.via_stack(
         size=size,
@@ -823,13 +823,13 @@ def rectangle(**kwargs) -> Component:
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
-    centered=True,
-    grating_coupler=None,
-    port_name="o1",
-    with_loopback=False,
-    rotation=-90,
-    straight_to_grating_spacing=10.0,
-    cross_section="xs_sc",
+    centered: bool = True,
+    grating_coupler: ComponentSpec | None = None,
+    port_name: str = "o1",
+    with_loopback: bool = False,
+    rotation: float = -90,
+    straight_to_grating_spacing: float = 10.0,
+    cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     """An array of grating couplers.
 
@@ -877,7 +877,7 @@ def grating_coupler_array(
 
 
 @gf.cell
-def die(cross_section="xs_sc") -> Component:
+def die(cross_section: CrossSectionSpec = "xs_sc") -> Component:
     """A die template.
 
     Args:
@@ -993,12 +993,12 @@ def crossing_sc() -> Component:
 
 @gf.cell
 def array(
-    component="pad",
+    component: ComponentSpec = "pad",
     spacing: tuple[float, float] = (150.0, 150.0),
     columns: int = 6,
     rows: int = 1,
     add_ports: bool = True,
-    size=None,
+    size: tuple[float, float] | None = None,
     centered: bool = False,
 ) -> Component:
     """An array of components.
