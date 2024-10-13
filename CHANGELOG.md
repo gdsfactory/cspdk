@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.11.2
+- add type annotations for si220 [#68](https://github.com/gdsfactory/cspdk/pull/68)
+- fix sample routing functions [#63](https://github.com/gdsfactory/cspdk/pull/63)
+- Update gdsfactory 8.13.3 [#70](https://github.com/gdsfactory/cspdk/pull/70)
+
 ## 0.10.0
 
 - add docstrings [#54](https://github.com/gdsfactory/cspdk/pull/54)
