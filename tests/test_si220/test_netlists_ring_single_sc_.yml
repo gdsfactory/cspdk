@@ -17,6 +17,7 @@ instances:
       cross_section: xs_sc
       p: 0.5
       radius: 10
+      width: null
   bend_euler_sc_R10_A90_P_a19f663e_m4000_21250:
     component: bend_euler_sc
     info:
@@ -35,12 +36,14 @@ instances:
       cross_section: xs_sc
       p: 0.5
       radius: 10
+      width: null
   coupler_ring_sc_G0p2_R1_c8cba183_0_0:
     component: coupler_ring_sc
     info: {}
     settings:
       bend: bend_euler_sc
       cross_section: xs_sc
+      cross_section_bend: null
       gap: 0.2
       length_extension: 3
       length_x: 4
@@ -58,6 +61,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.6
+      width: null
   straight_L0p6_WNone_CSxs_sc_m14000_10650:
     component: straight
     info:
@@ -70,6 +74,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.6
+      width: null
   straight_L4_WNone_CSxs_sc_0_21250:
     component: straight
     info:
@@ -82,6 +87,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 4
+      width: null
 name: ring_single_sc_G0p2_R10_a4ddd2ab
 nets:
 - p1: bend_euler_sc_R10_A90_P_a19f663e_10000_11250,o1

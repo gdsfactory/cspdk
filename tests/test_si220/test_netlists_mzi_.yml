@@ -16,6 +16,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_51800_m1570:
     component: bend_euler_sc
     info:
@@ -33,6 +35,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_56800_m12570:
     component: bend_euler_sc
     info:
@@ -50,6 +54,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_61800_12570:
     component: bend_euler_sc
     info:
@@ -67,6 +73,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_61900_m17570:
     component: bend_euler_sc
     info:
@@ -84,6 +92,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_66900_6000:
     component: bend_euler_sc
     info:
@@ -101,6 +111,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_66900_7570:
     component: bend_euler_sc
     info:
@@ -118,6 +130,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   bend_euler_sc_RNone_A90_3aec9813_71900_m1000:
     component: bend_euler_sc
     info:
@@ -135,6 +149,8 @@ instances:
       angle: 90
       cross_section: xs_sc
       p: 0.5
+      radius: null
+      width: null
   cp1:
     component: mmi1x2
     info: {}
@@ -143,6 +159,7 @@ instances:
       gap_mmi: 1.64
       length_mmi: 31.8
       length_taper: 20
+      width: null
       width_mmi: 6
       width_taper: 1.5
   cp2:
@@ -153,6 +170,7 @@ instances:
       gap_mmi: 0.5
       length_mmi: 42.5
       length_taper: 20
+      width: null
       width_mmi: 6
       width_taper: 1.5
   straight_L1p57_WNone_CSxs_sc_66900_6000:
@@ -167,6 +185,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 1.57
+      width: null
   straight_L6p57_WNone_CSxs_sc_66900_m12570:
     component: straight
     info:
@@ -179,6 +198,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 6.57
+      width: null
   sxb:
     component: straight
     info:
@@ -191,6 +211,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.1
+      width: null
   sxt:
     component: straight
     info:
@@ -203,6 +224,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.1
+      width: null
   syl:
     component: straight
     info:
@@ -215,6 +237,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 6
+      width: null
   sytl:
     component: straight
     info:
@@ -227,6 +250,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 1
+      width: null
 name: mzi_DL10_Bbend_euler_sc_1d19725f
 nets:
 - p1: bend_euler_sc_RNone_A90_3aec9813_51800_1570,o1

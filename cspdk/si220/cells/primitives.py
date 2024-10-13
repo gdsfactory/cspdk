@@ -829,6 +829,7 @@ def grating_coupler_array(
     with_loopback=False,
     rotation=-90,
     straight_to_grating_spacing=10.0,
+    radius: float | None = None,
     cross_section="xs_sc",
 ) -> Component:
     """An array of grating couplers.
@@ -842,6 +843,7 @@ def grating_coupler_array(
         with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
         rotation: rotation angle for each reference.
         straight_to_grating_spacing: spacing between the last grating coupler and the loopback.
+        radius: optional radius for routing the loopback.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     if grating_coupler is None:
@@ -873,14 +875,37 @@ def grating_coupler_array(
         port_name=port_name,
         centered=centered,
         cross_section=cross_section,
+        radius=radius,
     )
 
 
 @gf.cell
-def die(cross_section="xs_sc") -> Component:
+def die(
+    size=(11470.0, 4900.0),
+    edge_to_grating_distance=150.0,
+    edge_to_pad_distance=150.0,
+    grating_coupler=None,
+    grating_pitch=250.0,
+    layer_floorplan=LAYER.FLOORPLAN,
+    ngratings=14,
+    npads=31,
+    pad="pad",
+    pad_pitch=300.0,
+    cross_section="xs_sc",
+) -> Component:
     """A die template.
 
     Args:
+        size: the size of the die.
+        edge_to_grating_distance: the distance from the edge to the grating couplers.
+        edge_to_pad_distance: the distance from the edge to the pads.
+        grating_coupler: the name of the grating coupler to use in the array.
+        grating_pitch: the pitch of the grating couplers.
+        layer_floorplan: the layer to use for the floorplan.
+        ngratings: the number of grating couplers.
+        npads: the number of pads.
+        pad: the name of the pad to use in the array.
+        pad_pitch: the pitch of the pads.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     if isinstance(cross_section, str):
@@ -897,19 +922,19 @@ def die(cross_section="xs_sc") -> Component:
         "xs_rc": "grating_coupler_rectangular_rc",
         "xs_ro": "grating_coupler_rectangular_ro",
     }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    grating_coupler = grating_coupler or gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.die_with_pads(
-        cross_section=cross_section,
-        edge_to_grating_distance=150.0,
-        edge_to_pad_distance=150.0,
+        size=size,
+        edge_to_grating_distance=edge_to_grating_distance,
+        edge_to_pad_distance=edge_to_pad_distance,
         grating_coupler=grating_coupler,
-        grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
-        ngratings=14,
-        npads=31,
-        pad="pad",
-        pad_pitch=300.0,
-        size=(11470.0, 4900.0),
+        grating_pitch=grating_pitch,
+        layer_floorplan=layer_floorplan,
+        ngratings=ngratings,
+        npads=npads,
+        pad=pad,
+        pad_pitch=pad_pitch,
+        cross_section=cross_section,
     )
 
 
@@ -927,8 +952,7 @@ die_ro = partial(die, cross_section="xs_ro")
 @gf.cell
 def heater() -> Component:
     """Heater fixed cell."""
-    heater = gf.import_gds(PATH.gds / "Heater.gds")
-    return heater
+    return gf.import_gds(PATH.gds / "Heater.gds")
 
 
 @gf.cell
@@ -1028,5 +1052,5 @@ pack_doe_grid = gf.c.pack_doe_grid
 
 
 if __name__ == "__main__":
-    c = coupler_symmetric()
+    c = grating_coupler_array()
     c.show()
