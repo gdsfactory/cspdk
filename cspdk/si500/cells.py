@@ -15,7 +15,6 @@ from cspdk.si500.tech import LAYER, Tech
 @gf.cell
 def straight(
     length: float = 10.0,
-    width: float | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
     **kwargs,
 ) -> Component:
@@ -23,13 +22,9 @@ def straight(
 
     Args:
         length: the length of the waveguide.
-        width: the width of the waveguide.
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    if width is not None:
-        kwargs["width"] = width
-    kwargs["npoints"] = kwargs.get("npoints", 2)
     return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
@@ -519,6 +514,7 @@ def grating_coupler_array(
     with_loopback=False,
     rotation=-90,
     straight_to_grating_spacing=10.0,
+    radius: float | None = None,
 ) -> Component:
     """An array of grating couplers.
 
@@ -532,6 +528,7 @@ def grating_coupler_array(
         rotation: rotation angle for each reference.
         straight_to_grating_spacing: spacing between the last grating coupler and the loopback.
         cross_section: a cross section or its name or a function generating a cross section.
+        radius: optional radius for routing the loopback.
     """
     if grating_coupler is None:
         if isinstance(cross_section, str):
@@ -558,6 +555,7 @@ def grating_coupler_array(
         port_name=port_name,
         centered=centered,
         cross_section=cross_section,
+        radius=radius,
     )
 
 

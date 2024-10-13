@@ -49,7 +49,7 @@ instances:
       length_x: 4
       radius: 10
       straight: straight_sc
-  straight_L0p6_WNone_CSxs_sc_10000_11250:
+  straight_L0p6_CSxs_sc_10000_11250:
     component: straight
     info:
       length: 0.6
@@ -61,8 +61,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.6
-      width: null
-  straight_L0p6_WNone_CSxs_sc_m14000_10650:
+  straight_L0p6_CSxs_sc_m14000_10650:
     component: straight
     info:
       length: 0.6
@@ -74,8 +73,7 @@ instances:
     settings:
       cross_section: xs_sc
       length: 0.6
-      width: null
-  straight_L4_WNone_CSxs_sc_0_21250:
+  straight_L4_CSxs_sc_0_21250:
     component: straight
     info:
       length: 4
@@ -87,21 +85,20 @@ instances:
     settings:
       cross_section: xs_sc
       length: 4
-      width: null
 name: ring_single_sc_G0p2_R10_a4ddd2ab
 nets:
 - p1: bend_euler_sc_R10_A90_P_a19f663e_10000_11250,o1
-  p2: straight_L0p6_WNone_CSxs_sc_10000_11250,o1
+  p2: straight_L0p6_CSxs_sc_10000_11250,o1
 - p1: bend_euler_sc_R10_A90_P_a19f663e_10000_11250,o2
-  p2: straight_L4_WNone_CSxs_sc_0_21250,o1
+  p2: straight_L4_CSxs_sc_0_21250,o1
 - p1: bend_euler_sc_R10_A90_P_a19f663e_m4000_21250,o1
-  p2: straight_L4_WNone_CSxs_sc_0_21250,o2
+  p2: straight_L4_CSxs_sc_0_21250,o2
 - p1: bend_euler_sc_R10_A90_P_a19f663e_m4000_21250,o2
-  p2: straight_L0p6_WNone_CSxs_sc_m14000_10650,o2
+  p2: straight_L0p6_CSxs_sc_m14000_10650,o2
 - p1: coupler_ring_sc_G0p2_R1_c8cba183_0_0,o2
-  p2: straight_L0p6_WNone_CSxs_sc_m14000_10650,o1
+  p2: straight_L0p6_CSxs_sc_m14000_10650,o1
 - p1: coupler_ring_sc_G0p2_R1_c8cba183_0_0,o3
-  p2: straight_L0p6_WNone_CSxs_sc_10000_11250,o2
+  p2: straight_L0p6_CSxs_sc_10000_11250,o2
 placements:
   bend_euler_sc_R10_A90_P_a19f663e_10000_11250:
     mirror: false
@@ -118,17 +115,17 @@ placements:
     rotation: 0
     x: 0
     y: 0
-  straight_L0p6_WNone_CSxs_sc_10000_11250:
+  straight_L0p6_CSxs_sc_10000_11250:
     mirror: false
     rotation: 270
     x: 10
     y: 11.25
-  straight_L0p6_WNone_CSxs_sc_m14000_10650:
+  straight_L0p6_CSxs_sc_m14000_10650:
     mirror: false
     rotation: 90
     x: -14
     y: 10.65
-  straight_L4_WNone_CSxs_sc_0_21250:
+  straight_L4_CSxs_sc_0_21250:
     mirror: false
     rotation: 180
     x: 0

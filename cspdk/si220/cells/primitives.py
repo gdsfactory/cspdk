@@ -16,7 +16,6 @@ from cspdk.si220.tech import LAYER, Tech
 @gf.cell
 def straight(
     length: float = 10.0,
-    width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
 ) -> Component:
@@ -24,13 +23,9 @@ def straight(
 
     Args:
         length: the length of the waveguide.
-        width: the width of the waveguide.
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    if width is not None:
-        kwargs["width"] = width
-    kwargs["npoints"] = kwargs.get("npoints", 2)
     return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
@@ -313,8 +308,8 @@ def coupler_straight(
     """The straight part of a coupler.
 
     Args:
-        length: the length of the straight part of the coupler
-        gap: the gap between the waveguides forming the straight part of the coupler
+        length: the length of the straight part of the coupler.
+        gap: the gap between the waveguides forming the straight part of the coupler.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     return gf.c.coupler_straight(
@@ -334,10 +329,10 @@ def coupler_symmetric(
     """The part of the coupler that diverges away from each other with s-bends.
 
     Args:
-        gap: the gap between the s-bends when closest together
-        dy: the height of the s-bend
-        dx: the length of the s-bend
-        cross_section: a cross section or its name or a function generating a cross section.
+        gap: the gap between the s-bends when closest together.
+        dy: the height of the s-bend.
+        dx: the length of the s-bend.
+        cross_section: a cross section or its name or a function generating a cross section..
     """
     return gf.c.coupler_symmetric(
         bend="bend_s",

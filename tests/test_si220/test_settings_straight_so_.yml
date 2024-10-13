@@ -5,7 +5,7 @@ info:
   route_info_weight: 10
   route_info_xs_so_length: 10
   width: 0.4
-name: straight_L10_WNone_CSxs_so
+name: straight_L10_CSxs_so
 settings:
   cross_section: xs_so
   length: 10
