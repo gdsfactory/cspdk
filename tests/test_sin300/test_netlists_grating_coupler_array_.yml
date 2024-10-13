@@ -71,7 +71,7 @@ instances:
       n_periods: 30
       period: 0.66
       wavelength: 1.55
-name: grating_coupler_array_P_84336d1d
+name: grating_coupler_array_P_7b5bab83
 nets: []
 placements:
   grating_coupler_rectang_27811604_190500_0:
@@ -111,27 +111,3 @@ ports:
   o3: grating_coupler_rectang_27811604_63500_0,o1
   o4: grating_coupler_rectang_27811604_190500_0,o1
   o5: grating_coupler_rectang_27811604_317500_0,o1
-warnings:
-  vertical_te:
-    unconnected_ports:
-    - message: 6 unconnected vertical_te ports!
-      ports:
-      - grating_coupler_rectang_27811604_m317500_0,o2
-      - grating_coupler_rectang_27811604_m190500_0,o2
-      - grating_coupler_rectang_27811604_m63500_0,o2
-      - grating_coupler_rectang_27811604_63500_0,o2
-      - grating_coupler_rectang_27811604_190500_0,o2
-      - grating_coupler_rectang_27811604_317500_0,o2
-      values:
-      - - -317500
-        - -209652
-      - - -190500
-        - -209652
-      - - -63500
-        - -209652
-      - - 63500
-        - -209652
-      - - 190500
-        - -209652
-      - - 317500
-        - -209652

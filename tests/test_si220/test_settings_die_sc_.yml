@@ -1,4 +1,15 @@
 info: {}
-name: die_CSxs_sc
+name: die_S11470_4900_ETGD150_fd76504f
 settings:
   cross_section: xs_sc
+  edge_to_grating_distance: 150
+  edge_to_pad_distance: 150
+  grating_pitch: 250
+  layer_floorplan: FLOORPLAN
+  ngratings: 14
+  npads: 31
+  pad: pad
+  pad_pitch: 300
+  size:
+  - 11470
+  - 4900

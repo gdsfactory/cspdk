@@ -16,7 +16,6 @@ from cspdk.si220.tech import LAYER, Tech
 @gf.cell
 def straight(
     length: float = 10.0,
-    width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
 ) -> Component:
@@ -24,13 +23,9 @@ def straight(
 
     Args:
         length: the length of the waveguide.
-        width: the width of the waveguide.
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    if width is not None:
-        kwargs["width"] = width
-    kwargs["npoints"] = kwargs.get("npoints", 2)
     return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
@@ -218,10 +213,10 @@ trans_sc_rc50 = partial(taper_strip_to_ridge, length=50)
 @gf.cell
 def mmi1x2(
     width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 20.0,
+    width_taper=1.5,
+    length_taper=20.0,
     length_mmi: float = 5.5,
-    width_mmi: float = 6.0,
+    width_mmi=6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
@@ -313,8 +308,8 @@ def coupler_straight(
     """The straight part of a coupler.
 
     Args:
-        length: the length of the straight part of the coupler
-        gap: the gap between the waveguides forming the straight part of the coupler
+        length: the length of the straight part of the coupler.
+        gap: the gap between the waveguides forming the straight part of the coupler.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     return gf.c.coupler_straight(
@@ -334,10 +329,10 @@ def coupler_symmetric(
     """The part of the coupler that diverges away from each other with s-bends.
 
     Args:
-        gap: the gap between the s-bends when closest together
-        dy: the height of the s-bend
-        dx: the length of the s-bend
-        cross_section: a cross section or its name or a function generating a cross section.
+        gap: the gap between the s-bends when closest together.
+        dy: the height of the s-bend.
+        dx: the length of the s-bend.
+        cross_section: a cross section or its name or a function generating a cross section..
     """
     return gf.c.coupler_symmetric(
         bend="bend_s",
@@ -405,11 +400,11 @@ coupler_ro = partial(
 
 @gf.cell
 def grating_coupler_rectangular(
-    period: float = 0.315 * 2,
+    period=0.315 * 2,
     n_periods: int = 30,
     length_taper: float = 350.0,
     wavelength: float = 1.55,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section="xs_sc",
 ) -> Component:
     """A grating coupler with straight and parallel teeth.
 
@@ -476,8 +471,8 @@ grating_coupler_rectangular_ro = partial(
 @gf.cell
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
-    grating_line_width: float = 0.315,
-    cross_section: CrossSectionSpec = "xs_sc",
+    grating_line_width=0.315,
+    cross_section="xs_sc",
 ) -> Component:
     """A grating coupler with curved but parallel teeth.
 
@@ -531,10 +526,10 @@ grating_coupler_elliptical_so = partial(
 @gf.cell
 def mzi(
     delta_length: float = 10.0,
-    bend: ComponentSpec = "bend_euler_sc",
-    straight: ComponentSpec = "straight_sc",
-    splitter: ComponentSpec = "mmi1x2_sc",
-    combiner: ComponentSpec = "mmi2x2_sc",
+    bend="bend_euler_sc",
+    straight="straight_sc",
+    splitter="mmi1x2_sc",
+    combiner="mmi2x2_sc",
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> Component:
     """A Mach-Zehnder Interferometer.
@@ -726,7 +721,7 @@ ring_single_so = partial(
 
 
 @gf.cell
-def via_stack_heater_mtop(size: tuple[float, float] = (10, 10)) -> Component:
+def via_stack_heater_mtop(size=(10, 10)) -> Component:
     """Returns a via stack for the heater."""
     return gf.c.via_stack(
         size=size,
@@ -823,13 +818,14 @@ def rectangle(**kwargs) -> Component:
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
-    centered: bool = True,
-    grating_coupler: ComponentSpec | None = None,
-    port_name: str = "o1",
-    with_loopback: bool = False,
-    rotation: float = -90,
-    straight_to_grating_spacing: float = 10.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    centered=True,
+    grating_coupler=None,
+    port_name="o1",
+    with_loopback=False,
+    rotation=-90,
+    straight_to_grating_spacing=10.0,
+    radius: float | None = None,
+    cross_section="xs_sc",
 ) -> Component:
     """An array of grating couplers.
 
@@ -842,6 +838,7 @@ def grating_coupler_array(
         with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
         rotation: rotation angle for each reference.
         straight_to_grating_spacing: spacing between the last grating coupler and the loopback.
+        radius: optional radius for routing the loopback.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     if grating_coupler is None:
@@ -873,14 +870,37 @@ def grating_coupler_array(
         port_name=port_name,
         centered=centered,
         cross_section=cross_section,
+        radius=radius,
     )
 
 
 @gf.cell
-def die(cross_section: CrossSectionSpec = "xs_sc") -> Component:
+def die(
+    size=(11470.0, 4900.0),
+    edge_to_grating_distance=150.0,
+    edge_to_pad_distance=150.0,
+    grating_coupler=None,
+    grating_pitch=250.0,
+    layer_floorplan=LAYER.FLOORPLAN,
+    ngratings=14,
+    npads=31,
+    pad="pad",
+    pad_pitch=300.0,
+    cross_section="xs_sc",
+) -> Component:
     """A die template.
 
     Args:
+        size: the size of the die.
+        edge_to_grating_distance: the distance from the edge to the grating couplers.
+        edge_to_pad_distance: the distance from the edge to the pads.
+        grating_coupler: the name of the grating coupler to use in the array.
+        grating_pitch: the pitch of the grating couplers.
+        layer_floorplan: the layer to use for the floorplan.
+        ngratings: the number of grating couplers.
+        npads: the number of pads.
+        pad: the name of the pad to use in the array.
+        pad_pitch: the pitch of the pads.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     if isinstance(cross_section, str):
@@ -897,19 +917,19 @@ def die(cross_section: CrossSectionSpec = "xs_sc") -> Component:
         "xs_rc": "grating_coupler_rectangular_rc",
         "xs_ro": "grating_coupler_rectangular_ro",
     }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
+    grating_coupler = grating_coupler or gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.die_with_pads(
-        cross_section=cross_section,
-        edge_to_grating_distance=150.0,
-        edge_to_pad_distance=150.0,
+        size=size,
+        edge_to_grating_distance=edge_to_grating_distance,
+        edge_to_pad_distance=edge_to_pad_distance,
         grating_coupler=grating_coupler,
-        grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
-        ngratings=14,
-        npads=31,
-        pad="pad",
-        pad_pitch=300.0,
-        size=(11470.0, 4900.0),
+        grating_pitch=grating_pitch,
+        layer_floorplan=layer_floorplan,
+        ngratings=ngratings,
+        npads=npads,
+        pad=pad,
+        pad_pitch=pad_pitch,
+        cross_section=cross_section,
     )
 
 
@@ -927,8 +947,7 @@ die_ro = partial(die, cross_section="xs_ro")
 @gf.cell
 def heater() -> Component:
     """Heater fixed cell."""
-    heater = gf.import_gds(PATH.gds / "Heater.gds")
-    return heater
+    return gf.import_gds(PATH.gds / "Heater.gds")
 
 
 @gf.cell
@@ -993,12 +1012,12 @@ def crossing_sc() -> Component:
 
 @gf.cell
 def array(
-    component: ComponentSpec = "pad",
+    component="pad",
     spacing: tuple[float, float] = (150.0, 150.0),
     columns: int = 6,
     rows: int = 1,
     add_ports: bool = True,
-    size: tuple[float, float] | None = None,
+    size=None,
     centered: bool = False,
 ) -> Component:
     """An array of components.
@@ -1028,5 +1047,5 @@ pack_doe_grid = gf.c.pack_doe_grid
 
 
 if __name__ == "__main__":
-    c = coupler_symmetric()
+    c = grating_coupler_array()
     c.show()
