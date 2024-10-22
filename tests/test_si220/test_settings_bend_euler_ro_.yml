@@ -9,6 +9,7 @@ info:
   route_info_type: xs_ro
   route_info_weight: 41.592
   route_info_xs_ro_length: 41.592
+  width: 0.5
 name: bend_euler_sc_RNone_A90_a1dd07b8
 settings:
   angle: 90

@@ -12,6 +12,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -31,6 +32,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -50,6 +52,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -69,6 +72,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -88,6 +92,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -107,6 +112,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -126,6 +132,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
@@ -145,6 +152,7 @@ instances:
       route_info_type: xs_sc
       route_info_weight: 8.318
       route_info_xs_sc_length: 8.318
+      width: 0.45
     settings:
       angle: 90
       cross_section: xs_sc
