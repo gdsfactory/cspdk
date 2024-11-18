@@ -4,6 +4,7 @@ from collections.abc import Iterable
 from functools import partial
 
 import gdsfactory as gf
+from gdsfactory import Section
 from gdsfactory.cross_section import (
     CrossSectionSpec,
     LayerSpec,
@@ -26,7 +27,6 @@ from gdsfactory.typings import (
     Floats,
     Layer,
     LayerSpecs,
-    Section,
 )
 
 from cspdk.si220.config import PATH

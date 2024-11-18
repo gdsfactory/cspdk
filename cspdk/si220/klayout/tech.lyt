@@ -156,7 +156,7 @@
  </writer-options>
  <connectivity>
   <connection>HEATER,HEATER,PAD</connection>
-  <symbols>PAD='41/0'</symbols>
   <symbols>HEATER='39/0'</symbols>
+  <symbols>PAD='41/0'</symbols>
  </connectivity>
 </technology>
