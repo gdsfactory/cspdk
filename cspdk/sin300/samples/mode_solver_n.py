@@ -1,10 +1,10 @@
 """Nitride mode solver."""
 
-import gplugins.tidy3d as gt
-
 nm = 1e-3
 
 if __name__ == "__main__":
+    import gplugins.tidy3d as gt
+
     wg_nc = gt.modes.Waveguide(
         wavelength=1.55,
         core_width=1.20,
