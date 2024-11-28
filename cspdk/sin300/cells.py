@@ -3,7 +3,14 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, CrossSection, CrossSectionSpec
+from gdsfactory.component import Component
+from gdsfactory.typings import (
+    CrossSection,
+    CrossSectionSpec,
+    Ints,
+    LayerSpec,
+    Size,
+)
 
 from cspdk.sin300.tech import LAYER, Tech
 
@@ -503,10 +510,38 @@ def pad() -> Component:
 
 
 @gf.cell
-def rectangle(**kwargs) -> Component:
+def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle."""
-    kwargs["layer"] = LAYER.FLOORPLAN
-    return gf.c.rectangle(**kwargs)
+    return gf.c.rectangle(layer=layer, **kwargs)
+
+
+@gf.cell
+def compass(
+    size: Size = (4.0, 2.0),
+    layer: LayerSpec = "PAD",
+    port_type: str | None = "electrical",
+    port_inclusion: float = 0.0,
+    port_orientations: Ints | None = (180, 90, 0, -90),
+    auto_rename_ports: bool = True,
+) -> gf.Component:
+    """Rectangle with ports on each edge (north, south, east, and west).
+
+    Args:
+        size: rectangle size.
+        layer: tuple (int, int).
+        port_type: optical, electrical.
+        port_inclusion: from edge.
+        port_orientations: list of port_orientations to add. None does not add ports.
+        auto_rename_ports: auto rename ports.
+    """
+    return gf.c.compass(
+        size=size,
+        layer=layer,
+        port_type=port_type,
+        port_inclusion=port_inclusion,
+        port_orientations=port_orientations,
+        auto_rename_ports=auto_rename_ports,
+    )
 
 
 @gf.cell

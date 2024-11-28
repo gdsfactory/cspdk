@@ -3,7 +3,14 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, ComponentSpec, CrossSection, CrossSectionSpec
+from gdsfactory.typings import (
+    ComponentSpec,
+    CrossSection,
+    CrossSectionSpec,
+    Ints,
+    LayerSpec,
+    Size,
+)
 
 from cspdk.si220.config import PATH
 from cspdk.si220.tech import LAYER, Tech
@@ -18,7 +25,7 @@ def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-) -> Component:
+) -> gf.Component:
     """A straight waveguide.
 
     Args:
@@ -41,7 +48,7 @@ straight_metal = partial(straight, cross_section="metal_routing")
 
 
 @gf.cell
-def wire_corner() -> Component:
+def wire_corner() -> gf.Component:
     """A wire corner.
 
     A wire corner is a bend for electrical routes.
@@ -54,7 +61,7 @@ def bend_s(
     size: tuple[float, float] = (11.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-) -> Component:
+) -> gf.Component:
     """An S-bend.
 
     Args:
@@ -72,7 +79,7 @@ def bend_euler_sc(
     p: float = 0.5,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """An euler bend.
 
     Args:
@@ -113,7 +120,7 @@ def taper(
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     **kwargs,
-) -> Component:
+) -> gf.Component:
     """A taper.
 
     A taper is a transition between two waveguide widths
@@ -175,7 +182,7 @@ def taper_strip_to_ridge(
     w_slab1: float = 0.2,
     w_slab2: float = 10.45,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """A taper between strip and ridge.
 
     This is a transition between two distinct cross sections
@@ -219,7 +226,7 @@ def mmi1x2(
     width_mmi=6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """An mmi1x2.
 
     An mmi1x2 is a splitter that splits a single input to two outputs
@@ -261,7 +268,7 @@ def mmi2x2(
     width_mmi: float = 6.0,
     gap_mmi: float = 0.25,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """An mmi2x2.
 
     An mmi2x2 is a 2x2 splitter
@@ -304,7 +311,7 @@ def coupler_straight(
     length: float = 20.0,
     gap: float = 0.27,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """The straight part of a coupler.
 
     Args:
@@ -325,7 +332,7 @@ def coupler_symmetric(
     dy: float = 4.0,
     dx: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """The part of the coupler that diverges away from each other with s-bends.
 
     Args:
@@ -350,7 +357,7 @@ def coupler(
     dy: float = 4.0,
     dx: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """A coupler.
 
     a coupler is a 2x2 splitter
@@ -405,7 +412,7 @@ def grating_coupler_rectangular(
     length_taper: float = 350.0,
     wavelength: float = 1.55,
     cross_section="xs_sc",
-) -> Component:
+) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
 
     Args:
@@ -473,7 +480,7 @@ def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.315,
     cross_section="xs_sc",
-) -> Component:
+) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
     Args:
@@ -531,7 +538,7 @@ def mzi(
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
     cross_section: CrossSectionSpec = "xs_sc",
-) -> Component:
+) -> gf.Component:
     """A Mach-Zehnder Interferometer.
 
     Args:
@@ -616,7 +623,7 @@ def coupler_ring_sc(
     cross_section: CrossSectionSpec = "xs_sc",
     cross_section_bend: CrossSectionSpec | None = None,
     length_extension: float = 3,
-) -> Component:
+) -> gf.Component:
     r"""Coupler for ring.
 
     Args:
@@ -721,7 +728,7 @@ ring_single_so = partial(
 
 
 @gf.cell
-def via_stack_heater_mtop(size=(10, 10)) -> Component:
+def via_stack_heater_mtop(size=(10, 10)) -> gf.Component:
     """Returns a via stack for the heater."""
     return gf.c.via_stack(
         size=size,
@@ -747,7 +754,7 @@ def straight_heater_metal_sc(
     port_orientation2: int | None = 0,
     heater_taper_length: float | None = 5.0,
     ohms_per_square: float | None = None,
-) -> Component:
+) -> gf.Component:
     """Returns a thermal phase shifter.
 
     dimensions from https://doi.org/10.1364/OE.27.010456
@@ -802,16 +809,44 @@ straight_heater_metal_so = partial(
 
 
 @gf.cell
-def pad() -> Component:
+def pad() -> gf.Component:
     """An electrical pad."""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
 @gf.cell
-def rectangle(**kwargs) -> Component:
+def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle."""
-    kwargs["layer"] = LAYER.FLOORPLAN
-    return gf.c.rectangle(**kwargs)
+    return gf.c.rectangle(layer=layer, **kwargs)
+
+
+@gf.cell
+def compass(
+    size: Size = (4.0, 2.0),
+    layer: LayerSpec = "PAD",
+    port_type: str | None = "electrical",
+    port_inclusion: float = 0.0,
+    port_orientations: Ints | None = (180, 90, 0, -90),
+    auto_rename_ports: bool = True,
+) -> gf.Component:
+    """Rectangle with ports on each edge (north, south, east, and west).
+
+    Args:
+        size: rectangle size.
+        layer: tuple (int, int).
+        port_type: optical, electrical.
+        port_inclusion: from edge.
+        port_orientations: list of port_orientations to add. None does not add ports.
+        auto_rename_ports: auto rename ports.
+    """
+    return gf.c.compass(
+        size=size,
+        layer=layer,
+        port_type=port_type,
+        port_inclusion=port_inclusion,
+        port_orientations=port_orientations,
+        auto_rename_ports=auto_rename_ports,
+    )
 
 
 @gf.cell
@@ -826,7 +861,7 @@ def grating_coupler_array(
     straight_to_grating_spacing=10.0,
     radius: float | None = None,
     cross_section="xs_sc",
-) -> Component:
+) -> gf.Component:
     """An array of grating couplers.
 
     Args:
@@ -887,7 +922,7 @@ def die(
     pad="pad",
     pad_pitch=300.0,
     cross_section="xs_sc",
-) -> Component:
+) -> gf.Component:
     """A die template.
 
     Args:
@@ -945,13 +980,13 @@ die_ro = partial(die, cross_section="xs_ro")
 
 
 @gf.cell
-def heater() -> Component:
+def heater() -> gf.Component:
     """Heater fixed cell."""
     return gf.import_gds(PATH.gds / "Heater.gds")
 
 
 @gf.cell
-def crossing_so() -> Component:
+def crossing_so() -> gf.Component:
     """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
     xc = 493.47
@@ -970,7 +1005,7 @@ def crossing_so() -> Component:
 
 
 @gf.cell
-def crossing_rc() -> Component:
+def crossing_rc() -> gf.Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
     xc = 404.24
@@ -990,7 +1025,7 @@ def crossing_rc() -> Component:
 
 
 @gf.cell
-def crossing_sc() -> Component:
+def crossing_sc() -> gf.Component:
     """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")
     xc = 494.24
@@ -1019,7 +1054,7 @@ def array(
     add_ports: bool = True,
     size=None,
     centered: bool = False,
-) -> Component:
+) -> gf.Component:
     """An array of components.
 
     Args:
