@@ -1,3 +1,4 @@
 info: {}
-name: rectangle
-settings: {}
+name: rectangle_LFLOORPLAN
+settings:
+  layer: FLOORPLAN

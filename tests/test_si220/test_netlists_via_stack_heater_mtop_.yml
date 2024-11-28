@@ -1,5 +1,51 @@
-instances: {}
+instances:
+  compass_S10_10_LHEATER__dfb178f0_0_0:
+    component: compass
+    info: {}
+    settings:
+      auto_rename_ports: true
+      layer: HEATER
+      port_inclusion: 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: null
+      size:
+      - 10
+      - 10
+  compass_S10_10_LPAD_PTe_503c8e09_0_0:
+    component: compass
+    info: {}
+    settings:
+      auto_rename_ports: false
+      layer: PAD
+      port_inclusion: 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: electrical
+      size:
+      - 10
+      - 10
 name: via_stack_heater_mtop_S10_10
 nets: []
-placements: {}
-ports: {}
+placements:
+  compass_S10_10_LHEATER__dfb178f0_0_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  compass_S10_10_LPAD_PTe_503c8e09_0_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports:
+  e1: compass_S10_10_LPAD_PTe_503c8e09_0_0,e1
+  e2: compass_S10_10_LPAD_PTe_503c8e09_0_0,e2
+  e3: compass_S10_10_LPAD_PTe_503c8e09_0_0,e3
+  e4: compass_S10_10_LPAD_PTe_503c8e09_0_0,e4

@@ -3,7 +3,13 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import Component, CrossSection, CrossSectionSpec
+from gdsfactory.typings import (
+    CrossSection,
+    CrossSectionSpec,
+    Ints,
+    LayerSpec,
+    Size,
+)
 
 from cspdk.si500.tech import LAYER, Tech
 
@@ -17,7 +23,7 @@ def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_rc",
     **kwargs,
-) -> Component:
+) -> gf.Component:
     """A straight waveguide.
 
     Args:
@@ -38,7 +44,7 @@ straight_ro = partial(straight, cross_section="xs_ro")
 
 
 @gf.cell
-def wire_corner() -> Component:
+def wire_corner() -> gf.Component:
     """A wire corner.
 
     A wire corner is a bend for electrical routes.
@@ -50,7 +56,7 @@ def wire_corner() -> Component:
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """An S-bend.
 
     Args:
@@ -71,7 +77,7 @@ def bend_euler(
     p: float = 0.5,
     width: float | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """An euler bend.
 
     Args:
@@ -109,7 +115,7 @@ def taper(
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """A taper.
 
     A taper is a transition between two waveguide widths
@@ -159,7 +165,7 @@ def mmi1x2(
     width_mmi=6.0,
     gap_mmi: float = 1.47,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """An mmi1x2.
 
     An mmi1x2 is a splitter that splits a single input to two outputs
@@ -199,7 +205,7 @@ def mmi2x2(
     width_mmi: float = 6.0,
     gap_mmi: float = 0.4,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """An mmi2x2.
 
     An mmi2x2 is a 2x2 splitter
@@ -239,7 +245,7 @@ def coupler_straight(
     length: float = 20.0,
     gap: float = 0.236,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """The straight part of a coupler.
 
     Args:
@@ -260,7 +266,7 @@ def coupler_symmetric(
     dy: float = 4.0,
     dx: float = 15.0,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """The part of the coupler that diverges away from each other with s-bends.
 
     Args:
@@ -285,7 +291,7 @@ def coupler(
     dy: float = 4.0,
     dx: float = 15.0,
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """A coupler.
 
     a coupler is a 2x2 splitter
@@ -322,7 +328,7 @@ def grating_coupler_rectangular(
     length_taper: float = 350.0,
     wavelength: float = 1.55,
     cross_section="xs_rc",
-) -> Component:
+) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
 
     Args:
@@ -371,7 +377,7 @@ def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.315,
     cross_section="xs_rc",
-) -> Component:
+) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
     Args:
@@ -416,7 +422,7 @@ grating_coupler_elliptical_ro = partial(
 ################
 
 # TODO: (needs gdsfactory fix) currently function arguments need to be
-# supplied as ComponentSpec strings, because when supplied as function they get
+# supplied as gf.ComponentSpec strings, because when supplied as function they get
 # serialized weirdly in the netlist
 
 
@@ -428,7 +434,7 @@ def mzi(
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
     cross_section: CrossSectionSpec = "xs_rc",
-) -> Component:
+) -> gf.Component:
     """A Mach-Zehnder Interferometer.
 
     Args:
@@ -491,16 +497,44 @@ mzi_ro = partial(
 
 
 @gf.cell
-def pad() -> Component:
+def pad() -> gf.Component:
     """An electrical pad."""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
 @gf.cell
-def rectangle(**kwargs) -> Component:
+def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle."""
-    kwargs["layer"] = LAYER.FLOORPLAN
-    return gf.c.rectangle(**kwargs)
+    return gf.c.rectangle(layer=layer, **kwargs)
+
+
+@gf.cell
+def compass(
+    size: Size = (4.0, 2.0),
+    layer: LayerSpec = "PAD",
+    port_type: str | None = "electrical",
+    port_inclusion: float = 0.0,
+    port_orientations: Ints | None = (180, 90, 0, -90),
+    auto_rename_ports: bool = True,
+) -> gf.Component:
+    """Rectangle with ports on each edge (north, south, east, and west).
+
+    Args:
+        size: rectangle size.
+        layer: tuple (int, int).
+        port_type: optical, electrical.
+        port_inclusion: from edge.
+        port_orientations: list of port_orientations to add. None does not add ports.
+        auto_rename_ports: auto rename ports.
+    """
+    return gf.c.compass(
+        size=size,
+        layer=layer,
+        port_type=port_type,
+        port_inclusion=port_inclusion,
+        port_orientations=port_orientations,
+        auto_rename_ports=auto_rename_ports,
+    )
 
 
 @gf.cell
@@ -515,7 +549,7 @@ def grating_coupler_array(
     rotation=-90,
     straight_to_grating_spacing=10.0,
     radius: float | None = None,
-) -> Component:
+) -> gf.Component:
     """An array of grating couplers.
 
     Args:
@@ -560,7 +594,7 @@ def grating_coupler_array(
 
 
 @gf.cell
-def die(cross_section="xs_rc") -> Component:
+def die(cross_section="xs_rc") -> gf.Component:
     """A die template.
 
     Args:
@@ -607,7 +641,7 @@ def array(
     add_ports: bool = True,
     size=None,
     centered: bool = False,
-) -> Component:
+) -> gf.Component:
     """An array of components.
 
     Args:
