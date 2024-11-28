@@ -2,6 +2,9 @@
 
 <!-- towncrier release notes start -->
 
+## 0.11.5
+- update gdsfactory 8.21.0
+
 ## 0.11.4
 - update gdsfactory 8.20.0 [#77](https://github.com/gdsfactory/cspdk/pull/77)
 
