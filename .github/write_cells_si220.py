@@ -61,6 +61,7 @@ Cells Si SOI 220nm
   import cspdk
 
   c = cspdk.si220.cells.{name}({kwargs})
+  c.draw_ports()
   c.plot()
 
 """
