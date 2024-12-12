@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.12.0
+
+- add uv instructions [#84](https://github.com/gdsfactory/cspdk/pull/84)
+- update to 8.25.1 [#82](https://github.com/gdsfactory/cspdk/pull/82)
+
 ## 0.11.5
 
 - update changelog [#79](https://github.com/gdsfactory/cspdk/pull/79)
