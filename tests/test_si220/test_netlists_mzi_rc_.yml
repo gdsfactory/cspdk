@@ -1,6 +1,6 @@
 instances:
   b1:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -20,7 +20,7 @@ instances:
       radius: null
       width: null
   b2:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -40,7 +40,7 @@ instances:
       radius: null
       width: null
   b3:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -60,7 +60,7 @@ instances:
       radius: null
       width: null
   b4:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -80,7 +80,7 @@ instances:
       radius: null
       width: null
   b5:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -100,7 +100,7 @@ instances:
       radius: null
       width: null
   b6:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -120,7 +120,7 @@ instances:
       radius: null
       width: null
   b7:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592
@@ -140,7 +140,7 @@ instances:
       radius: null
       width: null
   b8:
-    component: bend_euler_sc
+    component: bend_euler
     info:
       dy: 25
       length: 41.592

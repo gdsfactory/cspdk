@@ -3,9 +3,9 @@
 from functools import partial
 
 import gdsfactory as gf
+from gdsfactory.cross_section import CrossSection
 from gdsfactory.typings import (
     ComponentSpec,
-    CrossSection,
     CrossSectionSpec,
     Ints,
     LayerSpec,
@@ -73,7 +73,7 @@ def bend_s(
 
 
 @gf.cell
-def bend_euler_sc(
+def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
     p: float = 0.5,
@@ -102,9 +102,10 @@ def bend_euler_sc(
     )
 
 
-bend_euler_so = partial(bend_euler_sc, cross_section="xs_so")
-bend_euler_rc = partial(bend_euler_sc, cross_section="xs_rc")
-bend_euler_ro = partial(bend_euler_sc, cross_section="xs_ro")
+bend_euler_sc = partial(bend_euler, cross_section="xs_sc")
+bend_euler_so = partial(bend_euler, cross_section="xs_so")
+bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
+bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 bend_metal = partial(bend_euler_sc, cross_section="metal_routing")
 
 ################

@@ -1,12 +1,16 @@
 """Technology definitions."""
 
-import sys
 from collections.abc import Iterable
 from functools import partial
 from typing import cast
 
 import gdsfactory as gf
-from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
+from gdsfactory.cross_section import (
+    CrossSection,
+    cross_section,
+    port_names_electrical,
+    port_types_electrical,
+)
 from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
@@ -15,7 +19,15 @@ from gdsfactory.technology import (
     LayerViews,
     LogicalLayer,
 )
-from gdsfactory.typings import ComponentSpec, ConnectivitySpec, Layer
+from gdsfactory.typings import (
+    ComponentSpec,
+    ConnectivitySpec,
+    CrossSectionSpec,
+    Floats,
+    Layer,
+    LayerSpec,
+    LayerSpecs,
+)
 
 from cspdk.si500.config import PATH
 
@@ -111,6 +123,8 @@ class Tech:
     width_rc = 0.45
     width_ro = 0.40
 
+    width_slab = 5
+
 
 TECH = Tech()
 
@@ -118,96 +132,87 @@ TECH = Tech()
 ############################
 # Cross-sections functions
 ############################
-
-# will be filled after all cross sections are defined:
-DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
+xsection = gf.xsection
 
 
-def xs_rc(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
-    """Returns a rib Cband cross-section."""
-    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
-    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
-    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
-    kwargs["radius_min"] = kwargs.get("radius_min", radius)
-    kwargs["sections"] = kwargs.get(
-        "sections",
-        (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
+@xsection
+def xs_rc(
+    width: float = TECH.width_rc,
+    layer: LayerSpec = "WG",
+    radius: float = TECH.radius_rc,
+    radius_min: float = TECH.radius_rc,
+    bbox_layers: LayerSpecs = ("SLAB",),
+    bbox_offsets: Floats = (TECH.width_slab,),
+    **kwargs,
+) -> CrossSection:
+    """Return Rib cross_section."""
+    return gf.cross_section.cross_section(
+        width=width,
+        layer=layer,
+        radius=radius,
+        radius_min=radius_min,
+        bbox_layers=bbox_layers,
+        bbox_offsets=bbox_offsets,
+        **kwargs,
     )
-    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
-    return xs
 
 
-def xs_rc_tip(width=Tech.width_rc, radius=Tech.radius_rc, **kwargs) -> gf.CrossSection:
-    """Returns a rib Cband cross-section."""
-    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
-    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
-    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
-    kwargs["radius_min"] = kwargs.get("radius_min", radius)
-    kwargs["sections"] = kwargs.get(
-        "sections",
-        (gf.Section(width=0.2, layer=LAYER.SLAB, name="slab"),),
+@xsection
+def xs_ro(
+    width: float = TECH.width_ro,
+    layer: LayerSpec = "WG",
+    radius: float = TECH.radius_ro,
+    radius_min: float = TECH.radius_ro,
+    bbox_layers: LayerSpecs = ("SLAB",),
+    bbox_offsets: Floats = (TECH.width_slab,),
+    **kwargs,
+) -> CrossSection:
+    """Return Rib cross_section."""
+    return gf.cross_section.cross_section(
+        width=width,
+        layer=layer,
+        radius=radius,
+        radius_min=radius_min,
+        bbox_layers=bbox_layers,
+        bbox_offsets=bbox_offsets,
+        **kwargs,
     )
-    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
-    return xs
 
 
-def xs_ro(width=Tech.width_ro, radius=Tech.radius_ro, **kwargs) -> gf.CrossSection:
-    """Returns a rib Oband cross-section."""
-    kwargs["layer"] = kwargs.get("layer", LAYER.WG)
-    kwargs["bbox_layers"] = kwargs.get("bbox_layers", (LAYER.SLAB,))
-    kwargs["bbox_offsets"] = kwargs.get("bbox_offsets", (5,))
-    kwargs["radius_min"] = kwargs.get("radius_min", radius)
-    kwargs["sections"] = kwargs.get(
-        "sections",
-        (gf.Section(width=10.45, layer=LAYER.SLAB, name="slab", simplify=50 * nm),),
+@xsection
+def metal_routing(
+    width: float = 10,
+    layer: LayerSpec = "PAD",
+    radius: float | None = None,
+) -> CrossSection:
+    """Return Metal Strip cross_section."""
+    return cross_section(
+        width=width,
+        layer=layer,
+        radius=radius,
+        port_names=port_names_electrical,
+        port_types=port_types_electrical,
     )
-    xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
-    return xs
 
 
-def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
-    """Returns a metal routing cross-section."""
-    kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
-    kwargs["port_names"] = kwargs.get(
-        "port_names", gf.cross_section.port_names_electrical
+@xsection
+def heater_metal(
+    width: float = 4,
+    layer: LayerSpec = "HEATER",
+    radius: float | None = None,
+    port_names=port_names_electrical,
+    port_types=port_types_electrical,
+    **kwargs,
+) -> CrossSection:
+    """Return Metal Strip cross_section."""
+    return gf.cross_section.cross_section(
+        width=width,
+        layer=layer,
+        radius=radius,
+        port_names=port_names,
+        port_types=port_types,
+        **kwargs,
     )
-    kwargs["port_types"] = kwargs.get(
-        "port_types", gf.cross_section.port_types_electrical
-    )
-    kwargs["radius"] = kwargs.get("radius", 0)
-    kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
-    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
-    return xs
-
-
-def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
-    """Returns a heater metal cross-section."""
-    kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
-    xs = metal_routing(width=width, **kwargs).copy()
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
-    return xs
-
-
-def populate_default_cross_section_names() -> None:
-    """Populates the default cross-section names."""
-    xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
-    for k, xs in xss.items():
-        xs._name = ""
-        _k = xs.name
-        xs._name = k
-        DEFAULT_CROSS_SECTION_NAMES[_k] = xs.name
-
-
-populate_default_cross_section_names()
 
 
 ############################
