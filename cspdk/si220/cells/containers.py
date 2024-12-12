@@ -1,12 +1,12 @@
 """This module contains cells that contain other cells."""
 
 from functools import partial
+from typing import Any
 
 import gdsfactory as gf
+from gdsfactory.component import Component
 from gdsfactory.typings import (
-    Any,
     CellSpec,
-    Component,
     ComponentSpec,
     CrossSectionSpec,
     Strs,

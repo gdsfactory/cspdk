@@ -6,8 +6,7 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory import Section
 from gdsfactory.cross_section import (
-    CrossSectionSpec,
-    LayerSpec,
+    CrossSection,
     cross_section,
     port_names_electrical,
     port_types_electrical,
@@ -23,9 +22,10 @@ from gdsfactory.technology import (
 from gdsfactory.typings import (
     ComponentSpec,
     ConnectivitySpec,
-    CrossSection,
+    CrossSectionSpec,
     Floats,
     Layer,
+    LayerSpec,
     LayerSpecs,
 )
 
@@ -124,8 +124,8 @@ class Tech:
     radius_ro = 25
     width_sc = 0.45
     width_so = 0.40
-    width_rc = 0.45
-    width_ro = 0.40
+    width_rc = 0.5
+    width_ro = 0.5
 
     width_slab = 5
 
@@ -173,7 +173,7 @@ def xs_so(
 
 @xsection
 def xs_rc(
-    width: float = 0.5,
+    width: float = TECH.width_rc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_rc,
     radius_min: float = TECH.radius_rc,
@@ -195,7 +195,7 @@ def xs_rc(
 
 @xsection
 def xs_ro(
-    width: float = 0.5,
+    width: float = TECH.width_ro,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_ro,
     radius_min: float = TECH.radius_ro,

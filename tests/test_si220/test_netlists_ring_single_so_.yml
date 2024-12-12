@@ -1,6 +1,6 @@
 instances:
-  bend_euler_sc_R10_A90_P_b5bfad2b_10000_11200:
-    component: bend_euler_sc
+  bend_euler_R10_A90_P0p5_78d7e92f_10000_11200:
+    component: bend_euler
     info:
       dy: 10
       length: 16.637
@@ -19,8 +19,8 @@ instances:
       p: 0.5
       radius: 10
       width: null
-  bend_euler_sc_R10_A90_P_b5bfad2b_m4000_21200:
-    component: bend_euler_sc
+  bend_euler_R10_A90_P0p5_78d7e92f_m4000_21200:
+    component: bend_euler
     info:
       dy: 10
       length: 16.637
@@ -89,25 +89,25 @@ instances:
       length: 4
 name: ring_single_sc_G0p2_R10_7d576c4a
 nets:
-- p1: bend_euler_sc_R10_A90_P_b5bfad2b_10000_11200,o1
+- p1: bend_euler_R10_A90_P0p5_78d7e92f_10000_11200,o1
   p2: straight_L0p6_CSxs_so_10000_11200,o1
-- p1: bend_euler_sc_R10_A90_P_b5bfad2b_10000_11200,o2
+- p1: bend_euler_R10_A90_P0p5_78d7e92f_10000_11200,o2
   p2: straight_L4_CSxs_so_0_21200,o1
-- p1: bend_euler_sc_R10_A90_P_b5bfad2b_m4000_21200,o1
+- p1: bend_euler_R10_A90_P0p5_78d7e92f_m4000_21200,o1
   p2: straight_L4_CSxs_so_0_21200,o2
-- p1: bend_euler_sc_R10_A90_P_b5bfad2b_m4000_21200,o2
+- p1: bend_euler_R10_A90_P0p5_78d7e92f_m4000_21200,o2
   p2: straight_L0p6_CSxs_so_m14000_10600,o2
 - p1: coupler_ring_sc_G0p2_R1_48750ebd_0_0,o2
   p2: straight_L0p6_CSxs_so_m14000_10600,o1
 - p1: coupler_ring_sc_G0p2_R1_48750ebd_0_0,o3
   p2: straight_L0p6_CSxs_so_10000_11200,o2
 placements:
-  bend_euler_sc_R10_A90_P_b5bfad2b_10000_11200:
+  bend_euler_R10_A90_P0p5_78d7e92f_10000_11200:
     mirror: false
     rotation: 90
     x: 10
     y: 11.2
-  bend_euler_sc_R10_A90_P_b5bfad2b_m4000_21200:
+  bend_euler_R10_A90_P0p5_78d7e92f_m4000_21200:
     mirror: false
     rotation: 180
     x: -4

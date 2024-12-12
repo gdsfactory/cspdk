@@ -6,7 +6,7 @@ from functools import partial
 from typing import cast
 
 import gdsfactory as gf
-from gdsfactory.cross_section import CrossSectionSpec, LayerSpec, get_cross_sections
+from gdsfactory.cross_section import CrossSectionSpec, get_cross_sections
 from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
@@ -15,7 +15,7 @@ from gdsfactory.technology import (
     LayerViews,
     LogicalLayer,
 )
-from gdsfactory.typings import ComponentSpec, ConnectivitySpec, Layer
+from gdsfactory.typings import ComponentSpec, ConnectivitySpec, Layer, LayerSpec
 
 from cspdk.sin300.config import PATH
 

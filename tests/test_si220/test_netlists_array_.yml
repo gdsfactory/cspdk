@@ -1,7 +1,10 @@
 instances:
   pad_0_0:
-    column_pitch: 150
-    columns: 6
+    array:
+      column_pitch: 150
+      columns: 6
+      row_pitch: 150
+      rows: 1
     component: pad
     info:
       size:
@@ -9,8 +12,6 @@ instances:
       - 100
       xsize: 100
       ysize: 100
-    row_pitch: 150
-    rows: 1
     settings: {}
 name: array_Cpad_S150_150_C6__0e3de41c
 nets: []

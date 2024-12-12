@@ -6,7 +6,7 @@ test:
 	pytest -s tests/test_si500.py
 	pytest -s tests/test_sin300.py
 
-test-force-regen:
+test-force:
 	pytest -s tests/test_si220.py --force-regen
 	pytest -s tests/test_si500.py --force-regen
 	pytest -s tests/test_sin300.py --force-regen
