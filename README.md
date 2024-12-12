@@ -23,16 +23,25 @@ Then you need to restart Klayout to make sure the new technology installed appea
 
 You can download the [code](https://github.com/gdsfactory/cspdk/archive/refs/heads/main.zip) and examples.
 
-### Installation for developers
+### Installation for contributors
 
-For developers you need to `git clone` the GitHub repository, fork it, git add, git commit, git push and merge request your changes.
+We recommend `uv`
 
+```bash
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-git clone https://github.com/gdsfactory/cspdk.git
-cd cspdk
-pip install -e . pre-commit
-pre-commit install
-python install_tech.py
+
+```bash
+# On Windows.
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Then you can install with:
+
+```bash
+uv venv --python 3.11
+uv sync --extra docs --extra dev
 ```
 
 ## Documentation
