@@ -261,30 +261,6 @@ def coupler_straight(
 
 
 @gf.cell
-def coupler_symmetric(
-    gap: float = 0.236,
-    dy: float = 4.0,
-    dx: float = 15.0,
-    cross_section: CrossSectionSpec = "xs_rc",
-) -> gf.Component:
-    """The part of the coupler that diverges away from each other with s-bends.
-
-    Args:
-        gap: the gap between the s-bends when closest together.
-        dy: the height of the s-bend.
-        dx: the length of the s-bend.
-        cross_section: a cross section or its name or a function generating a cross section.
-    """
-    return gf.c.coupler_symmetric(
-        bend="bend_s",
-        gap=gap,
-        dy=dy,
-        dx=dx,
-        cross_section=cross_section,
-    )
-
-
-@gf.cell
 def coupler(
     gap: float = 0.236,
     length: float = 20.0,
@@ -662,3 +638,8 @@ def array(
         centered=centered,
         add_ports=add_ports,
     )
+
+
+if __name__ == "__main__":
+    c = die_rc()
+    c.show()
