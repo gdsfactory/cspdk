@@ -79,11 +79,11 @@ select = [
   "W"  # pycodestyle warnings
 ]
 
-[tool.ruff.pydocstyle]
-convention = "google"
-
 [tool.ruff.lint.per-file-ignores]
 "cspdk/si220/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [tool.setuptools.package-data]
 mypkg = ["*.csv", "*.yaml"]
@@ -101,6 +101,9 @@ src = "pyproject.toml"
 
 [[tool.tbump.file]]
 src = "cspdk/__init__.py"
+
+[[tool.tbump.file]]
+src = "uv.lock"
 
 [tool.tbump.git]
 message_template = "Bump to {new_version}"
