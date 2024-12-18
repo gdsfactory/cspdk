@@ -2,7 +2,6 @@
 
 sample_pads = """
 name: pads
-pdk: cspdk.si220
 
 instances:
     bl:
@@ -17,15 +16,15 @@ instances:
 placements:
     tl:
         x: -200
-        y: 500
+        y: 200
 
     br:
-        x: 400
-        y: 400
+        x: 900
+        y: 500
 
     tr:
-        x: 400
-        y: 600
+        x: 900
+        y: 900
 
 
 routes:
@@ -33,23 +32,22 @@ routes:
         settings:
             cross_section: metal_routing
             separation: 20
-            width: 10
+            route_width: 5
             end_straight_length: 100
+            radius: 5
         links:
             tl,e3: tr,e1
             bl,e3: br,e1
-    optical:
-        settings:
-            cross_section: xs_sc
-            radius: 100
-        links:
-            bl,e4: br,e3
 
 """
 
 
 if __name__ == "__main__":
     import gdsfactory as gf
+
+    from cspdk.si220 import PDK
+
+    PDK.activate()
 
     c = gf.read.from_yaml(sample_pads)
     c.show()
