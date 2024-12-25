@@ -9,11 +9,15 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     name: Sphinx docs to gh-pages
-    container: ghcr.io/gdsfactory/gdsfactory:main
     steps:
       - uses: actions/checkout@v4
-      - name: Installing the library
-        shell: bash -l {0}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
         run: |
           make install
       - name: make docs

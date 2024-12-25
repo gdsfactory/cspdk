@@ -1,5 +1,5 @@
 install:
-	pip install -e .[dev,docs]
+	uv sync --extra docs --extra dev
 
 test:
 	pytest -s tests/test_si220.py
@@ -34,9 +34,9 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs:
-	python .github/write_cells_si220.py
-	python .github/write_cells_si500.py
-	python .github/write_cells_sin300.py
-	jb build docs
+	uv run python .github/write_cells_si220.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	uv run jb build docs
 
 .PHONY: drc doc docs
