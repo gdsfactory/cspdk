@@ -2,9 +2,9 @@ install:
 	uv sync --extra docs --extra dev
 
 test:
-	pytest -s tests/test_si220.py
-	pytest -s tests/test_si500.py
-	pytest -s tests/test_sin300.py
+	uv run pytest -s tests/test_si220.py
+	uv run pytest -s tests/test_si500.py
+	uv run pytest -s tests/test_sin300.py
 
 test-force:
 	uv run pytest -s tests/test_si220.py --force-regen
@@ -12,9 +12,9 @@ test-force:
 	uv run pytest -s tests/test_sin300.py --force-regen
 
 test-fail-fast:
-	pytest -s tests/test_si220.py -x
-	pytest -s tests/test_si500.py -x
-	pytest -s tests/test_sin300.py -x
+	uv run pytest -s tests/test_si220.py -x
+	uv run pytest -s tests/test_si500.py -x
+	uv run pytest -s tests/test_sin300.py -x
 
 update-pre:
 	pre-commit autoupdate --bleeding-edge
