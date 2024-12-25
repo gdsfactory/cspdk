@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 0.12.2
+
+- better wire_corner [#89](https://github.com/gdsfactory/cspdk/pull/89)
+
 ## 0.12.1
 
 - use uv in cicd
