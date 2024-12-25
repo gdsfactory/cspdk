@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 0.12.1
+
+- use uv in cicd
+- update to gdsfactory 8.27.0
+
 ## 0.12.0
 
 - add uv instructions [#84](https://github.com/gdsfactory/cspdk/pull/84)
