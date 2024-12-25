@@ -44,12 +44,12 @@ straight_ro = partial(straight, cross_section="xs_ro")
 
 
 @gf.cell
-def wire_corner() -> gf.Component:
+def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     """A wire corner.
 
     A wire corner is a bend for electrical routes.
     """
-    return gf.components.wire_corner(cross_section="metal_routing")
+    return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
 
 @gf.cell
