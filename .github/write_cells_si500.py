@@ -60,7 +60,7 @@ Cells Si SOI 500nm
 
   import cspdk
 
-  c = cspdk.si500.cells.{name}({kwargs})
+  c = cspdk.si500.cells.{name}({kwargs}).dup()
   c.draw_ports()
   c.plot()
 

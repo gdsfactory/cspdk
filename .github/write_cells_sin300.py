@@ -60,7 +60,7 @@ Cells SiN300
 
   import cspdk
 
-  c = cspdk.si220.cells.{name}({kwargs})
+  c = cspdk.si220.cells.{name}({kwargs}).dup()
   c.draw_ports()
   c.plot()
 
