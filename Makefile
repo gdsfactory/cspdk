@@ -7,9 +7,9 @@ test:
 	pytest -s tests/test_sin300.py
 
 test-force:
-	pytest -s tests/test_si220.py --force-regen
-	pytest -s tests/test_si500.py --force-regen
-	pytest -s tests/test_sin300.py --force-regen
+	uv run pytest -s tests/test_si220.py --force-regen
+	uv run pytest -s tests/test_si500.py --force-regen
+	uv run pytest -s tests/test_sin300.py --force-regen
 
 test-fail-fast:
 	pytest -s tests/test_si220.py -x

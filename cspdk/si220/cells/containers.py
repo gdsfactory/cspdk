@@ -56,7 +56,7 @@ def add_fiber_array_sc(
         routing_method: route_single.
         optical_routing_type: None: auto, 0: no extension, 1: standard, 2: check.
         input_port_indexes: to connect.
-        fiber_spacing: in um.
+        pitch: in um.
         radius: optional radius of the bend. Defaults to the cross_section.
         radius_loopback: optional radius of the loopback bend. Defaults to the cross_section.
         route_backwards: route from component to grating coupler or vice-versa.
@@ -191,7 +191,7 @@ def add_pads_top(
     pad: ComponentSpec = "pad",
     bend: ComponentSpec = "wire_corner",
     straight_separation: float = 15.0,
-    pad_spacing: float | str = "pad_spacing",
+    pad_pitch: float = 100.0,
     taper: ComponentSpec | None = None,
     port_type: str = "electrical",
     allow_width_mismatch: bool = True,
@@ -210,7 +210,7 @@ def add_pads_top(
         pad: pad function.
         bend: bend function.
         straight_separation: from edge to edge.
-        pad_spacing: spacing between pads.
+        pad_pitch: spacing between pads.
         taper: taper function.
         port_type: port type.
         allow_width_mismatch: if True, allows width mismatch.
@@ -244,7 +244,7 @@ def add_pads_top(
         pad=pad,
         bend=bend,
         straight_separation=straight_separation,
-        pad_spacing=pad_spacing,
+        pad_pitch=pad_pitch,
         taper=taper,
         port_type=port_type,
         allow_width_mismatch=allow_width_mismatch,

@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  # "gdsfactory~=8.25.1",
+  "gdsfactory~=8.27.0",
   "gplugins[sax]>=1,<2"
 ]
 description = "CornerStone PDK"
@@ -29,9 +29,11 @@ version = "0.12.0"
 [project.optional-dependencies]
 dev = [
   "pre-commit",
+  "jsondiff",
   "pytest",
   "pytest-cov",
-  "pytest_regressions"
+  "pytest_regressions",
+  "pytest-github-actions-annotate-failures"
 ]
 docs = [
   "jupytext",
