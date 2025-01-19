@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 0.12.3
+
+- update to gdsfactory 8.30.3 [#93](https://github.com/gdsfactory/cspdk/pull/93)
+
 ## 0.12.2
 
 - better wire_corner [#89](https://github.com/gdsfactory/cspdk/pull/89)
