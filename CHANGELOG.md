@@ -2,7 +2,7 @@
 
 <!-- towncrier release notes start -->
 
-## 0.12.3
+## 0.12.4
 
 - update to gdsfactory 8.31.0
 
