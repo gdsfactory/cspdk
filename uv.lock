@@ -487,7 +487,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gdsfactory", specifier = "~=8.31.0" },
+    { name = "gdsfactory", specifier = "~=8.32.0" },
     { name = "gplugins", extras = ["sax"], specifier = ">=1,<2" },
     { name = "jsondiff", marker = "extra == 'dev'" },
     { name = "jupyter-book", marker = "extra == 'docs'", specifier = "==1.0.3" },
@@ -739,7 +739,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactory"
-version = "8.31.0"
+version = "8.32.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -773,9 +773,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/af/91/be738d576b555e26c2b65a76e497ba2acf7599e30afd7fd71b8d3484d631/gdsfactory-8.31.0.tar.gz", hash = "sha256:ed6e7553d2f929687484cdd506eea747bced6f84e4dd4e85bedb600966d5fe06", size = 474054 }
+sdist = { url = "https://files.pythonhosted.org/packages/77/67/0207c7ee8c5731131b239590b518db3b8287b1c816d18647cd4b8d349a28/gdsfactory-8.32.0.tar.gz", hash = "sha256:a163e8490758fd0e14180f172e57059efa31548fcafef39c26bac5500e3cc2ac", size = 473934 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/73/6f/bad9c3ca665857b9fa15de486c267b60674e6a0aed11813631c0c5dc02dd/gdsfactory-8.31.0-py3-none-any.whl", hash = "sha256:c1af9af4e28c095945c9feeb54f1802df1d8e1640b6d6f0238013b97b4f90735", size = 664412 },
+    { url = "https://files.pythonhosted.org/packages/7c/26/604766b5ae19aacad4986f963218e0d1817c5966ff4e2ebb1aa4f08dc6b7/gdsfactory-8.32.0-py3-none-any.whl", hash = "sha256:00ba9e9501cb4e296fab162033bb0a2aecbc4c8116b7e8825f5b2d8e520e4789", size = 664254 },
 ]
 
 [[package]]
