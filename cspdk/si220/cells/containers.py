@@ -23,6 +23,7 @@ def add_fiber_array_sc(
     component_name: str | None = None,
     cross_section: CrossSectionSpec = "xs_sc",
     gc_rotation: float = -90,
+    radius_loopback: float = 10,
     **kwargs,
 ) -> Component:
     """Returns component with south routes and grating_couplers.
@@ -36,6 +37,7 @@ def add_fiber_array_sc(
         component_name: optional for the label.
         cross_section: cross_section function.
         gc_rotation: fiber coupler rotation in degrees. Defaults to -90.
+        radius_loopback: optional radius of the loopback bend. Defaults to the cross_section.
         kwargs: additional arguments.
 
     Keyword Args:
@@ -58,7 +60,6 @@ def add_fiber_array_sc(
         input_port_indexes: to connect.
         pitch: in um.
         radius: optional radius of the bend. Defaults to the cross_section.
-        radius_loopback: optional radius of the loopback bend. Defaults to the cross_section.
         route_backwards: route from component to grating coupler or vice-versa.
 
     .. plot::
@@ -83,6 +84,7 @@ def add_fiber_array_sc(
         gc_rotation=gc_rotation,
         component_name=component_name,
         cross_section=cross_section,
+        radius_loopback=radius_loopback,
         **kwargs,
     )
 
@@ -344,7 +346,7 @@ if __name__ == "__main__":
 
     PDK.activate()
 
-    c = add_fiber_single_sc()
+    c = add_fiber_array_sc()
     # c =gf.get_component(gc_sc)
     # c = pack_doe()
     c.pprint_ports()
