@@ -618,30 +618,33 @@ die_no = partial(die, cross_section="xs_no")
 @gf.cell
 def array(
     component="pad",
-    spacing: tuple[float, float] = (150.0, 150.0),
     columns: int = 6,
     rows: int = 1,
     add_ports: bool = True,
     size=None,
     centered: bool = False,
-) -> Component:
+    column_pitch: float = 150,
+    row_pitch: float = 150,
+) -> gf.Component:
     """An array of components.
 
     Args:
         component: the component of which to create an array
-        spacing: the x and y spacing by which to place the component
         columns: the number of components to place in the x-direction
         rows: the number of components to place in the y-direction
         add_ports: add ports to the component
         size: Optional x, y size. Overrides columns and rows.
         centered: center the array around the origin.
+        row_pitch: the pitch between rows.
+        column_pitch: the pitch between columns.
     """
     return gf.c.array(
         component=component,
-        spacing=spacing,
         columns=columns,
         rows=rows,
         size=size,
         centered=centered,
         add_ports=add_ports,
+        column_pitch=column_pitch,
+        row_pitch=row_pitch,
     )
