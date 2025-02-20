@@ -13,7 +13,7 @@ instances:
       xsize: 100
       ysize: 100
     settings: {}
-name: array_Cpad_S150_150_C6__0e3de41c
+name: array_Cpad_C6_R1_APTrue_6a580928
 nets: []
 placements:
   pad_0_0:
