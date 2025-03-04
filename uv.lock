@@ -1,5 +1,4 @@
 version = 1
-revision = 1
 requires-python = ">=3.11, <3.14"
 resolution-markers = [
     "python_full_version >= '3.13'",
@@ -275,7 +274,7 @@ name = "click"
 version = "8.1.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "colorama", marker = "platform_system == 'Windows'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a", size = 226593 }
 wheels = [
@@ -434,7 +433,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gdsfactory", specifier = "~=9.0.0" },
+    { name = "gdsfactory", specifier = "~=9.0.3" },
     { name = "gplugins", extras = ["sax"], specifier = ">=1,<2" },
     { name = "jsondiff", marker = "extra == 'dev'" },
     { name = "jupyter-book", marker = "extra == 'docs'", specifier = "==1.0.3" },
@@ -446,7 +445,6 @@ requires-dist = [
     { name = "pytest-github-actions-annotate-failures", marker = "extra == 'dev'" },
     { name = "pytest-regressions", marker = "extra == 'dev'" },
 ]
-provides-extras = ["dev", "docs"]
 
 [[package]]
 name = "cycler"
@@ -667,7 +665,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactory"
-version = "9.0.0"
+version = "9.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -701,9 +699,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/12/b6/7e0257675921c10823b81b4c675a549365de681d3e8ebe91b89bac36804a/gdsfactory-9.0.0.tar.gz", hash = "sha256:64d230d9623ad8e233d44b82a5df43383a0a31f3b84d4e41af3d63dcc06662d0", size = 468347 }
+sdist = { url = "https://files.pythonhosted.org/packages/0b/7e/8cd8c2ab511f8b7ef14acc731c8df75b4d1ee830b8c54df86f2b5e7b122d/gdsfactory-9.0.3.tar.gz", hash = "sha256:76ac65dc9e3b41ffad0af65a3e6184f7841211f88c522a8acac71d22cc32fabd", size = 468266 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/5a/7857dd6a182d806e7e4afac71ad2081ccc8a66aa658e65a38b6cf11b280a/gdsfactory-9.0.0-py3-none-any.whl", hash = "sha256:61b9b2bcd8a54c1c2fae1c79294493c3bc1a6a5568e4910f4253bcb5260e56f8", size = 657276 },
+    { url = "https://files.pythonhosted.org/packages/86/f4/f7ea4129f5bdc82e6efd3e674515b586131a60e67255ca604340f68e9d5d/gdsfactory-9.0.3-py3-none-any.whl", hash = "sha256:89c5ff0e81f918abec43fcb441f094f3519dd133257c3c4bc592c2508f6f5824", size = 657352 },
 ]
 
 [[package]]
@@ -938,7 +936,7 @@ name = "ipykernel"
 version = "6.29.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "appnope", marker = "sys_platform == 'darwin'" },
+    { name = "appnope", marker = "platform_system == 'Darwin'" },
     { name = "comm" },
     { name = "debugpy" },
     { name = "ipython" },
@@ -1244,7 +1242,7 @@ wheels = [
 
 [[package]]
 name = "kfactory"
-version = "1.1.3"
+version = "1.2.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aenum" },
@@ -1262,9 +1260,9 @@ dependencies = [
     { name = "toolz" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/84/06/5322cd3dd77587c186290f20083f47b38c77d3d968086070c31d6fbef6a8/kfactory-1.1.3.tar.gz", hash = "sha256:f2da10ec36d3accd6c8886fd0518fd77d01870422f50283a7661247739492b2e", size = 1384872 }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/7c/a6cec1f502df1fe926e781292a46473661407787c32fa73a5b3bff51c1a3/kfactory-1.2.1.tar.gz", hash = "sha256:9a615593d1cfeafc087cebbdbe100674e2a5cdbc9abb4416844f07609028d5c3", size = 1383542 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ab/f4/b8b5d36788fa7ccde439faf942de6eb4fc311cf89edf0edc12802111494b/kfactory-1.1.3-py3-none-any.whl", hash = "sha256:3a4f2c66e122997d30be1ed5b8fe6d29b49392f2a20d84e41d1ae4b6cf56a120", size = 186216 },
+    { url = "https://files.pythonhosted.org/packages/f9/84/21ebd77e17042cfbaac377c214f5322d89dba6afd2acb472a63e959d3dda/kfactory-1.2.1-py3-none-any.whl", hash = "sha256:9f008e017d81a72ae19ae499c6b34c54aed1a1380e6e8036e2605c61eb9d340a", size = 187015 },
 ]
 
 [package.optional-dependencies]
@@ -3432,7 +3430,7 @@ name = "tqdm"
 version = "4.67.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "colorama", marker = "platform_system == 'Windows'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737 }
 wheels = [
