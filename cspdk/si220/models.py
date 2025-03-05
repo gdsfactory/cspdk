@@ -373,6 +373,42 @@ def heater() -> sax.SDict:
     raise NotImplementedError("No model for 'heater'")
 
 
+def straight_heater_metal_sc(
+    wl: float = 1.55,
+    neff: float = 2.34,
+    voltage: float = 0,
+    vpi: float = 1.0,  # Voltage required for π-phase shift
+    length: float = 10,
+    loss: float = 0.0,
+) -> sax.SDict:
+    """Returns simple phase shifter model.
+
+    Args:
+        wl: wavelength.
+        neff: effective index.
+        voltage: applied voltage.
+        vpi: voltage required for a π-phase shift.
+        length: length.
+        loss: loss.
+    """
+    # Calculate additional phase shift due to applied voltage.
+    deltaphi = (voltage / vpi) * jnp.pi
+    phase = 2 * jnp.pi * neff * length / wl + deltaphi
+    amplitude = jnp.asarray(10 ** (-loss * length / 20), dtype=complex)
+    transmission = amplitude * jnp.exp(1j * phase)
+    return sax.reciprocal(
+        {
+            ("o1", "o2"): transmission,
+            ("l_e1", "r_e1"): 0.0,
+            ("l_e2", "r_e2"): 0.0,
+            ("l_e3", "r_e3"): 0.0,
+            ("l_e4", "r_e4"): 0.0,
+        }
+    )
+
+
+straight_heater_metal_so = straight_heater_metal_sc
+
 crossing_so = sm.crossing
 crossing_rc = sm.crossing
 crossing_sc = sm.crossing

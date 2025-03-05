@@ -2,6 +2,16 @@
 
 <!-- towncrier release notes start -->
 
+## 0.14.0
+
+- fix release flow [#102](https://github.com/gdsfactory/cspdk/pull/102)
+- update gdsfactory9 [#100](https://github.com/gdsfactory/cspdk/pull/100)
+
+## 0.13.0
+
+- add radius_loopback [#99](https://github.com/gdsfactory/cspdk/pull/99)
+- update gdsfactory9 [#100](https://github.com/gdsfactory/cspdk/pull/100)
+
 ## 0.12.4
 
 - update to gdsfactory 8.31.0
