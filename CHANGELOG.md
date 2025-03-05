@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 0.15.0
+
+- add heater models [#104](https://github.com/gdsfactory/cspdk/pull/104)
+
 ## 0.14.0
 
 - fix release flow [#102](https://github.com/gdsfactory/cspdk/pull/102)
