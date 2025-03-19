@@ -257,9 +257,9 @@ def coupler_symmetric() -> sax.SDict:
     raise NotImplementedError("No model for 'coupler_symmetric'")
 
 
-coupler_sc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+coupler_sc = partial(sm.coupler, wl0=1.55, fwhm=0.2)
 coupler_rc = coupler_sc
-coupler_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+coupler_so = partial(sm.coupler, wl0=1.31, fwhm=0.2)
 coupler_ro = coupler_so
 
 coupler_ring_sc = partial(sm.coupler, wl0=1.55)

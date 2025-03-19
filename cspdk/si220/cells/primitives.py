@@ -615,6 +615,52 @@ mzi_ro = partial(
 
 
 @gf.cell
+def mzi_lattice_sc(
+    delta_length: float = 10.0,
+    bend="bend_euler_sc",
+    straight="straight_sc",
+    splitter="mmi1x2_sc",
+    combiner="mmi2x2_sc",
+    cross_section: CrossSectionSpec = "xs_sc",
+) -> gf.Component:
+    """A Mach-Zehnder Interferometer.
+
+    Args:
+        delta_length: the difference in length between the upper and lower arms of the mzi
+        bend: the name of the default bend of the mzi
+        straight: the name of the default straight of the mzi
+        splitter: the name of the default splitter of the mzi
+        combiner: the name of the default combiner of the mzi
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.c.mzi(
+        delta_length=delta_length,
+        length_y=1.0,
+        length_x=0.1,
+        straight_y=None,
+        straight_x_top=None,
+        straight_x_bot=None,
+        with_splitter=True,
+        port_e1_splitter="o2",
+        port_e0_splitter="o3",
+        port_e1_combiner="o3",
+        port_e0_combiner="o4",
+        nbends=2,
+        cross_section=cross_section,
+        cross_section_x_top=None,
+        cross_section_x_bot=None,
+        mirror_bot=False,
+        add_optical_ports_arms=False,
+        min_length=10e-3,
+        auto_rename_ports=True,
+        bend=bend,
+        straight=straight,
+        splitter=splitter,
+        combiner=combiner,
+    )
+
+
+@gf.cell
 def coupler_ring_sc(
     gap: float = 0.2,
     radius: float = 5.0,
