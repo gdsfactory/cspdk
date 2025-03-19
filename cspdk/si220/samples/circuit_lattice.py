@@ -1,19 +1,20 @@
-"""Circuit simulation."""
+"""Circuit simulation with routes."""
 
+import gdsfactory as gf
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import sax
 
 from cspdk.si220 import PDK, cells
 
-if __name__ == "__main__":
-    # Layout definition
-    c = cells.mzi_sc(delta_length=12 * 2)
-    c.show()  # show the layout in Klayout
+def lattice_filter():
 
-    # Circuit simulation
-    netlist = c.get_netlist()
-    c.plot_netlist()
+if __name__ == "__main__":
+    c = gf.Component()
+    mzi_lattice = cells.mzi_lattice(delta_length=10)
+
+    netlist = c.get_netlist(recursive=True)
+    c.plot_netlist(recursive=True)
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
     wl = jnp.linspace(1.5, 1.6, 256)

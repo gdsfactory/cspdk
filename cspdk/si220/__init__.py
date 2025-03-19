@@ -24,12 +24,12 @@ def get_pdk() -> Pdk:
     """Return Cornerstone PDK."""
     return Pdk(
         name="cornerstone_si220",
-        cells=_cells,
+        cells=_cells,  # layout parametric cells
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
-        models=_models,
+        models=_models,  # models for simulation
         routing_strategies=routing_strategies,
     )
 
