@@ -1,13 +1,14 @@
 """Sample circuit sims with routes."""
 
-import gdsfactory as gf
-import jax.numpy as jnp
-import matplotlib.pyplot as plt
-import sax
-
 from cspdk.sin300 import PDK, cells, tech
 
 if __name__ == "__main__":
+    import jax.numpy as jnp
+    import matplotlib.pyplot as plt
+    import sax
+
+    from cspdk.sin300 import PDK, cells
+
     c = gf.Component()
     mzi1 = c << cells.mzi_nc(delta_length=10)
     mzi2 = c << cells.mzi_nc(delta_length=100)

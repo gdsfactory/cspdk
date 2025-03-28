@@ -1,12 +1,13 @@
 """Circuit simulation."""
 
-import jax.numpy as jnp
-import matplotlib.pyplot as plt
-import sax
-
-from cspdk.si220 import PDK, cells
-
 if __name__ == "__main__":
+    import gdsfactory as gf
+    import jax.numpy as jnp
+    import matplotlib.pyplot as plt
+    import sax
+
+    from cspdk.si220 import PDK, cells, tech
+
     c = cells.ring_single_sc(radius=10)
     c.show()
     netlist = c.get_netlist()

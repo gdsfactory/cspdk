@@ -816,9 +816,26 @@ def pad() -> gf.Component:
 
 
 @gf.cell
-def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
-    """A rectangle."""
-    return gf.c.rectangle(layer=layer, **kwargs)
+def rectangle(
+    size: Size = (4.0, 2.0),
+    layer: str = "FLOORPLAN",
+    centered: bool = False,
+    **kwargs,
+) -> gf.Component:
+    """A rectangle.
+
+    Args:
+        size: Width and height of rectangle.
+        layer: Specific layer to put polygon geometry on.
+        centered: True sets center to (0, 0), False sets south-west to (0, 0).
+        kwargs: additional arguments to pass to the rectangle function.
+    """
+    return gf.c.rectangle(
+        size=size,
+        layer=layer,
+        centered=centered,
+        **kwargs,
+    )
 
 
 @gf.cell
@@ -912,16 +929,16 @@ def grating_coupler_array(
 
 @gf.cell
 def die(
-    size=(11470.0, 4900.0),
-    edge_to_grating_distance=150.0,
-    edge_to_pad_distance=150.0,
+    size: Size = (11470.0, 4900.0),
+    edge_to_grating_distance: float = 150.0,
+    edge_to_pad_distance: float = 150.0,
     grating_coupler=None,
-    grating_pitch=250.0,
+    grating_pitch: float = 250.0,
     layer_floorplan=LAYER.FLOORPLAN,
-    ngratings=14,
-    npads=31,
-    pad="pad",
-    pad_pitch=300.0,
+    ngratings: int = 14,
+    npads: int = 31,
+    pad: str = "pad",
+    pad_pitch: float = 300.0,
     cross_section="xs_sc",
 ) -> gf.Component:
     """A die template.
@@ -973,6 +990,7 @@ die_sc = partial(die, cross_section="xs_sc")
 die_so = partial(die, cross_section="xs_so")
 die_rc = partial(die, cross_section="xs_rc")
 die_ro = partial(die, cross_section="xs_ro")
+
 
 
 ################

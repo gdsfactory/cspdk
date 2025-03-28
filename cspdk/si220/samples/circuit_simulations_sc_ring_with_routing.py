@@ -1,13 +1,13 @@
 """Circuit simulation with routes."""
 
-import gdsfactory as gf
-import jax.numpy as jnp
-import matplotlib.pyplot as plt
-import sax
-
-from cspdk.si220 import PDK, cells, tech
-
 if __name__ == "__main__":
+    import gdsfactory as gf
+    import jax.numpy as jnp
+    import matplotlib.pyplot as plt
+    import sax
+
+    from cspdk.si220 import PDK, cells, tech
+
     c = gf.Component()
     r1 = c << cells.ring_single_sc(radius=5)
     r2 = c << cells.ring_single_sc(radius=15)
