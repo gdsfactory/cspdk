@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.3.2",
+  "gdsfactory==9.3.2",
   "gplugins[sax]>=1,<2"
 ]
 description = "CornerStone PDK"
@@ -120,3 +120,4 @@ regex = '''
   \.
   (?P<patch>\d+)
   '''
+
