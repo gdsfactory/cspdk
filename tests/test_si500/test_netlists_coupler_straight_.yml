@@ -1,5 +1,5 @@
 instances:
-  straight_L20_N2_CSxs_rc_WNone_0_0:
+  straight_gdsfactorypcom_613fbca3_0_0:
     component: straight
     info:
       length: 20
@@ -13,7 +13,7 @@ instances:
       length: 20
       npoints: 2
       width: null
-  straight_L20_N2_CSxs_rc_WNone_0_686:
+  straight_gdsfactorypcom_613fbca3_0_686:
     component: straight
     info:
       length: 20
@@ -30,18 +30,18 @@ instances:
 name: coupler_straight_L20_G0_407c9b4b
 nets: []
 placements:
-  straight_L20_N2_CSxs_rc_WNone_0_0:
+  straight_gdsfactorypcom_613fbca3_0_0:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  straight_L20_N2_CSxs_rc_WNone_0_686:
+  straight_gdsfactorypcom_613fbca3_0_686:
     mirror: false
     rotation: 0
     x: 0
     y: 0.686
 ports:
-  o1: straight_L20_N2_CSxs_rc_WNone_0_0,o1
-  o2: straight_L20_N2_CSxs_rc_WNone_0_686,o1
-  o3: straight_L20_N2_CSxs_rc_WNone_0_686,o2
-  o4: straight_L20_N2_CSxs_rc_WNone_0_0,o2
+  o1: straight_gdsfactorypcom_613fbca3_0_0,o1
+  o2: straight_gdsfactorypcom_613fbca3_0_686,o1
+  o3: straight_gdsfactorypcom_613fbca3_0_686,o2
+  o4: straight_gdsfactorypcom_613fbca3_0_0,o2

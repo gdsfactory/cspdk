@@ -1,12 +1,11 @@
 """Circuit simulation."""
 
 if __name__ == "__main__":
-    import gdsfactory as gf
     import jax.numpy as jnp
     import matplotlib.pyplot as plt
     import sax
 
-    from cspdk.si220 import PDK, cells, tech
+    from cspdk.si220 import PDK, cells
 
     c = cells.ring_single_sc(radius=10)
     c.show()

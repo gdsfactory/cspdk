@@ -992,7 +992,6 @@ die_rc = partial(die, cross_section="xs_rc")
 die_ro = partial(die, cross_section="xs_ro")
 
 
-
 ################
 # Imported from Cornerstone MPW SOI 220nm GDSII Template
 ################

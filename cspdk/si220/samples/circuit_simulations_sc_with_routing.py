@@ -1,6 +1,5 @@
 """Circuit simulation with routes."""
 
-
 if __name__ == "__main__":
     import gdsfactory as gf
     import jax.numpy as jnp

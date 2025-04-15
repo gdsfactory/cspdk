@@ -1,12 +1,12 @@
 """Sample circuit sims."""
 
-
 if __name__ == "__main__":
     import jax.numpy as jnp
     import matplotlib.pyplot as plt
     import sax
 
     from cspdk.sin300 import PDK, cells
+
     c = cells.mzi_nc(delta_length=100)
     c.show()
     c.plot_netlist()
