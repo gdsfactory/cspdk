@@ -1,5 +1,7 @@
 """Sample circuit sims with routes."""
 
+import gdsfactory as gf
+
 from cspdk.sin300 import PDK, cells, tech
 
 if __name__ == "__main__":
