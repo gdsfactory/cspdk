@@ -112,12 +112,21 @@ def test_netlists(
     n.pop("connections", None)
     n.pop("warnings", None)
     yaml_str = c.write_netlist(n)
+
+    cis = list(c.kcl.each_cell_top_down())
+    for ci in cis:
+        gf.kcl.dkcells[ci].delete()
+
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
     d = jsondiff.diff(n, n2)
     d.pop("warnings", None)
     d.pop("ports", None)
     assert len(d) == 0, d
+
+    cis = list(c.kcl.each_cell_top_down())
+    for ci in cis:
+        gf.kcl.dkcells[ci].delete()
 
 
 if __name__ == "__main__":

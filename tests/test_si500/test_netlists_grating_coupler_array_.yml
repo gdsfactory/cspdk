@@ -111,3 +111,27 @@ ports:
   o3: grating_coupler_rectang_2cd63619_63500_0,o1
   o4: grating_coupler_rectang_2cd63619_190500_0,o1
   o5: grating_coupler_rectang_2cd63619_317500_0,o1
+warnings:
+  vertical_te:
+    unconnected_ports:
+    - message: 6 unconnected vertical_te ports!
+      ports:
+      - grating_coupler_rectang_2cd63619_m317500_0,o2
+      - grating_coupler_rectang_2cd63619_m190500_0,o2
+      - grating_coupler_rectang_2cd63619_m63500_0,o2
+      - grating_coupler_rectang_2cd63619_63500_0,o2
+      - grating_coupler_rectang_2cd63619_190500_0,o2
+      - grating_coupler_rectang_2cd63619_317500_0,o2
+      values:
+      - - -317.5
+        - -366.886
+      - - -190.5
+        - -366.886
+      - - -63.5
+        - -366.886
+      - - 63.5
+        - -366.886
+      - - 190.5
+        - -366.886
+      - - 317.5
+        - -366.886
