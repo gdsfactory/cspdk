@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 0.16.0
+
+- update gdsfactory 9.4.0 [#110](https://github.com/gdsfactory/cspdk/pull/110)
+
 ## 0.15.0
 
 - add heater models [#104](https://github.com/gdsfactory/cspdk/pull/104)
