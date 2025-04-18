@@ -1103,5 +1103,6 @@ pack_doe_grid = gf.c.pack_doe_grid
 
 
 if __name__ == "__main__":
-    c = array()
+    c = crossing_so()
+    c.pprint_ports()
     c.show()

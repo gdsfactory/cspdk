@@ -264,7 +264,7 @@ def route_bundle(
     min_straight_taper: float = 100.0,
     port_type: str | None = None,
     collision_check_layers: Iterable[LayerSpec] = (),
-    on_collision: str | None = "show_error",
+    on_collision: str | None = None,
     bboxes: list | None = None,
     allow_width_mismatch: bool = False,
     radius: float | None = None,
