@@ -390,6 +390,7 @@ route_single_sc = partial(
     bend="bend_euler_sc",
     taper="taper_sc",
     cross_section="xs_sc",
+    port_type="optical",
 )
 route_single_so = partial(
     route_single,
@@ -397,6 +398,7 @@ route_single_so = partial(
     bend="bend_euler_so",
     taper="taper_so",
     cross_section="xs_so",
+    port_type="optical",
 )
 route_single_rc = partial(
     route_single,
@@ -404,6 +406,7 @@ route_single_rc = partial(
     bend="bend_euler_rc",
     taper="taper_rc",
     cross_section="xs_rc",
+    port_type="optical",
 )
 route_single_ro = partial(
     route_single,
@@ -411,6 +414,7 @@ route_single_ro = partial(
     bend="bend_euler_ro",
     taper="taper_ro",
     cross_section="xs_ro",
+    port_type="optical",
 )
 route_bundle_sc = partial(
     route_bundle,
@@ -418,6 +422,7 @@ route_bundle_sc = partial(
     bend="bend_euler_sc",
     taper="taper_sc",
     cross_section="xs_sc",
+    port_type="optical",
 )
 route_bundle_so = partial(
     route_bundle,
@@ -425,6 +430,7 @@ route_bundle_so = partial(
     bend="bend_euler_so",
     taper="taper_so",
     cross_section="xs_so",
+    port_type="optical",
 )
 route_bundle_rc = partial(
     route_bundle,
@@ -432,6 +438,7 @@ route_bundle_rc = partial(
     bend="bend_euler_rc",
     taper="taper_rc",
     cross_section="xs_rc",
+    port_type="optical",
 )
 route_bundle_ro = partial(
     route_bundle,
@@ -439,6 +446,7 @@ route_bundle_ro = partial(
     bend="bend_euler_ro",
     taper="taper_ro",
     cross_section="xs_ro",
+    port_type="optical",
 )
 route_bundle_metal = partial(
     route_bundle,
@@ -446,6 +454,7 @@ route_bundle_metal = partial(
     bend="bend_metal",
     taper=None,
     cross_section="metal_routing",
+    port_type="electrical",
 )
 route_bundle_metal_corner = partial(
     route_bundle,
@@ -453,6 +462,7 @@ route_bundle_metal_corner = partial(
     bend="wire_corner",
     taper=None,
     cross_section="metal_routing",
+    port_type="electrical",
 )
 
 routing_strategies = dict(
