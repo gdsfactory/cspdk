@@ -466,12 +466,7 @@ route_bundle_metal_corner = partial(
 )
 
 routing_strategies = dict(
-    route_single=route_single,
     route_bundle=route_bundle,
-    route_single_sc=route_single_sc,
-    route_single_so=route_single_so,
-    route_single_rc=route_single_rc,
-    route_single_ro=route_single_ro,
     route_bundle_sc=route_bundle_sc,
     route_bundle_so=route_bundle_so,
     route_bundle_rc=route_bundle_rc,
