@@ -105,7 +105,7 @@ def add_fiber_single_sc(
     cross_section: CrossSectionSpec = "xs_sc",
     taper: ComponentSpec | None = None,
     input_port_names: list[str] | tuple[str, ...] | None = None,
-    fiber_spacing: float = 70,
+    pitch: float = 70,
     with_loopback: bool = True,
     loopback_spacing: float = 100.0,
     **kwargs,
@@ -122,7 +122,7 @@ def add_fiber_single_sc(
         cross_section: cross_section function.
         taper: taper spec.
         input_port_names: list of input port names to connect to grating couplers.
-        fiber_spacing: spacing between fibers.
+        pitch: spacing between fibers.
         with_loopback: adds loopback structures.
         loopback_spacing: spacing between loopback and test structure.
         kwargs: additional arguments.
@@ -169,7 +169,7 @@ def add_fiber_single_sc(
         cross_section=cross_section,
         taper=taper,
         input_port_names=input_port_names,
-        fiber_spacing=fiber_spacing,
+        pitch=pitch,
         with_loopback=with_loopback,
         loopback_spacing=loopback_spacing,
         **kwargs,
@@ -346,7 +346,7 @@ if __name__ == "__main__":
 
     PDK.activate()
 
-    c = add_fiber_array_sc()
+    c = add_fiber_single_sc()
     # c =gf.get_component(gc_sc)
     # c = pack_doe()
     c.pprint_ports()
