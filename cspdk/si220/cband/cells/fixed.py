@@ -1,19 +1,9 @@
 """This module contains the building blocks for the CSPDK PDK."""
 
-from functools import partial
-
 import gdsfactory as gf
-from gdsfactory.cross_section import CrossSection
-from gdsfactory.typings import (
-    ComponentSpec,
-    CrossSectionSpec,
-    Ints,
-    LayerSpec,
-    Size,
-)
 
 from cspdk.si220.cband.config import PATH
-from cspdk.si220.cband.tech import LAYER, TECH
+from cspdk.si220.cband.tech import LAYER
 
 ################
 # Imported from Cornerstone MPW SOI 220nm GDSII Template

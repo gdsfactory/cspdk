@@ -1,10 +1,11 @@
 """Tapers."""
 
 from functools import partial
-import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec, LayerSpec
 
-from cspdk.si220.cband.tech import TECH, LAYER
+import gdsfactory as gf
+from gdsfactory.typings import CrossSectionSpec
+
+from cspdk.si220.cband.tech import LAYER, TECH
 
 
 @gf.cell
