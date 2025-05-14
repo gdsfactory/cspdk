@@ -1,0 +1,8 @@
+info: {}
+name: text_rectangular_multi__b6b11d24
+settings:
+  layers:
+  - WG
+  - PAD
+  text: abc
+  text_factory: text_rectangular

@@ -1,0 +1,9 @@
+info: {}
+name: _mmi2x2_WNone_WT1p5_LT2_9e8b30d0
+settings:
+  cross_section: rib
+  gap_mmi: 0.53
+  length_mmi: 44.8
+  length_taper: 20
+  width_mmi: 6
+  width_taper: 1.5

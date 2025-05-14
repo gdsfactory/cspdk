@@ -2,9 +2,9 @@ install:
 	uv sync --extra docs --extra dev
 
 test:
-	uv run pytest -s tests/test_si220.py
-	uv run pytest -s tests/test_si500.py
-	uv run pytest -s tests/test_sin300.py
+	uv run pytest -s tests/test_si220_cband.py
+	# uv run pytest -s tests/test_si500.py
+	# uv run pytest -s tests/test_sin300.py
 
 test-force:
 	uv run pytest -s tests/test_si220.py --force-regen

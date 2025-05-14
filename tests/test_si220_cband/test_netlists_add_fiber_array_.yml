@@ -1,0 +1,457 @@
+instances:
+  bend_euler_R10_A90_P0p5_17151b03_175500_m68933:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_185500_m14183:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_195500_m24183:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_m155500_m78933:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_m165500_m24183:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_m175500_m14183:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_RNone_A90_P0_fbfa4d8c_68500_m5000:
+    component: bend_euler
+    info:
+      dy: 5
+      length: 8.318
+      min_bend_radius: 3.53
+      radius: 5
+      route_info_length: 8.318
+      route_info_min_bend_radius: 3.53
+      route_info_n_bend_90: 1
+      route_info_strip_length: 8.318
+      route_info_type: strip
+      route_info_weight: 8.318
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: null
+      width: null
+  bend_euler_RNone_A90_P0_fbfa4d8c_m58500_m5000:
+    component: bend_euler
+    info:
+      dy: 5
+      length: 8.318
+      min_bend_radius: 3.53
+      radius: 5
+      route_info_length: 8.318
+      route_info_min_bend_radius: 3.53
+      route_info_n_bend_90: 1
+      route_info_strip_length: 8.318
+      route_info_type: strip
+      route_info_weight: 8.318
+      width: 0.45
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: null
+      width: null
+  grating_coupler_ellipti_2f8caedf_195500_m22900:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  grating_coupler_ellipti_2f8caedf_68500_m22900:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  grating_coupler_ellipti_2f8caedf_m185500_m22900:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  grating_coupler_ellipti_2f8caedf_m58500_m22900:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  straight_L10_CSstrip_WNone_0_0:
+    component: straight
+    info:
+      length: 10
+      route_info_length: 10
+      route_info_strip_length: 10
+      route_info_type: strip
+      route_info_weight: 10
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 10
+      width: null
+  straight_L19p183_CSstrip_W0p45_68500_m5000:
+    component: straight
+    info:
+      length: 19.183
+      route_info_length: 19.183
+      route_info_strip_length: 19.183
+      route_info_type: strip
+      route_info_weight: 19.183
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 19.183
+      width: 0.45
+  straight_L19p183_CSstrip_W0p45_m58500_m5000:
+    component: straight
+    info:
+      length: 19.183
+      route_info_length: 19.183
+      route_info_strip_length: 19.183
+      route_info_type: strip
+      route_info_weight: 19.183
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 19.183
+      width: 0.45
+  straight_L321_CSstrip_WNone_165500_m78933:
+    component: straight
+    info:
+      length: 321
+      route_info_length: 321
+      route_info_strip_length: 321
+      route_info_type: strip
+      route_info_weight: 321
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 321
+      width: null
+  straight_L44p75_CSstrip_WNone_175500_m24183:
+    component: straight
+    info:
+      length: 44.75
+      route_info_length: 44.75
+      route_info_strip_length: 44.75
+      route_info_type: strip
+      route_info_weight: 44.75
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 44.75
+      width: null
+  straight_L44p75_CSstrip_WNone_m165500_m68933:
+    component: straight
+    info:
+      length: 44.75
+      route_info_length: 44.75
+      route_info_strip_length: 44.75
+      route_info_type: strip
+      route_info_weight: 44.75
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 44.75
+      width: null
+  straight_L53p5_CSstrip_W0p45_63500_0:
+    component: straight
+    info:
+      length: 53.5
+      route_info_length: 53.5
+      route_info_strip_length: 53.5
+      route_info_type: strip
+      route_info_weight: 53.5
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 53.5
+      width: 0.45
+  straight_L53p5_CSstrip_W0p45_m53500_0:
+    component: straight
+    info:
+      length: 53.5
+      route_info_length: 53.5
+      route_info_strip_length: 53.5
+      route_info_type: strip
+      route_info_weight: 53.5
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 53.5
+      width: 0.45
+name: Unnamed_366
+nets:
+- p1: bend_euler_R10_A90_P0p5_17151b03_175500_m68933,o1
+  p2: straight_L44p75_CSstrip_WNone_175500_m24183,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_175500_m68933,o2
+  p2: straight_L321_CSstrip_WNone_165500_m78933,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_185500_m14183,o1
+  p2: bend_euler_R10_A90_P0p5_17151b03_195500_m24183,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_185500_m14183,o2
+  p2: straight_L44p75_CSstrip_WNone_175500_m24183,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_195500_m24183,o1
+  p2: grating_coupler_ellipti_2f8caedf_195500_m22900,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_m155500_m78933,o1
+  p2: straight_L321_CSstrip_WNone_165500_m78933,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_m155500_m78933,o2
+  p2: straight_L44p75_CSstrip_WNone_m165500_m68933,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_m165500_m24183,o1
+  p2: straight_L44p75_CSstrip_WNone_m165500_m68933,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_m165500_m24183,o2
+  p2: bend_euler_R10_A90_P0p5_17151b03_m175500_m14183,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_m175500_m14183,o2
+  p2: grating_coupler_ellipti_2f8caedf_m185500_m22900,o1
+- p1: bend_euler_RNone_A90_P0_fbfa4d8c_68500_m5000,o1
+  p2: straight_L19p183_CSstrip_W0p45_68500_m5000,o1
+- p1: bend_euler_RNone_A90_P0_fbfa4d8c_68500_m5000,o2
+  p2: straight_L53p5_CSstrip_W0p45_63500_0,o1
+- p1: bend_euler_RNone_A90_P0_fbfa4d8c_m58500_m5000,o1
+  p2: straight_L19p183_CSstrip_W0p45_m58500_m5000,o1
+- p1: bend_euler_RNone_A90_P0_fbfa4d8c_m58500_m5000,o2
+  p2: straight_L53p5_CSstrip_W0p45_m53500_0,o1
+- p1: grating_coupler_ellipti_2f8caedf_68500_m22900,o1
+  p2: straight_L19p183_CSstrip_W0p45_68500_m5000,o2
+- p1: grating_coupler_ellipti_2f8caedf_m58500_m22900,o1
+  p2: straight_L19p183_CSstrip_W0p45_m58500_m5000,o2
+- p1: straight_L10_CSstrip_WNone_0_0,o1
+  p2: straight_L53p5_CSstrip_W0p45_m53500_0,o2
+- p1: straight_L10_CSstrip_WNone_0_0,o2
+  p2: straight_L53p5_CSstrip_W0p45_63500_0,o2
+placements:
+  bend_euler_R10_A90_P0p5_17151b03_175500_m68933:
+    mirror: true
+    rotation: 270
+    x: 175.5
+    y: -68.933
+  bend_euler_R10_A90_P0p5_17151b03_185500_m14183:
+    mirror: false
+    rotation: 180
+    x: 185.5
+    y: -14.183
+  bend_euler_R10_A90_P0p5_17151b03_195500_m24183:
+    mirror: false
+    rotation: 90
+    x: 195.5
+    y: -24.183
+  bend_euler_R10_A90_P0p5_17151b03_m155500_m78933:
+    mirror: true
+    rotation: 180
+    x: -155.5
+    y: -78.933
+  bend_euler_R10_A90_P0p5_17151b03_m165500_m24183:
+    mirror: false
+    rotation: 90
+    x: -165.5
+    y: -24.183
+  bend_euler_R10_A90_P0p5_17151b03_m175500_m14183:
+    mirror: false
+    rotation: 180
+    x: -175.5
+    y: -14.183
+  bend_euler_RNone_A90_P0_fbfa4d8c_68500_m5000:
+    mirror: false
+    rotation: 90
+    x: 68.5
+    y: -5
+  bend_euler_RNone_A90_P0_fbfa4d8c_m58500_m5000:
+    mirror: true
+    rotation: 90
+    x: -58.5
+    y: -5
+  grating_coupler_ellipti_2f8caedf_195500_m22900:
+    mirror: false
+    rotation: 270
+    x: 195.5
+    y: -22.9
+  grating_coupler_ellipti_2f8caedf_68500_m22900:
+    mirror: false
+    rotation: 270
+    x: 68.5
+    y: -22.9
+  grating_coupler_ellipti_2f8caedf_m185500_m22900:
+    mirror: false
+    rotation: 270
+    x: -185.5
+    y: -22.9
+  grating_coupler_ellipti_2f8caedf_m58500_m22900:
+    mirror: false
+    rotation: 270
+    x: -58.5
+    y: -22.9
+  straight_L10_CSstrip_WNone_0_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  straight_L19p183_CSstrip_W0p45_68500_m5000:
+    mirror: false
+    rotation: 270
+    x: 68.5
+    y: -5
+  straight_L19p183_CSstrip_W0p45_m58500_m5000:
+    mirror: false
+    rotation: 270
+    x: -58.5
+    y: -5
+  straight_L321_CSstrip_WNone_165500_m78933:
+    mirror: false
+    rotation: 180
+    x: 165.5
+    y: -78.933
+  straight_L44p75_CSstrip_WNone_175500_m24183:
+    mirror: false
+    rotation: 270
+    x: 175.5
+    y: -24.183
+  straight_L44p75_CSstrip_WNone_m165500_m68933:
+    mirror: false
+    rotation: 90
+    x: -165.5
+    y: -68.933
+  straight_L53p5_CSstrip_W0p45_63500_0:
+    mirror: false
+    rotation: 180
+    x: 63.5
+    y: 0
+  straight_L53p5_CSstrip_W0p45_m53500_0:
+    mirror: false
+    rotation: 0
+    x: -53.5
+    y: 0
+ports:
+  loopback1: grating_coupler_ellipti_2f8caedf_m185500_m22900,o2
+  loopback2: grating_coupler_ellipti_2f8caedf_195500_m22900,o2
+  o1: grating_coupler_ellipti_2f8caedf_m58500_m22900,o2
+  o2: grating_coupler_ellipti_2f8caedf_68500_m22900,o2
