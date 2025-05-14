@@ -829,7 +829,6 @@ def die(
     gcs = {
         "strip": "grating_coupler_rectangular",
         "rib": "grating_coupler_rectangular_rib",
-        "xs_ro": "grating_coupler_rectangular_ro",
     }
     grating_coupler = grating_coupler or gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.die_with_pads(

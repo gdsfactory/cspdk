@@ -1,6 +1,5 @@
 """This module contains cells that contain other cells."""
 
-from functools import partial
 from typing import Any
 
 import gdsfactory as gf
@@ -89,14 +88,6 @@ def add_fiber_array(
     )
 
 
-add_fiber_array_so = partial(
-    add_fiber_array,
-    component="straight_so",
-    grating_coupler=gc_so,
-    cross_section="xs_so",
-)
-
-
 def add_fiber_single(
     component: ComponentSpec = "straight",
     grating_coupler=gc,
@@ -174,14 +165,6 @@ def add_fiber_single(
         loopback_spacing=loopback_spacing,
         **kwargs,
     )
-
-
-add_fiber_single_so = partial(
-    add_fiber_single,
-    component="straight_so",
-    grating_coupler=gc_so,
-    cross_section="xs_so",
-)
 
 
 def add_pads_top(
