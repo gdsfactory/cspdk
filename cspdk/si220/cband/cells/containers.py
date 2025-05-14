@@ -14,6 +14,7 @@ from gdsfactory.typings import (
 gc = "grating_coupler_elliptical"
 
 
+@gf.cell
 def add_fiber_array(
     component: ComponentSpec = "straight",
     grating_coupler=gc,
@@ -87,6 +88,7 @@ def add_fiber_array(
     )
 
 
+@gf.cell
 def add_fiber_single(
     component: ComponentSpec = "straight",
     grating_coupler=gc,
@@ -166,6 +168,7 @@ def add_fiber_single(
     )
 
 
+@gf.cell
 def add_pads_top(
     component: ComponentSpec = "straight_heater_metal",
     port_names: Strs | None = None,
@@ -238,6 +241,7 @@ def add_pads_top(
     )
 
 
+@gf.cell
 def pack_doe(
     doe: ComponentSpec,
     settings: dict[str, tuple[Any, ...]],
@@ -280,6 +284,7 @@ def pack_doe(
     )
 
 
+@gf.cell
 def pack_doe_grid(
     doe: ComponentSpec,
     settings: dict[str, tuple[Any, ...]],

@@ -319,7 +319,7 @@ instances:
       length: 53.5
       npoints: 2
       width: 0.45
-name: Unnamed_713
+name: add_fiber_array_Cstraig_97619bb3
 nets:
 - p1: bend_euler_R10_A90_P0p5_17151b03_175500_m68933,o1
   p2: straight_L44p75_CSstrip_WNone_N2_175500_m24183,o2

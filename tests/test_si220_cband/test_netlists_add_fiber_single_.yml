@@ -57,7 +57,7 @@ instances:
       length: 68.366
       npoints: 2
       width: null
-name: Unnamed_769
+name: add_fiber_single_Cstrai_74435255
 nets:
 - p1: grating_coupler_ellipti_2f8caedf_0_m37900,o1
   p2: straight_L29p183_CSstri_637c02b2_0_m10000,o2

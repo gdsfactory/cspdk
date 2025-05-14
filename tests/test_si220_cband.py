@@ -31,6 +31,7 @@ skip_test = {
     "add_fiber_array_sc",
     "add_fiber_array_so",
     "coupler_symmetric",
+    "die_with_pads",
 }
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]

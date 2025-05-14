@@ -5,5 +5,12 @@ info:
   route_info_type: strip
   route_info_weight: 10
   width: 0.45
-name: Unnamed_354
-settings: {}
+name: add_fiber_single_Cstrai_74435255
+settings:
+  component: straight
+  cross_section: strip
+  gc_port_name: o1
+  grating_coupler: grating_coupler_elliptical
+  loopback_spacing: 100
+  pitch: 70
+  with_loopback: true
