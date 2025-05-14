@@ -118,7 +118,7 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 class Tech:
     """Technology parameters."""
 
-    radius_sc = 5
+    radius = 5
     radius_so = 5
     radius_rc = 25
     radius_ro = 25
@@ -143,8 +143,8 @@ xsection = gf.xsection
 def strip(
     width: float = TECH.width,
     layer: LayerSpec = "WG",
-    radius: float = TECH.radius_sc,
-    radius_min: float = TECH.radius_sc,
+    radius: float = TECH.radius,
+    radius_min: float = TECH.radius,
 ) -> CrossSection:
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(
@@ -281,9 +281,9 @@ def route_single(
     radius: float | None = None,
     route_width: float | None = None,
     cross_section: CrossSectionSpec = "strip",
-    straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_euler_sc",
-    taper: ComponentSpec = "taper_sc",
+    straight: ComponentSpec = "straight",
+    bend: ComponentSpec = "bend_euler",
+    taper: ComponentSpec = "taper",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -321,9 +321,9 @@ def route_bundle(
     radius: float | None = None,
     route_width: float | list[float] | None = None,
     cross_section: CrossSectionSpec = "strip",
-    straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_euler_sc",
-    taper: ComponentSpec | None = "taper_sc",
+    straight: ComponentSpec = "straight",
+    bend: ComponentSpec = "bend_euler",
+    taper: ComponentSpec | None = "taper",
 ) -> list[ManhattanRoute]:
     """Route two bundles of ports."""
     return gf.routing.route_bundle(
@@ -351,9 +351,9 @@ def route_bundle(
 
 route_single = partial(
     route_single,
-    straight="straight_sc",
-    bend="bend_euler_sc",
-    taper="taper_sc",
+    straight="straight",
+    bend="bend_euler",
+    taper="taper",
     cross_section="strip",
     port_type="optical",
 route_bundle_so = partial(
@@ -399,7 +399,7 @@ route_bundle_metal_corner = partial(
 
 routing_strategies = dict(
     route_bundle=route_bundle,
-    route_bundle_sc=route_bundle_sc,
+    route_bundle=route_bundle,
     route_bundle_so=route_bundle_so,
     route_bundle_rc=route_bundle_rc,
     route_bundle_ro=route_bundle_ro,

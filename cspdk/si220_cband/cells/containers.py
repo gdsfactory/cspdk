@@ -12,13 +12,13 @@ from gdsfactory.typings import (
     Strs,
 )
 
-gc_sc = "grating_coupler_elliptical_sc"
+gc = "grating_coupler_elliptical"
 gc_so = "grating_coupler_elliptical_so"
 
 
-def add_fiber_array_sc(
-    component: ComponentSpec = "straight_sc",
-    grating_coupler=gc_sc,
+def add_fiber_array(
+    component: ComponentSpec = "straight",
+    grating_coupler=gc,
     gc_port_name: str = "o1",
     component_name: str | None = None,
     cross_section: CrossSectionSpec = "strip",
@@ -90,16 +90,16 @@ def add_fiber_array_sc(
 
 
 add_fiber_array_so = partial(
-    add_fiber_array_sc,
+    add_fiber_array,
     component="straight_so",
     grating_coupler=gc_so,
     cross_section="xs_so",
 )
 
 
-def add_fiber_single_sc(
-    component: ComponentSpec = "straight_sc",
-    grating_coupler=gc_sc,
+def add_fiber_single(
+    component: ComponentSpec = "straight",
+    grating_coupler=gc,
     gc_port_name: str = "o1",
     component_name: str | None = None,
     cross_section: CrossSectionSpec = "strip",
@@ -177,7 +177,7 @@ def add_fiber_single_sc(
 
 
 add_fiber_single_so = partial(
-    add_fiber_single_sc,
+    add_fiber_single,
     component="straight_so",
     grating_coupler=gc_so,
     cross_section="xs_so",
@@ -185,7 +185,7 @@ add_fiber_single_so = partial(
 
 
 def add_pads_top(
-    component: ComponentSpec = "straight_heater_metal_sc",
+    component: ComponentSpec = "straight_heater_metal",
     port_names: Strs | None = None,
     component_name: str | None = None,
     cross_section: CrossSectionSpec = "metal_routing",
@@ -346,8 +346,8 @@ if __name__ == "__main__":
 
     PDK.activate()
 
-    c = add_fiber_single_sc()
-    # c =gf.get_component(gc_sc)
+    c = add_fiber_single()
+    # c =gf.get_component(gc)
     # c = pack_doe()
     c.pprint_ports()
     c.show()

@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     from cspdk.si220 import PDK, cells
 
-    c = cells.ring_single_sc(radius=10)
+    c = cells.ring_single(radius=10)
     c.show()
     netlist = c.get_netlist()
     c.plot_netlist()

@@ -8,7 +8,7 @@ from cspdk.si220 import PDK, cells
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
-    c = cells.mzi_sc(delta_length=12)
+    c = cells.mzi(delta_length=12)
     c.show()
     netlist = c.get_netlist()
     c.plot_netlist()

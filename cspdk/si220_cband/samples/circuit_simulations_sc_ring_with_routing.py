@@ -9,8 +9,8 @@ if __name__ == "__main__":
     from cspdk.si220 import PDK, cells, tech
 
     c = gf.Component()
-    r1 = c << cells.ring_single_sc(radius=5)
-    r2 = c << cells.ring_single_sc(radius=15)
+    r1 = c << cells.ring_single(radius=5)
+    r2 = c << cells.ring_single(radius=15)
     r2.dmove((200, 200))
 
     route = tech.route_bundle(c, [r1.ports["o2"]], [r2.ports["o1"]])

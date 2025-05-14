@@ -9,10 +9,10 @@ if __name__ == "__main__":
     from cspdk.si220 import PDK, cells, tech
 
     c = gf.Component()
-    mzi1 = c << cells.mzi_sc(delta_length=10)
-    mzi2 = c << cells.mzi_sc(delta_length=100)
+    mzi1 = c << cells.mzi(delta_length=10)
+    mzi2 = c << cells.mzi(delta_length=100)
     mzi2.dmove((200, 200))
-    # route = tech.route_single_sc(c, mzi1.ports["o2"], mzi2.ports["o1"])
+    # route = tech.route_single(c, mzi1.ports["o2"], mzi2.ports["o1"])
     route = tech.route_bundle(c, [mzi1.ports["o2"]], [mzi2.ports["o1"]])
     c.add_port(name="o1", port=mzi1.ports["o1"])
     c.add_port(name="o2", port=mzi2.ports["o2"])

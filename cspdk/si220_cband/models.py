@@ -20,7 +20,7 @@ Float = float | FloatArray
 # Straights
 ################
 
-straight_sc = partial(
+straight = partial(
     sm.straight,
     length=10.0,
     loss=0.0,
@@ -68,7 +68,7 @@ def straight(
     """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": straight_sc,
+        "strip": straight,
         "xs_so": straight_so,
         "xs_rc": straight_rc,
         "xs_ro": straight_ro,
@@ -127,7 +127,7 @@ def bend_euler(
     )
 
 
-bend_euler_sc = partial(bend_euler, cross_section="strip")
+bend_euler = partial(bend_euler, cross_section="strip")
 bend_euler_so = partial(bend_euler, cross_section="xs_so")
 bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
 bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
@@ -156,7 +156,7 @@ def taper(
     )
 
 
-taper_sc = partial(taper, cross_section="xs_so", length=10.0)
+taper = partial(taper, cross_section="xs_so", length=10.0)
 taper_so = partial(taper, cross_section="xs_so", length=10.0)
 taper_rc = partial(taper, cross_section="xs_rc", length=10.0)
 taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
@@ -180,16 +180,16 @@ def taper_strip_to_ridge(
     )
 
 
-trans_sc_rc10 = partial(taper_strip_to_ridge, length=10.0)
-trans_sc_rc20 = partial(taper_strip_to_ridge, length=20.0)
-trans_sc_rc50 = partial(taper_strip_to_ridge, length=50.0)
+trans_rc10 = partial(taper_strip_to_ridge, length=10.0)
+trans_rc20 = partial(taper_strip_to_ridge, length=20.0)
+trans_rc50 = partial(taper_strip_to_ridge, length=50.0)
 
 ################
 # MMIs
 ################
 
-mmi1x2_sc = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
-mmi1x2_rc = mmi1x2_sc
+mmi1x2 = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
+mmi1x2_rc = mmi1x2
 mmi1x2_so = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
 mmi1x2_ro = mmi1x2_so
 
@@ -202,7 +202,7 @@ def mmi1x2(
     """MMI 1x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi1x2_sc,
+        "strip": mmi1x2,
         "xs_so": mmi1x2_so,
         "xs_rc": mmi1x2_rc,
         "xs_ro": mmi1x2_ro,
@@ -214,8 +214,8 @@ def mmi1x2(
     )
 
 
-mmi2x2_sc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-mmi2x2_rc = mmi2x2_sc
+mmi2x2 = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+mmi2x2_rc = mmi2x2
 mmi2x2_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 mmi2x2_ro = mmi2x2_so
 
@@ -228,7 +228,7 @@ def mmi2x2(
     """MMI 2x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi2x2_sc,
+        "strip": mmi2x2,
         "xs_so": mmi2x2_so,
         "xs_rc": mmi2x2_rc,
         "xs_ro": mmi2x2_ro,
@@ -257,12 +257,12 @@ def coupler_symmetric() -> sax.SDict:
     raise NotImplementedError("No model for 'coupler_symmetric'")
 
 
-coupler_sc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-coupler_rc = coupler_sc
+coupler = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+coupler_rc = coupler
 coupler_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 coupler_ro = coupler_so
 
-coupler_ring_sc = partial(sm.coupler, wl0=1.55)
+coupler_ring = partial(sm.coupler, wl0=1.55)
 coupler_ring_so = partial(sm.coupler, wl0=1.31)
 
 
@@ -275,7 +275,7 @@ def coupler(
     # TODO: take more coupler arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": coupler_sc,
+        "strip": coupler,
         "xs_so": coupler_so,
         "xs_rc": coupler_rc,
         "xs_ro": coupler_ro,
@@ -296,10 +296,10 @@ grating_coupler_rectangular_so = partial(
 )
 grating_coupler_rectangular_ro = grating_coupler_rectangular_so
 
-grating_coupler_rectangular_sc = partial(
+grating_coupler_rectangular = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
-grating_coupler_rectangular_rc = grating_coupler_rectangular_sc
+grating_coupler_rectangular_rc = grating_coupler_rectangular
 
 
 def grating_coupler_rectangular(
@@ -310,7 +310,7 @@ def grating_coupler_rectangular(
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": grating_coupler_rectangular_sc,
+        "strip": grating_coupler_rectangular,
         "xs_so": grating_coupler_rectangular_so,
         "xs_rc": grating_coupler_rectangular_rc,
         "xs_ro": grating_coupler_rectangular_ro,
@@ -327,7 +327,7 @@ grating_coupler_elliptical_so = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
 )
 
-grating_coupler_elliptical_sc = partial(
+grating_coupler_elliptical = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
 
@@ -341,7 +341,7 @@ def grating_coupler_elliptical(
     # TODO: take more grating_coupler_elliptical arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": grating_coupler_elliptical_sc,
+        "strip": grating_coupler_elliptical,
         "xs_so": grating_coupler_elliptical_so,
     }
     f = fs[cross_section]
@@ -373,7 +373,7 @@ def heater() -> sax.SDict:
     raise NotImplementedError("No model for 'heater'")
 
 
-def straight_heater_metal_sc(
+def straight_heater_metal(
     wl: float = 1.55,
     neff: float = 2.34,
     voltage: float = 0,
@@ -407,11 +407,11 @@ def straight_heater_metal_sc(
     )
 
 
-straight_heater_metal_so = straight_heater_metal_sc
+straight_heater_metal_so = straight_heater_metal
 
 crossing_so = sm.crossing
 crossing_rc = sm.crossing
-crossing_sc = sm.crossing
+crossing = sm.crossing
 
 
 ################

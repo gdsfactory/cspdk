@@ -6,11 +6,11 @@ from cspdk.si220 import cells, tech
 
 if __name__ == "__main__":
     c = gf.Component("sample_connect")
-    mmi1 = c << cells.mmi1x2_sc()
-    mmi2 = c << cells.mmi1x2_sc()
+    mmi1 = c << cells.mmi1x2()
+    mmi2 = c << cells.mmi1x2()
     mmi2.dmove((500, 50))
 
-    route = tech.route_single_sc(
+    route = tech.route_single(
         c,
         mmi1.ports["o3"],
         mmi2.ports["o1"],

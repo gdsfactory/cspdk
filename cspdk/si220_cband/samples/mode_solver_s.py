@@ -5,7 +5,7 @@ nm = 1e-3
 if __name__ == "__main__":
     import gplugins.tidy3d as gt
 
-    wg_sc = gt.modes.Waveguide(
+    wg = gt.modes.Waveguide(
         wavelength=1.55,
         core_width=0.45,
         core_thickness=0.22,
@@ -15,8 +15,8 @@ if __name__ == "__main__":
         group_index_step=10 * nm,
     )
 
-    print("wg_sc_ng = ", wg_sc.n_group)
-    print("wg_sc_neff = ", wg_sc.n_eff)
+    print("wg_ng = ", wg.n_group)
+    print("wg_neff = ", wg.n_eff)
 
     wg_so = gt.modes.Waveguide(
         wavelength=1.31,
