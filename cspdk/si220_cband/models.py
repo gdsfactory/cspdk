@@ -70,7 +70,7 @@ def straight(
     fs = {
         "strip": straight,
         "xs_so": straight_so,
-        "xs_rib": straight_rib,
+        "rib": straight_rib,
         "xs_ro": straight_ro,
     }
     f = fs[cross_section]
@@ -129,7 +129,7 @@ def bend_euler(
 
 bend_euler = partial(bend_euler, cross_section="strip")
 bend_euler_so = partial(bend_euler, cross_section="xs_so")
-bend_euler_rib = partial(bend_euler, cross_section="xs_rib")
+bend_euler_rib = partial(bend_euler, cross_section="rib")
 bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 
 
@@ -158,7 +158,7 @@ def taper(
 
 taper = partial(taper, cross_section="xs_so", length=10.0)
 taper_so = partial(taper, cross_section="xs_so", length=10.0)
-taper_rib = partial(taper, cross_section="xs_rib", length=10.0)
+taper_rib = partial(taper, cross_section="rib", length=10.0)
 taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
 
 
@@ -204,7 +204,7 @@ def mmi1x2(
     fs = {
         "strip": mmi1x2,
         "xs_so": mmi1x2_so,
-        "xs_rib": mmi1x2_rib,
+        "rib": mmi1x2_rib,
         "xs_ro": mmi1x2_ro,
     }
     f = fs[cross_section]
@@ -230,7 +230,7 @@ def mmi2x2(
     fs = {
         "strip": mmi2x2,
         "xs_so": mmi2x2_so,
-        "xs_rib": mmi2x2_rib,
+        "rib": mmi2x2_rib,
         "xs_ro": mmi2x2_ro,
     }
     f = fs[cross_section]
@@ -277,7 +277,7 @@ def coupler(
     fs = {
         "strip": coupler,
         "xs_so": coupler_so,
-        "xs_rib": coupler_rib,
+        "rib": coupler_rib,
         "xs_ro": coupler_ro,
     }
     f = fs[cross_section]
@@ -312,7 +312,7 @@ def grating_coupler_rectangular(
     fs = {
         "strip": grating_coupler_rectangular,
         "xs_so": grating_coupler_rectangular_so,
-        "xs_rib": grating_coupler_rectangular_rib,
+        "rib": grating_coupler_rectangular_rib,
         "xs_ro": grating_coupler_rectangular_ro,
     }
     f = fs[cross_section]

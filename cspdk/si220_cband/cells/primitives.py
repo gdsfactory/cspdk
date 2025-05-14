@@ -12,8 +12,8 @@ from gdsfactory.typings import (
     Size,
 )
 
-from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER, Tech
+from cspdk.si220_cband.config import PATH
+from cspdk.si220_cband.tech import LAYER, TECH
 
 ################
 # Straights
@@ -36,10 +36,7 @@ def straight(
     return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
-straight = partial(straight, cross_section="strip")
-straight_so = partial(straight, cross_section="xs_so")
-straight_rib = partial(straight, cross_section="xs_rib")
-straight_ro = partial(straight, cross_section="xs_ro")
+straight_rib = partial(straight, cross_section="rib")
 straight_metal = partial(straight, cross_section="metal_routing")
 
 ################
@@ -102,10 +99,7 @@ def bend_euler(
     )
 
 
-bend_euler = partial(bend_euler, cross_section="strip")
-bend_euler_so = partial(bend_euler, cross_section="xs_so")
-bend_euler_rib = partial(bend_euler, cross_section="xs_rib")
-bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
+bend_euler_rib = partial(bend_euler, cross_section="rib")
 bend_metal = partial(bend_euler, cross_section="metal_routing")
 
 ################
@@ -116,7 +110,7 @@ bend_metal = partial(bend_euler, cross_section="metal_routing")
 @gf.cell
 def taper(
     length: float = 10.0,
-    width1: float = Tech.width,
+    width1: float = TECH.width,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "strip",
@@ -149,28 +143,14 @@ taper = partial(
     taper,
     cross_section="strip",
     length=10.0,
-    width1=Tech.width,
-    width2=None,
-)
-taper_so = partial(
-    taper,
-    cross_section="xs_so",
-    length=10.0,
-    width1=Tech.width_so,
+    width1=TECH.width,
     width2=None,
 )
 taper_rib = partial(
     taper,
-    cross_section="xs_rib",
+    cross_section="rib",
     length=10.0,
-    width1=Tech.width_rib,
-    width2=None,
-)
-taper_ro = partial(
-    taper,
-    cross_section="xs_ro",
-    length=10.0,
-    width1=Tech.width_ro,
+    width1=TECH.width_rib,
     width2=None,
 )
 
@@ -219,7 +199,7 @@ trans_rib50 = partial(taper_strip_to_ridge, length=50)
 
 
 @gf.cell
-def mmi1x2(
+def _mmi1x2(
     width: float | None = None,
     width_taper=1.5,
     length_taper=20.0,
@@ -254,14 +234,12 @@ def mmi1x2(
     )
 
 
-mmi1x2 = partial(mmi1x2, length_mmi=31.8, gap_mmi=1.64, cross_section="strip")
-mmi1x2_so = partial(mmi1x2, length_mmi=40.1, gap_mmi=1.55, cross_section="xs_so")
-mmi1x2_rib = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="xs_rib")
-mmi1x2_ro = partial(mmi1x2, length_mmi=40.8, gap_mmi=1.55, cross_section="xs_ro")
+mmi1x2 = partial(_mmi1x2, length_mmi=31.8, gap_mmi=1.64, cross_section="strip")
+mmi1x2_rib = partial(_mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="rib")
 
 
 @gf.cell
-def mmi2x2(
+def _mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,
     length_taper: float = 20.0,
@@ -296,10 +274,8 @@ def mmi2x2(
     )
 
 
-mmi2x2 = partial(mmi2x2, length_mmi=42.5, gap_mmi=0.5, cross_section="strip")
-mmi2x2_so = partial(mmi2x2, length_mmi=53.5, gap_mmi=0.53, cross_section="xs_so")
-mmi2x2_rib = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="xs_rib")
-mmi2x2_ro = partial(mmi2x2, length_mmi=55.0, gap_mmi=0.53, cross_section="xs_ro")
+mmi2x2 = partial(_mmi2x2, length_mmi=42.5, gap_mmi=0.5, cross_section="strip")
+mmi2x2_rib = partial(_mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="rib")
 
 
 ##############################
@@ -379,27 +355,12 @@ def coupler(
     )
 
 
-coupler = partial(
-    coupler,
-    cross_section="strip",
-)
-coupler_so = partial(
-    coupler,
-    cross_section="xs_so",
-)
 coupler_rib = partial(
     coupler,
-    cross_section="xs_rib",
+    cross_section="rib",
     dx=15,
     dy=4.0,
 )
-coupler_ro = partial(
-    coupler,
-    cross_section="xs_ro",
-    dx=15,
-    dy=4.0,
-)
-
 
 ##############################
 # grating couplers Rectangular
@@ -448,28 +409,12 @@ grating_coupler_rectangular = partial(
     n_periods=60,
 )
 
-grating_coupler_rectangular_so = partial(
-    grating_coupler_rectangular,
-    wavelength=1.31,
-    cross_section="xs_so",
-    n_periods=80,
-    period=0.250 * 2,
-)
-
 grating_coupler_rectangular_rib = partial(
     grating_coupler_rectangular,
     period=0.5,
-    cross_section="xs_rib",
+    cross_section="rib",
     n_periods=60,
 )
-
-grating_coupler_rectangular_ro = partial(
-    grating_coupler_rectangular,
-    period=0.5,
-    cross_section="xs_ro",
-    n_periods=80,
-)
-
 
 ##############################
 # grating couplers elliptical
@@ -505,21 +450,6 @@ def grating_coupler_elliptical(
         end_straight_length=0.2,
         cross_section=cross_section,
     )
-
-
-grating_coupler_elliptical = partial(
-    grating_coupler_elliptical,
-    grating_line_width=0.315,
-    wavelength=1.55,
-    cross_section="strip",
-)
-
-grating_coupler_elliptical_so = partial(
-    grating_coupler_elliptical,
-    grating_line_width=0.250,
-    wavelength=1.31,
-    cross_section="xs_so",
-)
 
 
 ################
@@ -577,40 +507,13 @@ def mzi(
     )
 
 
-mzi = partial(
-    mzi,
-    straight="straight",
-    bend="bend_euler",
-    splitter="mmi1x2",
-    combiner="mmi2x2",
-    cross_section="strip",
-)
-
-mzi_so = partial(
-    mzi,
-    straight="straight_so",
-    bend="bend_euler_so",
-    splitter="mmi1x2_so",
-    combiner="mmi2x2_so",
-    cross_section="xs_so",
-)
-
 mzi_rib = partial(
     mzi,
     straight="straight_rib",
     bend="bend_euler_rib",
     splitter="mmi1x2_rib",
     combiner="mmi2x2_rib",
-    cross_section="xs_rib",
-)
-
-mzi_ro = partial(
-    mzi,
-    straight="straight_ro",
-    bend="bend_euler_ro",
-    splitter="mmi1x2_ro",
-    combiner="mmi2x2_ro",
-    cross_section="xs_ro",
+    cross_section="rib",
 )
 
 
@@ -657,14 +560,6 @@ def coupler_ring(
         cross_section_bend,
         length_extension,
     )
-
-
-coupler_ring_so = partial(
-    coupler_ring,
-    cross_section="xs_so",
-    bend="bend_euler_so",
-    straight="straight_so",
-)
 
 
 @gf.cell
@@ -717,15 +612,6 @@ def ring_single(
     return gf.components.ring_single(
         gap, radius, length_x, length_y, bend, straight, coupler_ring, cross_section
     )
-
-
-ring_single_so = partial(
-    ring_single,
-    cross_section="xs_so",
-    bend="bend_euler_so",
-    straight="straight_so",
-    coupler_ring="coupler_ring_so",
-)
 
 
 @gf.cell
@@ -794,14 +680,6 @@ def straight_heater_metal(
         heater_taper_length,
         ohms_per_square,
     )
-
-
-straight_heater_metal_so = partial(
-    straight_heater_metal,
-    cross_section="xs_so",
-    cross_section_waveguide_heater="xs_so_heater",
-    cross_section_heater_undercut="xs_so_heater",
-)
 
 
 ################
@@ -905,9 +783,7 @@ def grating_coupler_array(
             xs = ""
         gcs = {
             "strip": "grating_coupler_rectangular",
-            "xs_so": "grating_coupler_rectangular_so",
-            "xs_rib": "grating_coupler_rectangular_rib",
-            "xs_ro": "grating_coupler_rectangular_ro",
+            "rib": "grating_coupler_rectangular_rib",
         }
         grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
 
@@ -966,8 +842,7 @@ def die(
         xs = ""
     gcs = {
         "strip": "grating_coupler_rectangular",
-        "xs_so": "grating_coupler_rectangular_so",
-        "xs_rib": "grating_coupler_rectangular_rib",
+        "rib": "grating_coupler_rectangular_rib",
         "xs_ro": "grating_coupler_rectangular_ro",
     }
     grating_coupler = grating_coupler or gcs.get(xs, "grating_coupler_rectangular")
@@ -986,10 +861,7 @@ def die(
     )
 
 
-die = partial(die, cross_section="strip")
-die_so = partial(die, cross_section="xs_so")
-die_rib = partial(die, cross_section="xs_rib")
-die_ro = partial(die, cross_section="xs_ro")
+die_rib = partial(die, cross_section="rib")
 
 
 ################
@@ -1001,25 +873,6 @@ die_ro = partial(die, cross_section="xs_ro")
 def heater() -> gf.Component:
     """Heater fixed cell."""
     return gf.import_gds(PATH.gds / "Heater.gds")
-
-
-@gf.cell
-def crossing_so() -> gf.Component:
-    """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
-    c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")
-    xc = 493.47
-    dx = 8.47 / 2
-    x = xc - dx
-    xl = xc - 2 * dx
-    xr = xc
-    yb = -dx
-    yt = +dx
-
-    c.add_port("o1", orientation=180, center=(xl, 0), width=0.4, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=0.4, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, 0), width=0.4, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=0.4, layer=LAYER.WG)
-    return c
 
 
 @gf.cell
@@ -1064,6 +917,6 @@ def crossing() -> gf.Component:
 
 
 if __name__ == "__main__":
-    c = crossing_so()
+    c = crossing()
     c.pprint_ports()
     c.show()
