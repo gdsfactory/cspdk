@@ -42,7 +42,7 @@ Cells SiN300
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si220_cband.cells.{name}
 
 """
             )
@@ -53,14 +53,14 @@ Cells SiN300
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si220_cband.cells.{name}
 
 .. plot::
   :include-source:
 
   import cspdk
 
-  c = cspdk.si220.cells.{name}({kwargs}).dup()
+  c = cspdk.si220_cband.cells.{name}({kwargs}).dup()
   c.draw_ports()
   c.plot()
 

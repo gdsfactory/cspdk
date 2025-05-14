@@ -2,8 +2,8 @@
 
 import inspect
 
-from cspdk.si220 import _cells as cells
-from cspdk.si220.config import PATH
+from cspdk.si220_cband import _cells as cells
+from cspdk.si220_cband.config import PATH
 
 filepath = PATH.repo / "docs" / "cells_si220.rst"
 
@@ -42,7 +42,7 @@ Cells Si SOI 220nm
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si220_cband.cells.{name}
 
 """
             )
@@ -53,14 +53,14 @@ Cells Si SOI 220nm
 {name}
 ----------------------------------------------------
 
-.. autofunction:: cspdk.si220.cells.{name}
+.. autofunction:: cspdk.si220_cband.cells.{name}
 
 .. plot::
   :include-source:
 
   import cspdk
 
-  c = cspdk.si220.cells.{name}({kwargs}).dup()
+  c = cspdk.si220_cband.cells.{name}({kwargs}).dup()
   c.draw_ports()
   c.plot()
 

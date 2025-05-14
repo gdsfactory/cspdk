@@ -2,7 +2,7 @@
 
 import gdsfactory as gf
 
-from cspdk.si220 import cells, tech
+from cspdk.si220_cband import cells, tech
 
 if __name__ == "__main__":
     c = gf.Component("sample_connect")

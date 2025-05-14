@@ -3,4 +3,4 @@
 import gdsfactory as gf
 
 if __name__ == "__main__":
-    print(gf.write_cells.get_import_gds_script("gds", module="cspdk.si220.cells"))
+    print(gf.write_cells.get_import_gds_script("gds", module="cspdk.si220_cband.cells"))

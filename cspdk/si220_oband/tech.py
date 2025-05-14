@@ -29,7 +29,7 @@ from gdsfactory.typings import (
     LayerSpecs,
 )
 
-from cspdk.si220.config import PATH
+from cspdk.si220_cband.config import PATH
 
 nm = 1e-3
 

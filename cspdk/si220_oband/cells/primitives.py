@@ -12,8 +12,8 @@ from gdsfactory.typings import (
     Size,
 )
 
-from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER, Tech
+from cspdk.si220_cband.config import PATH
+from cspdk.si220_cband.tech import LAYER, Tech
 
 ################
 # Straights

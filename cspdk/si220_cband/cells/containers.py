@@ -342,7 +342,7 @@ def pack_doe_grid(
 
 
 if __name__ == "__main__":
-    from cspdk.si220 import PDK
+    from cspdk.si220_cband import PDK
 
     PDK.activate()
 

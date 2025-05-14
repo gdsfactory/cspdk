@@ -6,7 +6,7 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import sax
 
-    from cspdk.si220 import PDK, cells, tech
+    from cspdk.si220_cband import PDK, cells, tech
 
     c = gf.Component()
     r1 = c << cells.ring_single_sc(radius=5)

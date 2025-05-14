@@ -3,7 +3,7 @@
 import jax.numpy as jnp
 import sax
 
-from cspdk.si220 import PDK, cells
+from cspdk.si220_cband import PDK, cells
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt

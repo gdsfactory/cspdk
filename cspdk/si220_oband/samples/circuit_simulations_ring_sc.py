@@ -5,7 +5,7 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import sax
 
-    from cspdk.si220 import PDK, cells
+    from cspdk.si220_cband import PDK, cells
 
     c = cells.ring_single_sc(radius=10)
     c.show()

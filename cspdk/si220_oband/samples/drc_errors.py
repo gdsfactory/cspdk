@@ -7,7 +7,7 @@ import numpy as np
 from gdsfactory.component import Component
 from gdsfactory.typings import Float2, Layer
 
-from cspdk.si220 import LAYER
+from cspdk.si220_cband import LAYER
 
 layer = LAYER.WG
 layer1 = LAYER.WG

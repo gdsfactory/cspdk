@@ -139,13 +139,6 @@ def taper(
     return c
 
 
-taper = partial(
-    taper,
-    cross_section="strip",
-    length=10.0,
-    width1=TECH.width,
-    width2=None,
-)
 taper_rib = partial(
     taper,
     cross_section="rib",
@@ -370,7 +363,7 @@ coupler_rib = partial(
 @gf.cell
 def grating_coupler_rectangular(
     period=0.315 * 2,
-    n_periods: int = 30,
+    n_periods: int = 60,
     length_taper: float = 350.0,
     wavelength: float = 1.55,
     cross_section="strip",
@@ -401,13 +394,6 @@ def grating_coupler_rectangular(
         cross_section=cross_section,
     )
 
-
-grating_coupler_rectangular = partial(
-    grating_coupler_rectangular,
-    wavelength=1.55,
-    cross_section="strip",
-    n_periods=60,
-)
 
 grating_coupler_rectangular_rib = partial(
     grating_coupler_rectangular,

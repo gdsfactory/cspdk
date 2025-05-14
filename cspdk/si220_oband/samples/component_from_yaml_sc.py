@@ -45,7 +45,7 @@ routes:
 if __name__ == "__main__":
     import gdsfactory as gf
 
-    from cspdk.si220 import PDK
+    from cspdk.si220_cband import PDK
 
     PDK.activate()
 
