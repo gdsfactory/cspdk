@@ -1,10 +1,10 @@
 """Technology definitions."""
 
-from collections.abc import Iterable
-from functools import partial
+from collections.abc import Callable, Iterable
+from functools import partial, wraps
+from typing import Any
 
 import gdsfactory as gf
-from gdsfactory import Section
 from gdsfactory.cross_section import (
     CrossSection,
     cross_section,
@@ -140,7 +140,33 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-xsection = gf.xsection
+cross_sections: dict[str, Callable[..., CrossSection]] = {}
+_cross_section_default_names: dict[str, str] = {}
+
+
+def xsection(func: Callable[..., CrossSection]) -> Callable[..., CrossSection]:
+    """Returns decorated to register a cross section function.
+
+    Ensures that the cross-section name matches the name of the function that generated it when created using default parameters
+
+    .. code-block:: python
+
+        @xsection
+        def strip(width=TECH.width_strip, radius=TECH.radius_strip):
+            return gf.cross_section.cross_section(width=width, radius=radius)
+    """
+    default_xs = func()
+    _cross_section_default_names[default_xs.name] = func.__name__
+
+    @wraps(func)
+    def newfunc(**kwargs: Any) -> CrossSection:
+        xs = func(**kwargs)
+        if xs.name in _cross_section_default_names:
+            xs._name = _cross_section_default_names[xs.name]
+        return xs
+
+    cross_sections[func.__name__] = newfunc
+    return newfunc
 
 
 @xsection
@@ -214,7 +240,7 @@ def metal_routing(
 
 
 @xsection
-def heater_metal(width=TECH.width_heater):
+def heater_metal(width=TECH.width_heater) -> CrossSection:
     """Heater cross-section."""
     return gf.cross_section.heater_metal(width=width, layer=LAYER.HEATER)
 

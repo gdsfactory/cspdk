@@ -7,7 +7,7 @@ from cspdk.si220.cband.tech import TECH
 
 
 @gf.cell
-def coupler_strip(length: float = 20, gap: float = TECH.gap_strip) -> gf.Component:
+def coupler(length: float = 20, gap: float = TECH.gap_strip) -> gf.Component:
     """Returns Symmetric coupler.
 
     Args:
@@ -22,7 +22,6 @@ def coupler_strip(length: float = 20, gap: float = TECH.gap_strip) -> gf.Compone
         cross_section="strip",
         allow_min_radius_violation=False,
     )
-
 
 
 @gf.cell
@@ -78,5 +77,5 @@ if __name__ == "__main__":
     from cspdk.si220.cband import PDK
 
     PDK.activate()
-    c = coupler_strip()
+    c = coupler()
     c.show()
