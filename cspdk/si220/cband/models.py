@@ -20,7 +20,7 @@ Float = float | FloatArray
 # Straights
 ################
 
-straight = partial(
+straight_strip = partial(
     sm.straight,
     length=10.0,
     loss=0.0,
@@ -28,16 +28,6 @@ straight = partial(
     neff=2.38,
     ng=4.30,
 )
-
-straight_so = partial(
-    sm.straight,
-    length=10.0,
-    loss=0.0,
-    wl0=1.31,
-    neff=2.52,
-    ng=4.33,
-)
-
 
 straight_rib = partial(
     sm.straight,
@@ -46,15 +36,6 @@ straight_rib = partial(
     wl0=1.55,
     neff=2.38,
     ng=4.30,
-)
-
-straight_ro = partial(
-    sm.straight,
-    length=10.0,
-    loss=0.0,
-    wl0=1.31,
-    neff=2.72,
-    ng=3.98,
 )
 
 
@@ -68,10 +49,8 @@ def straight(
     """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": straight,
-        "xs_so": straight_so,
+        "strip": straight_strip,
         "rib": straight_rib,
-        "xs_ro": straight_ro,
     }
     f = fs[cross_section]
     return f(
@@ -128,9 +107,7 @@ def bend_euler(
 
 
 bend_euler = partial(bend_euler, cross_section="strip")
-bend_euler_so = partial(bend_euler, cross_section="xs_so")
 bend_euler_rib = partial(bend_euler, cross_section="rib")
-bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 
 
 ################
@@ -156,8 +133,6 @@ def taper(
     )
 
 
-taper = partial(taper, cross_section="xs_so", length=10.0)
-taper_so = partial(taper, cross_section="xs_so", length=10.0)
 taper_rib = partial(taper, cross_section="rib", length=10.0)
 taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
 
@@ -190,8 +165,6 @@ trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
 
 mmi1x2 = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
 mmi1x2_rib = mmi1x2
-mmi1x2_so = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
-mmi1x2_ro = mmi1x2_so
 
 
 def mmi1x2(
@@ -203,9 +176,7 @@ def mmi1x2(
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "strip": mmi1x2,
-        "xs_so": mmi1x2_so,
         "rib": mmi1x2_rib,
-        "xs_ro": mmi1x2_ro,
     }
     f = fs[cross_section]
     return f(
@@ -216,8 +187,6 @@ def mmi1x2(
 
 mmi2x2 = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
 mmi2x2_rib = mmi2x2
-mmi2x2_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
-mmi2x2_ro = mmi2x2_so
 
 
 def mmi2x2(
@@ -229,9 +198,7 @@ def mmi2x2(
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "strip": mmi2x2,
-        "xs_so": mmi2x2_so,
         "rib": mmi2x2_rib,
-        "xs_ro": mmi2x2_ro,
     }
     f = fs[cross_section]
     return f(
@@ -259,11 +226,7 @@ def coupler_symmetric() -> sax.SDict:
 
 coupler = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
 coupler_rib = coupler
-coupler_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
-coupler_ro = coupler_so
-
 coupler_ring = partial(sm.coupler, wl0=1.55)
-coupler_ring_so = partial(sm.coupler, wl0=1.31)
 
 
 def coupler(
@@ -276,9 +239,7 @@ def coupler(
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "strip": coupler,
-        "xs_so": coupler_so,
         "rib": coupler_rib,
-        "xs_ro": coupler_ro,
     }
     f = fs[cross_section]
     return f(
@@ -291,10 +252,6 @@ def coupler(
 # grating couplers Rectangular
 ##############################
 
-grating_coupler_rectangular_so = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
-)
-grating_coupler_rectangular_ro = grating_coupler_rectangular_so
 
 grating_coupler_rectangular = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
@@ -311,9 +268,7 @@ def grating_coupler_rectangular(
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
         "strip": grating_coupler_rectangular,
-        "xs_so": grating_coupler_rectangular_so,
         "rib": grating_coupler_rectangular_rib,
-        "xs_ro": grating_coupler_rectangular_ro,
     }
     f = fs[cross_section]
     return f(wl=wl)  # type: ignore
@@ -323,32 +278,10 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-grating_coupler_elliptical_so = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
-)
 
 grating_coupler_elliptical = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
-
-
-def grating_coupler_elliptical(
-    wl: Float = 1.55,
-    bandwidth: float = 35e-3,
-    cross_section="strip",
-) -> sax.SDict:
-    """Grating coupler elliptical model."""
-    # TODO: take more grating_coupler_elliptical arguments into account
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": grating_coupler_elliptical,
-        "xs_so": grating_coupler_elliptical_so,
-    }
-    f = fs[cross_section]
-    return f(
-        wl=wl,  # type: ignore
-        bandwidth=bandwidth,
-    )
 
 
 ################
@@ -407,9 +340,6 @@ def straight_heater_metal(
     )
 
 
-straight_heater_metal_so = straight_heater_metal
-
-crossing_so = sm.crossing
 crossing_rib = sm.crossing
 crossing = sm.crossing
 
