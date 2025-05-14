@@ -29,7 +29,7 @@ instances:
       cross_section: strip
       grating_line_width: 0.315
       wavelength: 1.55
-  straight_L29p183_CSstrip_W0p45_0_m10000:
+  straight_L29p183_CSstri_637c02b2_0_m10000:
     component: straight
     info:
       length: 29.183
@@ -41,8 +41,9 @@ instances:
     settings:
       cross_section: strip
       length: 29.183
+      npoints: 2
       width: 0.45
-  straight_L68p3660000000_395d7d3a_141258_m39183:
+  straight_L68p3660000000_52a65daf_141258_m39183:
     component: straight
     info:
       length: 68.366
@@ -54,15 +55,16 @@ instances:
     settings:
       cross_section: strip
       length: 68.366
+      npoints: 2
       width: null
-name: Unnamed_616
+name: Unnamed_769
 nets:
 - p1: grating_coupler_ellipti_2f8caedf_0_m37900,o1
-  p2: straight_L29p183_CSstrip_W0p45_0_m10000,o2
+  p2: straight_L29p183_CSstri_637c02b2_0_m10000,o2
 - p1: grating_coupler_ellipti_2f8caedf_141258_27900,o1
-  p2: straight_L68p3660000000_395d7d3a_141258_m39183,o2
+  p2: straight_L68p3660000000_52a65daf_141258_m39183,o2
 - p1: grating_coupler_ellipti_2f8caedf_141258_m37900,o1
-  p2: straight_L68p3660000000_395d7d3a_141258_m39183,o1
+  p2: straight_L68p3660000000_52a65daf_141258_m39183,o1
 placements:
   grating_coupler_ellipti_2f8caedf_0_m37900:
     mirror: false
@@ -79,12 +81,12 @@ placements:
     rotation: 270
     x: 141.258
     y: -37.9
-  straight_L29p183_CSstrip_W0p45_0_m10000:
+  straight_L29p183_CSstri_637c02b2_0_m10000:
     mirror: false
     rotation: 270
     x: 0
     y: -10
-  straight_L68p3660000000_395d7d3a_141258_m39183:
+  straight_L68p3660000000_52a65daf_141258_m39183:
     mirror: false
     rotation: 90
     x: 141.258
@@ -98,7 +100,7 @@ warnings:
     unconnected_ports:
     - message: 1 unconnected optical ports!
       ports:
-      - straight_L29p183_CSstrip_W0p45_0_m10000,o1
+      - straight_L29p183_CSstri_637c02b2_0_m10000,o1
       values:
       - - 0
         - -10

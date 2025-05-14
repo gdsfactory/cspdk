@@ -1,0 +1,13 @@
+info: {}
+name: mzi_DL10_Bbend_euler_Ss_b324d970
+settings:
+  bend: bend_euler
+  combiner: coupler
+  cross_section: strip
+  delta_length: 10
+  port_e0_combiner: o4
+  port_e0_splitter: o4
+  port_e1_combiner: o3
+  port_e1_splitter: o3
+  splitter: coupler
+  straight: straight

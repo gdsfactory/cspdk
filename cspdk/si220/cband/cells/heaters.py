@@ -1,7 +1,5 @@
 """Heater components."""
 
-from functools import partial
-
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
@@ -97,7 +95,7 @@ def straight_heater_meander(
 
 
 if __name__ == "__main__":
-    from si220.cband import PDK
+    from cspdk.si220.cband import PDK
 
     PDK.activate()
     c = straight_heater_metal_undercut()

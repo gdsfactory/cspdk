@@ -2,7 +2,7 @@
 
 import gdsfactory as gf
 from gdsfactory.cross_section import port_names_electrical, port_types_electrical
-from gdsfactory.typings import CrossSectionSpec, Size, LayerSpec
+from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
 
 @gf.cell
@@ -10,6 +10,7 @@ def straight(
     length: float = 10,
     cross_section: CrossSectionSpec = "strip",
     width: float | None = None,
+    npoints: int = 2,
 ) -> gf.Component:
     """Returns a Straight waveguide.
 
@@ -17,9 +18,10 @@ def straight(
         length: straight length (um).
         cross_section: specification (CrossSection, string or dict).
         width: width of the waveguide. If None, it will use the width of the cross_section.
+        npoints: number of points.
     """
     return gf.c.straight(
-        length=length, cross_section=cross_section, width=width, npoints=2
+        length=length, cross_section=cross_section, width=width, npoints=npoints
     )
 
 
@@ -28,6 +30,7 @@ def straight_strip(
     length: float = 10,
     cross_section: CrossSectionSpec = "strip",
     width: float | None = None,
+    npoints: int = 2,
 ) -> gf.Component:
     """Returns a Straight waveguide.
 
@@ -35,9 +38,10 @@ def straight_strip(
         length: straight length (um).
         cross_section: specification (CrossSection, string or dict).
         width: width of the waveguide. If None, it will use the width of the cross_section.
+        npoints: number of points.
     """
     return gf.c.straight(
-        length=length, cross_section=cross_section, width=width, npoints=2
+        length=length, cross_section=cross_section, width=width, npoints=npoints
     )
 
 
@@ -96,6 +100,7 @@ def bend_s(
     size: Size = (11, 1.8),
     cross_section: CrossSectionSpec = "strip",
     width: float | None = None,
+    allow_min_radius_violation: bool = False,
 ) -> gf.Component:
     """Return S bend with bezier curve.
 
@@ -106,12 +111,13 @@ def bend_s(
         size: in x and y direction.
         cross_section: spec.
         width: width of the waveguide. If None, it will use the width of the cross_section.
+        allow_min_radius_violation: allows min radius violations.
     """
     return gf.c.bend_s(
         size=size,
         cross_section=cross_section,
         npoints=99,
-        allow_min_radius_violation=False,
+        allow_min_radius_violation=allow_min_radius_violation,
         width=width,
     )
 
@@ -203,7 +209,7 @@ def bend_metal(
         angle=angle,
         width=width,
         cross_section=cross_section,
-        allow_min_radius_violation=False,
+        allow_min_radius_violation=True,
         npoints=None,
         layer=None,
     )
@@ -214,6 +220,7 @@ def bend_s_metal(
     size: Size = (11, 1.8),
     cross_section: CrossSectionSpec = "metal_routing",
     width: float | None = None,
+    allow_min_radius_violation: bool = True,
 ) -> gf.Component:
     """Return S bend with bezier curve.
 
@@ -224,12 +231,13 @@ def bend_s_metal(
         size: in x and y direction.
         cross_section: spec.
         width: width of the waveguide. If None, it will use the width of the cross_section.
+        allow_min_radius_violation: allows min radius violations.
     """
     return gf.c.bend_s(
         size=size,
         cross_section=cross_section,
         npoints=99,
-        allow_min_radius_violation=False,
+        allow_min_radius_violation=allow_min_radius_violation,
         width=width,
     )
 

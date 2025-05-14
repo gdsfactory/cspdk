@@ -12,4 +12,5 @@ from .rings import *
 from .spirals import *
 from .tapers import *
 from .text import *
+from .vias import *
 from .waveguides import *

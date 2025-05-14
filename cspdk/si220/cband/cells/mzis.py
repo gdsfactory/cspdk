@@ -14,7 +14,7 @@ def mzi(
     delta_length: float = 10,
     bend: ComponentSpec = "bend_euler",
     straight: ComponentSpec = "straight",
-    splitter: ComponentSpec = "coupler_strip",
+    splitter: ComponentSpec = "coupler",
     combiner: ComponentSpec | None = "coupler",
     port_e1_splitter: str = "o3",
     port_e0_splitter: str = "o4",

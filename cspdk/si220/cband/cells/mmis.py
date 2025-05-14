@@ -3,18 +3,9 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.cross_section import CrossSection
 from gdsfactory.typings import (
-    ComponentSpec,
     CrossSectionSpec,
-    Ints,
-    LayerSpec,
-    Size,
 )
-
-from cspdk.si220.cband.config import PATH
-from cspdk.si220.cband.tech import LAYER, TECH
-
 
 ################
 # MMIs
@@ -22,13 +13,13 @@ from cspdk.si220.cband.tech import LAYER, TECH
 
 
 @gf.cell
-def _mmi1x2(
+def mmi1x2(
     width: float | None = None,
-    width_taper=1.5,
-    length_taper=20.0,
-    length_mmi: float = 5.5,
-    width_mmi=6.0,
-    gap_mmi: float = 0.25,
+    width_taper: float = 1.5,
+    length_taper: float = 20.0,
+    length_mmi: float = 31.0,
+    width_mmi: float = 6.0,
+    gap_mmi: float = 1.64,
     cross_section: CrossSectionSpec = "strip",
 ) -> gf.Component:
     """An mmi1x2.
@@ -55,18 +46,17 @@ def _mmi1x2(
     )
 
 
-mmi1x2 = partial(_mmi1x2, length_mmi=31.8, gap_mmi=1.64, cross_section="strip")
-mmi1x2_rib = partial(_mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="rib")
+mmi1x2_rib = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="rib")
 
 
 @gf.cell
-def _mmi2x2(
+def mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,
     length_taper: float = 20.0,
-    length_mmi: float = 5.5,
+    length_mmi: float = 42.5,
     width_mmi: float = 6.0,
-    gap_mmi: float = 0.25,
+    gap_mmi: float = 0.5,
     cross_section: CrossSectionSpec = "strip",
 ) -> gf.Component:
     """An mmi2x2.
@@ -93,8 +83,7 @@ def _mmi2x2(
     )
 
 
-mmi2x2 = partial(_mmi2x2, length_mmi=42.5, gap_mmi=0.5, cross_section="strip")
-mmi2x2_rib = partial(_mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="rib")
+mmi2x2_rib = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="rib")
 
 if __name__ == "__main__":
     c = mmi1x2()
