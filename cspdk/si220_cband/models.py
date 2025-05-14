@@ -39,7 +39,7 @@ straight_so = partial(
 )
 
 
-straight_rc = partial(
+straight_rib = partial(
     sm.straight,
     length=10.0,
     loss=0.0,
@@ -70,7 +70,7 @@ def straight(
     fs = {
         "strip": straight,
         "xs_so": straight_so,
-        "xs_rc": straight_rc,
+        "xs_rib": straight_rib,
         "xs_ro": straight_ro,
     }
     f = fs[cross_section]
@@ -129,7 +129,7 @@ def bend_euler(
 
 bend_euler = partial(bend_euler, cross_section="strip")
 bend_euler_so = partial(bend_euler, cross_section="xs_so")
-bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
+bend_euler_rib = partial(bend_euler, cross_section="xs_rib")
 bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 
 
@@ -158,7 +158,7 @@ def taper(
 
 taper = partial(taper, cross_section="xs_so", length=10.0)
 taper_so = partial(taper, cross_section="xs_so", length=10.0)
-taper_rc = partial(taper, cross_section="xs_rc", length=10.0)
+taper_rib = partial(taper, cross_section="xs_rib", length=10.0)
 taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
 
 
@@ -180,16 +180,16 @@ def taper_strip_to_ridge(
     )
 
 
-trans_rc10 = partial(taper_strip_to_ridge, length=10.0)
-trans_rc20 = partial(taper_strip_to_ridge, length=20.0)
-trans_rc50 = partial(taper_strip_to_ridge, length=50.0)
+trans_rib10 = partial(taper_strip_to_ridge, length=10.0)
+trans_rib20 = partial(taper_strip_to_ridge, length=20.0)
+trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
 
 ################
 # MMIs
 ################
 
 mmi1x2 = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
-mmi1x2_rc = mmi1x2
+mmi1x2_rib = mmi1x2
 mmi1x2_so = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
 mmi1x2_ro = mmi1x2_so
 
@@ -204,7 +204,7 @@ def mmi1x2(
     fs = {
         "strip": mmi1x2,
         "xs_so": mmi1x2_so,
-        "xs_rc": mmi1x2_rc,
+        "xs_rib": mmi1x2_rib,
         "xs_ro": mmi1x2_ro,
     }
     f = fs[cross_section]
@@ -215,7 +215,7 @@ def mmi1x2(
 
 
 mmi2x2 = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-mmi2x2_rc = mmi2x2
+mmi2x2_rib = mmi2x2
 mmi2x2_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 mmi2x2_ro = mmi2x2_so
 
@@ -230,7 +230,7 @@ def mmi2x2(
     fs = {
         "strip": mmi2x2,
         "xs_so": mmi2x2_so,
-        "xs_rc": mmi2x2_rc,
+        "xs_rib": mmi2x2_rib,
         "xs_ro": mmi2x2_ro,
     }
     f = fs[cross_section]
@@ -258,7 +258,7 @@ def coupler_symmetric() -> sax.SDict:
 
 
 coupler = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-coupler_rc = coupler
+coupler_rib = coupler
 coupler_so = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 coupler_ro = coupler_so
 
@@ -277,7 +277,7 @@ def coupler(
     fs = {
         "strip": coupler,
         "xs_so": coupler_so,
-        "xs_rc": coupler_rc,
+        "xs_rib": coupler_rib,
         "xs_ro": coupler_ro,
     }
     f = fs[cross_section]
@@ -299,7 +299,7 @@ grating_coupler_rectangular_ro = grating_coupler_rectangular_so
 grating_coupler_rectangular = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
-grating_coupler_rectangular_rc = grating_coupler_rectangular
+grating_coupler_rectangular_rib = grating_coupler_rectangular
 
 
 def grating_coupler_rectangular(
@@ -312,7 +312,7 @@ def grating_coupler_rectangular(
     fs = {
         "strip": grating_coupler_rectangular,
         "xs_so": grating_coupler_rectangular_so,
-        "xs_rc": grating_coupler_rectangular_rc,
+        "xs_rib": grating_coupler_rectangular_rib,
         "xs_ro": grating_coupler_rectangular_ro,
     }
     f = fs[cross_section]
@@ -410,7 +410,7 @@ def straight_heater_metal(
 straight_heater_metal_so = straight_heater_metal
 
 crossing_so = sm.crossing
-crossing_rc = sm.crossing
+crossing_rib = sm.crossing
 crossing = sm.crossing
 
 

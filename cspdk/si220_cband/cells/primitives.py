@@ -38,7 +38,7 @@ def straight(
 
 straight = partial(straight, cross_section="strip")
 straight_so = partial(straight, cross_section="xs_so")
-straight_rc = partial(straight, cross_section="xs_rc")
+straight_rib = partial(straight, cross_section="xs_rib")
 straight_ro = partial(straight, cross_section="xs_ro")
 straight_metal = partial(straight, cross_section="metal_routing")
 
@@ -104,7 +104,7 @@ def bend_euler(
 
 bend_euler = partial(bend_euler, cross_section="strip")
 bend_euler_so = partial(bend_euler, cross_section="xs_so")
-bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
+bend_euler_rib = partial(bend_euler, cross_section="xs_rib")
 bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 bend_metal = partial(bend_euler, cross_section="metal_routing")
 
@@ -159,11 +159,11 @@ taper_so = partial(
     width1=Tech.width_so,
     width2=None,
 )
-taper_rc = partial(
+taper_rib = partial(
     taper,
-    cross_section="xs_rc",
+    cross_section="xs_rib",
     length=10.0,
-    width1=Tech.width_rc,
+    width1=Tech.width_rib,
     width2=None,
 )
 taper_ro = partial(
@@ -208,9 +208,9 @@ def taper_strip_to_ridge(
     )
 
 
-trans_rc10 = partial(taper_strip_to_ridge, length=10)
-trans_rc20 = partial(taper_strip_to_ridge, length=20)
-trans_rc50 = partial(taper_strip_to_ridge, length=50)
+trans_rib10 = partial(taper_strip_to_ridge, length=10)
+trans_rib20 = partial(taper_strip_to_ridge, length=20)
+trans_rib50 = partial(taper_strip_to_ridge, length=50)
 
 
 ################
@@ -256,7 +256,7 @@ def mmi1x2(
 
 mmi1x2 = partial(mmi1x2, length_mmi=31.8, gap_mmi=1.64, cross_section="strip")
 mmi1x2_so = partial(mmi1x2, length_mmi=40.1, gap_mmi=1.55, cross_section="xs_so")
-mmi1x2_rc = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="xs_rc")
+mmi1x2_rib = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="xs_rib")
 mmi1x2_ro = partial(mmi1x2, length_mmi=40.8, gap_mmi=1.55, cross_section="xs_ro")
 
 
@@ -298,7 +298,7 @@ def mmi2x2(
 
 mmi2x2 = partial(mmi2x2, length_mmi=42.5, gap_mmi=0.5, cross_section="strip")
 mmi2x2_so = partial(mmi2x2, length_mmi=53.5, gap_mmi=0.53, cross_section="xs_so")
-mmi2x2_rc = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="xs_rc")
+mmi2x2_rib = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="xs_rib")
 mmi2x2_ro = partial(mmi2x2, length_mmi=55.0, gap_mmi=0.53, cross_section="xs_ro")
 
 
@@ -387,9 +387,9 @@ coupler_so = partial(
     coupler,
     cross_section="xs_so",
 )
-coupler_rc = partial(
+coupler_rib = partial(
     coupler,
-    cross_section="xs_rc",
+    cross_section="xs_rib",
     dx=15,
     dy=4.0,
 )
@@ -456,10 +456,10 @@ grating_coupler_rectangular_so = partial(
     period=0.250 * 2,
 )
 
-grating_coupler_rectangular_rc = partial(
+grating_coupler_rectangular_rib = partial(
     grating_coupler_rectangular,
     period=0.5,
-    cross_section="xs_rc",
+    cross_section="xs_rib",
     n_periods=60,
 )
 
@@ -595,13 +595,13 @@ mzi_so = partial(
     cross_section="xs_so",
 )
 
-mzi_rc = partial(
+mzi_rib = partial(
     mzi,
-    straight="straight_rc",
-    bend="bend_euler_rc",
-    splitter="mmi1x2_rc",
-    combiner="mmi2x2_rc",
-    cross_section="xs_rc",
+    straight="straight_rib",
+    bend="bend_euler_rib",
+    splitter="mmi1x2_rib",
+    combiner="mmi2x2_rib",
+    cross_section="xs_rib",
 )
 
 mzi_ro = partial(
@@ -906,7 +906,7 @@ def grating_coupler_array(
         gcs = {
             "strip": "grating_coupler_rectangular",
             "xs_so": "grating_coupler_rectangular_so",
-            "xs_rc": "grating_coupler_rectangular_rc",
+            "xs_rib": "grating_coupler_rectangular_rib",
             "xs_ro": "grating_coupler_rectangular_ro",
         }
         grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
@@ -967,7 +967,7 @@ def die(
     gcs = {
         "strip": "grating_coupler_rectangular",
         "xs_so": "grating_coupler_rectangular_so",
-        "xs_rc": "grating_coupler_rectangular_rc",
+        "xs_rib": "grating_coupler_rectangular_rib",
         "xs_ro": "grating_coupler_rectangular_ro",
     }
     grating_coupler = grating_coupler or gcs.get(xs, "grating_coupler_rectangular")
@@ -988,7 +988,7 @@ def die(
 
 die = partial(die, cross_section="strip")
 die_so = partial(die, cross_section="xs_so")
-die_rc = partial(die, cross_section="xs_rc")
+die_rib = partial(die, cross_section="xs_rib")
 die_ro = partial(die, cross_section="xs_ro")
 
 
@@ -1023,7 +1023,7 @@ def crossing_so() -> gf.Component:
 
 
 @gf.cell
-def crossing_rc() -> gf.Component:
+def crossing_rib() -> gf.Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
     xc = 404.24

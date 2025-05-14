@@ -120,11 +120,11 @@ class Tech:
 
     radius = 5
     radius_so = 5
-    radius_rc = 25
+    radius_rib = 25
     radius_ro = 25
     width = 0.45
     width_so = 0.40
-    width_rc = 0.5
+    width_rib = 0.5
     width_ro = 0.5
 
     width_slab = 5
@@ -157,11 +157,11 @@ def strip(
 
 
 @xsection
-def xs_rc(
-    width: float = TECH.width_rc,
+def xs_rib(
+    width: float = TECH.width_rib,
     layer: LayerSpec = "WG",
-    radius: float = TECH.radius_rc,
-    radius_min: float = TECH.radius_rc,
+    radius: float = TECH.radius_rib,
+    radius_min: float = TECH.radius_rib,
     bbox_layers: LayerSpecs = ("SLAB",),
     bbox_offsets: Floats = (TECH.width_slab,),
     **kwargs,
@@ -364,12 +364,12 @@ route_bundle_so = partial(
     cross_section="xs_so",
     port_type="optical",
 )
-route_bundle_rc = partial(
+route_bundle_rib = partial(
     route_bundle,
-    straight="straight_rc",
-    bend="bend_euler_rc",
-    taper="taper_rc",
-    cross_section="xs_rc",
+    straight="straight_rib",
+    bend="bend_euler_rib",
+    taper="taper_rib",
+    cross_section="xs_rib",
     port_type="optical",
 )
 route_bundle_ro = partial(
@@ -401,7 +401,7 @@ routing_strategies = dict(
     route_bundle=route_bundle,
     route_bundle=route_bundle,
     route_bundle_so=route_bundle_so,
-    route_bundle_rc=route_bundle_rc,
+    route_bundle_rib=route_bundle_rib,
     route_bundle_ro=route_bundle_ro,
     route_bundle_metal=route_bundle_metal,
     route_bundle_metal_corner=route_bundle_metal_corner,
