@@ -71,8 +71,6 @@ def rectangle(
 def pad(
     size: tuple[float, float] = (90.0, 90.0),
     layer: LayerSpec = "PAD",
-    bbox_layers: tuple[LayerSpec, ...] | None = ("PAD",),
-    bbox_offsets: tuple[float, ...] | None = (-2,),
     port_inclusion: float = 0,
     port_orientation: float = 0,
 ) -> gf.Component:
@@ -90,8 +88,6 @@ def pad(
     return gf.components.pad(
         size=size,
         layer=layer,
-        bbox_layers=bbox_layers,
-        bbox_offsets=bbox_offsets,
         port_inclusion=port_inclusion,
         port_orientation=port_orientation,
     )
@@ -198,6 +194,6 @@ if __name__ == "__main__":
     from cspdk.si220.cband import PDK
 
     PDK.activate()
-    c = die_with_pads()
+    c = die()
     c.pprint_ports()
     c.show()

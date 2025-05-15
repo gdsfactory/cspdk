@@ -163,8 +163,8 @@ trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
 # MMIs
 ################
 
-mmi1x2 = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
-mmi1x2_rib = mmi1x2
+mmi1x2_strip = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
+mmi1x2_rib = mmi1x2_strip
 
 
 def mmi1x2(
@@ -175,7 +175,7 @@ def mmi1x2(
     """MMI 1x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi1x2,
+        "strip": mmi1x2_strip,
         "rib": mmi1x2_rib,
     }
     f = fs[cross_section]
@@ -185,8 +185,8 @@ def mmi1x2(
     )
 
 
-mmi2x2 = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-mmi2x2_rib = mmi2x2
+mmi2x2_strip = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+mmi2x2_rib = mmi2x2_strip
 
 
 def mmi2x2(
@@ -197,7 +197,7 @@ def mmi2x2(
     """MMI 2x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi2x2,
+        "strip": mmi2x2_strip,
         "rib": mmi2x2_rib,
     }
     f = fs[cross_section]
@@ -211,47 +211,33 @@ def mmi2x2(
 # Evanescent couplers
 ##############################
 
-
-def coupler_straight() -> sax.SDict:
-    """Straight coupler model."""
-    # we should not need this model...
-    raise NotImplementedError("No model for 'coupler_straight'")
-
-
-def coupler_symmetric() -> sax.SDict:
-    """Symmetric coupler model."""
-    # we should not need this model...
-    raise NotImplementedError("No model for 'coupler_symmetric'")
-
-
-coupler = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-coupler_rib = coupler
-coupler_ring = partial(sm.coupler, wl0=1.55)
+coupler_strip = partial(sm.coupler, wl0=1.55)
+coupler_rib = coupler_strip
+coupler_ring = partial(coupler_strip, wl0=1.55)
 
 
 def coupler(
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    length: float = 10.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Evanescent coupler model."""
     # TODO: take more coupler arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": coupler,
+        "strip": coupler_strip,
         "rib": coupler_rib,
     }
     f = fs[cross_section]
     return f(
         wl=wl,
-        loss_dB=loss_dB,
+        length=length,
     )
 
 
 ##############################
 # grating couplers Rectangular
 ##############################
-
 
 grating_coupler_rectangular = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
@@ -278,23 +264,9 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-
 grating_coupler_elliptical = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
-
-
-################
-# MZI
-################
-
-# MZIs don't need models. They're composite components.
-
-################
-# Packaging
-################
-
-# No packaging models
 
 ################
 # Imported

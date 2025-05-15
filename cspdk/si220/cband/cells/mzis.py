@@ -15,7 +15,7 @@ def mzi(
     bend: ComponentSpec = "bend_euler",
     straight: ComponentSpec = "straight",
     splitter: ComponentSpec = "coupler",
-    combiner: ComponentSpec | None = "coupler",
+    combiner: ComponentSpec | None = None,
     port_e1_splitter: str = "o3",
     port_e0_splitter: str = "o4",
     port_e1_combiner: str = "o3",
@@ -36,6 +36,18 @@ def mzi(
         port_e0_combiner: east bot combiner port.
         cross_section: for routing (sxtop/sxbot to combiner).
     """
+    combiner = combiner or splitter
+    _splitter = gf.get_component(splitter)
+    _combiner = gf.get_component(combiner)
+    if len(_splitter.ports) < 4:
+        raise ValueError(
+            f"Splitter {splitter} has {len(_splitter.ports)} ports, but needs at least 4 ports."
+        )
+    if len(_combiner.ports) < 4:
+        raise ValueError(
+            f"Combiner {combiner} has {len(_combiner.ports)} ports, but needs at least 4 ports."
+        )
+
     return gf.c.mzi(
         delta_length=delta_length,
         bend=bend,

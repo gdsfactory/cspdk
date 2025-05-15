@@ -1,20 +1,19 @@
 """Circuit simulation."""
 
-import jax.numpy as jnp
-import sax
-
-from cspdk.si220.cband import PDK, cells
-
 if __name__ == "__main__":
+    import jax.numpy as jnp
     import matplotlib.pyplot as plt
+    import sax
 
-    c = cells.mzi(delta_length=12)
+    from cspdk.si220.cband import PDK, cells
+
+    c = cells.ring_single(radius=10)
     c.show()
     netlist = c.get_netlist()
     c.plot_netlist()
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
-    wl = jnp.linspace(1.5, 1.6, 256)
+    wl = jnp.linspace(1.5, 1.6, 3000)
 
     S = circuit(wl=wl)
     plt.figure(figsize=(14, 4))

@@ -21,7 +21,7 @@ if __name__ == "__main__":
     c.plot_netlist(recursive=True)
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
-    wl = jnp.linspace(1.5, 1.6, 256)
+    wl = jnp.linspace(1.5, 1.6, 3000)
 
     S = circuit(wl=wl)
     plt.figure(figsize=(14, 4))

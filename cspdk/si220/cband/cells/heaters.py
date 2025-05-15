@@ -5,7 +5,7 @@ from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
 
 @gf.cell
-def straight_heater_metal_undercut(
+def straight_heater_metal(
     length: float = 320.0,
     length_undercut_spacing: float = 6.0,
     length_undercut: float = 30.0,
@@ -98,6 +98,6 @@ if __name__ == "__main__":
     from cspdk.si220.cband import PDK
 
     PDK.activate()
-    c = straight_heater_metal_undercut()
+    c = straight_heater_metal()
     c.pprint_ports()
     c.show()

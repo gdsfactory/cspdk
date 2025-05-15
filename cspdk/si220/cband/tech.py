@@ -1,17 +1,17 @@
 """Technology definitions."""
 
-from collections.abc import Callable, Iterable
+from collections.abc import Callable
 from functools import partial, wraps
 from typing import Any
 
 import gdsfactory as gf
+from doroutes.bundles import add_bundle_astar
 from gdsfactory.cross_section import (
     CrossSection,
     cross_section,
     port_names_electrical,
     port_types_electrical,
 )
-from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -20,9 +20,7 @@ from gdsfactory.technology import (
     LogicalLayer,
 )
 from gdsfactory.typings import (
-    ComponentSpec,
     ConnectivitySpec,
-    CrossSectionSpec,
     Floats,
     Layer,
     LayerSpec,
@@ -71,7 +69,7 @@ def get_layer_stack(
         zmin_heater: TiN heater.
         thickness_heater: TiN thickness.
         zmin_metal: metal thickness in um.
-        thickness_metal: metal2 thickness.
+        thickness_metal: top metal thickness.
     """
     return LayerStack(
         layers=dict(
@@ -249,102 +247,13 @@ def heater_metal(width=TECH.width_heater) -> CrossSection:
 # Routing functions
 ############################
 
-
-def route_single(
-    component: gf.Component,
-    port1: gf.Port,
-    port2: gf.Port,
-    start_straight_length: float = 0.0,
-    end_straight_length: float = 0.0,
-    waypoints: list[tuple[float, float]] | None = None,
-    port_type: str | None = None,
-    allow_width_mismatch: bool = False,
-    radius: float | None = None,
-    route_width: float | None = None,
-    cross_section: CrossSectionSpec = "strip",
-    straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
-    taper: ComponentSpec = "taper",
-) -> ManhattanRoute:
-    """Route two ports with a single route."""
-    return gf.routing.route_single(
-        component=component,
-        port1=port1,
-        port2=port2,
-        start_straight_length=start_straight_length,
-        end_straight_length=end_straight_length,
-        cross_section=cross_section,
-        waypoints=waypoints,
-        port_type=port_type,
-        allow_width_mismatch=allow_width_mismatch,
-        radius=radius,
-        route_width=route_width,
-        straight=straight,
-        bend=bend,
-        taper=taper,
-    )
+route_single = partial(gf.routing.route_single, cross_section="strip")
+route_bundle = partial(gf.routing.route_bundle, cross_section="strip")
 
 
-def route_bundle(
-    component: gf.Component,
-    ports1: list[gf.Port],
-    ports2: list[gf.Port],
-    separation: float = 3.0,
-    sort_ports: bool = False,
-    start_straight_length: float = 0.0,
-    end_straight_length: float = 0.0,
-    min_straight_taper: float = 100.0,
-    port_type: str | None = None,
-    collision_check_layers: Iterable[LayerSpec] = (),
-    on_collision: str | None = None,
-    bboxes: list | None = None,
-    allow_width_mismatch: bool = False,
-    radius: float | None = None,
-    route_width: float | list[float] | None = None,
-    cross_section: CrossSectionSpec = "strip",
-    straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
-    taper: ComponentSpec | None = "taper",
-) -> list[ManhattanRoute]:
-    """Route two bundles of ports."""
-    return gf.routing.route_bundle(
-        component=component,
-        ports1=ports1,
-        ports2=ports2,
-        separation=separation,
-        sort_ports=sort_ports,
-        start_straight_length=start_straight_length,
-        end_straight_length=end_straight_length,
-        min_straight_taper=min_straight_taper,
-        port_type=port_type,
-        collision_check_layers=tuple(collision_check_layers),
-        on_collision=on_collision,
-        bboxes=bboxes,
-        allow_width_mismatch=allow_width_mismatch,
-        radius=radius,
-        route_width=route_width,
-        cross_section=cross_section,
-        straight=straight,
-        bend=bend,
-        taper=taper,
-    )
-
-
-route_single = partial(
-    route_single,
-    straight="straight",
-    bend="bend_euler",
-    taper="taper",
-    cross_section="strip",
-    port_type="optical",
-)
 route_bundle_rib = partial(
     route_bundle,
-    straight="straight_rib",
-    bend="bend_euler_rib",
-    taper="taper_rib",
     cross_section="rib",
-    port_type="optical",
 )
 route_bundle_metal = partial(
     route_bundle,
@@ -363,11 +272,32 @@ route_bundle_metal_corner = partial(
     port_type="electrical",
 )
 
+route_astar = partial(
+    add_bundle_astar,
+    layers=["WG"],
+    bend="bend_euler",
+    straight="straight",
+    grid_unit=500,
+    spacing=3,
+)
+
+route_astar_metal = partial(
+    add_bundle_astar,
+    layers=["PAD"],
+    bend="wire_corner",
+    straight="straight_metal",
+    grid_unit=500,
+    spacing=15,
+)
+
+
 routing_strategies = dict(
     route_bundle=route_bundle,
     route_bundle_rib=route_bundle_rib,
     route_bundle_metal=route_bundle_metal,
     route_bundle_metal_corner=route_bundle_metal_corner,
+    route_astar=route_astar,
+    route_astar_metal=route_astar_metal,
 )
 
 if __name__ == "__main__":
