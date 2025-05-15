@@ -12,6 +12,7 @@ parts:
   - caption: Reference
     chapters:
       - file: cells_si220_cband
+      - file: cells_si220_oband
       - file: cells_si500
       - file: cells_sin300
       - file: changelog

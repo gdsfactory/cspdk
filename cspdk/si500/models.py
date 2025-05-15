@@ -10,7 +10,7 @@ import jax.numpy as jnp
 import sax
 from numpy.typing import NDArray
 
-import cspdk.si220.cband.models as csm
+import cspdk.si220.models as csm
 
 nm = 1e-3
 
