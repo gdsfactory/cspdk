@@ -24,24 +24,24 @@ straight_strip = partial(
     sm.straight,
     length=10.0,
     loss=0.0,
-    wl0=1.55,
-    neff=2.38,
-    ng=4.30,
+    wl0=1.31,
+    neff=2.52,
+    ng=4.33,
 )
 
 straight_rib = partial(
     sm.straight,
     length=10.0,
     loss=0.0,
-    wl0=1.55,
-    neff=2.38,
-    ng=4.30,
+    wl0=1.31,
+    neff=2.72,
+    ng=3.98,
 )
 
 
 def straight(
     *,
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     loss: float = 0.0,
     cross_section: str = "strip",
@@ -65,7 +65,7 @@ def straight(
 ################
 
 
-def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+def wire_corner(*, wl: Float = 1.31) -> sax.SDict:
     """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
@@ -74,7 +74,7 @@ def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
 
 def bend_s(
     *,
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     loss: float = 0.03,
     cross_section="strip",
@@ -91,7 +91,7 @@ def bend_s(
 
 def bend_euler(
     *,
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     loss: float = 0.03,
     cross_section="strip",
@@ -117,7 +117,7 @@ bend_euler_rib = partial(bend_euler, cross_section="rib")
 
 def taper(
     *,
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     loss: float = 0.0,
     cross_section="strip",
@@ -139,7 +139,7 @@ taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
 
 def taper_strip_to_ridge(
     *,
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     loss: float = 0.0,
     cross_section="strip",
@@ -163,12 +163,12 @@ trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
 # MMIs
 ################
 
-mmi1x2_strip = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
+mmi1x2_strip = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
 mmi1x2_rib = mmi1x2_strip
 
 
 def mmi1x2(
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     loss_dB: Float = 0.3,
     cross_section="strip",
 ) -> sax.SDict:
@@ -185,12 +185,12 @@ def mmi1x2(
     )
 
 
-mmi2x2_strip = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
+mmi2x2_strip = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
 mmi2x2_rib = mmi2x2_strip
 
 
 def mmi2x2(
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     loss_dB: Float = 0.3,
     cross_section="strip",
 ) -> sax.SDict:
@@ -211,13 +211,13 @@ def mmi2x2(
 # Evanescent couplers
 ##############################
 
-coupler_strip = partial(sm.coupler, wl0=1.55)
+coupler_strip = partial(sm.coupler, wl0=1.31)
 coupler_rib = coupler_strip
-coupler_ring = partial(coupler_strip, wl0=1.55)
+coupler_ring = partial(coupler_strip, wl0=1.31)
 
 
 def coupler(
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     length: float = 10.0,
     cross_section="strip",
 ) -> sax.SDict:
@@ -240,13 +240,13 @@ def coupler(
 ##############################
 
 grating_coupler_rectangular = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
 )
 grating_coupler_rectangular_rib = grating_coupler_rectangular
 
 
 def grating_coupler_rectangular(
-    wl: Float = 1.55,
+    wl: Float = 1.31,
     cross_section="strip",
 ) -> sax.SDict:
     """Grating coupler rectangular model."""
@@ -265,7 +265,7 @@ def grating_coupler_rectangular(
 ##############################
 
 grating_coupler_elliptical = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
 )
 
 ################
@@ -279,8 +279,8 @@ def heater() -> sax.SDict:
 
 
 def straight_heater_metal(
-    wl: float = 1.55,
-    neff: float = 2.34,
+    wl: float = 1.31,
+    neff: float = 2.52,
     voltage: float = 0,
     vpi: float = 1.0,  # Voltage required for π-phase shift
     length: float = 10,
