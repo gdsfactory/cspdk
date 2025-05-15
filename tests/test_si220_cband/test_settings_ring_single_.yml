@@ -1,0 +1,8 @@
+info: {}
+name: ring_single_G0p27_R10_L_c4ff7786
+settings:
+  cross_section: strip
+  gap: 0.27
+  length_x: 4
+  length_y: 0.6
+  radius: 10

@@ -1,0 +1,9 @@
+info: {}
+name: coupler_ring_LX4_G0p27__1a5b425b
+settings:
+  bend: bend_euler
+  cross_section: strip
+  gap: 0.27
+  length_x: 4
+  radius: 5
+  straight: straight

@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 Pipfile
 
+docs/cells_si220_cband.rst
+docs/cells_si220_oband.rst
+
 # C extensions
 *.so
 *.fsp

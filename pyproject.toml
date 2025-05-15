@@ -16,7 +16,8 @@ classifiers = [
 ]
 dependencies = [
   "gdsfactory==9.5.9",
-  "gplugins[sax]>=1.3.3,<2"
+  "gplugins[sax]>=1.3.3,<2",
+  "doroutes>=0.2.0"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
@@ -82,7 +83,8 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+"cspdk/si220/oband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
 
 [tool.ruff.pydocstyle]
 convention = "google"
