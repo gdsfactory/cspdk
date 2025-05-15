@@ -1,8 +1,7 @@
 info: {}
-name: mzi_DL10_Bbend_euler_Ss_b324d970
+name: mzi_DL10_Bbend_euler_Ss_a38bc3c2
 settings:
   bend: bend_euler
-  combiner: coupler
   cross_section: strip
   delta_length: 10
   port_e0_combiner: o4

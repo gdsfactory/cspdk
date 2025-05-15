@@ -4,12 +4,8 @@ info:
   - 90
   xsize: 90
   ysize: 90
-name: pad_S90_90_LPAD_BLPAD_B_a43eb157
+name: pad_S90_90_LPAD_PI0_PO0
 settings:
-  bbox_layers:
-  - PAD
-  bbox_offsets:
-  - -2
   layer: PAD
   port_inclusion: 0
   port_orientation: 0
