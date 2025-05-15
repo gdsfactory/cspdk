@@ -34,7 +34,7 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs:
-	uv run python .github/write_cells_si220.py
+	uv run python .github/write_cells_si220_cband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	uv run jb build docs

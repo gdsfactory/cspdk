@@ -5,7 +5,7 @@ import inspect
 from cspdk.si220.cband import _cells as cells
 from cspdk.si220.cband.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_si220.rst"
+filepath = PATH.repo / "docs" / "cells_si220_cband.rst"
 
 skip = {}
 
@@ -17,7 +17,7 @@ with open(filepath, "w+") as f:
     f.write(
         """
 
-Cells Si SOI 220nm
+Cells Si SOI 220nm Cband
 =============================
 """
     )
