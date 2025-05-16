@@ -23,7 +23,7 @@ CONF.pdk = "cspdk.si220.cband"
 def get_pdk() -> Pdk:
     """Return Cornerstone PDK."""
     return Pdk(
-        name="cornerstone_si220_cband",
+        name="cspdk.si220.cband",
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
