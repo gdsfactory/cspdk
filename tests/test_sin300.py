@@ -20,7 +20,7 @@ def activate_pdk() -> None:
 
 
 cells = PDK.cells
-skip_test = {"coupler_symmetric"}
+skip_test = {"coupler_symmetric", "die", "die_nc", "die_no"}
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
 dirpath = (

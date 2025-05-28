@@ -170,16 +170,16 @@ instances:
   cp1:
     component: coupler
     info:
-      length: 10.188
       min_bend_radius: 11.807
+      path_length: 40.376
     settings:
       gap: 0.27
       length: 20
   cp2:
     component: coupler
     info:
-      length: 10.188
       min_bend_radius: 11.807
+      path_length: 40.376
     settings:
       gap: 0.27
       length: 20

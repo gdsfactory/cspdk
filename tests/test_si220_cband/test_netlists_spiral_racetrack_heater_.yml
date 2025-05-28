@@ -43,7 +43,7 @@ instances:
       - 4
       straight: straight
       straight_length: 100
-  straight_gdsfactorypcom_262b2f90_54277_22000:
+  straight_gdsfactorypcom_262b2f90_54277_22000_A180:
     component: straight
     info:
       length: 100
@@ -57,7 +57,7 @@ instances:
       length: 100
       npoints: 2
       width: null
-  straight_gdsfactorypcom_262b2f90_54277_m28000:
+  straight_gdsfactorypcom_262b2f90_54277_m28000_A180:
     component: straight
     info:
       length: 100
@@ -92,12 +92,12 @@ instances:
 name: spiral_racetrack_heater_8f268b5e
 nets:
 - p1: bend_euler_R25_A180_P0p_ce329588_54277_m28000,e1
-  p2: straight_gdsfactorypcom_262b2f90_54277_m28000,e1
+  p2: straight_gdsfactorypcom_262b2f90_54277_m28000_A180,e1
 - p1: bend_euler_R25_A180_P0p_ce329588_54277_m28000,e2
-  p2: straight_gdsfactorypcom_262b2f90_54277_22000,e1
-- p1: straight_gdsfactorypcom_262b2f90_54277_22000,e2
+  p2: straight_gdsfactorypcom_262b2f90_54277_22000_A180,e1
+- p1: straight_gdsfactorypcom_262b2f90_54277_22000_A180,e2
   p2: via_stack_heater_mtop_S20_10_m55723_22000,e3
-- p1: straight_gdsfactorypcom_262b2f90_54277_m28000,e2
+- p1: straight_gdsfactorypcom_262b2f90_54277_m28000_A180,e2
   p2: via_stack_heater_mtop_S20_10_m55723_m28000,e3
 placements:
   bend_euler_R25_A180_P0p_ce329588_54277_m28000:
@@ -110,12 +110,12 @@ placements:
     rotation: 0
     x: 0
     y: 0
-  straight_gdsfactorypcom_262b2f90_54277_22000:
+  straight_gdsfactorypcom_262b2f90_54277_22000_A180:
     mirror: false
     rotation: 180
     x: 54.277
     y: 22
-  straight_gdsfactorypcom_262b2f90_54277_m28000:
+  straight_gdsfactorypcom_262b2f90_54277_m28000_A180:
     mirror: false
     rotation: 180
     x: 54.277
