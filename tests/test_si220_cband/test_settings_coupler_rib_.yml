@@ -1,6 +1,6 @@
 info:
-  length: 16.083
   min_bend_radius: 34.638
+  path_length: 52.166
 name: coupler_rib_L20_G0p27
 settings:
   gap: 0.27

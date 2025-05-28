@@ -1,8 +1,9 @@
 instances:
-  grating_coupler_array_g_737a5d1b_5320605_0:
+  grating_coupler_array_g_37373fb7_5320605_0_A90:
     component: grating_coupler_array
     info: {}
     settings:
+      bend: bend_euler
       centered: true
       cross_section: xs_no
       grating_coupler: grating_coupler_rectangular_no
@@ -13,10 +14,11 @@ instances:
       rotation: -90
       straight_to_grating_spacing: 10
       with_loopback: true
-  grating_coupler_array_g_737a5d1b_m5320605_0:
+  grating_coupler_array_g_37373fb7_m5320605_0_A270:
     component: grating_coupler_array
     info: {}
     settings:
+      bend: bend_euler
       centered: true
       cross_section: xs_no
       grating_coupler: grating_coupler_rectangular_no
@@ -603,12 +605,12 @@ instances:
 name: die_CSxs_no
 nets: []
 placements:
-  grating_coupler_array_g_737a5d1b_5320605_0:
+  grating_coupler_array_g_37373fb7_5320605_0_A90:
     mirror: false
     rotation: 90
     x: 5320.605
     y: 0
-  grating_coupler_array_g_737a5d1b_m5320605_0:
+  grating_coupler_array_g_37373fb7_m5320605_0_A270:
     mirror: false
     rotation: 270
     x: -5320.605
@@ -991,30 +993,30 @@ ports:
   e7: pad_m2650000_m2250000,e2
   e8: pad_m2350000_m2250000,e2
   e9: pad_m2050000_m2250000,e2
-  o1: grating_coupler_array_g_737a5d1b_5320605_0,o1
-  o10: grating_coupler_array_g_737a5d1b_5320605_0,o10
-  o11: grating_coupler_array_g_737a5d1b_5320605_0,o11
-  o12: grating_coupler_array_g_737a5d1b_5320605_0,o12
-  o13: grating_coupler_array_g_737a5d1b_m5320605_0,o1
-  o14: grating_coupler_array_g_737a5d1b_m5320605_0,o2
-  o15: grating_coupler_array_g_737a5d1b_m5320605_0,o3
-  o16: grating_coupler_array_g_737a5d1b_m5320605_0,o4
-  o17: grating_coupler_array_g_737a5d1b_m5320605_0,o5
-  o18: grating_coupler_array_g_737a5d1b_m5320605_0,o6
-  o19: grating_coupler_array_g_737a5d1b_m5320605_0,o7
-  o2: grating_coupler_array_g_737a5d1b_5320605_0,o2
-  o20: grating_coupler_array_g_737a5d1b_m5320605_0,o8
-  o21: grating_coupler_array_g_737a5d1b_m5320605_0,o9
-  o22: grating_coupler_array_g_737a5d1b_m5320605_0,o10
-  o23: grating_coupler_array_g_737a5d1b_m5320605_0,o11
-  o24: grating_coupler_array_g_737a5d1b_m5320605_0,o12
-  o3: grating_coupler_array_g_737a5d1b_5320605_0,o3
-  o4: grating_coupler_array_g_737a5d1b_5320605_0,o4
-  o5: grating_coupler_array_g_737a5d1b_5320605_0,o5
-  o6: grating_coupler_array_g_737a5d1b_5320605_0,o6
-  o7: grating_coupler_array_g_737a5d1b_5320605_0,o7
-  o8: grating_coupler_array_g_737a5d1b_5320605_0,o8
-  o9: grating_coupler_array_g_737a5d1b_5320605_0,o9
+  o1: grating_coupler_array_g_37373fb7_5320605_0_A90,o1
+  o10: grating_coupler_array_g_37373fb7_5320605_0_A90,o10
+  o11: grating_coupler_array_g_37373fb7_5320605_0_A90,o11
+  o12: grating_coupler_array_g_37373fb7_5320605_0_A90,o12
+  o13: grating_coupler_array_g_37373fb7_m5320605_0_A270,o1
+  o14: grating_coupler_array_g_37373fb7_m5320605_0_A270,o2
+  o15: grating_coupler_array_g_37373fb7_m5320605_0_A270,o3
+  o16: grating_coupler_array_g_37373fb7_m5320605_0_A270,o4
+  o17: grating_coupler_array_g_37373fb7_m5320605_0_A270,o5
+  o18: grating_coupler_array_g_37373fb7_m5320605_0_A270,o6
+  o19: grating_coupler_array_g_37373fb7_m5320605_0_A270,o7
+  o2: grating_coupler_array_g_37373fb7_5320605_0_A90,o2
+  o20: grating_coupler_array_g_37373fb7_m5320605_0_A270,o8
+  o21: grating_coupler_array_g_37373fb7_m5320605_0_A270,o9
+  o22: grating_coupler_array_g_37373fb7_m5320605_0_A270,o10
+  o23: grating_coupler_array_g_37373fb7_m5320605_0_A270,o11
+  o24: grating_coupler_array_g_37373fb7_m5320605_0_A270,o12
+  o3: grating_coupler_array_g_37373fb7_5320605_0_A90,o3
+  o4: grating_coupler_array_g_37373fb7_5320605_0_A90,o4
+  o5: grating_coupler_array_g_37373fb7_5320605_0_A90,o5
+  o6: grating_coupler_array_g_37373fb7_5320605_0_A90,o6
+  o7: grating_coupler_array_g_37373fb7_5320605_0_A90,o7
+  o8: grating_coupler_array_g_37373fb7_5320605_0_A90,o8
+  o9: grating_coupler_array_g_37373fb7_5320605_0_A90,o9
 warnings:
   electrical:
     unconnected_ports:

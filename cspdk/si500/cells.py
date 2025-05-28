@@ -644,5 +644,5 @@ def array(
 
 
 if __name__ == "__main__":
-    c = coupler_rc()
+    c = die_rc()
     c.show()

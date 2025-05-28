@@ -1,6 +1,6 @@
 info:
-  length: 20.07
   min_bend_radius: 52.186
+  path_length: 60.14
 name: coupler_G0p236_L20_D4_D_3f0984fa
 settings:
   cross_section: xs_no

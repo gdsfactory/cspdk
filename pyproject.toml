@@ -15,8 +15,8 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory==9.5.9",
-  "gplugins[sax]>=1.3.3,<2",
+  "gdsfactory==9.7.0",
+  "gplugins[sax]>=1.3.6,<2",
   "doroutes>=0.2.0"
 ]
 description = "CornerStone PDK"
@@ -101,7 +101,7 @@ select = [
 convention = "google"
 
 [tool.setuptools.package-data]
-mypkg = ["*.csv", "*.yaml"]
+"*" = ["*.csv", "*.yaml", "*.yml", "*.gds", "*.lyp", "*.oas", "*.lyt", "*.dat", "*.nc", "*.svg"]
 
 [tool.setuptools.packages]
 find = {}

@@ -1,5 +1,5 @@
 instances:
-  bend_euler_R10_A90_P0p5_17151b03_10000_11320:
+  bend_euler_R10_A90_P0p5_17151b03_10000_11320_A90:
     component: bend_euler
     info:
       dy: 10
@@ -20,7 +20,7 @@ instances:
       p: 0.5
       radius: 10
       width: null
-  bend_euler_R10_A90_P0p5_17151b03_m4000_21320:
+  bend_euler_R10_A90_P0p5_17151b03_m4000_21320_A180:
     component: bend_euler
     info:
       dy: 10
@@ -51,7 +51,7 @@ instances:
       length_x: 4
       radius: 10
       straight: straight
-  straight_L0p6_CSstrip_WNone_N2_10000_11320:
+  straight_L0p6_CSstrip_WNone_N2_10000_11320_A270:
     component: straight
     info:
       length: 0.6
@@ -65,7 +65,7 @@ instances:
       length: 0.6
       npoints: 2
       width: null
-  straight_L0p6_CSstrip_WNone_N2_m14000_10720:
+  straight_L0p6_CSstrip_WNone_N2_m14000_10720_A90:
     component: straight
     info:
       length: 0.6
@@ -79,7 +79,7 @@ instances:
       length: 0.6
       npoints: 2
       width: null
-  straight_L4_CSstrip_WNone_N2_0_21320:
+  straight_L4_CSstrip_WNone_N2_0_21320_A180:
     component: straight
     info:
       length: 4
@@ -95,25 +95,25 @@ instances:
       width: null
 name: ring_single_G0p27_R10_L_c4ff7786
 nets:
-- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11320,o1
-  p2: straight_L0p6_CSstrip_WNone_N2_10000_11320,o1
-- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11320,o2
-  p2: straight_L4_CSstrip_WNone_N2_0_21320,o1
-- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21320,o1
-  p2: straight_L4_CSstrip_WNone_N2_0_21320,o2
-- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21320,o2
-  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10720,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11320_A90,o1
+  p2: straight_L0p6_CSstrip_WNone_N2_10000_11320_A270,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11320_A90,o2
+  p2: straight_L4_CSstrip_WNone_N2_0_21320_A180,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21320_A180,o1
+  p2: straight_L4_CSstrip_WNone_N2_0_21320_A180,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21320_A180,o2
+  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10720_A90,o2
 - p1: coupler_ring_LX4_G0p27__d3277347_0_0,o2
-  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10720,o1
+  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10720_A90,o1
 - p1: coupler_ring_LX4_G0p27__d3277347_0_0,o3
-  p2: straight_L0p6_CSstrip_WNone_N2_10000_11320,o2
+  p2: straight_L0p6_CSstrip_WNone_N2_10000_11320_A270,o2
 placements:
-  bend_euler_R10_A90_P0p5_17151b03_10000_11320:
+  bend_euler_R10_A90_P0p5_17151b03_10000_11320_A90:
     mirror: false
     rotation: 90
     x: 10
     y: 11.32
-  bend_euler_R10_A90_P0p5_17151b03_m4000_21320:
+  bend_euler_R10_A90_P0p5_17151b03_m4000_21320_A180:
     mirror: false
     rotation: 180
     x: -4
@@ -123,17 +123,17 @@ placements:
     rotation: 0
     x: 0
     y: 0
-  straight_L0p6_CSstrip_WNone_N2_10000_11320:
+  straight_L0p6_CSstrip_WNone_N2_10000_11320_A270:
     mirror: false
     rotation: 270
     x: 10
     y: 11.32
-  straight_L0p6_CSstrip_WNone_N2_m14000_10720:
+  straight_L0p6_CSstrip_WNone_N2_m14000_10720_A90:
     mirror: false
     rotation: 90
     x: -14
     y: 10.72
-  straight_L4_CSstrip_WNone_N2_0_21320:
+  straight_L4_CSstrip_WNone_N2_0_21320_A180:
     mirror: false
     rotation: 180
     x: 0
