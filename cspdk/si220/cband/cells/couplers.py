@@ -50,6 +50,7 @@ def coupler_ring(
     bend: ComponentSpec = "bend_euler",
     straight: ComponentSpec = "straight",
     cross_section: str = "strip",
+    length_extension: float = 10,
 ) -> gf.Component:
     """Returns Coupler for ring.
 
@@ -60,6 +61,7 @@ def coupler_ring(
         bend: 90 degrees bend spec.
         straight: straight spec.
         cross_section: cross_section spec.
+        length_extension: length extension for the coupler.
     """
     return gf.c.coupler_ring(
         length_x=length_x,
@@ -69,7 +71,7 @@ def coupler_ring(
         straight=straight,
         cross_section=cross_section,
         cross_section_bend=None,
-        length_extension=3,
+        length_extension=length_extension,
     )
 
 

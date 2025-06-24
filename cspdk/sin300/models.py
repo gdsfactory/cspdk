@@ -6,9 +6,9 @@ import inspect
 from collections.abc import Callable
 from functools import partial
 
-import gplugins.sax.models as sm
 import jax.numpy as jnp
 import sax
+import sax.models as sm
 from numpy.typing import NDArray
 
 nm = 1e-3
@@ -358,7 +358,7 @@ def heater() -> sax.SDict:
     raise NotImplementedError("No model for 'heater'")
 
 
-crossing_no = sm.crossing
+crossing_no = sm.crossing_ideal
 
 
 ################
