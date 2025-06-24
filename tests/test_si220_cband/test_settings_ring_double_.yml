@@ -1,8 +1,9 @@
 info: {}
-name: ring_double_G0p27_GTNon_7e33e492
+name: ring_double_G0p27_GTNon_1cd09565
 settings:
   cross_section: strip
   gap: 0.27
+  length_extension: 10
   length_x: 0.01
   length_y: 0.01
   radius: 10

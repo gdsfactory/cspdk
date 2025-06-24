@@ -6,9 +6,9 @@ import inspect
 from collections.abc import Callable
 from functools import partial
 
-import gplugins.sax.models as sm
 import jax.numpy as jnp
 import sax
+import sax.models as sm
 from numpy.typing import NDArray
 
 nm = 1e-3
@@ -312,8 +312,8 @@ def straight_heater_metal(
     )
 
 
-crossing_rib = sm.crossing
-crossing = sm.crossing
+crossing_rib = sm.crossing_ideal
+crossing = sm.crossing_ideal
 
 
 ################
