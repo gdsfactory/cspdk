@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 1.0.3
+
+- fix models and add tests for models [#138](https://github.com/gdsfactory/cspdk/pull/138)
+
 ## 1.0.2
 
 - update gdsfactory 9.9.4
