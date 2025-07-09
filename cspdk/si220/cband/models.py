@@ -23,7 +23,7 @@ Float = float | FloatArray
 straight_strip = partial(
     sm.straight,
     length=10.0,
-    loss=0.0,
+    loss_dB_cm=3.0,
     wl0=1.55,
     neff=2.38,
     ng=4.30,
@@ -32,7 +32,7 @@ straight_strip = partial(
 straight_rib = partial(
     sm.straight,
     length=10.0,
-    loss=0.0,
+    loss_dB_cm=3.0,
     wl0=1.55,
     neff=2.38,
     ng=4.30,
@@ -43,7 +43,7 @@ def straight(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 3.0,
     cross_section: str = "strip",
 ) -> sax.SDict:
     """Straight waveguide model."""
@@ -56,7 +56,7 @@ def straight(
     return f(
         wl=wl,  # type: ignore
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
     )
 
 
@@ -76,7 +76,7 @@ def bend_s(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.03,
+    loss_dB_cm=3.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Bend S model."""
@@ -84,7 +84,7 @@ def bend_s(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
@@ -93,7 +93,7 @@ def bend_euler(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.03,
+    loss_dB_cm: float = 3,
     cross_section="strip",
 ) -> sax.SDict:
     """Euler bend model."""
@@ -101,12 +101,12 @@ def bend_euler(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
 
-bend_euler = partial(bend_euler, cross_section="strip")
+bend_euler_strip = partial(bend_euler, cross_section="strip")
 bend_euler_rib = partial(bend_euler, cross_section="rib")
 
 
@@ -119,7 +119,7 @@ def taper(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 0.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Taper model."""
@@ -128,20 +128,19 @@ def taper(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
 
 taper_rib = partial(taper, cross_section="rib", length=10.0)
-taper_ro = partial(taper, cross_section="xs_ro", length=10.0)
 
 
 def taper_strip_to_ridge(
     *,
     wl: Float = 1.55,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 0.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Taper strip to ridge model."""
@@ -150,7 +149,7 @@ def taper_strip_to_ridge(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
@@ -239,10 +238,10 @@ def coupler(
 # grating couplers Rectangular
 ##############################
 
-grating_coupler_rectangular = partial(
+grating_coupler_rectangular_strip = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
-grating_coupler_rectangular_rib = grating_coupler_rectangular
+grating_coupler_rectangular_rib = grating_coupler_rectangular_strip
 
 
 def grating_coupler_rectangular(
@@ -253,7 +252,7 @@ def grating_coupler_rectangular(
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": grating_coupler_rectangular,
+        "strip": grating_coupler_rectangular_strip,
         "rib": grating_coupler_rectangular_rib,
     }
     f = fs[cross_section]
@@ -264,7 +263,7 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-grating_coupler_elliptical = partial(
+grating_coupler_elliptical_strip = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
 
