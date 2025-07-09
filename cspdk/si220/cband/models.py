@@ -11,6 +11,8 @@ import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+sax.set_port_naming_strategy("optical")
+
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
