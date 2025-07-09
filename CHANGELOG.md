@@ -2,6 +2,10 @@
 
 <!-- towncrier release notes start -->
 
+## 1.0.4
+
+- use default port naming strategy for sax.models
+
 ## 1.0.3
 
 - fix models and add tests for models [#138](https://github.com/gdsfactory/cspdk/pull/138)
