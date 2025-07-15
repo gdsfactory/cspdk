@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.9.4",
+  "gdsfactory>=9.9.4,<9.12.0",
   "gplugins[sax]>=1.4.0,<2",
   "doroutes>=0.2.0"
 ]
