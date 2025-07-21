@@ -28,10 +28,7 @@ skip_test = {
     "pack_doe_grid",
     "add_pads_top",
     "add_pads_bot",
-    "add_fiber_single_sc",
-    "add_fiber_single_so",
-    "add_fiber_array_sc",
-    "add_fiber_array_so",
+    "add_fiber_single",
     "coupler_symmetric",
     "die_with_pads",
 }
