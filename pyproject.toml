@@ -36,11 +36,7 @@ dev = [
   "pytest_regressions",
   "pytest-github-actions-annotate-failures"
 ]
-docs = [
-  "jupytext",
-  "matplotlib",
-  "jupyter-book==1.0.4"
-]
+docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1"]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
