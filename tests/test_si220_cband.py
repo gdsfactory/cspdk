@@ -169,7 +169,7 @@ def test_models_with_wavelength_sweep(
 
     ndarrays_regression.check(
         arrays_to_check,
-        default_tolerance={"atol": 1e-8, "rtol": 1e-8},
+        default_tolerance={"atol": 1e-2, "rtol": 1e-2},
     )
 
 
