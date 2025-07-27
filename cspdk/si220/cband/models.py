@@ -265,7 +265,7 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-grating_coupler_elliptical_strip = partial(
+grating_coupler_elliptical = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
 )
 
