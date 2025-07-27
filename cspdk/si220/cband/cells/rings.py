@@ -13,6 +13,7 @@ def ring_single(
     length_x: float = 4.0,
     length_y: float = 0.6,
     cross_section: CrossSectionSpec = "strip",
+    length_extension: float = 10.0,
 ) -> gf.Component:
     """Returns a single ring.
 
@@ -29,6 +30,8 @@ def ring_single(
         straight: straight spec.
         coupler_ring: ring coupler spec.
         cross_section: cross_section spec.
+        length_extension: straight length extension at the end of the coupler bottom ports.
+
 
     .. code::
 
@@ -59,6 +62,7 @@ def ring_single(
         straight="straight",
         coupler_ring="coupler_ring",
         cross_section=cross_section,
+        length_extension=length_extension,
     )
 
 
@@ -71,6 +75,7 @@ def ring_double(
     length_x: float = 0.01,
     length_y: float = 0.01,
     cross_section: CrossSectionSpec = "strip",
+    length_extension: float = 10.0,
 ) -> gf.Component:
     """Returns a double bus ring.
 
@@ -89,6 +94,7 @@ def ring_double(
         coupler_ring: ring coupler spec.
         coupler_ring_top: top ring coupler spec. Defaults to coupler_ring.
         cross_section: cross_section spec.
+        length_extension: straight length extension at the end of the coupler bottom ports.
     """
     return gf.c.ring_double(
         gap=gap,
@@ -101,6 +107,7 @@ def ring_double(
         straight="straight",
         coupler_ring="coupler_ring",
         cross_section=cross_section,
+        length_extension=length_extension,
     )
 
 

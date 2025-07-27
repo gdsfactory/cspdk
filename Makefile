@@ -8,8 +8,8 @@ test:
 
 test-force:
 	uv run pytest -s tests/test_si220_cband.py --force-regen
-	uv run pytest -s tests/test_si500.py --force-regen
-	uv run pytest -s tests/test_sin300.py --force-regen
+	# uv run pytest -s tests/test_si500.py --force-regen
+	# uv run pytest -s tests/test_sin300.py --force-regen
 
 test-fail-fast:
 	uv run pytest -s tests/test_si220_cband.py -x

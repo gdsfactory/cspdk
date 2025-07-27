@@ -6,9 +6,11 @@ import pathlib
 
 import gdsfactory as gf
 import jsondiff
+import numpy as np
 import pytest
 from gdsfactory.difftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
+from pytest_regressions.ndarrays_regression import NDArraysRegressionFixture
 
 from cspdk.si220.cband import PDK
 
@@ -26,10 +28,7 @@ skip_test = {
     "pack_doe_grid",
     "add_pads_top",
     "add_pads_bot",
-    "add_fiber_single_sc",
-    "add_fiber_single_so",
-    "add_fiber_array_sc",
-    "add_fiber_array_so",
+    "add_fiber_single",
     "coupler_symmetric",
     "die_with_pads",
 }
@@ -128,6 +127,50 @@ def test_netlists(
     cis = list(c.kcl.each_cell_top_down())
     for ci in cis:
         gf.kcl.dkcells[ci].delete()
+
+
+skip_test_models = {}
+
+
+models = PDK.models
+model_names = sorted(
+    [
+        name
+        for name in set(models.keys()) - set(skip_test_models)
+        if not name.startswith("_")
+    ]
+)
+
+
+@pytest.mark.parametrize("model_name", model_names)
+def test_models_with_wavelength_sweep(
+    model_name: str, ndarrays_regression: NDArraysRegressionFixture
+) -> None:
+    """Test models with different wavelengths to avoid regressions in frequency response."""
+    # Test at different wavelengths
+    wl = [1.53, 1.55, 1.57]
+    try:
+        model = models[model_name]
+        s_params = model(wl=wl)
+    except TypeError:
+        pytest.skip(f"{model_name} does not accept a wl argument")
+
+    # Convert s_params dictionary to arrays for regression testing
+    # s_params is a dict with tuple keys (port pairs) and JAX array values
+    arrays_to_check = {}
+    for key, value in sorted(s_params.items()):
+        # Convert tuple key to string for regression test compatibility
+        key_str = f"s_{key[0]}_{key[1]}"
+        # Convert JAX arrays to numpy and separate real/imag parts
+
+        value_np = np.array(value)
+        arrays_to_check[f"{key_str}_real"] = np.real(value_np)
+        arrays_to_check[f"{key_str}_imag"] = np.imag(value_np)
+
+    ndarrays_regression.check(
+        arrays_to_check,
+        default_tolerance={"atol": 1e-2, "rtol": 1e-2},
+    )
 
 
 if __name__ == "__main__":
