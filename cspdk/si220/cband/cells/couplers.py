@@ -7,7 +7,7 @@ from cspdk.si220.cband.tech import TECH
 
 
 @gf.cell
-def coupler(length: float = 20, gap: float = TECH.gap_strip) -> gf.Component:
+def coupler(length: float = 14.5, gap: float = TECH.gap_strip) -> gf.Component:
     """Returns Symmetric coupler.
 
     Args:

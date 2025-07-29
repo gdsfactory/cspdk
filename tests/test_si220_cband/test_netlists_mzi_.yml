@@ -171,18 +171,18 @@ instances:
     component: coupler
     info:
       min_bend_radius: 11.807
-      path_length: 40.376
+      path_length: 34.876
     settings:
       gap: 0.27
-      length: 20
+      length: 14.5
   cp2:
     component: coupler
     info:
       min_bend_radius: 11.807
-      path_length: 40.376
+      path_length: 34.876
     settings:
       gap: 0.27
-      length: 20
+      length: 14.5
   sxb:
     component: straight
     info:
@@ -305,42 +305,42 @@ placements:
   b1:
     mirror: false
     rotation: 0
-    x: 30
+    x: 24.5
     y: 2.36
   b2:
     mirror: false
     rotation: 180
-    x: 40
+    x: 34.5
     y: 14.36
   b3:
     mirror: false
     rotation: 90
-    x: 45.1
+    x: 39.6
     y: 9.36
   b4:
     mirror: false
     rotation: 270
-    x: 45.1
+    x: 39.6
     y: 7.36
   b5:
     mirror: true
     rotation: 0
-    x: 30
+    x: 24.5
     y: -1.64
   b6:
     mirror: false
     rotation: 270
-    x: 35
+    x: 29.5
     y: -13.64
   b7:
     mirror: false
     rotation: 0
-    x: 40.1
+    x: 34.6
     y: -18.64
   b8:
     mirror: false
     rotation: 180
-    x: 50.1
+    x: 44.6
     y: -1.64
   cp1:
     mirror: false
@@ -350,37 +350,37 @@ placements:
   cp2:
     mirror: true
     rotation: 180
-    x: 80.1
+    x: 69.1
     y: 0
   sxb:
     mirror: false
     rotation: 0
-    x: 40
+    x: 34.5
     y: -18.64
   sxt:
     mirror: false
     rotation: 0
-    x: 40
+    x: 34.5
     y: 14.36
   sybr:
     mirror: false
     rotation: 90
-    x: 45.1
+    x: 39.6
     y: -13.64
   syl:
     mirror: false
     rotation: 270
-    x: 35
+    x: 29.5
     y: -6.64
   sytl:
     mirror: false
     rotation: 90
-    x: 35
+    x: 29.5
     y: 7.36
   sytr:
     mirror: false
     rotation: 90
-    x: 45.1
+    x: 39.6
     y: 7.36
 ports:
   o1: cp1,o1
