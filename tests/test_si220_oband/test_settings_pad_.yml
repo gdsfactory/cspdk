@@ -1,0 +1,14 @@
+info:
+  size:
+  - 90
+  - 90
+  xsize: 90
+  ysize: 90
+name: pad_S90_90_LPAD_PI0_PO0
+settings:
+  layer: PAD
+  port_inclusion: 0
+  port_orientation: 0
+  size:
+  - 90
+  - 90

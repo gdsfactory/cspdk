@@ -1,0 +1,144 @@
+instances:
+  bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.4
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180:
+    component: bend_euler
+    info:
+      dy: 10
+      length: 16.637
+      min_bend_radius: 7.061
+      radius: 10
+      route_info_length: 16.637
+      route_info_min_bend_radius: 7.061
+      route_info_n_bend_90: 1
+      route_info_strip_length: 16.637
+      route_info_type: strip
+      route_info_weight: 16.637
+      width: 0.4
+    settings:
+      allow_min_radius_violation: false
+      angle: 90
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  coupler_ring_LX4_G0p27__8aa06cb1_0_0:
+    component: coupler_ring
+    info: {}
+    settings:
+      bend: bend_euler
+      cross_section: strip
+      gap: 0.27
+      length_extension: 3
+      length_x: 4
+      radius: 10
+      straight: straight
+  straight_L0p6_CSstrip_WNone_N2_10000_11270_A270:
+    component: straight
+    info:
+      length: 0.6
+      route_info_length: 0.6
+      route_info_strip_length: 0.6
+      route_info_type: strip
+      route_info_weight: 0.6
+      width: 0.4
+    settings:
+      cross_section: strip
+      length: 0.6
+      npoints: 2
+      width: null
+  straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90:
+    component: straight
+    info:
+      length: 0.6
+      route_info_length: 0.6
+      route_info_strip_length: 0.6
+      route_info_type: strip
+      route_info_weight: 0.6
+      width: 0.4
+    settings:
+      cross_section: strip
+      length: 0.6
+      npoints: 2
+      width: null
+  straight_L4_CSstrip_WNone_N2_0_21270_A180:
+    component: straight
+    info:
+      length: 4
+      route_info_length: 4
+      route_info_strip_length: 4
+      route_info_type: strip
+      route_info_weight: 4
+      width: 0.4
+    settings:
+      cross_section: strip
+      length: 4
+      npoints: 2
+      width: null
+name: ring_single_G0p27_R10_L_c4ff7786
+nets:
+- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90,o1
+  p2: straight_L0p6_CSstrip_WNone_N2_10000_11270_A270,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90,o2
+  p2: straight_L4_CSstrip_WNone_N2_0_21270_A180,o1
+- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180,o1
+  p2: straight_L4_CSstrip_WNone_N2_0_21270_A180,o2
+- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180,o2
+  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o2
+- p1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o2
+  p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o1
+- p1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o3
+  p2: straight_L0p6_CSstrip_WNone_N2_10000_11270_A270,o2
+placements:
+  bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90:
+    mirror: false
+    rotation: 90
+    x: 10
+    y: 11.27
+  bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180:
+    mirror: false
+    rotation: 180
+    x: -4
+    y: 21.27
+  coupler_ring_LX4_G0p27__8aa06cb1_0_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  straight_L0p6_CSstrip_WNone_N2_10000_11270_A270:
+    mirror: false
+    rotation: 270
+    x: 10
+    y: 11.27
+  straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90:
+    mirror: false
+    rotation: 90
+    x: -14
+    y: 10.67
+  straight_L4_CSstrip_WNone_N2_0_21270_A180:
+    mirror: false
+    rotation: 180
+    x: 0
+    y: 21.27
+ports:
+  o1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o1
+  o2: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o4
