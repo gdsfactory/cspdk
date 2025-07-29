@@ -119,7 +119,7 @@ def taper(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 0.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Taper model."""
@@ -128,7 +128,7 @@ def taper(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
