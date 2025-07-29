@@ -23,7 +23,7 @@ Float = float | FloatArray
 straight_strip = partial(
     sm.straight,
     length=10.0,
-    loss=0.0,
+    loss_dB_cm=0.0,
     wl0=1.31,
     neff=2.52,
     ng=4.33,
@@ -32,7 +32,7 @@ straight_strip = partial(
 straight_rib = partial(
     sm.straight,
     length=10.0,
-    loss=0.0,
+    loss_dB_cm=0.0,
     wl0=1.31,
     neff=2.72,
     ng=3.98,
@@ -43,7 +43,7 @@ def straight(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 0.0,
     cross_section: str = "strip",
 ) -> sax.SDict:
     """Straight waveguide model."""
@@ -56,7 +56,7 @@ def straight(
     return f(
         wl=wl,  # type: ignore
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
     )
 
 
@@ -76,7 +76,7 @@ def bend_s(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss: float = 0.03,
+    loss_dB_cm: float = 3.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Bend S model."""
@@ -84,7 +84,7 @@ def bend_s(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
@@ -93,7 +93,7 @@ def bend_euler(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss: float = 0.03,
+    loss_dB_cm: float = 3.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Euler bend model."""
@@ -101,7 +101,7 @@ def bend_euler(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
@@ -141,7 +141,7 @@ def taper_strip_to_ridge(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss: float = 0.0,
+    loss_dB_cm: float = 0.0,
     cross_section="strip",
 ) -> sax.SDict:
     """Taper strip to ridge model."""
@@ -150,7 +150,7 @@ def taper_strip_to_ridge(
     return straight(
         wl=wl,
         length=length,
-        loss=loss,
+        loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
