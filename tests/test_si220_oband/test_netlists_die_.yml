@@ -1,0 +1,25 @@
+instances:
+  rectangle_gdsfactorypco_fb11a571_0_0:
+    component: rectangle
+    info: {}
+    settings:
+      centered: true
+      layer: FLOORPLAN
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: null
+      size:
+      - 16000
+      - 3000
+name: die_S16000_3000
+nets: []
+placements:
+  rectangle_gdsfactorypco_fb11a571_0_0:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports: {}
