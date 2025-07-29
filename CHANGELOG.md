@@ -2,6 +2,12 @@
 
 <!-- towncrier release notes start -->
 
+## 1.0.7
+
+- add oband tests [#145](https://github.com/gdsfactory/cspdk/pull/145)
+- fix coupler length [#144](https://github.com/gdsfactory/cspdk/pull/144)
+- Fix models for Oband [#143](https://github.com/gdsfactory/cspdk/pull/143)
+
 ## 1.0.4
 
 - use default port naming strategy for sax.models
