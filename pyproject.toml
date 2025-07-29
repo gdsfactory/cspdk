@@ -97,7 +97,7 @@ select = [
 convention = "google"
 
 [tool.setuptools.package-data]
-"*" = ["*.csv", "*.yaml", "*.yml", "*.gds", "*.lyp", "*.oas", "*.lyt", "*.dat", "*.nc", "*.svg"]
+"*" = ["*.csv", "*.yaml", "*.yml", "*.gds", "*.lyp", "*.oas", "*.lyt", "*.dat", "*.nc", "*.svg", "*.GDS"]
 
 [tool.setuptools.packages]
 find = {}
