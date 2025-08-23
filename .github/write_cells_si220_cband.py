@@ -60,7 +60,7 @@ Cells Si SOI 220nm Cband
 
   import cspdk
 
-  c = cspdk.si220.cband.cells.{name}({kwargs}).dup()
+  c = cspdk.si220.cband.cells.{name}({kwargs}).copy()
   c.draw_ports()
   c.plot()
 

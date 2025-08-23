@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.11.6",
+  "gdsfactory~=9.12.2",
   "doroutes>=0.2.0"
 ]
 description = "CornerStone PDK"
@@ -28,7 +28,7 @@ version = "1.0.7"
 
 [project.optional-dependencies]
 dev = [
-  "gplugins[sax,tidy3d]>=1.4.0,<2",
+  "gplugins[sax,tidy3d]>=1.4.2,<2",
   "pre-commit",
   "jsondiff",
   "pytest",

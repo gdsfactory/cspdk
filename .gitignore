@@ -12,6 +12,7 @@ docs/cells_si220_oband.rst
 *.fsp
 tests/gds_ref/*.oas
 tests/gds_ref_si220/*.oas
+tests/gds_ref_si220_oband/*.oas
 tests/gds_ref_si500/*.oas
 tests/gds_ref_sin300/*.oas
 cspdk/si220/gds/*.oas
