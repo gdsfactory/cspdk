@@ -1,23 +1,23 @@
 instances:
-  coupler_ring_LX0p01_G0p_6f809dde_0_0:
+  coupler_ring_LX0p01_G0p_00b9100d_0_0:
     component: coupler_ring
     info: {}
     settings:
       bend: bend_euler
       cross_section: strip
       gap: 0.27
-      length_extension: 3
+      length_extension: null
       length_x: 0.01
       radius: 10
       straight: straight
-  coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180:
+  coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180:
     component: coupler_ring
     info: {}
     settings:
       bend: bend_euler
       cross_section: strip
       gap: 0.27
-      length_extension: 3
+      length_extension: null
       length_x: 0.01
       radius: 10
       straight: straight
@@ -51,21 +51,21 @@ instances:
       width: null
 name: ring_double_G0p27_GTNon_7e33e492
 nets:
-- p1: coupler_ring_LX0p01_G0p_6f809dde_0_0,o2
+- p1: coupler_ring_LX0p01_G0p_00b9100d_0_0,o2
   p2: straight_L0p01_CSstrip_WNone_N2_m10010_10670_A90,o1
-- p1: coupler_ring_LX0p01_G0p_6f809dde_0_0,o3
+- p1: coupler_ring_LX0p01_G0p_00b9100d_0_0,o3
   p2: straight_L0p01_CSstrip_WNone_N2_10000_10680_A270,o2
-- p1: coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180,o2
+- p1: coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180,o2
   p2: straight_L0p01_CSstrip_WNone_N2_10000_10680_A270,o1
-- p1: coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180,o3
+- p1: coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180,o3
   p2: straight_L0p01_CSstrip_WNone_N2_m10010_10670_A90,o2
 placements:
-  coupler_ring_LX0p01_G0p_6f809dde_0_0:
+  coupler_ring_LX0p01_G0p_00b9100d_0_0:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180:
+  coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180:
     mirror: false
     rotation: 180
     x: -0.01
@@ -81,7 +81,7 @@ placements:
     x: -10.01
     y: 10.67
 ports:
-  o1: coupler_ring_LX0p01_G0p_6f809dde_0_0,o1
-  o2: coupler_ring_LX0p01_G0p_6f809dde_0_0,o4
-  o3: coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180,o4
-  o4: coupler_ring_LX0p01_G0p_6f809dde_m10_21350_A180,o1
+  o1: coupler_ring_LX0p01_G0p_00b9100d_0_0,o1
+  o2: coupler_ring_LX0p01_G0p_00b9100d_0_0,o4
+  o3: coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180,o4
+  o4: coupler_ring_LX0p01_G0p_00b9100d_m10_21350_A180,o1

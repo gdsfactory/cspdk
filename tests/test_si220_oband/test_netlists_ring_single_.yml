@@ -41,14 +41,14 @@ instances:
       p: 0.5
       radius: 10
       width: null
-  coupler_ring_LX4_G0p27__8aa06cb1_0_0:
+  coupler_ring_LX4_G0p27__23df31b2_0_0:
     component: coupler_ring
     info: {}
     settings:
       bend: bend_euler
       cross_section: strip
       gap: 0.27
-      length_extension: 3
+      length_extension: 10
       length_x: 4
       radius: 10
       straight: straight
@@ -104,9 +104,9 @@ nets:
   p2: straight_L4_CSstrip_WNone_N2_0_21270_A180,o2
 - p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180,o2
   p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o2
-- p1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o2
+- p1: coupler_ring_LX4_G0p27__23df31b2_0_0,o2
   p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o1
-- p1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o3
+- p1: coupler_ring_LX4_G0p27__23df31b2_0_0,o3
   p2: straight_L0p6_CSstrip_WNone_N2_10000_11270_A270,o2
 placements:
   bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90:
@@ -119,7 +119,7 @@ placements:
     rotation: 180
     x: -4
     y: 21.27
-  coupler_ring_LX4_G0p27__8aa06cb1_0_0:
+  coupler_ring_LX4_G0p27__23df31b2_0_0:
     mirror: false
     rotation: 0
     x: 0
@@ -140,5 +140,5 @@ placements:
     x: 0
     y: 21.27
 ports:
-  o1: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o1
-  o2: coupler_ring_LX4_G0p27__8aa06cb1_0_0,o4
+  o1: coupler_ring_LX4_G0p27__23df31b2_0_0,o1
+  o2: coupler_ring_LX4_G0p27__23df31b2_0_0,o4
