@@ -1,7 +1,11 @@
-"""Circuit simulation with routes."""
+"""Sample pads with routes."""
 
 if __name__ == "__main__":
     import gdsfactory as gf
+
+    from cspdk.si220.cband import PDK
+
+    PDK.activate()
 
     yaml = """
 # yaml-language-server: $schema=../build/schemas/top.json
@@ -25,14 +29,15 @@ connections: {}
 routes:
   bundle:
     links:
-      bl,e3: br,e1
       tl,e3: tr,e1
+      bl,e3: br,e1
     routing_strategy: route_bundle_metal
     settings:
       end_straight_length: 3
       min_straight_taper: 3
       separation: 3
       start_straight_length: 3
+      layer_marker: [1, 0]
       steps:
       - dx: 400.0
       - dy: 500.0
