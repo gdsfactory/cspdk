@@ -1,7 +1,11 @@
-"""Circuit simulation with routes."""
+"""Sample pads with routes."""
 
 if __name__ == "__main__":
     import gdsfactory as gf
+
+    from cspdk.si220.cband import PDK
+
+    PDK.activate()
 
     yaml = """
 
