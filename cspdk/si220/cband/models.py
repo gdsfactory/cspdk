@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import inspect
 from collections.abc import Callable
-from functools import partial
 
 import jax.numpy as jnp
 import sax
@@ -22,23 +21,39 @@ Float = float | FloatArray
 # Straights
 ################
 
-straight_strip = partial(
-    sm.straight,
-    length=10.0,
-    loss_dB_cm=3.0,
-    wl0=1.55,
-    neff=2.38,
-    ng=4.30,
-)
 
-straight_rib = partial(
-    sm.straight,
-    length=10.0,
-    loss_dB_cm=3.0,
-    wl0=1.55,
-    neff=2.38,
-    ng=4.30,
-)
+def straight_strip(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss_dB_cm: float = 3.0,
+) -> sax.SDict:
+    """Straight strip waveguide model."""
+    return sm.straight(
+        wl=wl,
+        length=length,
+        loss_dB_cm=loss_dB_cm,
+        wl0=1.55,
+        neff=2.38,
+        ng=4.30,
+    )
+
+
+def straight_rib(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss_dB_cm: float = 3.0,
+) -> sax.SDict:
+    """Straight rib waveguide model."""
+    return sm.straight(
+        wl=wl,
+        length=length,
+        loss_dB_cm=loss_dB_cm,
+        wl0=1.55,
+        neff=2.38,
+        ng=4.30,
+    )
 
 
 def straight(
@@ -108,8 +123,34 @@ def bend_euler(
     )
 
 
-bend_euler_strip = partial(bend_euler, cross_section="strip")
-bend_euler_rib = partial(bend_euler, cross_section="rib")
+def bend_euler_strip(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss_dB_cm: float = 3,
+) -> sax.SDict:
+    """Euler bend strip model."""
+    return bend_euler(
+        wl=wl,
+        length=length,
+        loss_dB_cm=loss_dB_cm,
+        cross_section="strip",
+    )
+
+
+def bend_euler_rib(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss_dB_cm: float = 3,
+) -> sax.SDict:
+    """Euler bend rib model."""
+    return bend_euler(
+        wl=wl,
+        length=length,
+        loss_dB_cm=loss_dB_cm,
+        cross_section="rib",
+    )
 
 
 ################
@@ -135,7 +176,19 @@ def taper(
     )
 
 
-taper_rib = partial(taper, cross_section="rib", length=10.0)
+def taper_rib(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss_dB_cm: float = 0.0,
+) -> sax.SDict:
+    """Taper rib model."""
+    return taper(
+        wl=wl,
+        length=length,
+        loss_dB_cm=loss_dB_cm,
+        cross_section="rib",
+    )
 
 
 def taper_strip_to_ridge(
@@ -156,16 +209,86 @@ def taper_strip_to_ridge(
     )
 
 
-trans_rib10 = partial(taper_strip_to_ridge, length=10.0)
-trans_rib20 = partial(taper_strip_to_ridge, length=20.0)
-trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
+def trans_rib10(
+    *,
+    wl: Float = 1.55,
+    loss_dB_cm: float = 0.0,
+    cross_section="strip",
+) -> sax.SDict:
+    """Taper strip to ridge 10um model."""
+    return taper_strip_to_ridge(
+        wl=wl,
+        length=10.0,
+        loss_dB_cm=loss_dB_cm,
+        cross_section=cross_section,
+    )
+
+
+def trans_rib20(
+    *,
+    wl: Float = 1.55,
+    loss_dB_cm: float = 0.0,
+    cross_section="strip",
+) -> sax.SDict:
+    """Taper strip to ridge 20um model."""
+    return taper_strip_to_ridge(
+        wl=wl,
+        length=20.0,
+        loss_dB_cm=loss_dB_cm,
+        cross_section=cross_section,
+    )
+
+
+def trans_rib50(
+    *,
+    wl: Float = 1.55,
+    loss_dB_cm: float = 0.0,
+    cross_section="strip",
+) -> sax.SDict:
+    """Taper strip to ridge 50um model."""
+    return taper_strip_to_ridge(
+        wl=wl,
+        length=50.0,
+        loss_dB_cm=loss_dB_cm,
+        cross_section=cross_section,
+    )
+
 
 ################
 # MMIs
 ################
 
-mmi1x2_strip = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
-mmi1x2_rib = mmi1x2_strip
+
+def mmi1x2_strip(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    loss_dB: Float = 0.3,
+    fwhm: Float = 0.2,
+) -> sax.SDict:
+    """MMI 1x2 strip model."""
+    return sm.mmi1x2(
+        wl=wl,
+        wl0=wl0,
+        fwhm=fwhm,
+        loss_dB=loss_dB,
+    )
+
+
+def mmi1x2_rib(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    loss_dB: Float = 0.3,
+    fwhm: Float = 0.2,
+) -> sax.SDict:
+    """MMI 1x2 rib model."""
+    return sm.mmi1x2(
+        wl=wl,
+        wl0=wl0,
+        fwhm=fwhm,
+        loss_dB=loss_dB,
+    )
 
 
 def mmi1x2(
@@ -186,8 +309,36 @@ def mmi1x2(
     )
 
 
-mmi2x2_strip = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-mmi2x2_rib = mmi2x2_strip
+def mmi2x2_strip(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    loss_dB: Float = 0.3,
+    fwhm: Float = 0.2,
+) -> sax.SDict:
+    """MMI 2x2 strip model."""
+    return sm.mmi2x2(
+        wl=wl,
+        wl0=wl0,
+        fwhm=fwhm,
+        loss_dB=loss_dB,
+    )
+
+
+def mmi2x2_rib(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    loss_dB: Float = 0.3,
+    fwhm: Float = 0.2,
+) -> sax.SDict:
+    """MMI 2x2 rib model."""
+    return sm.mmi2x2(
+        wl=wl,
+        wl0=wl0,
+        fwhm=fwhm,
+        loss_dB=loss_dB,
+    )
 
 
 def mmi2x2(
@@ -212,9 +363,82 @@ def mmi2x2(
 # Evanescent couplers
 ##############################
 
-coupler_strip = partial(sm.coupler, wl0=1.55)
-coupler_rib = coupler_strip
-coupler_ring = partial(coupler_strip, wl0=1.55)
+
+def coupler_strip(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    coupling0: sax.FloatArrayLike = 0.2,
+    dk1: sax.FloatArrayLike = 1.2435,
+    dk2: sax.FloatArrayLike = 5.3022,
+    dn: sax.FloatArrayLike = 0.02,
+    dn1: sax.FloatArrayLike = 0.1169,
+    dn2: sax.FloatArrayLike = 0.4821,
+) -> sax.SDict:
+    """Evanescent coupler strip model."""
+    return sm.coupler(
+        wl=wl,
+        wl0=1.55,
+        length=length,
+        coupling0=coupling0,
+        dk1=dk1,
+        dk2=dk2,
+        dn=dn,
+        dn1=dn1,
+        dn2=dn2,
+    )
+
+
+def coupler_rib(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    length: float = 10.0,
+    coupling0: sax.FloatArrayLike = 0.2,
+    dk1: sax.FloatArrayLike = 1.2435,
+    dk2: sax.FloatArrayLike = 5.3022,
+    dn: sax.FloatArrayLike = 0.02,
+    dn1: sax.FloatArrayLike = 0.1169,
+    dn2: sax.FloatArrayLike = 0.4821,
+) -> sax.SDict:
+    """Evanescent coupler rib model."""
+    return sm.coupler(
+        wl=wl,
+        wl0=wl0,
+        length=length,
+        coupling0=coupling0,
+        dk1=dk1,
+        dk2=dk2,
+        dn=dn,
+        dn1=dn1,
+        dn2=dn2,
+    )
+
+
+def coupler_ring(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    length: float = 10.0,
+    coupling0: sax.FloatArrayLike = 0.2,
+    dk1: sax.FloatArrayLike = 1.2435,
+    dk2: sax.FloatArrayLike = 5.3022,
+    dn: sax.FloatArrayLike = 0.02,
+    dn1: sax.FloatArrayLike = 0.1169,
+    dn2: sax.FloatArrayLike = 0.4821,
+) -> sax.SDict:
+    """Ring coupler model."""
+    return sm.coupler(
+        wl=wl,
+        wl0=wl0,
+        length=length,
+        coupling0=coupling0,
+        dk1=dk1,
+        dk2=dk2,
+        dn=dn,
+        dn1=dn1,
+        dn2=dn2,
+    )
 
 
 def coupler(
@@ -240,10 +464,29 @@ def coupler(
 # grating couplers Rectangular
 ##############################
 
-grating_coupler_rectangular_strip = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
-)
-grating_coupler_rectangular_rib = grating_coupler_rectangular_strip
+
+def grating_coupler_rectangular_strip(
+    *,
+    wl: Float = 1.55,
+) -> sax.SDict:
+    """Grating coupler rectangular strip model."""
+    return sm.grating_coupler(
+        wl=wl,
+        loss=6,
+        bandwidth=35 * nm,
+    )
+
+
+def grating_coupler_rectangular_rib(
+    *,
+    wl: Float = 1.55,
+) -> sax.SDict:
+    """Grating coupler rectangular rib model."""
+    return sm.grating_coupler(
+        wl=wl,
+        loss=6,
+        bandwidth=35 * nm,
+    )
 
 
 def grating_coupler_rectangular(
@@ -265,9 +508,18 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-grating_coupler_elliptical = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
-)
+
+def grating_coupler_elliptical(
+    *,
+    wl: Float = 1.55,
+) -> sax.SDict:
+    """Grating coupler elliptical model."""
+    return sm.grating_coupler(
+        wl=wl,
+        loss=6,
+        bandwidth=35 * nm,
+    )
+
 
 ################
 # Imported
@@ -313,8 +565,20 @@ def straight_heater_metal(
     )
 
 
-crossing_rib = sm.crossing_ideal
-crossing = sm.crossing_ideal
+def crossing_rib(
+    *,
+    wl: Float = 1.55,
+) -> sax.SDict:
+    """Crossing rib model."""
+    return sm.crossing_ideal(wl=wl)
+
+
+def crossing(
+    *,
+    wl: Float = 1.55,
+) -> sax.SDict:
+    """Crossing model."""
+    return sm.crossing_ideal(wl=wl)
 
 
 ################
@@ -326,15 +590,17 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Return a dictionary of all models in this module."""
     models = {}
     for name, func in list(globals().items()):
+        # Skip get_models itself and private functions
+        if name == "get_models" or name.startswith("_"):
+            continue
         if not callable(func):
             continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
         try:
-            sig = inspect.signature(_func)
-        except ValueError:
+            sig = inspect.signature(func)
+        except (ValueError, TypeError):
             continue
-        if str(sig.return_annotation).lower().split(".")[-1] == "sdict":
+        # Check for sax.SDict return type (case-insensitive)
+        return_anno = str(sig.return_annotation)
+        if "sdict" in return_anno.lower():
             models[name] = func
     return models

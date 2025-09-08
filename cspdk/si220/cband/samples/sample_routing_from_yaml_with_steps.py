@@ -33,14 +33,13 @@ routes:
       bl,e3: br,e1
     routing_strategy: route_bundle_metal
     settings:
-      end_straight_length: 3
       min_straight_taper: 3
-      separation: 3
-      start_straight_length: 3
+      separation: 10
       layer_marker: [1, 0]
       steps:
       - dx: 400.0
-      - dy: 500.0
+        dy: 20
+      - dy: 100.0
 nets: []
 ports: {}
 placements:
