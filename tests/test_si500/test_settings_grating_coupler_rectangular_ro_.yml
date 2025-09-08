@@ -1,0 +1,11 @@
+info:
+  fiber_angle: 10
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_rectang_f879519e
+settings:
+  cross_section: xs_ro
+  length_taper: 350
+  n_periods: 60
+  period: 0.57
+  wavelength: 1.55

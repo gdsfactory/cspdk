@@ -1,0 +1,17 @@
+info:
+  end_angle: 0
+  length: 15.152
+  min_bend_radius: 23.498
+  route_info_length: 15.152
+  route_info_min_bend_radius: 23.498
+  route_info_n_bend_s: 1
+  route_info_type: xs_nc
+  route_info_weight: 15.152
+  route_info_xs_nc_length: 15.152
+  start_angle: 0
+name: bend_s_S15_1p8_CSxs_nc
+settings:
+  cross_section: xs_nc
+  size:
+  - 15
+  - 1.8

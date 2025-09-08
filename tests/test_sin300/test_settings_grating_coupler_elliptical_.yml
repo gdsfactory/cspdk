@@ -1,0 +1,9 @@
+info:
+  period: 1.401
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_ellipti_ec5c2730
+settings:
+  cross_section: xs_nc
+  grating_line_width: 0.343
+  wavelength: 1.55

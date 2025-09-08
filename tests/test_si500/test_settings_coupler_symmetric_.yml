@@ -1,0 +1,9 @@
+info:
+  length: 15.129
+  min_bend_radius: 25.392
+name: coupler_symmetric_G0p23_aa53a358
+settings:
+  cross_section: xs_rc
+  dx: 15
+  dy: 4
+  gap: 0.236

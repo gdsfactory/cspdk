@@ -1,0 +1,10 @@
+info:
+  length: 20
+name: taper_strip_to_ridge_L2_bb2fa4e3
+settings:
+  cross_section: strip
+  length: 20
+  w_slab1: 0.2
+  w_slab2: 10.45
+  width1: 0.5
+  width2: 0.5

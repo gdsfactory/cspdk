@@ -1,0 +1,17 @@
+info:
+  dy: 5
+  length: 8.318
+  min_bend_radius: 3.53
+  radius: 5
+  route_info_length: 8.318
+  route_info_min_bend_radius: 3.53
+  route_info_n_bend_90: 1
+  route_info_type: xs_so
+  route_info_weight: 8.318
+  route_info_xs_so_length: 8.318
+  width: 0.4
+name: bend_euler_RNone_A90_P0_aec1b638
+settings:
+  angle: 90
+  cross_section: xs_so
+  p: 0.5

@@ -1,0 +1,11 @@
+info:
+  length: 10
+  route_info_length: 10
+  route_info_rib_length: 10
+  route_info_type: rib
+  route_info_weight: 10
+  width: 0.5
+name: straight_rib_L10_CSrib_WNone
+settings:
+  cross_section: rib
+  length: 10

@@ -1,0 +1,9 @@
+info: {}
+name: mmi1x2_WNone_WM12_WT5p5_156b57ae
+settings:
+  cross_section: xs_no
+  gap_mmi: 0.4
+  length_mmi: 42
+  length_taper: 50
+  width_mmi: 12
+  width_taper: 5.5

@@ -1,4 +1,5 @@
 """Symlink tech to klayout."""
+
 import os
 import pathlib
 import shutil
@@ -6,6 +7,7 @@ import sys
 
 
 def remove_path_or_dir(dest: pathlib.Path):
+    """Remove a path or directory."""
     if dest.is_dir():
         os.unlink(dest)
     else:
@@ -13,7 +15,11 @@ def remove_path_or_dir(dest: pathlib.Path):
 
 
 def make_link(src, dest, overwrite: bool = True) -> None:
+    """Make a symbolic link from src to dest."""
     dest = pathlib.Path(dest)
+    if not src.exists():
+        raise FileNotFoundError(f"{src} does not exist")
+
     if dest.exists() and not overwrite:
         print(f"{dest} already exists")
         return
@@ -23,7 +29,7 @@ def make_link(src, dest, overwrite: bool = True) -> None:
     try:
         os.symlink(src, dest, target_is_directory=True)
     except OSError:
-        shutil.copy(src, dest)
+        shutil.copytree(src, dest)
     print("link made:")
     print(f"From: {src}")
     print(f"To:   {dest}")
@@ -33,8 +39,13 @@ if __name__ == "__main__":
     klayout_folder = "KLayout" if sys.platform == "win32" else ".klayout"
     cwd = pathlib.Path(__file__).resolve().parent
     home = pathlib.Path.home()
-    src = cwd / "cspdk" / "klayout"
     dest_folder = home / klayout_folder / "tech"
     dest_folder.mkdir(exist_ok=True, parents=True)
-    dest = dest_folder / "cspdk"
+
+    src = cwd / "cspdk" / "si220" / "klayout"
+    dest = dest_folder / "cspdk_si220"
+    make_link(src=src, dest=dest)
+
+    src = cwd / "cspdk" / "sin300" / "klayout"
+    dest = dest_folder / "cspdk_sin300"
     make_link(src=src, dest=dest)

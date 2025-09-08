@@ -1,0 +1,10 @@
+info:
+  min_bend_radius: 25.392
+  path_length: 50.258
+name: coupler_G0p236_L20_D4_D_681368b1
+settings:
+  cross_section: xs_rc
+  dx: 15
+  dy: 4
+  gap: 0.236
+  length: 20

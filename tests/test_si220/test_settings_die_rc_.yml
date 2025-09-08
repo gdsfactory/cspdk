@@ -1,0 +1,15 @@
+info: {}
+name: die_S11470_4900_ETGD150_9a6f1a79
+settings:
+  cross_section: xs_rc
+  edge_to_grating_distance: 150
+  edge_to_pad_distance: 150
+  grating_pitch: 250
+  layer_floorplan: FLOORPLAN
+  ngratings: 14
+  npads: 31
+  pad: pad
+  pad_pitch: 300
+  size:
+  - 11470
+  - 4900

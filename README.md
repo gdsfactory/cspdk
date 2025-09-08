@@ -1,34 +1,44 @@
-# CORNERSTONE PDK 0.2.0
+
+# CORNERSTONE PDK 1.0.9
+
+![](https://i.imgur.com/V5Ukc6j.png)
 
 [CORNERSTONE](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
 
 ## Installation
 
+We recommend `uv`
+
+```bash
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+```bash
+# On Windows.
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
 ### Installation for users
 
-Use python3.10 or python3.11. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
+Use python 3.11, 3.12 or 3.13. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
 
-If you don't have python installed on your system you can [download anaconda](https://www.anaconda.com/download/)
-
-Once you have python installed, open Anaconda Prompt as Administrator and then install the latest gdsfactory using pip.
-
-![anaconda prompt](https://i.imgur.com/eKk2bbs.png)
 ```
-pip install cspdk --upgrade
+uv pip install cspdk --upgrade
 ```
 
 Then you need to restart Klayout to make sure the new technology installed appears.
 
-### Installation for developers
+### Installation for contributors
 
-For developers you need to `git clone` the GitHub repository, fork it, git add, git commit, git push and merge request your changes.
 
-```
+Then you can install with:
+
+```bash
 git clone https://github.com/gdsfactory/cspdk.git
 cd cspdk
-pip install -e . pre-commit
-pre-commit install
-python install_tech.py
+uv venv --python 3.12
+uv sync --extra docs --extra dev
 ```
 
 ## Documentation

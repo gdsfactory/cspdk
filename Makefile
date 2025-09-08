@@ -1,8 +1,22 @@
 install:
-	pip install -e .[dev,docs]
+	uv sync --extra docs --extra dev
 
 test:
-	pytest -s
+	uv run pytest -s tests/test_si220_cband.py
+	uv run pytest -s tests/test_si220_oband.py
+	# uv run pytest -s tests/test_si500.py
+	# uv run pytest -s tests/test_sin300.py
+
+test-force:
+	uv run pytest -s tests/test_si220_cband.py --force-regen
+	uv run pytest -s tests/test_si220_oband.py --force-regen
+	# uv run pytest -s tests/test_si500.py --force-regen
+	# uv run pytest -s tests/test_sin300.py --force-regen
+
+test-fail-fast:
+	uv run pytest -s tests/test_si220_cband.py -x
+	uv run pytest -s tests/test_si500.py -x
+	uv run pytest -s tests/test_sin300.py -x
 
 update-pre:
 	pre-commit autoupdate --bleeding-edge
@@ -22,6 +36,9 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs:
-	jb build docs
+	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	uv run jb build docs
 
 .PHONY: drc doc docs

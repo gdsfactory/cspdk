@@ -1,0 +1,9 @@
+info:
+  period: 0.685
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_ellipti_8668f611
+settings:
+  cross_section: xs_rc
+  grating_line_width: 0.315
+  wavelength: 1.55

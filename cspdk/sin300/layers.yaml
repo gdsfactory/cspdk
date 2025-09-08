@@ -1,0 +1,38 @@
+LayerViews:
+  NITRIDE:
+    layer: [203, 0]
+    layer_in_name: true
+    color: "orange"
+    hatch_pattern: coarsely dotted
+  NITRIDE_ETCH:
+    layer: [204, 0]
+    layer_in_name: true
+    hatch_pattern: coarsely dotted
+    transparent: true
+    width: 1
+    color: "blue"
+  HEATER:
+    layer: [39, 0]
+    layer_in_name: true
+    color: "#ebc634"
+    hatch_pattern: coarsely dotted
+  PAD:
+    layer: [41, 0]
+    layer_in_name: true
+    fill_color: "teal"
+    hatch_pattern: coarsely dotted
+  FLOORPLAN:
+    layer: [99, 0]
+    layer_in_name: true
+    color: "green"
+    hatch_pattern: hollow
+  LABEL_SETTINGS:
+    layer: [100, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  LABEL_INSTANCE:
+    layer: [101, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow

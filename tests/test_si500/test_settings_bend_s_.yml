@@ -1,0 +1,17 @@
+info:
+  end_angle: 0
+  length: 20.115
+  min_bend_radius: 41.13
+  route_info_length: 20.115
+  route_info_min_bend_radius: 41.13
+  route_info_n_bend_s: 1
+  route_info_type: xs_rc
+  route_info_weight: 20.115
+  route_info_xs_rc_length: 20.115
+  start_angle: 0
+name: bend_s_S20_1p8_CSxs_rc
+settings:
+  cross_section: xs_rc
+  size:
+  - 20
+  - 1.8

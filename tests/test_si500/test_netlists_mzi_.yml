@@ -1,0 +1,374 @@
+instances:
+  b1:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b2:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b3:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b4:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b5:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b6:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b7:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  b8:
+    component: bend_euler
+    info:
+      dy: 25
+      length: 41.592
+      min_bend_radius: 17.652
+      radius: 25
+      route_info_length: 41.592
+      route_info_min_bend_radius: 17.652
+      route_info_n_bend_90: 1
+      route_info_type: xs_rc
+      route_info_weight: 41.592
+      route_info_xs_rc_length: 41.592
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: xs_rc
+      p: 0.5
+      radius: null
+      width: null
+  cp1:
+    component: mmi1x2
+    info: {}
+    settings:
+      cross_section: xs_rc
+      gap_mmi: 1.47
+      length_mmi: 37.5
+      length_taper: 20
+      width: null
+      width_mmi: 6
+      width_taper: 1.5
+  cp2:
+    component: mmi2x2
+    info: {}
+    settings:
+      cross_section: xs_rc
+      gap_mmi: 0.4
+      length_mmi: 5.5
+      length_taper: 50.2
+      width: null
+      width_mmi: 6
+      width_taper: 1.5
+  sxb:
+    component: straight
+    info:
+      length: 0.1
+      route_info_length: 0.1
+      route_info_type: xs_rc
+      route_info_weight: 0.1
+      route_info_xs_rc_length: 0.1
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 0.1
+  sxt:
+    component: straight
+    info:
+      length: 0.1
+      route_info_length: 0.1
+      route_info_type: xs_rc
+      route_info_weight: 0.1
+      route_info_xs_rc_length: 0.1
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 0.1
+  sybr:
+    component: straight
+    info:
+      length: 6.535
+      route_info_length: 6.535
+      route_info_type: xs_rc
+      route_info_weight: 6.535
+      route_info_xs_rc_length: 6.535
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 6.535
+  syl:
+    component: straight
+    info:
+      length: 6
+      route_info_length: 6
+      route_info_type: xs_rc
+      route_info_weight: 6
+      route_info_xs_rc_length: 6
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 6
+  sytl:
+    component: straight
+    info:
+      length: 1
+      route_info_length: 1
+      route_info_type: xs_rc
+      route_info_weight: 1
+      route_info_xs_rc_length: 1
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 1
+  sytr:
+    component: straight
+    info:
+      length: 1.535
+      route_info_length: 1.535
+      route_info_type: xs_rc
+      route_info_weight: 1.535
+      route_info_xs_rc_length: 1.535
+      width: 0.45
+    settings:
+      cross_section: xs_rc
+      length: 1.535
+name: mzi_DL10_Bbend_euler_rc_de758620
+nets:
+- p1: b1,o1
+  p2: cp1,o2
+- p1: b1,o2
+  p2: sytl,o1
+- p1: b2,o1
+  p2: sxt,o1
+- p1: b2,o2
+  p2: sytl,o2
+- p1: b3,o1
+  p2: sytr,o2
+- p1: b3,o2
+  p2: sxt,o2
+- p1: b4,o1
+  p2: sytr,o1
+- p1: b4,o2
+  p2: cp2,o3
+- p1: b5,o1
+  p2: cp1,o3
+- p1: b5,o2
+  p2: syl,o1
+- p1: b6,o1
+  p2: syl,o2
+- p1: b6,o2
+  p2: sxb,o1
+- p1: b7,o1
+  p2: sxb,o2
+- p1: b7,o2
+  p2: sybr,o1
+- p1: b8,o1
+  p2: cp2,o4
+- p1: b8,o2
+  p2: sybr,o2
+placements:
+  b1:
+    mirror: false
+    rotation: 0
+    x: 57.5
+    y: 1.485
+  b2:
+    mirror: false
+    rotation: 180
+    x: 107.5
+    y: 52.485
+  b3:
+    mirror: false
+    rotation: 90
+    x: 132.6
+    y: 27.485
+  b4:
+    mirror: false
+    rotation: 270
+    x: 132.6
+    y: 25.95
+  b5:
+    mirror: true
+    rotation: 0
+    x: 57.5
+    y: -1.485
+  b6:
+    mirror: false
+    rotation: 270
+    x: 82.5
+    y: -32.485
+  b7:
+    mirror: false
+    rotation: 0
+    x: 107.6
+    y: -57.485
+  b8:
+    mirror: false
+    rotation: 180
+    x: 157.6
+    y: -0.95
+  cp1:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  cp2:
+    mirror: true
+    rotation: 180
+    x: 213.3
+    y: 0
+  sxb:
+    mirror: false
+    rotation: 0
+    x: 107.5
+    y: -57.485
+  sxt:
+    mirror: false
+    rotation: 0
+    x: 107.5
+    y: 52.485
+  sybr:
+    mirror: false
+    rotation: 90
+    x: 132.6
+    y: -32.485
+  syl:
+    mirror: false
+    rotation: 270
+    x: 82.5
+    y: -26.485
+  sytl:
+    mirror: false
+    rotation: 90
+    x: 82.5
+    y: 26.485
+  sytr:
+    mirror: false
+    rotation: 90
+    x: 132.6
+    y: 25.95
+ports:
+  o1: cp1,o1
+  o2: cp2,o2
+  o3: cp2,o1

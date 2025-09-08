@@ -1,0 +1,11 @@
+info:
+  length: 10
+  route_info_length: 10
+  route_info_type: xs_no
+  route_info_weight: 10
+  route_info_xs_no_length: 10
+  width: 0.95
+name: straight_L10_CSxs_no
+settings:
+  cross_section: xs_no
+  length: 10
