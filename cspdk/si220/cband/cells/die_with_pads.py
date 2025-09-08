@@ -95,22 +95,7 @@ def pad(
 
 @gf.cell
 def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
-    """A die with grating couplers and pads.
-
-    Args:
-        size: the size of the die, in um.
-        ngratings: the number of grating couplers.
-        npads: the number of pads.
-        grating_pitch: the pitch of the grating couplers, in um.
-        pad_pitch: the pitch of the pads, in um.
-        grating_coupler: the grating coupler component. None skips the grating couplers.
-        cross_section: the cross section.
-        pad: the pad component.
-        layer_floorplan: the layer of the floorplan.
-        edge_to_pad_distance: the distance from the edge to the pads, in um.
-        edge_to_grating_distance: the distance from the edge to the grating couplers, in um.
-        with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
-    """
+    """A die."""
     c = gf.Component()
     _ = c << gf.c.rectangle(
         size=size, layer=LAYER.FLOORPLAN, centered=True, port_type=None
