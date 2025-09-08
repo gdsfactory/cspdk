@@ -2,6 +2,12 @@
 
 <!-- towncrier release notes start -->
 
+## 1.1.0
+
+- add route samples [#150](https://github.com/gdsfactory/cspdk/pull/150)
+- add missing init file [#151](https://github.com/gdsfactory/cspdk/pull/151)
+- Update gdsfactory9.14 [#158](https://github.com/gdsfactory/cspdk/pull/158)
+
 ## 1.0.7
 
 - add oband tests [#145](https://github.com/gdsfactory/cspdk/pull/145)
