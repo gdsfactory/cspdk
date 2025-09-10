@@ -109,6 +109,7 @@ def bend_euler(
     length: float = 10.0,
     loss_dB_cm: float = 3,
     cross_section="strip",
+    **kwargs,
 ) -> sax.SDict:
     """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
@@ -121,10 +122,7 @@ def bend_euler(
 
 
 def bend_euler_strip(
-    *,
-    wl: Float = 1.55,
-    length: float = 10.0,
-    loss_dB_cm: float = 3,
+    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3, **kwargs
 ) -> sax.SDict:
     """Euler bend strip model."""
     return bend_euler(
@@ -136,10 +134,7 @@ def bend_euler_strip(
 
 
 def bend_euler_rib(
-    *,
-    wl: Float = 1.55,
-    length: float = 10.0,
-    loss_dB_cm: float = 3,
+    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3, **kwargs
 ) -> sax.SDict:
     """Euler bend rib model."""
     return bend_euler(
