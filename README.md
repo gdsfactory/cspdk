@@ -1,5 +1,5 @@
 
-# CORNERSTONE PDK 1.1.0
+# CORNERSTONE PDK 1.2.0
 
 ![](https://i.imgur.com/V5Ukc6j.png)
 
