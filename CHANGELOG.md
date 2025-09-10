@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 1.2.0
+
+- better models [#159](https://github.com/gdsfactory/cspdk/pull/159)
+- fix bend models [#160](https://github.com/gdsfactory/cspdk/pull/160)
+
 ## 1.1.0
 
 - add route samples [#150](https://github.com/gdsfactory/cspdk/pull/150)
