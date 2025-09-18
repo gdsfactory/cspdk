@@ -124,20 +124,23 @@ def bend_s(
 
 @gf.cell
 def wire_corner(
-    cross_section: CrossSectionSpec = "metal_routing", width: float | None = None
+    cross_section: CrossSectionSpec = "metal_routing",
+    width: float | None = None,
+    radius: float | None = None,
 ) -> gf.Component:
     """Returns 45 degrees electrical corner wire.
 
     Args:
         cross_section: spec.
         width: optional width. Defaults to cross_section width.
+        radius: ignored.
     """
     return gf.c.wire_corner(
         cross_section=cross_section,
         width=width,
         port_names=port_names_electrical,
         port_types=port_types_electrical,
-        radius=None,
+        radius=radius,
     )
 
 
@@ -153,9 +156,9 @@ def wire_corner45(
 
     Args:
         cross_section: spec.
-        radius: ignored.
+        radius: in um.
         width: optional width. Defaults to cross_section width.
-        layer: ignored.
+        layer: optional layer.
         with_corner90_ports: if True, adds ports at 90 degrees.
     """
     return gf.c.wire_corner45(
