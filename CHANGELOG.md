@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## 1.2.1
+
+- update gdsfactory9.16.3 [#165](https://github.com/gdsfactory/cspdk/pull/165)
+
+
 ## 1.2.0
 
 - better models [#159](https://github.com/gdsfactory/cspdk/pull/159)
