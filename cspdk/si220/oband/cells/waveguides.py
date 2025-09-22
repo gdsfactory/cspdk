@@ -167,6 +167,26 @@ def wire_corner45(
     )
 
 
+@gf.cell
+def wire_corner45_straight(
+    width: float | None = None,
+    radius: float | None = None,
+    cross_section: CrossSectionSpec = "metal_routing",
+) -> gf.Component:
+    """Returns 90 degrees electrical corner wire.
+
+    Args:
+        width: of the wire.
+        radius: of the corner. Defaults to width.
+        cross_section: metal_routing.
+    """
+    return gf.c.wire_corner45_straight(
+        width=width,
+        radius=radius,
+        cross_section=cross_section,
+    )
+
+
 ####################
 # Metal waveguides
 ####################

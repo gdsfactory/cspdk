@@ -1,5 +1,5 @@
 instances:
-  bend_euler_R12_A180_P0p_834d3699_0_6000_A180:
+  bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_0_6000_A180:
     component: bend_euler
     info:
       dy: 0
@@ -20,7 +20,7 @@ instances:
       p: 0.5
       radius: 12
       width: null
-  bend_euler_R12_A180_P0p_834d3699_20000_m14000:
+  bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m14000:
     component: bend_euler
     info:
       dy: 0
@@ -41,7 +41,7 @@ instances:
       p: 0.5
       radius: 12
       width: null
-  bend_euler_R15_A180_P0p_16968374_0_10000_A180:
+  bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_0_10000_A180:
     component: bend_euler
     info:
       dy: 0
@@ -62,7 +62,7 @@ instances:
       p: 0.5
       radius: 15
       width: null
-  bend_euler_R15_A180_P0p_16968374_20000_m18000:
+  bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m18000:
     component: bend_euler
     info:
       dy: 0
@@ -83,7 +83,7 @@ instances:
       p: 0.5
       radius: 15
       width: null
-  bend_euler_R17_A180_P0p_8af989a6_0_12000_A180:
+  bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_0_12000_A180:
     component: bend_euler
     info:
       dy: 0
@@ -104,7 +104,7 @@ instances:
       p: 0.5
       radius: 17
       width: null
-  bend_euler_R17_A180_P0p_8af989a6_20000_m20000:
+  bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m20000:
     component: bend_euler
     info:
       dy: 0
@@ -125,7 +125,7 @@ instances:
       p: 0.5
       radius: 17
       width: null
-  bend_euler_R5_A180_P0p5_224e2057_0_0_A180:
+  bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_0_0_A180:
     component: bend_euler
     info:
       dy: 0
@@ -146,7 +146,7 @@ instances:
       p: 0.5
       radius: 5
       width: null
-  bend_euler_R5_A180_P0p5_224e2057_20000_m8000:
+  bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m8000:
     component: bend_euler
     info:
       dy: 0
@@ -167,7 +167,7 @@ instances:
       p: 0.5
       radius: 5
       width: null
-  bend_euler_R7_A180_P0p5_7d8495e9_0_2000_A180:
+  bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_0_2000_A180:
     component: bend_euler
     info:
       dy: 0
@@ -188,7 +188,7 @@ instances:
       p: 0.5
       radius: 7
       width: null
-  bend_euler_R7_A180_P0p5_7d8495e9_20000_m10000:
+  bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m10000:
     component: bend_euler
     info:
       dy: 0
@@ -209,7 +209,7 @@ instances:
       p: 0.5
       radius: 7
       width: null
-  bend_euler_R9_A180_P0p5_431cc5ca_0_4000_A180:
+  bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_0_4000_A180:
     component: bend_euler
     info:
       dy: 0
@@ -230,7 +230,7 @@ instances:
       p: 0.5
       radius: 9
       width: null
-  bend_euler_R9_A180_P0p5_431cc5ca_20000_m12000:
+  bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m12000:
     component: bend_euler
     info:
       dy: 0
@@ -251,7 +251,7 @@ instances:
       p: 0.5
       radius: 9
       width: null
-  bend_s_S20_m8_CSstrip_W_198c7a61_0_0:
+  bend_s_S20_m8_CSstrip_WNone_AMRVFalse_0_0:
     component: bend_s
     info:
       end_angle: 0
@@ -439,118 +439,118 @@ instances:
       length: 20
       npoints: 2
       width: null
-name: spiral_racetrack_MRNone_05d4c3d3
+name: spiral_racetrack_MRNone_SL20_S2_2_3_3_2_2_Sstraight_Bbe_05d4c3d3
 nets:
-- p1: bend_euler_R12_A180_P0p_834d3699_0_6000_A180,o1
+- p1: bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_0_6000_A180,o1
   p2: straight_L20_CSstrip_WNone_N2_20000_6000_A180,o2
-- p1: bend_euler_R12_A180_P0p_834d3699_0_6000_A180,o2
+- p1: bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_0_6000_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m18000,o1
-- p1: bend_euler_R12_A180_P0p_834d3699_20000_m14000,o1
+- p1: bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m14000,o1
   p2: straight_L20_CSstrip_WNone_N2_0_m14000,o2
-- p1: bend_euler_R12_A180_P0p_834d3699_20000_m14000,o2
+- p1: bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m14000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_10000_A180,o1
-- p1: bend_euler_R15_A180_P0p_16968374_0_10000_A180,o1
+- p1: bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_0_10000_A180,o1
   p2: straight_L20_CSstrip_WNone_N2_20000_10000_A180,o2
-- p1: bend_euler_R15_A180_P0p_16968374_0_10000_A180,o2
+- p1: bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_0_10000_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m20000,o1
-- p1: bend_euler_R15_A180_P0p_16968374_20000_m18000,o1
+- p1: bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m18000,o1
   p2: straight_L20_CSstrip_WNone_N2_0_m18000,o2
-- p1: bend_euler_R15_A180_P0p_16968374_20000_m18000,o2
+- p1: bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m18000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_12000_A180,o1
-- p1: bend_euler_R17_A180_P0p_8af989a6_0_12000_A180,o1
+- p1: bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_0_12000_A180,o1
   p2: straight_L20_CSstrip_WNone_N2_20000_12000_A180,o2
-- p1: bend_euler_R17_A180_P0p_8af989a6_0_12000_A180,o2
+- p1: bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_0_12000_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m22000,o1
-- p1: bend_euler_R17_A180_P0p_8af989a6_20000_m20000,o1
+- p1: bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m20000,o1
   p2: straight_L20_CSstrip_WNone_N2_0_m20000,o2
-- p1: bend_euler_R17_A180_P0p_8af989a6_20000_m20000,o2
+- p1: bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m20000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_14000_A180,o1
-- p1: bend_euler_R5_A180_P0p5_224e2057_0_0_A180,o1
-  p2: bend_s_S20_m8_CSstrip_W_198c7a61_0_0,o1
-- p1: bend_euler_R5_A180_P0p5_224e2057_0_0_A180,o2
+- p1: bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_0_0_A180,o1
+  p2: bend_s_S20_m8_CSstrip_WNone_AMRVFalse_0_0,o1
+- p1: bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_0_0_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m10000,o1
-- p1: bend_euler_R5_A180_P0p5_224e2057_20000_m8000,o1
-  p2: bend_s_S20_m8_CSstrip_W_198c7a61_0_0,o2
-- p1: bend_euler_R5_A180_P0p5_224e2057_20000_m8000,o2
+- p1: bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m8000,o1
+  p2: bend_s_S20_m8_CSstrip_WNone_AMRVFalse_0_0,o2
+- p1: bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m8000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_2000_A180,o1
-- p1: bend_euler_R7_A180_P0p5_7d8495e9_0_2000_A180,o1
+- p1: bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_0_2000_A180,o1
   p2: straight_L20_CSstrip_WNone_N2_20000_2000_A180,o2
-- p1: bend_euler_R7_A180_P0p5_7d8495e9_0_2000_A180,o2
+- p1: bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_0_2000_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m12000,o1
-- p1: bend_euler_R7_A180_P0p5_7d8495e9_20000_m10000,o1
+- p1: bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m10000,o1
   p2: straight_L20_CSstrip_WNone_N2_0_m10000,o2
-- p1: bend_euler_R7_A180_P0p5_7d8495e9_20000_m10000,o2
+- p1: bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m10000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_4000_A180,o1
-- p1: bend_euler_R9_A180_P0p5_431cc5ca_0_4000_A180,o1
+- p1: bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_0_4000_A180,o1
   p2: straight_L20_CSstrip_WNone_N2_20000_4000_A180,o2
-- p1: bend_euler_R9_A180_P0p5_431cc5ca_0_4000_A180,o2
+- p1: bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_0_4000_A180,o2
   p2: straight_L20_CSstrip_WNone_N2_0_m14000,o1
-- p1: bend_euler_R9_A180_P0p5_431cc5ca_20000_m12000,o1
+- p1: bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m12000,o1
   p2: straight_L20_CSstrip_WNone_N2_0_m12000,o2
-- p1: bend_euler_R9_A180_P0p5_431cc5ca_20000_m12000,o2
+- p1: bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m12000,o2
   p2: straight_L20_CSstrip_WNone_N2_20000_6000_A180,o1
 placements:
-  bend_euler_R12_A180_P0p_834d3699_0_6000_A180:
+  bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_0_6000_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 6
-  bend_euler_R12_A180_P0p_834d3699_20000_m14000:
+  bend_euler_R12_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m14000:
     mirror: false
     rotation: 0
     x: 20
     y: -14
-  bend_euler_R15_A180_P0p_16968374_0_10000_A180:
+  bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_0_10000_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 10
-  bend_euler_R15_A180_P0p_16968374_20000_m18000:
+  bend_euler_R15_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m18000:
     mirror: false
     rotation: 0
     x: 20
     y: -18
-  bend_euler_R17_A180_P0p_8af989a6_0_12000_A180:
+  bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_0_12000_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 12
-  bend_euler_R17_A180_P0p_8af989a6_20000_m20000:
+  bend_euler_R17_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m20000:
     mirror: false
     rotation: 0
     x: 20
     y: -20
-  bend_euler_R5_A180_P0p5_224e2057_0_0_A180:
+  bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_0_0_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 0
-  bend_euler_R5_A180_P0p5_224e2057_20000_m8000:
+  bend_euler_R5_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m8000:
     mirror: false
     rotation: 0
     x: 20
     y: -8
-  bend_euler_R7_A180_P0p5_7d8495e9_0_2000_A180:
+  bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_0_2000_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 2
-  bend_euler_R7_A180_P0p5_7d8495e9_20000_m10000:
+  bend_euler_R7_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m10000:
     mirror: false
     rotation: 0
     x: 20
     y: -10
-  bend_euler_R9_A180_P0p5_431cc5ca_0_4000_A180:
+  bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_0_4000_A180:
     mirror: false
     rotation: 180
     x: 0
     y: 4
-  bend_euler_R9_A180_P0p5_431cc5ca_20000_m12000:
+  bend_euler_R9_A180_P0p5_WNone_CSstrip_AMRVFalse_20000_m12000:
     mirror: false
     rotation: 0
     x: 20
     y: -12
-  bend_s_S20_m8_CSstrip_W_198c7a61_0_0:
+  bend_s_S20_m8_CSstrip_WNone_AMRVFalse_0_0:
     mirror: false
     rotation: 0
     x: 0

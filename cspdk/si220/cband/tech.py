@@ -8,7 +8,6 @@ import gdsfactory as gf
 from doroutes.bundles import add_bundle_astar
 from gdsfactory.cross_section import (
     CrossSection,
-    cross_section,
     port_names_electrical,
     port_types_electrical,
 )
@@ -228,7 +227,7 @@ def metal_routing(
     radius: float | None = None,
 ) -> CrossSection:
     """Return Metal Strip cross_section."""
-    return cross_section(
+    return gf.cross_section.metal1(
         width=width,
         layer=layer,
         radius=radius,
