@@ -1,5 +1,5 @@
 instances:
-  bend_euler_R25_A180_P0p_ce329588_54277_m28000:
+  bend_euler_R25_A180_P0p5_WNone_CSheater_metal_AMRVFalse_54277_m28000:
     component: bend_euler
     info:
       dy: 0
@@ -20,7 +20,7 @@ instances:
       p: 0.5
       radius: 25
       width: null
-  spiral_racetrack_gdsfac_e184ab77_0_0:
+  spiral_racetrack_gdsfactorypcomponentspspiralspspiral_h_e184ab77_0_0:
     component: spiral_racetrack
     info:
       length: 3001.908
@@ -43,7 +43,7 @@ instances:
       - 4
       straight: straight
       straight_length: 100
-  straight_gdsfactorypcom_262b2f90_54277_22000_A180:
+  straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_22000_A180:
     component: straight
     info:
       length: 100
@@ -57,7 +57,7 @@ instances:
       length: 100
       npoints: 2
       width: null
-  straight_gdsfactorypcom_262b2f90_54277_m28000_A180:
+  straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_m28000_A180:
     component: straight
     info:
       length: 100
@@ -89,33 +89,33 @@ instances:
       size:
       - 20
       - 10
-name: spiral_racetrack_heater_8f268b5e
+name: spiral_racetrack_heater_S4_N8_SL100_CSstrip
 nets:
-- p1: bend_euler_R25_A180_P0p_ce329588_54277_m28000,e1
-  p2: straight_gdsfactorypcom_262b2f90_54277_m28000_A180,e1
-- p1: bend_euler_R25_A180_P0p_ce329588_54277_m28000,e2
-  p2: straight_gdsfactorypcom_262b2f90_54277_22000_A180,e1
-- p1: straight_gdsfactorypcom_262b2f90_54277_22000_A180,e2
+- p1: bend_euler_R25_A180_P0p5_WNone_CSheater_metal_AMRVFalse_54277_m28000,e1
+  p2: straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_m28000_A180,e1
+- p1: bend_euler_R25_A180_P0p5_WNone_CSheater_metal_AMRVFalse_54277_m28000,e2
+  p2: straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_22000_A180,e1
+- p1: straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_22000_A180,e2
   p2: via_stack_heater_mtop_S20_10_m55723_22000,e3
-- p1: straight_gdsfactorypcom_262b2f90_54277_m28000_A180,e2
+- p1: straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_m28000_A180,e2
   p2: via_stack_heater_mtop_S20_10_m55723_m28000,e3
 placements:
-  bend_euler_R25_A180_P0p_ce329588_54277_m28000:
+  bend_euler_R25_A180_P0p5_WNone_CSheater_metal_AMRVFalse_54277_m28000:
     mirror: false
     rotation: 0
     x: 54.277
     y: -28
-  spiral_racetrack_gdsfac_e184ab77_0_0:
+  spiral_racetrack_gdsfactorypcomponentspspiralspspiral_h_e184ab77_0_0:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  straight_gdsfactorypcom_262b2f90_54277_22000_A180:
+  straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_22000_A180:
     mirror: false
     rotation: 180
     x: 54.277
     y: 22
-  straight_gdsfactorypcom_262b2f90_54277_m28000_A180:
+  straight_gdsfactorypcomponentspwaveguidespstraight_L100_262b2f90_54277_m28000_A180:
     mirror: false
     rotation: 180
     x: 54.277
@@ -135,8 +135,8 @@ ports:
   bot_e2: via_stack_heater_mtop_S20_10_m55723_m28000,e2
   bot_e3: via_stack_heater_mtop_S20_10_m55723_m28000,e3
   bot_e4: via_stack_heater_mtop_S20_10_m55723_m28000,e4
-  o1: spiral_racetrack_gdsfac_e184ab77_0_0,o1
-  o2: spiral_racetrack_gdsfac_e184ab77_0_0,o2
+  o1: spiral_racetrack_gdsfactorypcomponentspspiralspspiral_h_e184ab77_0_0,o1
+  o2: spiral_racetrack_gdsfactorypcomponentspspiralspspiral_h_e184ab77_0_0,o2
   top_e1: via_stack_heater_mtop_S20_10_m55723_22000,e1
   top_e2: via_stack_heater_mtop_S20_10_m55723_22000,e2
   top_e3: via_stack_heater_mtop_S20_10_m55723_22000,e3

@@ -2,7 +2,7 @@ info:
   fiber_angle: 10
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectang_ec81bc77
+name: grating_coupler_rectangular_P0p63_NP60_LT350_W1p55_CSstrip
 settings:
   cross_section: strip
   length_taper: 350

@@ -1,5 +1,5 @@
 instances:
-  bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90:
+  bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_10000_11270_A90:
     component: bend_euler
     info:
       dy: 10
@@ -20,7 +20,7 @@ instances:
       p: 0.5
       radius: 10
       width: null
-  bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180:
+  bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_m4000_21270_A180:
     component: bend_euler
     info:
       dy: 10
@@ -41,7 +41,7 @@ instances:
       p: 0.5
       radius: 10
       width: null
-  coupler_ring_LX4_G0p27__23df31b2_0_0:
+  coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0:
     component: coupler_ring
     info: {}
     settings:
@@ -94,32 +94,32 @@ instances:
       length: 4
       npoints: 2
       width: null
-name: ring_single_G0p27_R10_L_c4ff7786
+name: ring_single_G0p27_R10_LX4_LY0p6_CSstrip
 nets:
-- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90,o1
+- p1: bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_10000_11270_A90,o1
   p2: straight_L0p6_CSstrip_WNone_N2_10000_11270_A270,o1
-- p1: bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90,o2
+- p1: bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_10000_11270_A90,o2
   p2: straight_L4_CSstrip_WNone_N2_0_21270_A180,o1
-- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180,o1
+- p1: bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_m4000_21270_A180,o1
   p2: straight_L4_CSstrip_WNone_N2_0_21270_A180,o2
-- p1: bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180,o2
+- p1: bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_m4000_21270_A180,o2
   p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o2
-- p1: coupler_ring_LX4_G0p27__23df31b2_0_0,o2
+- p1: coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0,o2
   p2: straight_L0p6_CSstrip_WNone_N2_m14000_10670_A90,o1
-- p1: coupler_ring_LX4_G0p27__23df31b2_0_0,o3
+- p1: coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0,o3
   p2: straight_L0p6_CSstrip_WNone_N2_10000_11270_A270,o2
 placements:
-  bend_euler_R10_A90_P0p5_17151b03_10000_11270_A90:
+  bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_10000_11270_A90:
     mirror: false
     rotation: 90
     x: 10
     y: 11.27
-  bend_euler_R10_A90_P0p5_17151b03_m4000_21270_A180:
+  bend_euler_R10_A90_P0p5_WNone_CSstrip_AMRVFalse_m4000_21270_A180:
     mirror: false
     rotation: 180
     x: -4
     y: 21.27
-  coupler_ring_LX4_G0p27__23df31b2_0_0:
+  coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0:
     mirror: false
     rotation: 0
     x: 0
@@ -140,5 +140,5 @@ placements:
     x: 0
     y: 21.27
 ports:
-  o1: coupler_ring_LX4_G0p27__23df31b2_0_0,o1
-  o2: coupler_ring_LX4_G0p27__23df31b2_0_0,o4
+  o1: coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0,o1
+  o2: coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0,o4

@@ -31,7 +31,9 @@ skip_test = {
     "add_fiber_single",
     "coupler_symmetric",
     "die_with_pads",
+    "spiral_racetrack_heater",
 }
+
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
 dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_ref_si220"

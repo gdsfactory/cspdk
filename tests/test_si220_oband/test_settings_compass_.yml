@@ -1,5 +1,5 @@
 info: {}
-name: compass_S4_2_LPAD_PTNon_e36286a1
+name: compass_S4_2_LPAD_PTNone_PI0_PO180_90_0_m90_ARPTrue
 settings:
   auto_rename_ports: true
   layer: PAD

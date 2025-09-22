@@ -1,5 +1,5 @@
 instances:
-  rectangle_gdsfactorypco_fb11a571_0_0:
+  rectangle_gdsfactorypcomponentspshapesprectangle_S16000_fb11a571_0_0:
     component: rectangle
     info: {}
     settings:
@@ -17,7 +17,7 @@ instances:
 name: die_S16000_3000
 nets: []
 placements:
-  rectangle_gdsfactorypco_fb11a571_0_0:
+  rectangle_gdsfactorypcomponentspshapesprectangle_S16000_fb11a571_0_0:
     mirror: false
     rotation: 0
     x: 0
