@@ -1,5 +1,5 @@
 instances:
-  text_rectangular_Tabc_S_7a2516a6_0_0:
+  text_rectangular_Tabc_S3_Jleft_LPAD_0_0:
     component: text_rectangular
     info: {}
     settings:
@@ -7,7 +7,7 @@ instances:
       layer: PAD
       size: 3
       text: abc
-  text_rectangular_Tabc_S_ded20486_0_0:
+  text_rectangular_Tabc_S3_Jleft_LWG_0_0:
     component: text_rectangular
     info: {}
     settings:
@@ -15,15 +15,15 @@ instances:
       layer: WG
       size: 3
       text: abc
-name: text_rectangular_multi__b6b11d24
+name: text_rectangular_multi_layer_Tabc_LWG_PAD_TFtext_rectangular
 nets: []
 placements:
-  text_rectangular_Tabc_S_7a2516a6_0_0:
+  text_rectangular_Tabc_S3_Jleft_LPAD_0_0:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  text_rectangular_Tabc_S_ded20486_0_0:
+  text_rectangular_Tabc_S3_Jleft_LWG_0_0:
     mirror: false
     rotation: 0
     x: 0
