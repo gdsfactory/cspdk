@@ -73,7 +73,7 @@ def get_layer_stack(
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
+                layer=LogicalLayer(layer=LAYER.WG) - LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
