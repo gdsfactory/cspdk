@@ -80,6 +80,7 @@ def get_layer_stack(
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.WG),
             ),
             slab=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.SLAB),
