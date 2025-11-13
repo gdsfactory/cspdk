@@ -75,11 +75,3 @@ def mzi(
         min_length=0.01,
         auto_rename_ports=True,
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    c = mzi()
-    c.show()

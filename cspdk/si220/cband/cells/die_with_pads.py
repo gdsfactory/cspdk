@@ -173,12 +173,3 @@ def die_with_pads(
         c.add_port(name=f"S{i}", port=pad_ref.ports["e2"])
     c.auto_rename_ports()
     return c
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    c = die()
-    c.pprint_ports()
-    c.show()

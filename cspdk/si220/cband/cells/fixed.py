@@ -55,9 +55,3 @@ def crossing() -> gf.Component:
     c.add_port("o3", orientation=0, center=(xr, yc), width=width, layer=LAYER.WG)
     c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
     return c
-
-
-if __name__ == "__main__":
-    c = crossing()
-    c.pprint_ports()
-    c.show()

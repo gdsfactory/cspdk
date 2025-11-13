@@ -86,9 +86,3 @@ def grating_coupler_elliptical(
         end_straight_length=0.2,
         cross_section=cross_section,
     )
-
-
-if __name__ == "__main__":
-    c = grating_coupler_elliptical()
-    c.pprint_ports()
-    c.show()
