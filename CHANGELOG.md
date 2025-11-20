@@ -2,6 +2,13 @@
 
 <!-- towncrier release notes start -->
 
+## 1.3.0
+
+- update gdsfactory9.22 [#177](https://github.com/gdsfactory/cspdk/pull/177)
+- fix 3d stack [#166](https://github.com/gdsfactory/cspdk/pull/166)
+- update gdsfactory9.22 [#177](https://github.com/gdsfactory/cspdk/pull/177)
+- update gdsfactory9.21 [#175](https://github.com/gdsfactory/cspdk/pull/175)
+
 ## 1.2.2
 
 - fix 3d stack [#166](https://github.com/gdsfactory/cspdk/pull/166)
