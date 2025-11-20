@@ -15,7 +15,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.18.0",
+  "gdsfactory~=9.21.0",
   "doroutes>=0.2.0"
 ]
 description = "CornerStone PDK"
