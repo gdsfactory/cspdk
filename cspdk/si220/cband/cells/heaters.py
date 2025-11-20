@@ -12,8 +12,8 @@ def straight_heater_metal(
     length_straight: float = 0.1,
     length_straight_input: float = 15.0,
     with_undercut: bool = False,
-    port_orientation1: int | None = None,
-    port_orientation2: int | None = None,
+    port_orientation1: int | None = 90,
+    port_orientation2: int | None = 90,
 ) -> gf.Component:
     """Returns a thermal phase shifter.
 
@@ -53,8 +53,8 @@ def straight_heater_meander(
     layer_heater: LayerSpec = "HEATER",
     via_stack: ComponentSpec | None = "via_stack_heater_mtop",
     n: int | None = 3,
-    port_orientation1: float | None = None,
-    port_orientation2: float | None = None,
+    port_orientation1: float | None = 90,
+    port_orientation2: float | None = 90,
     radius: float | None = None,
 ) -> gf.Component:
     """Returns a meander based heater.
@@ -92,12 +92,3 @@ def straight_heater_meander(
         n=n,
         radius=radius,
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    c = straight_heater_metal()
-    c.pprint_ports()
-    c.show()

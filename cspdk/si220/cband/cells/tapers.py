@@ -102,8 +102,3 @@ def taper_strip_to_ridge(
 trans_rib10 = partial(taper_strip_to_ridge, length=10)
 trans_rib20 = partial(taper_strip_to_ridge, length=20)
 trans_rib50 = partial(taper_strip_to_ridge, length=50)
-
-
-if __name__ == "__main__":
-    c = taper_metal()
-    c.show()

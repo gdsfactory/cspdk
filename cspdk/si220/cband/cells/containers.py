@@ -326,15 +326,3 @@ def pack_doe_grid(
         with_text=with_text,
         **kwargs,
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-
-    c = add_fiber_single()
-    # c =gf.get_component(gc)
-    # c = pack_doe()
-    c.pprint_ports()
-    c.show()

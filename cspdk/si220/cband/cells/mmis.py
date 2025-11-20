@@ -84,7 +84,3 @@ def mmi2x2(
 
 
 mmi2x2_rib = partial(mmi2x2, length_mmi=44.8, gap_mmi=0.53, cross_section="rib")
-
-if __name__ == "__main__":
-    c = mmi1x2()
-    c.show()

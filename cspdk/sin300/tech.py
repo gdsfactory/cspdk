@@ -38,6 +38,7 @@ class LayerMapCornerstone(LayerMap):
     # labels for gdsfactory
     LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
     LABEL_INSTANCE: Layer = (101, 0)  # type: ignore
+    routing_error_marker: Layer = (1000, 0)  # type: ignore
 
 
 LAYER = LayerMapCornerstone

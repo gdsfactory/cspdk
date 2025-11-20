@@ -73,11 +73,3 @@ def coupler_ring(
         cross_section_bend=None,
         length_extension=length_extension,
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    c = coupler()
-    c.show()

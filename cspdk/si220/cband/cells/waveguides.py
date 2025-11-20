@@ -263,13 +263,3 @@ def bend_s_metal(
         allow_min_radius_violation=allow_min_radius_violation,
         width=width,
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-
-    c = wire_corner45_straight()
-    c.pprint_ports()
-    c.show()

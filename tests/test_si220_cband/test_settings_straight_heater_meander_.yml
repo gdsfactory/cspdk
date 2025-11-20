@@ -1,11 +1,13 @@
 info:
   length: 518.366
-name: straight_heater_meander_L320_HW2p5_S2_CSstrip_LHHEATER__35890dd0
+name: straight_heater_meander_L320_HW2p5_S2_CSstrip_LHHEATER__a1286782
 settings:
   cross_section: strip
   heater_width: 2.5
   layer_heater: HEATER
   length: 320
   n: 3
+  port_orientation1: 90
+  port_orientation2: 90
   spacing: 2
   via_stack: via_stack_heater_mtop

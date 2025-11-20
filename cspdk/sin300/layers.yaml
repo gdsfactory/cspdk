@@ -36,3 +36,9 @@ LayerViews:
     layer_in_name: true
     color: "cyan"
     hatch_pattern: hollow
+  routing_error_marker:
+    layer: [1000, 0]
+    layer_in_name: false
+    width: 1
+    color: "red"
+    hatch_pattern: coarsely dotted

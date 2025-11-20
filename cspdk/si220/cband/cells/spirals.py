@@ -102,11 +102,3 @@ def spiral_racetrack_heater(
         waveguide_cross_section=cross_section,
         via_stack="via_stack_heater_mtop",
     )
-
-
-if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    c = spiral()
-    c.show()

@@ -109,8 +109,3 @@ def ring_double(
         cross_section=cross_section,
         length_extension=length_extension,
     )
-
-
-if __name__ == "__main__":
-    c = ring_single()
-    c.show()
