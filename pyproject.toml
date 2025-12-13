@@ -34,12 +34,16 @@ dev = [
   "pytest",
   "pytest-cov",
   "pytest_regressions",
-  "pytest-github-actions-annotate-failures"
+  "pytest-github-actions-annotate-failures",
+  "towncrier"
 ]
 docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1"]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+
+[tool.gdsfactoryplus]
+name = "cspdk.si220.cband"
 
 [tool.gdsfactoryplus.drc]
 timeout = 300
@@ -105,6 +109,10 @@ find = {}
 
 [tool.tbump]
 
+[[tool.tbump.before_commit]]
+cmd = "towncrier build --yes --version {new_version}"
+name = "create & check changelog"
+
 [[tool.tbump.file]]
 src = "README.md"
 
@@ -130,3 +138,13 @@ regex = '''
   \.
   (?P<patch>\d+)
   '''
+
+[tool.towncrier]
+directory = ".changelog.d"
+filename = "CHANGELOG.md"
+issue_format = "[#{issue}](https://github.com/gdsfactory/cspdk/issues/{issue})"
+package = "gdsfactory"
+start_string = "<!-- towncrier release notes start -->\n"
+template = ".changelog.d/changelog_template.jinja"
+title_format = "## [{version}](https://github.com/gdsfactory/cspdk/releases/tag/v{version}) - {project_date}"
+underlines = ["", "", ""]
