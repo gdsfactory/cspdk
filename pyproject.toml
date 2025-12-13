@@ -35,6 +35,7 @@ dev = [
   "pytest-cov",
   "pytest_regressions",
   "pytest-github-actions-annotate-failures",
+  "gdsfactoryplus",
   "towncrier"
 ]
 docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1"]
