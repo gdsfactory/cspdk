@@ -2,6 +2,11 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.0](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.0) - 2025-12-19
+
+No significant changes.
+
+
 ## 1.3.0
 
 - update gdsfactory9.22 [#177](https://github.com/gdsfactory/cspdk/pull/177)
