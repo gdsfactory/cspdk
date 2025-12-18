@@ -4,8 +4,9 @@
 
 ## [1.4.0](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.0) - 2025-12-19
 
-No significant changes.
-
+- add sbend router [#184](https://github.com/gdsfactory/cspdk/pull/184)
+- fix route_bundle_sbend [#185](https://github.com/gdsfactory/cspdk/pull/185)
+- fix typo [#183](https://github.com/gdsfactory/cspdk/pull/183)
 
 ## 1.3.0
 
