@@ -283,6 +283,7 @@ route_bundle_sbend_metal = partial(
     gf.routing.route_bundle_sbend,
     cross_section="metal_routing",
     bend_s=gf.components.bend_s,
+    port_name="e1",
 )
 
 route_astar = partial(

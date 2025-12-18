@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 Pipfile
+.vscode/
 
 docs/cells_si220_cband.rst
 docs/cells_si220_oband.rst
