@@ -43,7 +43,8 @@ instances:
       width: null
   coupler_ring_LX4_G0p27_R10_Bbend_euler_Sstraight_CSstrip_LE10_0_0:
     component: coupler_ring
-    info: {}
+    info:
+      radius: 10
     settings:
       bend: bend_euler
       cross_section: strip

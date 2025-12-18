@@ -1,4 +1,5 @@
-info: {}
+info:
+  radius: 10
 name: ring_single_G0p27_R10_LX4_LY0p6_CSstrip
 settings:
   cross_section: strip

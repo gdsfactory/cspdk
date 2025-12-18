@@ -1,4 +1,5 @@
-info: {}
+info:
+  radius: 5
 name: coupler_ring_LX4_G0p27_R5_Bbend_euler_Sstraight_CSstrip_LE10
 settings:
   bend: bend_euler
