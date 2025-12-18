@@ -272,6 +272,18 @@ route_bundle_metal_corner = partial(
     port_type="electrical",
 )
 
+route_bundle_sbend = partial(
+    gf.routing.route_bundle_sbend,
+    cross_section="strip",
+    bend_s=gf.components.bend_s,
+)
+
+route_bundle_sbend_metal = partial(
+    gf.routing.route_bundle_sbend,
+    cross_section="metal_routing",
+    bend_s=gf.components.bend_s,
+)
+
 route_astar = partial(
     add_bundle_astar,
     layers=["WG"],
@@ -298,6 +310,8 @@ routing_strategies = dict(
     route_bundle_metal_corner=route_bundle_metal_corner,
     route_astar=route_astar,
     route_astar_metal=route_astar_metal,
+    route_bundle_sbend=route_bundle_sbend,
+    route_bundle_sbend_metal=route_bundle_sbend_metal,
 )
 
 if __name__ == "__main__":
