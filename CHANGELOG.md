@@ -2,6 +2,8 @@
 
 <!-- towncrier release notes start -->
 
+- update gdsfactory
+
 ## [1.4.0](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.0) - 2025-12-19
 
 - add sbend router [#184](https://github.com/gdsfactory/cspdk/pull/184)
