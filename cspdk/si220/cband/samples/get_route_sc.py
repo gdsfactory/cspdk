@@ -2,9 +2,11 @@
 
 import gdsfactory as gf
 
-from cspdk.si220.cband import cells, tech
+from cspdk.si220.cband import PDK, cells, tech
 
 if __name__ == "__main__":
+    PDK.activate()
+
     c = gf.Component("sample_connect")
     mmi1 = c << cells.mmi1x2()
     mmi2 = c << cells.mmi1x2()

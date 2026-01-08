@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Remove samples
+        run: make rm-samples
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
