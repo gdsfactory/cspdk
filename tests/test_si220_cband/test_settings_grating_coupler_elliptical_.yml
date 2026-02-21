@@ -3,6 +3,25 @@ info:
   polarization: te
   wavelength: 1.55
 name: grating_coupler_elliptical_W1p55_GLW0p315_CSstrip
+ports:
+  o1:
+    center:
+    - 1.283
+    - 0
+    layer: 5
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 26.275
+    - 0
+    layer: 5
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
 settings:
   cross_section: strip
   grating_line_width: 0.315

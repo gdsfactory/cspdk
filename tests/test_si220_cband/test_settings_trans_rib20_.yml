@@ -1,6 +1,25 @@
 info:
   length: 20
 name: taper_strip_to_ridge_L20_W0p5_W0p5_WS0p2_WS10p45_CSstrip
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: 5
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.5
+  o2:
+    center:
+    - 20
+    - 0
+    layer: 5
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.5
 settings:
   cross_section: strip
   length: 20
