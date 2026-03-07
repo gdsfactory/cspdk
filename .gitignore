@@ -25,7 +25,6 @@ docs/cells_si500.rst
 docs/cells_sin300.rst
 
 tests/gds_ref/*.oas
-uv.lock
 
 # Distribution / packaging
 .Python
