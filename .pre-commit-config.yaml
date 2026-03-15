@@ -46,16 +46,9 @@ repos:
     rev: bb87fde98ed4852f8a9474b95355672feb1cae3b
     hooks:
       - id: actionlint
-  - repo: https://github.com/astral-sh/uv-pre-commit
-    # - repo: https://github.com/pre-commit/mirrors-mypy
-    #   rev: v1.13.0
-    #   hooks:
-    #     - id: mypy
-    #       stages: [pre-commit]
-    #       args: [--strict, --ignore-missing-imports, --config-file=pyproject.toml]
-
-    # uv version.
-    rev: 0.10.10
-    hooks:
-      # Update the uv lockfile
-      - id: uv-lock
+# - repo: https://github.com/pre-commit/mirrors-mypy
+#   rev: v1.13.0
+#   hooks:
+#     - id: mypy
+#       stages: [pre-commit]
+#       args: [--strict, --ignore-missing-imports, --config-file=pyproject.toml]
