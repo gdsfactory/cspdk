@@ -1,36 +1,36 @@
 exclude: ^uv\.lock$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: f1dff44d3a9ae852957f34def96390f28719c232
     hooks:
       - id: check-yaml
         exclude: ^(conda\.recipe/meta\.yaml|conda_build/templates/.*\.yaml|docs/click/meta\.yaml|conda/meta\.yaml|conda/construct.yaml|.*\.pic\.yml|conda/constructor/Miniforge3/construct.yaml)
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.8.1
+    rev: bda94f03d5195fdc88334c3eb5a60f4c3fd6db04
     hooks:
       - id: nbstripout
         files: ".ipynb"
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: 5e016dca8c92d7e9de5479e187fc821919c2e25a
     hooks:
       - id: codespell
         additional_dependencies:
           - tomli
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.11.0"
+    rev: "v0.15.6"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix, --config=pyproject.toml]
       - id: ruff-format
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.14.0
+    rev: f0026613870451c117014719d8fb28ade8dc67a3
     hooks:
       - id: pretty-format-toml
         args: [--autofix]
   - repo: https://github.com/aristanetworks/j2lint.git
-    rev: v1.1.0
+    rev: d59c6edf3f1b23b0d8106db4a7dc87366eab3bd0
     hooks:
       - id: j2lint
         types: [file]
@@ -38,12 +38,12 @@ repos:
         exclude: .github/.*
         # args: [--extensions, "j2,yml,yaml", --ignore, jinja-statements-delimiter, jinja-statements-indentation]
   - repo: https://github.com/google/yamlfmt
-    rev: v0.14.0
+    rev: da6a3e2e5d6f318174d6f76d1d23fa6715fbc133
     hooks:
       - id: yamlfmt
         exclude: ".*.tests*|.*.pic.yml"
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.4
+    rev: bb87fde98ed4852f8a9474b95355672feb1cae3b
     hooks:
       - id: actionlint
   - repo: https://github.com/astral-sh/uv-pre-commit
@@ -55,7 +55,7 @@ repos:
     #       args: [--strict, --ignore-missing-imports, --config-file=pyproject.toml]
 
     # uv version.
-    rev: 0.6.5
+    rev: 0.10.10
     hooks:
       # Update the uv lockfile
       - id: uv-lock

@@ -58,12 +58,6 @@ make pre-commit
 ```bash
 tbump 0.0.1
 ```
-
-2. Push the tag:
-
-```bash
-git push --tags
-```
 This triggers the release workflow that builds wheels and uploads them.
 
-3. Create a pull request with the updated changelog since last release.
+2. Create a pull request with the updated changelog since last release.
