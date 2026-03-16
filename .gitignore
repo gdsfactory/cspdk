@@ -9,6 +9,8 @@ docs/cells_si220_cband.rst
 docs/cells_si220_oband.rst
 
 sim-data-*/
+tests/gds_run/
+
 
 # C extensions
 *.so
