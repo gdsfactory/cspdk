@@ -24,10 +24,11 @@ repos:
         args: [--fix, --exit-non-zero-on-fix, --config=pyproject.toml]
       - id: ruff-format
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.14.0
+    rev: v2.16.0
     hooks:
       - id: pretty-format-toml
         args: [--autofix]
+        exclude: ^uv\.lock$
   - repo: https://github.com/aristanetworks/j2lint.git
     rev: v1.1.0
     hooks:
