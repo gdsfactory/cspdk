@@ -1,7 +1,7 @@
 """Ring Resonators."""
 
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec
+from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 from cspdk.si220.oband.tech import TECH
 
@@ -13,6 +13,8 @@ def ring_single(
     length_x: float = 4.0,
     length_y: float = 0.6,
     cross_section: CrossSectionSpec = "strip",
+    bend: ComponentSpec = "bend_euler",
+    p: float = 0,
 ) -> gf.Component:
     """Returns a single ring.
 
@@ -24,11 +26,9 @@ def ring_single(
         radius: for the bend and coupler.
         length_x: ring coupler length.
         length_y: vertical straight length.
-        coupler_ring: ring coupler spec.
-        bend: 90 degrees bend spec.
-        straight: straight spec.
-        coupler_ring: ring coupler spec.
         cross_section: cross_section spec.
+        bend: bend type for the ring. Defaults to "bend_euler".
+        p: percentage of the bend that is euler. 1 means full euler, 0 means full circular.
 
     .. code::
 
@@ -50,65 +50,12 @@ def ring_single(
                          │gap
                  o1──────▼─────────o2
     """
-    if length_y == 0 or length_x == 0:
-        # Handle zero-length straights specially to avoid port overlap issues
-        c = gf.Component()
-
-        settings = {
-            "gap": gap,
-            "radius": radius,
-            "length_x": length_x,
-            "cross_section": cross_section,
-            "bend": "bend_euler",
-            "straight": "straight",
-        }
-
-        coupler = gf.get_component("coupler_ring", settings=settings)
-        cb = c << coupler
-
-        b = gf.get_component("bend_euler", cross_section=cross_section, radius=radius)
-        bl = c << b  # Left bend
-        br = c << b  # Right bend
-
-        if length_y == 0 and length_x == 0:
-            # Both zero: connect bends directly to coupler and to each other
-            bl.connect(port="o2", other=cb.ports["o2"])
-            br.connect(port="o2", other=bl.ports["o1"])
-            br.connect(port="o1", other=cb.ports["o3"])
-        elif length_y == 0:
-            # Only length_y=0: skip vertical straights, keep horizontal
-            sx = gf.get_component(
-                "straight", length=length_x, cross_section=cross_section
-            )
-            st = c << sx
-            bl.connect(port="o2", other=cb.ports["o2"])
-            st.connect(port="o2", other=bl.ports["o1"])
-            br.connect(port="o2", other=st.ports["o1"])
-            br.connect(port="o1", other=cb.ports["o3"])
-        else:
-            # Only length_x=0: skip horizontal straight, keep vertical
-            sy = gf.get_component(
-                "straight", length=length_y, cross_section=cross_section
-            )
-            sl = c << sy
-            sr = c << sy
-            sl.connect(port="o1", other=cb.ports["o2"])
-            bl.connect(port="o2", other=sl.ports["o2"])
-            br.connect(port="o2", other=bl.ports["o1"])
-            sr.connect(port="o1", other=br.ports["o1"])
-            sr.connect(port="o2", other=cb.ports["o3"])
-
-        c.add_port("o2", port=cb.ports["o4"])
-        c.add_port("o1", port=cb.ports["o1"])
-        c.info["radius"] = coupler.info["radius"]
-        return c
-
     return gf.c.ring_single(
         gap=gap,
         radius=radius,
         length_x=length_x,
         length_y=length_y,
-        bend="bend_euler",
+        bend=gf.get_component(bend, p=p, radius=radius, cross_section=cross_section),
         straight="straight",
         coupler_ring="coupler_ring",
         cross_section=cross_section,

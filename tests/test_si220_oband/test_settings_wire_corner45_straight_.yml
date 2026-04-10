@@ -1,5 +1,24 @@
 info:
   length: 17.071
 name: wire_corner45_straight_WNone_RNone_CSmetal_routing
+ports:
+  e1:
+    center:
+    - 0
+    - 0
+    layer: 22
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 10
+  e2:
+    center:
+    - 10
+    - 10
+    layer: 22
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 10
 settings:
   cross_section: metal_routing
