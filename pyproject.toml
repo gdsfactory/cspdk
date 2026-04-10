@@ -75,6 +75,8 @@ testpaths = ["cspdk/", "tests"]
 
 [tool.ruff]
 fix = true
+
+[tool.ruff.lint]
 ignore = [
   "E501",  # line too long, handled by black
   "B008",  # do not perform function calls in argument defaults
@@ -99,7 +101,7 @@ select = [
 "cspdk/si220/cband/models/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
 "cspdk/si220/oband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.setuptools.package-data]
