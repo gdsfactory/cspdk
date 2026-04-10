@@ -1,5 +1,33 @@
 info: {}
 name: mmi1x2_WNone_WT1p5_LT20_LM32p7_WM6_GM1p64_CSrib
+ports:
+  o1:
+    center:
+    - -20
+    - 0
+    layer: 5
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.5
+  o2:
+    center:
+    - 52.7
+    - 1.57
+    layer: 5
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.5
+  o3:
+    center:
+    - 52.7
+    - -1.57
+    layer: 5
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.5
 settings:
   cross_section: rib
   gap_mmi: 1.64

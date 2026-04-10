@@ -2,6 +2,43 @@ info:
   min_bend_radius: 11.807
   path_length: 34.876
 name: coupler_L14p5_G0p27
+ports:
+  o1:
+    center:
+    - -10
+    - -1.64
+    layer: 5
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -10
+    - 2.36
+    layer: 5
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 24.5
+    - 2.36
+    layer: 5
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - 24.5
+    - -1.64
+    layer: 5
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.45
 settings:
   gap: 0.27
   length: 14.5

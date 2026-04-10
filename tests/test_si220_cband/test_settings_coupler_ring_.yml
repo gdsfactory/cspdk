@@ -1,6 +1,43 @@
 info:
   radius: 5
 name: coupler_ring_LX4_G0p27_R5_Bbend_euler_Sstraight_CSstrip_LE10
+ports:
+  o1:
+    center:
+    - -14
+    - 0
+    layer: 5
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -9
+    - 5.72
+    layer: 5
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 5
+    - 5.72
+    layer: 5
+    name: o3
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - 10
+    - 0
+    layer: 5
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.45
 settings:
   bend: bend_euler
   cross_section: strip
