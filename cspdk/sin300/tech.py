@@ -194,6 +194,7 @@ def populate_default_cross_section_names():
 
 
 populate_default_cross_section_names()
+cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 ############################

@@ -20,9 +20,9 @@ latex:
 # Add a bibtex file so that we can create citations
 html:
   home_page_in_navbar: true
-  use_edit_page_button: true
-  use_repository_button: true
-  use_issues_button: true
+  use_edit_page_button: false
+  use_repository_button: false
+  use_issues_button: false
   baseurl: https://github.com/gdsfactory/cspdk
 # Information about where the book exists on the web
 repository:
