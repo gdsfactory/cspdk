@@ -1,5 +1,6 @@
 """Technology definitions."""
 
+import sys
 from collections.abc import Iterable
 from functools import partial
 from typing import cast
@@ -8,6 +9,7 @@ import gdsfactory as gf
 from gdsfactory.cross_section import (
     CrossSection,
     cross_section,
+    get_cross_sections,
     port_names_electrical,
     port_types_electrical,
 )
@@ -299,6 +301,9 @@ def route_bundle(
         bend=bend,
         taper=taper,
     )
+
+
+cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 routing_strategies = dict(
