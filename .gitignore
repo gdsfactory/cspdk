@@ -8,6 +8,8 @@ Pipfile
 docs/cells_si220_cband.rst
 docs/cells_si220_oband.rst
 
+sim-data-*/
+
 # C extensions
 *.so
 *.fsp
@@ -45,7 +47,6 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.ipynb
 MANIFEST
 
 # PyInstaller
@@ -165,3 +166,4 @@ cython_debug/
 *Thumbs.db
 test_diffs/
 gds_run/
+.pre-commit-config.yaml

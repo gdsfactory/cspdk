@@ -48,6 +48,10 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     """A wire corner.
 
     A wire corner is a bend for electrical routes.
+
+    Args:
+        cross_section: "metal_routing".
+        **kwargs: additional arguments.
     """
     return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
@@ -487,7 +491,12 @@ def pad() -> Component:
 
 @gf.cell
 def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
-    """A rectangle."""
+    """A rectangle.
+
+    Args:
+        layer: LAYER.FLOORPLAN.
+        **kwargs: additional arguments.
+    """
     return gf.c.rectangle(layer=layer, **kwargs)
 
 

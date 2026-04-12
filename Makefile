@@ -1,6 +1,10 @@
 install:
 	uv sync --extra docs --extra dev
 
+dev: install
+	curl -sf https://raw.githubusercontent.com/doplaydo/pdk-ci-workflow/main/templates/.pre-commit-config.yaml -o .pre-commit-config.yaml
+	uv run pre-commit install
+
 rm-samples:
 	rm -rf cspdk/si220/oband/samples cspdk/si220/cband/samples cspdk/sin300/samples cspdk/si500/samples
 

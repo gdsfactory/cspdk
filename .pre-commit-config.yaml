@@ -1,54 +1,42 @@
-exclude: ^uv\.lock$
+# Canonical pre-commit config for GDSFactory PDK repos.
+#
+# All hooks (PDK checks + third-party tools) are defined in pdk-ci-workflow.
+# Versions of third-party tools are controlled centrally via
+# additional_dependencies — no per-repo version pinning needed.
+#
+# CI: fetched automatically by the reusable test_code.yml workflow.
+# Local: download via `make dev` or copy this file to your repo root.
+#
+# PDK repos needing custom overrides (e.g. check-yaml exclude) can add
+# per-hook settings below without changing this file's single-repo structure.
+
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f1dff44d3a9ae852957f34def96390f28719c232
+  - repo: https://github.com/doplaydo/pdk-ci-workflow
+    rev: main
     hooks:
-      - id: check-yaml
-        exclude: ^(conda\.recipe/meta\.yaml|conda_build/templates/.*\.yaml|docs/click/meta\.yaml|conda/meta\.yaml|conda/construct.yaml|.*\.pic\.yml|conda/constructor/Miniforge3/construct.yaml)
-      - id: end-of-file-fixer
+      # PDK structure validation
+      - id: check-required-files
+      - id: check-pyproject-sections
+      - id: check-package-init
+      - id: check-version-sync
+      - id: check-cells-structure
+      - id: check-tech-structure
+      - id: check-pdk-object
+      - id: check-test-structure
+      - id: check-makefile-targets
+      - id: check-workflows
+      - id: check-multi-band
+      - id: check-no-raw-layers
+      - id: check-no-main-in-cells
+      - id: check-precommit-config
+      # Code quality (versions controlled by pdk-ci-workflow)
       - id: trailing-whitespace
-  - repo: https://github.com/kynan/nbstripout
-    rev: bda94f03d5195fdc88334c3eb5a60f4c3fd6db04
-    hooks:
-      - id: nbstripout
-        files: ".ipynb"
-  - repo: https://github.com/codespell-project/codespell
-    rev: 5e016dca8c92d7e9de5479e187fc821919c2e25a
-    hooks:
-      - id: codespell
-        additional_dependencies:
-          - tomli
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.6"
-    hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix, --config=pyproject.toml]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-toml
+      - id: ruff-lint
       - id: ruff-format
-  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: f0026613870451c117014719d8fb28ade8dc67a3
-    hooks:
+      - id: nbstripout
+      - id: codespell
       - id: pretty-format-toml
-        args: [--autofix]
-  - repo: https://github.com/aristanetworks/j2lint.git
-    rev: d59c6edf3f1b23b0d8106db4a7dc87366eab3bd0
-    hooks:
-      - id: j2lint
-        types: [file]
-        files: \.(j2|yml|yaml)$
-        exclude: .github/.*
-        # args: [--extensions, "j2,yml,yaml", --ignore, jinja-statements-delimiter, jinja-statements-indentation]
-  - repo: https://github.com/google/yamlfmt
-    rev: da6a3e2e5d6f318174d6f76d1d23fa6715fbc133
-    hooks:
-      - id: yamlfmt
-        exclude: ".*.tests*|.*.pic.yml"
-  - repo: https://github.com/rhysd/actionlint
-    rev: bb87fde98ed4852f8a9474b95355672feb1cae3b
-    hooks:
-      - id: actionlint
-# - repo: https://github.com/pre-commit/mirrors-mypy
-#   rev: v1.13.0
-#   hooks:
-#     - id: mypy
-#       stages: [pre-commit]
-#       args: [--strict, --ignore-missing-imports, --config-file=pyproject.toml]
