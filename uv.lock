@@ -661,8 +661,6 @@ name = "cspdk"
 version = "1.4.2"
 source = { editable = "." }
 dependencies = [
-    { name = "doroutes", version = "0.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "doroutes", version = "0.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "gdsfactory" },
     { name = "gplugins", extra = ["femwell", "sax", "tidy3d"] },
 ]
@@ -688,8 +686,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "doroutes", specifier = ">=0.3.0" },
-    { name = "gdsfactory", specifier = "~=9.39.0" },
+    { name = "gdsfactory", specifier = "~=9.40.0" },
     { name = "gdsfactoryplus", marker = "extra == 'dev'" },
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.0.1" },
     { name = "gsim", marker = "python_full_version >= '3.12' and extra == 'docs'" },
@@ -820,45 +817,8 @@ wheels = [
 
 [[package]]
 name = "doroutes"
-version = "0.3.0"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version < '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.12' and sys_platform == 'emscripten'",
-    "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
-]
-dependencies = [
-    { name = "kfactory", marker = "python_full_version < '3.12'" },
-    { name = "numpy", marker = "python_full_version < '3.12'" },
-    { name = "shapely", marker = "python_full_version < '3.12'" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/eb/46/aa7ea7b93701ca58dc5b64b603d8013cac50a8a5d359154f04ac2f7f32ac/doroutes-0.3.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b4a6a495dd81609bf56be6693f6387955e8879aaa3d9bb6735bb659180322ed6", size = 1652790, upload-time = "2025-11-25T19:06:45.629Z" },
-    { url = "https://files.pythonhosted.org/packages/2b/72/e1cafe8441bc63a9ec5570f86e9f5d5092330cf5c7ea58862a131ddd03da/doroutes-0.3.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ddc2e4ac41ea5b439ce78926e82acab34fb7efc9e3953e1822f6bd6664baaed9", size = 3709135, upload-time = "2025-11-25T19:06:47.05Z" },
-    { url = "https://files.pythonhosted.org/packages/86/de/c99b52a455c053a753dadf86726021574b5ed0afa9ec5c430dc7724b4e80/doroutes-0.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5a9f4c3020a739e1be84fd7350cfae56e8ac9a154f093a7f150f8d9a199e596f", size = 4012996, upload-time = "2025-11-25T19:06:48.579Z" },
-    { url = "https://files.pythonhosted.org/packages/f7/07/2a06baec6783011ffa7b5feef9311774c52c5abe5a480c6eed9c98bb612f/doroutes-0.3.0-cp311-cp311-win_amd64.whl", hash = "sha256:d130cec565eff15a9ba911707856143395dc50b9d6c7630df82a81007e6e3066", size = 1491537, upload-time = "2025-11-25T19:06:49.998Z" },
-    { url = "https://files.pythonhosted.org/packages/92/4f/9bfeaf6fd6c08194a8020c070d0faca60cbec7692ebf1a59c7a53633ca0b/doroutes-0.3.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:8bef0c1c15a1b92d06d664360f666ba42a4d1b0ff6c507c53f7ed6948e8e4fab", size = 1652149, upload-time = "2025-11-25T19:06:51Z" },
-    { url = "https://files.pythonhosted.org/packages/e0/ee/9b256249c38e3356340d23e500db960e61cab8f4a217a8659ab2e14fa868/doroutes-0.3.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b242d7670991d2574a7d58b2fb3e28ecb30ffeedab1c53493e031df20695ac76", size = 3707884, upload-time = "2025-11-25T19:06:52.01Z" },
-    { url = "https://files.pythonhosted.org/packages/73/a3/39589e0846a318ac9b018884703d88045d2589422e2c82cb8cbd5a585211/doroutes-0.3.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7fbfd40db6ca5c7c66e90a1f6f409a98f59641ff12688da09650ae77e70509fe", size = 4011903, upload-time = "2025-11-25T19:06:53.126Z" },
-    { url = "https://files.pythonhosted.org/packages/1a/52/114b31d2502b1b4011c59474e70aec085278d97eeec2faa045b5449d8722/doroutes-0.3.0-cp312-cp312-win_amd64.whl", hash = "sha256:8389c8c903ae912c8cb24f95598ad027300bb10cb0484e25d542241291f564cb", size = 1489980, upload-time = "2025-11-25T19:06:54.212Z" },
-    { url = "https://files.pythonhosted.org/packages/c8/c2/8b1abaa167365e3d2b4dc70944d2abab39dd4cad549efd00045a7d24976e/doroutes-0.3.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:c9b7a1fdd2d8223be39c412e5a6edf735c27be33e5799083bea2365be0b59969", size = 1651942, upload-time = "2025-11-25T19:06:55.264Z" },
-    { url = "https://files.pythonhosted.org/packages/8c/a0/bf9c925025aa714dfdd7210b4cb282435d3ae68e7e52ddd10426c8a8ed3a/doroutes-0.3.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2323ebade7e25eb93ce195db857e055e25a32e439b0ddae9e8f513ffc907557e", size = 3707979, upload-time = "2025-11-25T19:06:56.81Z" },
-    { url = "https://files.pythonhosted.org/packages/57/22/6b3e58a99b1129918c98d9693e88238e15c1f0bc834e98ea3668d2950679/doroutes-0.3.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a496d1673c0cd130781ca49a187877fb28b7d296cd7f15240ac1546a0923c4c9", size = 4011896, upload-time = "2025-11-25T19:06:57.933Z" },
-    { url = "https://files.pythonhosted.org/packages/d8/eb/811aa03651d82461c0b39eb260e288931cf22a9ef23598accb421f8bb400/doroutes-0.3.0-cp313-cp313-win_amd64.whl", hash = "sha256:a2aa234f129df6150282df827eb8d012146206ed2e6dd6b222ce4969d7d01b80", size = 1490078, upload-time = "2025-11-25T19:06:59.37Z" },
-]
-
-[[package]]
-name = "doroutes"
 version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.13' and sys_platform == 'win32'",
-    "python_full_version == '3.12.*' and sys_platform == 'win32'",
-    "python_full_version >= '3.13' and sys_platform == 'emscripten'",
-    "python_full_version == '3.12.*' and sys_platform == 'emscripten'",
-    "python_full_version >= '3.13' and sys_platform != 'emscripten' and sys_platform != 'win32'",
-    "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
-]
 dependencies = [
     { name = "kfactory", marker = "python_full_version >= '3.12'" },
     { name = "numpy", marker = "python_full_version >= '3.12'" },
@@ -1161,7 +1121,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactory"
-version = "9.39.0"
+version = "9.40.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -1197,9 +1157,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0d/03/12661dc4ca08b573bc57c34f8c801850d0d43be55742c04a2c880b35c2cf/gdsfactory-9.39.0.tar.gz", hash = "sha256:354867637c9ff8e61d03e0c2b232a2c6757657e34fcafd815ce0f373dac279fd", size = 513029, upload-time = "2026-03-06T15:14:30.623Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/76/e0/747fe854a61a8e70c66ea6d42bd62ed036330e3a2b4b0105f2339c22cf09/gdsfactory-9.40.0.tar.gz", hash = "sha256:37b556321b7bc8294eb284ef6e350c11560522e8e5a21a98d75cb399e789efb0", size = 540081, upload-time = "2026-04-09T17:40:36.441Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/ae/b9dd50164a57169ad8965d9b398feb0c02c0a49043996051c96882860847/gdsfactory-9.39.0-py3-none-any.whl", hash = "sha256:60878264e720566cd996982a4e667fe05600242ec593f5c0b1a66815e756f191", size = 731388, upload-time = "2026-03-06T15:14:28.431Z" },
+    { url = "https://files.pythonhosted.org/packages/37/dc/b24fc1a930f3bb930a51db3b066fb99cfe0fdec3c55c2b94b28a6989eefc/gdsfactory-9.40.0-py3-none-any.whl", hash = "sha256:79c20c33c1fcadaa4cc6584d9bf4670cc12f7bb3c33f37afc8ea65b49bf58315", size = 777776, upload-time = "2026-04-09T17:40:33.732Z" },
 ]
 
 [[package]]
@@ -1235,7 +1195,7 @@ dependencies = [
     { name = "bokeh", marker = "python_full_version >= '3.12'" },
     { name = "cookiecutter", marker = "python_full_version >= '3.12'" },
     { name = "deepdiff", marker = "python_full_version >= '3.12'" },
-    { name = "doroutes", version = "0.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "doroutes", marker = "python_full_version >= '3.12'" },
     { name = "doweb", marker = "python_full_version >= '3.12'" },
     { name = "elvis-lvs", marker = "python_full_version >= '3.12'" },
     { name = "frozendict", marker = "python_full_version >= '3.12'" },

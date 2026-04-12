@@ -1,4 +1,5 @@
 install:
+	uv venv --python 3.12
 	uv sync --extra docs --extra dev
 
 dev: install
