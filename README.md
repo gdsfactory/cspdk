@@ -44,3 +44,20 @@ uv sync --extra docs --extra dev
 ## Documentation
 
 - [gdsfactory docs](https://gdsfactory.github.io/gdsfactory/)
+
+## Pre-commit
+
+```bash
+make pre-commit
+```
+
+## Release
+
+1. Bump the version:
+
+```bash
+tbump 0.0.1
+```
+This triggers the release workflow that builds wheels and uploads them.
+
+2. Create a pull request with the updated changelog since last release.
