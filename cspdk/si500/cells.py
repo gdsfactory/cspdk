@@ -60,17 +60,19 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_rc",
+    allow_min_radius_violation: bool = True,
 ) -> gf.Component:
     """An S-bend.
 
     Args:
         size: the width and height of the s-bend.
         cross_section: a cross section or its name or a function generating a cross section.
+        allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
-        allow_min_radius_violation=True,  # TODO: fix without this flag
+        allow_min_radius_violation=allow_min_radius_violation,
     )
 
 

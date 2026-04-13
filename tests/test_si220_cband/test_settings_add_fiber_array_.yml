@@ -11,7 +11,7 @@ ports:
     center:
     - -185.5
     - -49.175
-    layer: 5
+    layer: WG
     name: loopback1
     orientation: 270
     port_type: vertical_te
@@ -20,7 +20,7 @@ ports:
     center:
     - 195.5
     - -49.175
-    layer: 5
+    layer: WG
     name: loopback2
     orientation: 270
     port_type: vertical_te
@@ -29,7 +29,7 @@ ports:
     center:
     - -58.5
     - -49.175
-    layer: 5
+    layer: WG
     name: o1
     orientation: 270
     port_type: vertical_te
@@ -38,7 +38,7 @@ ports:
     center:
     - 68.5
     - -49.175
-    layer: 5
+    layer: WG
     name: o2
     orientation: 270
     port_type: vertical_te

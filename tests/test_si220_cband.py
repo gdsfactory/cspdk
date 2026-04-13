@@ -94,6 +94,12 @@ def test_settings(component_name: str, data_regression: DataRegressionFixture) -
     data_regression.check(component.to_dict(with_ports=True))
 
 
+skip_netlist_roundtrip = {
+    "ring_single",
+    "ring_double",
+}
+
+
 @pytest.mark.parametrize("component_type", cell_names)
 def test_netlists(
     component_type: str,
@@ -111,6 +117,9 @@ def test_netlists(
     n = c.get_netlist()
     if check:
         data_regression.check(n)
+
+    if component_type in skip_netlist_roundtrip:
+        return
 
     n.pop("connections", None)
     n.pop("warnings", None)

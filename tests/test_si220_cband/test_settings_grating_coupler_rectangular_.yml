@@ -8,7 +8,7 @@ ports:
     center:
     - 0
     - 0
-    layer: 5
+    layer: WG
     name: o1
     orientation: 180
     port_type: optical
@@ -17,7 +17,7 @@ ports:
     center:
     - 368.664
     - 0
-    layer: 9
+    layer: GRA
     name: o2
     orientation: 0
     port_type: vertical_te

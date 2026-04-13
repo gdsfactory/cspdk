@@ -5,4 +5,50 @@ info:
   xsize: 100
   ysize: 100
 name: pad
+ports:
+  e1:
+    center:
+    - -50
+    - 0
+    layer: PAD
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e2:
+    center:
+    - 0
+    - 50
+    layer: PAD
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e3:
+    center:
+    - 50
+    - 0
+    layer: PAD
+    name: e3
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e4:
+    center:
+    - 0
+    - -50
+    layer: PAD
+    name: e4
+    orientation: 270
+    port_type: electrical
+    width: 100
+  pad:
+    center:
+    - 0
+    - 0
+    layer: PAD
+    name: pad
+    orientation: 0
+    port_type: pad
+    width: 100
 settings: {}

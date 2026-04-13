@@ -2,7 +2,26 @@ info:
   fiber_angle: 20
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectang_27811604
+name: grating_coupler_rectangular_P0p66_NP30_LT200_W1p55_CSxs_nc
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - 209.652
+    - 0
+    layer: NITRIDE_ETCH
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 11
 settings:
   cross_section: xs_nc
   length_taper: 200

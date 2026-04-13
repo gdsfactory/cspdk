@@ -1,5 +1,60 @@
 info: {}
-name: grating_coupler_array_P_7b5bab83
+name: grating_coupler_array_P127_N6_CSxs_nc_CTrue_GCNone_PNo1_7b5bab83
+ports:
+  o0:
+    center:
+    - -317.5
+    - 0
+    layer: NITRIDE
+    name: o0
+    orientation: 90
+    port_type: optical
+    width: 1.2
+  o1:
+    center:
+    - -190.5
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 90
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - -63.5
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 1.2
+  o3:
+    center:
+    - 63.5
+    - 0
+    layer: NITRIDE
+    name: o3
+    orientation: 90
+    port_type: optical
+    width: 1.2
+  o4:
+    center:
+    - 190.5
+    - 0
+    layer: NITRIDE
+    name: o4
+    orientation: 90
+    port_type: optical
+    width: 1.2
+  o5:
+    center:
+    - 317.5
+    - 0
+    layer: NITRIDE
+    name: o5
+    orientation: 90
+    port_type: optical
+    width: 1.2
 settings:
   centered: true
   cross_section: xs_nc
