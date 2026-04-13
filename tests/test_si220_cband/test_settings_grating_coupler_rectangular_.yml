@@ -3,6 +3,25 @@ info:
   polarization: te
   wavelength: 1.55
 name: grating_coupler_rectangular_P0p63_NP60_LT350_W1p55_CSstrip
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 368.664
+    - 0
+    layer: GRA
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 11
 settings:
   cross_section: strip
   length_taper: 350

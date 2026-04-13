@@ -2,7 +2,26 @@ info:
   length: 10
   width1: 1.2
   width2: 1.2
-name: taper_L10_W1p2_WNone_PN_5bb181aa
+name: taper_L10_W1p2_WNone_PNone_CSxs_nc
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - 10
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 1.2
 settings:
   cross_section: xs_nc
   length: 10

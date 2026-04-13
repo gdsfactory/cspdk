@@ -2,5 +2,24 @@ info:
   dy: 10
   length: 10
 name: wire_corner_CSmetal_routing
+ports:
+  e1:
+    center:
+    - -5
+    - 0
+    layer: PAD
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 10
+  e2:
+    center:
+    - 0
+    - 5
+    layer: PAD
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 10
 settings:
   cross_section: metal_routing

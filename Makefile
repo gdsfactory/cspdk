@@ -1,4 +1,5 @@
 install:
+	uv venv --python 3.12
 	uv sync --extra docs --extra dev
 
 dev: install
@@ -14,11 +15,14 @@ test:
 	# uv run pytest -s tests/test_si500.py
 	# uv run pytest -s tests/test_sin300.py
 
+test-ports:
+	uv run pytest -s tests/test_si220_cband.py::test_optical_port_positions tests/test_si220_oband.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
+
 test-force:
-	uv run pytest -s tests/test_si220_cband.py --force-regen
-	uv run pytest -s tests/test_si220_oband.py --force-regen
-	# uv run pytest -s tests/test_si500.py --force-regen
-	# uv run pytest -s tests/test_sin300.py --force-regen
+	uv run pytest -s tests/test_si220_cband.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si220_oband.py --update-gds-refs --force-regen
+	# uv run pytest -s tests/test_si500.py --update-gds-refs --force-regen
+	# uv run pytest -s tests/test_sin300.py --update-gds-refs --force-regen
 
 test-fail-fast:
 	uv run pytest -s tests/test_si220_cband.py -x
@@ -26,7 +30,7 @@ test-fail-fast:
 	uv run pytest -s tests/test_sin300.py -x
 
 update-pre:
-	pre-commit autoupdate --bleeding-edge
+	pre-commit autoupdate
 
 git-rm-merged:
 	git branch -D `git branch --merged | grep -v \* | xargs`

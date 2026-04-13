@@ -27,7 +27,6 @@ docs/cells_si500.rst
 docs/cells_sin300.rst
 
 tests/gds_ref/*.oas
-uv.lock
 
 # Distribution / packaging
 .Python
@@ -165,4 +164,6 @@ cython_debug/
 *.DS_Store
 .DS_Store
 *Thumbs.db
+test_diffs/
+gds_run/
 .pre-commit-config.yaml

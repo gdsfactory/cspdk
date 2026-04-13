@@ -1,5 +1,33 @@
 info: {}
-name: mzi_DL10_Bbend_euler_no_d1777d6b
+name: mzi_DL10_Bbend_euler_no_Sstraight_no_Smmi1x2_no_Cmmi2x2_d1777d6b
+ports:
+  o1:
+    center:
+    - -50
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.95
+  o2:
+    center:
+    - 418.1
+    - 2.95
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.95
+  o3:
+    center:
+    - 418.1
+    - -2.95
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.95
 settings:
   bend: bend_euler_no
   combiner: mmi2x2_no

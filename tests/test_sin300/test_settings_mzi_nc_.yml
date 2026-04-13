@@ -1,5 +1,33 @@
 info: {}
-name: mzi_DL10_Bbend_euler_nc_ebc434a4
+name: mzi_DL10_Bbend_euler_nc_Sstraight_nc_Smmi1x2_nc_Cmmi2x2_ebc434a4
+ports:
+  o1:
+    center:
+    - -50
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - 546.8
+    - 2.95
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 1.2
+  o3:
+    center:
+    - 546.8
+    - -2.95
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 1.2
 settings:
   bend: bend_euler_nc
   combiner: mmi2x2_nc

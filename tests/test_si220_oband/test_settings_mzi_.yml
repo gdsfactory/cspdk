@@ -1,5 +1,42 @@
 info: {}
 name: mzi_DL10_Bbend_euler_Sstraight_Scoupler_CNone_PESo3_PES_a38bc3c2
+ports:
+  o1:
+    center:
+    - -10
+    - -1.665
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o2:
+    center:
+    - -10
+    - 2.335
+    layer: WG
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o3:
+    center:
+    - 90.1
+    - 2.335
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.4
+  o4:
+    center:
+    - 90.1
+    - -1.665
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.4
 settings:
   bend: bend_euler
   cross_section: strip

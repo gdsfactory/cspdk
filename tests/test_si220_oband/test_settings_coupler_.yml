@@ -2,6 +2,43 @@ info:
   min_bend_radius: 11.652
   path_length: 40.388
 name: coupler_L20_G0p27
+ports:
+  o1:
+    center:
+    - -10
+    - -1.665
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o2:
+    center:
+    - -10
+    - 2.335
+    layer: WG
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o3:
+    center:
+    - 30
+    - 2.335
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.4
+  o4:
+    center:
+    - 30
+    - -1.665
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.4
 settings:
   gap: 0.27
   length: 20

@@ -1,5 +1,276 @@
 info: {}
-name: array_Cpad_C6_R1_APTrue_6a580928
+name: array_Cpad_C6_R1_APTrue_SNone_CFalse_CP150_RP150
+ports:
+  e1_1_1:
+    center:
+    - -50
+    - 0
+    layer: PAD
+    name: e1_1_1
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e1_1_2:
+    center:
+    - 100
+    - 0
+    layer: PAD
+    name: e1_1_2
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e1_1_3:
+    center:
+    - 250
+    - 0
+    layer: PAD
+    name: e1_1_3
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e1_1_4:
+    center:
+    - 400
+    - 0
+    layer: PAD
+    name: e1_1_4
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e1_1_5:
+    center:
+    - 550
+    - 0
+    layer: PAD
+    name: e1_1_5
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e1_1_6:
+    center:
+    - 700
+    - 0
+    layer: PAD
+    name: e1_1_6
+    orientation: 180
+    port_type: electrical
+    width: 100
+  e2_1_1:
+    center:
+    - 0
+    - 50
+    layer: PAD
+    name: e2_1_1
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2_1_2:
+    center:
+    - 150
+    - 50
+    layer: PAD
+    name: e2_1_2
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2_1_3:
+    center:
+    - 300
+    - 50
+    layer: PAD
+    name: e2_1_3
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2_1_4:
+    center:
+    - 450
+    - 50
+    layer: PAD
+    name: e2_1_4
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2_1_5:
+    center:
+    - 600
+    - 50
+    layer: PAD
+    name: e2_1_5
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2_1_6:
+    center:
+    - 750
+    - 50
+    layer: PAD
+    name: e2_1_6
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e3_1_1:
+    center:
+    - 50
+    - 0
+    layer: PAD
+    name: e3_1_1
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e3_1_2:
+    center:
+    - 200
+    - 0
+    layer: PAD
+    name: e3_1_2
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e3_1_3:
+    center:
+    - 350
+    - 0
+    layer: PAD
+    name: e3_1_3
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e3_1_4:
+    center:
+    - 500
+    - 0
+    layer: PAD
+    name: e3_1_4
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e3_1_5:
+    center:
+    - 650
+    - 0
+    layer: PAD
+    name: e3_1_5
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e3_1_6:
+    center:
+    - 800
+    - 0
+    layer: PAD
+    name: e3_1_6
+    orientation: 0
+    port_type: electrical
+    width: 100
+  e4_1_1:
+    center:
+    - 0
+    - -50
+    layer: PAD
+    name: e4_1_1
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4_1_2:
+    center:
+    - 150
+    - -50
+    layer: PAD
+    name: e4_1_2
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4_1_3:
+    center:
+    - 300
+    - -50
+    layer: PAD
+    name: e4_1_3
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4_1_4:
+    center:
+    - 450
+    - -50
+    layer: PAD
+    name: e4_1_4
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4_1_5:
+    center:
+    - 600
+    - -50
+    layer: PAD
+    name: e4_1_5
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4_1_6:
+    center:
+    - 750
+    - -50
+    layer: PAD
+    name: e4_1_6
+    orientation: 270
+    port_type: electrical
+    width: 100
+  pad_1_1:
+    center:
+    - 0
+    - 0
+    layer: PAD
+    name: pad_1_1
+    orientation: 0
+    port_type: pad
+    width: 100
+  pad_1_2:
+    center:
+    - 150
+    - 0
+    layer: PAD
+    name: pad_1_2
+    orientation: 0
+    port_type: pad
+    width: 100
+  pad_1_3:
+    center:
+    - 300
+    - 0
+    layer: PAD
+    name: pad_1_3
+    orientation: 0
+    port_type: pad
+    width: 100
+  pad_1_4:
+    center:
+    - 450
+    - 0
+    layer: PAD
+    name: pad_1_4
+    orientation: 0
+    port_type: pad
+    width: 100
+  pad_1_5:
+    center:
+    - 600
+    - 0
+    layer: PAD
+    name: pad_1_5
+    orientation: 0
+    port_type: pad
+    width: 100
+  pad_1_6:
+    center:
+    - 750
+    - 0
+    layer: PAD
+    name: pad_1_6
+    orientation: 0
+    port_type: pad
+    width: 100
 settings:
   add_ports: true
   centered: false

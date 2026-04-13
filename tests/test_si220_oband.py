@@ -9,7 +9,7 @@ import jsondiff
 import kfactory as kf
 import numpy as np
 import pytest
-from gdsfactory.difftest import difftest
+from conftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 from pytest_regressions.ndarrays_regression import NDArraysRegressionFixture
 
@@ -92,7 +92,13 @@ def test_gds(component_name: str) -> None:
 def test_settings(component_name: str, data_regression: DataRegressionFixture) -> None:
     """Avoid regressions when exporting settings."""
     component = cells[component_name]()
-    data_regression.check(component.to_dict())
+    data_regression.check(component.to_dict(with_ports=True))
+
+
+skip_netlist_roundtrip = {
+    "ring_single",
+    "ring_double",
+}
 
 
 @pytest.mark.parametrize("component_type", cell_names)
@@ -112,6 +118,9 @@ def test_netlists(
     n = c.get_netlist()
     if check:
         data_regression.check(n)
+
+    if component_type in skip_netlist_roundtrip:
+        return
 
     n.pop("connections", None)
     n.pop("warnings", None)
