@@ -18,7 +18,7 @@ from cspdk.si500.tech import LAYER, Tech
 ################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_rc",
@@ -43,7 +43,7 @@ straight_ro = partial(straight, cross_section="xs_ro")
 ################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     """A wire corner.
 
@@ -56,7 +56,7 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_rc",
@@ -76,7 +76,7 @@ def bend_s(
     )
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
@@ -114,7 +114,7 @@ bend_euler_ro = partial(bend_euler, cross_section="xs_ro")
 ################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def taper(
     length: float = 10.0,
     width1: float = Tech.width_rc,
@@ -162,7 +162,7 @@ taper_ro = partial(
 ################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def mmi1x2(
     width: float | None = None,
     width_taper=1.5,
@@ -202,7 +202,7 @@ mmi1x2_rc = partial(mmi1x2, cross_section="xs_rc")
 mmi1x2_ro = partial(mmi1x2, cross_section="xs_ro")
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,
@@ -246,7 +246,7 @@ mmi2x2_ro = partial(mmi2x2, cross_section="xs_ro")
 ##############################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def coupler_straight(
     length: float = 20.0,
     gap: float = 0.236,
@@ -266,7 +266,7 @@ def coupler_straight(
     )
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def coupler(
     gap: float = 0.236,
     length: float = 20.0,
@@ -303,7 +303,7 @@ coupler_ro = partial(coupler, cross_section="xs_ro")
 ##############################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def grating_coupler_rectangular(
     period=0.57,
     n_periods: int = 60,
@@ -354,7 +354,7 @@ grating_coupler_rectangular_ro = partial(
 ##############################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.315,
@@ -408,7 +408,7 @@ grating_coupler_elliptical_ro = partial(
 # serialized weirdly in the netlist
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def mzi(
     delta_length: float = 10.0,
     bend="bend_euler_rc",
@@ -478,13 +478,13 @@ mzi_ro = partial(
 ################
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def pad() -> gf.Component:
     """An electrical pad."""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle.
 
@@ -495,7 +495,7 @@ def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     return gf.c.rectangle(layer=layer, **kwargs)
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def compass(
     size: Size = (4.0, 2.0),
     layer: LayerSpec = "PAD",
@@ -524,7 +524,7 @@ def compass(
     )
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
@@ -580,7 +580,7 @@ def grating_coupler_array(
     )
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def die(cross_section="xs_rc") -> gf.Component:
     """A die template.
 
@@ -619,7 +619,7 @@ die_rc = partial(die, cross_section="xs_rc")
 die_ro = partial(die, cross_section="xs_ro")
 
 
-@gf.cell
+@gf.cell(tags={"type": "cells"})
 def array(
     component="pad",
     columns: int = 6,

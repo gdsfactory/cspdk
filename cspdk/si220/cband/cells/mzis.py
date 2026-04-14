@@ -9,7 +9,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 
-@gf.cell
+@gf.cell(tags={"type": "mzis"})
 def mzi(
     delta_length: float = 10,
     bend: ComponentSpec = "bend_euler",

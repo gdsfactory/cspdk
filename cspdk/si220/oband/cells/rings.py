@@ -6,7 +6,7 @@ from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 from cspdk.si220.oband.tech import TECH
 
 
-@gf.cell
+@gf.cell(tags={"type": "rings"})
 def ring_single(
     gap: float = TECH.gap_strip,
     radius: float = 10.0,
@@ -62,7 +62,7 @@ def ring_single(
     )
 
 
-@gf.cell
+@gf.cell(tags={"type": "rings"})
 def ring_double(
     gap: float = TECH.gap_strip,
     gap_top: float | None = None,
