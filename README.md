@@ -1,6 +1,18 @@
 
 # CORNERSTONE PDK 1.4.2
 
+<!-- BADGES:START -->
+[![Docs](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml)
+[![Tests](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml)
+[![DRC](https://github.com/gdsfactory/cspdk/actions/workflows/drc.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/drc.yml)
+[![Model Regression](https://github.com/gdsfactory/cspdk/actions/workflows/model_regression.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/model_regression.yml)
+[![Test Coverage](https://github.com/gdsfactory/cspdk/raw/badges/coverage.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/test_coverage.yml)
+[![Model Coverage](https://github.com/gdsfactory/cspdk/raw/badges/model_coverage.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/model_coverage.yml)
+[![Issues](https://github.com/gdsfactory/cspdk/raw/badges/issues.svg)](https://github.com/gdsfactory/cspdk/issues)
+[![PRs](https://github.com/gdsfactory/cspdk/raw/badges/prs.svg)](https://github.com/gdsfactory/cspdk/pulls)
+<!-- BADGES:END -->
+
+
 ![](https://i.imgur.com/V5Ukc6j.png)
 
 [CORNERSTONE](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
