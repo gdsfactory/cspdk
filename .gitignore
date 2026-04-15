@@ -167,3 +167,4 @@ cython_debug/
 test_diffs/
 gds_run/
 .pre-commit-config.yaml
+tests/gds_run/
