@@ -51,6 +51,7 @@ timeout = 300
 
 [tool.gdsfactoryplus.pdk]
 name = "cspdk.si220.cband"
+options = ["cspdk.si220.cband", "cspdk.si220.oband", "cspdk.si500", "cspdk.sin300"]
 
 [tool.gdsfactoryplus.sim.wls]
 max = 1.6
