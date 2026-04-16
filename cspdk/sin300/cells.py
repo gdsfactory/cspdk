@@ -19,7 +19,7 @@ from cspdk.sin300.tech import LAYER, Tech
 ################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_nc",
@@ -43,7 +43,7 @@ straight_no = partial(straight, cross_section="xs_no")
 ################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     """A wire corner.
 
@@ -56,7 +56,7 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_nc",
@@ -76,7 +76,7 @@ def bend_s(
     )
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
@@ -114,7 +114,7 @@ bend_euler_no = partial(bend_euler, cross_section="xs_no")
 ################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def taper(
     length: float = 10.0,
     width1: float = Tech.width_nc,
@@ -163,7 +163,7 @@ taper_no = partial(
 ################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def mmi1x2(
     width: float | None = None,
     width_mmi: float = 12.0,
@@ -203,7 +203,7 @@ mmi1x2_nc = partial(mmi1x2, length_mmi=64.7, cross_section="xs_nc")
 mmi1x2_no = partial(mmi1x2, length_mmi=42.0, cross_section="xs_no")
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 5.5,
@@ -248,7 +248,7 @@ mmi2x2_no = partial(mmi2x2, length_mmi=126.0, cross_section="xs_no")
 ##############################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def coupler_straight(
     length: float = 20.0,
     gap: float = 0.236,
@@ -268,7 +268,7 @@ def coupler_straight(
     )
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def coupler(
     gap: float = 0.236,
     length: float = 20.0,
@@ -305,7 +305,7 @@ coupler_no = partial(coupler, cross_section="xs_no")
 ##############################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def grating_coupler_rectangular(
     period: float = 0.66,
     n_periods: int = 30,
@@ -360,7 +360,7 @@ grating_coupler_rectangular_no = partial(
 ##############################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.343,
@@ -415,7 +415,7 @@ grating_coupler_elliptical_no = partial(
 # serialized weirdly in the netlist
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def mzi(
     delta_length: float = 10.0,
     bend="bend_euler_nc",
@@ -485,13 +485,13 @@ mzi_no = partial(
 ################
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def pad() -> Component:
     """An electrical pad."""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle.
 
@@ -502,7 +502,7 @@ def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     return gf.c.rectangle(layer=layer, **kwargs)
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def compass(
     size: Size = (4.0, 2.0),
     layer: LayerSpec = "PAD",
@@ -531,7 +531,7 @@ def compass(
     )
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
@@ -587,7 +587,7 @@ def grating_coupler_array(
     )
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def die(cross_section="xs_nc") -> Component:
     """A die template.
 
@@ -626,7 +626,7 @@ die_nc = partial(die, cross_section="xs_nc")
 die_no = partial(die, cross_section="xs_no")
 
 
-@gf.cell(tags={"type": "cells"})
+@gf.cell(tags=["cells"])
 def array(
     component="pad",
     columns: int = 6,

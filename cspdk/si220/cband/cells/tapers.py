@@ -8,7 +8,7 @@ from gdsfactory.typings import CrossSectionSpec
 from cspdk.si220.cband.tech import LAYER, TECH
 
 
-@gf.cell(tags={"type": "tapers"})
+@gf.cell(tags=["tapers"])
 def taper(
     length: float = 10.0,
     width1: float = TECH.width,
@@ -37,7 +37,7 @@ def taper(
     )
 
 
-@gf.cell(tags={"type": "tapers"})
+@gf.cell(tags=["tapers"])
 def taper_metal(
     length: float = 10.0,
     width1: float = TECH.width_metal,
@@ -66,7 +66,7 @@ def taper_metal(
     )
 
 
-@gf.cell(tags={"type": "tapers"})
+@gf.cell(tags=["tapers"])
 def taper_strip_to_ridge(
     length: float = 10.0,
     width1: float = 0.5,
