@@ -19,6 +19,12 @@ _cross_sections = get_cross_sections(tech)
 CONF.pdk = "cspdk.si220.oband"
 
 
+layer_transitions = {
+    LAYER.WG: cells.taper,
+    LAYER.PAD: cells.taper_metal,
+}
+
+
 @lru_cache
 def get_pdk() -> Pdk:
     """Return Cornerstone PDK."""
@@ -31,6 +37,7 @@ def get_pdk() -> Pdk:
         layer_views=LAYER_VIEWS,
         models=_models,
         routing_strategies=routing_strategies,
+        layer_transitions=layer_transitions,
     )
 
 
