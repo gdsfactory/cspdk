@@ -12,7 +12,7 @@ from gdsfactory.typings import (
 from cspdk.si220.oband.tech import LAYER
 
 
-@gf.cell
+@gf.cell(tags=["die"])
 def compass(
     size: Size = (4, 2),
     layer: LayerSpec = "PAD",
@@ -41,7 +41,7 @@ def compass(
     )
 
 
-@gf.cell
+@gf.cell(tags=["die"])
 def rectangle(
     size: Size = (4, 2),
     layer: LayerSpec = "PAD",
@@ -67,7 +67,7 @@ def rectangle(
     )
 
 
-@gf.cell
+@gf.cell(tags=["die"])
 def pad(
     size: tuple[float, float] = (90.0, 90.0),
     layer: LayerSpec = "PAD",
@@ -93,7 +93,7 @@ def pad(
     )
 
 
-@gf.cell
+@gf.cell(tags=["die"])
 def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
     """A die with grating couplers and pads.
 
@@ -118,7 +118,7 @@ def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
     return c
 
 
-@gf.cell
+@gf.cell(tags=["die"])
 def die_with_pads(
     size: tuple[float, float] = (11470.0, 4900.0),
     ngratings: int = 14,

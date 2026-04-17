@@ -12,7 +12,7 @@ from gdsfactory.typings import (
 ################
 
 
-@gf.cell
+@gf.cell(tags=["mmis"])
 def mmi1x2(
     width: float | None = None,
     width_taper: float = 1.5,
@@ -49,7 +49,7 @@ def mmi1x2(
 mmi1x2_rib = partial(mmi1x2, length_mmi=40.8, gap_mmi=1.55, cross_section="rib")
 
 
-@gf.cell
+@gf.cell(tags=["mmis"])
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,

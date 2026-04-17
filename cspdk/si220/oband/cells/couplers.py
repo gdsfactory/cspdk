@@ -6,7 +6,7 @@ from gdsfactory.typings import ComponentSpec
 from cspdk.si220.oband.tech import TECH
 
 
-@gf.cell
+@gf.cell(tags=["couplers"])
 def coupler(length: float = 20, gap: float = TECH.gap_strip) -> gf.Component:
     """Returns Symmetric coupler.
 
@@ -24,7 +24,7 @@ def coupler(length: float = 20, gap: float = TECH.gap_strip) -> gf.Component:
     )
 
 
-@gf.cell
+@gf.cell(tags=["couplers"])
 def coupler_rib(length: float = 20, gap: float = TECH.gap_rib) -> gf.Component:
     """Returns Symmetric coupler.
 
@@ -42,7 +42,7 @@ def coupler_rib(length: float = 20, gap: float = TECH.gap_rib) -> gf.Component:
     )
 
 
-@gf.cell
+@gf.cell(tags=["couplers"])
 def coupler_ring(
     length_x: float = 4,
     gap: float = TECH.gap_strip,

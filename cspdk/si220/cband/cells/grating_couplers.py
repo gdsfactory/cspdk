@@ -11,7 +11,7 @@ from cspdk.si220.cband.tech import LAYER
 ##############################
 
 
-@gf.cell
+@gf.cell(tags=["grating_couplers"])
 def grating_coupler_rectangular(
     period=0.315 * 2,
     n_periods: int = 60,
@@ -57,7 +57,7 @@ grating_coupler_rectangular_rib = partial(
 ##############################
 
 
-@gf.cell
+@gf.cell(tags=["grating_couplers"])
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.315,

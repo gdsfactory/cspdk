@@ -10,13 +10,13 @@ from cspdk.si220.oband.tech import LAYER
 ################
 
 
-@gf.cell
+@gf.cell(tags=["fixed"])
 def heater() -> gf.Component:
     """Heater fixed cell."""
     return gf.import_gds(PATH.gds / "Heater.gds")
 
 
-@gf.cell
+@gf.cell(tags=["fixed"])
 def crossing_rib() -> gf.Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_RIB_Waveguide_Crossing.gds")
@@ -36,7 +36,7 @@ def crossing_rib() -> gf.Component:
     return c
 
 
-@gf.cell
+@gf.cell(tags=["fixed"])
 def crossing() -> gf.Component:
     """SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1310nm_TE_STRIP_Waveguide_Crossing.gds")

@@ -14,7 +14,7 @@ pack_doe = gf.c.pack_doe
 pack_doe_grid = gf.c.pack_doe_grid
 
 
-@gf.cell
+@gf.cell(tags=["containers"])
 def add_fiber_array(
     component: ComponentSpec = "straight",
     grating_coupler=gc,
@@ -88,7 +88,7 @@ def add_fiber_array(
     )
 
 
-@gf.cell
+@gf.cell(tags=["containers"])
 def add_fiber_single(
     component: ComponentSpec = "straight",
     grating_coupler=gc,
@@ -168,7 +168,7 @@ def add_fiber_single(
     )
 
 
-@gf.cell
+@gf.cell(tags=["containers"])
 def add_pads_top(
     component: ComponentSpec = "straight_metal",
     port_names: Strs | None = None,
