@@ -10,7 +10,7 @@ from cspdk._schematic import (
     _LEFT_RIGHT,
     _MZI_1X2,
     _PAD,
-    _WIRE_STRAIGHT,
+    _WIRE_BEND,
     sax_model,
     schematic,
 )
@@ -36,7 +36,7 @@ bend_s_schematic = schematic(
     _LEFT_RIGHT,
     models=[sax_model("bend_s", _MODULE, ["o1", "o2"])],
 )
-wire_corner_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_STRAIGHT)
+wire_corner_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
 taper_schematic = schematic(
     "taper",
     ["taper"],

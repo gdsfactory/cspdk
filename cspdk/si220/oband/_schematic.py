@@ -8,7 +8,6 @@ from cspdk._schematic import (
     _CROSSING,
     _GRATING,
     _HEATER_FULL,
-    _HEATER_TOP,
     _LEFT_BOTTOM,
     _LEFT_RIGHT,
     _PAD,
@@ -32,13 +31,17 @@ straight_strip_schematic = schematic(
     "straight",
     ["waveguide", "strip"],
     _LEFT_RIGHT,
-    models=[sax_model("straight_strip", _MODULE, ["o1", "o2"], params={"length": "length"})],
+    models=[
+        sax_model("straight_strip", _MODULE, ["o1", "o2"], params={"length": "length"})
+    ],
 )
 straight_rib_schematic = schematic(
     "straight",
     ["waveguide", "rib"],
     _LEFT_RIGHT,
-    models=[sax_model("straight_rib", _MODULE, ["o1", "o2"], params={"length": "length"})],
+    models=[
+        sax_model("straight_rib", _MODULE, ["o1", "o2"], params={"length": "length"})
+    ],
 )
 bend_euler_schematic = schematic(
     "bend",
@@ -56,7 +59,9 @@ bend_s_schematic = schematic(
 # Electrical wires
 wire_corner_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
 wire_corner45_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
-wire_corner45_straight_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_STRAIGHT)
+wire_corner45_straight_schematic = schematic(
+    "wire-corner", ["wire", "corner"], _WIRE_STRAIGHT
+)
 straight_metal_schematic = schematic("wire", ["wire", "straight"], _WIRE_STRAIGHT)
 bend_metal_schematic = schematic("wire-bend", ["wire", "bend"], _WIRE_BEND)
 bend_s_metal_schematic = schematic("wire-sbend", ["wire", "sbend"], _WIRE_STRAIGHT)
@@ -120,9 +125,16 @@ straight_heater_metal_schematic = schematic(
             "straight_heater_metal",
             _MODULE,
             [
-                "o1", "o2",
-                "l_e1", "l_e2", "l_e3", "l_e4",
-                "r_e1", "r_e2", "r_e3", "r_e4",
+                "o1",
+                "o2",
+                "l_e1",
+                "l_e2",
+                "l_e3",
+                "l_e4",
+                "r_e1",
+                "r_e2",
+                "r_e3",
+                "r_e4",
             ],
             params={"length": "length"},
         )

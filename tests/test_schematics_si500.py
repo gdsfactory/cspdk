@@ -18,12 +18,15 @@ def _activate_pdk() -> None:
 
 
 def test_symbol_present() -> None:
+    """Every schematic-driven cell exposes a non-empty symbol."""
     check_symbol_present(PDK)
 
 
 def test_ports_subset_of_component() -> None:
+    """Schematic port names are a subset of each Component's ports."""
     check_ports_subset_of_component(PDK)
 
 
 def test_sax_model_refs() -> None:
+    """Only the python module resolution is checked (si500 has no SAX models)."""
     check_sax_model_refs(PDK, has_models=False)

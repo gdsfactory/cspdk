@@ -25,7 +25,9 @@ def _unwrap_factory(fn):
     return None
 
 
-def schematic_driven_cells(pdk) -> Iterable[tuple[str, "kf.decorators.WrappedKCellFunc"]]:
+def schematic_driven_cells(
+    pdk,
+) -> Iterable[tuple[str, kf.decorators.WrappedKCellFunc]]:
     for name in sorted(pdk.cells):
         factory = _unwrap_factory(pdk.cells[name])
         if factory is not None and factory.schematic_driven():
