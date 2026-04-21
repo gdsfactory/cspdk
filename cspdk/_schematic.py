@@ -138,11 +138,15 @@ def _make_schematic(
     ports: list[dict],
     models: list[dict] | None,
 ) -> DSchematic:
+    # Deep-copy ports and models: both are lists of dicts shared across all
+    # calls via module-level constants (_LEFT_RIGHT, _1X2, ...) and closure
+    # variables. A downstream consumer mutating s.info would otherwise
+    # corrupt every future schematic built from the same pattern.
     s = DSchematic()
     s.info["symbol"] = symbol
-    s.info["tags"] = tags
-    s.info["ports"] = ports
-    s.info["models"] = models or []
+    s.info["tags"] = list(tags)
+    s.info["ports"] = [dict(p) for p in ports]
+    s.info["models"] = [dict(m) for m in models or []]
 
     side_counts: dict[str, int] = {}
     for port in ports:
@@ -152,10 +156,16 @@ def _make_schematic(
     spacing = 0.5
     for port in ports:
         side = port["side"]
+        try:
+            bx, by, orientation = _SIDE_XY[side]
+        except KeyError as exc:
+            raise ValueError(
+                f"schematic {symbol!r} port {port['name']!r}: unknown side "
+                f"{side!r} (expected one of {sorted(_SIDE_XY)})"
+            ) from exc
         idx = seen_sides.get(side, 0)
         seen_sides[side] = idx + 1
         total = side_counts[side]
-        bx, by, orientation = _SIDE_XY[side]
         offset = (idx - (total - 1) / 2) * spacing
         if side in ("left", "right"):
             x, y = bx, by + offset
