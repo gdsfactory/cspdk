@@ -5,10 +5,15 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
+from cspdk.si220.cband._schematic import (
+    taper_metal_schematic,
+    taper_schematic,
+    transition_schematic,
+)
 from cspdk.si220.cband.tech import LAYER, TECH
 
 
-@gf.cell(tags=["tapers"])
+@gf.cell(tags=["tapers"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
     width1: float = TECH.width,
@@ -37,7 +42,7 @@ def taper(
     )
 
 
-@gf.cell(tags=["tapers"])
+@gf.cell(tags=["tapers"], schematic_function=taper_metal_schematic)
 def taper_metal(
     length: float = 10.0,
     width1: float = TECH.width_metal,
@@ -66,7 +71,7 @@ def taper_metal(
     )
 
 
-@gf.cell(tags=["tapers"])
+@gf.cell(tags=["tapers"], schematic_function=transition_schematic)
 def taper_strip_to_ridge(
     length: float = 10.0,
     width1: float = 0.5,

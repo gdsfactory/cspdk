@@ -2,6 +2,7 @@
 
 import gdsfactory as gf
 
+from cspdk.si220.cband._schematic import crossing_rib_schematic, crossing_schematic
 from cspdk.si220.cband.config import PATH
 from cspdk.si220.cband.tech import LAYER
 
@@ -16,7 +17,7 @@ def heater() -> gf.Component:
     return gf.import_gds(PATH.gds / "Heater.gds")
 
 
-@gf.cell(tags=["fixed"])
+@gf.cell(tags=["fixed"], schematic_function=crossing_rib_schematic)
 def crossing_rib() -> gf.Component:
     """SOI220nm_1550nm_TE_RIB_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_RIB_Waveguide_Crossing.gds")
@@ -36,7 +37,7 @@ def crossing_rib() -> gf.Component:
     return c
 
 
-@gf.cell(tags=["fixed"])
+@gf.cell(tags=["fixed"], schematic_function=crossing_schematic)
 def crossing() -> gf.Component:
     """SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing fixed cell."""
     c = gf.import_gds(PATH.gds / "SOI220nm_1550nm_TE_STRIP_Waveguide_Crossing.gds")

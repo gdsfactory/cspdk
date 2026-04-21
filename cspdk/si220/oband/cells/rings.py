@@ -3,10 +3,11 @@
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
+from cspdk.si220.oband._schematic import ring_double_schematic, ring_single_schematic
 from cspdk.si220.oband.tech import TECH
 
 
-@gf.cell(tags=["rings"])
+@gf.cell(tags=["rings"], schematic_function=ring_single_schematic)
 def ring_single(
     gap: float = TECH.gap_strip,
     radius: float = 10.0,
@@ -62,7 +63,7 @@ def ring_single(
     )
 
 
-@gf.cell(tags=["rings"])
+@gf.cell(tags=["rings"], schematic_function=ring_double_schematic)
 def ring_double(
     gap: float = TECH.gap_strip,
     gap_top: float | None = None,

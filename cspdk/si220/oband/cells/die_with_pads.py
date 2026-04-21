@@ -9,6 +9,7 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk.si220.oband._schematic import pad_schematic
 from cspdk.si220.oband.tech import LAYER
 
 
@@ -67,7 +68,7 @@ def rectangle(
     )
 
 
-@gf.cell(tags=["die"])
+@gf.cell(tags=["die"], schematic_function=pad_schematic)
 def pad(
     size: tuple[float, float] = (90.0, 90.0),
     layer: LayerSpec = "PAD",

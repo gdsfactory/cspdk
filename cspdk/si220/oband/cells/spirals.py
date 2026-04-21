@@ -7,8 +7,10 @@ from gdsfactory.typings import (
     Floats,
 )
 
+from cspdk.si220.oband._schematic import spiral_schematic
 
-@gf.cell(tags=["spirals"])
+
+@gf.cell(tags=["spirals"], schematic_function=spiral_schematic)
 def spiral(
     length: float = 100,
     cross_section: CrossSectionSpec = "strip",
@@ -33,7 +35,7 @@ def spiral(
     )
 
 
-@gf.cell(tags=["spirals"])
+@gf.cell(tags=["spirals"], schematic_function=spiral_schematic)
 def spiral_racetrack(
     min_radius: float | None = None,
     straight_length: float = 20.0,
@@ -74,7 +76,7 @@ def spiral_racetrack(
     )
 
 
-@gf.cell(tags=["spirals"])
+@gf.cell(tags=["spirals"], schematic_function=spiral_schematic)
 def spiral_racetrack_heater(
     spacing: float = 4.0,
     num: int = 8,

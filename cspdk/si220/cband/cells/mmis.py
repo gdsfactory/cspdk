@@ -7,12 +7,14 @@ from gdsfactory.typings import (
     CrossSectionSpec,
 )
 
+from cspdk.si220.cband._schematic import mmi1x2_schematic, mmi2x2_schematic
+
 ################
 # MMIs
 ################
 
 
-@gf.cell(tags=["mmis"])
+@gf.cell(tags=["mmis"], schematic_function=mmi1x2_schematic)
 def mmi1x2(
     width: float | None = None,
     width_taper: float = 1.5,
@@ -49,7 +51,7 @@ def mmi1x2(
 mmi1x2_rib = partial(mmi1x2, length_mmi=32.7, gap_mmi=1.64, cross_section="rib")
 
 
-@gf.cell(tags=["mmis"])
+@gf.cell(tags=["mmis"], schematic_function=mmi2x2_schematic)
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,
