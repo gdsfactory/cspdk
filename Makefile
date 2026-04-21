@@ -12,6 +12,7 @@ rm-samples:
 test:
 	uv run pytest -s tests/test_si220_cband.py
 	uv run pytest -s tests/test_si220_oband.py
+	uv run pytest -s tests/test_routing.py
 	# uv run pytest -s tests/test_si500.py
 	# uv run pytest -s tests/test_sin300.py
 
