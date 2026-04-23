@@ -3,8 +3,13 @@
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
+from cspdk.si220.cband._schematic import (
+    straight_heater_meander_schematic,
+    straight_heater_metal_schematic,
+)
 
-@gf.cell(tags=["heaters"])
+
+@gf.cell(tags=["heaters"], schematic_function=straight_heater_metal_schematic)
 def straight_heater_metal(
     length: float = 320.0,
     length_undercut_spacing: float = 6.0,
@@ -44,7 +49,7 @@ def straight_heater_metal(
     )
 
 
-@gf.cell(tags=["heaters"])
+@gf.cell(tags=["heaters"], schematic_function=straight_heater_meander_schematic)
 def straight_heater_meander(
     length: float = 320.0,
     heater_width: float = 2.5,

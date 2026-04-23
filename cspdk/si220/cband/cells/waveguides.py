@@ -4,8 +4,22 @@ import gdsfactory as gf
 from gdsfactory.cross_section import port_names_electrical, port_types_electrical
 from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
+from cspdk.si220.cband._schematic import (
+    bend_euler_schematic,
+    bend_metal_schematic,
+    bend_s_metal_schematic,
+    bend_s_schematic,
+    straight_metal_schematic,
+    straight_rib_schematic,
+    straight_schematic,
+    straight_strip_schematic,
+    wire_corner45_schematic,
+    wire_corner45_straight_schematic,
+    wire_corner_schematic,
+)
 
-@gf.cell(tags=["waveguides"])
+
+@gf.cell(tags=["waveguides"], schematic_function=straight_schematic)
 def straight(
     length: float = 10,
     cross_section: CrossSectionSpec = "strip",
@@ -25,7 +39,7 @@ def straight(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=straight_strip_schematic)
 def straight_strip(
     length: float = 10,
     cross_section: CrossSectionSpec = "strip",
@@ -45,7 +59,7 @@ def straight_strip(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=straight_rib_schematic)
 def straight_rib(
     length: float = 10,
     cross_section: CrossSectionSpec = "rib",
@@ -63,7 +77,7 @@ def straight_rib(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=bend_euler_schematic)
 def bend_euler(
     radius: float | None = None,
     angle: float = 90,
@@ -95,7 +109,7 @@ def bend_euler(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=bend_s_schematic)
 def bend_s(
     size: Size = (11, 1.8),
     cross_section: CrossSectionSpec = "strip",
@@ -122,7 +136,7 @@ def bend_s(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=wire_corner_schematic)
 def wire_corner(
     cross_section: CrossSectionSpec = "metal_routing",
     width: float | None = None,
@@ -144,7 +158,7 @@ def wire_corner(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=wire_corner45_schematic)
 def wire_corner45(
     cross_section: CrossSectionSpec = "metal_routing",
     radius: float = 10,
@@ -170,7 +184,7 @@ def wire_corner45(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=wire_corner45_straight_schematic)
 def wire_corner45_straight(
     width: float | None = None,
     radius: float | None = None,
@@ -195,7 +209,7 @@ def wire_corner45_straight(
 ####################
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=straight_metal_schematic)
 def straight_metal(
     length: float = 10,
     cross_section: CrossSectionSpec = "metal_routing",
@@ -213,7 +227,7 @@ def straight_metal(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=bend_metal_schematic)
 def bend_metal(
     radius: float | None = None,
     angle: float = 90,
@@ -238,7 +252,7 @@ def bend_metal(
     )
 
 
-@gf.cell(tags=["waveguides"])
+@gf.cell(tags=["waveguides"], schematic_function=bend_s_metal_schematic)
 def bend_s_metal(
     size: Size = (11, 1.8),
     cross_section: CrossSectionSpec = "metal_routing",

@@ -8,8 +8,10 @@ MZIs are used in a variety of applications, including optical communications, qu
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
+from cspdk.si220.oband._schematic import mzi_schematic
 
-@gf.cell(tags=["mzis"])
+
+@gf.cell(tags=["mzis"], schematic_function=mzi_schematic)
 def mzi(
     delta_length: float = 10,
     bend: ComponentSpec = "bend_euler",

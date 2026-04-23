@@ -5,8 +5,10 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk.si220.cband._schematic import via_stack_schematic
 
-@gf.cell(tags=["vias"])
+
+@gf.cell(tags=["vias"], schematic_function=via_stack_schematic)
 def via_stack_heater_mtop(size: Size = (20.0, 10.0)) -> gf.Component:
     """Rectangular via array stack.
 

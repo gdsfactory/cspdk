@@ -3,10 +3,11 @@
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec
 
+from cspdk.si220.cband._schematic import coupler_ring_schematic, coupler_schematic
 from cspdk.si220.cband.tech import TECH
 
 
-@gf.cell(tags=["couplers"])
+@gf.cell(tags=["couplers"], schematic_function=coupler_schematic)
 def coupler(length: float = 14.5, gap: float = TECH.gap_strip) -> gf.Component:
     """Returns Symmetric coupler.
 
@@ -24,7 +25,7 @@ def coupler(length: float = 14.5, gap: float = TECH.gap_strip) -> gf.Component:
     )
 
 
-@gf.cell(tags=["couplers"])
+@gf.cell(tags=["couplers"], schematic_function=coupler_schematic)
 def coupler_rib(length: float = 20, gap: float = TECH.gap_rib) -> gf.Component:
     """Returns Symmetric coupler.
 
@@ -42,7 +43,7 @@ def coupler_rib(length: float = 20, gap: float = TECH.gap_rib) -> gf.Component:
     )
 
 
-@gf.cell(tags=["couplers"])
+@gf.cell(tags=["couplers"], schematic_function=coupler_ring_schematic)
 def coupler_ring(
     length_x: float = 4,
     gap: float = TECH.gap_strip,
