@@ -1213,7 +1213,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactoryplus"
-version = "1.8.2"
+version = "1.8.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "altair" },
@@ -1253,11 +1253,11 @@ dependencies = [
     { name = "websocket-client" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/05/79/0294f2d11658a9429613098116e2ef0d10311667b0b64a67e3ec7209bf47/gdsfactoryplus-1.8.2-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:ede3edcfa1d7e9bb0dff5c6462834cf993247b8568410629dc75068a8574a7ba", size = 6780517, upload-time = "2026-04-08T19:49:13.021Z" },
-    { url = "https://files.pythonhosted.org/packages/ae/fd/8237923d56064de879c62300277956a4d5b6437ac5e79e663280a3bfa642/gdsfactoryplus-1.8.2-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:5d460751415dc0d93c7002de29e96839bcc9f0dd691961832411f6624e0b8643", size = 6920360, upload-time = "2026-04-08T19:49:15.395Z" },
-    { url = "https://files.pythonhosted.org/packages/18/05/883bc3123a2d64d4e19ee97e48816295f04e994793af44e894e91ca7a8ca/gdsfactoryplus-1.8.2-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:13a16869a0876d192b5c3a9c5725f20f69c4dfe7873692d8197204305def9614", size = 14186165, upload-time = "2026-04-08T19:49:17.856Z" },
-    { url = "https://files.pythonhosted.org/packages/ae/22/c57cc78d484b79cb198e5687d6be538f351d25b5f645938c250e66694347/gdsfactoryplus-1.8.2-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:78505809cfdf2ee36dd4ad8c5e8b4164aac17f04a083f9eeabc69e2b356488ec", size = 14751697, upload-time = "2026-04-08T19:49:20.884Z" },
-    { url = "https://files.pythonhosted.org/packages/ba/48/a45dc7362afbf0272afa2b75f8a7714175dbafe6fdd4ffb8d81b88eb52b3/gdsfactoryplus-1.8.2-cp312-cp312-win_amd64.whl", hash = "sha256:ee5104124781365a37f46a839cabc473472554e0d39e33c2078ccc4f98dbb9ab", size = 5456265, upload-time = "2026-04-08T19:49:23.134Z" },
+    { url = "https://files.pythonhosted.org/packages/26/e7/67a8d2d86c2c3286355ba97e83a3da06f2b5624fcdc97aa606c19ff76e47/gdsfactoryplus-1.8.5-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:b1ac72693a421857aaad4855582e36980a7329c88fedcb11842fd3286bd85de3", size = 6884724, upload-time = "2026-04-24T08:47:24.738Z" },
+    { url = "https://files.pythonhosted.org/packages/dd/7c/f6459ea378815a17fc190fe56c2b07e10dadd5405d2da0207179edd29af1/gdsfactoryplus-1.8.5-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:07f96dbb76e84baa2d589722d67cfe5bc624c0ee469c61b3a0b7b648e259f5d1", size = 7029325, upload-time = "2026-04-24T08:47:27.018Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/3c/4700af4a08ab3a8527f794d5b5de6e6ed1254a774f4bd47638090ad9ea06/gdsfactoryplus-1.8.5-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:108a9d3e9d74e46b586f31ae751c65a115a0a38eb1d442753db08280372b3606", size = 14494702, upload-time = "2026-04-24T08:47:29.983Z" },
+    { url = "https://files.pythonhosted.org/packages/8d/46/cb20a839817300d444123d4095df2e72b2174ad08dcc18e293ecddf3ecbd/gdsfactoryplus-1.8.5-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:ca09a08d8b4b40c34b13320cf36ef60d6e20dcdaf0ab2650b1054b5b710194ca", size = 15081044, upload-time = "2026-04-24T08:47:32.808Z" },
+    { url = "https://files.pythonhosted.org/packages/03/2c/8f0901091126f036cd951ee5197204d1d584acd3b4f7e256067d8105176e/gdsfactoryplus-1.8.5-cp312-cp312-win_amd64.whl", hash = "sha256:83a625c740f3cfe8e0c187923390b9f10e0e312a7feb9d4e3c615720ac4a386f", size = 5536526, upload-time = "2026-04-24T08:47:35.051Z" },
 ]
 
 [[package]]
