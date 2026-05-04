@@ -1,0 +1,243 @@
+exploded: ''
+camera_transform:
+  translation:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  rotation:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  scale:
+    x: 1.0
+    y: 1.0
+    z: 1.0
+transforms:
+  b1:
+    translation:
+      x: -353.7641
+      y: 54.77532
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  b2:
+    translation:
+      x: -281.68756
+      y: 185.88574
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  b3:
+    translation:
+      x: 63.026077
+      y: 318.56635
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  b4:
+    translation:
+      x: 292.57407
+      y: 162.33296
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  c1:
+    translation:
+      x: -213.9877
+      y: -156.74902
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  c2:
+    translation:
+      x: 125.00882
+      y: -190.86273
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  h:
+    translation:
+      x: -80.21701
+      y: 251.78354
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  o1:
+    translation:
+      x: -386.66858
+      y: -132.86172
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  o2:
+    translation:
+      x: -378.83423
+      y: -237.279
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  o3:
+    translation:
+      x: 298.84152
+      y: -66.91399
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  o4:
+    translation:
+      x: 358.383
+      y: -170.54616
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  p1:
+    translation:
+      x: -152.25548
+      y: 480.57855
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+  p2:
+    translation:
+      x: -28.780657
+      y: 478.97775
+      z: 1.0
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    scale:
+      x: 1.0
+      y: 1.0
+      z: 1.0
+sizes:
+  b1:
+    width: 100
+    height: 100
+  b2:
+    width: 100
+    height: 100
+  b3:
+    width: 100
+    height: 100
+  b4:
+    width: 100
+    height: 100
+  c1:
+    width: 100
+    height: 100
+  c2:
+    width: 100
+    height: 100
+  h:
+    width: 100
+    height: 100
+  p1:
+    width: 100
+    height: 100
+  p2:
+    width: 100
+    height: 100
+link_paths: []
+layers:
+  b1: 0
+  b2: 0
+  b3: 0
+  b4: 0
+  c1: 0
+  c2: 0
+  h: 0
+  p1: 0
+  p2: 0
+fan_point_positions:
+  btm:
+    - x: 15.259689
+      y: -210.19606
+    - x: -104.23857
+      y: -176.08237
