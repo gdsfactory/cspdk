@@ -9,7 +9,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12"
 ]
 dependencies = [
-  "cspdk==1.4.1",
+  "cspdk==1.4.2",
   "gdsfactoryplus",
   "gplugins[femwell,sax,tidy3d]==2.0.1",
   "meow-sim",
