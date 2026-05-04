@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../build/schemas/heater_schem.json
+instances:
+  p1:
+    component: pad
+    settings: {}
+  s1:
+    component: straight_heater_metal
+    settings: {}
+connections: {}
+routes: {}
+nets: []
+ports: {}
+placements:
+  p1:
+    dx: -37.754
+    dy: 150.198
+    rotation: 0
+    mirror: false
