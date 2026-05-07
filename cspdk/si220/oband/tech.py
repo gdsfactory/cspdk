@@ -54,6 +54,7 @@ LAYER = LayerMapCornerstone
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
     thickness_slab: float = 100 * nm,
+    thickness_grating: float = 150 * nm,
     zmin_heater: float = 1.1,
     thickness_heater: float = 700 * nm,
     zmin_metal: float = 1.1,
@@ -61,11 +62,12 @@ def get_layer_stack(
 ) -> LayerStack:
     """Returns LayerStack.
 
-    based on paper https://www.degruyter.com/document/doi/10.1515/nanoph-2013-0034/html
+    based on Cornerstone Si_220nm_passive process_overview.yaml
 
     Args:
         thickness_wg: waveguide thickness in um.
         thickness_slab: slab thickness in um.
+        thickness_grating: DUV grating residual Si thickness in um (220nm - 70nm etch).
         zmin_heater: TiN heater.
         thickness_heater: TiN thickness.
         zmin_metal: metal thickness in um.
@@ -74,13 +76,24 @@ def get_layer_stack(
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
+                layer=LogicalLayer(layer=LAYER.WG) - LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.WG),
+            ),
+            grating=LayerLevel(
+                layer=LogicalLayer(layer=LAYER.WG) & LogicalLayer(layer=LAYER.GRA),
+                thickness=thickness_grating,
+                zmin=0.0,
+                material="si",
+                info={"mesh_order": 1},
+                sidewall_angle=10,
+                width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.GRA),
             ),
             slab=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.SLAB),
