@@ -43,6 +43,7 @@ Cells Si SOI 220nm Cband
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si220.cband.cells.{name}
+   :noindex:
 
 """
             )
@@ -54,6 +55,7 @@ Cells Si SOI 220nm Cband
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si220.cband.cells.{name}
+   :noindex:
 
 .. plot::
   :include-source:
