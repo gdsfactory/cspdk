@@ -1,0 +1,30 @@
+instances:
+  text_rectangular:
+    component: text_rectangular
+    info: {}
+    settings:
+      justify: left
+      layer: PAD
+      size: 3
+      text: abc
+  text_rectangular2:
+    component: text_rectangular
+    info: {}
+    settings:
+      justify: left
+      layer: WG
+      size: 3
+      text: abc
+nets: []
+placements:
+  text_rectangular:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  text_rectangular2:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports: {}

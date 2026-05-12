@@ -1,0 +1,11 @@
+info: {}
+name: grating_coupler_array_P_a06f4870
+settings:
+  centered: true
+  cross_section: xs_sc
+  n: 6
+  pitch: 127
+  port_name: o1
+  rotation: -90
+  straight_to_grating_spacing: 10
+  with_loopback: false

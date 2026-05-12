@@ -1,0 +1,15 @@
+info: {}
+name: compass_S4_2_LPAD_PTele_238b7594
+settings:
+  auto_rename_ports: true
+  layer: PAD
+  port_inclusion: 0
+  port_orientations:
+  - 180
+  - 90
+  - 0
+  - -90
+  port_type: electrical
+  size:
+  - 4
+  - 2

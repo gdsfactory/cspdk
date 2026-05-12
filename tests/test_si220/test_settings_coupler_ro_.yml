@@ -1,0 +1,10 @@
+info:
+  length: 15.126
+  min_bend_radius: 25.743
+name: coupler_G0p234_L20_D4_D_da0f10e1
+settings:
+  cross_section: xs_ro
+  dx: 15
+  dy: 4
+  gap: 0.234
+  length: 20

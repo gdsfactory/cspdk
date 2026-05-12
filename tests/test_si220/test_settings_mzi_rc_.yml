@@ -1,0 +1,9 @@
+info: {}
+name: mzi_DL10_Bbend_euler_rc_de758620
+settings:
+  bend: bend_euler_rc
+  combiner: mmi2x2_rc
+  cross_section: xs_rc
+  delta_length: 10
+  splitter: mmi1x2_rc
+  straight: straight_rc
