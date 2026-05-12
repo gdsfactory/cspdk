@@ -43,7 +43,6 @@ Cells SiN300
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si220.cband.cells.{name}
-   :noindex:
 
 """
             )
@@ -55,7 +54,6 @@ Cells SiN300
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si220.cband.cells.{name}
-   :noindex:
 
 .. plot::
   :include-source:
