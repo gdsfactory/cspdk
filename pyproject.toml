@@ -44,6 +44,13 @@ docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1", "gsim; python_ver
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
 
+[tool.elvis]
+connected-layers = [[[39, 0], [41, 0]]]
+short-layers = [[39, 0], [41, 0]]
+
+[tool.elvis.equivalent-ports]
+pad = ["e1", "e2", "e3", "e4", "pad"]
+
 [tool.gdsfactoryplus]
 name = "cspdk.si220.cband"
 
