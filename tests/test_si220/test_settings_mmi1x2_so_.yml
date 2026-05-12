@@ -1,0 +1,9 @@
+info: {}
+name: mmi1x2_WNone_WT1p5_LT20_c7e3383e
+settings:
+  cross_section: xs_so
+  gap_mmi: 1.55
+  length_mmi: 40.1
+  length_taper: 20
+  width_mmi: 6
+  width_taper: 1.5

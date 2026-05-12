@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<klayout-macro>
+ <description/>
+ <version/>
+ <category>d25</category>
+ <prolog/>
+ <epilog/>
+ <doc/>
+ <autorun>false</autorun>
+ <autorun-early>false</autorun-early>
+ <priority>0</priority>
+ <shortcut/>
+ <show-in-menu>true</show-in-menu>
+ <group-name>d25ripts</group-name>
+ <menu-path>tools_menu.d25.end</menu-path>
+ <interpreter>dsl</interpreter>
+ <dsl-interpreter-name>d25-dsl-xml</dsl-interpreter-name>
+ <text>
+
+core = input(3, 0)
+slab = input(5, 0)
+nitride = input(203, 0)
+nitride_etch = input(204, 0)
+heater = input(39, 0)
+metal = input(41, 0)
+
+
+
+z(core, zstart: 0.0, zstop: 0.2, name: 'core: si 3/0', )
+z(slab, zstart: 0.0, zstop: 0.1, name: 'slab: si 5/0', )
+z(nitride, zstart: 0.0, zstop: 0.3, name: 'nitride: sin 203/0', )
+z(nitride_etch, zstart: 0.0, zstop: 0.3, name: 'nitride_etch: sin 204/0', )
+z(heater, zstart: 1.1, zstop: 1.8, name: 'heater: TiN 39/0', )
+z(metal, zstart: 1.8, zstop: 2.5, name: 'metal: Aluminum 41/0', )
+
+
+</text>
+</klayout-macro>

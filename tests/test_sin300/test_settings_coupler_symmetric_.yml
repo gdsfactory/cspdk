@@ -1,0 +1,9 @@
+info:
+  length: 20.058
+  min_bend_radius: 57.149
+name: coupler_symmetric_G0p23_c93709df
+settings:
+  cross_section: xs_nc
+  dx: 20
+  dy: 4
+  gap: 0.236
