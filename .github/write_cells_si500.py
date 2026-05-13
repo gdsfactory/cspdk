@@ -43,7 +43,6 @@ Cells Si SOI 500nm
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si500.cells.{name}
-   :noindex:
 
 """
             )
@@ -55,7 +54,6 @@ Cells Si SOI 500nm
 ----------------------------------------------------
 
 .. autofunction:: cspdk.si500.cells.{name}
-   :noindex:
 
 .. plot::
   :include-source:
