@@ -13,3 +13,4 @@ parts:
   - caption: Simulations
     chapters:
       - file: notebooks/meep_dc
+      - file: notebooks/meep_mmi
