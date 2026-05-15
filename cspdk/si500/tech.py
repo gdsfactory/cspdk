@@ -300,6 +300,7 @@ def route_bundle(
         straight=straight,
         bend=bend,
         taper=taper,
+        sbend="bend_s",
     )
 
 

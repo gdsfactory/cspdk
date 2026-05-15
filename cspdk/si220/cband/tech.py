@@ -262,7 +262,7 @@ def heater_metal(width=TECH.width_heater) -> CrossSection:
 ############################
 
 route_single = partial(gf.routing.route_single, cross_section="strip")
-route_bundle = partial(gf.routing.route_bundle, cross_section="strip")
+route_bundle = partial(gf.routing.route_bundle, cross_section="strip", sbend="bend_s")
 
 
 route_bundle_rib = partial(
