@@ -5,7 +5,7 @@ info:
   route_info_type: strip
   route_info_weight: 10
   width: 0.4
-name: add_fiber_array_Cstraight_GCgrating_coupler_elliptical__97619bb3
+name: add_fiber_array_Cstraight_GCgrating_coupler_elliptical__5f8de5a8
 ports:
   loopback1:
     center:
@@ -47,6 +47,4 @@ settings:
   component: straight
   cross_section: strip
   gc_port_name: o1
-  gc_rotation: -90
   grating_coupler: grating_coupler_elliptical
-  radius_loopback: 10

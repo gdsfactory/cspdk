@@ -19,7 +19,7 @@ test:
 test-ports:
 	uv run pytest -s tests/test_si220_cband.py::test_optical_port_positions tests/test_si220_oband.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
 
-test-force:
+test-force: install
 	uv run pytest -s tests/test_si220_cband.py --update-gds-refs --force-regen
 	uv run pytest -s tests/test_si220_oband.py --update-gds-refs --force-regen
 	# uv run pytest -s tests/test_si500.py --update-gds-refs --force-regen
