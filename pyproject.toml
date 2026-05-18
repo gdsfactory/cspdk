@@ -39,7 +39,14 @@ dev = [
   "gdsfactoryplus",
   "towncrier"
 ]
-docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1", "gsim; python_version>='3.12'"]
+docs = [
+  "jupyter",
+  "mkdocs-material",
+  "mkdocs-with-pdf",
+  "nbconvert",
+  "mkdocstrings[python]>=0.27.0",
+  "zensical>=0.0.40,<0.1.0"
+]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
