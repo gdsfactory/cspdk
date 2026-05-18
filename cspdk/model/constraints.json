@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "pdk_name": "cspdk",
+  "constraints": [
+    {"layer": "WG", "rule": "WG.width", "type": "min_width", "value_um": 0.20},
+    {"layer": "WG", "rule": "WG.space", "type": "min_space", "value_um": 0.20},
+    {"layer": "Si_Etch1_DF_70nm", "rule": "Si_Etch1_DF.width", "type": "min_width", "value_um": 0.20},
+    {"layer": "Si_Etch1_DF_70nm", "rule": "Si_Etch1_DF.space", "type": "min_space", "value_um": 0.25},
+    {"layer": "Si_Etch2_LF_120nm", "rule": "Si_Etch2_LF.width", "type": "min_width", "value_um": 0.35},
+    {"layer": "Si_Etch2_LF_120nm", "rule": "Si_Etch2_LF.space", "type": "min_space", "value_um": 0.20},
+    {"layer": "Si_Etch2_DF_120nm", "rule": "Si_Etch2_DF.width", "type": "min_width", "value_um": 0.20},
+    {"layer": "Si_Etch2_DF_120nm", "rule": "Si_Etch2_DF.space", "type": "min_space", "value_um": 0.35},
+    {"layer": "Si_Etch3_LF_100nm_to_BOX", "rule": "Si_Etch3_LF.width", "type": "min_width", "value_um": 0.25},
+    {"layer": "Si_Etch3_LF_100nm_to_BOX", "rule": "Si_Etch3_LF.space", "type": "min_space", "value_um": 0.25}
+  ]
+}
