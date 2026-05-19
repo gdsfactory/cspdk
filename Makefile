@@ -47,10 +47,28 @@ jupytext:
 notebooks:
 	jupytext docs/**/*.py --to ipynb
 
-docs:
+docs-pdf:
 	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
-	uv run jb build docs
+	cp CHANGELOG.md docs/changelog.md
+	uv run mkdocs build -f mkdocs-pdf.yml
 
-.PHONY: drc doc docs
+docs:
+	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	cp CHANGELOG.md docs/changelog.md
+	uv run --extra docs zensical build
+
+docs-serve:
+	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	cp CHANGELOG.md docs/changelog.md
+	uv run --extra docs zensical serve -a localhost:8080
+
+.PHONY: drc drc-sample doc docs docs-pdf build

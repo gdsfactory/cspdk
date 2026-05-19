@@ -1,0 +1,24 @@
+site_name: CornerStone PDK
+docs_dir: docs
+site_dir: build/pdf
+nav:
+  - Home: index.md
+  - Reference:
+      - Changelog: changelog.md
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_root_toc_entry: false
+            show_source: false
+  - with-pdf:
+      author: GDSFactory
+      cover_subtitle: Photonics Process Design Kit
+      output_path: ../../docs.pdf
+theme:
+  name: material
+  logo: logo.png
