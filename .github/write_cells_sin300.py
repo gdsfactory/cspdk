@@ -36,7 +36,7 @@ with open(filepath, "w+") as f:
 ## {name}
 
 
-::: cspdk.si220.cband.cells.{name}
+::: cspdk.sin300.cells.{name}
    :noindex:
 
 """
@@ -48,13 +48,13 @@ with open(filepath, "w+") as f:
 ## {name}
 
 
-::: cspdk.si220.cband.cells.{name}
+::: cspdk.sin300.cells.{name}
    :noindex:
 
 ```python
 import cspdk
 
-c = cspdk.si220.cband.cells.{name}({kwargs}).copy()
+c = cspdk.sin300.cells.{name}({kwargs}).copy()
 c.draw_ports()
 c.plot()
 ```
