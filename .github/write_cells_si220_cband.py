@@ -5,7 +5,7 @@ import inspect
 from cspdk.si220.cband import _cells as cells
 from cspdk.si220.cband.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_si220_cband.rst"
+filepath = PATH.repo / "docs" / "cells_si220_cband.md"
 
 skip = {}
 
@@ -15,11 +15,7 @@ skip_settings: tuple[str, ...] = ()
 
 with open(filepath, "w+") as f:
     f.write(
-        """
-
-Cells Si SOI 220nm Cband
-=============================
-"""
+        "# Cells Si SOI 220nm Cband\n\n"
     )
 
     for name in sorted(cells.keys()):
@@ -39,10 +35,10 @@ Cells Si SOI 220nm Cband
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.cband.cells.{name}
+
+::: cspdk.si220.cband.cells.{name}
    :noindex:
 
 """
@@ -51,20 +47,18 @@ Cells Si SOI 220nm Cband
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.cband.cells.{name}
+
+::: cspdk.si220.cband.cells.{name}
    :noindex:
 
-.. plot::
-  :include-source:
+```python
+import cspdk
 
-  import cspdk
-
-  c = cspdk.si220.cband.cells.{name}({kwargs}).copy()
-  c.draw_ports()
-  c.plot()
-
+c = cspdk.si220.cband.cells.{name}({kwargs}).copy()
+c.draw_ports()
+c.plot()
+```
 """
             )
