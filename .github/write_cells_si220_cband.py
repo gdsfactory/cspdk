@@ -14,9 +14,7 @@ skip_settings: tuple[str, ...] = ()
 
 
 with open(filepath, "w+") as f:
-    f.write(
-        "# Cells Si SOI 220nm Cband\n\n"
-    )
+    f.write("# Cells Si SOI 220nm Cband\n\n")
 
     for name in sorted(cells.keys()):
         if name in skip or name.startswith("_"):
