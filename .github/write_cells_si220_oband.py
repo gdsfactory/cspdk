@@ -5,7 +5,7 @@ import inspect
 from cspdk.si220.oband import _cells as cells
 from cspdk.si220.oband.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_si220_oband.rst"
+filepath = PATH.repo / "docs" / "cells_si220_oband.md"
 
 skip = {}
 
@@ -14,13 +14,7 @@ skip_settings: tuple[str, ...] = ()
 
 
 with open(filepath, "w+") as f:
-    f.write(
-        """
-
-Cells Si SOI 220nm Oband
-=============================
-"""
-    )
+    f.write("# Cells Si SOI 220nm Oband\n\n")
 
     for name in sorted(cells.keys()):
         if name in skip or name.startswith("_"):
@@ -39,10 +33,10 @@ Cells Si SOI 220nm Oband
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.oband.cells.{name}
+
+::: cspdk.si220.oband.cells.{name}
    :noindex:
 
 """
@@ -51,20 +45,18 @@ Cells Si SOI 220nm Oband
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.oband.cells.{name}
+
+::: cspdk.si220.oband.cells.{name}
    :noindex:
 
-.. plot::
-  :include-source:
+```python
+import cspdk
 
-  import cspdk
-
-  c = cspdk.si220.oband.cells.{name}({kwargs}).copy()
-  c.draw_ports()
-  c.plot()
-
+c = cspdk.si220.oband.cells.{name}({kwargs}).copy()
+c.draw_ports()
+c.plot()
+```
 """
             )

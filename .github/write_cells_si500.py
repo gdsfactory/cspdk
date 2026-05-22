@@ -5,7 +5,7 @@ import inspect
 from cspdk.si500 import _cells as cells
 from cspdk.si500.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_si500.rst"
+filepath = PATH.repo / "docs" / "cells_si500.md"
 
 skip = {}
 
@@ -14,13 +14,7 @@ skip_settings: tuple[str, ...] = ()
 
 
 with open(filepath, "w+") as f:
-    f.write(
-        """
-
-Cells Si SOI 500nm
-=============================
-"""
-    )
+    f.write("# Cells Si SOI 500nm\n\n")
 
     for name in sorted(cells.keys()):
         if name in skip or name.startswith("_"):
@@ -39,10 +33,10 @@ Cells Si SOI 500nm
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si500.cells.{name}
+
+::: cspdk.si500.cells.{name}
    :noindex:
 
 """
@@ -51,20 +45,18 @@ Cells Si SOI 500nm
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si500.cells.{name}
+
+::: cspdk.si500.cells.{name}
    :noindex:
 
-.. plot::
-  :include-source:
+```python
+import cspdk
 
-  import cspdk
-
-  c = cspdk.si500.cells.{name}({kwargs}).copy()
-  c.draw_ports()
-  c.plot()
-
+c = cspdk.si500.cells.{name}({kwargs}).copy()
+c.draw_ports()
+c.plot()
+```
 """
             )

@@ -61,7 +61,7 @@ docs:
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	cp CHANGELOG.md docs/changelog.md
-	uv run --extra docs zensical build
+	uv run --extra docs zensical build -f docs/zensical.toml
 
 docs-serve:
 	uv run python .github/write_cells_si220_cband.py
@@ -69,6 +69,6 @@ docs-serve:
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	cp CHANGELOG.md docs/changelog.md
-	uv run --extra docs zensical serve -a localhost:8080
+	uv run --extra docs zensical serve -f docs/zensical.toml -a localhost:8080
 
 .PHONY: drc drc-sample doc docs docs-pdf build

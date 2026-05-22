@@ -5,7 +5,7 @@ import inspect
 from cspdk.sin300 import _cells as cells
 from cspdk.sin300.config import PATH
 
-filepath = PATH.repo / "docs" / "cells_sin300.rst"
+filepath = PATH.repo / "docs" / "cells_sin300.md"
 
 skip = {}
 
@@ -14,13 +14,7 @@ skip_settings: tuple[str, ...] = ()
 
 
 with open(filepath, "w+") as f:
-    f.write(
-        """
-
-Cells SiN300
-=============================
-"""
-    )
+    f.write("# Cells SiN300\n\n")
 
     for name in sorted(cells.keys()):
         if name in skip or name.startswith("_"):
@@ -39,10 +33,10 @@ Cells SiN300
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.cband.cells.{name}
+
+::: cspdk.sin300.cells.{name}
    :noindex:
 
 """
@@ -51,20 +45,18 @@ Cells SiN300
             f.write(
                 f"""
 
-{name}
-----------------------------------------------------
+## {name}
 
-.. autofunction:: cspdk.si220.cband.cells.{name}
+
+::: cspdk.sin300.cells.{name}
    :noindex:
 
-.. plot::
-  :include-source:
+```python
+import cspdk
 
-  import cspdk
-
-  c = cspdk.si220.cband.cells.{name}({kwargs}).copy()
-  c.draw_ports()
-  c.plot()
-
+c = cspdk.sin300.cells.{name}({kwargs}).copy()
+c.draw_ports()
+c.plot()
+```
 """
             )
