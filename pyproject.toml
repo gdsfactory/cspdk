@@ -30,14 +30,15 @@ version = "1.4.2"
 
 [project.optional-dependencies]
 dev = [
-  "pre-commit",
+  "gdsfactoryplus",
   "jsondiff",
+  "pre-commit",
   "pytest",
   "pytest-cov",
-  "pytest_regressions",
   "pytest-github-actions-annotate-failures",
-  "gdsfactoryplus",
-  "towncrier"
+  "pytest_regressions",
+  "tbump",
+  "towncrier",
 ]
 docs = [
   "jupyter",
