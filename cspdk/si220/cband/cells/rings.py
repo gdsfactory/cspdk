@@ -33,8 +33,7 @@ def ring_single(
         bend: bend type for the ring. Defaults to "bend_euler".
         p: percentage of the bend that is euler. 1 means full euler, 0 means full circular.
 
-    .. code::
-
+    ```
                     xxxxxxxxxxxxx
                 xxxxx           xxxx
               xxx                   xxx
@@ -52,6 +51,7 @@ def ring_single(
                 xxx──────▲─────────xxx
                          │gap
                  o1──────▼─────────o2
+    ```
     """
     return gf.c.ring_single(
         gap=gap,
