@@ -88,28 +88,28 @@ fix = true
 
 [tool.ruff.lint]
 ignore = [
-  "E501",  # line too long, handled by black
-  "B008",  # do not perform function calls in argument defaults
-  "C901",  # too complex
-  "B905",  # `zip()` without an explicit `strict=` parameter
-  "C408"  # C408 Unnecessary `dict` call (rewrite as a literal)
+  "E501", # line too long, handled by black
+  "B008", # do not perform function calls in argument defaults
+  "C901", # too complex
+  "B905", # `zip()` without an explicit `strict=` parameter
+  "C408" # C408 Unnecessary `dict` call (rewrite as a literal)
 ]
 select = [
-  "B",  # flake8-bugbear
-  "C",  # flake8-comprehensions
-  "D",  # pydocstyle
-  "E",  # pycodestyle errors
-  "F",  # pyflakes
-  "I",  # isort
-  "T10",  # flake8-debugger
-  "UP",  # pyupgrade
-  "W"  # pycodestyle warnings
+  "B", # flake8-bugbear
+  "C", # flake8-comprehensions
+  "D", # pydocstyle
+  "E", # pycodestyle errors
+  "F", # pyflakes
+  "I", # isort
+  "T10", # flake8-debugger
+  "UP", # pyupgrade
+  "W" # pycodestyle warnings
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
-"cspdk/si220/cband/models/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
-"cspdk/si220/oband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/cells/__init__.py" = ["F403"] # allowing star imports to aggregate cells
+"cspdk/si220/cband/models/__init__.py" = ["F403"] # allowing star imports to aggregate cells
+"cspdk/si220/oband/cells/__init__.py" = ["F403"] # allowing star imports to aggregate cells
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
