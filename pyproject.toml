@@ -5,22 +5,22 @@ build-backend = "flit_core.buildapi"
 requires = ["flit_core >=3.2,<4"]
 
 [project]
-authors = [{ name = "gdsfactory", email = "contact@gdsfactory.com" }]
+authors = [{name = "gdsfactory", email = "contact@gdsfactory.com"}]
 classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
-  "Operating System :: OS Independent",
+  "Operating System :: OS Independent"
 ]
 dependencies = [
   "gdsfactory~=9.43.0",
   "gplugins[sax,femwell,tidy3d]~=2.1.0",
-  "doroutes~=0.6.0",
+  "doroutes~=0.6.0"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
-license = { file = "LICENSE" }
+license = {file = "LICENSE"}
 name = "cspdk"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
@@ -36,7 +36,7 @@ dev = [
   "pytest-github-actions-annotate-failures",
   "pytest_regressions",
   "tbump",
-  "towncrier",
+  "towncrier"
 ]
 docs = [
   "jupyter",
@@ -44,12 +44,12 @@ docs = [
   "mkdocs-with-pdf",
   "nbconvert",
   "mkdocstrings[python]>=0.27.0",
-  "zensical>=0.0.40,<0.1.0",
+  "zensical>=0.0.40,<0.1.0"
 ]
 
 [tool.codespell]
-skip = "references/*"
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+skip = "references/*"
 
 [tool.gdsfactoryplus]
 name = "cspdk.si220.cband"
@@ -63,7 +63,7 @@ options = [
   "cspdk.si220.cband",
   "cspdk.si220.oband",
   "cspdk.si500",
-  "cspdk.sin300",
+  "cspdk.sin300"
 ]
 
 [tool.gdsfactoryplus.sim.wls]
@@ -92,35 +92,35 @@ fix = true
 
 [tool.ruff.lint]
 ignore = [
-  "E501", # line too long, handled by black
-  "B008", # do not perform function calls in argument defaults
-  "C901", # too complex
-  "B905", # `zip()` without an explicit `strict=` parameter
-  "C408", # C408 Unnecessary `dict` call (rewrite as a literal)
+  "E501",  # line too long, handled by black
+  "B008",  # do not perform function calls in argument defaults
+  "C901",  # too complex
+  "B905",  # `zip()` without an explicit `strict=` parameter
+  "C408"  # C408 Unnecessary `dict` call (rewrite as a literal)
 ]
 select = [
-  "B",   # flake8-bugbear
-  "C",   # flake8-comprehensions
-  "D",   # pydocstyle
-  "E",   # pycodestyle errors
-  "F",   # pyflakes
-  "I",   # isort
-  "T10", # flake8-debugger
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  "D",  # pydocstyle
+  "E",  # pycodestyle errors
+  "F",  # pyflakes
+  "I",  # isort
+  "T10",  # flake8-debugger
   "UP",  # pyupgrade
-  "W",   # pycodestyle warnings
+  "W"  # pycodestyle warnings
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"references/**" = ["ALL"]
 "cspdk/si220/cband/cells/__init__.py" = [
-  "F403",
-] # allowing star imports to aggregate cells
+  "F403"
+]  # allowing star imports to aggregate cells
 "cspdk/si220/cband/models/__init__.py" = [
-  "F403",
-] # allowing star imports to aggregate cells
+  "F403"
+]  # allowing star imports to aggregate cells
 "cspdk/si220/oband/cells/__init__.py" = [
-  "F403",
-] # allowing star imports to aggregate cells
+  "F403"
+]  # allowing star imports to aggregate cells
+"references/**" = ["ALL"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
@@ -138,7 +138,7 @@ convention = "google"
   "*.nc",
   "*.svg",
   "*.GDS",
-  "*.OAS",
+  "*.OAS"
 ]
 
 [tool.setuptools.packages]
