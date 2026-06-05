@@ -5,9 +5,7 @@ build-backend = "flit_core.buildapi"
 requires = ["flit_core >=3.2,<4"]
 
 [project]
-authors = [
-  {name = "gdsfactory", email = "contact@gdsfactory.com"}
-]
+authors = [{name = "gdsfactory", email = "contact@gdsfactory.com"}]
 classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -51,6 +49,7 @@ docs = [
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+skip = "references/*"
 
 [tool.gdsfactoryplus]
 name = "cspdk.si220.cband"
@@ -60,7 +59,12 @@ timeout = 300
 
 [tool.gdsfactoryplus.pdk]
 name = "cspdk.si220.cband"
-options = ["cspdk.si220.cband", "cspdk.si220.oband", "cspdk.si500", "cspdk.sin300"]
+options = [
+  "cspdk.si220.cband",
+  "cspdk.si220.oband",
+  "cspdk.si500",
+  "cspdk.sin300"
+]
 
 [tool.gdsfactoryplus.sim.wls]
 max = 1.6
@@ -88,34 +92,54 @@ fix = true
 
 [tool.ruff.lint]
 ignore = [
-  "E501", # line too long, handled by black
-  "B008", # do not perform function calls in argument defaults
-  "C901", # too complex
-  "B905", # `zip()` without an explicit `strict=` parameter
-  "C408" # C408 Unnecessary `dict` call (rewrite as a literal)
+  "E501",  # line too long, handled by black
+  "B008",  # do not perform function calls in argument defaults
+  "C901",  # too complex
+  "B905",  # `zip()` without an explicit `strict=` parameter
+  "C408"  # C408 Unnecessary `dict` call (rewrite as a literal)
 ]
 select = [
-  "B", # flake8-bugbear
-  "C", # flake8-comprehensions
-  "D", # pydocstyle
-  "E", # pycodestyle errors
-  "F", # pyflakes
-  "I", # isort
-  "T10", # flake8-debugger
-  "UP", # pyupgrade
-  "W" # pycodestyle warnings
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  "D",  # pydocstyle
+  "E",  # pycodestyle errors
+  "F",  # pyflakes
+  "I",  # isort
+  "T10",  # flake8-debugger
+  "UP",  # pyupgrade
+  "W"  # pycodestyle warnings
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cband/cells/__init__.py" = ["F403"] # allowing star imports to aggregate cells
-"cspdk/si220/cband/models/__init__.py" = ["F403"] # allowing star imports to aggregate cells
-"cspdk/si220/oband/cells/__init__.py" = ["F403"] # allowing star imports to aggregate cells
+"cspdk/si220/cband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/models/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/oband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"references/**" = ["ALL"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.setuptools.package-data]
-"*" = ["*.csv", "*.yaml", "*.yml", "*.gds", "*.lyp", "*.oas", "*.lyt", "*.dat", "*.nc", "*.svg", "*.GDS", "*.OAS"]
+"*" = [
+  "*.csv",
+  "*.yaml",
+  "*.yml",
+  "*.gds",
+  "*.lyp",
+  "*.oas",
+  "*.lyt",
+  "*.dat",
+  "*.nc",
+  "*.svg",
+  "*.GDS",
+  "*.OAS"
+]
 
 [tool.setuptools.packages]
 find = {}
