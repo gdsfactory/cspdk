@@ -2,15 +2,32 @@
 build-backend = "setuptools.build_meta"
 requires = ["setuptools>=68.0"]
 
+[dependency-groups]
+dev = ["gdsfactoryplus", "pytest"]
+
 [project]
-name = "cspdk-sample-basic"
+name = "mycspdk"
 version = "0.1.0"
 description = "Basic sample project for cspdk"
 requires-python = ">=3.12"
 dependencies = ["cspdk"]
 
-[dependency-groups]
-dev = ["gdsfactoryplus", "pytest"]
+[tool.gdsfactoryplus]
+name = "cspdk.si220.cband"
+
+[tool.gdsfactoryplus.drc]
+pdk = "cspdk.si220.cband"
+timeout = 300
+
+[tool.gdsfactoryplus.pdk]
+name = "cspdk.si220.cband"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+"*" = ["*.csv", "*.gds", "*.lyp", "*.oas", "*.yaml", "*.yml"]
+
+[tool.setuptools.packages.find]
+include = ["mycspdk*"]
+where = ["."]
