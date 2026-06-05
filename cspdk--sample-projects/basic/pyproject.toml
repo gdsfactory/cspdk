@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
+requires = ["setuptools>=68.0"]
 
 [project]
 name = "cspdk-sample-basic"
@@ -10,7 +10,7 @@ requires-python = ">=3.12"
 dependencies = ["cspdk"]
 
 [dependency-groups]
-dev = ["pytest"]
+dev = ["gdsfactoryplus", "pytest"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
