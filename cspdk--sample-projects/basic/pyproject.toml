@@ -6,21 +6,11 @@ requires = ["setuptools>=68.0"]
 dev = ["gdsfactoryplus", "pytest"]
 
 [project]
-name = "mycspdk"
-version = "0.1.0"
-description = "Basic sample project for cspdk"
-requires-python = ">=3.12"
 dependencies = ["cspdk"]
-
-[tool.gdsfactoryplus]
-name = "cspdk.si220.cband"
-
-[tool.gdsfactoryplus.drc]
-pdk = "cspdk.si220.cband"
-timeout = 300
-
-[tool.gdsfactoryplus.pdk]
-name = "cspdk.si220.cband"
+description = "Basic sample project for cspdk"
+name = "mycspdk"
+requires-python = ">=3.12"
+version = "0.1.0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
