@@ -771,7 +771,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "doroutes", specifier = "~=0.6.0" },
+    { name = "doroutes", specifier = ">=0.6,<1.1" },
     { name = "gdsfactory", specifier = "~=9.43.0" },
     { name = "gdsfactoryplus", marker = "extra == 'dev'" },
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.1.0" },
@@ -909,7 +909,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/a2/55/8f8cab2afd404cf57
 
 [[package]]
 name = "doroutes"
-version = "0.6.1"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "kfactory" },
@@ -918,18 +918,18 @@ dependencies = [
     { name = "shapely" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/16/1eef3e5be3cc4d80648df08a0f3c19bc6106f2fe21573ae52476716288db/doroutes-0.6.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:a690304e8af314df5ada6791002e25b18932a878d69e65390e73dd611e5984bd", size = 3324092, upload-time = "2026-05-21T17:55:05.511Z" },
-    { url = "https://files.pythonhosted.org/packages/23/fc/b4b760d3b3ec56c81380d6e28ee21e5fb602a0dbf8ce8a9156e63bbe710e/doroutes-0.6.1-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:66661f07f7ca4334bf042ed6b1e50118e2805a2239650f63b1b0252fa88f74b8", size = 3491635, upload-time = "2026-05-21T17:55:07.194Z" },
-    { url = "https://files.pythonhosted.org/packages/7e/0f/c654534734b3b0bb2d151c30c2f7c826e3715ce38a96f12967a188297680/doroutes-0.6.1-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:ab67db2a3d086eb11e5ba2f6bed47c2bf24bbb5d6c1e1f2553630e5fe243bacd", size = 3657817, upload-time = "2026-05-21T17:55:09.052Z" },
-    { url = "https://files.pythonhosted.org/packages/75/74/f4532c6d04485c6b9aa94911f6e9463f9746e428d10b526148be91c9690c/doroutes-0.6.1-cp312-cp312-win_amd64.whl", hash = "sha256:a361600b4eaddf8e850d91fbc819dc5a2dabb0fae456c31b75300cfb969f4e01", size = 3044789, upload-time = "2026-05-21T17:55:10.475Z" },
-    { url = "https://files.pythonhosted.org/packages/83/88/0d3706b4195cda99d894f19def4acc0d906d6a335d506866e9d62e258110/doroutes-0.6.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:91876af9bed0a78891fed0f2eeb1ce963a0975218ce90f4bab6e4ac949f1b2f5", size = 3324073, upload-time = "2026-05-21T17:55:12.234Z" },
-    { url = "https://files.pythonhosted.org/packages/f3/2d/8351b24d49ba59929709656a42e783c36b937201d205ee857671b98c440d/doroutes-0.6.1-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:e301740363398da7c77ccd65d641a02fb30bc685db3fef093499ba6bba3e7d9d", size = 3491601, upload-time = "2026-05-21T17:55:13.56Z" },
-    { url = "https://files.pythonhosted.org/packages/80/f0/936cdeee85aa963f72515d95b38c82b58e7793914252a7aa3e5eb964caa0/doroutes-0.6.1-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:5201fc980e185918a4b4c035615021b7b33c75039ac1382276fabcfb6fae4830", size = 3657669, upload-time = "2026-05-21T17:55:15.415Z" },
-    { url = "https://files.pythonhosted.org/packages/d8/5d/7b27a1a6b3167ffdaf8279427e1cf85964c66538ae6e88a745dad346f7df/doroutes-0.6.1-cp313-cp313-win_amd64.whl", hash = "sha256:c1d888a892cb2030685f650e34be4e141d2b1012b351bb8a4566c652b7a06bf9", size = 3044476, upload-time = "2026-05-21T17:55:17.5Z" },
-    { url = "https://files.pythonhosted.org/packages/d8/06/46a8539108dfa96fdae4516152103b7b78140c2a0c5a07e6c691c4ee1535/doroutes-0.6.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:560baa2f51e124f7f53a42ee01647c27deff244810e7986dc204cdf71d2060dd", size = 3324058, upload-time = "2026-05-21T17:55:18.996Z" },
-    { url = "https://files.pythonhosted.org/packages/5f/b3/3553a6b401decf0fbd7fdd696c908f3afe7d9ad5d5a37546067c8da189d1/doroutes-0.6.1-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:bd5c222ac89589fda793a43ba6a94ae41da7a1ec3fdbf286367d12a970cbc1d9", size = 3490314, upload-time = "2026-05-21T17:55:20.437Z" },
-    { url = "https://files.pythonhosted.org/packages/22/f1/4df975d788110b8ee54640b3849508d232db3b0916228cabb571e8404fb8/doroutes-0.6.1-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:bb06e20811ce0c81947c1ac37c011221400b5cd957cf993a7a827d9e342e83a7", size = 3657670, upload-time = "2026-05-21T17:55:22.319Z" },
-    { url = "https://files.pythonhosted.org/packages/c8/8c/2ace23760d3a34bccab035e9775e85d8dd99059c86f9463ee28f00a4670d/doroutes-0.6.1-cp314-cp314-win_amd64.whl", hash = "sha256:d09d976b9676e8ae00ed95154ffd3ac646d4b1e0015e5670eb70dcac65601963", size = 3044444, upload-time = "2026-05-21T17:55:24.128Z" },
+    { url = "https://files.pythonhosted.org/packages/fd/ea/2273176f576dee3a98bde9ed1e63e402102ceb0eb6af16d62ca5c15947d2/doroutes-1.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:1c72d60afc6c41f24de992cfd447c464cac360939b5c20cf6c5e422f91399f6c", size = 3324331, upload-time = "2026-05-26T20:15:17.334Z" },
+    { url = "https://files.pythonhosted.org/packages/73/04/89b185c471522e2d4e24e4232cfade126743eb91a64c684b5d282a41d753/doroutes-1.0.0-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:e4040c5d229cc50115652ab036528e9b5fe17769a3f5f884a9629a69efe6e8b9", size = 3492113, upload-time = "2026-05-26T20:15:19.254Z" },
+    { url = "https://files.pythonhosted.org/packages/82/6c/85dcfd28703d960162a73d62cd3a0b796d45f4cdb7db4056b2d56678b4d2/doroutes-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:fdf527565966933daaa3b5f4d1be775691afed31106597122fa5472e199aaffb", size = 3659472, upload-time = "2026-05-26T20:15:21.485Z" },
+    { url = "https://files.pythonhosted.org/packages/bc/09/b58c7f87451ac603aa1bc8c9988159bf58c2fceaeef2c4f4aa2565b2dacf/doroutes-1.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:c5d9002c910110cdddc74d00d888f2b96d5a88be8981847037b1bd62d4eed0f9", size = 3044546, upload-time = "2026-05-26T20:15:23.195Z" },
+    { url = "https://files.pythonhosted.org/packages/15/77/52cd019263f62ad9cceb5a084e54654c4f8118f80c1a265f2a687f04cd2a/doroutes-1.0.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:7c0d41585f569ecdbbe40f6c4e6c0b75e52f41a581e05dfea6328ea6f7a2aed3", size = 3324233, upload-time = "2026-05-26T20:15:25.301Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/17/972771cd444eb55be30678832d1c819194fe2246a6679b9d8c391bc14c7a/doroutes-1.0.0-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:8e05c5044c4a380811113bc0b3cc0174a3ae86b7f30d14b41e3cd169aa8fb261", size = 3492080, upload-time = "2026-05-26T20:15:27.239Z" },
+    { url = "https://files.pythonhosted.org/packages/93/c7/fc27f655d12f6d4c860bc6e46e2a072f8c433c052ab780b7862edba13633/doroutes-1.0.0-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:ebfd12ba01e9df19817aae91a83e45f9ea3f9407f2b64906c5564baeb707f5fc", size = 3658953, upload-time = "2026-05-26T20:15:28.985Z" },
+    { url = "https://files.pythonhosted.org/packages/98/d5/bb917ab526a3489935bee5fb6fd522cb6df98870093891a1410abca38914/doroutes-1.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:b6809c7f2c0cfe2ac8759783a9b25f44975c4b7df60b8d5b04e2311beb2fea57", size = 3044080, upload-time = "2026-05-26T20:15:30.612Z" },
+    { url = "https://files.pythonhosted.org/packages/dc/d1/c800253e466884c75a46756bb4ed0fd8e2d34af77cc1db91257d3030220f/doroutes-1.0.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:6bb682d93b1d89ed4ae37746a8b89cc2690ab231362a338b07ecadeb35831b60", size = 3324104, upload-time = "2026-05-26T20:15:32.21Z" },
+    { url = "https://files.pythonhosted.org/packages/ef/73/f79eeff15cf7ca610846ba97fb20719f570aeebbb73d6c73a455e9f39e56/doroutes-1.0.0-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:5c4007384d146f024d79a058748630fbfd3a3540f975c3ae5412a4c5b5fa5981", size = 3490786, upload-time = "2026-05-26T20:15:34.279Z" },
+    { url = "https://files.pythonhosted.org/packages/56/fe/ca74b8d5afb4029928bf541002d49b45f2e042de85aae6ab9b3692889745/doroutes-1.0.0-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:084e3acb87ed455bfba1ca3c87d8bf023bba5b032c0be6709ec35604389d249c", size = 3658716, upload-time = "2026-05-26T20:15:36.068Z" },
+    { url = "https://files.pythonhosted.org/packages/ed/b3/e4de038b7c78534e0bda7ffc0d967d0b2528f65209870dd9393b5309e16f/doroutes-1.0.0-cp314-cp314-win_amd64.whl", hash = "sha256:cf5ea3e5df6aa2ba155c0270dffb89274cd116fbb7ce27bf360f84dbce2f086d", size = 3044284, upload-time = "2026-05-26T20:15:37.839Z" },
 ]
 
 [[package]]
