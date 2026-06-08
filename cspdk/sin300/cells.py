@@ -398,7 +398,7 @@ def grating_coupler_elliptical(
         fiber_angle=20.0,
         neff=1.6,
         ncladding=1.443,
-        layer_trench=LAYER.GRA,
+        layer_trench=LAYER.NITRIDE_ETCH,
         p_start=26,
         n_periods=30,
         end_straight_length=0.2,

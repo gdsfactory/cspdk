@@ -20,7 +20,7 @@ CONF.pdk = "cspdk.sin300"
 
 
 layer_transitions = {
-    LAYER.WG: cells.taper,
+    LAYER.NITRIDE: cells.taper,
 }
 
 

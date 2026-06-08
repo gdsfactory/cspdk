@@ -35,10 +35,12 @@ class LayerMapCornerstone(LayerMap):
     """Layer map for Cornerstone technology."""
 
     WG: Layer = (3, 0)  # type: ignore
+    WG_DF: Layer = (4, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore
     HEATER: Layer = (39, 0)  # type: ignore
     GRA: Layer = (6, 0)  # type: ignore
+    GRA_EBL: Layer = (60, 0)  # type: ignore
     LBL: Layer = (100, 0)  # type: ignore
     PAD: Layer = (41, 0)  # type: ignore
 
@@ -56,9 +58,9 @@ def get_layer_stack(
     thickness_slab: float = 100 * nm,
     thickness_grating: float = 150 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -129,14 +131,14 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 class Tech:
     """Technology parameters."""
 
-    radius = 5
-    radius_strip = 5
-    radius_min = 3.5
+    radius = 10
+    radius_strip = 10
+    radius_min = 10
     radius_rib = 25
     radius_ro = 25
     width = 0.45
-    width_rib = 0.5
-    width_ro = 0.5
+    width_rib = 0.45
+    width_ro = 0.45
 
     width_slab = 5
     width_heater = 2.5
