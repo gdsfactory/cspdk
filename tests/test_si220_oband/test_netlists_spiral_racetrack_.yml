@@ -3,87 +3,108 @@ instances:
     component: bend_euler
     info:
       dy: 0
-      length: 51.381
-      min_bend_radius: 10.903
-      radius: 12
-      route_info_length: 51.381
-      route_info_min_bend_radius: 10.903
+      length: 42.817
+      min_bend_radius: 9.086
+      radius: 10
+      route_info_length: 42.817
+      route_info_min_bend_radius: 9.086
       route_info_n_bend_90: 2
-      route_info_strip_length: 51.381
+      route_info_strip_length: 42.817
       route_info_type: strip
-      route_info_weight: 51.381
+      route_info_weight: 42.817
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 12
+      radius: 10
       width: null
   bend_euler10:
     component: bend_euler
     info:
       dy: 0
-      length: 29.972
-      min_bend_radius: 6.36
-      radius: 7
-      route_info_length: 29.972
-      route_info_min_bend_radius: 6.36
+      length: 85.635
+      min_bend_radius: 18.172
+      radius: 20
+      route_info_length: 85.635
+      route_info_min_bend_radius: 18.172
       route_info_n_bend_90: 2
-      route_info_strip_length: 29.972
+      route_info_strip_length: 85.635
       route_info_type: strip
-      route_info_weight: 29.972
+      route_info_weight: 85.635
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 7
+      radius: 20
       width: null
   bend_euler11:
     component: bend_euler
     info:
       dy: 0
-      length: 38.535
-      min_bend_radius: 8.178
-      radius: 9
-      route_info_length: 38.535
-      route_info_min_bend_radius: 8.178
+      length: 94.199
+      min_bend_radius: 19.99
+      radius: 22
+      route_info_length: 94.199
+      route_info_min_bend_radius: 19.99
       route_info_n_bend_90: 2
-      route_info_strip_length: 38.535
+      route_info_strip_length: 94.199
       route_info_type: strip
-      route_info_weight: 38.535
+      route_info_weight: 94.199
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 9
+      radius: 22
       width: null
   bend_euler12:
     component: bend_euler
     info:
       dy: 0
-      length: 38.535
-      min_bend_radius: 8.178
-      radius: 9
-      route_info_length: 38.535
-      route_info_min_bend_radius: 8.178
+      length: 94.199
+      min_bend_radius: 19.99
+      radius: 22
+      route_info_length: 94.199
+      route_info_min_bend_radius: 19.99
       route_info_n_bend_90: 2
-      route_info_strip_length: 38.535
+      route_info_strip_length: 94.199
       route_info_type: strip
-      route_info_weight: 38.535
+      route_info_weight: 94.199
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 9
+      radius: 22
       width: null
   bend_euler2:
+    component: bend_euler
+    info:
+      dy: 0
+      length: 42.817
+      min_bend_radius: 9.086
+      radius: 10
+      route_info_length: 42.817
+      route_info_min_bend_radius: 9.086
+      route_info_n_bend_90: 2
+      route_info_strip_length: 42.817
+      route_info_type: strip
+      route_info_weight: 42.817
+      width: 0.4
+    settings:
+      allow_min_radius_violation: false
+      angle: 180
+      cross_section: strip
+      p: 0.5
+      radius: 10
+      width: null
+  bend_euler3:
     component: bend_euler
     info:
       dy: 0
@@ -104,73 +125,73 @@ instances:
       p: 0.5
       radius: 12
       width: null
-  bend_euler3:
-    component: bend_euler
-    info:
-      dy: 0
-      length: 64.226
-      min_bend_radius: 13.629
-      radius: 15
-      route_info_length: 64.226
-      route_info_min_bend_radius: 13.629
-      route_info_n_bend_90: 2
-      route_info_strip_length: 64.226
-      route_info_type: strip
-      route_info_weight: 64.226
-      width: 0.4
-    settings:
-      allow_min_radius_violation: false
-      angle: 180
-      cross_section: strip
-      p: 0.5
-      radius: 15
-      width: null
   bend_euler4:
     component: bend_euler
     info:
       dy: 0
-      length: 64.226
-      min_bend_radius: 13.629
-      radius: 15
-      route_info_length: 64.226
-      route_info_min_bend_radius: 13.629
+      length: 51.381
+      min_bend_radius: 10.903
+      radius: 12
+      route_info_length: 51.381
+      route_info_min_bend_radius: 10.903
       route_info_n_bend_90: 2
-      route_info_strip_length: 64.226
+      route_info_strip_length: 51.381
       route_info_type: strip
-      route_info_weight: 64.226
+      route_info_weight: 51.381
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 15
+      radius: 12
       width: null
   bend_euler5:
     component: bend_euler
     info:
       dy: 0
-      length: 72.79
-      min_bend_radius: 15.447
-      radius: 17
-      route_info_length: 72.79
-      route_info_min_bend_radius: 15.447
+      length: 59.944
+      min_bend_radius: 12.721
+      radius: 14
+      route_info_length: 59.944
+      route_info_min_bend_radius: 12.721
       route_info_n_bend_90: 2
-      route_info_strip_length: 72.79
+      route_info_strip_length: 59.944
       route_info_type: strip
-      route_info_weight: 72.79
+      route_info_weight: 59.944
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 17
+      radius: 14
       width: null
   bend_euler6:
     component: bend_euler
     info:
       dy: 0
+      length: 59.944
+      min_bend_radius: 12.721
+      radius: 14
+      route_info_length: 59.944
+      route_info_min_bend_radius: 12.721
+      route_info_n_bend_90: 2
+      route_info_strip_length: 59.944
+      route_info_type: strip
+      route_info_weight: 59.944
+      width: 0.4
+    settings:
+      allow_min_radius_violation: false
+      angle: 180
+      cross_section: strip
+      p: 0.5
+      radius: 14
+      width: null
+  bend_euler7:
+    component: bend_euler
+    info:
+      dy: 0
       length: 72.79
       min_bend_radius: 15.447
       radius: 17
@@ -188,88 +209,67 @@ instances:
       p: 0.5
       radius: 17
       width: null
-  bend_euler7:
-    component: bend_euler
-    info:
-      dy: 0
-      length: 21.408
-      min_bend_radius: 4.543
-      radius: 5
-      route_info_length: 21.408
-      route_info_min_bend_radius: 4.543
-      route_info_n_bend_90: 2
-      route_info_strip_length: 21.408
-      route_info_type: strip
-      route_info_weight: 21.408
-      width: 0.4
-    settings:
-      allow_min_radius_violation: false
-      angle: 180
-      cross_section: strip
-      p: 0.5
-      radius: 5
-      width: null
   bend_euler8:
     component: bend_euler
     info:
       dy: 0
-      length: 21.408
-      min_bend_radius: 4.543
-      radius: 5
-      route_info_length: 21.408
-      route_info_min_bend_radius: 4.543
+      length: 72.79
+      min_bend_radius: 15.447
+      radius: 17
+      route_info_length: 72.79
+      route_info_min_bend_radius: 15.447
       route_info_n_bend_90: 2
-      route_info_strip_length: 21.408
+      route_info_strip_length: 72.79
       route_info_type: strip
-      route_info_weight: 21.408
+      route_info_weight: 72.79
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 5
+      radius: 17
       width: null
   bend_euler9:
     component: bend_euler
     info:
       dy: 0
-      length: 29.972
-      min_bend_radius: 6.36
-      radius: 7
-      route_info_length: 29.972
-      route_info_min_bend_radius: 6.36
+      length: 85.635
+      min_bend_radius: 18.172
+      radius: 20
+      route_info_length: 85.635
+      route_info_min_bend_radius: 18.172
       route_info_n_bend_90: 2
-      route_info_strip_length: 29.972
+      route_info_strip_length: 85.635
       route_info_type: strip
-      route_info_weight: 29.972
+      route_info_weight: 85.635
       width: 0.4
     settings:
       allow_min_radius_violation: false
       angle: 180
       cross_section: strip
       p: 0.5
-      radius: 7
+      radius: 20
       width: null
   bend_s:
     component: bend_s
     info:
       end_angle: 0
-      length: 22.076
-      min_bend_radius: 11.989
-      route_info_length: 22.076
-      route_info_min_bend_radius: 11.989
+      length: 28.393
+      min_bend_radius: 7.066
+      route_info_length: 28.393
+      route_info_min_bend_radius: 7.066
       route_info_n_bend_s: 1
-      route_info_strip_length: 22.076
+      route_info_strip_length: 28.393
       route_info_type: strip
-      route_info_weight: 22.076
+      route_info_weight: 28.393
       start_angle: 0
     settings:
       allow_min_radius_violation: false
       cross_section: strip
       size:
       - 20
-      - -8
+      - -18
       width: null
   straight:
     component: straight
@@ -441,114 +441,114 @@ instances:
       width: null
 nets:
 - p1: bend_euler2,o1
-  p2: straight3,o2
-- p1: bend_euler2,o2
-  p2: straight7,o1
-- p1: bend_euler3,o1
-  p2: straight7,o2
-- p1: bend_euler3,o2
-  p2: straight5,o1
-- p1: bend_euler4,o1
-  p2: straight4,o2
-- p1: bend_euler4,o2
-  p2: straight8,o1
-- p1: bend_euler5,o1
-  p2: straight8,o2
-- p1: bend_euler5,o2
-  p2: straight6,o1
-- p1: bend_euler6,o1
-  p2: straight5,o2
-- p1: bend_euler6,o2
-  p2: straight9,o1
-- p1: bend_euler7,o1
-  p2: bend_s,o1
-- p1: bend_euler7,o2
-  p2: straight,o1
-- p1: bend_euler8,o1
   p2: bend_s,o2
-- p1: bend_euler8,o2
+- p1: bend_euler2,o2
   p2: straight10,o1
-- p1: bend_euler9,o1
+- p1: bend_euler3,o1
   p2: straight10,o2
-- p1: bend_euler9,o2
+- p1: bend_euler3,o2
   p2: straight2,o1
-- p1: bend_euler10,o1
+- p1: bend_euler4,o1
   p2: straight,o2
-- p1: bend_euler10,o2
+- p1: bend_euler4,o2
   p2: straight11,o1
-- p1: bend_euler11,o1
+- p1: bend_euler5,o1
   p2: straight11,o2
-- p1: bend_euler11,o2
+- p1: bend_euler5,o2
   p2: straight3,o1
-- p1: bend_euler12,o1
+- p1: bend_euler6,o1
   p2: straight2,o2
-- p1: bend_euler12,o2
+- p1: bend_euler6,o2
   p2: straight12,o1
-- p1: bend_euler,o1
+- p1: bend_euler7,o1
   p2: straight12,o2
-- p1: bend_euler,o2
+- p1: bend_euler7,o2
   p2: straight4,o1
+- p1: bend_euler8,o1
+  p2: straight3,o2
+- p1: bend_euler8,o2
+  p2: straight7,o1
+- p1: bend_euler9,o1
+  p2: straight7,o2
+- p1: bend_euler9,o2
+  p2: straight5,o1
+- p1: bend_euler10,o1
+  p2: straight4,o2
+- p1: bend_euler10,o2
+  p2: straight8,o1
+- p1: bend_euler11,o1
+  p2: straight8,o2
+- p1: bend_euler11,o2
+  p2: straight6,o1
+- p1: bend_euler12,o1
+  p2: straight5,o2
+- p1: bend_euler12,o2
+  p2: straight9,o1
+- p1: bend_euler,o1
+  p2: bend_s,o1
+- p1: bend_euler,o2
+  p2: straight,o1
 placements:
   bend_euler:
     mirror: false
     rotation: 180
     x: 0
-    y: 6
+    y: 0
   bend_euler10:
     mirror: false
     rotation: 0
     x: 20
-    y: -10
+    y: -28
   bend_euler11:
     mirror: false
     rotation: 180
     x: 0
-    y: 4
+    y: 12
   bend_euler12:
     mirror: false
     rotation: 0
     x: 20
-    y: -12
+    y: -30
   bend_euler2:
     mirror: false
     rotation: 0
     x: 20
-    y: -14
+    y: -18
   bend_euler3:
     mirror: false
     rotation: 180
     x: 0
-    y: 10
+    y: 2
   bend_euler4:
     mirror: false
     rotation: 0
     x: 20
-    y: -18
+    y: -20
   bend_euler5:
     mirror: false
     rotation: 180
     x: 0
-    y: 12
+    y: 4
   bend_euler6:
     mirror: false
     rotation: 0
     x: 20
-    y: -20
+    y: -22
   bend_euler7:
     mirror: false
     rotation: 180
     x: 0
-    y: 0
+    y: 6
   bend_euler8:
     mirror: false
     rotation: 0
     x: 20
-    y: -8
+    y: -24
   bend_euler9:
     mirror: false
     rotation: 180
     x: 0
-    y: 2
+    y: 10
   bend_s:
     mirror: false
     rotation: 0
@@ -558,7 +558,7 @@ placements:
     mirror: false
     rotation: 0
     x: 0
-    y: -10
+    y: -20
   straight10:
     mirror: false
     rotation: 180
@@ -578,27 +578,27 @@ placements:
     mirror: false
     rotation: 0
     x: 0
-    y: -12
+    y: -22
   straight3:
     mirror: false
     rotation: 0
     x: 0
-    y: -14
+    y: -24
   straight4:
     mirror: false
     rotation: 0
     x: 0
-    y: -18
+    y: -28
   straight5:
     mirror: false
     rotation: 0
     x: 0
-    y: -20
+    y: -30
   straight6:
     mirror: false
     rotation: 0
     x: 0
-    y: -22
+    y: -32
   straight7:
     mirror: false
     rotation: 180

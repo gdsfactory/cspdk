@@ -133,6 +133,7 @@ class Tech:
 
     radius = 10
     radius_strip = 10
+    radius_min = 5
     radius_rib = 25
     radius_ro = 25
     width = 0.40
@@ -187,7 +188,7 @@ def strip(
     width: float = TECH.width,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius,
-    radius_min: float = TECH.radius,
+    radius_min: float = TECH.radius_min,
 ) -> CrossSection:
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(

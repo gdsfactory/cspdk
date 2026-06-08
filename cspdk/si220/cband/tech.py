@@ -133,7 +133,7 @@ class Tech:
 
     radius = 10
     radius_strip = 10
-    radius_min = 10
+    radius_min = 5
     radius_rib = 25
     radius_ro = 25
     width = 0.45

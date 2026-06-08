@@ -9,7 +9,7 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.5
+    width: 0.4
   o2:
     center:
     - 60.8
@@ -18,7 +18,7 @@ ports:
     name: o2
     orientation: 0
     port_type: optical
-    width: 0.5
+    width: 0.4
   o3:
     center:
     - 60.8
@@ -27,7 +27,7 @@ ports:
     name: o3
     orientation: 0
     port_type: optical
-    width: 0.5
+    width: 0.4
 settings:
   cross_section: rib
   gap_mmi: 1.55

@@ -12,7 +12,7 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.5
+    width: 0.45
   o2:
     center:
     - 364.812
