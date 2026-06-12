@@ -14,21 +14,25 @@ from cspdk.si_sus._schematic import (
 from cspdk.si_sus.tech import LAYER, Tech
 
 
-def _stabilize_tether_names(c: gf.Component) -> gf.Component:
+def _stabilize_tether_names(c: gf.Component) -> None:
     """Rename the unnamed along-path tether containers deterministically.
 
+    Stopgap for https://github.com/gdsfactory/gdsfactory/issues/4598:
     gdsfactory's ComponentAlongPath support (used by xs_sus for the tether
     slots) places the slots inside an auto-named 'Unnamed_N' container cell.
     N depends on global creation order, which would make GDS and netlist
-    regression files nondeterministic.
+    regression files nondeterministic. Remove once the fix is released.
     """
     for i, inst in enumerate(c.insts):
         if inst.cell.name.startswith("Unnamed"):
             inst.cell.name = f"{c.name}_tethers_{i}"
-    return c
 
 
-@gf.cell(tags=["cells"], schematic_function=straight_schematic)
+@gf.cell(
+    tags=["cells"],
+    schematic_function=straight_schematic,
+    post_process=[_stabilize_tether_names],
+)
 def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sus",
@@ -41,12 +45,14 @@ def straight(
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    return _stabilize_tether_names(
-        gf.c.straight(length=length, cross_section=cross_section, **kwargs)
-    )
+    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
-@gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
+@gf.cell(
+    tags=["cells"],
+    schematic_function=bend_s_schematic,
+    post_process=[_stabilize_tether_names],
+)
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sus",
@@ -59,16 +65,18 @@ def bend_s(
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
     """
-    return _stabilize_tether_names(
-        gf.components.bend_s(
-            size=size,
-            cross_section=cross_section,
-            allow_min_radius_violation=allow_min_radius_violation,
-        )
+    return gf.components.bend_s(
+        size=size,
+        cross_section=cross_section,
+        allow_min_radius_violation=allow_min_radius_violation,
     )
 
 
-@gf.cell(tags=["cells"], schematic_function=bend_euler_schematic)
+@gf.cell(
+    tags=["cells"],
+    schematic_function=bend_euler_schematic,
+    post_process=[_stabilize_tether_names],
+)
 def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
@@ -85,22 +93,24 @@ def bend_euler(
         width: the width of the waveguide forming the bend.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return _stabilize_tether_names(
-        gf.components.bend_euler(
-            radius=radius,
-            angle=angle,
-            p=p,
-            with_arc_floorplan=True,
-            npoints=None,
-            layer=None,
-            width=width,
-            cross_section=cross_section,
-            allow_min_radius_violation=False,
-        )
+    return gf.components.bend_euler(
+        radius=radius,
+        angle=angle,
+        p=p,
+        with_arc_floorplan=True,
+        npoints=None,
+        layer=None,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
     )
 
 
-@gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
+@gf.cell(
+    tags=["cells"],
+    schematic_function=bend_circular_schematic,
+    post_process=[_stabilize_tether_names],
+)
 def bend_circular(
     radius: float | None = None,
     angle: float = 90.0,
@@ -118,18 +128,20 @@ def bend_circular(
         width: the width of the waveguide forming the bend.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return _stabilize_tether_names(
-        gf.components.bend_circular(
-            radius=radius,
-            angle=angle,
-            width=width,
-            cross_section=cross_section,
-            allow_min_radius_violation=False,
-        )
+    return gf.components.bend_circular(
+        radius=radius,
+        angle=angle,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
     )
 
 
-@gf.cell(tags=["cells"], schematic_function=taper_schematic)
+@gf.cell(
+    tags=["cells"],
+    schematic_function=taper_schematic,
+    post_process=[_stabilize_tether_names],
+)
 def taper(
     length: float = 10.0,
     width1: float = Tech.width_sus,
@@ -146,14 +158,12 @@ def taper(
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return _stabilize_tether_names(
-        gf.c.taper(
-            length=length,
-            width1=width1,
-            width2=width2,
-            port=port,
-            cross_section=cross_section,
-        )
+    return gf.c.taper(
+        length=length,
+        width1=width1,
+        width2=width2,
+        port=port,
+        cross_section=cross_section,
     )
 
 
