@@ -11,6 +11,13 @@ LayerViews:
     hatch_pattern: coarsely dotted
     width: 1
     color: "silver"
+  # abstract marker for the un-etched suspended waveguide core (not a mask layer)
+  WG_MARK:
+    layer: [404, 10]
+    layer_in_name: true
+    width: 1
+    color: "#9dff9d"
+    hatch_pattern: hollow
   FLOORPLAN:
     layer: [99, 0]
     layer_in_name: true

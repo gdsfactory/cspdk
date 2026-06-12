@@ -4,8 +4,10 @@ import sys
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
+    ComponentAlongPath,
     CrossSection,
     CrossSectionSpec,
+    Section,
     get_cross_sections,
 )
 from gdsfactory.routing.route_bundle import ManhattanRoute
@@ -18,10 +20,7 @@ from gdsfactory.technology import (
 )
 from gdsfactory.typings import (
     ComponentSpec,
-    Floats,
     Layer,
-    LayerSpec,
-    LayerSpecs,
 )
 
 from cspdk.si_sus.config import PATH
@@ -34,6 +33,10 @@ class LayerMapCornerstone(LayerMap):
 
     WG: Layer = (404, 0)
     SLAB: Layer = (405, 0)
+    # abstract marker layer (not a foundry mask layer, datatype 10 is ignored
+    # by mask prep): marks where the suspended waveguide core lies, since the
+    # core itself is the UN-drawn Si between the etch windows on (404, 0)
+    WG_MARK: Layer = (404, 10)
     FLOORPLAN: Layer = (99, 0)
     LBL: Layer = (100, 0)
 
@@ -55,10 +58,15 @@ def get_layer_stack(
         thickness_wg: Si waveguide thickness in um.
         thickness_slab: Si slab thickness in um.
     """
+    # (404, 0) is a dark-field etch layer (drawn shapes are etched to BOX), so
+    # the physical core is the UN-drawn Si between the etch windows. The core
+    # level extrudes the abstract WG_MARK layer that xs_sus draws along the
+    # waveguide center for exactly this purpose. The surrounding un-etched Si
+    # mesa and the rib slab (404 AND 405 regions, 150nm) are not modeled.
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
+                layer=LogicalLayer(layer=LAYER.WG_MARK),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="si",
@@ -84,10 +92,21 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 
 
 class Tech:
-    """Technology parameters."""
+    """Technology parameters.
+
+    Values from the Cornerstone suspended-Si spec ('bias' variant) and the
+    Suspendedsilicon500nm_3800nm_TE_Waveguide reference GDS: total
+    cross-section width 8.5um = 3.5um etch window + 1.5um core + 3.5um etch
+    window; each window is drawn as periodic 0.3um etch slots at 0.55um
+    pitch, leaving 0.25um Si tethers that support the suspended core.
+    """
 
     radius_sus = 20
-    width_sus = 8.5
+    width_sus = 1.5  # un-etched Si core between the two etch windows
+    width_etch_window = 3.5  # width of each etch band drawn on (404, 0)
+    offset_etch_window = 2.5  # center offset of each etch band
+    tether_period = 0.55  # pitch of the etch slots along the waveguide
+    etch_slot_length = 0.3  # etched slot length; 0.25um tether in between
 
 
 TECH = Tech()
@@ -99,25 +118,71 @@ TECH = Tech()
 xsection = gf.xsection
 
 
+@gf.cell
+def _etch_slot() -> gf.Component:
+    """One etch slot of the tethered etch window, centered at the origin.
+
+    Built with raw kdb shapes (not gf.c.rectangle) so it can be created at
+    import time, before any PDK is active.
+    """
+    import kfactory as kf  # noqa: PLC0415
+
+    c = gf.Component()
+    dx = TECH.etch_slot_length / 2
+    dy = TECH.width_etch_window / 2
+    layer_index = c.kcl.layout.layer(*LAYER.WG)
+    c.shapes(layer_index).insert(kf.kdb.DBox(-dx, -dy, dx, dy))
+    return c
+
+
 @xsection
 def xs_sus(
     width: float = TECH.width_sus,
-    layer: LayerSpec = "WG",
     radius: float = TECH.radius_sus,
     radius_min: float = TECH.radius_sus,
-    bbox_layers: LayerSpecs = ("SLAB",),
-    bbox_offsets: Floats = (5.0,),
-    **kwargs,
 ) -> CrossSection:
-    """Return Suspended Si cross_section for 3800nm TE."""
-    return gf.cross_section.cross_section(
-        width=width,
-        layer=layer,
+    """Return Suspended Si cross_section for 3800nm TE (bias variant).
+
+    (404, 0) is dark field: drawn shapes are etched to BOX, so the waveguide
+    core is the UN-drawn 1.5um of Si between two 3.5um etch windows. Each
+    window is drawn as periodic 0.3um etch slots (0.55um pitch), leaving
+    0.25um tethers that hold the suspended core, matching the
+    Suspendedsilicon500nm_3800nm_TE_Waveguide reference GDS. The core
+    Section is drawn on the abstract WG_MARK (404, 10) marker layer, which
+    carries the optical ports and the LayerStack core level; it is not a
+    foundry mask layer.
+
+    Only the 'bias' variant is modeled; the rib cross-section (solid etch
+    windows + SLAB (405, 0) protect) is not implemented.
+
+    Args:
+        width: width of the un-etched core. The etch windows stay at
+            +-offset_etch_window, so only the default width matches the
+            foundry cross-section.
+        radius: bend radius.
+        radius_min: minimum allowed bend radius.
+    """
+    slot = _etch_slot()
+    offset = TECH.offset_etch_window
+    return CrossSection(
+        sections=(
+            Section(
+                width=width,
+                layer=LAYER.WG_MARK,
+                port_names=("o1", "o2"),
+                port_types=("optical", "optical"),
+            ),
+        ),
         radius=radius,
         radius_min=radius_min,
-        bbox_layers=bbox_layers,
-        bbox_offsets=bbox_offsets,
-        **kwargs,
+        components_along_path=(
+            ComponentAlongPath(
+                component=slot, spacing=TECH.tether_period, offset=offset
+            ),
+            ComponentAlongPath(
+                component=slot, spacing=TECH.tether_period, offset=-offset
+            ),
+        ),
     )
 
 

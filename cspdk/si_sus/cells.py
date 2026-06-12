@@ -115,6 +115,11 @@ def grating_coupler_rectangular(
 ) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
 
+    Note: not matched to the foundry reference GDS
+    (Suspendedsilicon500nm_3800nm_TE_GratingCoupler); the generic gdsfactory
+    grating with layer_slab=WG only approximates the etch-slot drawing
+    convention of this platform.
+
     Args:
         period: the period of the grating.
         n_periods: the number of grating teeth.
