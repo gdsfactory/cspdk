@@ -233,7 +233,7 @@ def mmi2x2(
     width: float | None = None,
     width_taper: float = 3.0,
     length_taper: float = 25.0,
-    length_mmi: float = 5.5,
+    length_mmi: float = 116.0,
     width_mmi: float = 6.0,
     gap_mmi: float = 0.4,
     cross_section: CrossSectionSpec = "xs_n780",
@@ -299,7 +299,7 @@ def coupler(
     gap: float = 0.236,
     length: float = 20.0,
     dy: float = 4.0,
-    dx: float = 20.0,
+    dx: float = 25.0,
     cross_section: CrossSectionSpec = "xs_n780",
 ) -> Component:
     """A coupler.
