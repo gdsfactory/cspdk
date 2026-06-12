@@ -42,7 +42,7 @@ LAYER = LayerMapCornerstone
 
 def get_layer_stack(
     thickness_slab: float = 1200 * nm,
-    thickness_wg: float = 1800 * nm,
+    thickness_wg: float = 3000 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
