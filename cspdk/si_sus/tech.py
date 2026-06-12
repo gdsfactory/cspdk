@@ -119,19 +119,24 @@ xsection = gf.xsection
 
 
 @gf.cell
-def _etch_slot() -> gf.Component:
-    """One etch slot of the tethered etch window, centered at the origin.
+def _etch_slot_pair() -> gf.Component:
+    """One pair of etch slots (one per etch window), centered at the origin.
 
-    Built with raw kdb shapes (not gf.c.rectangle) so it can be created at
-    import time, before any PDK is active.
+    Placing the pair as a single component along the path center line keeps
+    the two windows radially aligned in bends, like the foundry reference
+    bend GDS (same slot count on both sides, slots pointing at the bend
+    center). Built with raw kdb shapes (not gf.c.rectangle) so it can be
+    created at import time, before any PDK is active.
     """
     import kfactory as kf  # noqa: PLC0415
 
     c = gf.Component()
     dx = TECH.etch_slot_length / 2
     dy = TECH.width_etch_window / 2
+    o = TECH.offset_etch_window
     layer_index = c.kcl.layout.layer(*LAYER.WG)
-    c.shapes(layer_index).insert(kf.kdb.DBox(-dx, -dy, dx, dy))
+    c.shapes(layer_index).insert(kf.kdb.DBox(-dx, o - dy, dx, o + dy))
+    c.shapes(layer_index).insert(kf.kdb.DBox(-dx, -o - dy, dx, -o + dy))
     return c
 
 
@@ -162,8 +167,6 @@ def xs_sus(
         radius: bend radius.
         radius_min: minimum allowed bend radius.
     """
-    slot = _etch_slot()
-    offset = TECH.offset_etch_window
     return CrossSection(
         sections=(
             Section(
@@ -176,12 +179,7 @@ def xs_sus(
         radius=radius,
         radius_min=radius_min,
         components_along_path=(
-            ComponentAlongPath(
-                component=slot, spacing=TECH.tether_period, offset=offset
-            ),
-            ComponentAlongPath(
-                component=slot, spacing=TECH.tether_period, offset=-offset
-            ),
+            ComponentAlongPath(component=_etch_slot_pair(), spacing=TECH.tether_period),
         ),
     )
 
