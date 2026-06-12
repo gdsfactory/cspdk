@@ -33,17 +33,16 @@ def add_fiber_array(
         cross_section: cross_section function.
         kwargs: additional arguments.
 
-    .. plot::
-        :include-source:
+    ```python
+    import gdsfactory as gf
 
-        import gdsfactory as gf
-
-        c = gf.components.crossing()
-        cc = gf.routing.add_fiber_array(
-            component=c,
-            grating_coupler=gf.components.grating_coupler_elliptical_te,
-        )
-        cc.plot()
+    c = gf.components.crossing()
+    cc = gf.routing.add_fiber_array(
+        component=c,
+        grating_coupler=gf.components.grating_coupler_elliptical_te,
+    )
+    cc.plot()
+    ```
 
     """
     return gf.routing.add_fiber_array(
@@ -82,17 +81,16 @@ def add_fiber_single(
         loopback_spacing: spacing between loopback and test structure.
         kwargs: additional arguments.
 
-    .. plot::
-        :include-source:
+    ```python
+    import gdsfactory as gf
 
-        import gdsfactory as gf
-
-        c = gf.components.crossing()
-        cc = gf.routing.add_fiber_single(
-            component=c,
-            grating_coupler=gf.components.grating_coupler_elliptical_te,
-        )
-        cc.plot()
+    c = gf.components.crossing()
+    cc = gf.routing.add_fiber_single(
+        component=c,
+        grating_coupler=gf.components.grating_coupler_elliptical_te,
+    )
+    cc.plot()
+    ```
 
     """
     return gf.routing.add_fiber_single(
@@ -141,21 +139,20 @@ def add_pads_top(
         route_width: width of the route.
         kwargs: additional arguments.
 
-    .. plot::
-        :include-source:
-
-        import gdsfactory as gf
-        c = gf.c.nxn(
-            xsize=600,
-            ysize=200,
-            north=2,
-            south=3,
-            wg_width=10,
-            layer="M3",
-            port_type="electrical",
-        )
-        cc = gf.routing.add_pads_top(component=c, port_names=("e1", "e4"), fanout_length=50)
-        cc.plot()
+    ```python
+    import gdsfactory as gf
+    c = gf.c.nxn(
+        xsize=600,
+        ysize=200,
+        north=2,
+        south=3,
+        wg_width=10,
+        layer="M3",
+        port_type="electrical",
+    )
+    cc = gf.routing.add_pads_top(component=c, port_names=("e1", "e4"), fanout_length=50)
+    cc.plot()
+    ```
 
     """
     return gf.routing.add_pads_top(
