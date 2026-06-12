@@ -101,7 +101,11 @@ class Tech:
     pitch, leaving 0.25um Si tethers that support the suspended core.
     """
 
-    radius_sus = 20
+    # spec minimum bend radius is 20um, but a nominal-20 euler bend dips to
+    # ~14um local curvature; default to the 40.75um center-line radius of the
+    # Suspendedsilicon500nm_3800nm_TE_90_DegreeBend reference GDS
+    radius_sus = 40.75
+    radius_min_sus = 20
     width_sus = 1.5  # un-etched Si core between the two etch windows
     width_etch_window = 3.5  # width of each etch band drawn on (404, 0)
     offset_etch_window = 2.5  # center offset of each etch band
@@ -144,7 +148,7 @@ def _etch_slot_pair() -> gf.Component:
 def xs_sus(
     width: float = TECH.width_sus,
     radius: float = TECH.radius_sus,
-    radius_min: float = TECH.radius_sus,
+    radius_min: float = TECH.radius_min_sus,
 ) -> CrossSection:
     """Return Suspended Si cross_section for 3800nm TE (bias variant).
 
