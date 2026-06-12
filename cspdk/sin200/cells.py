@@ -190,11 +190,11 @@ taper_n520 = partial(
 @gf.cell(tags=["cells"], schematic_function=mmi1x2_schematic)
 def mmi1x2(
     width: float | None = None,
-    width_mmi: float = 6.0,
-    width_taper: float = 3.0,
-    length_taper: float = 25.0,
-    length_mmi: float = 32.0,
-    gap_mmi: float = 0.4,
+    width_mmi: float = 4.3,
+    width_taper: float = 1.8,
+    length_taper: float = 40.0,
+    length_mmi: float = 21.6,
+    gap_mmi: float = 0.45,
     cross_section: CrossSectionSpec = "xs_n780",
 ) -> Component:
     """An mmi1x2.
@@ -223,19 +223,34 @@ def mmi1x2(
     )
 
 
-mmi1x2_n780 = partial(mmi1x2, length_mmi=32.0, cross_section="xs_n780")
-mmi1x2_n638 = partial(mmi1x2, length_mmi=24.0, cross_section="xs_n638")
-mmi1x2_n520 = partial(mmi1x2, length_mmi=18.0, cross_section="xs_n520")
+# dimensions from the Cornerstone SiN200 standard components reference GDS
+mmi1x2_n780 = partial(mmi1x2, cross_section="xs_n780")
+mmi1x2_n638 = partial(
+    mmi1x2,
+    length_mmi=18.4,
+    width_mmi=3.5,
+    width_taper=1.4,
+    gap_mmi=0.35,
+    cross_section="xs_n638",
+)
+mmi1x2_n520 = partial(
+    mmi1x2,
+    length_mmi=21.6,
+    width_mmi=3.4,
+    width_taper=1.3,
+    gap_mmi=0.4,
+    cross_section="xs_n520",
+)
 
 
 @gf.cell(tags=["cells"], schematic_function=mmi2x2_schematic)
 def mmi2x2(
     width: float | None = None,
-    width_taper: float = 3.0,
-    length_taper: float = 25.0,
-    length_mmi: float = 116.0,
-    width_mmi: float = 6.0,
-    gap_mmi: float = 0.4,
+    width_taper: float = 1.8,
+    length_taper: float = 40.0,
+    length_mmi: float = 88.0,
+    width_mmi: float = 4.3,
+    gap_mmi: float = 0.45,
     cross_section: CrossSectionSpec = "xs_n780",
 ) -> Component:
     """An mmi2x2.
@@ -264,9 +279,24 @@ def mmi2x2(
     )
 
 
-mmi2x2_n780 = partial(mmi2x2, length_mmi=116.0, cross_section="xs_n780")
-mmi2x2_n638 = partial(mmi2x2, length_mmi=84.0, cross_section="xs_n638")
-mmi2x2_n520 = partial(mmi2x2, length_mmi=63.0, cross_section="xs_n520")
+# dimensions from the Cornerstone SiN200 standard components reference GDS
+mmi2x2_n780 = partial(mmi2x2, cross_section="xs_n780")
+mmi2x2_n638 = partial(
+    mmi2x2,
+    length_mmi=81.6,
+    width_mmi=3.5,
+    width_taper=1.4,
+    gap_mmi=0.35,
+    cross_section="xs_n638",
+)
+mmi2x2_n520 = partial(
+    mmi2x2,
+    length_mmi=84.8,
+    width_mmi=3.4,
+    width_taper=1.3,
+    gap_mmi=0.4,
+    cross_section="xs_n520",
+)
 
 
 ##############################
