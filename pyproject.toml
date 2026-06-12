@@ -64,9 +64,9 @@ options = [
   "cspdk.si220.oband",
   "cspdk.si500",
   "cspdk.sin300",
-  "cspdk.si340", 
-  "cspdk.si_sus", 
-  "cspdk.sin200", 
+  "cspdk.si340",
+  "cspdk.si_sus",
+  "cspdk.sin200",
   "cspdk.ge_on_si"
 ]
 
