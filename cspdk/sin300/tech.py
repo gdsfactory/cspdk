@@ -214,7 +214,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_nc",
     straight: ComponentSpec = "straight_nc",
     bend: ComponentSpec = "bend_euler_nc",
-    taper: ComponentSpec = "taper_nc",
 ) -> ManhattanRoute:
     """Route single optical path.
 
@@ -232,7 +231,6 @@ def route_single(
         cross_section: cross section.
         straight: straight component.
         bend: bend component.
-        taper: taper component.
 
     """
     return gf.routing.route_single(
@@ -249,7 +247,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -305,14 +302,12 @@ routing_strategies = dict(
         route_single,
         straight="straight_nc",
         bend="bend_euler_nc",
-        taper="taper_nc",
         cross_section="xs_nc",
     ),
     route_single_no=partial(
         route_single,
         straight="straight_no",
         bend="bend_euler_no",
-        taper="taper_no",
         cross_section="xs_no",
     ),
     route_bundle=route_bundle,

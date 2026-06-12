@@ -140,7 +140,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_sus",
     straight: ComponentSpec = "straight",
     bend: ComponentSpec = "bend_euler",
-    taper: ComponentSpec = "taper",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -157,7 +156,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 

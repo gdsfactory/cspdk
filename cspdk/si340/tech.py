@@ -266,7 +266,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_sc",
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_euler_sc",
-    taper: ComponentSpec = "taper_sc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -283,7 +282,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -342,21 +340,18 @@ routing_strategies = dict(
         route_single,
         straight="straight_sc",
         bend="bend_euler_sc",
-        taper="taper_sc",
         cross_section="xs_sc",
     ),
     route_single_so=partial(
         route_single,
         straight="straight_so",
         bend="bend_euler_so",
-        taper="taper_so",
         cross_section="xs_so",
     ),
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_bundle=route_bundle,
