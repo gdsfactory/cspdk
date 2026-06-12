@@ -50,6 +50,10 @@ def get_layer_stack(
         thickness_slab: Ge slab thickness in um.
         thickness_wg: Ge rib waveguide thickness in um.
     """
+    # Note: the foundry slab is a blanket Ge film (1.2 um left everywhere after
+    # the 1.8 um rib etch), not derivable from the drawn rib layer (303,0)
+    # alone; both levels extrude the same WG polygons. Kept so the 1.2/3.0 um
+    # thicknesses stay visible in the stack.
     return LayerStack(
         layers=dict(
             slab=LayerLevel(
