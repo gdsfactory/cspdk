@@ -169,7 +169,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     )
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
-    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    xs = gf.cross_section.cross_section(width=width, **kwargs)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
