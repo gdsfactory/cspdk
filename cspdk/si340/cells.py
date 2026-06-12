@@ -336,17 +336,22 @@ coupler_rc = partial(coupler, cross_section="xs_rc")
 
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_rectangular_schematic)
 def grating_coupler_rectangular(
-    period=0.57,
+    period=0.59,
     n_periods: int = 60,
+    fill_factor: float = 0.5508,
     length_taper: float = 350.0,
     wavelength: float = 1.55,
     cross_section="xs_sc",
 ) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
 
+    Defaults from the SOI340nm_1550nm_TE_STRIP_Grating_Coupler reference
+    GDS: 60 teeth, 0.59um period, 0.325um tooth width on GRA, 11um wide.
+
     Args:
         period: the period of the grating.
         n_periods: the number of grating teeth.
+        fill_factor: tooth width as a fraction of the period.
         length_taper: the length of the taper tapering up to the grating.
         wavelength: the center wavelength for which the grating is designed.
         cross_section: a cross section or its name or a function generating a cross section.
@@ -354,7 +359,7 @@ def grating_coupler_rectangular(
     return gf.c.grating_coupler_rectangular(
         n_periods=n_periods,
         period=period,
-        fill_factor=0.5,
+        fill_factor=fill_factor,
         width_grating=11.0,
         length_taper=length_taper,
         polarization="te",
@@ -369,6 +374,7 @@ def grating_coupler_rectangular(
     )
 
 
+# dimensions from the Cornerstone SOI 340nm standard components reference GDS
 grating_coupler_rectangular_sc = partial(
     grating_coupler_rectangular,
     cross_section="xs_sc",
@@ -376,6 +382,9 @@ grating_coupler_rectangular_sc = partial(
 
 grating_coupler_rectangular_so = partial(
     grating_coupler_rectangular,
+    period=0.47,
+    fill_factor=0.468,
+    wavelength=1.31,
     cross_section="xs_so",
 )
 

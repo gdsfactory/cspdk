@@ -364,18 +364,26 @@ coupler_n520 = partial(coupler, cross_section="xs_n520")
 
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_rectangular_schematic)
 def grating_coupler_rectangular(
-    period: float = 0.52,
+    period: float = 0.668,
     n_periods: int = 30,
+    fill_factor: float = 0.5,
     length_taper: float = 200.0,
+    width_grating: float = 7.0,
     wavelength: float = 0.78,
     cross_section="xs_n780",
 ) -> Component:
     """A grating coupler with straight and parallel teeth.
 
+    Defaults from the SiN200nm_780nm_TE_STRIP_Grating_Coupler reference
+    GDS: 30 teeth, 0.668um period, 7um wide, 200um taper, teeth on
+    NITRIDE_ETCH.
+
     Args:
         period: the period of the grating
         n_periods: the number of grating teeth
+        fill_factor: tooth width as a fraction of the period
         length_taper: the length of the taper tapering up to the grating
+        width_grating: the width of the grating teeth
         wavelength: the center wavelength for which the grating is designed
         cross_section: a cross section or its name or a function generating a cross section.
     """
@@ -386,8 +394,8 @@ def grating_coupler_rectangular(
         wavelength=wavelength,
         taper=taper,
         cross_section=cross_section,
-        fill_factor=0.5,
-        width_grating=11.0,
+        fill_factor=fill_factor,
+        width_grating=width_grating,
         polarization="te",
         layer_slab=LAYER.NITRIDE,
         layer_grating=LAYER.NITRIDE_ETCH,
@@ -397,23 +405,29 @@ def grating_coupler_rectangular(
     )
 
 
+# dimensions from the Cornerstone SiN200 standard components reference GDS
 grating_coupler_rectangular_n780 = partial(
     grating_coupler_rectangular,
-    period=0.52,
-    wavelength=0.78,
     cross_section="xs_n780",
 )
 
 grating_coupler_rectangular_n638 = partial(
     grating_coupler_rectangular,
-    period=0.44,
+    period=0.504,
+    fill_factor=0.472,
+    length_taper=150.0,
+    width_grating=6.5,
     wavelength=0.638,
     cross_section="xs_n638",
 )
 
 grating_coupler_rectangular_n520 = partial(
     grating_coupler_rectangular,
-    period=0.37,
+    period=0.417,
+    fill_factor=0.4988,
+    n_periods=20,
+    length_taper=150.0,
+    width_grating=6.0,
     wavelength=0.52,
     cross_section="xs_n520",
 )
