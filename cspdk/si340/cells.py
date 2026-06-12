@@ -191,9 +191,9 @@ def mmi1x2(
     width: float | None = None,
     width_taper=1.5,
     length_taper=20.0,
-    length_mmi: float = 37.5,
+    length_mmi: float = 34.7,
     width_mmi=6.0,
-    gap_mmi: float = 1.47,
+    gap_mmi: float = 1.65,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     """An mmi1x2.
@@ -222,8 +222,10 @@ def mmi1x2(
     )
 
 
+# dimensions from the Cornerstone SOI 340nm standard components reference GDS
 mmi1x2_sc = partial(mmi1x2, cross_section="xs_sc")
-mmi1x2_so = partial(mmi1x2, cross_section="xs_so")
+mmi1x2_so = partial(mmi1x2, length_mmi=42.6, gap_mmi=1.51, cross_section="xs_so")
+# no foundry reference exists for rib MMIs; defaults follow the strip C-band values
 mmi1x2_rc = partial(mmi1x2, cross_section="xs_rc")
 
 
@@ -231,10 +233,10 @@ mmi1x2_rc = partial(mmi1x2, cross_section="xs_rc")
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 1.5,
-    length_taper: float = 50.2,
-    length_mmi: float = 5.5,
+    length_taper: float = 20.0,
+    length_mmi: float = 46.5,
     width_mmi: float = 6.0,
-    gap_mmi: float = 0.4,
+    gap_mmi: float = 0.53,
     cross_section: CrossSectionSpec = "xs_sc",
 ) -> gf.Component:
     """An mmi2x2.
@@ -263,8 +265,10 @@ def mmi2x2(
     )
 
 
+# dimensions from the Cornerstone SOI 340nm standard components reference GDS
 mmi2x2_sc = partial(mmi2x2, cross_section="xs_sc")
-mmi2x2_so = partial(mmi2x2, cross_section="xs_so")
+mmi2x2_so = partial(mmi2x2, length_mmi=57.0, gap_mmi=0.50, cross_section="xs_so")
+# no foundry reference exists for rib MMIs; defaults follow the strip C-band values
 mmi2x2_rc = partial(mmi2x2, cross_section="xs_rc")
 
 ##############################
