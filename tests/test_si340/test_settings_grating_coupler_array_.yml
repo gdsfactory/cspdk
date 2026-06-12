@@ -1,0 +1,66 @@
+info: {}
+name: grating_coupler_array_P127_N6_CSxs_sc_CTrue_GCNone_PNo1_28904b2e
+ports:
+  o0:
+    center:
+    - -317.5
+    - 0
+    layer: WG
+    name: o0
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o1:
+    center:
+    - -190.5
+    - 0
+    layer: WG
+    name: o1
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -63.5
+    - 0
+    layer: WG
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 63.5
+    - 0
+    layer: WG
+    name: o3
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - 190.5
+    - 0
+    layer: WG
+    name: o4
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o5:
+    center:
+    - 317.5
+    - 0
+    layer: WG
+    name: o5
+    orientation: 90
+    port_type: optical
+    width: 0.45
+settings:
+  centered: true
+  cross_section: xs_sc
+  n: 6
+  pitch: 127
+  port_name: o1
+  rotation: -90
+  straight_to_grating_spacing: 10
+  with_loopback: false

@@ -1,0 +1,37 @@
+info: {}
+name: mmi1x2_WNone_WM4p3_WT1p8_LT40_LM21p6_GM0p45_CSxs_n780
+ports:
+  o1:
+    center:
+    - -40
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.5
+  o2:
+    center:
+    - 61.6
+    - 1.125
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.5
+  o3:
+    center:
+    - 61.6
+    - -1.125
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.5
+settings:
+  cross_section: xs_n780
+  gap_mmi: 0.45
+  length_mmi: 21.6
+  length_taper: 40
+  width_mmi: 4.3
+  width_taper: 1.8

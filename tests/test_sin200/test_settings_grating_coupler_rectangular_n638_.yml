@@ -1,0 +1,32 @@
+info:
+  fiber_angle: 20
+  polarization: te
+  wavelength: 0.638
+name: grating_coupler_rectangular_P0p504_NP30_FF0p472_LT150_W_5dc0e79b
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 157.368
+    - 0
+    layer: NITRIDE_ETCH
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 6.5
+settings:
+  cross_section: xs_n638
+  fill_factor: 0.472
+  length_taper: 150
+  n_periods: 30
+  period: 0.504
+  wavelength: 0.638
+  width_grating: 6.5

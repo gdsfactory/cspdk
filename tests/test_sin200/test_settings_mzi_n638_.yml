@@ -1,0 +1,37 @@
+info: {}
+name: mzi_DL10_Bbend_euler_n638_Sstraight_n638_Smmi1x2_n638_C_b660fb5c
+ports:
+  o1:
+    center:
+    - -40
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 380.1
+    - 0.875
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o3:
+    center:
+    - 380.1
+    - -0.875
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.36
+settings:
+  bend: bend_euler_n638
+  combiner: mmi2x2_n638
+  cross_section: xs_n638
+  delta_length: 10
+  splitter: mmi1x2_n638
+  straight: straight_n638

@@ -1,0 +1,28 @@
+info:
+  length: 10
+  width1: 1.5
+  width2: 1.5
+name: taper_L10_W1p5_WNone_PNone_CSxs_sus
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG_MARK
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.5
+  o2:
+    center:
+    - 10
+    - 0
+    layer: WG_MARK
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 1.5
+settings:
+  cross_section: xs_sus
+  length: 10
+  width1: 1.5

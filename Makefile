@@ -13,6 +13,10 @@ test:
 	uv run pytest -s tests/test_si220_cband.py
 	uv run pytest -s tests/test_si220_oband.py
 	uv run pytest -s tests/test_routing.py
+	uv run pytest -s tests/test_si340.py
+	uv run pytest -s tests/test_sin200.py
+	uv run pytest -s tests/test_ge_on_si.py
+	uv run pytest -s tests/test_si_sus.py
 	# uv run pytest -s tests/test_si500.py
 	# uv run pytest -s tests/test_sin300.py
 
@@ -22,6 +26,10 @@ test-ports:
 test-force: install
 	uv run pytest -s tests/test_si220_cband.py --update-gds-refs --force-regen
 	uv run pytest -s tests/test_si220_oband.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si340.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_sin200.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_ge_on_si.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si_sus.py --update-gds-refs --force-regen
 	# uv run pytest -s tests/test_si500.py --update-gds-refs --force-regen
 	# uv run pytest -s tests/test_sin300.py --update-gds-refs --force-regen
 

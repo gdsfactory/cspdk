@@ -1,0 +1,30 @@
+info:
+  length: 10
+  route_info_length: 10
+  route_info_type: xs_sus
+  route_info_weight: 10
+  route_info_xs_sus_length: 10
+  width: 1.5
+name: straight_L10_CSxs_sus
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG_MARK
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.5
+  o2:
+    center:
+    - 10
+    - 0
+    layer: WG_MARK
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 1.5
+settings:
+  cross_section: xs_sus
+  length: 10

@@ -1,0 +1,47 @@
+info:
+  min_bend_radius: 67.353
+  path_length: 70.164
+name: coupler_G0p236_L20_D4_D25_CSxs_n638
+ports:
+  o1:
+    center:
+    - -25
+    - -1.702
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - -25
+    - 2.298
+    layer: NITRIDE
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o3:
+    center:
+    - 45
+    - 2.298
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o4:
+    center:
+    - 45
+    - -1.702
+    layer: NITRIDE
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.36
+settings:
+  cross_section: xs_n638
+  dx: 25
+  dy: 4
+  gap: 0.236
+  length: 20

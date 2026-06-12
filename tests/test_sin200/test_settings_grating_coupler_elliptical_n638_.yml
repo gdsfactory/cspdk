@@ -1,0 +1,28 @@
+info:
+  period: 0.634
+  polarization: te
+  wavelength: 0.638
+name: grating_coupler_elliptical_W0p638_GLW0p22_CSxs_n638
+ports:
+  o1:
+    center:
+    - -0.64
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 26.11
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
+settings:
+  cross_section: xs_n638
+  grating_line_width: 0.22
+  wavelength: 0.638

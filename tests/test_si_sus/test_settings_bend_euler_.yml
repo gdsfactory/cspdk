@@ -1,0 +1,36 @@
+info:
+  dy: 40.75
+  length: 67.795
+  min_bend_radius: 28.773
+  radius: 40.75
+  route_info_length: 67.795
+  route_info_min_bend_radius: 28.773
+  route_info_n_bend_90: 1
+  route_info_type: xs_sus
+  route_info_weight: 67.795
+  route_info_xs_sus_length: 67.795
+  width: 1.5
+name: bend_euler_RNone_A90_P0p5_WNone_CSxs_sus
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG_MARK
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.5
+  o2:
+    center:
+    - 40.75
+    - 40.75
+    layer: WG_MARK
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 1.5
+settings:
+  angle: 90
+  cross_section: xs_sus
+  p: 0.5
