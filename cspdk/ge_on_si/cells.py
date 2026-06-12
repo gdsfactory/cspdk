@@ -30,7 +30,7 @@ def straight(
 
 @gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
 def bend_s(
-    size: tuple[float, float] = (20.0, 1.8),
+    size: tuple[float, float] = (80.0, 5.0),
     cross_section: CrossSectionSpec = "xs_rib",
     allow_min_radius_violation: bool = True,
 ) -> gf.Component:
