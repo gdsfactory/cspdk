@@ -1,0 +1,37 @@
+info: {}
+name: mzi_DL10_Bbend_euler_sc_Sstraight_sc_Smmi1x2_sc_Cmmi2x2_1d19725f
+ports:
+  o1:
+    center:
+    - -20
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 181.3
+    - 1.015
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 181.3
+    - -1.015
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  bend: bend_euler_sc
+  combiner: mmi2x2_sc
+  cross_section: xs_sc
+  delta_length: 10
+  splitter: mmi1x2_sc
+  straight: straight_sc

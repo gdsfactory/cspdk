@@ -21,7 +21,7 @@ ports:
     width: 0.4
   o3:
     center:
-    - 90.1
+    - 110.1
     - 2.335
     layer: WG
     name: o3
@@ -30,7 +30,7 @@ ports:
     width: 0.4
   o4:
     center:
-    - 90.1
+    - 110.1
     - -1.665
     layer: WG
     name: o4

@@ -1,14 +1,14 @@
 info:
-  dy: 5
-  length: 8.318
-  min_bend_radius: 3.53
-  radius: 5
-  route_info_length: 8.318
-  route_info_min_bend_radius: 3.53
+  dy: 10
+  length: 16.637
+  min_bend_radius: 7.061
+  radius: 10
+  route_info_length: 16.637
+  route_info_min_bend_radius: 7.061
   route_info_n_bend_90: 1
-  route_info_strip_length: 8.318
+  route_info_strip_length: 16.637
   route_info_type: strip
-  route_info_weight: 8.318
+  route_info_weight: 16.637
   width: 0.4
 name: bend_euler_RNone_A90_P0p5_WNone_CSstrip_AMRVFalse
 ports:
@@ -23,8 +23,8 @@ ports:
     width: 0.4
   o2:
     center:
-    - 5
-    - 5
+    - 10
+    - 10
     layer: WG
     name: o2
     orientation: 90

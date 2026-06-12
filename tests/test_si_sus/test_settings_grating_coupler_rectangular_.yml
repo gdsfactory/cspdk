@@ -1,0 +1,30 @@
+info:
+  fiber_angle: 10
+  polarization: te
+  wavelength: 3.8
+name: grating_coupler_rectangular_P2p5_NP20_LT350_W3p8_CSxs_sus
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG_MARK
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.5
+  o2:
+    center:
+    - 374.062
+    - 0
+    layer: WG_MARK
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 20
+settings:
+  cross_section: xs_sus
+  length_taper: 350
+  n_periods: 20
+  period: 2.5
+  wavelength: 3.8

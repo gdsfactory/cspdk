@@ -60,9 +60,9 @@ def get_layer_stack(
     thickness_wg: float = 500 * nm,
     thickness_slab: float = 200 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -237,7 +237,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_rc",
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
-    taper: ComponentSpec = "taper_rc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -254,7 +253,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -313,14 +311,12 @@ routing_strategies = dict(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
         bend="bend_euler_ro",
-        taper="taper_ro",
         cross_section="xs_ro",
     ),
     route_bundle=route_bundle,

@@ -17,6 +17,19 @@
 
 [CORNERSTONE](https://www.cornerstone.sotonfab.co.uk/) Photonics PDK.
 
+## Supported Process Variants
+
+| Module | Process | Waveguide | Wavelength | Heaters |
+|--------|---------|-----------|------------|---------|
+| `cspdk.si220.cband` | SOI 220nm | Strip + Rib | C-band (1550nm) | Yes |
+| `cspdk.si220.oband` | SOI 220nm | Strip + Rib | O-band (1310nm) | Yes |
+| `cspdk.si340` | SOI 340nm | Strip + Rib | C-band / O-band | Yes |
+| `cspdk.si500` | SOI 500nm | Rib | C-band / O-band | Yes |
+| `cspdk.sin300` | SiN 300nm | Strip | C-band / O-band | Yes |
+| `cspdk.sin200` | SiN 200nm | Strip | Visible (520/638/780nm) | Yes |
+| `cspdk.ge_on_si` | Ge-on-Si | Rib | Mid-IR (3800nm) | No |
+| `cspdk.si_sus` | Suspended Si | Suspended | Mid-IR (3800nm) | No |
+
 ## Installation
 
 We recommend `uv`

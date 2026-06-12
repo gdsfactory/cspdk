@@ -1,0 +1,31 @@
+info:
+  fiber_angle: 10
+  polarization: te
+  wavelength: 1.31
+name: grating_coupler_rectangular_P0p47_NP60_FF0p468_LT350_W1_adef4f2b
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o2:
+    center:
+    - 363.92
+    - 0
+    layer: GRA
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 11
+settings:
+  cross_section: xs_so
+  fill_factor: 0.468
+  length_taper: 350
+  n_periods: 60
+  period: 0.47
+  wavelength: 1.31

@@ -1,0 +1,119 @@
+info: {}
+name: array_Cstraight_C6_R1_APTrue_SNone_CFalse_CP150_RP150
+ports:
+  o1_1_1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1_1_1
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o1_1_2:
+    center:
+    - 150
+    - 0
+    layer: WG
+    name: o1_1_2
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o1_1_3:
+    center:
+    - 300
+    - 0
+    layer: WG
+    name: o1_1_3
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o1_1_4:
+    center:
+    - 450
+    - 0
+    layer: WG
+    name: o1_1_4
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o1_1_5:
+    center:
+    - 600
+    - 0
+    layer: WG
+    name: o1_1_5
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o1_1_6:
+    center:
+    - 750
+    - 0
+    layer: WG
+    name: o1_1_6
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o2_1_1:
+    center:
+    - 10
+    - 0
+    layer: WG
+    name: o2_1_1
+    orientation: 0
+    port_type: optical
+    width: 3.2
+  o2_1_2:
+    center:
+    - 160
+    - 0
+    layer: WG
+    name: o2_1_2
+    orientation: 0
+    port_type: optical
+    width: 3.2
+  o2_1_3:
+    center:
+    - 310
+    - 0
+    layer: WG
+    name: o2_1_3
+    orientation: 0
+    port_type: optical
+    width: 3.2
+  o2_1_4:
+    center:
+    - 460
+    - 0
+    layer: WG
+    name: o2_1_4
+    orientation: 0
+    port_type: optical
+    width: 3.2
+  o2_1_5:
+    center:
+    - 610
+    - 0
+    layer: WG
+    name: o2_1_5
+    orientation: 0
+    port_type: optical
+    width: 3.2
+  o2_1_6:
+    center:
+    - 760
+    - 0
+    layer: WG
+    name: o2_1_6
+    orientation: 0
+    port_type: optical
+    width: 3.2
+settings:
+  add_ports: true
+  centered: false
+  column_pitch: 150
+  columns: 6
+  component: straight
+  row_pitch: 150
+  rows: 1

@@ -1,0 +1,37 @@
+info:
+  end_angle: 0
+  length: 80.222
+  min_bend_radius: 234.322
+  route_info_length: 80.222
+  route_info_min_bend_radius: 234.322
+  route_info_n_bend_s: 1
+  route_info_type: xs_rib
+  route_info_weight: 80.222
+  route_info_xs_rib_length: 80.222
+  start_angle: 0
+name: bend_s_S80_5_CSxs_rib_AMRVTrue
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 3.2
+  o2:
+    center:
+    - 80
+    - 5
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 3.2
+settings:
+  allow_min_radius_violation: true
+  cross_section: xs_rib
+  size:
+  - 80
+  - 5

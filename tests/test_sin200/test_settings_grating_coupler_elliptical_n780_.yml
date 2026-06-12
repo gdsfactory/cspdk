@@ -1,0 +1,28 @@
+info:
+  period: 0.775
+  polarization: te
+  wavelength: 0.78
+name: grating_coupler_elliptical_W0p78_GLW0p26_CSxs_n780
+ports:
+  o1:
+    center:
+    - 2.905
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.5
+  o2:
+    center:
+    - 28.225
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
+settings:
+  cross_section: xs_n780
+  grating_line_width: 0.26
+  wavelength: 0.78

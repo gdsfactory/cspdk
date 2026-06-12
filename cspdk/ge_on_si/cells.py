@@ -1,0 +1,150 @@
+"""Building blocks for the cspdk.ge_on_si library."""
+
+import gdsfactory as gf
+from gdsfactory.typings import CrossSectionSpec
+
+from cspdk.ge_on_si._schematic import (
+    bend_euler_schematic,
+    bend_s_schematic,
+    straight_schematic,
+    taper_schematic,
+)
+from cspdk.ge_on_si.tech import LAYER, Tech
+
+
+@gf.cell(tags=["cells"], schematic_function=straight_schematic)
+def straight(
+    length: float = 10.0,
+    cross_section: CrossSectionSpec = "xs_rib",
+    **kwargs,
+) -> gf.Component:
+    """A straight waveguide.
+
+    Args:
+        length: the length of the waveguide.
+        cross_section: a cross section or its name or a function generating a cross section.
+        kwargs: additional arguments to pass to the straight function.
+    """
+    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
+
+
+@gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
+def bend_s(
+    size: tuple[float, float] = (80.0, 5.0),
+    cross_section: CrossSectionSpec = "xs_rib",
+    allow_min_radius_violation: bool = True,
+) -> gf.Component:
+    """An S-bend.
+
+    Args:
+        size: the width and height of the s-bend.
+        cross_section: a cross section or its name or a function generating a cross section.
+        allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
+    """
+    return gf.components.bend_s(
+        size=size,
+        cross_section=cross_section,
+        allow_min_radius_violation=allow_min_radius_violation,
+    )
+
+
+@gf.cell(tags=["cells"], schematic_function=bend_euler_schematic)
+def bend_euler(
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_rib",
+) -> gf.Component:
+    """An euler bend.
+
+    Args:
+        radius: the effective radius of the bend.
+        angle: the angle of the bend (usually 90 degrees).
+        p: the fraction of the bend that's represented by a polar bend.
+        width: the width of the waveguide forming the bend.
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.components.bend_euler(
+        radius=radius,
+        angle=angle,
+        p=p,
+        with_arc_floorplan=True,
+        npoints=None,
+        layer=None,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
+    )
+
+
+@gf.cell(tags=["cells"], schematic_function=taper_schematic)
+def taper(
+    length: float = 10.0,
+    width1: float = Tech.width_rib,
+    width2: float | None = None,
+    port: gf.Port | None = None,
+    cross_section: CrossSectionSpec = "xs_rib",
+) -> gf.Component:
+    """A taper.
+
+    Args:
+        length: the length of the taper.
+        width1: the input width of the taper.
+        width2: the output width of the taper (if not given, use port).
+        port: the port (with certain width) to taper towards (if not given, use width2).
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.c.taper(
+        length=length,
+        width1=width1,
+        width2=width2,
+        port=port,
+        cross_section=cross_section,
+    )
+
+
+@gf.cell(tags=["cells"])
+def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
+    """A rectangle.
+
+    Args:
+        layer: LAYER.FLOORPLAN.
+        **kwargs: additional arguments.
+    """
+    return gf.c.rectangle(layer=layer, **kwargs)
+
+
+@gf.cell(tags=["cells"])
+def array(
+    component="straight",
+    columns: int = 6,
+    rows: int = 1,
+    add_ports: bool = True,
+    size=None,
+    centered: bool = False,
+    column_pitch: float = 150,
+    row_pitch: float = 150,
+) -> gf.Component:
+    """An array of components.
+
+    Args:
+        component: the component of which to create an array.
+        columns: the number of components to place in the x-direction.
+        rows: the number of components to place in the y-direction.
+        add_ports: add ports to the component.
+        size: Optional x, y size. Overrides columns and rows.
+        centered: center the array around the origin.
+        column_pitch: the pitch between columns.
+        row_pitch: the pitch between rows.
+    """
+    return gf.c.array(
+        component=component,
+        columns=columns,
+        rows=rows,
+        size=size,
+        centered=centered,
+        add_ports=add_ports,
+        column_pitch=column_pitch,
+        row_pitch=row_pitch,
+    )

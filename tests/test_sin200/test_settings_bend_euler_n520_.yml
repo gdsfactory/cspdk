@@ -1,0 +1,36 @@
+info:
+  dy: 30
+  length: 49.911
+  min_bend_radius: 21.183
+  radius: 30
+  route_info_length: 49.911
+  route_info_min_bend_radius: 21.183
+  route_info_n_bend_90: 1
+  route_info_type: xs_n520
+  route_info_weight: 49.911
+  route_info_xs_n520_length: 49.911
+  width: 0.27
+name: bend_euler_RNone_A90_P0p5_WNone_CSxs_n520
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.27
+  o2:
+    center:
+    - 30
+    - 30
+    layer: NITRIDE
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.27
+settings:
+  angle: 90
+  cross_section: xs_n520
+  p: 0.5

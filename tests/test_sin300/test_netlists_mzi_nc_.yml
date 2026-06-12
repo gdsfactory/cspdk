@@ -2,16 +2,16 @@ instances:
   b1:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -22,16 +22,16 @@ instances:
   b2:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -42,16 +42,16 @@ instances:
   b3:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -62,16 +62,16 @@ instances:
   b4:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -82,16 +82,16 @@ instances:
   b5:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -102,16 +102,16 @@ instances:
   b6:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -122,16 +122,16 @@ instances:
   b7:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -142,16 +142,16 @@ instances:
   b8:
     component: bend_euler
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 30
+      length: 49.911
+      min_bend_radius: 21.183
+      radius: 30
+      route_info_length: 49.911
+      route_info_min_bend_radius: 21.183
       route_info_n_bend_90: 1
       route_info_type: xs_nc
-      route_info_weight: 41.592
-      route_info_xs_nc_length: 41.592
+      route_info_weight: 49.911
+      route_info_xs_nc_length: 49.911
       width: 1.2
     settings:
       angle: 90
@@ -295,18 +295,18 @@ placements:
   b2:
     mirror: false
     rotation: 180
-    x: 164.7
-    y: 54.95
+    x: 174.7
+    y: 64.95
   b3:
     mirror: false
     rotation: 90
-    x: 189.8
-    y: 29.95
+    x: 204.8
+    y: 34.95
   b4:
     mirror: false
     rotation: 270
-    x: 189.8
-    y: 27.95
+    x: 204.8
+    y: 32.95
   b5:
     mirror: true
     rotation: 0
@@ -315,17 +315,17 @@ placements:
   b6:
     mirror: false
     rotation: 270
-    x: 139.7
-    y: -34.95
+    x: 144.7
+    y: -39.95
   b7:
     mirror: false
     rotation: 0
-    x: 164.8
-    y: -59.95
+    x: 174.8
+    y: -69.95
   b8:
     mirror: false
     rotation: 180
-    x: 214.8
+    x: 234.8
     y: -2.95
   cp1:
     mirror: false
@@ -335,38 +335,38 @@ placements:
   cp2:
     mirror: true
     rotation: 180
-    x: 496.8
+    x: 516.8
     y: 0
   sxb:
     mirror: false
     rotation: 0
-    x: 164.7
-    y: -59.95
+    x: 174.7
+    y: -69.95
   sxt:
     mirror: false
     rotation: 0
-    x: 164.7
-    y: 54.95
+    x: 174.7
+    y: 64.95
   sybr:
     mirror: false
     rotation: 90
-    x: 189.8
-    y: -34.95
+    x: 204.8
+    y: -39.95
   syl:
     mirror: false
     rotation: 270
-    x: 139.7
-    y: -27.95
+    x: 144.7
+    y: -32.95
   sytl:
     mirror: false
     rotation: 90
-    x: 139.7
-    y: 27.95
+    x: 144.7
+    y: 32.95
   sytr:
     mirror: false
     rotation: 90
-    x: 189.8
-    y: 27.95
+    x: 204.8
+    y: 32.95
 ports:
   o1: cp1,o1
   o2: cp2,o2
