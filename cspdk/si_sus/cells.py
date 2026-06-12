@@ -4,6 +4,7 @@ import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
 from cspdk.si_sus._schematic import (
+    bend_circular_schematic,
     bend_euler_schematic,
     bend_s_schematic,
     grating_coupler_rectangular_schematic,
@@ -73,6 +74,33 @@ def bend_euler(
         with_arc_floorplan=True,
         npoints=None,
         layer=None,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
+    )
+
+
+@gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
+def bend_circular(
+    radius: float | None = None,
+    angle: float = 90.0,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_sus",
+) -> gf.Component:
+    """A circular bend, matching the foundry reference bend geometry.
+
+    The Suspendedsilicon500nm_3800nm_TE_90_DegreeBend reference GDS is a
+    circular arc with a 40.75um center-line radius (the xs_sus default).
+
+    Args:
+        radius: the radius of the bend (defaults to the cross-section radius).
+        angle: the angle of the bend (usually 90 degrees).
+        width: the width of the waveguide forming the bend.
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.components.bend_circular(
+        radius=radius,
+        angle=angle,
         width=width,
         cross_section=cross_section,
         allow_min_radius_violation=False,
