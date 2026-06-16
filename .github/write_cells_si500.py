@@ -95,8 +95,9 @@ with open(filepath, "w+") as f:
                     f' style="border:none"></iframe>\n\n'
                 )
             f.write("```python\n")
-            f.write("import cspdk\n\n")
-            f.write(f"c = cspdk.si500.cells.{name}({kwargs}).copy()\n")
+            f.write("from cspdk.si500 import cells, PDK\n\n")
+            f.write("PDK.activate()\n\n")
+            f.write(f"c = cells.{name}({kwargs})\n")
             f.write("c.draw_ports()\n")
             f.write("c.plot()\n")
             f.write("```\n\n")
