@@ -10,8 +10,8 @@ from cspdk._schematic import (
     _1X2,
     _2X2,
     _GRATING,
-    _LEFT_BOTTOM,
     _LEFT_RIGHT,
+    _LEFT_TOP,
     _MZI_1X2,
     _PAD,
     _WIRE_BEND,
@@ -19,7 +19,7 @@ from cspdk._schematic import (
 )
 
 straight_schematic = schematic("straight", ["waveguide"], _LEFT_RIGHT)
-bend_euler_schematic = schematic("bend", ["bend", "euler"], _LEFT_BOTTOM)
+bend_euler_schematic = schematic("bend", ["bend", "euler"], _LEFT_TOP)
 bend_s_schematic = schematic("sbend", ["bend", "s"], _LEFT_RIGHT)
 wire_corner_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
 taper_schematic = schematic("taper", ["taper"], _LEFT_RIGHT)

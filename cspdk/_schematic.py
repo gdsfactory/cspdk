@@ -35,10 +35,10 @@ _LEFT_RIGHT = [
     {"name": "o2", "side": "right", "type": "photonic"},
 ]
 
-# 2-port 90-degree bend
-_LEFT_BOTTOM = [
+# 2-port 90-degree bend (o1 left/180°, o2 top/90°) — matches bend_euler GDS
+_LEFT_TOP = [
     {"name": "o1", "side": "left", "type": "photonic"},
-    {"name": "o2", "side": "bottom", "type": "photonic"},
+    {"name": "o2", "side": "top", "type": "photonic"},
 ]
 
 # 1x2 splitter (mmi1x2)
