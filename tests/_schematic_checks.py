@@ -93,7 +93,7 @@ def check_bend_ports_left_top(pdk) -> None:
     """
     checked = False
     for name, factory in schematic_driven_cells(pdk):
-        if "bend_euler" not in name and "bend_circular" not in name:
+        if name not in ("bend_euler", "bend_circular"):
             continue
         s = factory.get_schematic()
         sides = {p["name"]: p["side"] for p in s.info["ports"]}
