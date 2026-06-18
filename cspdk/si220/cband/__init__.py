@@ -41,6 +41,12 @@ def get_pdk() -> Pdk:
     )
 
 
+def activate_pdk() -> None:
+    """Activate Cornerstone Si220 Cband PDK."""
+    pdk = get_pdk()
+    pdk.activate()
+
+
 PDK = get_pdk()
 
 __all__ = [
