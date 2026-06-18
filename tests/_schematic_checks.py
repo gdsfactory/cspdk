@@ -100,11 +100,134 @@ def check_bend_ports_left_top(pdk) -> None:
         assert sides.get("o1") == "left", (
             f"{name}: o1 side {sides.get('o1')!r} != 'left'"
         )
-        assert sides.get("o2") == "top", (
-            f"{name}: o2 side {sides.get('o2')!r} != 'top'"
-        )
+        assert sides.get("o2") == "top", f"{name}: o2 side {sides.get('o2')!r} != 'top'"
         checked = True
     assert checked, "no bend_euler/bend_circular schematic-driven cells found"
+
+
+# side -> canonical outward-normal orientation (mirrors _schematic._SIDE_XY)
+_SIDE_ORIENTATION = {"left": 180, "right": 0, "top": 90, "bottom": 270}
+
+# (cell, port) pairs whose declared schematic side intentionally differs from
+# the GDS port orientation. These are documented exemptions, not bugs:
+_GDS_ORIENT_EXEMPT = {
+    # spiral exposes both optical ports at 0° (same side) in the GDS, but it has
+    # a bespoke Mosaic glyph drawn left->right; matching the GDS here would need
+    # a glyph redraw, not a preset tweak. It is a 2-port inline element, so the
+    # deviation creates no routing "knot".
+    ("spiral", "o1"),
+}
+
+
+def _orientation_close(a: float, b: float) -> bool:
+    return abs(((a - b + 180) % 360) - 180) < 1.0
+
+
+def check_all_ports_match_gds(pdk) -> None:
+    """Every declared schematic port side matches the real GDS port orientation.
+
+    Generalises ``check_bend_ports_left_top`` to the whole schematic-driven set:
+    a port declared on side ``S`` must point in ``S``'s outward direction on the
+    physical component (left=180°, right=0°, top=90°, bottom=270°). This guards
+    against the class of bug where a schematic symbol is "twisted" relative to
+    the GDS layout (the bend left->bottom regression). Known, intentional
+    deviations are listed in ``_GDS_ORIENT_EXEMPT``.
+    """
+    mismatches = []
+    for name, factory in schematic_driven_cells(pdk):
+        s = factory.get_schematic()
+        try:
+            ports = {p.name: p for p in pdk.cells[name]().ports}
+        except Exception:
+            # Composite cells can fail to build in a shared pytest session due
+            # to cross-band kfactory cache contamination (see _COMPOSITE_SKIP);
+            # their geometry is locked by the per-band reference-GDS tests. Only
+            # tolerate this for known composites — a build failure anywhere else
+            # is a real error and must fail the test.
+            if name in _COMPOSITE_SKIP:
+                continue
+            raise
+        for p in s.info["ports"]:
+            if (name, p["name"]) in _GDS_ORIENT_EXEMPT:
+                continue
+            want = _SIDE_ORIENTATION.get(p["side"])
+            ap = ports.get(p["name"])
+            if ap is None:
+                mismatches.append(
+                    f"{name}.{p['name']}: declared in schematic but missing on the GDS component"
+                )
+                continue
+            if ap.orientation is None or want is None:
+                continue
+            got = float(ap.orientation) % 360
+            if not _orientation_close(got, want):
+                mismatches.append(
+                    f"{name}.{p['name']}: declared {p['side']!r} ({want}°) "
+                    f"but GDS orientation is {got:.1f}°"
+                )
+    assert not mismatches, (
+        "schematic port sides disagree with GDS layout:\n  " + "\n  ".join(mismatches)
+    )
+
+
+# Cells exempt from the clockwise-order check. The heaters render as a generic
+# "ckt" box but are physically wide devices whose via-stack ports face inward
+# (e.g. a left-facing port sits at the far-right x). Collapsed onto a unit box,
+# "clockwise from the layout" is not meaningful, so their multi-port sides are
+# not order-checked. (Tracked for a proper symbol in doplaydo/gdsfactoryplus#3050.)
+_CLOCKWISE_EXEMPT = {"straight_heater_metal", "straight_heater_meander"}
+
+
+def check_ports_clockwise_from_left(pdk) -> None:
+    """Schematic ports are listed clockwise-from-left within each side.
+
+    The nyanlib->Mosaic bridge converts gdsfactory's clockwise port ordering into
+    Mosaic's top->bottom rendering by reversing the left and bottom side groups.
+    For that to land each port where the GDS layout puts it, every schematic must
+    list same-side ports in clockwise order, measured against the real component
+    port positions: left bottom->top, right top->bottom, top left->right, bottom
+    right->left. (Coordinate monotonic per side; equal positions are allowed.)
+    """
+    mismatches = []
+    for name, factory in schematic_driven_cells(pdk):
+        if name in _CLOCKWISE_EXEMPT:
+            continue
+        s = factory.get_schematic()
+        try:
+            ports = {p.name: p for p in pdk.cells[name]().ports}
+        except Exception:
+            if name in _COMPOSITE_SKIP:
+                continue
+            raise
+        by_side: dict[str, list[str]] = {}
+        for p in s.info["ports"]:
+            by_side.setdefault(p["side"], []).append(p["name"])
+        for side, names in by_side.items():
+            # coordinate along the side: y for left/right, x for top/bottom
+            coords = []
+            for nm in names:
+                ap = ports.get(nm)
+                if ap is None:
+                    coords = None
+                    break
+                coords.append(ap.y if side in ("left", "right") else ap.x)
+            if not coords or len(coords) < 2:
+                continue
+            # left/top run ascending (bottom->top, left->right); right/bottom
+            # run descending (top->bottom, right->left). Ties (equal) are fine.
+            ascending = side in ("left", "top")
+            ok = all(
+                (a <= b + 1e-6) if ascending else (a >= b - 1e-6)
+                for a, b in zip(coords, coords[1:])
+            )
+            if not ok:
+                mismatches.append(
+                    f"{name} side {side!r}: schematic order {names} is not "
+                    f"clockwise (GDS coords {[round(c, 2) for c in coords]})"
+                )
+    assert not mismatches, (
+        "schematic ports not listed clockwise-from-left:\n  " + "\n  ".join(mismatches)
+    )
 
 
 def check_sax_model_refs(pdk, *, has_models: bool) -> None:

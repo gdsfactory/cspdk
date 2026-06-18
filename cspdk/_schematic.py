@@ -48,11 +48,34 @@ _1X2 = [
     {"name": "o3", "side": "right", "type": "photonic"},
 ]
 
-# 2x2 coupler / mmi2x2 / ring_double / mzi (with 2x2 splitter)
+# 2x2 coupler / mmi2x2 / mzi (with 2x2 splitter)
 _2X2 = [
     {"name": "o1", "side": "left", "type": "photonic"},
     {"name": "o2", "side": "left", "type": "photonic"},
     {"name": "o3", "side": "right", "type": "photonic"},
+    {"name": "o4", "side": "right", "type": "photonic"},
+]
+
+# ring_double: two parallel through-buses with the GDS port naming
+# o1=bottom-left, o2=bottom-right, o3=top-left, o4=top-right. Ports are listed
+# clockwise-from-left within each side (left bottom->top: o1, o3; right
+# top->bottom: o4, o2) so the nyanlib->Mosaic bridge places them to match the
+# layout. (gdsfactory names these by bus-pair, not clockwise, so the list order
+# here is deliberately o1, o3, o4, o2.)
+_RING_DOUBLE = [
+    {"name": "o1", "side": "left", "type": "photonic"},
+    {"name": "o3", "side": "left", "type": "photonic"},
+    {"name": "o4", "side": "right", "type": "photonic"},
+    {"name": "o2", "side": "right", "type": "photonic"},
+]
+
+# ring coupler element: bus (o1 left, o4 right) with two ports up to the ring
+# (o2, o3 on top). Matches the GDS (o2/o3 at 90°). No dedicated Mosaic symbol;
+# renders as a generic box.
+_RING_COUPLER = [
+    {"name": "o1", "side": "left", "type": "photonic"},
+    {"name": "o2", "side": "top", "type": "photonic"},
+    {"name": "o3", "side": "top", "type": "photonic"},
     {"name": "o4", "side": "right", "type": "photonic"},
 ]
 
@@ -63,18 +86,20 @@ _MZI_1X2 = [
     {"name": "o3", "side": "right", "type": "photonic"},
 ]
 
-# 4-port crossing
+# 4-port crossing (o1 left/180°, o2 top/90°, o3 right/0°, o4 bottom/270°) —
+# matches the GDS port orientations and the symmetric Mosaic crossing symbol.
 _CROSSING = [
     {"name": "o1", "side": "left", "type": "photonic"},
-    {"name": "o2", "side": "bottom", "type": "photonic"},
+    {"name": "o2", "side": "top", "type": "photonic"},
     {"name": "o3", "side": "right", "type": "photonic"},
-    {"name": "o4", "side": "top", "type": "photonic"},
+    {"name": "o4", "side": "bottom", "type": "photonic"},
 ]
 
-# Grating coupler (bus left, fiber above)
+# Grating coupler: bus o1 left/180°, fiber port o2 right/0° — matches the GDS
+# (o2 at 0°) and the Mosaic grating-coupler symbol, whose fan radiates right.
 _GRATING = [
     {"name": "o1", "side": "left", "type": "photonic"},
-    {"name": "o2", "side": "top", "type": "photonic"},
+    {"name": "o2", "side": "right", "type": "photonic"},
 ]
 
 # Pad with 4 electrical edges
@@ -85,10 +110,11 @@ _PAD = [
     {"name": "e4", "side": "bottom", "type": "electric"},
 ]
 
-# Wire bend (electrical)
+# Wire bend / corner (electrical 90° turn): e1 left/180°, e2 top/90° — matches
+# the GDS (wire_corner/bend_metal e2 at 90°), mirroring the photonic bend.
 _WIRE_BEND = [
     {"name": "e1", "side": "left", "type": "electric"},
-    {"name": "e2", "side": "bottom", "type": "electric"},
+    {"name": "e2", "side": "top", "type": "electric"},
 ]
 
 # Wire straight (electrical)
@@ -111,9 +137,9 @@ _HEATER_FULL = [
     {"name": "o2", "side": "right", "type": "photonic"},
     {"name": "l_e1", "side": "left", "type": "electric"},
     {"name": "l_e2", "side": "top", "type": "electric"},
-    {"name": "l_e3", "side": "left", "type": "electric"},
+    {"name": "l_e3", "side": "right", "type": "electric"},
     {"name": "l_e4", "side": "bottom", "type": "electric"},
-    {"name": "r_e1", "side": "right", "type": "electric"},
+    {"name": "r_e1", "side": "left", "type": "electric"},
     {"name": "r_e2", "side": "top", "type": "electric"},
     {"name": "r_e3", "side": "right", "type": "electric"},
     {"name": "r_e4", "side": "bottom", "type": "electric"},
