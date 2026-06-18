@@ -56,15 +56,17 @@ _2X2 = [
     {"name": "o4", "side": "right", "type": "photonic"},
 ]
 
-# ring_double: two parallel through-buses (o1-o2 and o3-o4), each left->right.
-# Matches the GDS (o1/o3 at 180°/left, o2/o4 at 0°/right) and the Mosaic
-# ring-double symbol, which draws two horizontal buses. Using _2X2 here would
-# group o1,o2 on the left and o3,o4 on the right, twisting the buses.
+# ring_double: two parallel through-buses with the GDS port naming
+# o1=bottom-left, o2=bottom-right, o3=top-left, o4=top-right. Ports are listed
+# clockwise-from-left within each side (left bottom->top: o1, o3; right
+# top->bottom: o4, o2) so the nyanlib->Mosaic bridge places them to match the
+# layout. (gdsfactory names these by bus-pair, not clockwise, so the list order
+# here is deliberately o1, o3, o4, o2.)
 _RING_DOUBLE = [
     {"name": "o1", "side": "left", "type": "photonic"},
-    {"name": "o2", "side": "right", "type": "photonic"},
     {"name": "o3", "side": "left", "type": "photonic"},
     {"name": "o4", "side": "right", "type": "photonic"},
+    {"name": "o2", "side": "right", "type": "photonic"},
 ]
 
 # ring coupler element: bus (o1 left, o4 right) with two ports up to the ring
