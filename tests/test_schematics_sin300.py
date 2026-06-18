@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pytest
 from _schematic_checks import (
+    check_bend_ports_left_top,
     check_ports_subset_of_component,
     check_sax_model_refs,
     check_sax_port_order_matches_sdict,
@@ -21,6 +22,11 @@ def _activate_pdk() -> None:
 def test_symbol_present() -> None:
     """Every schematic-driven cell exposes a non-empty symbol."""
     check_symbol_present(PDK)
+
+
+def test_bend_ports_left_top() -> None:
+    """90-degree bend schematics declare o1 left, o2 top (matches GDS)."""
+    check_bend_ports_left_top(PDK)
 
 
 def test_ports_subset_of_component() -> None:

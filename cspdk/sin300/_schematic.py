@@ -6,8 +6,8 @@ from cspdk._schematic import (
     _1X2,
     _2X2,
     _GRATING,
-    _LEFT_BOTTOM,
     _LEFT_RIGHT,
+    _LEFT_TOP,
     _MZI_1X2,
     _PAD,
     _WIRE_BEND,
@@ -27,7 +27,7 @@ straight_schematic = schematic(
 bend_euler_schematic = schematic(
     "bend",
     ["bend", "euler"],
-    _LEFT_BOTTOM,
+    _LEFT_TOP,
     models=[sax_model("bend_euler", _MODULE, ["o1", "o2"])],
 )
 bend_s_schematic = schematic(

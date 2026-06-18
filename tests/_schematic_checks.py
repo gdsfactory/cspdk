@@ -84,6 +84,29 @@ def check_ports_subset_of_component(pdk) -> None:
         )
 
 
+def check_bend_ports_left_top(pdk) -> None:
+    """90-degree bend schematics declare o1 on the left and o2 on the top.
+
+    This matches the physical bend_euler/bend_circular GDS (o1 at 180°, o2 at
+    90°) and the canonical Mosaic ``bend`` symbol. Guards against regressing to
+    the old left/bottom layout.
+    """
+    checked = False
+    for name, factory in schematic_driven_cells(pdk):
+        if name not in ("bend_euler", "bend_circular"):
+            continue
+        s = factory.get_schematic()
+        sides = {p["name"]: p["side"] for p in s.info["ports"]}
+        assert sides.get("o1") == "left", (
+            f"{name}: o1 side {sides.get('o1')!r} != 'left'"
+        )
+        assert sides.get("o2") == "top", (
+            f"{name}: o2 side {sides.get('o2')!r} != 'top'"
+        )
+        checked = True
+    assert checked, "no bend_euler/bend_circular schematic-driven cells found"
+
+
 def check_sax_model_refs(pdk, *, has_models: bool) -> None:
     for name, factory in schematic_driven_cells(pdk):
         s = factory.get_schematic()
