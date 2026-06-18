@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pytest
 from _schematic_checks import (
+    check_all_ports_match_gds,
     check_bend_ports_left_top,
     check_ports_subset_of_component,
     check_sax_model_refs,
@@ -21,6 +22,11 @@ def _activate_pdk() -> None:
 def test_symbol_present() -> None:
     """Every schematic-driven cell exposes a non-empty symbol."""
     check_symbol_present(PDK)
+
+
+def test_all_ports_match_gds() -> None:
+    """Every declared schematic port side matches the GDS port orientation."""
+    check_all_ports_match_gds(PDK)
 
 
 def test_bend_ports_left_top() -> None:

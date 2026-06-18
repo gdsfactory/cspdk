@@ -100,11 +100,65 @@ def check_bend_ports_left_top(pdk) -> None:
         assert sides.get("o1") == "left", (
             f"{name}: o1 side {sides.get('o1')!r} != 'left'"
         )
-        assert sides.get("o2") == "top", (
-            f"{name}: o2 side {sides.get('o2')!r} != 'top'"
-        )
+        assert sides.get("o2") == "top", f"{name}: o2 side {sides.get('o2')!r} != 'top'"
         checked = True
     assert checked, "no bend_euler/bend_circular schematic-driven cells found"
+
+
+# side -> canonical outward-normal orientation (mirrors _schematic._SIDE_XY)
+_SIDE_ORIENTATION = {"left": 180, "right": 0, "top": 90, "bottom": 270}
+
+# (cell, port) pairs whose declared schematic side intentionally differs from
+# the GDS port orientation. These are documented exemptions, not bugs:
+_GDS_ORIENT_EXEMPT = {
+    # spiral exposes both optical ports at 0° (same side) in the GDS, but it has
+    # a bespoke Mosaic glyph drawn left->right; matching the GDS here would need
+    # a glyph redraw, not a preset tweak. It is a 2-port inline element, so the
+    # deviation creates no routing "knot".
+    ("spiral", "o1"),
+}
+
+
+def _orientation_close(a: float, b: float) -> bool:
+    return abs(((a - b + 180) % 360) - 180) < 1.0
+
+
+def check_all_ports_match_gds(pdk) -> None:
+    """Every declared schematic port side matches the real GDS port orientation.
+
+    Generalises ``check_bend_ports_left_top`` to the whole schematic-driven set:
+    a port declared on side ``S`` must point in ``S``'s outward direction on the
+    physical component (left=180°, right=0°, top=90°, bottom=270°). This guards
+    against the class of bug where a schematic symbol is "twisted" relative to
+    the GDS layout (the bend left->bottom regression). Known, intentional
+    deviations are listed in ``_GDS_ORIENT_EXEMPT``.
+    """
+    mismatches = []
+    for name, factory in schematic_driven_cells(pdk):
+        s = factory.get_schematic()
+        try:
+            ports = {p.name: p for p in pdk.cells[name]().ports}
+        except Exception:
+            # Composite cells can fail to build in a shared pytest session due
+            # to cross-band kfactory cache contamination (see _COMPOSITE_SKIP);
+            # their geometry is locked by the per-band reference-GDS tests.
+            continue
+        for p in s.info["ports"]:
+            if (name, p["name"]) in _GDS_ORIENT_EXEMPT:
+                continue
+            want = _SIDE_ORIENTATION.get(p["side"])
+            ap = ports.get(p["name"])
+            if ap is None or ap.orientation is None or want is None:
+                continue
+            got = float(ap.orientation) % 360
+            if not _orientation_close(got, want):
+                mismatches.append(
+                    f"{name}.{p['name']}: declared {p['side']!r} ({want}°) "
+                    f"but GDS orientation is {got:.1f}°"
+                )
+    assert not mismatches, (
+        "schematic port sides disagree with GDS layout:\n  " + "\n  ".join(mismatches)
+    )
 
 
 def check_sax_model_refs(pdk, *, has_models: bool) -> None:

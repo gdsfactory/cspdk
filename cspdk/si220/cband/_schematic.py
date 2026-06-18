@@ -11,6 +11,8 @@ from cspdk._schematic import (
     _LEFT_RIGHT,
     _LEFT_TOP,
     _PAD,
+    _RING_COUPLER,
+    _RING_DOUBLE,
     _WIRE_BEND,
     _WIRE_STRAIGHT,
     sax_model,
@@ -60,7 +62,7 @@ bend_s_schematic = schematic(
 wire_corner_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
 wire_corner45_schematic = schematic("wire-corner", ["wire", "corner"], _WIRE_BEND)
 wire_corner45_straight_schematic = schematic(
-    "wire-corner", ["wire", "corner"], _WIRE_STRAIGHT
+    "wire-corner", ["wire", "corner"], _WIRE_BEND
 )
 straight_metal_schematic = schematic("wire", ["wire", "straight"], _WIRE_STRAIGHT)
 bend_metal_schematic = schematic("wire-bend", ["wire", "bend"], _WIRE_BEND)
@@ -105,13 +107,13 @@ coupler_schematic = schematic(
 coupler_ring_schematic = schematic(
     "coupler-ring",
     ["coupler", "ring"],
-    _2X2,
+    _RING_COUPLER,
     models=[sax_model("coupler_ring", _MODULE, ["o1", "o2", "o3", "o4"])],
 )
 
 # Rings (no top-level SAX model; composites)
 ring_single_schematic = schematic("ring-single", ["ring", "single"], _LEFT_RIGHT)
-ring_double_schematic = schematic("ring-double", ["ring", "double"], _2X2)
+ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBLE)
 
 # MZI (composite; cband mzi uses 2x2 splitter so 4 ports)
 mzi_schematic = schematic("mzi", ["mzi"], _2X2)
@@ -121,7 +123,10 @@ spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
 # Heaters
 straight_heater_metal_schematic = schematic(
-    "modulator",
+    # Rendered as a generic model-driven box ("ckt") so all heater ports show.
+    # The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
+    # multi-port heater; see the model-driven-modulator follow-up issue.
+    "ckt",
     ["heater", "modulator"],
     _HEATER_TOP,
     models=[
@@ -145,7 +150,7 @@ straight_heater_metal_schematic = schematic(
     ],
 )
 straight_heater_meander_schematic = schematic(
-    "modulator", ["heater", "modulator", "meander"], _HEATER_TOP
+    "ckt", ["heater", "modulator", "meander"], _HEATER_TOP
 )
 
 # Grating couplers
