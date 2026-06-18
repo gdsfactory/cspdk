@@ -141,14 +141,23 @@ def check_all_ports_match_gds(pdk) -> None:
         except Exception:
             # Composite cells can fail to build in a shared pytest session due
             # to cross-band kfactory cache contamination (see _COMPOSITE_SKIP);
-            # their geometry is locked by the per-band reference-GDS tests.
-            continue
+            # their geometry is locked by the per-band reference-GDS tests. Only
+            # tolerate this for known composites — a build failure anywhere else
+            # is a real error and must fail the test.
+            if name in _COMPOSITE_SKIP:
+                continue
+            raise
         for p in s.info["ports"]:
             if (name, p["name"]) in _GDS_ORIENT_EXEMPT:
                 continue
             want = _SIDE_ORIENTATION.get(p["side"])
             ap = ports.get(p["name"])
-            if ap is None or ap.orientation is None or want is None:
+            if ap is None:
+                mismatches.append(
+                    f"{name}.{p['name']}: declared in schematic but missing on the GDS component"
+                )
+                continue
+            if ap.orientation is None or want is None:
                 continue
             got = float(ap.orientation) % 360
             if not _orientation_close(got, want):
