@@ -740,7 +740,7 @@ wheels = [
 
 [[package]]
 name = "cspdk"
-version = "1.4.3"
+version = "1.4.4"
 source = { editable = "." }
 dependencies = [
     { name = "doroutes" },
@@ -1194,7 +1194,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactoryplus"
-version = "1.8.14"
+version = "1.8.16"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "altair" },
@@ -1233,11 +1233,11 @@ dependencies = [
     { name = "websocket-client" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f3/4f/8b4b566ee6c42e5a53cfd6954475792163eb8e395dafc6978449c86f8d29/gdsfactoryplus-1.8.14-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:78c80f9ac2a8a4a7eb2ccb4182517c2b51b46e59c3b90106790c502e451cbbc9", size = 7025525, upload-time = "2026-05-22T07:27:27.591Z" },
-    { url = "https://files.pythonhosted.org/packages/30/62/c7c8589bb5c4bf24170eafa3dda24c9ccf6ea9cb92d1c02015d4bfc064d6/gdsfactoryplus-1.8.14-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:42dc21441d6e72329bda5d19fc58b79930487031f77c28eed73032ea2398935d", size = 7178684, upload-time = "2026-05-22T07:27:29.799Z" },
-    { url = "https://files.pythonhosted.org/packages/e9/c0/d9b83c99f7881fef8c322a405c70cfbd0bd13c974e6b89f14f7440b356e5/gdsfactoryplus-1.8.14-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:350cb99cdeb7d78cc1bb8556965e2426adfc08e8b56d761204bc32b61a925b1b", size = 14976816, upload-time = "2026-05-22T07:27:31.491Z" },
-    { url = "https://files.pythonhosted.org/packages/d1/17/6df1eabfb19ab5c2efb74b4632e03353c45fc938cca02139c04a8b864d2d/gdsfactoryplus-1.8.14-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:d3dfbc30864e36cfc773fda3e56d16d6c4d9117df16acd791b7b888231207970", size = 15581592, upload-time = "2026-05-22T07:27:33.811Z" },
-    { url = "https://files.pythonhosted.org/packages/9a/77/69d0ccdd0175622d927099768f6acd992c19112ac99143e65acbd30ee776/gdsfactoryplus-1.8.14-cp312-cp312-win_amd64.whl", hash = "sha256:17dcdfbcb67b08f29feeb2800d1a7ed7d44614ce7b744c13868d25c4f337687c", size = 5596446, upload-time = "2026-05-22T07:27:36.319Z" },
+    { url = "https://files.pythonhosted.org/packages/58/b7/1f27ab904803aaa51014769c033b650ad561fe52a85c34e22e53be1b7595/gdsfactoryplus-1.8.16-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:7172f34121e3e61e2caa8ee14adb952e88a8a76c24cc0eb9786d172db7e77ac6", size = 7177259, upload-time = "2026-06-17T05:01:11.24Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/02/b737da05d58dfc3bbcdbbd3f747a70516e9daf5e977b6834019f097d6dea/gdsfactoryplus-1.8.16-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:1476868bd4b87f37e833414d104c88039a79021f9ffca0a99d0ac7c78719263c", size = 7359284, upload-time = "2026-06-17T05:01:13.016Z" },
+    { url = "https://files.pythonhosted.org/packages/c4/35/b575868d068e7457d90b784863add8d8dceac89e6bb278090b3d2507907c/gdsfactoryplus-1.8.16-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:3b80c4a82cf126cc24f7db07f5526881a9f4d58440615ab8369cd11eaae96ac4", size = 15599788, upload-time = "2026-06-17T05:01:14.782Z" },
+    { url = "https://files.pythonhosted.org/packages/46/7c/d55adff7069302fcaf1f1001c40e8024f358c06417eaaa548026db3362e4/gdsfactoryplus-1.8.16-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:b3b83165a7bbf24ecf4f0fabef8af7ed2845116a05ff86bce748bbd4529f8426", size = 16215448, upload-time = "2026-06-17T05:01:17.537Z" },
+    { url = "https://files.pythonhosted.org/packages/ba/7f/764b5eb4af661d140e76f276e286bcefe330a349b39418918d1720e796e9/gdsfactoryplus-1.8.16-cp312-cp312-win_amd64.whl", hash = "sha256:5426b4490bac421e1ee735367e17b0fda230f4645c5a0297d1d7e7b211f9989e", size = 5644357, upload-time = "2026-06-17T05:01:20.096Z" },
 ]
 
 [[package]]
