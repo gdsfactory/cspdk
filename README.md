@@ -1,6 +1,8 @@
 
 # CORNERSTONE PDK 1.4.4
 
+The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm SOI multi-project-wafer process built for accessible, low-cost prototyping.
+
 <!-- BADGES:START -->
 [![Docs](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml)
 [![Tests](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml)
