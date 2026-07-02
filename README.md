@@ -1,6 +1,8 @@
 
 # CORNERSTONE PDK 1.4.4
 
+The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm SOI multi-project-wafer process built for accessible, low-cost prototyping.
+
 <!-- BADGES:START -->
 [![Docs](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/pages.yml)
 [![Tests](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml/badge.svg)](https://github.com/gdsfactory/cspdk/actions/workflows/test_code.yml)
@@ -72,8 +74,18 @@ uv sync --extra docs --extra dev
 
 ## Pre-commit
 
+Pre-commit hooks are centrally maintained in [pdk-ci-workflow-public](https://github.com/doplaydo/pdk-ci-workflow-public). `make dev` fetches the canonical config and installs the git hook.
+
 ```bash
-make pre-commit
+make dev
+```
+
+## Tests
+
+Run the test suite:
+
+```bash
+make test
 ```
 
 ## Release
