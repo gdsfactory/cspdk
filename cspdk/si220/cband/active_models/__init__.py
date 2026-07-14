@@ -59,6 +59,7 @@ def ThermalPhaseShifter(
 
 
 def get_active_models() -> dict:
+    """Return circulax active models keyed by component name."""
     return {
         "straight_heater_meander": ThermalPhaseShifter,
         "straight_heater_metal": ThermalPhaseShifter,
