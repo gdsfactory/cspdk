@@ -1,0 +1,373 @@
+{
+  "thermal_mzi:X1": {
+    "type": "ckt",
+    "model": "cspdk.si220.cband.cells.heaters.straight_heater_meander",
+    "name": "X1",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "x": 3,
+    "y": 3,
+    "props": {
+      "via_stack": "via_stack_heater_mtop",
+      "heater_width": 2.5,
+      "port_orientation2": 90,
+      "n": 3,
+      "cross_section": "strip",
+      "layer_heater": "HEATER",
+      "length": 320,
+      "port_orientation1": 90,
+      "spacing": 2
+    },
+    "nets": {
+      "o1": "W1",
+      "l_e2": "GND",
+      "r_e2": "net5",
+      "o2": "W11"
+    }
+  },
+  "thermal_mzi:X2": {
+    "type": "mmi-1x2",
+    "model": "cspdk.si220.cband.cells.mmis.mmi1x2",
+    "name": "X2",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "x": 0,
+    "y": 3,
+    "props": {
+      "width_taper": 1.5,
+      "length_taper": 20,
+      "length_mmi": 31,
+      "width_mmi": 6,
+      "gap_mmi": 1.64,
+      "cross_section": "strip"
+    },
+    "nets": {
+      "o1": "W7",
+      "o2": "W1",
+      "o3": "W2"
+    }
+  },
+  "thermal_mzi:W1": {
+    "type": "wire",
+    "x": 3,
+    "y": 4,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W1",
+    "net": "W1"
+  },
+  "thermal_mzi:W2": {
+    "type": "wire",
+    "x": 2,
+    "y": 6,
+    "rx": 1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W2",
+    "net": "W2"
+  },
+  "thermal_mzi:X4": {
+    "type": "mmi-2x2",
+    "model": "cspdk.si220.cband.cells.mmis.mmi2x2",
+    "name": "X4",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "x": 9,
+    "y": 3,
+    "props": {
+      "width_taper": 1.5,
+      "length_taper": 20,
+      "length_mmi": 42.5,
+      "width_mmi": 6,
+      "gap_mmi": 0.5,
+      "cross_section": "strip"
+    },
+    "nets": {
+      "o1": "W11",
+      "o2": "W4",
+      "o3": "W5",
+      "o4": "W6"
+    }
+  },
+  "thermal_mzi:W3": {
+    "type": "wire",
+    "x": 9,
+    "y": 4,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W3",
+    "net": "W11"
+  },
+  "thermal_mzi:W4": {
+    "type": "wire",
+    "x": 8,
+    "y": 6,
+    "rx": 1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W4",
+    "net": "W4"
+  },
+  "thermal_mzi:PD1": {
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "OpticalDetector",
+    "x": 12,
+    "y": 3,
+    "name": "PD1",
+    "nets": {
+      "p1": "W5"
+    }
+  },
+  "thermal_mzi:PD2": {
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "OpticalDetector",
+    "x": 12,
+    "y": 5,
+    "name": "PD2",
+    "nets": {
+      "p1": "W6"
+    }
+  },
+  "thermal_mzi:W5": {
+    "type": "wire",
+    "x": 12,
+    "y": 4,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W5",
+    "net": "W5"
+  },
+  "thermal_mzi:W6": {
+    "type": "wire",
+    "x": 12,
+    "y": 6,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W6",
+    "net": "W6"
+  },
+  "thermal_mzi:LS1": {
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "OpticalSource",
+    "x": -3,
+    "y": 4,
+    "name": "LS1",
+    "nets": {
+      "p1": "W7"
+    },
+    "props": {
+      "wl": "1.5",
+      "power": "1",
+      "phase": "0"
+    }
+  },
+  "thermal_mzi:W7": {
+    "type": "wire",
+    "x": 0,
+    "y": 5,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W7",
+    "net": "W7"
+  },
+  "thermal_mzi:I1": {
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "isource",
+    "x": 4,
+    "y": 1,
+    "name": "I1",
+    "nets": {
+      "P": "GND",
+      "N": "net5"
+    },
+    "props": {
+      "dc": "0;0.05;100"
+    },
+    "template": "{self.name}: {self.props.dc}"
+  },
+  "thermal_mzi:W8": {
+    "type": "wire",
+    "x": 5,
+    "y": 1,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W8",
+    "net": "GND"
+  },
+  "thermal_mzi:W9": {
+    "type": "wire",
+    "x": 4,
+    "y": 1,
+    "rx": 0,
+    "ry": 2,
+    "variant": "d",
+    "name": "W9",
+    "net": "GND"
+  },
+  "thermal_mzi:P1": {
+    "transform": [
+      0,
+      1,
+      -1,
+      0,
+      0,
+      0
+    ],
+    "type": "port",
+    "x": 4,
+    "y": 1,
+    "variant": "ground",
+    "name": "GND",
+    "nets": {
+      "P": "GND"
+    },
+    "nature": "electric"
+  },
+  "thermal_mzi:P2": {
+    "transform": [
+      0,
+      -1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "type": "port",
+    "x": 4,
+    "y": 7,
+    "variant": "ground",
+    "name": "GND",
+    "nets": {
+      "P": "GND"
+    },
+    "nature": "electric"
+  },
+  "thermal_mzi:W10": {
+    "type": "wire",
+    "x": 5,
+    "y": 7,
+    "rx": -1,
+    "ry": 0,
+    "variant": "d",
+    "name": "W10",
+    "net": "GND"
+  },
+  "thermal_mzi:X3": {
+    "type": "ckt",
+    "model": "cspdk.si220.cband.cells.heaters.straight_heater_meander",
+    "name": "X3",
+    "transform": [
+      1,
+      0,
+      0,
+      -1,
+      0,
+      0
+    ],
+    "x": 3,
+    "y": 4,
+    "props": {
+      "via_stack": "via_stack_heater_mtop",
+      "heater_width": 2.5,
+      "port_orientation2": 90,
+      "n": 3,
+      "cross_section": "strip",
+      "layer_heater": "HEATER",
+      "length": 320,
+      "port_orientation1": 90,
+      "spacing": 2
+    },
+    "nets": {
+      "o1": "W2",
+      "l_e2": "GND",
+      "r_e2": "GND",
+      "o2": "net7"
+    }
+  },
+  "thermal_mzi:X5": {
+    "type": "straight",
+    "model": "cspdk.si220.cband.cells.waveguides.straight",
+    "name": "X5",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "x": 6,
+    "y": 5,
+    "props": {
+      "length": 100,
+      "cross_section": "strip",
+      "npoints": 2
+    },
+    "nets": {
+      "o1": "net7",
+      "o2": "W4"
+    }
+  },
+  "thermal_mzi:W11": {
+    "type": "wire",
+    "x": 6,
+    "y": 4,
+    "rx": 2,
+    "ry": 0,
+    "variant": "d",
+    "name": "W11",
+    "net": "W11"
+  }
+}
