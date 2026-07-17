@@ -40,6 +40,10 @@ def ThermalPhaseShifter(
 
     @tags eo dc sweep, circulax simulation
     """
+    if ohms_per_um <= 0 or length <= 0:
+        raise ValueError(
+            f"Both ohms_per_um ({ohms_per_um}) and length ({length}) must be strictly positive."
+        )
     R = ohms_per_um * length
     v_bias = jnp.real(signals.l_e2 - signals.r_e2)
     p_diss = v_bias * v_bias / R
