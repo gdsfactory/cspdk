@@ -4,12 +4,6 @@
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
-[tool.hatch.build.targets.wheel]
-packages = ["cspdk"]
-
-[tool.hatch.build.targets.wheel.force-include]
-"cspdk--sample-projects" = "cspdk--sample-projects"
-
 [project]
 authors = [{name = "gdsfactory", email = "contact@gdsfactory.com"}]
 classifiers = [
@@ -80,6 +74,12 @@ options = [
 max = 1.6
 min = 1.5
 num = 1000
+
+[tool.hatch.build.targets.wheel]
+packages = ["cspdk"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"cspdk--sample-projects" = "cspdk--sample-projects"
 
 [tool.mypy]
 python_version = "3.10"
