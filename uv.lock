@@ -772,7 +772,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "doroutes", specifier = "~=1.1.0" },
-    { name = "gdsfactory", specifier = "~=9.44.0" },
+    { name = "gdsfactory", specifier = "~=9.45.0" },
     { name = "gdsfactoryplus", marker = "extra == 'dev'" },
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.1.0" },
     { name = "jsondiff", marker = "extra == 'dev'" },
@@ -1151,7 +1151,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactory"
-version = "9.44.0"
+version = "9.45.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
@@ -1187,9 +1187,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2c/77/6b1751eab32f1ec7c4506a2dadb59194878f729de84905756b1c3a438343/gdsfactory-9.44.0.tar.gz", hash = "sha256:f993d35df133110938a368a6a3de60c23672ec7e5877a37c17eb92c630077727", size = 555361, upload-time = "2026-06-12T15:33:26.068Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/2c/46796cd9e022fc2f5a54b82bcfd7c5a45f5edfe6889461e5320d9ce2837e/gdsfactory-9.45.0.tar.gz", hash = "sha256:618781460dbaa4e50a2039b14a3ba88ef53f6b46bd90c98f12f3aa4f5bd45896", size = 558352, upload-time = "2026-07-03T13:32:15.991Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/63/c9/eb4b7a5c8b4c05cb9d2dbf348527f58029dd23f118bdf1919ee2f6dde5a5/gdsfactory-9.44.0-py3-none-any.whl", hash = "sha256:e07473acb91af16dd55c2964d13974e86ee7614dad70f70503543d9223c899d0", size = 806596, upload-time = "2026-06-12T15:33:23.765Z" },
+    { url = "https://files.pythonhosted.org/packages/d4/a6/c7a7cb059f57df14f13dbad7dcd069a5eafdcfa970288d4b4cafb6c6871e/gdsfactory-9.45.0-py3-none-any.whl", hash = "sha256:98a3c13b23b8740083e71c3ea8fbf75fe6f729416943efa5eb76b18ebd7d5100", size = 809978, upload-time = "2026-07-03T13:32:14.245Z" },
 ]
 
 [[package]]
@@ -2011,7 +2011,7 @@ wheels = [
 
 [[package]]
 name = "kfactory"
-version = "2.5.3"
+version = "2.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aenum" },
@@ -2032,9 +2032,9 @@ dependencies = [
     { name = "toolz" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1b/41/4f6df622887085e10f1753283696f295c6b5e45aa4a3c2a9dae599c81ff8/kfactory-2.5.3.tar.gz", hash = "sha256:1e8fbe04191109e018506f48fde47bdaa4a9a1247864708b33c11ca49c51064b", size = 13526132, upload-time = "2026-05-21T11:39:04.866Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/de/b1/db2bbdffe2c28032661fe306eb2dae1b54c0f85592d4b86b326453044653/kfactory-2.6.1.tar.gz", hash = "sha256:e469e52efa3d853df89b4ec15d0324b2a389555e0ec8fce5bd347d32e2c0ca97", size = 13551991, upload-time = "2026-07-01T22:44:46.038Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/04/0c45e335e478abbea055db9c47c2d84b022e4259e6c1a6339242949da1d0/kfactory-2.5.3-py3-none-any.whl", hash = "sha256:164f4ae69df5056a7e3ca12850c4e624392f73c5958d3292e5bd1afca9ef161b", size = 253237, upload-time = "2026-05-21T11:39:02.68Z" },
+    { url = "https://files.pythonhosted.org/packages/e4/29/dae62742e7b675c01b1d6e2dd8ee88cdb59a5d1ccf482818bda1d471333f/kfactory-2.6.1-py3-none-any.whl", hash = "sha256:34324989d4a5fa99aee636b7378ad42404d685cb754b40ad9f90280c321a02ea", size = 255125, upload-time = "2026-07-01T22:44:43.472Z" },
 ]
 
 [package.optional-dependencies]
@@ -2345,7 +2345,7 @@ name = "manifold3d"
 version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "python_full_version < '3.14'" },
+    { name = "numpy" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f6/e5/b61f0ae60793e91c42f4b1e7b4fcba4aaf4b99c43552caff568f67a5e0e4/manifold3d-3.5.0.tar.gz", hash = "sha256:d43d8614dadab7db9ade5cd459cde0640f3f99a91466947aa17334b9e9369b82", size = 300919, upload-time = "2026-05-23T05:05:40.238Z" }
 wheels = [
@@ -3197,7 +3197,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
+    { name = "ptyprocess" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [
