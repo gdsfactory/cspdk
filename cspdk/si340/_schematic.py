@@ -33,5 +33,5 @@ grating_coupler_rectangular_schematic = schematic(
 grating_coupler_elliptical_schematic = schematic(
     "grating-coupler", ["grating-coupler", "elliptical"], _GRATING
 )
-mzi_schematic = schematic("mzi", ["mzi"], _MZI_1X2)
+mzi_schematic = schematic("mzi-1x2", ["mzi"], _MZI_1X2)
 pad_schematic = schematic("pad", ["pad"], _PAD)

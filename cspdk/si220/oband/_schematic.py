@@ -114,7 +114,7 @@ coupler_ring_schematic = schematic(
 # Rings / MZI / spirals — composite, no top-level SAX model
 ring_single_schematic = schematic("ring-single", ["ring", "single"], _LEFT_RIGHT)
 ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBLE)
-mzi_schematic = schematic("mzi", ["mzi"], _2X2)
+mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
 # Heaters — oband exposes all via-stack electrical ports

@@ -79,5 +79,5 @@ grating_coupler_elliptical_schematic = schematic(
     _GRATING,
     models=[sax_model("grating_coupler_elliptical", _MODULE, ["o1", "o2"])],
 )
-mzi_schematic = schematic("mzi", ["mzi"], _MZI_1X2)
+mzi_schematic = schematic("mzi-1x2", ["mzi"], _MZI_1X2)
 pad_schematic = schematic("pad", ["pad"], _PAD)
