@@ -5,6 +5,7 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
+from cspdk._common import _add_pins
 from cspdk.si220.oband._schematic import (
     taper_metal_schematic,
     taper_schematic,
@@ -57,7 +58,7 @@ def taper_metal(
         width2: width of the east/right port. Defaults to width1.
         cross_section: specification (CrossSection, string, CrossSectionFactory dict).
     """
-    return gf.c.taper(
+    c = gf.c.taper(
         length=length,
         width1=width1,
         width2=width2,
@@ -69,6 +70,8 @@ def taper_metal(
         port_types=("electrical", "electrical"),
         with_bbox=True,
     )
+    _add_pins(c)
+    return c
 
 
 @gf.cell(tags=["tapers"], schematic_function=transition_schematic)

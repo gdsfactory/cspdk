@@ -9,6 +9,9 @@ dev: install
 rm-samples:
 	rm -rf cspdk/si220/oband/samples cspdk/si220/cband/samples cspdk/sin300/samples cspdk/si500/samples
 
+gf-main:
+	uv pip install "gdsfactory @ git+https://github.com/gdsfactory/gdsfactory.git@main"
+
 test:
 	uv run pytest -s tests/test_si220_cband.py
 	uv run pytest -s tests/test_si220_oband.py
