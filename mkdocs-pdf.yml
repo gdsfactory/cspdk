@@ -9,6 +9,11 @@ nav:
       - Cells Si500: cells_si500.md
       - Cells Sin300: cells_sin300.md
       - Changelog: changelog.md
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences
+  - admonition
 plugins:
   - search
   - autorefs
