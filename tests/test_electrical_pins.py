@@ -19,6 +19,7 @@ def test_si220_cband_straight_metal_has_electrical_pins():
     c = straight_metal()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si220_cband_taper_metal_has_electrical_pins():
@@ -31,6 +32,7 @@ def test_si220_cband_taper_metal_has_electrical_pins():
     c = taper_metal()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si220_cband_wire_corner_has_electrical_pins():
@@ -43,6 +45,7 @@ def test_si220_cband_wire_corner_has_electrical_pins():
     c = wire_corner()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si220_cband_bend_metal_has_electrical_pins():
@@ -55,6 +58,7 @@ def test_si220_cband_bend_metal_has_electrical_pins():
     c = bend_metal()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 # ── si220 oband ──────────────────────────────────────────────────────────────
@@ -70,6 +74,7 @@ def test_si220_oband_straight_metal_has_electrical_pins():
     c = straight_metal()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si220_oband_taper_metal_has_electrical_pins():
@@ -82,6 +87,7 @@ def test_si220_oband_taper_metal_has_electrical_pins():
     c = taper_metal()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 # ── si500 ─────────────────────────────────────────────────────────────────────
@@ -97,6 +103,7 @@ def test_si500_wire_corner_has_electrical_pins():
     c = wire_corner()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si500_pad_has_electrical_pins():
@@ -109,6 +116,7 @@ def test_si500_pad_has_electrical_pins():
     c = pad()
     ports = _electrical_port_names(c)
     assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si500_compass_has_electrical_pins():
@@ -121,6 +129,7 @@ def test_si500_compass_has_electrical_pins():
     c = compass()
     ports = _electrical_port_names(c)
     assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 # ── sin300 ────────────────────────────────────────────────────────────────────
@@ -136,6 +145,7 @@ def test_sin300_wire_corner_has_electrical_pins():
     c = wire_corner()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_sin300_pad_has_electrical_pins():
@@ -148,6 +158,7 @@ def test_sin300_pad_has_electrical_pins():
     c = pad()
     ports = _electrical_port_names(c)
     assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 # ── si340 ─────────────────────────────────────────────────────────────────────
@@ -163,6 +174,7 @@ def test_si340_wire_corner_has_electrical_pins():
     c = wire_corner()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_si340_compass_has_electrical_pins():
@@ -175,6 +187,7 @@ def test_si340_compass_has_electrical_pins():
     c = compass()
     ports = _electrical_port_names(c)
     assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 # ── sin200 ────────────────────────────────────────────────────────────────────
@@ -190,6 +203,7 @@ def test_sin200_wire_corner_has_electrical_pins():
     c = wire_corner()
     ports = _electrical_port_names(c)
     assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
 
 
 def test_sin200_pad_has_electrical_pins():
@@ -202,3 +216,4 @@ def test_sin200_pad_has_electrical_pins():
     c = pad()
     ports = _electrical_port_names(c)
     assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
+    assert len(c.pins) > 0, f"No logical pins on {c.name}"
