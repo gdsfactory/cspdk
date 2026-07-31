@@ -15,6 +15,7 @@ classifiers = [
 ]
 dependencies = [
   "gdsfactory~=9.45.0",
+  "gdsfactoryplus",
   "gplugins[sax,femwell,tidy3d]~=2.1.0",
   "doroutes~=1.1.0"
 ]
@@ -28,7 +29,6 @@ version = "1.4.4"
 
 [project.optional-dependencies]
 dev = [
-  "gdsfactoryplus",
   "jsondiff",
   "pre-commit",
   "pytest",
