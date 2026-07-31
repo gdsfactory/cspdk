@@ -168,7 +168,9 @@ def test_models_with_wavelength_sweep(
         pytest.skip(f"{model_name} does not accept a wl argument")
 
     if not isinstance(s_params, dict):
-        pytest.skip(f"{model_name} is not a SAX model (returns {type(s_params).__name__})")
+        pytest.skip(
+            f"{model_name} is not a SAX model (returns {type(s_params).__name__})"
+        )
 
     # Convert s_params dictionary to arrays for regression testing
     # s_params is a dict with tuple keys (port pairs) and JAX array values
