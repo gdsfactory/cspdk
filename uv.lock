@@ -745,12 +745,12 @@ source = { editable = "." }
 dependencies = [
     { name = "doroutes" },
     { name = "gdsfactory" },
+    { name = "gdsfactoryplus" },
     { name = "gplugins", extra = ["femwell", "sax", "tidy3d"] },
 ]
 
 [package.optional-dependencies]
 dev = [
-    { name = "gdsfactoryplus" },
     { name = "jsondiff" },
     { name = "pre-commit" },
     { name = "pytest" },
@@ -773,7 +773,7 @@ docs = [
 requires-dist = [
     { name = "doroutes", specifier = "~=1.1.0" },
     { name = "gdsfactory", specifier = "~=9.45.0" },
-    { name = "gdsfactoryplus", marker = "extra == 'dev'" },
+    { name = "gdsfactoryplus" },
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.1.0" },
     { name = "jsondiff", marker = "extra == 'dev'" },
     { name = "jupyter", marker = "extra == 'docs'" },
