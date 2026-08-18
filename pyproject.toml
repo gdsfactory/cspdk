@@ -14,7 +14,6 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "circulax>=0.2.3",
   "gdsfactory>=9.45,<9.47",
   "gdsfactoryplus",
   "gplugins[sax,femwell,tidy3d]~=2.1.0",
