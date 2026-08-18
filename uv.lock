@@ -6,10 +6,10 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'emscripten'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'win32'",
-    "python_full_version < '3.13' and sys_platform == 'win32'",
     "python_full_version == '3.13.*' and sys_platform == 'emscripten'",
-    "python_full_version < '3.13' and sys_platform == 'emscripten'",
     "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version < '3.13' and sys_platform == 'win32'",
+    "python_full_version < '3.13' and sys_platform == 'emscripten'",
     "python_full_version < '3.13' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
@@ -505,6 +505,28 @@ wheels = [
 ]
 
 [[package]]
+name = "circulax"
+version = "0.2.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "diffrax" },
+    { name = "equinox" },
+    { name = "jax" },
+    { name = "jaxlib" },
+    { name = "kfnetlist" },
+    { name = "klujax" },
+    { name = "lineax" },
+    { name = "matplotlib" },
+    { name = "numpy" },
+    { name = "sax" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ae/d7/d4838228e30a54ab4dbc78682364a7fbeb8e9031db3180ef7cc10e269943/circulax-0.2.3.tar.gz", hash = "sha256:3ea8f6f5a0b175a034de3bdae64dc77ea121b9a758524d5c50ccfaaed22aecaa", size = 3492258, upload-time = "2026-07-31T08:16:00.09Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1d/bf/0ad8b46152e90699af38df5c063fc999269c56c4290d626579f91a41a563/circulax-0.2.3-py3-none-any.whl", hash = "sha256:d5a99d207ce6053acb5adfc17fd35ed057ff13d6a1264de0523d9c995c4c9c15", size = 190958, upload-time = "2026-07-31T08:15:57.505Z" },
+]
+
+[[package]]
 name = "cli-ui"
 version = "0.19.0"
 source = { registry = "https://pypi.org/simple" }
@@ -743,6 +765,7 @@ name = "cspdk"
 version = "1.4.5"
 source = { editable = "." }
 dependencies = [
+    { name = "circulax" },
     { name = "doroutes" },
     { name = "gdsfactory" },
     { name = "gdsfactoryplus" },
@@ -771,6 +794,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
+    { name = "circulax", specifier = ">=0.2.3" },
     { name = "doroutes", specifier = ">=1.1,<1.3" },
     { name = "gdsfactory", specifier = ">=9.45,<9.47" },
     { name = "gdsfactoryplus" },
@@ -893,6 +917,24 @@ wheels = [
 ]
 
 [[package]]
+name = "diffrax"
+version = "0.7.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "equinox" },
+    { name = "jax" },
+    { name = "jaxtyping" },
+    { name = "lineax" },
+    { name = "optimistix" },
+    { name = "typing-extensions" },
+    { name = "wadler-lindig" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5a/ea/a22853377a840d70d1d174d43183f12990c66eecf34ba7e76eec781249d0/diffrax-0.7.2.tar.gz", hash = "sha256:9adc70fe90dba83f7dd839845839b2531a3dd736a3944fe1aa26598507cfb48e", size = 155159, upload-time = "2026-02-18T01:14:04.964Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6c/48/c42f657f3d6b4d9d9674c9bc48e763d024511ea4cc1d6e0c68c7b4380c43/diffrax-0.7.2-py3-none-any.whl", hash = "sha256:1beee2f991cd049962fe3c89da28f933753aa66d80bef857533276c9f23301ed", size = 199673, upload-time = "2026-02-18T01:14:03.38Z" },
+]
+
+[[package]]
 name = "distlib"
 version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -975,6 +1017,21 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/61/5e/da7c1448c209f406a5b43a8feb07489e8652a64c48450b5642d3f34cf9e7/embreex-4.4.0-cp314-cp314t-macosx_13_0_x86_64.whl", hash = "sha256:ea332cfe60f3b242ecb557ef7b5fcbffec5edd0f3127241bed343d090ac735e2", size = 13218445, upload-time = "2026-04-22T19:47:25.847Z" },
     { url = "https://files.pythonhosted.org/packages/a5/d4/8cb8a41b25138999a98286ae1562e5903c7579ec71becc05bfa1c10d571f/embreex-4.4.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:1e3481b76df80f23128173486ac0efe55e9199fc311bc74707452b4f19951eff", size = 14589303, upload-time = "2026-04-22T19:47:28.544Z" },
     { url = "https://files.pythonhosted.org/packages/93/3d/8b393b35016909143ecac7bf7bf418f79236e1f83faf3867b5c5cb50c97f/embreex-4.4.0-cp314-cp314t-win_amd64.whl", hash = "sha256:a2fedc756a36729da6803425398aa4987b27d1d89e9fad403d8ef371fad5ca01", size = 13389585, upload-time = "2026-04-22T19:47:31.398Z" },
+]
+
+[[package]]
+name = "equinox"
+version = "0.13.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jax" },
+    { name = "jaxtyping" },
+    { name = "typing-extensions" },
+    { name = "wadler-lindig" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/19/ff/522336d2f8264f2ad97119710b76e2cddf66145d03a1e89899175d26b192/equinox-0.13.8.tar.gz", hash = "sha256:dd075050018e2dd02e252e9d29d3060f7e67f085622d8d27a8e89e24bb8523db", size = 145257, upload-time = "2026-05-05T10:03:43.258Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ae/d6/69a76c8ccdef14af687c497040292a46e59fc7a0ab24724b60e50ca61030/equinox-0.13.8-py3-none-any.whl", hash = "sha256:ca004348533cc30a63ebe8823d7dd4bb626dce17743d40bbddb89b402ef2a240", size = 185813, upload-time = "2026-05-05T10:03:41.673Z" },
 ]
 
 [[package]]
@@ -2253,6 +2310,21 @@ wheels = [
 ]
 
 [[package]]
+name = "lineax"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "equinox" },
+    { name = "jax" },
+    { name = "jaxtyping" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/35/d6/4e28416a6fe58dd6bc7565b1ffa330f4d0ba7d74212642b1b734c511299e/lineax-0.1.0.tar.gz", hash = "sha256:5f1a8f060142af2cdbf7d66b99e8d3071c3aa734b677df6339df4b4c4c0554d2", size = 50209, upload-time = "2026-01-27T21:17:26.652Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/80/0c/2ed47112fc1958a0a81c9b015d4e1861953a1ec3a17b081c0180a25ce82c/lineax-0.1.0-py3-none-any.whl", hash = "sha256:f00911c6b07d427c4835db46856970c8348bc82a035b51f4386ad09382af957a", size = 74600, upload-time = "2026-01-27T21:17:25.33Z" },
+]
+
+[[package]]
 name = "locket"
 version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3032,6 +3104,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8c/f9/e3d11ae6f298ee941a0690e353a323d158ba5dedc436e75621c310845c5c/optax-0.2.8.tar.gz", hash = "sha256:5b225b35066fc3eebaa4d798f1b4173b4d57d1a480610908981f8343b50af0b0", size = 301193, upload-time = "2026-03-20T23:30:05.465Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8a/69/6a93d8600c339d7687a05857c7907bd4dd8cf88691a5ea106d7a50af90a1/optax-0.2.8-py3-none-any.whl", hash = "sha256:e3ca2d36c99daab1800ae9dbc0545034382d6bc780b24d969e1b0df65fa31cb4", size = 402960, upload-time = "2026-03-20T23:30:03.886Z" },
+]
+
+[[package]]
+name = "optimistix"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "equinox" },
+    { name = "jax" },
+    { name = "jaxtyping" },
+    { name = "lineax" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5c/0b/3bdc0e698cb0d264e5dca0b5bb171342a950a43fa6e046d8c57189298422/optimistix-0.1.0.tar.gz", hash = "sha256:f05c9104748e87e1dc10a0b4a2be94e427f98c3eab0b1d41ea24a593d76be03d", size = 70164, upload-time = "2026-02-16T13:35:43.991Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/63/53/6a81a6ebb1739f19c32002139719d4ee021a349d5bdbe066910feed327a1/optimistix-0.1.0-py3-none-any.whl", hash = "sha256:c8edda7bf7fe48839c93fcd72bce750c950ed9f7033158303150b7ab395add81", size = 101740, upload-time = "2026-02-16T13:35:42.971Z" },
 ]
 
 [[package]]
