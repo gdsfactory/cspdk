@@ -10,8 +10,8 @@ if __name__ == "__main__":
         core_width=0.45,
         core_thickness=0.22,
         slab_thickness=0.0,
-        core_material="si",
-        clad_material="sio2",
+        core_material="Si",
+        clad_material="SiO2",
         group_index_step=10 * nm,
     )
 
@@ -23,8 +23,8 @@ if __name__ == "__main__":
         core_width=0.4,
         core_thickness=0.22,
         slab_thickness=0.1,
-        core_material="si",
-        clad_material="sio2",
+        core_material="Si",
+        clad_material="SiO2",
         group_index_step=10 * nm,
     )
 
