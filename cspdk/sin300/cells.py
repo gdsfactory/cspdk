@@ -12,7 +12,6 @@ from gdsfactory.typings import (
     Size,
 )
 
-from cspdk._common import _add_pins
 from cspdk.sin300._schematic import (
     bend_euler_schematic,
     bend_s_schematic,
@@ -69,9 +68,7 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
         cross_section: "metal_routing".
         **kwargs: additional arguments.
     """
-    c = gf.components.wire_corner(cross_section=cross_section, **kwargs)
-    _add_pins(c)
-    return c
+    return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
 
 @gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
@@ -506,9 +503,7 @@ mzi_no = partial(
 @gf.cell(tags=["cells"], schematic_function=pad_schematic)
 def pad() -> Component:
     """An electrical pad."""
-    c = gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
-    _add_pins(c)
-    return c
+    return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
 @gf.cell(tags=["cells"])
@@ -541,7 +536,7 @@ def compass(
         port_orientations: list of port_orientations to add. None does not add ports.
         auto_rename_ports: auto rename ports.
     """
-    c = gf.c.compass(
+    return gf.c.compass(
         size=size,
         layer=layer,
         port_type=port_type,
@@ -549,8 +544,6 @@ def compass(
         port_orientations=port_orientations,
         auto_rename_ports=auto_rename_ports,
     )
-    _add_pins(c)
-    return c
 
 
 @gf.cell(tags=["cells"])

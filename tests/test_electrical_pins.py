@@ -1,219 +1,281 @@
-"""Tests for logical electrical pins on PCells with electrical ports."""
+"""Tests that logical electrical pins are registered on cells with electrical ports."""
 
+from __future__ import annotations
 
-def _electrical_port_names(component):
-    """Return names of electrical ports on a component."""
-    return [p.name for p in component.ports if p.port_type == "electrical"]
+import pytest
 
+from cspdk.si220.cband import PDK as si220_cband_PDK
+from cspdk.si220.oband import PDK as si220_oband_PDK
+from cspdk.si340 import PDK as si340_PDK
+from cspdk.si500 import PDK as si500_PDK
+from cspdk.sin200 import PDK as sin200_PDK
+from cspdk.sin300 import PDK as sin300_PDK
 
-# ── si220 cband ──────────────────────────────────────────────────────────────
+SI220_OBAND_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "bend_metal": {"e1", "e2"},
+    "bend_s_metal": {"e1", "e2"},
+    "pad": {"pad"},
+    "spiral_racetrack_heater": {"top", "bot"},
+    "straight_heater_meander": {"l", "r"},
+    "straight_heater_metal": {"l", "r"},
+    "straight_metal": {"e1", "e2"},
+    "taper_metal": {"e1", "e2"},
+    "via_stack_heater_mtop": {"pad"},
+    "wire_corner": {"e1", "e2"},
+    "wire_corner45": {"e1", "e2"},
+    "wire_corner45_straight": {"e1", "e2"},
+}
 
+SI220_CBAND_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "bend_metal": {"e1", "e2"},
+    "bend_s_metal": {"e1", "e2"},
+    "pad": {"pad"},
+    "spiral_racetrack_heater": {"top", "bot"},
+    "straight_heater_meander": {"l", "r"},
+    "straight_heater_metal": {"l", "r"},
+    "straight_metal": {"e1", "e2"},
+    "taper_metal": {"e1", "e2"},
+    "via_stack_heater_mtop": {"pad"},
+    "wire_corner": {"e1", "e2"},
+    "wire_corner45": {"e1", "e2"},
+    "wire_corner45_straight": {"e1", "e2"},
+}
 
-def test_si220_cband_straight_metal_has_electrical_pins():
-    """straight_metal exposes >=2 electrical ports."""
-    from cspdk.si220.cband import PDK
+SI340_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "compass": {"pad"},
+    "pad": {"pad"},
+    "rectangle": {"pad"},
+    "wire_corner": {"e1", "e2"},
+}
 
-    PDK.activate()
-    from cspdk.si220.cband.cells import straight_metal
+SIN200_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "compass": {"pad"},
+    "pad": {"pad"},
+    "rectangle": {"pad"},
+    "wire_corner": {"e1", "e2"},
+}
 
-    c = straight_metal()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+SIN300_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "compass": {"pad"},
+    "pad": {"pad"},
+    "rectangle": {"pad"},
+    "wire_corner": {"e1", "e2"},
+}
 
+SI500_EXPECTED_PIN_NAMES: dict[str, set[str]] = {
+    "compass": {"pad"},
+    "pad": {"pad"},
+    "rectangle": {"pad"},
+    "wire_corner": {"e1", "e2"},
+}
 
-def test_si220_cband_taper_metal_has_electrical_pins():
-    """taper_metal exposes >=2 electrical ports."""
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    from cspdk.si220.cband.cells import taper_metal
-
-    c = taper_metal()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
-
-
-def test_si220_cband_wire_corner_has_electrical_pins():
-    """wire_corner exposes >=2 electrical ports."""
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    from cspdk.si220.cband.cells import wire_corner
-
-    c = wire_corner()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
-
-
-def test_si220_cband_bend_metal_has_electrical_pins():
-    """bend_metal exposes >=2 electrical ports."""
-    from cspdk.si220.cband import PDK
-
-    PDK.activate()
-    from cspdk.si220.cband.cells import bend_metal
-
-    c = bend_metal()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+SI220_OBAND_CELLS = [pytest.param(n, id=n) for n in SI220_OBAND_EXPECTED_PIN_NAMES]
+SI220_CBAND_CELLS = [pytest.param(n, id=n) for n in SI220_CBAND_EXPECTED_PIN_NAMES]
+SI340_CELLS = [pytest.param(n, id=n) for n in SI340_EXPECTED_PIN_NAMES]
+SIN200_CELLS = [pytest.param(n, id=n) for n in SIN200_EXPECTED_PIN_NAMES]
+SIN300_CELLS = [pytest.param(n, id=n) for n in SIN300_EXPECTED_PIN_NAMES]
+SI500_CELLS = [pytest.param(n, id=n) for n in SI500_EXPECTED_PIN_NAMES]
 
 
 # ── si220 oband ──────────────────────────────────────────────────────────────
 
 
-def test_si220_oband_straight_metal_has_electrical_pins():
-    """straight_metal (oband) exposes >=2 electrical ports."""
-    from cspdk.si220.oband import PDK
-
-    PDK.activate()
-    from cspdk.si220.oband.cells import straight_metal
-
-    c = straight_metal()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI220_OBAND_CELLS)
+def test_si220_oband_logical_pin_registered(cell_name: str) -> None:
+    """Si220 O-band cell has logical pins."""
+    si220_oband_PDK.activate()
+    c = si220_oband_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
 
 
-def test_si220_oband_taper_metal_has_electrical_pins():
-    """taper_metal (oband) exposes >=2 electrical ports."""
-    from cspdk.si220.oband import PDK
-
-    PDK.activate()
-    from cspdk.si220.oband.cells import taper_metal
-
-    c = taper_metal()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI220_OBAND_CELLS)
+def test_si220_oband_pin_type_is_dc(cell_name: str) -> None:
+    """Si220 O-band pin type is DC."""
+    si220_oband_PDK.activate()
+    c = si220_oband_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
 
 
-# ── si500 ─────────────────────────────────────────────────────────────────────
+@pytest.mark.parametrize("cell_name", SI220_OBAND_CELLS)
+def test_si220_oband_expected_pin_names(cell_name: str) -> None:
+    """Si220 O-band cell has expected pin names."""
+    si220_oband_PDK.activate()
+    c = si220_oband_PDK.cells[cell_name]()
+    expected = SI220_OBAND_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )
 
 
-def test_si500_wire_corner_has_electrical_pins():
-    """wire_corner (si500) exposes >=2 electrical ports."""
-    from cspdk.si500 import PDK
-
-    PDK.activate()
-    from cspdk.si500.cells import wire_corner
-
-    c = wire_corner()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+# ── si220 cband ──────────────────────────────────────────────────────────────
 
 
-def test_si500_pad_has_electrical_pins():
-    """Pad (si500) exposes >=1 electrical port."""
-    from cspdk.si500 import PDK
-
-    PDK.activate()
-    from cspdk.si500.cells import pad
-
-    c = pad()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI220_CBAND_CELLS)
+def test_si220_cband_logical_pin_registered(cell_name: str) -> None:
+    """Si220 C-band cell has logical pins."""
+    si220_cband_PDK.activate()
+    c = si220_cband_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
 
 
-def test_si500_compass_has_electrical_pins():
-    """Compass (si500) exposes >=1 electrical port."""
-    from cspdk.si500 import PDK
-
-    PDK.activate()
-    from cspdk.si500.cells import compass
-
-    c = compass()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI220_CBAND_CELLS)
+def test_si220_cband_pin_type_is_dc(cell_name: str) -> None:
+    """Si220 C-band pin type is DC."""
+    si220_cband_PDK.activate()
+    c = si220_cband_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
 
 
-# ── sin300 ────────────────────────────────────────────────────────────────────
-
-
-def test_sin300_wire_corner_has_electrical_pins():
-    """wire_corner (sin300) exposes >=2 electrical ports."""
-    from cspdk.sin300 import PDK
-
-    PDK.activate()
-    from cspdk.sin300.cells import wire_corner
-
-    c = wire_corner()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
-
-
-def test_sin300_pad_has_electrical_pins():
-    """Pad (sin300) exposes >=1 electrical port."""
-    from cspdk.sin300 import PDK
-
-    PDK.activate()
-    from cspdk.sin300.cells import pad
-
-    c = pad()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI220_CBAND_CELLS)
+def test_si220_cband_expected_pin_names(cell_name: str) -> None:
+    """Si220 C-band cell has expected pin names."""
+    si220_cband_PDK.activate()
+    c = si220_cband_PDK.cells[cell_name]()
+    expected = SI220_CBAND_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )
 
 
 # ── si340 ─────────────────────────────────────────────────────────────────────
 
 
-def test_si340_wire_corner_has_electrical_pins():
-    """wire_corner (si340) exposes >=2 electrical ports."""
-    from cspdk.si340 import PDK
-
-    PDK.activate()
-    from cspdk.si340.cells import wire_corner
-
-    c = wire_corner()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI340_CELLS)
+def test_si340_logical_pin_registered(cell_name: str) -> None:
+    """Si340 cell has logical pins."""
+    si340_PDK.activate()
+    c = si340_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
 
 
-def test_si340_compass_has_electrical_pins():
-    """Compass (si340) exposes >=1 electrical port."""
-    from cspdk.si340 import PDK
+@pytest.mark.parametrize("cell_name", SI340_CELLS)
+def test_si340_pin_type_is_dc(cell_name: str) -> None:
+    """Si340 pin type is DC."""
+    si340_PDK.activate()
+    c = si340_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
 
-    PDK.activate()
-    from cspdk.si340.cells import compass
 
-    c = compass()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SI340_CELLS)
+def test_si340_expected_pin_names(cell_name: str) -> None:
+    """Si340 cell has expected pin names."""
+    si340_PDK.activate()
+    c = si340_PDK.cells[cell_name]()
+    expected = SI340_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )
 
 
 # ── sin200 ────────────────────────────────────────────────────────────────────
 
 
-def test_sin200_wire_corner_has_electrical_pins():
-    """wire_corner (sin200) exposes >=2 electrical ports."""
-    from cspdk.sin200 import PDK
-
-    PDK.activate()
-    from cspdk.sin200.cells import wire_corner
-
-    c = wire_corner()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 2, f"Expected >=2 electrical ports, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SIN200_CELLS)
+def test_sin200_logical_pin_registered(cell_name: str) -> None:
+    """SiN200 cell has logical pins."""
+    sin200_PDK.activate()
+    c = sin200_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
 
 
-def test_sin200_pad_has_electrical_pins():
-    """Pad (sin200) exposes >=1 electrical port."""
-    from cspdk.sin200 import PDK
+@pytest.mark.parametrize("cell_name", SIN200_CELLS)
+def test_sin200_pin_type_is_dc(cell_name: str) -> None:
+    """SiN200 pin type is DC."""
+    sin200_PDK.activate()
+    c = sin200_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
 
-    PDK.activate()
-    from cspdk.sin200.cells import pad
 
-    c = pad()
-    ports = _electrical_port_names(c)
-    assert len(ports) >= 1, f"Expected >=1 electrical port, got {ports}"
-    assert len(c.pins) > 0, f"No logical pins on {c.name}"
+@pytest.mark.parametrize("cell_name", SIN200_CELLS)
+def test_sin200_expected_pin_names(cell_name: str) -> None:
+    """SiN200 cell has expected pin names."""
+    sin200_PDK.activate()
+    c = sin200_PDK.cells[cell_name]()
+    expected = SIN200_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )
+
+
+# ── sin300 ────────────────────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("cell_name", SIN300_CELLS)
+def test_sin300_logical_pin_registered(cell_name: str) -> None:
+    """SiN300 cell has logical pins."""
+    sin300_PDK.activate()
+    c = sin300_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
+
+
+@pytest.mark.parametrize("cell_name", SIN300_CELLS)
+def test_sin300_pin_type_is_dc(cell_name: str) -> None:
+    """SiN300 pin type is DC."""
+    sin300_PDK.activate()
+    c = sin300_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
+
+
+@pytest.mark.parametrize("cell_name", SIN300_CELLS)
+def test_sin300_expected_pin_names(cell_name: str) -> None:
+    """SiN300 cell has expected pin names."""
+    sin300_PDK.activate()
+    c = sin300_PDK.cells[cell_name]()
+    expected = SIN300_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )
+
+
+# ── si500 ─────────────────────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("cell_name", SI500_CELLS)
+def test_si500_logical_pin_registered(cell_name: str) -> None:
+    """Si500 cell has logical pins."""
+    si500_PDK.activate()
+    c = si500_PDK.cells[cell_name]()
+    assert c.pins, f"{cell_name} should have logical pins"
+
+
+@pytest.mark.parametrize("cell_name", SI500_CELLS)
+def test_si500_pin_type_is_dc(cell_name: str) -> None:
+    """Si500 pin type is DC."""
+    si500_PDK.activate()
+    c = si500_PDK.cells[cell_name]()
+    for pin in c.pins:
+        assert pin.pin_type == "DC", (
+            f"{cell_name} pin {pin.name!r}: expected pin_type='DC', got {pin.pin_type!r}"
+        )
+
+
+@pytest.mark.parametrize("cell_name", SI500_CELLS)
+def test_si500_expected_pin_names(cell_name: str) -> None:
+    """Si500 cell has expected pin names."""
+    si500_PDK.activate()
+    c = si500_PDK.cells[cell_name]()
+    expected = SI500_EXPECTED_PIN_NAMES[cell_name]
+    actual = {pin.name for pin in c.pins}
+    assert expected.issubset(actual), (
+        f"{cell_name}: expected pins {expected} ⊄ actual {actual}"
+    )

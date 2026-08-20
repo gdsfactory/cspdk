@@ -19,7 +19,7 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.4
+    width: 0.45
   o2:
     center:
     - 11
@@ -28,7 +28,7 @@ ports:
     name: o2
     orientation: 0
     port_type: optical
-    width: 0.4
+    width: 0.45
 settings:
   allow_min_radius_violation: false
   cross_section: strip

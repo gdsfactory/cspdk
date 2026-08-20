@@ -1,10 +1,10 @@
 """Primitives."""
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.cross_section import port_names_electrical, port_types_electrical
 from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
-from cspdk._common import _add_pins
 from cspdk.si220.cband._schematic import (
     bend_euler_schematic,
     bend_metal_schematic,
@@ -153,15 +153,13 @@ def wire_corner(
         width: optional width. Defaults to cross_section width.
         radius: ignored.
     """
-    c = gf.c.wire_corner(
+    return gf.c.wire_corner(
         cross_section=cross_section,
         width=width,
         port_names=port_names_electrical,
         port_types=port_types_electrical,
         radius=radius,
     )
-    _add_pins(c)
-    return c
 
 
 @gf.cell(tags=["waveguides"], schematic_function=wire_corner45_schematic)
@@ -181,15 +179,13 @@ def wire_corner45(
         layer: optional layer.
         with_corner90_ports: if True, adds ports at 90 degrees.
     """
-    c = gf.c.wire_corner45(
+    return gf.c.wire_corner45(
         cross_section=cross_section,
         radius=radius,
         width=width,
         layer=layer,
         with_corner90_ports=with_corner90_ports,
     )
-    _add_pins(c)
-    return c
 
 
 @gf.cell(tags=["waveguides"], schematic_function=wire_corner45_straight_schematic)
@@ -205,13 +201,11 @@ def wire_corner45_straight(
         radius: of the corner. Defaults to width.
         cross_section: metal_routing.
     """
-    c = gf.c.wire_corner45_straight(
+    return gf.c.wire_corner45_straight(
         width=width,
         radius=radius,
         cross_section=cross_section,
     )
-    _add_pins(c)
-    return c
 
 
 ####################
@@ -235,7 +229,7 @@ def straight_metal(
     c = gf.c.straight(
         length=length, cross_section=cross_section, width=width, npoints=2
     )
-    _add_pins(c)
+    add_electrical_pins(c)
     return c
 
 
@@ -262,7 +256,7 @@ def bend_metal(
         npoints=None,
         layer=None,
     )
-    _add_pins(c)
+    add_electrical_pins(c)
     return c
 
 
@@ -291,5 +285,5 @@ def bend_s_metal(
         allow_min_radius_violation=allow_min_radius_violation,
         width=width,
     )
-    _add_pins(c)
+    add_electrical_pins(c)
     return c
