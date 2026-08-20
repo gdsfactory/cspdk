@@ -4,7 +4,7 @@ info:
   route_info_type: xs_rc
   route_info_weight: 10
   route_info_xs_rc_length: 10
-  width: 0.45
+  width: 0.8
 name: straight_L10_CSxs_rc
 ports:
   o1:
@@ -15,7 +15,7 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.45
+    width: 0.8
   o2:
     center:
     - 10
@@ -24,7 +24,7 @@ ports:
     name: o2
     orientation: 0
     port_type: optical
-    width: 0.45
+    width: 0.8
 settings:
   cross_section: xs_rc
   length: 10

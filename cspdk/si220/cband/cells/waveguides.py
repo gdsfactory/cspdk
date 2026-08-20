@@ -1,6 +1,7 @@
 """Primitives."""
 
 import gdsfactory as gf
+from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.cross_section import port_names_electrical, port_types_electrical
 from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
@@ -136,6 +137,9 @@ def bend_s(
     )
 
 
+
+
+
 @gf.cell(tags=["waveguides"], schematic_function=wire_corner_schematic)
 def wire_corner(
     cross_section: CrossSectionSpec = "metal_routing",
@@ -222,9 +226,11 @@ def straight_metal(
         cross_section: specification (CrossSection, string or dict).
         width: width of the waveguide. If None, it will use the width of the cross_section.
     """
-    return gf.c.straight(
+    c = gf.c.straight(
         length=length, cross_section=cross_section, width=width, npoints=2
     )
+    add_electrical_pins(c)
+    return c
 
 
 @gf.cell(tags=["waveguides"], schematic_function=bend_metal_schematic)
@@ -241,7 +247,7 @@ def bend_metal(
         else:
             xs = gf.get_cross_section(cross_section=cross_section)
         radius = xs.radius or xs.width
-    return gf.c.bend_circular(
+    c = gf.c.bend_circular(
         radius=radius,
         angle=angle,
         width=width,
@@ -250,6 +256,8 @@ def bend_metal(
         npoints=None,
         layer=None,
     )
+    add_electrical_pins(c)
+    return c
 
 
 @gf.cell(tags=["waveguides"], schematic_function=bend_s_metal_schematic)
@@ -270,10 +278,12 @@ def bend_s_metal(
         width: width of the waveguide. If None, it will use the width of the cross_section.
         allow_min_radius_violation: allows min radius violations.
     """
-    return gf.c.bend_s(
+    c = gf.c.bend_s(
         size=size,
         cross_section=cross_section,
         npoints=99,
         allow_min_radius_violation=allow_min_radius_violation,
         width=width,
     )
+    add_electrical_pins(c)
+    return c

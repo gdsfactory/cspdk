@@ -9,7 +9,7 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.4
+    width: 0.45
   o2:
     center:
     - 399.62
@@ -18,7 +18,7 @@ ports:
     name: o2
     orientation: 90
     port_type: optical
-    width: 0.4
+    width: 0.45
   o3:
     center:
     - 404.24
@@ -27,7 +27,7 @@ ports:
     name: o3
     orientation: 0
     port_type: optical
-    width: 0.4
+    width: 0.45
   o4:
     center:
     - 399.62
@@ -36,5 +36,5 @@ ports:
     name: o4
     orientation: 270
     port_type: optical
-    width: 0.4
+    width: 0.45
 settings: {}
