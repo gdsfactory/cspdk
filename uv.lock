@@ -784,6 +784,7 @@ dev = [
 ]
 docs = [
     { name = "jupyter" },
+    { name = "kwasm" },
     { name = "mkdocs-material" },
     { name = "mkdocs-with-pdf" },
     { name = "mkdocstrings", extra = ["python"] },
@@ -799,6 +800,7 @@ requires-dist = [
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.1.0" },
     { name = "jsondiff", marker = "extra == 'dev'" },
     { name = "jupyter", marker = "extra == 'docs'" },
+    { name = "kwasm", marker = "extra == 'docs'" },
     { name = "mkdocs-material", marker = "extra == 'docs'" },
     { name = "mkdocs-with-pdf", marker = "extra == 'docs'" },
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.27.0" },
@@ -2235,6 +2237,17 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/37/03/c6feea229b9d5aab9523a56733a9e939ee7890dcddf95deea0b8dd9213f4/klujax-0.5.0-cp314-cp314-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:78aabd28317dc0f3c7026e43101eb66fa3c3838dc5ca225c6187493de2542b6c", size = 2912262, upload-time = "2026-04-15T18:52:22.192Z" },
     { url = "https://files.pythonhosted.org/packages/eb/6a/74232bb22ce41a640941623c4baeea1a7243fc18834a6166c8c24d5c2510/klujax-0.5.0-cp314-cp314-win_amd64.whl", hash = "sha256:9f2b57aaf480b9d09297342f38ff2b1786b84195db2bf29af5cb9f1b24cfd084", size = 188709, upload-time = "2026-04-15T18:52:24.249Z" },
     { url = "https://files.pythonhosted.org/packages/7a/e6/56d4fe469c512cfdd246981f8b0971bdc44cf575e85e12b53767c9027c66/klujax-0.5.0-cp314-cp314-win_arm64.whl", hash = "sha256:6ab458b4aef332b52b96fca5bb6eba10dfdbc217d31f53579c07ac4f11f8d280", size = 160429, upload-time = "2026-04-15T18:52:25.556Z" },
+]
+
+[[package]]
+name = "kwasm"
+version = "0.2.26"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typer" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ff/a9/96f5b9f3ad75a4f9d3b2e36b64df013c1105729890e7c15f3d8810636f09/kwasm-0.2.26-py3-none-any.whl", hash = "sha256:c07af2bbf27335777ad604041c4c78752bf07c21c77a685a26c0de098dc47e4a", size = 6938612, upload-time = "2026-08-20T15:42:23.961Z" },
 ]
 
 [[package]]
