@@ -9,25 +9,25 @@ ports:
     name: o1
     orientation: 180
     port_type: optical
-    width: 0.45
+    width: 0.8
   o2:
     center:
-    - 263.5
-    - 0.95
+    - 241.3
+    - 1.015
     layer: WG
     name: o2
     orientation: 0
     port_type: optical
-    width: 0.45
+    width: 0.8
   o3:
     center:
-    - 263.5
-    - -0.95
+    - 241.3
+    - -1.015
     layer: WG
     name: o3
     orientation: 0
     port_type: optical
-    width: 0.45
+    width: 0.8
 settings:
   bend: bend_euler_rc
   combiner: mmi2x2_rc
