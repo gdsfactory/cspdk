@@ -61,6 +61,7 @@ docs-pdf:
 	uv run python .github/write_cells_si220_oband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
+	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
 	uv run mkdocs build -f mkdocs-pdf.yml
@@ -70,6 +71,7 @@ docs:
 	uv run python .github/write_cells_si220_oband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
+	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
 	uv run --extra docs zensical build -f docs/zensical.toml
@@ -79,6 +81,7 @@ docs-serve:
 	uv run python .github/write_cells_si220_oband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
+	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
 	uv run --extra docs zensical serve -f docs/zensical.toml -a localhost:8080
