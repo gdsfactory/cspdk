@@ -5,7 +5,6 @@ from functools import partial, wraps
 from typing import Any
 
 import gdsfactory as gf
-from doroutes.bundles import add_bundle_astar
 from gdsfactory.cross_section import (
     CrossSection,
     port_names_electrical,
@@ -301,32 +300,12 @@ route_bundle_sbend_metal = partial(
     port_name="e1",
 )
 
-route_astar = partial(
-    add_bundle_astar,
-    layers=["WG"],
-    bend="bend_euler",
-    straight="straight",
-    grid_unit=500,
-    spacing=3,
-)
-
-route_astar_metal = partial(
-    add_bundle_astar,
-    layers=["PAD"],
-    bend="wire_corner",
-    straight="straight_metal",
-    grid_unit=500,
-    spacing=15,
-)
-
 
 routing_strategies = dict(
     route_bundle=route_bundle,
     route_bundle_rib=route_bundle_rib,
     route_bundle_metal=route_bundle_metal,
     route_bundle_metal_corner=route_bundle_metal_corner,
-    route_astar=route_astar,
-    route_astar_metal=route_astar_metal,
     route_bundle_sbend=route_bundle_sbend,
     route_bundle_sbend_metal=route_bundle_sbend_metal,
 )
