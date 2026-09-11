@@ -9,7 +9,7 @@ from gdsfactory.typings import (
     Size,
 )
 
-from cspdk.si220.cband._schematic import pad_schematic
+from cspdk.si220.cband._schematic import die_schematic, pad_schematic
 from cspdk.si220.cband.tech import LAYER
 
 
@@ -104,7 +104,7 @@ def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
     return c
 
 
-@gf.cell(tags=["die"])
+@gf.cell(tags=["die"], schematic_function=die_schematic)
 def die_with_pads(
     size: tuple[float, float] = (11470.0, 4900.0),
     ngratings: int = 14,
