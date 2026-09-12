@@ -15,6 +15,7 @@ from cspdk._schematic import (
     _RING_DOUBLE,
     _WIRE_BEND,
     _WIRE_STRAIGHT,
+    _die_ports,
     sax_model,
     schematic,
 )
@@ -171,3 +172,8 @@ crossing_rib_schematic = schematic("crossing", ["crossing", "rib"], _CROSSING)
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)
 via_stack_schematic = schematic("pad", ["via", "stack"], _PAD)
+
+# Die: symbol "die" makes editors render it as a die (no background box).
+# Ports are derived from the factory kwargs; each side is the die edge the
+# port sits on — opposite of the inward-pointing GDS orientation.
+die_schematic = schematic("die", ["die"], _die_ports)

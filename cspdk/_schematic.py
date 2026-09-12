@@ -23,6 +23,8 @@ into the SAX call; the link here targets the dispatcher name.
 
 from __future__ import annotations
 
+from collections.abc import Callable
+
 from kfactory.schematic import DSchematic
 
 # ---------------------------------------------------------------------------
@@ -146,6 +148,48 @@ _HEATER_FULL = [
 ]
 
 
+def _die_ports(
+    ngratings: int = 14,
+    npads: int = 31,
+    with_loopback: bool = True,
+    grating_coupler: object = "grating_coupler_rectangular",
+    **_ignored: object,
+) -> list[dict]:
+    """Symbol ports for ``die_with_pads``, derived from its kwargs.
+
+    Side is the die edge each port sits on — opposite of the GDS orientation,
+    which points into the die. Within each side the order follows the
+    nyanlib->Mosaic bridge convention (left bottom->top, right top->bottom,
+    top left->right, bottom right->left) so symbol labels match the layout.
+
+    The loopback absorbs the two edge gratings, so ngratings-2 ports are
+    exposed per W/E edge when ``with_loopback`` is set; ``npads`` pads per
+    N/S edge.
+    """
+    ports: list[dict] = []
+    if grating_coupler:
+        n = ngratings - 2 if with_loopback else ngratings
+        if n > 0:
+            # o1..o(n) right edge bottom->top, o(n+1)..o(2n) left edge top->bottom
+            ports += [
+                {"name": f"o{i}", "side": "right", "type": "photonic"}
+                for i in range(n, 0, -1)
+            ]
+            ports += [
+                {"name": f"o{i}", "side": "left", "type": "photonic"}
+                for i in range(2 * n, n, -1)
+            ]
+    ports += [
+        {"name": f"e{i}", "side": "bottom", "type": "electric"}
+        for i in range(npads, 0, -1)
+    ]
+    ports += [
+        {"name": f"e{i}", "side": "top", "type": "electric"}
+        for i in range(2 * npads, npads, -1)
+    ]
+    return ports
+
+
 # ---------------------------------------------------------------------------
 # Schematic builder
 # ---------------------------------------------------------------------------
@@ -213,13 +257,18 @@ def _make_schematic(
 def schematic(
     symbol: str,
     tags: list[str],
-    ports: list[dict],
+    ports: list[dict] | Callable[..., list[dict]],
     models: list[dict] | None = None,
 ):
-    """Return a ``schematic_function`` closure for use with ``@gf.cell``."""
+    """Return a ``schematic_function`` closure for use with ``@gf.cell``.
+
+    ``ports`` may be a static list or a callable receiving the component's
+    kwargs, for parameter-dependent port sets.
+    """
 
     def _schematic_fn(**kwargs) -> DSchematic:
-        return _make_schematic(symbol, tags, ports, models)
+        resolved_ports = ports(**kwargs) if callable(ports) else ports
+        return _make_schematic(symbol, tags, resolved_ports, models)
 
     return _schematic_fn
 
