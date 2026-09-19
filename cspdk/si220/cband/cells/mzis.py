@@ -77,3 +77,49 @@ def mzi(
         min_length=0.01,
         auto_rename_ports=True,
     )
+
+
+@gf.cell(tags=["mzis"])
+def mzi_lattice(
+    delta_length: float = 10.0,
+    bend: ComponentSpec = "bend_euler",
+    straight: ComponentSpec = "straight",
+    splitter: ComponentSpec = "mmi1x2",
+    combiner: ComponentSpec = "mmi2x2",
+    cross_section: CrossSectionSpec = "strip",
+) -> gf.Component:
+    """Return an MZI lattice stage with one input and two outputs.
+
+    Args:
+        delta_length: Difference in length between the two MZI arms.
+        bend: Bend component specification.
+        straight: Straight component specification.
+        splitter: One-by-two input splitter component specification.
+        combiner: Two-by-two output combiner component specification.
+        cross_section: Cross section used to route the arms.
+    """
+    return gf.c.mzi(
+        delta_length=delta_length,
+        length_y=1.0,
+        length_x=0.1,
+        straight_y=None,
+        straight_x_top=None,
+        straight_x_bot=None,
+        with_splitter=True,
+        port_e1_splitter="o2",
+        port_e0_splitter="o3",
+        port_e1_combiner="o3",
+        port_e0_combiner="o4",
+        nbends=2,
+        cross_section=cross_section,
+        cross_section_x_top=None,
+        cross_section_x_bot=None,
+        mirror_bot=False,
+        add_optical_ports_arms=False,
+        min_length=0.01,
+        auto_rename_ports=True,
+        bend=bend,
+        straight=straight,
+        splitter=splitter,
+        combiner=combiner,
+    )

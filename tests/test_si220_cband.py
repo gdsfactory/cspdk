@@ -41,6 +41,12 @@ dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_re
 dirpath.mkdir(exist_ok=True, parents=True)
 
 
+def test_mzi_lattice_ports() -> None:
+    """The lattice MZI exposes one input and two output ports."""
+    component = cells["mzi_lattice"]()
+    assert {port.name for port in component.ports} == {"o1", "o2", "o3"}
+
+
 def get_minimal_netlist(comp: gf.Component):
     """Get minimal netlist from a component."""
     net = comp.get_netlist()
