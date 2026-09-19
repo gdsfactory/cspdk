@@ -13,6 +13,8 @@ def sample0_routed_mzi() -> gf.Component:
     s2 = c << cells.straight(length=10)
     s2.dmove((100, 50))
     tech.route_single(c, s1.ports["o2"], s2.ports["o1"])
+    c.add_port(name="o1", port=s1.ports["o1"])
+    c.add_port(name="o2", port=s2.ports["o2"])
     return c
 
 

@@ -15,6 +15,7 @@ from cspdk._schematic import (
     _RING_DOUBLE,
     _WIRE_BEND,
     _WIRE_STRAIGHT,
+    _die_ports,
     sax_model,
     schematic,
 )
@@ -116,7 +117,7 @@ ring_single_schematic = schematic("ring-single", ["ring", "single"], _LEFT_RIGHT
 ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBLE)
 
 # MZI (composite; cband mzi uses 2x2 splitter so 4 ports)
-mzi_schematic = schematic("mzi", ["mzi"], _2X2)
+mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 
 # Spirals (composite)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
@@ -184,3 +185,8 @@ crossing_rib_schematic = schematic(
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)
 via_stack_schematic = schematic("pad", ["via", "stack"], _PAD)
+
+# Die: symbol "die" makes editors render it as a die (no background box).
+# Ports are derived from the factory kwargs; each side is the die edge the
+# port sits on — opposite of the inward-pointing GDS orientation.
+die_schematic = schematic("die", ["die"], _die_ports)

@@ -3,7 +3,6 @@
 import sys
 from collections.abc import Iterable
 from functools import partial
-from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
@@ -57,6 +56,8 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_wg: float = 340 * nm,
@@ -84,7 +85,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.WG) - LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_wg,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -94,7 +95,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.WG) & LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_grating,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -104,7 +105,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.SLAB),
                 thickness=thickness_slab,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -120,7 +121,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
-                material="Aluminum",
+                material="Al",
                 info={"mesh_order": 2},
             ),
         )
@@ -384,13 +385,11 @@ if __name__ == "__main__":
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
 
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
-
     t = KLayoutTechnology(
         name="Cornerstone_si340",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)

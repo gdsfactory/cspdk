@@ -6,8 +6,9 @@ API keys.
 """
 
 import gdsfactory as gf
+from mycspdk.samples.sample0 import sample0_routed_mzi
 
-from cspdk.si220.cband import PDK, cells, tech
+from cspdk.si220.cband import PDK, cells
 
 
 def test_import():
@@ -49,19 +50,9 @@ def test_multiple_cells():
 
 def test_routing():
     """Create a simple routed component connecting two straights."""
-
-    @gf.cell
-    def routed_mzi():
-        c = gf.Component()
-        s1 = c << cells.straight(length=10)
-        s2 = c << cells.straight(length=10)
-        s2.dmove((100, 50))
-        tech.route_single(c, s1.ports["o2"], s2.ports["o1"])
-        return c
-
-    c = routed_mzi()
+    c = sample0_routed_mzi()
     assert isinstance(c, gf.Component)
-    assert len(c.ports) > 0
+    assert {port.name for port in c.ports} == {"o1", "o2"}
 
 
 def test_component_ports():
