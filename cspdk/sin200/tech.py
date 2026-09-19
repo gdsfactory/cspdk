@@ -3,7 +3,6 @@
 import sys
 from collections.abc import Iterable
 from functools import partial
-from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import CrossSectionSpec, get_cross_sections
@@ -41,6 +40,8 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_nitride: float = 200 * nm,
@@ -64,7 +65,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.NITRIDE),
                 thickness=thickness_nitride,
                 zmin=0.0,
-                material="sin",
+                material="SiN",
                 info={"mesh_order": 2},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -73,7 +74,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.NITRIDE_ETCH),
                 thickness=thickness_nitride,
                 zmin=0.0,
-                material="sin",
+                material="SiN",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -89,7 +90,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
-                material="Aluminum",
+                material="Al",
                 info={"mesh_order": 2},
             ),
         )
@@ -332,13 +333,11 @@ if __name__ == "__main__":
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
 
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
-
     t = KLayoutTechnology(
         name="Cornerstone_sin200",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)
