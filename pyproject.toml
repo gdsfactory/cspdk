@@ -56,6 +56,7 @@ skip = "references/*"
 name = "cspdk.si220"
 
 [tool.gdsfactoryplus.drc]
+pdk = "cspdk"
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
@@ -69,6 +70,9 @@ options = [
   "cspdk.sin200",
   "cspdk.ge_on_si"
 ]
+
+[tool.gdsfactoryplus.project]
+identifier = "cspdk"
 
 [tool.gdsfactoryplus.sim.wls]
 max = 1.6
