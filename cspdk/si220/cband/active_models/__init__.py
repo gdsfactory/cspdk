@@ -38,13 +38,29 @@ def ThermalPhaseShifter(
     phase-dependent back-reflection; stamping Y_in = 1 gives S11 = 0.
     ``wl`` is in micrometres (SAX convention).
 
+    Args:
+        signals: Input signals at each port, provided by circulax.
+        s: Mutable state container for the ``i_fwd`` branch current.
+        ohms_per_um: Heater resistance per unit length (must be positive).
+        eta_pi_per_W: Phase shift efficiency (radians per watt).
+        length: Heater length in micrometres (must be positive).
+        loss_dBcm: Propagation loss in dB/cm.
+        neff0: Effective refractive index.
+        wl: Wavelength in micrometres.
+
     @tags eo dc sweep, circulax simulation
     """
-    if ohms_per_um <= 0 or length <= 0:
-        raise ValueError(
-            f"Both ohms_per_um ({ohms_per_um}) and length ({length}) must be strictly positive."
-        )
-    R = ohms_per_um * length
+    # Validate parameters are positive; use jnp.where for JAX-safe evaluation
+    ohms_per_um_arr = jnp.asarray(ohms_per_um)
+    length_arr = jnp.asarray(length)
+    is_valid = (ohms_per_um_arr > 0) & (length_arr > 0)
+    # If invalid, use a safe fallback (jnp.where won't raise, but R will be set to safe value)
+    R = jnp.where(
+        is_valid,
+        ohms_per_um * length,
+        1.0,  # fallback resistance to avoid division by zero
+    )
+
     v_bias = jnp.real(signals.l_e2 - signals.r_e2)
     p_diss = v_bias * v_bias / R
     dphi = jnp.pi * eta_pi_per_W * p_diss

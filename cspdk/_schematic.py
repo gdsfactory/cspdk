@@ -289,3 +289,45 @@ def sax_model(
         "port_order": port_order,
         "params": params or {},
     }
+
+
+def circulax_model(
+    name: str,
+    module: str,
+    port_order: list[str],
+    qualname: str | None = None,
+    params: dict[str, str] | None = None,
+    port_map: dict[str, str] | None = None,
+    defaults: dict[str, float] | None = None,
+) -> dict:
+    """Build a circulax model entry for ``s.info["models"]``.
+
+    Args:
+        name: Model name (must match a circulax ``@component`` class name in
+            *module*).
+        module: Dotted Python module path containing the model.
+        port_order: Cell port names in the order the model expects them.
+        qualname: Qualified name within *module* (defaults to *name*).
+        params: Mapping of cell setting names to model parameter names. Used
+            by the consumer to rename parameters before passing them to the
+            model constructor.
+        port_map: Mapping of cell port names to generic model port names.
+            Used when a PDK-specific cell wraps a reusable model whose ports
+            have different names. ``None`` means ports match the model as-is.
+        defaults: Literal parameter values to pass to the model constructor.
+            Used when a generic model is reused across cells that each need
+            different calibrated defaults.
+    """
+    entry: dict = {
+        "language": "circulax",
+        "name": name,
+        "module": module,
+        "qualname": qualname or name,
+        "port_order": port_order,
+        "params": params or {},
+    }
+    if port_map is not None:
+        entry["port_map"] = port_map
+    if defaults is not None:
+        entry["defaults"] = defaults
+    return entry
