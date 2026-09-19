@@ -8,6 +8,8 @@ from gdsfactory.typings import (
     Strs,
 )
 
+from cspdk.si220._utils import get_band_component as _get_band_component
+
 gc = "grating_coupler_elliptical"
 
 pack_doe = gf.c.pack_doe
@@ -45,6 +47,8 @@ def add_fiber_array(
     ```
 
     """
+    component = _get_band_component(component, cross_section)
+    grating_coupler = _get_band_component(grating_coupler, cross_section)
     return gf.routing.add_fiber_array(
         component=component,
         grating_coupler=grating_coupler,
@@ -93,6 +97,8 @@ def add_fiber_single(
     ```
 
     """
+    component = _get_band_component(component, cross_section)
+    grating_coupler = _get_band_component(grating_coupler, cross_section)
     return gf.routing.add_fiber_single(
         component=component,
         grating_coupler=grating_coupler,

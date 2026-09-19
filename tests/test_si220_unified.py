@@ -87,3 +87,73 @@ def test_straight_model_dispatches_by_band() -> None:
     assert set(cband) == expected_ports
     assert set(oband) == expected_ports
     assert not np.allclose(cband["o1", "o2"], oband["o1", "o2"])
+
+
+@pytest.mark.parametrize(
+    "cross_section",
+    [si220.tech.strip_oband, si220.tech.strip_oband()],
+)
+def test_model_dispatch_accepts_oband_factories_and_objects(cross_section) -> None:
+    """Resolved cross-sections select the same O-band model as its name."""
+    model = si220.PDK.models["straight"]
+    expected = model(wl=1.31, length=10.0, cross_section="strip_oband")
+    actual = model(wl=1.31, length=10.0, cross_section=cross_section)
+    assert np.allclose(actual["o1", "o2"], expected["o1", "o2"])
+
+
+@pytest.mark.parametrize(
+    ("factory", "kwargs"),
+    [
+        (si220.cells.mzi, {}),
+        (si220.cells.mzi_lattice, {}),
+        (si220.cells.straight_heater_metal, {}),
+        (
+            si220.cells.die_with_pads,
+            {"ngratings": 2, "npads": 1, "with_loopback": False},
+        ),
+    ],
+)
+def test_composite_cells_propagate_oband_cross_section(factory, kwargs) -> None:
+    """O-band selection reaches every nested optical component."""
+    si220.PDK.activate()
+    component = factory(cross_section="strip_oband", **kwargs)
+    optical_ports = list(component.ports.filter(port_type="optical"))
+    assert optical_ports
+    assert all(port.width == pytest.approx(0.40) for port in optical_ports)
+
+
+def test_fiber_container_propagates_oband_cross_section() -> None:
+    """The routed device and grating inside a container use O-band ports."""
+    si220.PDK.activate()
+    component = si220.cells.add_fiber_single(
+        cross_section="strip_oband", with_loopback=False
+    )
+    optical_ports = [
+        port
+        for instance in component.insts
+        for port in instance.ports
+        if port.port_type == "optical"
+    ]
+    assert optical_ports
+    assert all(port.width == pytest.approx(0.40) for port in optical_ports)
+
+
+@pytest.mark.parametrize(
+    ("factory", "cross_section"),
+    [
+        (si220.cells.crossing, "strip_oband"),
+        (si220.cells.crossing_rib, "rib_oband"),
+    ],
+)
+def test_fixed_crossings_select_oband_geometry(factory, cross_section: str) -> None:
+    """Fixed crossings load the 1310 nm geometry and expose O-band ports."""
+    si220.PDK.activate()
+    component = factory(cross_section=cross_section)
+    assert all(port.width == pytest.approx(0.40) for port in component.ports)
+
+
+def test_pdk_uses_dispatchable_sax_heater_model() -> None:
+    """Optional active models do not replace the shared SAX model."""
+    model = si220.PDK.models["straight_heater_metal"]
+    result = model(wl=1.31, cross_section="strip_oband")
+    assert ("o1", "o2") in result

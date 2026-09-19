@@ -11,6 +11,8 @@ import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk.si220.tech import get_band, is_rib
+
 from .couplers import *
 from .waveguides import *
 
@@ -288,8 +290,11 @@ def _dispatch_model(
     @wraps(cband_model)
     def model(*args, **kwargs) -> sax.SDict:
         cross_section = kwargs.get("cross_section", "strip_cband")
-        is_oband = isinstance(cross_section, str) and cross_section.endswith("_oband")
-        target = oband_model if is_oband and oband_model is not None else cband_model
+        target = (
+            oband_model
+            if get_band(cross_section) == "oband" and oband_model is not None
+            else cband_model
+        )
         signature = inspect.signature(target)
         accepts_kwargs = any(
             parameter.kind is inspect.Parameter.VAR_KEYWORD
@@ -297,11 +302,7 @@ def _dispatch_model(
         )
         call_kwargs = dict(kwargs)
         if "cross_section" in signature.parameters:
-            call_kwargs["cross_section"] = (
-                "rib"
-                if isinstance(cross_section, str) and cross_section.startswith("rib_")
-                else "strip"
-            )
+            call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
         else:
             call_kwargs.pop("cross_section", None)
         if not accepts_kwargs:

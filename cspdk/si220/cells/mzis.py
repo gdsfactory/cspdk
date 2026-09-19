@@ -9,6 +9,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 from cspdk.si220._schematic import mzi_schematic
+from cspdk.si220._utils import get_band_component as _get_band_component
 
 
 @gf.cell(tags=["mzis"], schematic_function=mzi_schematic)
@@ -39,8 +40,8 @@ def mzi(
         cross_section: for routing (sxtop/sxbot to combiner).
     """
     combiner = combiner or splitter
-    _splitter = gf.get_component(splitter)
-    _combiner = gf.get_component(combiner)
+    _splitter = _get_band_component(splitter, cross_section)
+    _combiner = _get_band_component(combiner, cross_section)
     if len(_splitter.ports) < 4:
         raise ValueError(
             f"Splitter {splitter} has {len(_splitter.ports)} ports, but needs at least 4 ports."
@@ -54,8 +55,8 @@ def mzi(
         delta_length=delta_length,
         bend=bend,
         straight=straight,
-        splitter=splitter,
-        combiner=combiner,
+        splitter=_splitter,
+        combiner=_combiner,
         port_e1_splitter=port_e1_splitter,
         port_e0_splitter=port_e0_splitter,
         port_e1_combiner=port_e1_combiner,
@@ -98,6 +99,8 @@ def mzi_lattice(
         combiner: Two-by-two output combiner component specification.
         cross_section: Cross section used to route the arms.
     """
+    _splitter = _get_band_component(splitter, cross_section)
+    _combiner = _get_band_component(combiner, cross_section)
     return gf.c.mzi(
         delta_length=delta_length,
         length_y=1.0,
@@ -120,6 +123,6 @@ def mzi_lattice(
         auto_rename_ports=True,
         bend=bend,
         straight=straight,
-        splitter=splitter,
-        combiner=combiner,
+        splitter=_splitter,
+        combiner=_combiner,
     )

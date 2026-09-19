@@ -1,5 +1,5 @@
 info: {}
-name: crossing
+name: crossing_CSstrip_cband
 ports:
   o1:
     center:
@@ -37,4 +37,5 @@ ports:
     orientation: 270
     port_type: optical
     width: 0.45
-settings: {}
+settings:
+  cross_section: strip_cband

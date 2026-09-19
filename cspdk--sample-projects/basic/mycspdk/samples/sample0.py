@@ -2,12 +2,13 @@
 
 import gdsfactory as gf
 
-from cspdk.si220 import cells, tech
+from cspdk.si220 import PDK, cells, tech
 
 
 @gf.cell
 def sample0_routed_mzi() -> gf.Component:
     """Create two straights connected by a route."""
+    PDK.activate()
     c = gf.Component()
     s1 = c << cells.straight(length=10)
     s2 = c << cells.straight(length=10)
@@ -19,8 +20,5 @@ def sample0_routed_mzi() -> gf.Component:
 
 
 if __name__ == "__main__":
-    from cspdk.si220 import PDK
-
-    PDK.activate()
     c = sample0_routed_mzi()
     c.show()

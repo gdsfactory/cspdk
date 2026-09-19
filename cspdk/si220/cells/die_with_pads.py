@@ -10,6 +10,7 @@ from gdsfactory.typings import (
 )
 
 from cspdk.si220._schematic import die_schematic, pad_schematic
+from cspdk.si220._utils import get_band_component as _get_band_component
 from cspdk.si220.tech import LAYER
 
 
@@ -146,6 +147,7 @@ def die_with_pads(
     xs, ys = size
     x0 = xs / 2 + edge_to_grating_distance
     if grating_coupler:
+        grating_coupler = _get_band_component(grating_coupler, cross_section)
         gca = gf.c.grating_coupler_array(
             n=ngratings,
             pitch=grating_pitch,

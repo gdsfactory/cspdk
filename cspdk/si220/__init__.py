@@ -13,15 +13,6 @@ from cspdk.si220.models import get_models
 from cspdk.si220.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
 _models = get_models()
-try:
-    import circulax  # noqa: F401
-except ImportError:
-    circulax = None
-
-if circulax is not None:
-    from cspdk.si220.active_models import get_active_models
-
-    _models = {**_models, **get_active_models()}
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 

@@ -1,5 +1,7 @@
 """Heater components."""
 
+from functools import partial
+
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
 
@@ -7,7 +9,7 @@ from cspdk.si220._schematic import (
     straight_heater_meander_schematic,
     straight_heater_metal_schematic,
 )
-from cspdk.si220.tech import get_band
+from cspdk.si220.tech import LAYER, get_band, strip_heater_metal
 
 
 @gf.cell(tags=["heaters"], schematic_function=straight_heater_metal_schematic)
@@ -40,6 +42,15 @@ def straight_heater_metal(
     if get_band(cross_section) == "cband":
         port_orientation1 = 90 if port_orientation1 is None else port_orientation1
         port_orientation2 = 90 if port_orientation2 is None else port_orientation2
+    optical_width = gf.get_cross_section(cross_section).width
+    heated_cross_section = partial(strip_heater_metal, width=optical_width)
+    undercut_cross_section = partial(
+        gf.cross_section.strip_heater_metal_undercut,
+        width=optical_width,
+        layer="WG",
+        layer_heater="HEATER",
+        layer_trench=LAYER.SLAB,
+    )
     return gf.c.straight_heater_metal_undercut(
         length=length,
         length_undercut_spacing=length_undercut_spacing,
@@ -53,6 +64,8 @@ def straight_heater_metal(
         heater_taper_length=5.0,
         ohms_per_square=None,
         cross_section=cross_section,
+        cross_section_waveguide_heater=heated_cross_section,
+        cross_section_heater_undercut=undercut_cross_section,
     )
 
 

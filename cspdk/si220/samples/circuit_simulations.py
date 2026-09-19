@@ -8,14 +8,19 @@ from cspdk.si220 import PDK, cells
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
+    PDK.activate()
     # c = cells.mzi(delta_length=12, splitter=cells.mmi2x2)
-    c = cells.mzi(delta_length=12, splitter=cells.coupler)
+    c = cells.mzi(
+        delta_length=12,
+        splitter=cells.coupler,
+        cross_section="strip_oband",
+    )
     c.show()
     netlist = c.get_netlist()
     c.plot_netlist()
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore
-    wl = jnp.linspace(1.5, 1.6, 256)
+    wl = jnp.linspace(1.26, 1.36, 256)
 
     S = circuit(wl=wl)
     plt.figure(figsize=(14, 4))
