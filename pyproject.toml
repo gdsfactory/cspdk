@@ -6,7 +6,7 @@ requires = ["flit_core >=3.2,<4"]
 
 [project]
 authors = [
-  {name = "gdsfactory", email = "contact@gdsfactory.com"}
+  { name = "gdsfactory", email = "contact@gdsfactory.com" }
 ]
 classifiers = [
   "Programming Language :: Python :: 3.11",
@@ -21,7 +21,7 @@ dependencies = [
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
