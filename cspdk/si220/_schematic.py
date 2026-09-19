@@ -17,12 +17,14 @@ from cspdk._schematic import (
     _WIRE_BEND,
     _WIRE_STRAIGHT,
     _die_ports,
+    circulax_model,
     sax_model,
     schematic,
 )
 from cspdk.si220.tech import get_band
 
 _MODULE = "cspdk.si220.models"
+_ACTIVE_MODULE = "cspdk.si220.active_models"
 
 
 def _heater_ports(
@@ -136,25 +138,16 @@ straight_heater_metal_schematic = schematic(
     # Rendered as a generic model-driven box ("ckt") so all heater ports show.
     # The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
     # multi-port heater; see the model-driven-modulator follow-up issue.
+    # SAX model lists all 8 electrical ports, but Circulax active model only
+    # implements o1, o2, l_e2, r_e2; this entry uses the Circulax model.
     "ckt",
     ["heater", "modulator"],
     _heater_ports,
     models=[
-        sax_model(
+        circulax_model(
             "straight_heater_metal",
-            _MODULE,
-            [
-                "o1",
-                "o2",
-                "l_e1",
-                "l_e2",
-                "l_e3",
-                "l_e4",
-                "r_e1",
-                "r_e2",
-                "r_e3",
-                "r_e4",
-            ],
+            _ACTIVE_MODULE,
+            ["o1", "o2", "l_e2", "r_e2"],
             params={"length": "length"},
         )
     ],

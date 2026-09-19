@@ -14,10 +14,11 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "circulax>=0.2.3",
   "gdsfactory~=9.51.0",
   "gdsfactoryplus",
-  "gplugins[sax,femwell,tidy3d]~=2.1.0"
+  "gplugins[sax,femwell,tidy3d]~=2.1.0",
+  "circulax>=0.2.3",
+  "klujax>=0.5.1"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
