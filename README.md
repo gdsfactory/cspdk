@@ -23,8 +23,7 @@ The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm 
 
 | Module | Process | Waveguide | Wavelength | Heaters |
 |--------|---------|-----------|------------|---------|
-| `cspdk.si220.cband` | SOI 220nm | Strip + Rib | C-band (1550nm) | Yes |
-| `cspdk.si220.oband` | SOI 220nm | Strip + Rib | O-band (1310nm) | Yes |
+| `cspdk.si220` | SOI 220nm | Strip + Rib | C-band / O-band | Yes |
 | `cspdk.si340` | SOI 340nm | Strip + Rib | C-band / O-band | Yes |
 | `cspdk.si500` | SOI 500nm | Rib | C-band / O-band | Yes |
 | `cspdk.sin300` | SiN 300nm | Strip | C-band / O-band | Yes |

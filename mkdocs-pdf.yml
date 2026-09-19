@@ -4,8 +4,7 @@ site_dir: build/pdf
 nav:
   - Home: index.md
   - Reference:
-      - Cells Si220 Cband: cells_si220_cband.md
-      - Cells Si220 Oband: cells_si220_oband.md
+      - Cells Si220: cells_si220.md
       - Cells Si500: cells_si500.md
       - Cells Sin300: cells_sin300.md
       - Changelog: changelog.md

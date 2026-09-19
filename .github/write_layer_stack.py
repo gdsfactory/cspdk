@@ -1,6 +1,6 @@
 """Generate interactive layer_stack.md for cspdk.
 
-Reads layer_stack and cross_sections from each band PDK and writes
+Reads layer stacks and cross-sections from each PDK and writes
 docs/layer_stack.md with interactive SVG/JS visualizations.
 """
 
@@ -9,13 +9,11 @@ from __future__ import annotations
 import json
 import math
 
-from cspdk.si220.cband import PDK as PDK_SI220_CBAND
-from cspdk.si220.cband.config import PATH
-from cspdk.si220.oband import PDK as PDK_SI220_OBAND
+from cspdk.si220 import PDK as PDK_SI220
+from cspdk.si220.config import PATH
 
 BANDS = [
-    ("Si220 C-band", PDK_SI220_CBAND),
-    ("Si220 O-band", PDK_SI220_OBAND),
+    ("Si220 C-band / O-band", PDK_SI220),
 ]
 
 _optional = [

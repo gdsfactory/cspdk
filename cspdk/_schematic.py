@@ -9,7 +9,7 @@ Each entry in ``s.info["models"]`` has the shape::
     {
         "language": "sax",
         "name": "mmi1x2",                       # PDK.models key
-        "module": "cspdk.si220.cband.models",   # python dotted path
+        "module": "cspdk.si220.models",         # python dotted path
         "qualname": "mmi1x2",                   # attribute in module
         "port_order": ["o1", "o2", "o3"],       # SAX SDict port key order
         "params": {"length": "length", ...},    # component-arg -> model-arg
@@ -157,8 +157,7 @@ def _die_ports(
 ) -> list[dict]:
     """Symbol ports for ``die_with_pads``, derived from its kwargs.
 
-    Side is the die edge each port sits on — opposite of the GDS orientation,
-    which points into the die. Within each side the order follows the
+    Side follows the GDS port orientation. Within each side the order follows the
     nyanlib->Mosaic bridge convention (left bottom->top, right top->bottom,
     top left->right, bottom right->left) so symbol labels match the layout.
 
@@ -170,22 +169,22 @@ def _die_ports(
     if grating_coupler:
         n = ngratings - 2 if with_loopback else ngratings
         if n > 0:
-            # o1..o(n) right edge bottom->top, o(n+1)..o(2n) left edge top->bottom
-            ports += [
-                {"name": f"o{i}", "side": "right", "type": "photonic"}
-                for i in range(n, 0, -1)
-            ]
+            # o1..o(n) point left, o(n+1)..o(2n) point right.
             ports += [
                 {"name": f"o{i}", "side": "left", "type": "photonic"}
-                for i in range(2 * n, n, -1)
+                for i in range(1, n + 1)
+            ]
+            ports += [
+                {"name": f"o{i}", "side": "right", "type": "photonic"}
+                for i in range(n + 1, 2 * n + 1)
             ]
     ports += [
-        {"name": f"e{i}", "side": "bottom", "type": "electric"}
-        for i in range(npads, 0, -1)
+        {"name": f"e{i}", "side": "top", "type": "electric"}
+        for i in range(1, npads + 1)
     ]
     ports += [
-        {"name": f"e{i}", "side": "top", "type": "electric"}
-        for i in range(2 * npads, npads, -1)
+        {"name": f"e{i}", "side": "bottom", "type": "electric"}
+        for i in range(npads + 1, 2 * npads + 1)
     ]
     return ports
 

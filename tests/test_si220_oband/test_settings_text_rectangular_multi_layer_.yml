@@ -1,9 +1,0 @@
-info: {}
-name: text_rectangular_multi_layer_Tabc_LWG_PAD_TFtext_rectangular
-ports: {}
-settings:
-  layers:
-  - WG
-  - PAD
-  text: abc
-  text_factory: text_rectangular

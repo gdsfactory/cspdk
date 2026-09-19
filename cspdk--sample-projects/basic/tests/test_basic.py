@@ -8,22 +8,22 @@ API keys.
 import gdsfactory as gf
 from mycspdk.samples.sample0 import sample0_routed_mzi
 
-from cspdk.si220.cband import PDK, cells
+from cspdk.si220 import PDK, cells
 
 
 def test_import():
     """Verify that cspdk and its submodules import without errors."""
     import cspdk
-    import cspdk.si220.cband
+    import cspdk.si220
 
     assert cspdk is not None
-    assert cspdk.si220.cband is not None
+    assert cspdk.si220 is not None
 
 
 def test_pdk_activation():
-    """Verify that the si220 C-band PDK activates correctly."""
+    """Verify that the unified Si220 PDK activates correctly."""
     PDK.activate()
-    assert gf.get_active_pdk().name == "cspdk.si220.cband"
+    assert gf.get_active_pdk().name == "cspdk.si220"
 
 
 def test_cell_creation():
