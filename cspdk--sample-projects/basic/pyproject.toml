@@ -12,6 +12,11 @@ name = "mycspdk"
 requires-python = ">=3.12"
 version = "0.1.0"
 
+[tool.gdsfactoryplus.sim.wls]
+max = 1.6
+min = 1.5
+num = 1000
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

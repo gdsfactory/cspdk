@@ -8,7 +8,7 @@ import pytest
 
 circulax = pytest.importorskip("circulax")
 
-from cspdk.si220.cband.active_models import (  # noqa: E402
+from cspdk.si220.active_models import (  # noqa: E402
     ThermalPhaseShifter,
     get_active_models,
 )

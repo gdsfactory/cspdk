@@ -8,14 +8,14 @@ dev: install
 	uv run pre-commit install
 
 rm-samples:
-	rm -rf cspdk/si220/oband/samples cspdk/si220/cband/samples cspdk/sin300/samples cspdk/si500/samples
+	rm -rf cspdk/si220/samples cspdk/sin300/samples cspdk/si500/samples
 
 gf-main:
 	uv pip install "gdsfactory @ git+https://github.com/gdsfactory/gdsfactory.git@main"
 
 test:
-	uv run pytest -s tests/test_si220_cband.py
-	uv run pytest -s tests/test_si220_oband.py
+	uv run pytest -s tests/test_si220_unified_regressions.py
+	uv run pytest -s tests/test_si220_unified.py
 	uv run pytest -s tests/test_routing.py
 	uv run pytest -s tests/test_si340.py
 	uv run pytest -s tests/test_sin200.py
@@ -25,11 +25,10 @@ test:
 	# uv run pytest -s tests/test_sin300.py
 
 test-ports:
-	uv run pytest -s tests/test_si220_cband.py::test_optical_port_positions tests/test_si220_oband.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
+	uv run pytest -s tests/test_si220_unified_regressions.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
 
 test-force: install
-	uv run pytest -s tests/test_si220_cband.py --update-gds-refs --force-regen
-	uv run pytest -s tests/test_si220_oband.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si220_unified_regressions.py --update-gds-refs --force-regen
 	uv run pytest -s tests/test_si340.py --update-gds-refs --force-regen
 	uv run pytest -s tests/test_sin200.py --update-gds-refs --force-regen
 	uv run pytest -s tests/test_ge_on_si.py --update-gds-refs --force-regen
@@ -38,7 +37,7 @@ test-force: install
 	# uv run pytest -s tests/test_sin300.py --update-gds-refs --force-regen
 
 test-fail-fast:
-	uv run pytest -s tests/test_si220_cband.py -x
+	uv run pytest -s tests/test_si220_unified_regressions.py -x
 	uv run pytest -s tests/test_si500.py -x
 	uv run pytest -s tests/test_sin300.py -x
 
@@ -60,8 +59,7 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs-pdf:
-	uv run python .github/write_cells_si220_cband.py
-	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si220.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	uv run python .github/write_layer_stack.py
@@ -70,8 +68,7 @@ docs-pdf:
 	uv run mkdocs build -f mkdocs-pdf.yml
 
 docs:
-	uv run python .github/write_cells_si220_cband.py
-	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si220.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	uv run python .github/write_layer_stack.py
@@ -80,8 +77,7 @@ docs:
 	uv run --extra docs zensical build -f docs/zensical.toml
 
 docs-serve:
-	uv run python .github/write_cells_si220_cband.py
-	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si220.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
 	uv run python .github/write_layer_stack.py

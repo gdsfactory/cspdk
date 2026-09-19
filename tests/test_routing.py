@@ -6,8 +6,7 @@ import pytest
 @pytest.mark.parametrize(
     "pdk_module,sample_module",
     [
-        ("cspdk.si220.cband", "cspdk.si220.cband.samples.sample_routing"),
-        ("cspdk.si220.oband", "cspdk.si220.oband.samples.sample_routing"),
+        ("cspdk.si220", "cspdk.si220.samples.sample_routing"),
         ("cspdk.si500", "cspdk.si500.samples.sample_routing"),
         ("cspdk.sin300", "cspdk.sin300.samples.sample_routing"),
     ],
