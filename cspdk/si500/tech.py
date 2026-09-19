@@ -1,13 +1,14 @@
 """Technology definitions."""
 
+import sys
 from collections.abc import Iterable
 from functools import partial
-from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
     CrossSection,
     cross_section,
+    get_cross_sections,
     port_names_electrical,
     port_types_electrical,
 )
@@ -48,18 +49,21 @@ class LayerMapCornerstone(LayerMap):
     # labels for gdsfactory
     LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
     LABEL_INSTANCE: Layer = (101, 0)  # type: ignore
+    routing_error_marker: Layer = (1000, 0)  # type: ignore
 
 
 LAYER = LayerMapCornerstone
+
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
 
 
 def get_layer_stack(
     thickness_wg: float = 500 * nm,
     thickness_slab: float = 200 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -79,7 +83,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.WG),
                 thickness=thickness_wg,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -88,7 +92,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.SLAB),
                 thickness=thickness_slab,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -104,7 +108,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
-                material="Aluminum",
+                material="Al",
                 info={"mesh_order": 2},
             ),
         )
@@ -234,7 +238,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_rc",
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
-    taper: ComponentSpec = "taper_rc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -251,7 +254,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -266,7 +268,7 @@ def route_bundle(
     min_straight_taper: float = 100.0,
     port_type: str | None = None,
     collision_check_layers: Iterable[LayerSpec] = (),
-    on_collision: str | None = "show_error",
+    on_collision: str | None = None,
     bboxes: list | None = None,
     allow_width_mismatch: bool = False,
     radius: float | None = None,
@@ -297,7 +299,11 @@ def route_bundle(
         straight=straight,
         bend=bend,
         taper=taper,
+        sbend="bend_s",
     )
+
+
+cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 routing_strategies = dict(
@@ -306,14 +312,12 @@ routing_strategies = dict(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
         bend="bend_euler_ro",
-        taper="taper_ro",
         cross_section="xs_ro",
     ),
     route_bundle=route_bundle,
@@ -340,13 +344,11 @@ if __name__ == "__main__":
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     # LAYER_VIEWS.to_lyp(PATH.lyp)
 
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
-
     t = KLayoutTechnology(
         name="Cornerstone_si500",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)

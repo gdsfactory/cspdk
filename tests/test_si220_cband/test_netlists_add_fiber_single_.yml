@@ -1,0 +1,109 @@
+instances:
+  Unnamed_363_0_0_A180:
+    component: Unnamed_363
+    info: {}
+    settings: {}
+  grating_coupler_ellipti_2f8caedf_0_m37900_A270:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  grating_coupler_ellipti_2f8caedf_141258_27900_A90:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  grating_coupler_ellipti_2f8caedf_141258_m37900_A270:
+    component: grating_coupler_elliptical
+    info:
+      period: 0.685
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip
+      grating_line_width: 0.315
+      wavelength: 1.55
+  straight_L29p183_CSstri_637c02b2_0_m10000_A270:
+    component: straight
+    info:
+      length: 29.183
+      route_info_length: 29.183
+      route_info_strip_length: 29.183
+      route_info_type: strip
+      route_info_weight: 29.183
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 29.183
+      npoints: 2
+      width: 0.45
+  straight_L68p3660000000_52a65daf_141258_m39183_A90:
+    component: straight
+    info:
+      length: 68.366
+      route_info_length: 68.366
+      route_info_strip_length: 68.366
+      route_info_type: strip
+      route_info_weight: 68.366
+      width: 0.45
+    settings:
+      cross_section: strip
+      length: 68.366
+      npoints: 2
+      width: null
+name: add_fiber_single_Cstrai_74435255
+nets:
+- p1: Unnamed_363_0_0_A180,o2
+  p2: straight_L29p183_CSstri_637c02b2_0_m10000_A270,o1
+- p1: grating_coupler_ellipti_2f8caedf_0_m37900_A270,o1
+  p2: straight_L29p183_CSstri_637c02b2_0_m10000_A270,o2
+- p1: grating_coupler_ellipti_2f8caedf_141258_27900_A90,o1
+  p2: straight_L68p3660000000_52a65daf_141258_m39183_A90,o2
+- p1: grating_coupler_ellipti_2f8caedf_141258_m37900_A270,o1
+  p2: straight_L68p3660000000_52a65daf_141258_m39183_A90,o1
+placements:
+  Unnamed_363_0_0_A180:
+    mirror: false
+    rotation: 180
+    x: 0
+    y: 0
+  grating_coupler_ellipti_2f8caedf_0_m37900_A270:
+    mirror: false
+    rotation: 270
+    x: 0
+    y: -37.9
+  grating_coupler_ellipti_2f8caedf_141258_27900_A90:
+    mirror: false
+    rotation: 90
+    x: 141.258
+    y: 27.9
+  grating_coupler_ellipti_2f8caedf_141258_m37900_A270:
+    mirror: false
+    rotation: 270
+    x: 141.258
+    y: -37.9
+  straight_L29p183_CSstri_637c02b2_0_m10000_A270:
+    mirror: false
+    rotation: 270
+    x: 0
+    y: -10
+  straight_L68p3660000000_52a65daf_141258_m39183_A90:
+    mirror: false
+    rotation: 90
+    x: 141.258
+    y: -39.183
+ports:
+  loopback1: grating_coupler_ellipti_2f8caedf_141258_m37900_A270,o2
+  loopback2: grating_coupler_ellipti_2f8caedf_141258_27900_A90,o2
+  o1: Unnamed_363_0_0_A180,o1
+  o2: grating_coupler_ellipti_2f8caedf_0_m37900_A270,o2

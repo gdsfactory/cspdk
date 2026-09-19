@@ -1,0 +1,37 @@
+info: {}
+name: mmi1x2_WNone_WM3p4_WT1p3_LT40_LM21p6_GM0p4_CSxs_n520
+ports:
+  o1:
+    center:
+    - -40
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.27
+  o2:
+    center:
+    - 61.6
+    - 0.85
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.27
+  o3:
+    center:
+    - 61.6
+    - -0.85
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.27
+settings:
+  cross_section: xs_n520
+  gap_mmi: 0.4
+  length_mmi: 21.6
+  length_taper: 40
+  width_mmi: 3.4
+  width_taper: 1.3

@@ -1,0 +1,28 @@
+info:
+  period: 0.517
+  polarization: te
+  wavelength: 0.52
+name: grating_coupler_elliptical_W0p52_GLW0p185_CSxs_n520
+ports:
+  o1:
+    center:
+    - -3.583
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.27
+  o2:
+    center:
+    - 24.355
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
+settings:
+  cross_section: xs_n520
+  grating_line_width: 0.185
+  wavelength: 0.52

@@ -1,34 +1,18 @@
-name: build docs
+name: Build docs
 on:
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
+
 jobs:
-  build-docs:
-    runs-on: ubuntu-latest
-    name: Sphinx docs to gh-pages
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - name: Install dependencies
-        run: |
-          make install
-      - name: make docs
-        run: |
-          make docs
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "./docs/_build/html/"
+  docs:
+    uses: doplaydo/pdk-ci-workflow-public/.github/workflows/pages.yml@main
+    secrets:
+      GFP_API_KEY: ${{ secrets.GFP_API_KEY }}
+      SIMCLOUD_APIKEY: ${{ secrets.SIMCLOUD_APIKEY }}
   deploy-docs:
-    needs: build-docs
+    needs: docs
     if: ${{ github.ref == 'refs/heads/main' }}
     permissions:
       pages: write
@@ -40,4 +24,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

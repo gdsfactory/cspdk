@@ -2,7 +2,26 @@ info:
   period: 1.401
   polarization: te
   wavelength: 1.55
-name: grating_coupler_ellipti_ec5c2730
+name: grating_coupler_elliptical_W1p55_GLW0p343_CSxs_nc
+ports:
+  o1:
+    center:
+    - 18.597
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - 37.615
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
 settings:
   cross_section: xs_nc
   grating_line_width: 0.343

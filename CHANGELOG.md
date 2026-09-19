@@ -2,6 +2,86 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.5](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.5) - 2026-08-11
+
+No significant changes.
+
+
+## [1.4.4](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.4) - 2026-06-24
+
+No significant changes.
+
+
+## [1.4.3](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.3) - 2026-05-24
+
+No significant changes.
+
+
+## [1.4.2](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.2) - 2026-02-03
+
+- allow zero length straight rings [#199](https://github.com/gdsfactory/cspdk/pull/199)
+- Bump actions/checkout from 5 to 6 [#190](https://github.com/gdsfactory/cspdk/pull/190)
+- update changelog [#193](https://github.com/gdsfactory/cspdk/pull/193)
+- remove samples from wheel [#194](https://github.com/gdsfactory/cspdk/pull/194)
+
+## [1.4.1](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.1) - 2026-01-05
+
+- update gdsfactory 9.29.1
+
+## [1.4.0](https://github.com/gdsfactory/cspdk/releases/tag/v1.4.0) - 2025-12-19
+
+- add sbend router [#184](https://github.com/gdsfactory/cspdk/pull/184)
+- fix route_bundle_sbend [#185](https://github.com/gdsfactory/cspdk/pull/185)
+- fix typo [#183](https://github.com/gdsfactory/cspdk/pull/183)
+
+## 1.3.0
+
+- update gdsfactory9.22 [#177](https://github.com/gdsfactory/cspdk/pull/177)
+- fix 3d stack [#166](https://github.com/gdsfactory/cspdk/pull/166)
+- update gdsfactory9.22 [#177](https://github.com/gdsfactory/cspdk/pull/177)
+- update gdsfactory9.21 [#175](https://github.com/gdsfactory/cspdk/pull/175)
+
+## 1.2.2
+
+- fix 3d stack [#166](https://github.com/gdsfactory/cspdk/pull/166)
+
+## 1.2.1
+
+- update gdsfactory9.16.3 [#165](https://github.com/gdsfactory/cspdk/pull/165)
+
+## 1.2.0
+
+- better models [#159](https://github.com/gdsfactory/cspdk/pull/159)
+- fix bend models [#160](https://github.com/gdsfactory/cspdk/pull/160)
+
+## 1.1.0
+
+- add route samples [#150](https://github.com/gdsfactory/cspdk/pull/150)
+- add missing init file [#151](https://github.com/gdsfactory/cspdk/pull/151)
+- Update gdsfactory9.14 [#158](https://github.com/gdsfactory/cspdk/pull/158)
+
+## 1.0.7
+
+- add oband tests [#145](https://github.com/gdsfactory/cspdk/pull/145)
+- fix coupler length [#144](https://github.com/gdsfactory/cspdk/pull/144)
+- Fix models for Oband [#143](https://github.com/gdsfactory/cspdk/pull/143)
+
+## 1.0.4
+
+- use default port naming strategy for sax.models
+
+## 1.0.3
+
+- fix models and add tests for models [#138](https://github.com/gdsfactory/cspdk/pull/138)
+
+## 1.0.2
+
+- update gdsfactory 9.9.4
+
+## 0.16.0
+
+- update gdsfactory 9.4.0 [#110](https://github.com/gdsfactory/cspdk/pull/110)
+
 ## 0.15.0
 
 - add heater models [#104](https://github.com/gdsfactory/cspdk/pull/104)

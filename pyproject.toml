@@ -1,48 +1,86 @@
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.2,<4"]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
 [project]
-authors = [
-  {name = "gdsfactory", email = "contact@gdsfactory.com"}
-]
+authors = [{ name = "gdsfactory", email = "contact@gdsfactory.com" }]
 classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.0.3",
-  "gplugins[sax]>=1,<2"
+  "circulax>=0.2.3",
+  "gdsfactory~=9.51.0",
+  "gdsfactoryplus",
+  "gplugins[sax,femwell,tidy3d]~=2.1.0"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
-requires-python = ">=3.11,<3.14"
-version = "0.15.0"
+requires-python = ">=3.12,<3.15"
+version = "1.4.5"
 
 [project.optional-dependencies]
 dev = [
-  "pre-commit",
   "jsondiff",
+  "pre-commit",
   "pytest",
   "pytest-cov",
+  "pytest-github-actions-annotate-failures",
   "pytest_regressions",
-  "pytest-github-actions-annotate-failures"
+  "tbump",
+  "towncrier"
 ]
 docs = [
-  "jupytext",
-  "matplotlib",
-  "jupyter-book==1.0.4"
+  "jupyter",
+  "kwasm",
+  "mkdocs-material",
+  "mkdocs-with-pdf",
+  "nbconvert",
+  "mkdocstrings[python]>=0.27.0",
+  "zensical>=0.0.40,<0.1.0"
 ]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+skip = "references/*"
+
+[tool.gdsfactoryplus]
+name = "cspdk.si220.cband"
+
+[tool.gdsfactoryplus.drc]
+timeout = 300
+
+[tool.gdsfactoryplus.pdk]
+name = "cspdk.si220.cband"
+options = [
+  "cspdk.si220.cband",
+  "cspdk.si220.oband",
+  "cspdk.si500",
+  "cspdk.sin300",
+  "cspdk.si340",
+  "cspdk.si_sus",
+  "cspdk.sin200",
+  "cspdk.ge_on_si"
+]
+
+[tool.gdsfactoryplus.sim.wls]
+max = 1.6
+min = 1.5
+num = 1000
+
+[tool.hatch.build.targets.wheel]
+packages = ["cspdk"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"cspdk--sample-projects" = "cspdk--sample-projects"
 
 [tool.mypy]
 python_version = "3.10"
@@ -62,6 +100,8 @@ testpaths = ["cspdk/", "tests"]
 
 [tool.ruff]
 fix = true
+
+[tool.ruff.lint]
 ignore = [
   "E501",  # line too long, handled by black
   "B008",  # do not perform function calls in argument defaults
@@ -82,18 +122,44 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/models/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/oband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"references/**" = ["ALL"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.setuptools.package-data]
-mypkg = ["*.csv", "*.yaml"]
+"*" = [
+  "*.csv",
+  "*.yaml",
+  "*.yml",
+  "*.gds",
+  "*.lyp",
+  "*.oas",
+  "*.lyt",
+  "*.dat",
+  "*.nc",
+  "*.svg",
+  "*.GDS",
+  "*.OAS"
+]
 
 [tool.setuptools.packages]
 find = {}
 
 [tool.tbump]
+
+[[tool.tbump.before_commit]]
+cmd = "towncrier build --yes --version {new_version}"
+name = "create & check changelog"
 
 [[tool.tbump.file]]
 src = "README.md"
@@ -109,7 +175,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "0.15.0"
+current = "1.4.5"
 # Example of a semver regexp.
 # Make sure this matches current_version before
 # using tbump
@@ -120,3 +186,13 @@ regex = '''
   \.
   (?P<patch>\d+)
   '''
+
+[tool.towncrier]
+directory = ".changelog.d"
+filename = "CHANGELOG.md"
+issue_format = "[#{issue}](https://github.com/gdsfactory/cspdk/issues/{issue})"
+package = "gdsfactory"
+start_string = "<!-- towncrier release notes start -->\n"
+template = ".changelog.d/changelog_template.jinja"
+title_format = "## [{version}](https://github.com/gdsfactory/cspdk/releases/tag/v{version}) - {project_date}"
+underlines = ["", "", ""]

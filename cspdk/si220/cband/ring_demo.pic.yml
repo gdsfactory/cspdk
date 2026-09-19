@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../../build/schemas/ring_demo.json
+instances:
+  instance1:
+    component: ring_single
+    settings:
+      gap: 1
+connections: {}
+routes: {}
+nets: []
+ports:
+  o1: instance1,o1
+  o2: instance1,o2
+placements:
+  instance1:
+    x: 0.0
+    y: 0.0
+    dx: 100.0

@@ -3,12 +3,19 @@ __pycache__/
 *.py[cod]
 *$py.class
 Pipfile
+.vscode/
+
+docs/cells_si220_cband.rst
+docs/cells_si220_oband.rst
+
+sim-data-*/
 
 # C extensions
 *.so
 *.fsp
 tests/gds_ref/*.oas
 tests/gds_ref_si220/*.oas
+tests/gds_ref_si220_oband/*.oas
 tests/gds_ref_si500/*.oas
 tests/gds_ref_sin300/*.oas
 cspdk/si220/gds/*.oas
@@ -20,7 +27,6 @@ docs/cells_si500.rst
 docs/cells_sin300.rst
 
 tests/gds_ref/*.oas
-uv.lock
 
 # Distribution / packaging
 .Python
@@ -41,7 +47,6 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.ipynb
 MANIFEST
 
 # PyInstaller
@@ -159,3 +164,7 @@ cython_debug/
 *.DS_Store
 .DS_Store
 *Thumbs.db
+test_diffs/
+gds_run/
+.pre-commit-config.yaml
+tests/gds_run/

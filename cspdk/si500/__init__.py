@@ -9,14 +9,17 @@ from gdsfactory.pdk import Pdk
 
 from cspdk.si500 import cells, config, tech
 from cspdk.si500.config import PATH
-from cspdk.si500.models import get_models
 from cspdk.si500.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
-_models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 
 CONF.pdk = "cspdk.si500"
+
+
+layer_transitions = {
+    LAYER.WG: cells.taper,
+}
 
 
 @lru_cache
@@ -27,10 +30,11 @@ def get_pdk() -> Pdk:
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
+        connectivity=tech.CONNECTIVITY,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
-        models=_models,
         routing_strategies=routing_strategies,
+        layer_transitions=layer_transitions,
     )
 
 

@@ -1,0 +1,50 @@
+instances:
+  compass:
+    component: compass
+    info: {}
+    settings:
+      auto_rename_ports: true
+      layer: HEATER
+      port_inclusion: 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: null
+      size:
+      - 20
+      - 10
+  compass2:
+    component: compass
+    info: {}
+    settings:
+      auto_rename_ports: false
+      layer: PAD
+      port_inclusion: 0
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: electrical
+      size:
+      - 20
+      - 10
+nets: []
+placements:
+  compass:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  compass2:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports:
+  e1: compass2,e1
+  e2: compass2,e2
+  e3: compass2,e3
+  e4: compass2,e4

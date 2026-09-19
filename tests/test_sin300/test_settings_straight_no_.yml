@@ -6,6 +6,25 @@ info:
   route_info_xs_no_length: 10
   width: 0.95
 name: straight_L10_CSxs_no
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.95
+  o2:
+    center:
+    - 10
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.95
 settings:
   cross_section: xs_no
   length: 10

@@ -1,4 +1,8 @@
 info: {}
-name: rectangle_LFLOORPLAN
+name: rectangle_S4_2_LFLOORPLAN_CFalse
 settings:
+  centered: false
   layer: FLOORPLAN
+  size:
+  - 4
+  - 2

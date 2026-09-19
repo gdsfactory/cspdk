@@ -7,9 +7,11 @@ jobs:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
+      - name: Remove samples
+        run: make rm-samples
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: 3.x
           cache-dependency-path: pyproject.toml
@@ -23,14 +25,14 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           make build
-          twine upload dist/*
+          twine upload --verbose dist/*
   release_environment:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
       - name: Publish Latest Draft
         run: |
           gh release edit ${{ github.ref_name }} --draft=false

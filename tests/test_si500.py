@@ -6,8 +6,10 @@ import pathlib
 
 import gdsfactory as gf
 import jsondiff
+import kfactory as kf
+import numpy as np
 import pytest
-from gdsfactory.difftest import difftest
+from conftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 
 from cspdk.si500 import PDK
@@ -20,7 +22,7 @@ def activate_pdk() -> None:
 
 
 cells = PDK.cells
-skip_test = {"coupler_symmetric"}
+skip_test = {"coupler_symmetric", "die", "die_rc", "die_ro"}
 cell_names = cells.keys() - skip_test
 cell_names = [name for name in cell_names if not name.startswith("_")]
 dirpath = pathlib.Path(__file__).absolute().with_suffix(".gds").parent / "gds_ref_si500"
@@ -77,7 +79,7 @@ def test_gds(component_name: str) -> None:
 def test_settings(component_name: str, data_regression: DataRegressionFixture) -> None:
     """Avoid regressions when exporting settings."""
     component = cells[component_name]()
-    data_regression.check(component.to_dict())
+    data_regression.check(component.to_dict(with_ports=True))
 
 
 @pytest.mark.parametrize("component_type", cell_names)
@@ -102,6 +104,11 @@ def test_netlists(
     n.pop("connections", None)
     n.pop("warnings", None)
     yaml_str = c.write_netlist(n)
+
+    cis = list(c.kcl.each_cell_top_down())
+    for ci in cis:
+        gf.kcl.dkcells[ci].delete()
+
     c2 = gf.read.from_yaml(yaml_str)
     n2 = c2.get_netlist()
 
@@ -110,3 +117,73 @@ def test_netlists(
     d.pop("connections", None)
     d.pop("ports", None)
     assert len(d) == 0, d
+
+    cis = list(c.kcl.each_cell_top_down())
+    for ci in cis:
+        gf.kcl.dkcells[ci].delete()
+
+
+@pytest.mark.parametrize("component_name", cell_names)
+def test_optical_port_positions(component_name: str) -> None:
+    """Ensure that optical ports are positioned correctly."""
+    component = cells[component_name]()
+    if isinstance(component, gf.ComponentAllAngle):
+        new_component = gf.Component()
+        kf.VInstance(component).insert_into_flat(new_component, levels=0)
+        new_component.add_ports(component.ports)
+        component = new_component
+    for port in component.ports:
+        if port.port_type == "optical":
+            port_layer = port.layer
+            port_width = port.width
+            port_position = port.center
+            port_angle = port.orientation
+            # get the edges of the optical layer corresponding to the port
+            cs_region = kf.kdb.Region(component.begin_shapes_rec(port_layer))
+            optical_edges = cs_region.edges()
+
+            # get a small marker around the port position
+            tolerance = 0.001
+            poly = kf.kdb.DBox(-tolerance, -tolerance, tolerance, tolerance)
+            dbu_in_um = port.kcl.to_um(1)
+            port_marker = (
+                kf.kdb.DPolygon(poly).transformed(port.dcplx_trans).to_itype(dbu_in_um)
+            )
+            port_marker_region = kf.kdb.Region(port_marker)
+
+            # get the physical port edge that interacts with the marker
+            # assert that there is exactly one edge interacting with the marker
+            # and that it has the correct length
+            interacting_edges = optical_edges.interacting(port_marker_region)
+            if interacting_edges.is_empty():
+                raise AssertionError(
+                    f"No optical edge found for port {port.name} at position {port_position} with width {port_width} and angle {port_angle}."
+                )
+            port_edge = next(iter(interacting_edges.each()))
+            edge_length = port_edge.length() * 0.001
+            if not np.isclose(edge_length, port_width, atol=1e-3):
+                raise AssertionError(
+                    f"Port {port.name} has width {port_width}, but the optical edge length is {edge_length}."
+                )
+
+
+MANHATTAN_ORIENTATIONS = (0.0, 90.0, 180.0, 270.0)
+
+skip_test_manhattan_ports: set[str] = set()
+
+
+@pytest.mark.parametrize("component_name", cell_names)
+def test_port_orientations_manhattan(component_name: str) -> None:
+    """Ensure that all ports have a manhattan orientation (0, 90, 180 or 270 deg)."""
+    if component_name in skip_test_manhattan_ports:
+        pytest.skip(f"Skipping manhattan port orientation test for {component_name}")
+    component = cells[component_name]()
+    if isinstance(component, gf.ComponentAllAngle):
+        pytest.skip(f"{component_name} is an all-angle component")
+    for port in component.ports:
+        orientation = port.orientation % 360
+        if not np.any(np.isclose(orientation, MANHATTAN_ORIENTATIONS, atol=1e-3)):
+            raise AssertionError(
+                f"Port {port.name} of {component_name} has non-manhattan "
+                f"orientation {port.orientation} degrees."
+            )

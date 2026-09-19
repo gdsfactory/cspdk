@@ -1,0 +1,40 @@
+LayerViews:
+  WG:
+    layer: [303, 0]
+    layer_in_name: true
+    width: 1
+    color: "#ff9d9d"
+    hatch_pattern: coarsely dotted
+  WG_DF:
+    layer: [304, 0]
+    layer_in_name: true
+    hatch_pattern: coarsely dotted
+    transparent: true
+    width: 1
+    color: "cyan"
+  BLEED:
+    layer: [98, 0]
+    layer_in_name: true
+    color: "gray"
+    hatch_pattern: coarsely dotted
+  FLOORPLAN:
+    layer: [99, 0]
+    layer_in_name: true
+    color: "green"
+    hatch_pattern: hollow
+  LABEL_SETTINGS:
+    layer: [100, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  LABEL_INSTANCE:
+    layer: [101, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  routing_error_marker:
+    layer: [1000, 0]
+    layer_in_name: false
+    width: 1
+    color: "red"
+    hatch_pattern: coarsely dotted

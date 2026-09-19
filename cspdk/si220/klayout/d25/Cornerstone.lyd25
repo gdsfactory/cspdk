@@ -11,7 +11,7 @@
  <priority>0</priority>
  <shortcut/>
  <show-in-menu>true</show-in-menu>
- <group-name>d25_scripts</group-name>
+ <group-name>d25ripts</group-name>
  <menu-path>tools_menu.d25.end</menu-path>
  <interpreter>dsl</interpreter>
  <dsl-interpreter-name>d25-dsl-xml</dsl-interpreter-name>

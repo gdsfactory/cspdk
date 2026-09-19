@@ -12,6 +12,21 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk.sin300._schematic import (
+    bend_euler_schematic,
+    bend_s_schematic,
+    coupler_schematic,
+    coupler_straight_schematic,
+    grating_coupler_elliptical_schematic,
+    grating_coupler_rectangular_schematic,
+    mmi1x2_schematic,
+    mmi2x2_schematic,
+    mzi_schematic,
+    pad_schematic,
+    straight_schematic,
+    taper_schematic,
+    wire_corner_schematic,
+)
 from cspdk.sin300.tech import LAYER, Tech
 
 ################
@@ -19,7 +34,7 @@ from cspdk.sin300.tech import LAYER, Tech
 ################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=straight_schematic)
 def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_nc",
@@ -43,34 +58,40 @@ straight_no = partial(straight, cross_section="xs_no")
 ################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=wire_corner_schematic)
 def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
     """A wire corner.
 
     A wire corner is a bend for electrical routes.
+
+    Args:
+        cross_section: "metal_routing".
+        **kwargs: additional arguments.
     """
     return gf.components.wire_corner(cross_section=cross_section, **kwargs)
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
 def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_nc",
+    allow_min_radius_violation: bool = True,
 ) -> Component:
     """An S-bend.
 
     Args:
         size: the width and height of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
+        allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
-        allow_min_radius_violation=True,  # TODO: fix without this flag
+        allow_min_radius_violation=allow_min_radius_violation,
     )
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=bend_euler_schematic)
 def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
@@ -108,7 +129,7 @@ bend_euler_no = partial(bend_euler, cross_section="xs_no")
 ################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
     width1: float = Tech.width_nc,
@@ -157,7 +178,7 @@ taper_no = partial(
 ################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=mmi1x2_schematic)
 def mmi1x2(
     width: float | None = None,
     width_mmi: float = 12.0,
@@ -197,7 +218,7 @@ mmi1x2_nc = partial(mmi1x2, length_mmi=64.7, cross_section="xs_nc")
 mmi1x2_no = partial(mmi1x2, length_mmi=42.0, cross_section="xs_no")
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=mmi2x2_schematic)
 def mmi2x2(
     width: float | None = None,
     width_taper: float = 5.5,
@@ -242,7 +263,7 @@ mmi2x2_no = partial(mmi2x2, length_mmi=126.0, cross_section="xs_no")
 ##############################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=coupler_straight_schematic)
 def coupler_straight(
     length: float = 20.0,
     gap: float = 0.236,
@@ -262,7 +283,7 @@ def coupler_straight(
     )
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=coupler_schematic)
 def coupler(
     gap: float = 0.236,
     length: float = 20.0,
@@ -299,7 +320,7 @@ coupler_no = partial(coupler, cross_section="xs_no")
 ##############################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=grating_coupler_rectangular_schematic)
 def grating_coupler_rectangular(
     period: float = 0.66,
     n_periods: int = 30,
@@ -354,7 +375,7 @@ grating_coupler_rectangular_no = partial(
 ##############################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=grating_coupler_elliptical_schematic)
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.343,
@@ -377,7 +398,7 @@ def grating_coupler_elliptical(
         fiber_angle=20.0,
         neff=1.6,
         ncladding=1.443,
-        layer_trench=LAYER.GRA,
+        layer_trench=LAYER.NITRIDE_ETCH,
         p_start=26,
         n_periods=30,
         end_straight_length=0.2,
@@ -409,7 +430,7 @@ grating_coupler_elliptical_no = partial(
 # serialized weirdly in the netlist
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=mzi_schematic)
 def mzi(
     delta_length: float = 10.0,
     bend="bend_euler_nc",
@@ -479,19 +500,24 @@ mzi_no = partial(
 ################
 
 
-@gf.cell
+@gf.cell(tags=["cells"], schematic_function=pad_schematic)
 def pad() -> Component:
     """An electrical pad."""
     return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
 
 
-@gf.cell
+@gf.cell(tags=["cells"])
 def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
-    """A rectangle."""
+    """A rectangle.
+
+    Args:
+        layer: LAYER.FLOORPLAN.
+        **kwargs: additional arguments.
+    """
     return gf.c.rectangle(layer=layer, **kwargs)
 
 
-@gf.cell
+@gf.cell(tags=["cells"])
 def compass(
     size: Size = (4.0, 2.0),
     layer: LayerSpec = "PAD",
@@ -520,7 +546,7 @@ def compass(
     )
 
 
-@gf.cell
+@gf.cell(tags=["cells"])
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
@@ -576,7 +602,7 @@ def grating_coupler_array(
     )
 
 
-@gf.cell
+@gf.cell(tags=["cells"])
 def die(cross_section="xs_nc") -> Component:
     """A die template.
 
@@ -615,7 +641,7 @@ die_nc = partial(die, cross_section="xs_nc")
 die_no = partial(die, cross_section="xs_no")
 
 
-@gf.cell
+@gf.cell(tags=["cells"])
 def array(
     component="pad",
     columns: int = 6,

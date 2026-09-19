@@ -253,7 +253,6 @@ instances:
     settings:
       cross_section: xs_rc
       length: 1.535
-name: mzi_DL10_Bbend_euler_rc_de758620
 nets:
 - p1: b1,o1
   p2: cp1,o2
