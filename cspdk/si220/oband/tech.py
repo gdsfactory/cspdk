@@ -5,7 +5,6 @@ from functools import partial, wraps
 from typing import Any
 
 import gdsfactory as gf
-from doroutes.bundles import add_bundle_astar
 from gdsfactory.cross_section import (
     CrossSection,
     port_names_electrical,
@@ -52,6 +51,8 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
@@ -81,7 +82,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.WG) - LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_wg,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -91,7 +92,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.WG) & LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_grating,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -101,7 +102,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.SLAB),
                 thickness=thickness_slab,
                 zmin=0.0,
-                material="si",
+                material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
@@ -117,7 +118,7 @@ def get_layer_stack(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
                 zmin=zmin_metal + thickness_metal,
-                material="Aluminum",
+                material="Al",
                 info={"mesh_order": 2},
             ),
         )
@@ -301,52 +302,28 @@ route_bundle_sbend_metal = partial(
     port_name="e1",
 )
 
-route_astar = partial(
-    add_bundle_astar,
-    layers=["WG"],
-    bend="bend_euler",
-    straight="straight",
-    grid_unit=500,
-    spacing=3,
-)
-
-route_astar_metal = partial(
-    add_bundle_astar,
-    layers=["PAD"],
-    bend="wire_corner",
-    straight="straight_metal",
-    grid_unit=500,
-    spacing=15,
-)
-
 
 routing_strategies = dict(
     route_bundle=route_bundle,
     route_bundle_rib=route_bundle_rib,
     route_bundle_metal=route_bundle_metal,
     route_bundle_metal_corner=route_bundle_metal_corner,
-    route_astar=route_astar,
-    route_astar_metal=route_astar_metal,
     route_bundle_sbend=route_bundle_sbend,
     route_bundle_sbend_metal=route_bundle_sbend_metal,
 )
 
 if __name__ == "__main__":
-    from typing import cast
-
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     # LAYER_VIEWS.to_lyp(PATH.lyp)
-
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 
     t = KLayoutTechnology(
         name="Cornerstone_si220",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)
     # print(DEFAULT_CROSS_SECTION_NAMES)

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="80"
+   height="80"
+   viewBox="0 0 80 80"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="icon"
+     transform="translate(0,80) scale(1,-1)">
+    <rect
+       style="fill:none;fill-opacity:0;stroke:none;stroke-opacity:0.165761"
+       id="frame"
+       width="79"
+       height="79"
+       x="0.5"
+       y="0.5" />
+       <path d="M 55.843 4.700 L 55.832 75.286 L 78.487 75.286 L 78.480 47.006 L 73.939 47.017 L 73.934 61.105 L 60.385 61.105 L 60.385 18.895 L 73.934 18.895 L 73.939 32.983 L 78.480 32.994 L 78.487 4.714 L 55.843 4.700 Z" id="poly0" style="fill:none;fill-opacity:0;stroke:currentColor;stroke-dasharray:none;stroke-opacity:1" />
+<path d="M 28.684 4.700 L 28.673 75.286 L 51.327 75.286 L 51.327 4.714 L 37.726 4.714 L 37.726 18.882 L 46.775 18.895 L 46.775 32.902 L 37.730 32.908 L 37.723 47.073 L 46.775 47.098 L 46.775 61.105 L 33.225 61.105 L 33.225 4.734 L 28.684 4.700 Z" id="poly1" style="fill:none;fill-opacity:0;stroke:currentColor;stroke-dasharray:none;stroke-opacity:1" />
+<path d="M 1.524 4.700 L 1.513 75.286 L 24.168 75.286 L 24.168 4.714 L 19.616 4.734 L 19.615 61.105 L 6.066 61.105 L 6.066 47.098 L 15.114 47.084 L 15.118 32.936 L 6.066 32.902 L 6.064 4.725 L 1.524 4.700 Z" id="poly2" style="fill:none;fill-opacity:0;stroke:currentColor;stroke-dasharray:none;stroke-opacity:1" />
+
+  </g>
+</svg>
