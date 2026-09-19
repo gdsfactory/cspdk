@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import importlib
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 
 import jax.numpy as jnp
 import kfactory as kf
@@ -260,6 +260,10 @@ def check_sax_port_order_matches_sdict(pdk) -> None:
                 continue
             except Exception:
                 # Some models are composites that fail under default kwargs.
+                continue
+            if not isinstance(sdict, Mapping):
+                # An optional active-model backend may override the same PDK
+                # model key with a non-SAX component object.
                 continue
             allowed = set(entry["port_order"])
             used = {k for pair in sdict for k in pair}

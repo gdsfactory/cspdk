@@ -53,16 +53,15 @@ ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
 skip = "references/*"
 
 [tool.gdsfactoryplus]
-name = "cspdk.si220.cband"
+name = "cspdk.si220"
 
 [tool.gdsfactoryplus.drc]
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
-name = "cspdk.si220.cband"
+name = "cspdk.si220"
 options = [
-  "cspdk.si220.cband",
-  "cspdk.si220.oband",
+  "cspdk.si220",
   "cspdk.si500",
   "cspdk.sin300",
   "cspdk.si340",
@@ -122,13 +121,10 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cband/cells/__init__.py" = [
+"cspdk/si220/cells/__init__.py" = [
   "F403"
 ]  # allowing star imports to aggregate cells
-"cspdk/si220/cband/models/__init__.py" = [
-  "F403"
-]  # allowing star imports to aggregate cells
-"cspdk/si220/oband/cells/__init__.py" = [
+"cspdk/si220/models/__init__.py" = [
   "F403"
 ]  # allowing star imports to aggregate cells
 "references/**" = ["ALL"]

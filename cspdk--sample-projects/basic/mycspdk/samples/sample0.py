@@ -2,7 +2,7 @@
 
 import gdsfactory as gf
 
-from cspdk.si220.cband import cells, tech
+from cspdk.si220 import cells, tech
 
 
 @gf.cell
@@ -19,7 +19,7 @@ def sample0_routed_mzi() -> gf.Component:
 
 
 if __name__ == "__main__":
-    from cspdk.si220.cband import PDK
+    from cspdk.si220 import PDK
 
     PDK.activate()
     c = sample0_routed_mzi()

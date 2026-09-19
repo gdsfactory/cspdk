@@ -9,8 +9,7 @@ cspdk venv.
 import pytest
 
 from cspdk.ge_on_si.tech import LAYER_STACK as LAYER_STACK_GE_ON_SI
-from cspdk.si220.cband.tech import LAYER_STACK as LAYER_STACK_SI220_CBAND
-from cspdk.si220.oband.tech import LAYER_STACK as LAYER_STACK_SI220_OBAND
+from cspdk.si220.tech import LAYER_STACK as LAYER_STACK_SI220
 from cspdk.si340.tech import LAYER_STACK as LAYER_STACK_SI340
 from cspdk.si500.tech import LAYER_STACK as LAYER_STACK_SI500
 from cspdk.si_sus.tech import LAYER_STACK as LAYER_STACK_SI_SUS
@@ -21,8 +20,7 @@ from cspdk.sin300.tech import LAYER_STACK as LAYER_STACK_SIN300
 pdk_spec = pytest.importorskip("pdk_spec")
 
 LAYER_STACKS = {
-    "si220.cband": LAYER_STACK_SI220_CBAND,
-    "si220.oband": LAYER_STACK_SI220_OBAND,
+    "si220": LAYER_STACK_SI220,
     "si340": LAYER_STACK_SI340,
     "si500": LAYER_STACK_SI500,
     "si_sus": LAYER_STACK_SI_SUS,
