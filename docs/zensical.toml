@@ -1,14 +1,15 @@
 [project]
 docs_dir = "."
 nav = [
-  {"Home" = "index.md"},
-  {"Reference" = [
-    {"Cells Si220 Cband" = "cells_si220_cband.md"},
-    {"Cells Si220 Oband" = "cells_si220_oband.md"},
-    {"Cells Si500" = "cells_si500.md"},
-    {"Cells Sin300" = "cells_sin300.md"},
-    {"Changelog" = "changelog.md"}
-  ]}
+  { "Home" = "index.md" },
+  { "Reference" = [
+    { "Layer Stack" = "layer_stack.md" },
+    { "Cells Si220 Cband" = "cells_si220_cband.md" },
+    { "Cells Si220 Oband" = "cells_si220_oband.md" },
+    { "Cells Si500" = "cells_si500.md" },
+    { "Cells Sin300" = "cells_sin300.md" },
+    { "Changelog" = "changelog.md" }
+  ] }
 ]
 site_dir = "_build/html"
 site_name = "CornerStone PDK"

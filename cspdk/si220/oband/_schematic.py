@@ -15,6 +15,7 @@ from cspdk._schematic import (
     _RING_DOUBLE,
     _WIRE_BEND,
     _WIRE_STRAIGHT,
+    _die_ports,
     sax_model,
     schematic,
 )
@@ -114,7 +115,7 @@ coupler_ring_schematic = schematic(
 # Rings / MZI / spirals — composite, no top-level SAX model
 ring_single_schematic = schematic("ring-single", ["ring", "single"], _LEFT_RIGHT)
 ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBLE)
-mzi_schematic = schematic("mzi", ["mzi"], _2X2)
+mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
 # Heaters — oband exposes all via-stack electrical ports
@@ -171,3 +172,8 @@ crossing_rib_schematic = schematic("crossing", ["crossing", "rib"], _CROSSING)
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)
 via_stack_schematic = schematic("pad", ["via", "stack"], _PAD)
+
+# Die: symbol "die" makes editors render it as a die (no background box).
+# Ports are derived from the factory kwargs; each side is the die edge the
+# port sits on — opposite of the inward-pointing GDS orientation.
+die_schematic = schematic("die", ["die"], _die_ports)

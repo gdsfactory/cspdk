@@ -137,9 +137,6 @@ def bend_s(
     )
 
 
-
-
-
 @gf.cell(tags=["waveguides"], schematic_function=wire_corner_schematic)
 def wire_corner(
     cross_section: CrossSectionSpec = "metal_routing",

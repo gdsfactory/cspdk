@@ -32,6 +32,7 @@ def get_pdk() -> Pdk:
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
+        connectivity=tech.CONNECTIVITY,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
         models=_models,
