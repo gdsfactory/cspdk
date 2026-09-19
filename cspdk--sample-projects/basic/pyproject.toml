@@ -1,0 +1,23 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=68.0"]
+
+[dependency-groups]
+dev = ["gdsfactoryplus", "pytest"]
+
+[project]
+dependencies = ["cspdk"]
+description = "Basic sample project for cspdk"
+name = "mycspdk"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+"*" = ["*.csv", "*.gds", "*.lyp", "*.oas", "*.yaml", "*.yml"]
+
+[tool.setuptools.packages.find]
+include = ["mycspdk*"]
+where = ["."]

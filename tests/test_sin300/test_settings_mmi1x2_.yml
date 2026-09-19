@@ -1,5 +1,33 @@
 info: {}
-name: mmi1x2_WNone_WM12_WT5p5_47616c5c
+name: mmi1x2_WNone_WM12_WT5p5_LT50_LM64p7_GM0p4_CSxs_nc
+ports:
+  o1:
+    center:
+    - -50
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 1.2
+  o2:
+    center:
+    - 114.7
+    - 2.95
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 1.2
+  o3:
+    center:
+    - 114.7
+    - -2.95
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 1.2
 settings:
   cross_section: xs_nc
   gap_mmi: 0.4

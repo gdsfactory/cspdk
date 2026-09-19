@@ -19,6 +19,11 @@ _cross_sections = get_cross_sections(tech)
 CONF.pdk = "cspdk.sin300"
 
 
+layer_transitions = {
+    LAYER.NITRIDE: cells.taper,
+}
+
+
 @lru_cache
 def get_pdk() -> Pdk:
     """Return Cornerstone SiN300 PDK."""
@@ -27,10 +32,12 @@ def get_pdk() -> Pdk:
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
+        connectivity=tech.CONNECTIVITY,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
         models=_models,
         routing_strategies=routing_strategies,
+        layer_transitions=layer_transitions,
     )
 
 

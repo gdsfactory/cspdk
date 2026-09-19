@@ -11,6 +11,11 @@ LayerViews:
     transparent: true
     width: 1
     color: "blue"
+  CLAD_OPEN:
+    layer: [22, 0]
+    layer_in_name: true
+    color: "magenta"
+    hatch_pattern: coarsely dotted
   HEATER:
     layer: [39, 0]
     layer_in_name: true

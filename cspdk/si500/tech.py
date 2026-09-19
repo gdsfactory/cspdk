@@ -1,13 +1,14 @@
 """Technology definitions."""
 
+import sys
 from collections.abc import Iterable
 from functools import partial
-from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
     CrossSection,
     cross_section,
+    get_cross_sections,
     port_names_electrical,
     port_types_electrical,
 )
@@ -53,14 +54,16 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_wg: float = 500 * nm,
     thickness_slab: float = 200 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -235,7 +238,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_rc",
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
-    taper: ComponentSpec = "taper_rc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -252,7 +254,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -298,7 +299,11 @@ def route_bundle(
         straight=straight,
         bend=bend,
         taper=taper,
+        sbend="bend_s",
     )
+
+
+cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 routing_strategies = dict(
@@ -307,14 +312,12 @@ routing_strategies = dict(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        taper="taper_rc",
         cross_section="xs_rc",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
         bend="bend_euler_ro",
-        taper="taper_ro",
         cross_section="xs_ro",
     ),
     route_bundle=route_bundle,
@@ -341,13 +344,11 @@ if __name__ == "__main__":
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     # LAYER_VIEWS.to_lyp(PATH.lyp)
 
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
-
     t = KLayoutTechnology(
         name="Cornerstone_si500",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)

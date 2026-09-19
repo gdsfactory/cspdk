@@ -1,0 +1,37 @@
+info: {}
+name: mmi1x2_WNone_WM3p5_WT1p4_LT40_LM18p4_GM0p35_CSxs_n638
+ports:
+  o1:
+    center:
+    - -40
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 58.4
+    - 0.875
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o3:
+    center:
+    - 58.4
+    - -0.875
+    layer: NITRIDE
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.36
+settings:
+  cross_section: xs_n638
+  gap_mmi: 0.35
+  length_mmi: 18.4
+  length_taper: 40
+  width_mmi: 3.5
+  width_taper: 1.4

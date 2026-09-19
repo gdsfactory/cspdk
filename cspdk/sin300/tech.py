@@ -3,7 +3,6 @@
 import sys
 from collections.abc import Iterable
 from functools import partial
-from typing import cast
 
 import gdsfactory as gf
 from gdsfactory.cross_section import CrossSectionSpec, get_cross_sections
@@ -25,15 +24,13 @@ nm = 1e-3
 class LayerMapCornerstone(LayerMap):
     """Layer map for Cornerstone technology."""
 
-    WG: Layer = (3, 0)  # type: ignore
-    SLAB: Layer = (5, 0)  # type: ignore
-    FLOORPLAN: Layer = (99, 0)  # type: ignore
-    HEATER: Layer = (39, 0)  # type: ignore
-    GRA: Layer = (6, 0)  # type: ignore
-    LBL: Layer = (100, 0)  # type: ignore
-    PAD: Layer = (41, 0)  # type: ignore
     NITRIDE: Layer = (203, 0)  # type: ignore
     NITRIDE_ETCH: Layer = (204, 0)  # type: ignore
+    FLOORPLAN: Layer = (99, 0)  # type: ignore
+    HEATER: Layer = (39, 0)  # type: ignore
+    LBL: Layer = (100, 0)  # type: ignore
+    PAD: Layer = (41, 0)  # type: ignore
+    CLAD_OPEN: Layer = (22, 0)  # type: ignore
 
     # labels for gdsfactory
     LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
@@ -43,13 +40,15 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_nitride: float = 300 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -107,8 +106,8 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 class Tech:
     """Technology parameters."""
 
-    radius_nc = 25
-    radius_no = 25
+    radius_nc = 30
+    radius_no = 30
     width_nc = 1.20
     width_no = 0.95
 
@@ -194,6 +193,7 @@ def populate_default_cross_section_names():
 
 
 populate_default_cross_section_names()
+cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 ############################
@@ -215,7 +215,6 @@ def route_single(
     cross_section: CrossSectionSpec = "xs_nc",
     straight: ComponentSpec = "straight_nc",
     bend: ComponentSpec = "bend_euler_nc",
-    taper: ComponentSpec = "taper_nc",
 ) -> ManhattanRoute:
     """Route single optical path.
 
@@ -233,7 +232,6 @@ def route_single(
         cross_section: cross section.
         straight: straight component.
         bend: bend component.
-        taper: taper component.
 
     """
     return gf.routing.route_single(
@@ -250,7 +248,6 @@ def route_single(
         route_width=route_width,
         straight=straight,
         bend=bend,
-        taper=taper,
     )
 
 
@@ -296,6 +293,7 @@ def route_bundle(
         straight=straight,
         bend=bend,
         taper=taper,
+        sbend="bend_s",
     )
 
 
@@ -305,14 +303,12 @@ routing_strategies = dict(
         route_single,
         straight="straight_nc",
         bend="bend_euler_nc",
-        taper="taper_nc",
         cross_section="xs_nc",
     ),
     route_single_no=partial(
         route_single,
         straight="straight_no",
         bend="bend_euler_no",
-        taper="taper_no",
         cross_section="xs_no",
     ),
     route_bundle=route_bundle,
@@ -339,14 +335,12 @@ if __name__ == "__main__":
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     # LAYER_VIEWS.to_lyp(PATH.lyp)
 
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
-
     t = KLayoutTechnology(
         name="Cornerstone_sin300",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)
 

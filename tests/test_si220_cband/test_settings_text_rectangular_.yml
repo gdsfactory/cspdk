@@ -1,5 +1,6 @@
 info: {}
 name: text_rectangular_Tabc_S3_Jleft_LPAD
+ports: {}
 settings:
   justify: left
   layer: PAD

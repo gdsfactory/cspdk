@@ -1,0 +1,28 @@
+info:
+  length: 10
+  width1: 0.36
+  width2: 0.36
+name: taper_L10_W0p36_WNone_PNone_CSxs_n638
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 10
+    - 0
+    layer: NITRIDE
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.36
+settings:
+  cross_section: xs_n638
+  length: 10
+  width1: 0.36

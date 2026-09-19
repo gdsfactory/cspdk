@@ -5,7 +5,6 @@ from functools import partial, wraps
 from typing import Any
 
 import gdsfactory as gf
-from doroutes.bundles import add_bundle_astar
 from gdsfactory.cross_section import (
     CrossSection,
     port_names_electrical,
@@ -35,10 +34,12 @@ class LayerMapCornerstone(LayerMap):
     """Layer map for Cornerstone technology."""
 
     WG: Layer = (3, 0)  # type: ignore
+    WG_DF: Layer = (4, 0)  # type: ignore
     SLAB: Layer = (5, 0)  # type: ignore
     FLOORPLAN: Layer = (99, 0)  # type: ignore
     HEATER: Layer = (39, 0)  # type: ignore
     GRA: Layer = (6, 0)  # type: ignore
+    GRA_EBL: Layer = (60, 0)  # type: ignore
     LBL: Layer = (100, 0)  # type: ignore
     PAD: Layer = (41, 0)  # type: ignore
 
@@ -50,14 +51,17 @@ class LayerMapCornerstone(LayerMap):
 
 LAYER = LayerMapCornerstone
 
+CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
+
 
 def get_layer_stack(
     thickness_wg: float = 220 * nm,
     thickness_slab: float = 100 * nm,
+    thickness_grating: float = 150 * nm,
     zmin_heater: float = 1.1,
-    thickness_heater: float = 700 * nm,
+    thickness_heater: float = 150 * nm,
     zmin_metal: float = 1.1,
-    thickness_metal: float = 700 * nm,
+    thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
@@ -66,6 +70,7 @@ def get_layer_stack(
     Args:
         thickness_wg: waveguide thickness in um.
         thickness_slab: slab thickness in um.
+        thickness_grating: DUV grating residual Si thickness in um (220nm - 70nm etch).
         zmin_heater: TiN heater.
         thickness_heater: TiN thickness.
         zmin_metal: metal thickness in um.
@@ -82,6 +87,16 @@ def get_layer_stack(
                 sidewall_angle=10,
                 width_to_z=0.5,
                 derived_layer=LogicalLayer(layer=LAYER.WG),
+            ),
+            grating=LayerLevel(
+                layer=LogicalLayer(layer=LAYER.WG) & LogicalLayer(layer=LAYER.GRA),
+                thickness=thickness_grating,
+                zmin=0.0,
+                material="si",
+                info={"mesh_order": 1},
+                sidewall_angle=10,
+                width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.GRA),
             ),
             slab=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.SLAB),
@@ -117,13 +132,14 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 class Tech:
     """Technology parameters."""
 
-    radius = 5
-    radius_strip = 5
+    radius = 10
+    radius_strip = 10
+    radius_min = 5
     radius_rib = 25
     radius_ro = 25
     width = 0.45
-    width_rib = 0.5
-    width_ro = 0.5
+    width_rib = 0.45
+    width_ro = 0.45
 
     width_slab = 5
     width_heater = 2.5
@@ -148,11 +164,11 @@ def xsection(func: Callable[..., CrossSection]) -> Callable[..., CrossSection]:
 
     Ensures that the cross-section name matches the name of the function that generated it when created using default parameters
 
-    .. code-block:: python
-
+    ```python
         @xsection
         def strip(width=TECH.width_strip, radius=TECH.radius_strip):
             return gf.cross_section.cross_section(width=width, radius=radius)
+    ```
     """
     default_xs = func()
     _cross_section_default_names[default_xs.name] = func.__name__
@@ -173,7 +189,7 @@ def strip(
     width: float = TECH.width,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius,
-    radius_min: float = TECH.radius,
+    radius_min: float = TECH.radius_min,
 ) -> CrossSection:
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(
@@ -249,7 +265,7 @@ def heater_metal(width=TECH.width_heater) -> CrossSection:
 ############################
 
 route_single = partial(gf.routing.route_single, cross_section="strip")
-route_bundle = partial(gf.routing.route_bundle, cross_section="strip")
+route_bundle = partial(gf.routing.route_bundle, cross_section="strip", sbend="bend_s")
 
 
 route_bundle_rib = partial(
@@ -286,52 +302,28 @@ route_bundle_sbend_metal = partial(
     port_name="e1",
 )
 
-route_astar = partial(
-    add_bundle_astar,
-    layers=["WG"],
-    bend="bend_euler",
-    straight="straight",
-    grid_unit=500,
-    spacing=3,
-)
-
-route_astar_metal = partial(
-    add_bundle_astar,
-    layers=["PAD"],
-    bend="wire_corner",
-    straight="straight_metal",
-    grid_unit=500,
-    spacing=15,
-)
-
 
 routing_strategies = dict(
     route_bundle=route_bundle,
     route_bundle_rib=route_bundle_rib,
     route_bundle_metal=route_bundle_metal,
     route_bundle_metal_corner=route_bundle_metal_corner,
-    route_astar=route_astar,
-    route_astar_metal=route_astar_metal,
     route_bundle_sbend=route_bundle_sbend,
     route_bundle_sbend_metal=route_bundle_sbend_metal,
 )
 
 if __name__ == "__main__":
-    from typing import cast
-
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 
     LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
     # LAYER_VIEWS.to_lyp(PATH.lyp)
-
-    connectivity = cast(list[ConnectivitySpec], [("HEATER", "HEATER", "PAD")])
 
     t = KLayoutTechnology(
         name="Cornerstone_si220",
         layer_map=LAYER,
         layer_views=LAYER_VIEWS,
         layer_stack=LAYER_STACK,
-        connectivity=connectivity,
+        connectivity=CONNECTIVITY,
     )
     t.write_tech(tech_dir=PATH.klayout)
     # print(DEFAULT_CROSS_SECTION_NAMES)

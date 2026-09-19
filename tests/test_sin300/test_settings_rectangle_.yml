@@ -1,4 +1,41 @@
 info: {}
 name: rectangle_LFLOORPLAN
+ports:
+  e1:
+    center:
+    - 0
+    - 1
+    layer: FLOORPLAN
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 2
+  e2:
+    center:
+    - 2
+    - 2
+    layer: FLOORPLAN
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 4
+  e3:
+    center:
+    - 4
+    - 1
+    layer: FLOORPLAN
+    name: e3
+    orientation: 0
+    port_type: electrical
+    width: 2
+  e4:
+    center:
+    - 2
+    - 0
+    layer: FLOORPLAN
+    name: e4
+    orientation: 270
+    port_type: electrical
+    width: 4
 settings:
   layer: FLOORPLAN

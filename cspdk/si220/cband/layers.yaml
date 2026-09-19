@@ -11,7 +11,7 @@ LayerViews:
     hatch_pattern: coarsely dotted
     width: 1
     color: "silver"
-  RIB:
+  WG_DF:
     layer: [4, 0]
     layer_in_name: true
     hatch_pattern: coarsely dotted
@@ -25,6 +25,13 @@ LayerViews:
     transparent: true
     width: 1
     color: "blue"
+  GRA_EBL:
+    layer: [60, 0]
+    layer_in_name: true
+    hatch_pattern: coarsely dotted
+    transparent: true
+    width: 1
+    color: "magenta"
   HEATER:
     layer: [39, 0]
     layer_in_name: true

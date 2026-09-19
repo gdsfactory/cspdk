@@ -2,46 +2,55 @@
 
 [build-system]
 build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core>=3.2,<5"]
 
 [project]
-authors = [
-  { name = "gdsfactory", email = "contact@gdsfactory.com" }
-]
+authors = [{ name = "gdsfactory", email = "contact@gdsfactory.com" }]
 classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.34.0",
-  "gplugins[sax,tidy3d]~=2.0.0",
-  "doroutes>=0.3.0"
+  "circulax>=0.2.3",
+  "gdsfactory~=9.51.0",
+  "gdsfactoryplus",
+  "gplugins[sax,femwell,tidy3d]~=2.1.0"
 ]
 description = "CornerStone PDK"
 keywords = ["python"]
 license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
-requires-python = ">=3.11,<3.14"
-version = "1.4.2"
+requires-python = ">=3.12,<3.15"
+version = "1.4.5"
 
 [project.optional-dependencies]
 dev = [
-  "pre-commit",
   "jsondiff",
+  "pre-commit",
   "pytest",
   "pytest-cov",
-  "pytest_regressions",
   "pytest-github-actions-annotate-failures",
-  "gdsfactoryplus",
+  "pytest_regressions",
+  "tbump",
   "towncrier"
 ]
-docs = ["jupytext", "matplotlib", "jupyter-book>=0.15.1,<1.1", "gsim; python_version>='3.12'"]
+docs = [
+  "jupyter",
+  "kwasm",
+  "mkdocs-material",
+  "mkdocs-with-pdf",
+  "nbconvert",
+  "mkdocstrings[python]>=0.27.0",
+  "zensical>=0.0.40,<0.1.0"
+]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+skip = "references/*"
 
 [tool.gdsfactoryplus]
 name = "cspdk.si220.cband"
@@ -51,6 +60,16 @@ timeout = 300
 
 [tool.gdsfactoryplus.pdk]
 name = "cspdk.si220.cband"
+options = [
+  "cspdk.si220.cband",
+  "cspdk.si220.oband",
+  "cspdk.si500",
+  "cspdk.sin300",
+  "cspdk.si340",
+  "cspdk.si_sus",
+  "cspdk.sin200",
+  "cspdk.ge_on_si"
+]
 
 [tool.gdsfactoryplus.sim.wls]
 max = 1.6
@@ -75,6 +94,8 @@ testpaths = ["cspdk/", "tests"]
 
 [tool.ruff]
 fix = true
+
+[tool.ruff.lint]
 ignore = [
   "E501",  # line too long, handled by black
   "B008",  # do not perform function calls in argument defaults
@@ -95,15 +116,35 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"cspdk/si220/cband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
-"cspdk/si220/cband/models/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
-"cspdk/si220/oband/cells/__init__.py" = ["F403"]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/cband/models/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"cspdk/si220/oband/cells/__init__.py" = [
+  "F403"
+]  # allowing star imports to aggregate cells
+"references/**" = ["ALL"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.setuptools.package-data]
-"*" = ["*.csv", "*.yaml", "*.yml", "*.gds", "*.lyp", "*.oas", "*.lyt", "*.dat", "*.nc", "*.svg", "*.GDS", "*.OAS"]
+"*" = [
+  "*.csv",
+  "*.yaml",
+  "*.yml",
+  "*.gds",
+  "*.lyp",
+  "*.oas",
+  "*.lyt",
+  "*.dat",
+  "*.nc",
+  "*.svg",
+  "*.GDS",
+  "*.OAS"
+]
 
 [tool.setuptools.packages]
 find = {}
@@ -128,7 +169,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "1.4.2"
+current = "1.4.5"
 # Example of a semver regexp.
 # Make sure this matches current_version before
 # using tbump

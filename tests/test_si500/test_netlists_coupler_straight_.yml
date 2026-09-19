@@ -1,5 +1,5 @@
 instances:
-  straight_gdsfactorypcom_613fbca3_0_0:
+  straight:
     component: straight
     info:
       length: 20
@@ -13,7 +13,7 @@ instances:
       length: 20
       npoints: 2
       width: null
-  straight_gdsfactorypcom_613fbca3_0_686:
+  straight2:
     component: straight
     info:
       length: 20
@@ -27,21 +27,20 @@ instances:
       length: 20
       npoints: 2
       width: null
-name: coupler_straight_L20_G0_407c9b4b
 nets: []
 placements:
-  straight_gdsfactorypcom_613fbca3_0_0:
+  straight:
     mirror: false
     rotation: 0
     x: 0
     y: 0
-  straight_gdsfactorypcom_613fbca3_0_686:
+  straight2:
     mirror: false
     rotation: 0
     x: 0
     y: 0.686
 ports:
-  o1: straight_gdsfactorypcom_613fbca3_0_0,o1
-  o2: straight_gdsfactorypcom_613fbca3_0_686,o1
-  o3: straight_gdsfactorypcom_613fbca3_0_686,o2
-  o4: straight_gdsfactorypcom_613fbca3_0_0,o2
+  o1: straight,o1
+  o2: straight2,o1
+  o3: straight2,o2
+  o4: straight,o2

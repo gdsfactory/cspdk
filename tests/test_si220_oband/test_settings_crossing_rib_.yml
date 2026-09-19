@@ -1,3 +1,40 @@
 info: {}
 name: crossing_rib
+ports:
+  o1:
+    center:
+    - 395
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o2:
+    center:
+    - 399.62
+    - 4.62
+    layer: WG
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.4
+  o3:
+    center:
+    - 404.24
+    - 0
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.4
+  o4:
+    center:
+    - 399.62
+    - -4.62
+    layer: WG
+    name: o4
+    orientation: 270
+    port_type: optical
+    width: 0.4
 settings: {}

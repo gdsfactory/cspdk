@@ -1,7 +1,44 @@
 info:
   min_bend_radius: 25.036
   path_length: 50.266
-name: coupler_G0p236_L20_D4_D_4da8fff6
+name: coupler_G0p236_L20_D4_D15_CSxs_ro
+ports:
+  o1:
+    center:
+    - -15
+    - -1.682
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o2:
+    center:
+    - -15
+    - 2.318
+    layer: WG
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.4
+  o3:
+    center:
+    - 35
+    - 2.318
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.4
+  o4:
+    center:
+    - 35
+    - -1.682
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.4
 settings:
   cross_section: xs_ro
   dx: 15

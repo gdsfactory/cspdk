@@ -13,10 +13,25 @@ from cspdk.si220.cband.models import get_models
 from cspdk.si220.cband.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
 _models = get_models()
+try:
+    import circulax  # noqa: F401
+except ImportError:
+    circulax = None
+
+if circulax is not None:
+    from cspdk.si220.cband.active_models import get_active_models
+
+    _models = {**_models, **get_active_models()}
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 
 CONF.pdk = "cspdk.si220.cband"
+
+
+layer_transitions = {
+    LAYER.WG: cells.taper,
+    LAYER.PAD: cells.taper_metal,
+}
 
 
 @lru_cache
@@ -27,11 +42,19 @@ def get_pdk() -> Pdk:
         cells=_cells,
         cross_sections=_cross_sections,  # type: ignore
         layers=LAYER,
+        connectivity=tech.CONNECTIVITY,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
         models=_models,
         routing_strategies=routing_strategies,
+        layer_transitions=layer_transitions,
     )
+
+
+def activate_pdk() -> None:
+    """Activate Cornerstone Si220 Cband PDK."""
+    pdk = get_pdk()
+    pdk.activate()
 
 
 PDK = get_pdk()

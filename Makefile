@@ -1,5 +1,11 @@
 install:
+	uv venv --python 3.12
 	uv sync --extra docs --extra dev
+
+dev: install
+	curl -sf https://raw.githubusercontent.com/doplaydo/pdk-ci-workflow-public/main/templates/.pre-commit-config.yaml -o .pre-commit-config.yaml
+	uv run pre-commit clean
+	uv run pre-commit install
 
 rm-samples:
 	rm -rf cspdk/si220/oband/samples cspdk/si220/cband/samples cspdk/sin300/samples cspdk/si500/samples
@@ -7,14 +13,26 @@ rm-samples:
 test:
 	uv run pytest -s tests/test_si220_cband.py
 	uv run pytest -s tests/test_si220_oband.py
+	uv run pytest -s tests/test_routing.py
+	uv run pytest -s tests/test_si340.py
+	uv run pytest -s tests/test_sin200.py
+	uv run pytest -s tests/test_ge_on_si.py
+	uv run pytest -s tests/test_si_sus.py
 	# uv run pytest -s tests/test_si500.py
 	# uv run pytest -s tests/test_sin300.py
 
-test-force:
-	uv run pytest -s tests/test_si220_cband.py --force-regen
-	uv run pytest -s tests/test_si220_oband.py --force-regen
-	# uv run pytest -s tests/test_si500.py --force-regen
-	# uv run pytest -s tests/test_sin300.py --force-regen
+test-ports:
+	uv run pytest -s tests/test_si220_cband.py::test_optical_port_positions tests/test_si220_oband.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
+
+test-force: install
+	uv run pytest -s tests/test_si220_cband.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si220_oband.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si340.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_sin200.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_ge_on_si.py --update-gds-refs --force-regen
+	uv run pytest -s tests/test_si_sus.py --update-gds-refs --force-regen
+	# uv run pytest -s tests/test_si500.py --update-gds-refs --force-regen
+	# uv run pytest -s tests/test_sin300.py --update-gds-refs --force-regen
 
 test-fail-fast:
 	uv run pytest -s tests/test_si220_cband.py -x
@@ -22,7 +40,7 @@ test-fail-fast:
 	uv run pytest -s tests/test_sin300.py -x
 
 update-pre:
-	pre-commit autoupdate --bleeding-edge
+	pre-commit autoupdate
 
 git-rm-merged:
 	git branch -D `git branch --merged | grep -v \* | xargs`
@@ -38,10 +56,34 @@ jupytext:
 notebooks:
 	jupytext docs/**/*.py --to ipynb
 
-docs:
+docs-pdf:
 	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
 	uv run python .github/write_cells_si500.py
 	uv run python .github/write_cells_sin300.py
-	uv run jb build docs
+	cp CHANGELOG.md docs/changelog.md
+	cp README.md docs/index.md
+	uv run mkdocs build -f mkdocs-pdf.yml
 
-.PHONY: drc doc docs
+docs:
+	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	cp CHANGELOG.md docs/changelog.md
+	cp README.md docs/index.md
+	uv run --extra docs zensical build -f docs/zensical.toml
+
+docs-serve:
+	uv run python .github/write_cells_si220_cband.py
+	uv run python .github/write_cells_si220_oband.py
+	uv run python .github/write_cells_si500.py
+	uv run python .github/write_cells_sin300.py
+	cp CHANGELOG.md docs/changelog.md
+	cp README.md docs/index.md
+	uv run --extra docs zensical serve -f docs/zensical.toml -a localhost:8080
+
+update-changelog:
+	claude -p "remove links and make a user friendly changelog from @CHANGELOG.md to @docs/changelog.md"
+
+.PHONY: drc drc-sample doc docs docs-pdf build update-changelog
