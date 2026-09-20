@@ -21,7 +21,7 @@ dependencies = [
   "klujax>=0.5.1"
 ]
 description = "CornerStone PDK"
-keywords = ["python"]
+keywords = ["cornerstone", "cspdk", "eda", "gdsfactory", "pdk", "photonics", "python"]
 license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
