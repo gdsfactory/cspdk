@@ -316,8 +316,8 @@ def _dispatch_model(
     return model
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
-    """Return shared model names dispatching to cband or oband behavior."""
+def _build_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Build the shared model dict dispatching to cband or oband behavior."""
     from cspdk.si220.models import oband
 
     cband_models = _get_cband_models()
@@ -326,3 +326,19 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         name: _dispatch_model(model, oband_models.get(name))
         for name, model in cband_models.items()
     }
+
+
+# Build once, before any name can be referenced, and bind the dispatch wrappers
+# into this module's namespace.  Cell SAX metadata references
+# ``module="cspdk.si220.models"`` with ``qualname=<name>``; without this
+# binding that resolves to the raw implementation imported from
+# ``.waveguides``/``.couplers``, which only understands the model-level
+# ``"strip"``/``"rib"`` vocabulary and rejects the PDK-level
+# ``strip_cband``/``strip_oband`` names.
+_MODELS = _build_models()
+globals().update(_MODELS)
+
+
+def get_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Return shared model names dispatching to cband or oband behavior."""
+    return _MODELS
