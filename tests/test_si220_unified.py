@@ -101,6 +101,25 @@ def test_model_dispatch_accepts_oband_factories_and_objects(cross_section) -> No
     assert np.allclose(actual["o1", "o2"], expected["o1", "o2"])
 
 
+def test_model_module_attributes_bind_dispatch_wrappers() -> None:
+    """Module attributes resolve to band-dispatching wrappers, not raw models.
+
+    Cell SAX metadata references models as ``module="cspdk.si220.models"`` plus
+    ``qualname=<name>``, so consumers that resolve by module path must receive
+    the dispatch wrapper.  The raw implementations imported from
+    ``.waveguides``/``.couplers`` only accept the ``"strip"``/``"rib"``
+    vocabulary and would reject the PDK-level cross-section names.
+    """
+    import cspdk.si220.models as models
+
+    assert models.straight is si220.PDK.models["straight"]
+    assert models.bend_euler is si220.PDK.models["bend_euler"]
+
+    for cross_section in ("strip_cband", "strip_oband"):
+        response = models.bend_euler(wl=1.55, length=10.0, cross_section=cross_section)
+        assert ("o1", "o2") in response
+
+
 @pytest.mark.parametrize(
     ("factory", "kwargs"),
     [
