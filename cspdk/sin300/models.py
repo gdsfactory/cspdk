@@ -20,18 +20,25 @@ Float = float | FloatArray
 def _optical_model(model, inputs: int, outputs: int):
     """Normalize SAX ports without changing its process-wide naming strategy.
 
-    SAX's jitted models may already be cached with either naming convention.
-    Translate the returned keys so import order and earlier simulations cannot
-    change the ports exposed by this PDK.
+    Translate input/output and zero-based optical keys, preserving one-based
+    optical keys. Inspect the returned keys because jitted models may retain
+    a naming convention cached before the current strategy was selected.
     """
     port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
     port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
 
     @wraps(model)
     def optical(*args, **kwargs) -> sax.SDict:
+        result = model(*args, **kwargs)
+        mapping = port_map
+        if any("o0" in pair for pair in result):
+            mapping = {
+                **port_map,
+                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
+            }
         return {
-            (port_map.get(p, p), port_map.get(q, q)): value
-            for (p, q), value in model(*args, **kwargs).items()
+            (mapping.get(p, p), mapping.get(q, q)): value
+            for (p, q), value in result.items()
         }
 
     return optical

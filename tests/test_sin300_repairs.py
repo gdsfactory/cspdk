@@ -97,6 +97,40 @@ def test_registered_models_evaluate(name, wl):
         assert np.isfinite(value).all()
 
 
+@pytest.mark.parametrize("inputs,outputs", [(1, 1), (1, 2), (2, 2)])
+@pytest.mark.parametrize("convention", ["input_output", "zero_based", "one_based"])
+def test_optical_model_cached_port_names(inputs, outputs, convention):
+    """Normalize cached keys while preserving each S-parameter's port assignment."""
+    count = inputs + outputs
+    if convention == "input_output":
+        names = [f"in{i}" for i in range(inputs)] + [
+            f"out{i}" for i in reversed(range(outputs))
+        ]
+    else:
+        start = 0 if convention == "zero_based" else 1
+        names = [f"o{i}" for i in range(start, start + count)]
+
+    @jax.jit
+    def cached_model(wl):
+        return {
+            (p, q): (i * count + j + 1) * jnp.ones_like(wl)
+            for i, p in enumerate(names)
+            for j, q in enumerate(names)
+        }
+
+    wl = jnp.array([1.54, 1.55])
+    cached_model(wl)  # Populate the upstream cache before wrapping it.
+    result = jax.jit(models._optical_model(cached_model, inputs, outputs))(wl)
+    assert {p for pair in result for p in pair} == {
+        f"o{i}" for i in range(1, count + 1)
+    }
+    for i in range(count):
+        for j in range(count):
+            np.testing.assert_array_equal(
+                result[f"o{i + 1}", f"o{j + 1}"], (i * count + j + 1) * np.ones(2)
+            )
+
+
 @pytest.mark.parametrize("strategy", ["inout", "optical"])  # codespell:ignore inout
 def test_model_ports_in_fresh_process(strategy):
     """Import SiN300 after upstream models have cached either port convention."""
@@ -107,10 +141,26 @@ import sax.models as sm
 sax.set_port_naming_strategy({strategy!r})
 for model in (sm.straight, sm.mmi1x2, sm.mmi2x2, sm.grating_coupler):
     model(wl=np.array([1.55]))
-from cspdk.sin300 import PDK
+from cspdk.sin300 import PDK, cells
 for name, model in PDK.models.items():
     ports = {{p for pair in model(wl=np.array([1.55])) for p in pair}}
-    assert all(p.startswith('e' if name == 'wire_corner' else 'o') for p in ports), (name, ports)
+    if name == 'wire_corner':
+        expected = {{'e1', 'e2'}}
+    elif name.startswith(('mmi2x2', 'coupler', 'crossing')):
+        expected = {{'o1', 'o2', 'o3', 'o4'}}
+    elif name.startswith('mmi1x2'):
+        expected = {{'o1', 'o2', 'o3'}}
+    else:
+        expected = {{'o1', 'o2'}}
+    assert ports == expected, (name, ports)
+PDK.activate()
+for band, wl0 in [('nc', 1.55), ('no', 1.31)]:
+    component = getattr(cells, f'mzi_{{band}}')(delta_length=100)
+    circuit, _ = sax.circuit(component.get_netlist(), models=PDK.models)
+    result = circuit(wl=np.linspace(wl0 - 0.03, wl0 + 0.03, 121))
+    assert {{p for pair in result for p in pair}} == {{p.name for p in component.ports}}
+    assert all(np.isfinite(value).all() for value in result.values())
+    assert np.ptp(np.abs(result['o1', 'o3']) ** 2) > 0.3
 assert sax.get_port_naming_strategy() == {strategy!r}
 """
     subprocess.run([sys.executable, "-c", script], check=True, timeout=60)
