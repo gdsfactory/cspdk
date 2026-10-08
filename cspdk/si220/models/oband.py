@@ -11,6 +11,8 @@ import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk.si220.tech import TECH
+
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
@@ -210,27 +212,83 @@ def mmi2x2(
 # Evanescent couplers
 ##############################
 
-coupler_strip = partial(sm.coupler, wl0=1.31)
-coupler_rib = coupler_strip
-coupler_ring = partial(coupler_strip, wl0=1.31)
+# Shared with the C-band models (cspdk.si220.models.couplers) using O-band tables and
+# waveguide models. Imported lazily: couplers imports this module.
 
 
-def coupler(
+def directional_coupler(
+    *,
     wl: Float = 1.31,
-    length: float = 10.0,
-    cross_section="strip",
+    length: float | None = None,
+    gap: float = TECH.gap_strip,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    cross_section: str = "strip",
 ) -> sax.SDict:
-    """Evanescent coupler model."""
-    # TODO: take more coupler arguments into account
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": coupler_strip,
-        "rib": coupler_rib,
-    }
-    f = fs[cross_section]
-    return f(
+    """Directional coupler model (see couplers.directional_coupler)."""
+    from cspdk.si220.models import couplers
+
+    return couplers.directional_coupler(
         wl=wl,
         length=length,
+        gap=gap,
+        offset=offset,
+        bend_radius=bend_radius,
+        cross_section=cross_section,
+        band="oband",
+    )
+
+
+coupler = directional_coupler
+coupler_strip = directional_coupler
+coupler_rib = directional_coupler
+
+
+def coupler_ring_coupling_area(
+    *,
+    wl: Float = 1.31,
+    gap: float = 0.1,
+    radius: float = 5.0,
+    length_x: float = 1.0,
+    loss_dB: float = 0.0,
+    cross_section: str = "strip",
+) -> sax.SDict:
+    """Ring coupler coupling-region model (see couplers.coupler_ring_coupling_area)."""
+    from cspdk.si220.models import couplers
+
+    return couplers.coupler_ring_coupling_area(
+        wl=wl,
+        gap=gap,
+        radius=radius,
+        length_x=length_x,
+        loss_dB=loss_dB,
+        cross_section=cross_section,
+        band="oband",
+    )
+
+
+def coupler_ring(
+    *,
+    wl: Float = 1.31,
+    gap: float = 0.1,
+    radius: float = 40.0,
+    length_x: float = 1.0,
+    p: float = 0,
+    loss_dB: float = 0.0,
+    cross_section: str = "strip",
+) -> sax.SDict:
+    """Ring coupler model (see couplers.coupler_ring)."""
+    from cspdk.si220.models import couplers
+
+    return couplers.coupler_ring(
+        wl=wl,
+        gap=gap,
+        radius=radius,
+        length_x=length_x,
+        p=p,
+        loss_dB=loss_dB,
+        cross_section=cross_section,
+        band="oband",
     )
 
 

@@ -176,3 +176,56 @@ def test_pdk_uses_dispatchable_sax_heater_model() -> None:
     model = si220.PDK.models["straight_heater_metal"]
     result = model(wl=1.31, cross_section="strip_oband")
     assert ("o1", "o2") in result
+
+
+def _simulate(component, wl):
+    import jax
+    import jax.numpy as jnp
+    import sax
+
+    circuit, _ = sax.circuit(component.get_netlist(), models=si220.PDK.models)
+    # block before `circuit` is freed: klujax segfaults if it is released mid-solve
+    return jax.block_until_ready(circuit(wl=jnp.asarray(wl)))
+
+
+@pytest.mark.parametrize(
+    ("cross_section", "wl"),
+    [
+        ("strip_cband", 1.55),
+        ("rib_cband", 1.55),
+        ("strip_oband", 1.31),
+        ("rib_oband", 1.31),
+    ],
+)
+def test_mzi_simulates(cross_section: str, wl: float) -> None:
+    """The default coupler-based MZI lays out and simulates in every band."""
+    si220.PDK.activate()
+    s = _simulate(si220.cells.mzi(cross_section=cross_section), [wl])
+    power = abs(s["o1", "o3"][0]) ** 2 + abs(s["o1", "o4"][0]) ** 2
+    assert 0.5 < power <= 1.0
+
+
+@pytest.mark.parametrize(
+    ("cross_section", "radius", "gap", "ng", "wl0"),
+    [
+        ("strip_cband", 10, 0.2, 4.30, 1.55),
+        ("strip_cband", 25, 0.2, 4.30, 1.55),
+        ("rib_cband", 25, 0.5, 3.87, 1.55),
+        ("strip_oband", 25, 0.3, 4.33, 1.31),
+        ("rib_oband", 25, 0.4, 3.98, 1.31),
+    ],
+)
+def test_ring_fsr_matches_group_index(
+    cross_section: str, radius: float, gap: float, ng: float, wl0: float
+) -> None:
+    """Simulated ring FSR matches lambda^2 / (ng * L) for the full ring length."""
+    from scipy.signal import find_peaks
+
+    si220.PDK.activate()
+    ring = si220.cells.ring_single(radius=radius, cross_section=cross_section, gap=gap)
+    length = 2 * np.pi * radius + 2 * 4.0 + 2 * 0.6
+    wl = np.linspace(wl0 - 0.02, wl0 + 0.02, 4001)
+    transmission = np.abs(np.asarray(_simulate(ring, wl)["o1", "o2"])) ** 2
+    dips, _ = find_peaks(-transmission, prominence=0.01)
+    fsr = np.median(np.diff(wl[dips]))
+    assert fsr == pytest.approx(wl0**2 / (ng * length), rel=0.02)
