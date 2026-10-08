@@ -215,7 +215,7 @@ def test_mzi_simulates(cross_section: str, wl: float) -> None:
         ("strip_cband", 10, 0.2, 4.30, 1.55),
         ("strip_cband", 25, 0.2, 4.30, 1.55),
         ("rib_cband", 25, 0.5, 3.87, 1.55),
-        ("strip_oband", 25, 0.3, 4.33, 1.31),
+        ("strip_oband", 25, 0.3, 4.34, 1.31),
         ("rib_oband", 25, 0.4, 3.98, 1.31),
     ],
 )
@@ -233,3 +233,66 @@ def test_ring_fsr_matches_group_index(
     dips, _ = find_peaks(-transmission, prominence=0.01)
     fsr = np.median(np.diff(wl[dips]))
     assert fsr == pytest.approx(wl0**2 / (ng * length), rel=0.02)
+
+
+def _two_in_series(cell, **settings) -> gf.Component:
+    """Two copies of a two-port cell connected o2 -> o1, so SAX treats it as a circuit."""
+    c = gf.Component()
+    first = c << cell(**settings)
+    second = c << cell(**settings)
+    second.connect("o1", first.ports["o2"])
+    c.add_port("o1", port=first.ports["o1"])
+    c.add_port("o2", port=second.ports["o2"])
+    return c
+
+
+@pytest.mark.parametrize(
+    "name", ["grating_coupler_rectangular", "grating_coupler_elliptical"]
+)
+@pytest.mark.parametrize("cross_section", ["strip_oband", "rib_oband"])
+def test_oband_grating_couplers_are_centred_at_1310(
+    name: str, cross_section: str
+) -> None:
+    """O-band grating models transmit at 1.31 um, like C-band ones at 1.55 um."""
+    oband = si220.PDK.models[name](wl=np.array([1.31]), cross_section=cross_section)
+    cband = si220.PDK.models[name](wl=np.array([1.55]), cross_section="strip_cband")
+    assert abs(oband["o1", "o2"][0]) == pytest.approx(abs(cband["o1", "o2"][0]))
+
+
+def test_dispatched_models_expose_cross_section() -> None:
+    """SAX only forwards settings in the model signature, so every model needs it."""
+    import inspect
+
+    for name, model in si220.PDK.models.items():
+        assert "cross_section" in inspect.signature(model).parameters, name
+
+
+@pytest.mark.parametrize(
+    ("cross_section", "wl"),
+    [("strip_oband", 1.31), ("rib_oband", 1.31), ("strip_cband", 1.55)],
+)
+def test_straight_in_circuit_matches_direct_model(
+    cross_section: str, wl: float
+) -> None:
+    """Inside a circuit a band's model gets its own defaults, not C-band ones."""
+    si220.PDK.activate()
+    circuit = _simulate(
+        _two_in_series(si220.cells.straight, length=500, cross_section=cross_section),
+        [wl],
+    )
+    direct = si220.PDK.models["straight"](
+        wl=np.array([wl]), length=1000, cross_section=cross_section
+    )
+    assert np.allclose(circuit["o1", "o2"], direct["o1", "o2"])
+
+
+def test_oband_heater_in_circuit_uses_oband_model() -> None:
+    """The heater cell has no cross_section in its C-band model; O-band must still win."""
+    from cspdk.si220.models import oband
+
+    si220.PDK.activate()
+    heater = si220.cells.straight_heater_metal
+    length = heater(cross_section="strip_oband").info["length"]
+    circuit = _simulate(_two_in_series(heater, cross_section="strip_oband"), [1.31])
+    expected = oband.straight_heater_metal(wl=1.31, length=2 * length)["o1", "o2"]
+    assert np.allclose(circuit["o1", "o2"][0], expected)

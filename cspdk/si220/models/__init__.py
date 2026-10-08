@@ -286,11 +286,35 @@ def _dispatch_model(
     cband_model: Callable[..., sax.SDict],
     oband_model: Callable[..., sax.SDict] | None,
 ) -> Callable[..., sax.SDict]:
-    """Return a shared model that selects its implementation by cross-section."""
+    """Return a shared model that selects its implementation by cross-section.
+
+    SAX calls a model with every parameter of its signature, filling unset ones with
+    the signature defaults, and drops settings that are not in the signature. The
+    wrapper therefore exposes the union of both bands' parameters plus
+    ``cross_section``, all defaulting to ``None`` ("not set"), so the cross-section
+    always reaches the dispatcher and the selected model applies its own defaults.
+    """
+    parameters = {}
+    for band_model in (cband_model, oband_model):
+        if band_model is None:
+            continue
+        for parameter in inspect.signature(band_model).parameters.values():
+            if parameter.kind in (
+                inspect.Parameter.VAR_POSITIONAL,
+                inspect.Parameter.VAR_KEYWORD,
+            ):
+                continue
+            parameters.setdefault(
+                parameter.name,
+                parameter.replace(kind=inspect.Parameter.KEYWORD_ONLY, default=None),
+            )
+    parameters["cross_section"] = inspect.Parameter(
+        "cross_section", inspect.Parameter.KEYWORD_ONLY, default="strip_cband"
+    )
 
     @wraps(cband_model)
     def model(*args, **kwargs) -> sax.SDict:
-        cross_section = kwargs.get("cross_section", "strip_cband")
+        cross_section = kwargs.pop("cross_section", None) or "strip_cband"
         target = (
             oband_model
             if get_band(cross_section) == "oband" and oband_model is not None
@@ -301,19 +325,18 @@ def _dispatch_model(
             parameter.kind is inspect.Parameter.VAR_KEYWORD
             for parameter in signature.parameters.values()
         )
-        call_kwargs = dict(kwargs)
+        call_kwargs = {
+            key: value
+            for key, value in kwargs.items()
+            if value is not None and (accepts_kwargs or key in signature.parameters)
+        }
         if "cross_section" in signature.parameters:
             call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
-        else:
-            call_kwargs.pop("cross_section", None)
-        if not accepts_kwargs:
-            call_kwargs = {
-                key: value
-                for key, value in call_kwargs.items()
-                if key in signature.parameters
-            }
         return target(*args, **call_kwargs)
 
+    model.__signature__ = inspect.Signature(  # type: ignore[attr-defined]
+        list(parameters.values()), return_annotation=sax.SDict
+    )
     return model
 
 

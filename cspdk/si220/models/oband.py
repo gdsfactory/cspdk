@@ -22,19 +22,20 @@ Float = float | FloatArray
 # Straights
 ################
 
+# loss_dB_cm: placeholder equal to C-band until measured O-band data is available
 straight_strip = partial(
     sm.straight,
     length=10.0,
-    loss_dB_cm=0.0,
+    loss_dB_cm=3.0,
     wl0=1.31,
-    neff=2.52,
-    ng=4.33,
+    neff=2.56,
+    ng=4.34,
 )
 
 straight_rib = partial(
     sm.straight,
     length=10.0,
-    loss_dB_cm=0.0,
+    loss_dB_cm=3.0,
     wl0=1.31,
     neff=2.72,
     ng=3.98,
@@ -45,7 +46,7 @@ def straight(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
-    loss_dB_cm: float = 0.0,
+    loss_dB_cm: float = 3.0,
     cross_section: str = "strip",
 ) -> sax.SDict:
     """Straight waveguide model."""
@@ -297,7 +298,7 @@ def coupler_ring(
 ##############################
 
 grating_coupler_rectangular_strip = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
 grating_coupler_rectangular_rib = grating_coupler_rectangular_strip
 
@@ -322,7 +323,7 @@ def grating_coupler_rectangular(
 ##############################
 
 grating_coupler_elliptical = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
 
 ################
