@@ -22,18 +22,19 @@ def coupler(
     """
     if is_rib(cross_section):
         # rib bends need a longer, shallower S-bend to respect radius_min
-        return coupler_rib(length=length, gap=gap, cross_section=cross_section)
-    if length is None:
-        length = (
-            TECH.length_coupler_oband
-            if get_band(cross_section) == "oband"
-            else TECH.length_coupler
-        )
+        dx, dy = TECH.dx_coupler_rib, TECH.dy_coupler_rib
+        default_length = TECH.length_coupler_rib
+    else:
+        dx, dy = TECH.dx_coupler, TECH.dy_coupler
+        if get_band(cross_section) == "oband":
+            default_length = TECH.length_coupler_oband
+        else:
+            default_length = TECH.length_coupler
     return gf.c.coupler(
-        length=length,
+        length=default_length if length is None else length,
         gap=gap,
-        dy=TECH.dy_coupler,
-        dx=TECH.dx_coupler,
+        dy=dy,
+        dx=dx,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )
