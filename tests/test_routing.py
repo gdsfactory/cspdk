@@ -15,8 +15,12 @@ def test_sample_routing_different_widths(pdk_module: str, sample_module: str) ->
     """Test that routing two straights with different widths works."""
     import importlib
 
+    import gdsfactory as gf
+
     pdk = importlib.import_module(pdk_module)
     pdk.PDK.activate()
+    # every flavour's sample cell has the same name; don't reuse the previous one
+    gf.clear_cache()
     sample = importlib.import_module(sample_module)
     c = sample.sample_routing_different_widths()
     # one taper at each end, from each straight's width to the route's width
