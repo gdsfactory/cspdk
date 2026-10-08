@@ -5,12 +5,23 @@ import pathlib
 import shutil
 
 import gdsfactory as gf
+import pytest
 from gdsfactory.name import clean_name, get_name_short
 
 PROJECT_ROOT = pathlib.Path(__file__).parent.parent
 DIFF_DIR = PROJECT_ROOT / "test_diffs"
 
 _config = {"update_gds_refs": False}
+
+
+@pytest.fixture(autouse=True, scope="module")
+def clear_cell_cache():
+    """Start every test module with an empty cell cache.
+
+    Flavours share cell names (e.g. si340 and si500 both define ``xs_rc``), so a
+    cached cell from one PDK would otherwise be reused by the next.
+    """
+    gf.clear_cache()
 
 
 def pytest_addoption(parser):
