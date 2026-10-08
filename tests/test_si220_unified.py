@@ -198,11 +198,15 @@ def _simulate(component, wl):
     ],
 )
 def test_mzi_simulates(cross_section: str, wl: float) -> None:
-    """The default coupler-based MZI lays out and simulates in every band."""
+    """The default coupler-based MZI simulates in every band and interferes."""
     si220.PDK.activate()
-    s = _simulate(si220.cells.mzi(cross_section=cross_section), [wl])
-    power = abs(s["o1", "o3"][0]) ** 2 + abs(s["o1", "o4"][0]) ** 2
-    assert 0.5 < power <= 1.0
+    wls = np.linspace(wl - 0.03, wl + 0.03, 121)
+    s = _simulate(si220.cells.mzi(cross_section=cross_section), wls)
+    cross = np.abs(np.asarray(s["o1", "o3"])) ** 2
+    power = cross + np.abs(np.asarray(s["o1", "o4"])) ** 2
+    assert np.all((power > 0.5) & (power <= 1.0 + 1e-6))
+    # a coupler that does not split light gives a flat output: no fringes
+    assert cross.max() - cross.min() > 0.3
 
 
 @pytest.mark.parametrize(

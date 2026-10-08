@@ -31,6 +31,7 @@ CONFIGS = {
     ("oband", "rib"): {"wavelengths": (1.26, 1.31, 1.36), "width": 0.40},
 }
 GAPS = (0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5)
+MAX_SEPARATION = 2.0  # um of extra gap: >10 decay lengths, coupling negligible
 # table grids (wavelength axis: 21 points spanning the band)
 GRIDS = {
     "coupler_racetrack": {
@@ -114,24 +115,37 @@ def _kappa_l(params, wl, gap):
     return np.pi * np.exp(a0 + a1 * dwl - gap * (b0 + b1 * dwl)) / wl
 
 
-def _arc_phase(params, wl, gap, radius, both_bend):
-    x = np.linspace(0, min(radius, 10.0), 801)
+def _arc_phase(params, wl, gap, radius, arms, max_offset):
+    """Coupling phase along a circular bend where `arms` waveguides bend away.
+
+    Each arm moves sideways by at most `max_offset`; integration stops once the gap
+    has opened by MAX_SEPARATION, beyond which the coupling is negligible.
+    """
+    offset = min(radius, max_offset, MAX_SEPARATION / arms)
+    x = np.linspace(0, np.sqrt(radius**2 - (radius - offset) ** 2), 801)
     dy = radius - np.sqrt(np.maximum(radius**2 - x**2, 0))
-    return np.trapezoid(_kappa_l(params, wl, gap + (2 if both_bend else 1) * dy), x)
+    return np.trapezoid(_kappa_l(params, wl, gap + arms * dy), x)
 
 
 def ring_kappa(params, wl, gap, radius, length_x):
     """Ring coupler: straight bus, ring bends away from it."""
     phi = _kappa_l(params, wl, gap) * length_x
-    phi += 2 * _arc_phase(params, wl, gap, radius, both_bend=False)
+    phi += 2 * _arc_phase(params, wl, gap, radius, arms=1, max_offset=radius)
     return np.abs(np.sin(phi))
 
 
 def dc_kappa(params, wl, gap, radius, length_x, v_offset):
-    """Directional coupler: both waveguides bend away (v_offset >> decay length)."""
+    """Directional coupler: both arms follow the first arc of an S-bend of v_offset."""
     phi = _kappa_l(params, wl, gap) * length_x
-    phi += 2 * _arc_phase(params, wl, gap, radius, both_bend=True)
+    phi += 2 * _arc_phase(params, wl, gap, radius, arms=2, max_offset=v_offset / 2)
     return np.abs(np.sin(phi))
+
+
+def _write_atomic(path: Path, write) -> None:
+    """Write via a temporary file so an interrupted run never leaves a partial file."""
+    tmp = path.with_name(f"{path.stem}.tmp{path.suffix}")
+    write(tmp)
+    tmp.replace(path)
 
 
 def write_tables(band: str, kind: str, raw: dict) -> None:
@@ -154,9 +168,8 @@ def write_tables(band: str, kind: str, raw: dict) -> None:
         coords = {"wavelength": np.linspace(min(wls), max(wls), 21), **GRIDS[name]}
         grids = np.meshgrid(*coords.values(), indexing="ij")
         kappa = np.vectorize(func, excluded={0})(params, *grids)
-        xr.DataArray(kappa, coords=coords, dims=list(coords), attrs=attrs).to_netcdf(
-            MODELS / f"{name}_{kind}{suffix}.nc"
-        )
+        table = xr.DataArray(kappa, coords=coords, dims=list(coords), attrs=attrs)
+        _write_atomic(MODELS / f"{name}_{kind}{suffix}.nc", table.to_netcdf)
 
 
 if __name__ == "__main__":
@@ -167,7 +180,11 @@ if __name__ == "__main__":
         args = sys.argv[1:]
         targets = list(zip(args[::2], args[1::2], strict=True)) or list(CONFIGS)
         for band, kind in targets:
-            cache[f"{band},{kind}"] = solve_splitting(band, kind)
-            CACHE.write_text(json.dumps(cache, indent=1))
+            raw = solve_splitting(band, kind)
+            # re-read so results saved by another run since start are kept
+            cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+            cache[f"{band},{kind}"] = raw
+            text = json.dumps(cache, indent=1)
+            _write_atomic(CACHE, lambda path, text=text: path.write_text(text))
     for band, kind in targets:
         write_tables(band, kind, cache[f"{band},{kind}"])
