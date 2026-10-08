@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import inspect
 from collections.abc import Callable
-from functools import partial
+from functools import partial, wraps
 
 import jax.numpy as jnp
 import sax
@@ -16,12 +16,54 @@ nm = 1e-3
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
 
+
+def _optical_model(model, inputs: int, outputs: int):
+    """Normalize SAX ports without changing its process-wide naming strategy.
+
+    SAX's jitted models may already be cached with either naming convention.
+    Translate the returned keys so import order and earlier simulations cannot
+    change the ports exposed by this PDK.
+    """
+    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
+    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
+
+    @wraps(model)
+    def optical(*args, **kwargs) -> sax.SDict:
+        return {
+            (port_map.get(p, p), port_map.get(q, q)): value
+            for (p, q), value in model(*args, **kwargs).items()
+        }
+
+    return optical
+
+
+_straight_model = _optical_model(sm.straight, 1, 1)
+_mmi1x2_model = _optical_model(sm.mmi1x2, 1, 2)
+_mmi2x2_model = _optical_model(sm.mmi2x2, 2, 2)
+_grating_model = _optical_model(sm.grating_coupler, 1, 1)
+
+
+def _straight(
+    *,
+    wl: Float = 1.55,
+    length: float = 10.0,
+    loss: float = 0.0,
+    wl0: float = 1.55,
+    neff: float = 1.60,
+    ng: float = 1.95,
+) -> sax.SDict:
+    """Adapt the legacy SiN loss argument (dB/cm) to the SAX API."""
+    return _straight_model(
+        wl=wl, length=length, loss_dB_cm=loss, wl0=wl0, neff=neff, ng=ng
+    )
+
+
 ################
 # Straights
 ################
 
 straight_nc = partial(
-    sm.straight,
+    _straight,
     length=10.0,
     loss=0.0,
     wl0=1.55,
@@ -30,7 +72,7 @@ straight_nc = partial(
 )
 
 straight_no = partial(
-    sm.straight,
+    _straight,
     length=10.0,
     loss=0.0,
     wl0=1.31,
@@ -51,7 +93,7 @@ def straight(
     Args:
         wl: Wavelength of the simulation.
         length: Length of the waveguide.
-        loss: Loss of the waveguide.
+        loss: Propagation loss in dB/cm.
         cross_section: Cross section of the waveguide.
     """
     wl = jnp.asarray(wl)  # type: ignore
@@ -76,7 +118,7 @@ def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
     """Returns the S-matrix of a wire corner."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
-    return {"e1": zero, "e2": zero}  # type: ignore
+    return sax.reciprocal({("e1", "e2"): zero})
 
 
 def bend_s(
@@ -93,7 +135,7 @@ def bend_s(
     Args:
         wl: Wavelength of the simulation.
         length: Length of the bend.
-        loss: Loss of the bend.
+        loss: Propagation loss in dB/cm.
         cross_section: Cross section of the bend.
 
     """
@@ -119,7 +161,7 @@ def bend_euler(
     Args:
         wl: Wavelength of the simulation.
         length: Length of the bend.
-        loss: Loss of the bend.
+        loss: Propagation loss in dB/cm.
         cross_section: Cross section of the bend.
     """
     return straight(
@@ -154,7 +196,7 @@ def taper(
     Args:
         wl: Wavelength of the simulation.
         length: Length of the taper.
-        loss: Loss of the taper.
+        loss: Propagation loss in dB/cm.
         cross_section: Cross section of the taper.
     """
     return straight(
@@ -165,7 +207,7 @@ def taper(
     )
 
 
-taper_nc = partial(taper, cross_section="xs_no", length=10.0)
+taper_nc = partial(taper, cross_section="xs_nc", length=10.0)
 taper_no = partial(taper, cross_section="xs_no", length=10.0)
 
 
@@ -173,8 +215,8 @@ taper_no = partial(taper, cross_section="xs_no", length=10.0)
 # MMIs
 ################
 
-mmi1x2_nc = partial(sm.mmi1x2, wl0=1.55, fwhm=0.2)
-mmi1x2_no = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
+mmi1x2_nc = partial(_mmi1x2_model, wl0=1.55, fwhm=0.2)
+mmi1x2_no = partial(_mmi1x2_model, wl0=1.31, fwhm=0.2)
 
 
 def mmi1x2(
@@ -201,8 +243,8 @@ def mmi1x2(
     )
 
 
-mmi2x2_nc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-mmi2x2_no = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+mmi2x2_nc = partial(_mmi2x2_model, wl0=1.55, fwhm=0.2)
+mmi2x2_no = partial(_mmi2x2_model, wl0=1.31, fwhm=0.2)
 
 
 def mmi2x2(
@@ -246,8 +288,8 @@ def coupler_symmetric() -> sax.SDict:
     raise NotImplementedError("No model for 'coupler_symmetric'")
 
 
-coupler_nc = partial(sm.mmi2x2, wl0=1.55, fwhm=0.2)
-coupler_no = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+coupler_nc = partial(_mmi2x2_model, wl0=1.55, fwhm=0.2)
+coupler_no = partial(_mmi2x2_model, wl0=1.31, fwhm=0.2)
 
 
 def coupler(
@@ -281,11 +323,11 @@ def coupler(
 ##############################
 
 grating_coupler_rectangular_no = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+    _grating_model, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
 
 grating_coupler_rectangular_nc = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+    _grating_model, loss=6, bandwidth=35 * nm, wl=1.55, wl0=1.55
 )
 
 
@@ -309,11 +351,11 @@ def grating_coupler_rectangular(
 ##############################
 
 grating_coupler_elliptical_no = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31
+    _grating_model, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
 
 grating_coupler_elliptical_nc = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.55
+    _grating_model, loss=6, bandwidth=35 * nm, wl=1.55, wl0=1.55
 )
 
 
@@ -358,7 +400,7 @@ def heater() -> sax.SDict:
     raise NotImplementedError("No model for 'heater'")
 
 
-crossing_no = sm.crossing_ideal
+crossing_no = _optical_model(sm.crossing_ideal, 2, 2)
 
 
 ################
@@ -370,6 +412,12 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
     models = {}
     for name, func in list(globals().items()):
+        if name.startswith("_") or name in {
+            "heater",
+            "coupler_straight",
+            "coupler_symmetric",
+        }:
+            continue
         if not callable(func):
             continue
         _func = func
@@ -377,9 +425,12 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
             _func = _func.func
         try:
             sig = inspect.signature(_func)
-        except ValueError:
+        except (ValueError, TypeError):
             continue
-        if str(sig.return_annotation).lower().split(".")[-1] == "sdict":
+        if (
+            sig.return_annotation == sax.SDict
+            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
+        ):
             models[name] = func
     return models
 

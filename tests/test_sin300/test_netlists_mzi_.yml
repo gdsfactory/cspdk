@@ -175,12 +175,12 @@ instances:
     info: {}
     settings:
       cross_section: xs_nc
-      gap_mmi: 0.4
+      gap_mmi: 1.6
       length_mmi: 232
       length_taper: 50
       width: null
-      width_mmi: 12
-      width_taper: 5.5
+      width_mmi: 18
+      width_taper: 4.5
   sxb:
     component: straight
     info:
@@ -208,15 +208,15 @@ instances:
   sybr:
     component: straight
     info:
-      length: 7
-      route_info_length: 7
+      length: 6.9
+      route_info_length: 6.9
       route_info_type: xs_nc
-      route_info_weight: 7
-      route_info_xs_nc_length: 7
+      route_info_weight: 6.9
+      route_info_xs_nc_length: 6.9
       width: 1.2
     settings:
       cross_section: xs_nc
-      length: 7
+      length: 6.9
   syl:
     component: straight
     info:
@@ -244,15 +244,15 @@ instances:
   sytr:
     component: straight
     info:
-      length: 2
-      route_info_length: 2
+      length: 1.9
+      route_info_length: 1.9
       route_info_type: xs_nc
-      route_info_weight: 2
-      route_info_xs_nc_length: 2
+      route_info_weight: 1.9
+      route_info_xs_nc_length: 1.9
       width: 1.2
     settings:
       cross_section: xs_nc
-      length: 2
+      length: 1.9
 nets:
 - p1: b1,o1
   p2: cp1,o2
@@ -306,7 +306,7 @@ placements:
     mirror: false
     rotation: 270
     x: 204.8
-    y: 32.95
+    y: 33.05
   b5:
     mirror: true
     rotation: 0
@@ -326,7 +326,7 @@ placements:
     mirror: false
     rotation: 180
     x: 234.8
-    y: -2.95
+    y: -3.05
   cp1:
     mirror: false
     rotation: 0
@@ -366,7 +366,7 @@ placements:
     mirror: false
     rotation: 90
     x: 204.8
-    y: 32.95
+    y: 33.05
 ports:
   o1: cp1,o1
   o2: cp2,o2

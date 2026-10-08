@@ -157,7 +157,7 @@ def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
 
 
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
-    """Returns metal routing cross-section."""
+    """Returns a single-layer electrical routing cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
     kwargs["port_names"] = kwargs.get(
         "port_names", gf.cross_section.port_names_electrical
@@ -167,7 +167,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     )
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
-    xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
+    xs = gf.cross_section.cross_section(width=width, **kwargs)
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
         xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
@@ -297,7 +297,23 @@ def route_bundle(
     )
 
 
+# Explicit straight lengths avoid the upstream electrical router's handling of
+# None as an empty list in the installed gdsfactory/kfactory versions.
+route_single_metal = partial(
+    gf.routing.route_single_electrical,
+    cross_section="metal_routing",
+    start_straight_length=0.0,
+    end_straight_length=0.0,
+)
+route_bundle_metal = partial(
+    gf.routing.route_bundle_electrical,
+    cross_section="metal_routing",
+)
+
+
 routing_strategies = dict(
+    route_single_metal=route_single_metal,
+    route_bundle_metal=route_bundle_metal,
     route_single=route_single,
     route_single_nc=partial(
         route_single,

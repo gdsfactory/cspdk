@@ -65,7 +65,7 @@ coupler_straight_schematic = schematic(
     "coupler",
     ["coupler", "straight"],
     _2X2,
-    models=[sax_model("coupler_straight", _MODULE, ["o1", "o2", "o3", "o4"])],
+    # No calibrated model is available for this individual coupler section.
 )
 grating_coupler_rectangular_schematic = schematic(
     "grating-coupler",
