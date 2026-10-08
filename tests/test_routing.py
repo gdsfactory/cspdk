@@ -19,7 +19,8 @@ def test_sample_routing_different_widths(pdk_module: str, sample_module: str) ->
     pdk.PDK.activate()
     sample = importlib.import_module(sample_module)
     c = sample.sample_routing_different_widths()
-    # Two straights + route instances; more than 2 means tapers were inserted
-    assert len(c.insts) > 2, (
-        f"Expected tapers to be inserted, got only {len(c.insts)} instances"
+    # one taper at each end, from each straight's width to the route's width
+    tapers = [inst for inst in c.insts if inst.cell.name.startswith("taper")]
+    assert len(tapers) == 2, (
+        f"Expected 2 tapers, got {[inst.cell.name for inst in c.insts]}"
     )

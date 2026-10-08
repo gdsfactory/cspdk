@@ -224,6 +224,7 @@ def straight_heater_metal(
      o1 =========== o2
     ```
     """
+    wl = jnp.asarray(wl)  # type: ignore
     # Calculate additional phase shift due to applied voltage.
     deltaphi = (voltage / vpi) * jnp.pi
     phase = 2 * jnp.pi * neff * length / wl + deltaphi
