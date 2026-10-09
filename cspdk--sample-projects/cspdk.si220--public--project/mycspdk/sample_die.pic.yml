@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../build/schemas/sample_die.json
+instances:
+  d:
+    component: die_with_pads
+    settings: {}
+  m2:
+    component: mzi_heater
+    settings: {}
+  ring1:
+    component: ring_single
+    settings:
+      radius: 20
+  ring2:
+    component: ring_single
+    settings: {}
+connections: {}
+routes:
+  bundle5:
+    links:
+      ring1,o1: d,o1
+      ring2,o2: d,o2
+    routing_strategy: route_bundle
+    settings:
+      start_straight_length: 500
+  bundle6:
+    links:
+      d,o23: m2,o2
+      d,o24: m2,o1
+    routing_strategy: route_bundle
+    settings:
+      start_straight_length: 20
+  route1:
+    links:
+      ring1,o2: ring2,o1
+    routing_strategy: route_bundle
+    settings: {}
+nets: []
+ports:
+  o1: ring1,o1
+  o2: ring2,o2
+placements:
+  m2:
+    dx: -4382.262
+    dy: -1872.71
+    rotation: 0
+    mirror: false
+  ring1:
+    dx: 59.207
+    dy: 182.294
+    rotation: 0
+    mirror: false
+  ring2:
+    dx: 216.855
+    dy: 157.649
+    rotation: 0
+    mirror: false
+name: sample_die

@@ -1,0 +1,43 @@
+name: mzi_gratings_nc
+instances:
+  mzi:
+    component: mzi_nc
+    settings:
+      delta_length: 100
+  gc_in:
+    component: grating_coupler_rectangular_nc
+  gc_out1:
+    component: grating_coupler_rectangular_nc
+  gc_out2:
+    component: grating_coupler_rectangular_nc
+placements:
+  mzi:
+    x: 0
+    y: 0
+  gc_in:
+    x: -150
+    y: 0
+    rotation: 180
+    port: o1
+  gc_out1:
+    x: 800
+    y: -63.5
+    port: o1
+  gc_out2:
+    x: 800
+    y: 63.5
+    port: o1
+routes:
+  input:
+    links:
+      gc_in,o1: mzi,o1
+    routing_strategy: route_bundle_nc
+  outputs:
+    links:
+      mzi,o2: gc_out2,o1
+      mzi,o3: gc_out1,o1
+    routing_strategy: route_bundle_nc
+ports:
+  in: gc_in,o2
+  out1: gc_out1,o2
+  out2: gc_out2,o2

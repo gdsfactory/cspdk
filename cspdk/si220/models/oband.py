@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
 from functools import partial
 
@@ -23,7 +22,7 @@ Float = float | FloatArray
 ################
 
 # loss_dB_cm: placeholder equal to C-band until measured O-band data is available
-straight_strip = partial(
+_straight_strip = partial(
     sm.straight,
     length=10.0,
     loss_dB_cm=3.0,
@@ -32,7 +31,7 @@ straight_strip = partial(
     ng=4.34,
 )
 
-straight_rib = partial(
+_straight_rib = partial(
     sm.straight,
     length=10.0,
     loss_dB_cm=3.0,
@@ -42,7 +41,7 @@ straight_rib = partial(
 )
 
 
-def straight(
+def _straight(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
@@ -52,8 +51,8 @@ def straight(
     """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": straight_strip,
-        "rib": straight_rib,
+        "strip": _straight_strip,
+        "rib": _straight_rib,
     }
     f = fs[cross_section]
     return f(
@@ -68,14 +67,14 @@ def straight(
 ################
 
 
-def wire_corner(*, wl: Float = 1.31) -> sax.SDict:
+def _wire_corner(*, wl: Float = 1.31) -> sax.SDict:
     """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
     return {"e1": zero, "e2": zero}  # type: ignore
 
 
-def bend_s(
+def _bend_s(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
@@ -84,7 +83,7 @@ def bend_s(
 ) -> sax.SDict:
     """Bend S model."""
     # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
-    return straight(
+    return _straight(
         wl=wl,
         length=length,
         loss_dB_cm=loss_dB_cm,
@@ -92,7 +91,7 @@ def bend_s(
     )
 
 
-def bend_euler(
+def _bend_euler(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
@@ -101,7 +100,7 @@ def bend_euler(
 ) -> sax.SDict:
     """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
-    return straight(
+    return _straight(
         wl=wl,
         length=length,
         loss_dB_cm=loss_dB_cm,
@@ -109,8 +108,8 @@ def bend_euler(
     )
 
 
-bend_euler_strip = partial(bend_euler, cross_section="strip")
-bend_euler_rib = partial(bend_euler, cross_section="rib")
+_bend_euler_strip = partial(_bend_euler, cross_section="strip")
+_bend_euler_rib = partial(_bend_euler, cross_section="rib")
 
 
 ################
@@ -118,7 +117,7 @@ bend_euler_rib = partial(bend_euler, cross_section="rib")
 ################
 
 
-def taper(
+def _taper(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
@@ -128,7 +127,7 @@ def taper(
     """Taper model."""
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
     # TODO: take width1 and width2 into account.
-    return straight(
+    return _straight(
         wl=wl,
         length=length,
         loss_dB_cm=loss_dB_cm,
@@ -136,10 +135,10 @@ def taper(
     )
 
 
-taper_rib = partial(taper, cross_section="rib", length=10.0)
+_taper_rib = partial(_taper, cross_section="rib", length=10.0)
 
 
-def taper_strip_to_ridge(
+def _taper_strip_to_ridge(
     *,
     wl: Float = 1.31,
     length: float = 10.0,
@@ -149,7 +148,7 @@ def taper_strip_to_ridge(
     """Taper strip to ridge model."""
     # NOTE: it is assumed that `taper_strip_to_ridge` exposes it's length in its info dictionary!
     # TODO: take w_slab1 and w_slab2 into account.
-    return straight(
+    return _straight(
         wl=wl,
         length=length,
         loss_dB_cm=loss_dB_cm,
@@ -157,19 +156,19 @@ def taper_strip_to_ridge(
     )
 
 
-trans_rib10 = partial(taper_strip_to_ridge, length=10.0)
-trans_rib20 = partial(taper_strip_to_ridge, length=20.0)
-trans_rib50 = partial(taper_strip_to_ridge, length=50.0)
+_trans_rib10 = partial(_taper_strip_to_ridge, length=10.0)
+_trans_rib20 = partial(_taper_strip_to_ridge, length=20.0)
+_trans_rib50 = partial(_taper_strip_to_ridge, length=50.0)
 
 ################
 # MMIs
 ################
 
-mmi1x2_strip = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
-mmi1x2_rib = mmi1x2_strip
+_mmi1x2_strip = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
+_mmi1x2_rib = _mmi1x2_strip
 
 
-def mmi1x2(
+def _mmi1x2(
     wl: Float = 1.31,
     loss_dB: Float = 0.3,
     cross_section="strip",
@@ -177,8 +176,8 @@ def mmi1x2(
     """MMI 1x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi1x2_strip,
-        "rib": mmi1x2_rib,
+        "strip": _mmi1x2_strip,
+        "rib": _mmi1x2_rib,
     }
     f = fs[cross_section]
     return f(
@@ -187,11 +186,11 @@ def mmi1x2(
     )
 
 
-mmi2x2_strip = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
-mmi2x2_rib = mmi2x2_strip
+_mmi2x2_strip = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
+_mmi2x2_rib = _mmi2x2_strip
 
 
-def mmi2x2(
+def _mmi2x2(
     wl: Float = 1.31,
     loss_dB: Float = 0.3,
     cross_section="strip",
@@ -199,8 +198,8 @@ def mmi2x2(
     """MMI 2x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi2x2_strip,
-        "rib": mmi2x2_rib,
+        "strip": _mmi2x2_strip,
+        "rib": _mmi2x2_rib,
     }
     f = fs[cross_section]
     return f(
@@ -217,7 +216,7 @@ def mmi2x2(
 # waveguide models. Imported lazily: couplers imports this module.
 
 
-def directional_coupler(
+def _directional_coupler(
     *,
     wl: Float = 1.31,
     length: float | None = None,
@@ -229,7 +228,7 @@ def directional_coupler(
     """Directional coupler model (see couplers.directional_coupler)."""
     from cspdk.si220.models import couplers
 
-    return couplers.directional_coupler(
+    return couplers._directional_coupler(
         wl=wl,
         length=length,
         gap=gap,
@@ -240,12 +239,12 @@ def directional_coupler(
     )
 
 
-coupler = directional_coupler
-coupler_strip = directional_coupler
-coupler_rib = directional_coupler
+_coupler = _directional_coupler
+_coupler_strip = _directional_coupler
+_coupler_rib = _directional_coupler
 
 
-def coupler_ring_coupling_area(
+def _coupler_ring_coupling_area(
     *,
     wl: Float = 1.31,
     gap: float = 0.1,
@@ -257,7 +256,7 @@ def coupler_ring_coupling_area(
     """Ring coupler coupling-region model (see couplers.coupler_ring_coupling_area)."""
     from cspdk.si220.models import couplers
 
-    return couplers.coupler_ring_coupling_area(
+    return couplers._coupler_ring_coupling_area(
         wl=wl,
         gap=gap,
         radius=radius,
@@ -268,7 +267,7 @@ def coupler_ring_coupling_area(
     )
 
 
-def coupler_ring(
+def _coupler_ring(
     *,
     wl: Float = 1.31,
     gap: float = 0.1,
@@ -281,7 +280,7 @@ def coupler_ring(
     """Ring coupler model (see couplers.coupler_ring)."""
     from cspdk.si220.models import couplers
 
-    return couplers.coupler_ring(
+    return couplers._coupler_ring(
         wl=wl,
         gap=gap,
         radius=radius,
@@ -297,13 +296,13 @@ def coupler_ring(
 # grating couplers Rectangular
 ##############################
 
-grating_coupler_rectangular_strip = partial(
+_grating_coupler_rectangular_strip = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
-grating_coupler_rectangular_rib = grating_coupler_rectangular_strip
+_grating_coupler_rectangular_rib = _grating_coupler_rectangular_strip
 
 
-def grating_coupler_rectangular(
+def _grating_coupler_rectangular(
     wl: Float = 1.31,
     cross_section="strip",
 ) -> sax.SDict:
@@ -311,8 +310,8 @@ def grating_coupler_rectangular(
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": grating_coupler_rectangular_strip,
-        "rib": grating_coupler_rectangular_rib,
+        "strip": _grating_coupler_rectangular_strip,
+        "rib": _grating_coupler_rectangular_rib,
     }
     f = fs[cross_section]
     return f(wl=wl)  # type: ignore
@@ -322,7 +321,7 @@ def grating_coupler_rectangular(
 # grating couplers Elliptical
 ##############################
 
-grating_coupler_elliptical = partial(
+_grating_coupler_elliptical = partial(
     sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
 )
 
@@ -331,12 +330,7 @@ grating_coupler_elliptical = partial(
 ################
 
 
-def heater() -> sax.SDict:
-    """Heater model."""
-    raise NotImplementedError("No model for 'heater'")
-
-
-def straight_heater_metal(
+def _straight_heater_metal(
     wl: float = 1.31,
     neff: float = 2.52,
     voltage: float = 0,
@@ -370,8 +364,8 @@ def straight_heater_metal(
     )
 
 
-crossing_rib = sm.crossing_ideal
-crossing = sm.crossing_ideal
+_crossing_rib = sm.crossing_ideal
+_crossing = sm.crossing_ideal
 
 
 ################
@@ -380,18 +374,39 @@ crossing = sm.crossing_ideal
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
-    """Return a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except ValueError:
-            continue
-        if str(sig.return_annotation).lower().split(".")[-1] == "sdict":
-            models[name] = func
-    return models
+    """Return the O-band models keyed by model name."""
+    return {
+        "straight_strip": _straight_strip,
+        "straight_rib": _straight_rib,
+        "straight": _straight,
+        "wire_corner": _wire_corner,
+        "bend_s": _bend_s,
+        "bend_euler": _bend_euler,
+        "bend_euler_strip": _bend_euler_strip,
+        "bend_euler_rib": _bend_euler_rib,
+        "taper": _taper,
+        "taper_rib": _taper_rib,
+        "taper_strip_to_ridge": _taper_strip_to_ridge,
+        "trans_rib10": _trans_rib10,
+        "trans_rib20": _trans_rib20,
+        "trans_rib50": _trans_rib50,
+        "mmi1x2_strip": _mmi1x2_strip,
+        "mmi1x2_rib": _mmi1x2_rib,
+        "mmi1x2": _mmi1x2,
+        "mmi2x2_strip": _mmi2x2_strip,
+        "mmi2x2_rib": _mmi2x2_rib,
+        "mmi2x2": _mmi2x2,
+        "directional_coupler": _directional_coupler,
+        "coupler": _coupler,
+        "coupler_strip": _coupler_strip,
+        "coupler_rib": _coupler_rib,
+        "coupler_ring_coupling_area": _coupler_ring_coupling_area,
+        "coupler_ring": _coupler_ring,
+        "grating_coupler_rectangular_strip": _grating_coupler_rectangular_strip,
+        "grating_coupler_rectangular_rib": _grating_coupler_rectangular_rib,
+        "grating_coupler_rectangular": _grating_coupler_rectangular,
+        "grating_coupler_elliptical": _grating_coupler_elliptical,
+        "straight_heater_metal": _straight_heater_metal,
+        "crossing_rib": _crossing_rib,
+        "crossing": _crossing,
+    }

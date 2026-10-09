@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../build/schemas/lattice.json
+instances:
+  mzi1:
+    component: mzi
+    settings:
+      splitter: mmi2x2
+  mzi2:
+    component: mzi
+    settings:
+      delta_length: 100
+      splitter: mmi2x2
+connections: {}
+routes:
+  bundle:
+    links:
+      mzi1,o3: mzi2,o2
+      mzi1,o4: mzi2,o1
+    routing_strategy: route_astar
+    settings:
+      spacing: 2  # the MMI output/input pitch
+      fan_in:
+        type: manhattan
+        y_bundle: 1  # tracks at y_bundle - spacing and y_bundle: on the MMI ports at y = -1, 1
+nets: []
+ports:
+  o1: mzi1,o1
+  o2: mzi1,o2
+  o3: mzi2,o3
+  o4: mzi2,o4
+placements:
+  mzi1:
+    x: 0
+    y: 0
+  mzi2:
+    port: o1
+    x: mzi1,o4
+    y: mzi1,o4
+    dx: 100

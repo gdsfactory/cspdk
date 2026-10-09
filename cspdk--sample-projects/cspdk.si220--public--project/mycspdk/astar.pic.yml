@@ -1,0 +1,64 @@
+instances:
+  r2:
+    component: straight
+    settings: {}
+    array:
+      columns: 1
+      rows: 3
+      column_pitch: 100
+      row_pitch: 2
+  s2:
+    component: straight
+    settings: {}
+    array:
+      columns: 1
+      rows: 3
+      column_pitch: 2
+      row_pitch: 2
+  s1:
+    component: straight
+    settings:
+      length: 29
+    array:
+      columns: 1
+      rows: 3
+      column_pitch: 100
+      row_pitch: 2
+  r1:
+    component: straight
+    settings: {}
+    array:
+      columns: 1
+      rows: 3
+      column_pitch: 100
+      row_pitch: 2
+connections: {}
+routes:
+  bundle1:
+    links:
+      s2<0.0-2>,o2: r2<0.0-2>,o1
+    routing_strategy: route_astar
+    settings:
+      spacing: 2
+  bundle2:
+    links:
+      s1<0.0-2>,o2: r1<0.0-2>,o1
+    routing_strategy: route_astar
+    settings:
+      spacing: 2
+nets: []
+ports: {}
+placements:
+  s2:
+    x: 0
+    y: 0
+  r2:
+    x: 400
+    y: 50
+  s1:
+    x: 0
+    y: -60
+  r1:
+    x: 200
+    y: -100
+name: astar
