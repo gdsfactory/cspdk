@@ -1,3 +1,5 @@
+FLAVOURS = si220 si340 si500 sin200 sin300 si_sus ge_on_si
+
 install:
 	uv venv --python 3.12
 	uv sync --extra docs --extra dev
@@ -43,27 +45,21 @@ notebooks:
 	jupytext docs/**/*.py --to ipynb
 
 docs-pdf:
-	uv run python .github/write_cells_si220.py
-	uv run python .github/write_cells_si500.py
-	uv run python .github/write_cells_sin300.py
+	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
 	uv run mkdocs build -f mkdocs-pdf.yml
 
 docs:
-	uv run python .github/write_cells_si220.py
-	uv run python .github/write_cells_si500.py
-	uv run python .github/write_cells_sin300.py
+	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
 	uv run --extra docs zensical build -f docs/zensical.toml
 
 docs-serve:
-	uv run python .github/write_cells_si220.py
-	uv run python .github/write_cells_si500.py
-	uv run python .github/write_cells_sin300.py
+	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
