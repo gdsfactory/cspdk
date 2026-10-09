@@ -15,6 +15,7 @@ from gdsfactory.components.bends.bend_s import bezier_curve
 
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 from cspdk.si340 import PDK
+from cspdk.sin200 import models as sin200_models
 
 
 @pytest.fixture(autouse=True)
@@ -64,6 +65,15 @@ def test_lengths_trace_under_jit():
     assert float(sbend) == pytest.approx(float(_bend_s_length(20.0, 1.8)))
     grad = jax.grad(_euler_length)(30.0, 90.0, 0.5)
     assert np.isfinite(float(grad))
+
+
+def test_euler_length_zero_angle():
+    """A zero-angle bend has zero length, and its value and gradients stay finite."""
+    assert float(_euler_length(30.0, 0.0, 0.5)) == 0.0
+    grads = jax.grad(_euler_length, argnums=(0, 1, 2))(30.0, 0.0, 0.5)
+    assert all(np.isfinite(float(g)) for g in grads)
+    s = sin200_models.bend_euler(angle=0.0)
+    assert all(bool(jnp.all(jnp.isfinite(v))) for v in s.values())
 
 
 def test_optical_model_ports():

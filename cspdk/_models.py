@@ -60,7 +60,11 @@ def _euler_length(radius: Any, angle: Any, p: Any) -> Any:
         angle: bend angle in degrees.
         p: fraction of the bend that is an Euler curve; p -> 0 is a circular arc.
     """
-    alpha = jnp.deg2rad(jnp.abs(angle))
+    angle_rad = jnp.deg2rad(jnp.abs(angle))
+    # A zero-angle bend has zero length; evaluate the curve at a safe angle
+    # instead so neither the value nor its gradient becomes 0/0.
+    straight = angle_rad < 1e-9
+    alpha = jnp.where(straight, 1.0, angle_rad)
     p = jnp.clip(p, 1e-12, 1.0)
     sp = jnp.sqrt(p * alpha)
     rp = 1 / sp
@@ -75,7 +79,7 @@ def _euler_length(radius: Any, angle: Any, p: Any) -> Any:
     y1 = rp * (jnp.cos(p * alpha / 2) - jnp.cos(alpha / 2)) + yp
     r_eff = (x1 * jnp.cos(alpha / 2) + y1 * jnp.sin(alpha / 2)) / jnp.sin(alpha / 2)
     s0 = 2 * sp + rp * alpha * (1 - p)
-    return s0 * radius / r_eff
+    return jnp.where(straight, radius * angle_rad, s0 * radius / r_eff)
 
 
 def _bend_s_length(dx: Any, dy: Any, npoints: int = 99) -> Any:

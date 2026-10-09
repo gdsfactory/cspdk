@@ -6,13 +6,16 @@ Usage: python .github/write_cells.py <flavour>, e.g. si220 or sin300.
 import importlib
 import inspect
 import sys
+import tempfile
 import traceback
+from pathlib import Path
 
 import kwasm
 import kwasm.embed
 import matplotlib
 import matplotlib.pyplot as plt
 from gdsfactory.serialization import clean_value_json
+from gdsfactory.technology import LayerViews
 
 matplotlib.use("Agg")
 
@@ -66,8 +69,7 @@ fetch(url)
     for (let i = 0; i < bytes.length; i += 0x8000) {
       binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
     }
-    const options = { gds: btoa(binary), layers: true };
-    if (lyp !== null) options.lyp = lyp;
+    const options = { gds: btoa(binary), layers: true, lyp };
     Kwasm.mount(document.getElementById("viewer"), options);
   });
 </script></body></html>
@@ -77,16 +79,16 @@ fetch(url)
 def _setup_kwasm_viewer() -> None:
     """Write the kwasm script and this flavour's viewer page.
 
-    The page embeds the flavour's layers.lyp when it has one; otherwise kwasm
-    falls back to its default layer colours.
+    The page embeds the flavour's klayout/layers.lyp, or, for flavours without
+    one, layer properties built from its layers.yaml.
     """
     gds_dir.mkdir(parents=True, exist_ok=True)
     (kwasm_dir / kwasm_script).write_text(kwasm.embed._read_artifacts())
-    lyp = None
     if lyp_path.is_file():
         lyp = lyp_path.read_text()
     else:
-        print(f"no {lyp_path.relative_to(PATH.repo)}; viewer uses default colours")
+        with tempfile.TemporaryDirectory() as tmp:
+            lyp = LayerViews(PATH.lyp_yaml).to_lyp(Path(tmp) / "layers.lyp").read_text()
     page = VIEWER_HTML.replace("KWASM_SCRIPT", kwasm_script).replace(
         "KWASM_LYP", kwasm.embed._json_script(lyp)
     )
