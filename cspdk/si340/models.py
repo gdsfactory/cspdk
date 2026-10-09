@@ -40,15 +40,16 @@ grating data.
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
-from functools import partial, wraps
+from functools import partial
 
 import jax.numpy as jnp
 import numpy as np
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
+
+from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3
 
@@ -74,33 +75,6 @@ GRATINGS: dict[str, dict[str, float]] = {
 # Placeholders: no numeric MMI data in the standard components document.
 MMI_LOSS_DB = 0.3
 MMI_FWHM = 0.2
-
-
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -151,7 +125,7 @@ def straight(
 
 
 straight_sc = partial(straight, cross_section="xs_sc340")
-straight_so = partial(straight, cross_section="xs_so340")
+straight_so = partial(straight, cross_section="xs_so340", wl=1.31)
 straight_rc = partial(straight, cross_section="xs_rc340")
 
 
@@ -189,36 +163,8 @@ def bend_circular(
 
 
 bend_circular_sc = partial(bend_circular, cross_section="xs_sc340")
-bend_circular_so = partial(bend_circular, cross_section="xs_so340")
+bend_circular_so = partial(bend_circular, cross_section="xs_so340", wl=1.31)
 bend_circular_rc = partial(bend_circular, cross_section="xs_rc340")
-
-
-def _euler_length(radius: Float, angle: Float, p: Float) -> Float:
-    """Length of ``gf.path.euler(radius, angle, p, use_eff=True)``.
-
-    Closed form of the gdsfactory construction (Euler sections of minimum
-    radius 1, an arc in between, scaled so the end points match an arc of
-    ``radius``), written with ``jax.numpy`` so it also works on traced
-    settings inside a jitted ``sax.circuit``.
-    """
-    alpha = jnp.deg2rad(jnp.abs(angle))
-    p = jnp.clip(p, 1e-9, 1.0)
-    sp = jnp.sqrt(p * alpha)
-    rp = 1 / sp
-    s = jnp.linspace(0.0, 1.0, 257) * sp
-    xp = jnp.trapezoid(jnp.cos(s**2 / 2), s)
-    yp = jnp.trapezoid(jnp.sin(s**2 / 2), s)
-    a1, a2 = p * alpha / 2, alpha / 2
-    xh = rp * (jnp.sin(a2) - jnp.sin(a1)) + xp
-    yh = rp * (jnp.cos(a1) - jnp.cos(a2)) + yp
-    ex = xh + jnp.cos(alpha) * xh + jnp.sin(alpha) * yh
-    ey = yh + jnp.sin(alpha) * xh - jnp.cos(alpha) * yh
-    reff = jnp.where(
-        jnp.abs(jnp.rad2deg(alpha) - 180) < 1e-3,
-        ey / 2,
-        ey - jnp.tan(alpha - jnp.pi / 2) * ex,
-    )
-    return radius * (2 * sp + rp * (1 - p) * alpha) / reff
 
 
 def bend_euler(
@@ -246,17 +192,8 @@ def bend_euler(
 
 
 bend_euler_sc = partial(bend_euler, cross_section="xs_sc340")
-bend_euler_so = partial(bend_euler, cross_section="xs_so340")
+bend_euler_so = partial(bend_euler, cross_section="xs_so340", wl=1.31)
 bend_euler_rc = partial(bend_euler, cross_section="xs_rc340")
-
-
-def _bend_s_length(dx: Float, dy: Float) -> Float:
-    """Length of the cubic Bezier S-bend drawn by ``gf.components.bend_s``."""
-    t = jnp.linspace(0.0, 1.0, 1001)
-    # derivative of the Bezier with control points (0,0) (dx/2,0) (dx/2,dy) (dx,dy)
-    vx = 3 * (1 - t) ** 2 * dx / 2 + 3 * t**2 * dx / 2
-    vy = 6 * (1 - t) * t * dy
-    return jnp.trapezoid(jnp.hypot(vx, vy), t)
 
 
 def bend_s(
@@ -304,7 +241,7 @@ def taper(
 
 
 taper_sc = partial(taper, cross_section="xs_sc340", length=10.0)
-taper_so = partial(taper, cross_section="xs_so340", length=10.0)
+taper_so = partial(taper, cross_section="xs_so340", length=10.0, wl=1.31)
 taper_rc = partial(taper, cross_section="xs_rc340", length=10.0)
 
 
@@ -339,7 +276,9 @@ def taper_rib_to_strip(
 ################
 
 mmi1x2_sc = partial(_mmi1x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
-mmi1x2_so = partial(_mmi1x2_model, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
+mmi1x2_so = partial(
+    _mmi1x2_model, wl=1.31, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB
+)
 mmi1x2_rc = partial(_mmi1x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
 
 
@@ -360,7 +299,9 @@ def mmi1x2(
 
 
 mmi2x2_sc = partial(_mmi2x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
-mmi2x2_so = partial(_mmi2x2_model, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
+mmi2x2_so = partial(
+    _mmi2x2_model, wl=1.31, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB
+)
 mmi2x2_rc = partial(_mmi2x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
 
 
@@ -385,7 +326,9 @@ def mmi2x2(
 ##############################
 
 coupler_sc = partial(_mmi2x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
-coupler_so = partial(_mmi2x2_model, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
+coupler_so = partial(
+    _mmi2x2_model, wl=1.31, wl0=1.31, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB
+)
 coupler_rc = partial(_mmi2x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
 
 
@@ -458,25 +401,7 @@ def grating_coupler_elliptical(
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if name.startswith("_"):
-            continue
-        if not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except (ValueError, TypeError):
-            continue
-        if (
-            sig.return_annotation == sax.SDict
-            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
-        ):
-            models[name] = func
-    return models
+    return _sdict_models(globals())
 
 
 if __name__ == "__main__":

@@ -3,12 +3,12 @@
 Usage: python .github/write_cells.py <flavour>, e.g. si220 or sin300.
 """
 
-import base64
 import importlib
 import inspect
 import sys
 import traceback
 
+import kwasm
 import kwasm.embed
 import matplotlib
 import matplotlib.pyplot as plt
@@ -39,25 +39,58 @@ filepath = PATH.repo / "docs" / f"cells_{flavour}.md"
 kwasm_dir = PATH.repo / "docs" / "kwasm"
 # One folder per flavour: cell names repeat across flavours.
 gds_dir = kwasm_dir / "gds" / flavour
+# One viewer page per flavour, embedding that flavour's KLayout layer
+# properties; all pages share one copy of the kwasm script.
+viewer_name = f"viewer_{flavour}.html"
+kwasm_script = f"kwasm-{kwasm.__version__}.js"
+lyp_path = PATH.module / "klayout" / "layers.lyp"
+
+# Host page: fetch the GDS named by ?url=, then mount kwasm with the layer
+# properties (the same options kwasm.embed builds for a single component).
+VIEWER_HTML = """<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>kwasm</title><style>html,body,#viewer{height:100%;margin:0}</style>
+</head><body><div id="viewer"></div>
+<script src="KWASM_SCRIPT"></script>
+<script>
+const lyp = KWASM_LYP;
+const url = new URLSearchParams(location.search).get("url");
+fetch(url)
+  .then((response) => {
+    if (!response.ok) throw new Error(url + ": HTTP " + response.status);
+    return response.arrayBuffer();
+  })
+  .then((buffer) => {
+    const bytes = new Uint8Array(buffer);
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    }
+    const options = { gds: btoa(binary), layers: true };
+    if (lyp !== null) options.lyp = lyp;
+    Kwasm.mount(document.getElementById("viewer"), options);
+  });
+</script></body></html>
+"""
 
 
 def _setup_kwasm_viewer() -> None:
+    """Write the kwasm script and this flavour's viewer page.
+
+    The page embeds the flavour's layers.lyp when it has one; otherwise kwasm
+    falls back to its default layer colours.
+    """
     gds_dir.mkdir(parents=True, exist_ok=True)
-    viewer_path = kwasm_dir / "viewer.html"
-    if viewer_path.exists():
-        return
-    lyp_path = getattr(PATH, "lyp", None)
-    lyp_b64 = ""
-    if lyp_path is not None and lyp_path.exists():
-        lyp_b64 = base64.b64encode(lyp_path.read_bytes()).decode("ascii")
-    template = (
-        kwasm.embed._read_artifacts()
-        .replace("KWASM_GDS_B64", "")
-        .replace("KWASM_LYP_B64", lyp_b64)
-        .replace("KWASM_LYRDB_B64", "")
-        .replace("KWASM_NETLIST_B64", "")
+    (kwasm_dir / kwasm_script).write_text(kwasm.embed._read_artifacts())
+    lyp = None
+    if lyp_path.is_file():
+        lyp = lyp_path.read_text()
+    else:
+        print(f"no {lyp_path.relative_to(PATH.repo)}; viewer uses default colours")
+    page = VIEWER_HTML.replace("KWASM_SCRIPT", kwasm_script).replace(
+        "KWASM_LYP", kwasm.embed._json_script(lyp)
     )
-    viewer_path.write_text(template)
+    (kwasm_dir / viewer_name).write_text(page)
 
 
 def _simple_defaults(name: str) -> dict:
@@ -102,7 +135,7 @@ with open(filepath, "w") as f:
             f.write(f"    ![{name}](kwasm/gds/{flavour}/{name}.png)\n\n")
             f.write('=== "Dynamic"\n\n')
             f.write(
-                f'    <iframe src="kwasm/viewer.html?url=gds/{flavour}/{name}.gds"'
+                f'    <iframe src="kwasm/{viewer_name}?url=gds/{flavour}/{name}.gds"'
                 f' loading="lazy" width="100%" height="400"'
                 f' style="border:none"></iframe>\n\n'
             )

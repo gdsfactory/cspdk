@@ -61,9 +61,10 @@ def get_layer_stack(
     thickness_wg: float = 500 * nm,
     thickness_slab: float = 200 * nm,
     thickness_grating: float = 340 * nm,
-    zmin_heater: float = 1.1,
+    thickness_clad: float = 2.0,
+    zmin_heater: float | None = None,
     thickness_heater: float = 150 * nm,
-    zmin_metal: float = 1.1,
+    zmin_metal: float | None = None,
     thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
@@ -73,19 +74,27 @@ def get_layer_stack(
     300 nm) defines the rib, leaving a 200 nm slab; Silicon Etch 1 (GDS
     layer 6, 160 nm) defines the grating teeth, leaving 340 nm of silicon.
 
-    The heater and metal heights are not given in the design guidelines and
-    are placeholders (heater sits on the 2 um top cladding).
+    The heater filaments (GDS layer 39) and contact pads (GDS layer 41) sit
+    on top of the 2 um top cladding, so both start 2.5 um above the BOX. The
+    heater and pad thicknesses and materials are not given in the design
+    guidelines and are placeholders.
 
     Args:
         thickness_wg: waveguide thickness in um.
         thickness_slab: slab thickness in um (500 nm - 300 nm rib etch).
         thickness_grating: residual Si thickness under the grating etch in um
             (500 nm - 160 nm grating etch).
-        zmin_heater: TiN heater bottom in um.
+        thickness_clad: top cladding thickness above the waveguide in um.
+        zmin_heater: TiN heater bottom in um; defaults to the cladding top
+            (thickness_wg + thickness_clad).
         thickness_heater: TiN thickness.
-        zmin_metal: metal bottom in um.
-        thickness_metal: metal thickness.
+        zmin_metal: contact pad bottom in um; defaults to zmin_heater.
+        thickness_metal: contact pad thickness.
     """
+    if zmin_heater is None:
+        zmin_heater = thickness_wg + thickness_clad
+    if zmin_metal is None:
+        zmin_metal = zmin_heater
     return LayerStack(
         layers=dict(
             core=LayerLevel(
@@ -127,7 +136,7 @@ def get_layer_stack(
             metal=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
-                zmin=zmin_metal + thickness_metal,
+                zmin=zmin_metal,
                 material="Al",
                 info={"mesh_order": 2},
             ),

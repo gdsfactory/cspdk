@@ -387,3 +387,25 @@ def test_tech_bands_match_models():
     for band, _, _ in BANDS:
         xs = f"xs_{band}"
         assert models.BANDS[xs].radius == getattr(tech.Tech, f"radius_{band}")
+
+
+@pytest.mark.parametrize(("band", "_wavelength", "wl0"), BANDS)
+@pytest.mark.parametrize(
+    ("cell", "kwargs"),
+    [
+        ("bend_euler", {}),
+        ("bend_euler", {"angle": 180, "p": 0.3}),
+        ("bend_euler", {"radius": 120, "p": 1.0}),
+        ("bend_s", {}),
+        ("bend_s", {"size": (40.0, 8.0)}),
+    ],
+)
+def test_bend_model_length_matches_cell(band, _wavelength, wl0, cell, kwargs):
+    """Bend models use the drawn cell's path length to within 1 nm."""
+    xs = f"xs_{band}"
+    length = getattr(cells, cell)(cross_section=xs, **kwargs).info["length"]
+    model = PDK.models[cell](wl=wl0, cross_section=xs, **kwargs)["o1", "o2"]
+    reference = models.straight(wl=wl0, length=length, cross_section=xs)["o1", "o2"]
+    # phase per um of length at wl0 is 2 pi neff / wl0
+    max_phase = 2 * np.pi * models.BANDS[xs].neff * 1e-3 / wl0
+    assert abs(np.angle(model / reference)) <= max_phase

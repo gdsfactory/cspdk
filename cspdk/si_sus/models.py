@@ -14,13 +14,13 @@ placeholder (6 dB peak loss, 150nm 3-dB bandwidth at 3.8um).
 from __future__ import annotations
 
 from collections.abc import Callable
-from functools import wraps
 
 import jax.numpy as jnp
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._models import _euler_length, _optical_model
 from cspdk.si_sus.tech import TECH
 
 FloatArray = NDArray[jnp.floating]
@@ -33,33 +33,6 @@ NG = 3.7328
 LOSS_DB_CM = 5.0
 GRATING_LOSS_DB = 6.0
 GRATING_BANDWIDTH = 0.15
-
-
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -135,34 +108,6 @@ def bend_circular(
     radius = TECH.radius_sus if radius is None else radius
     length = jnp.abs(jnp.deg2rad(angle)) * radius
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
-
-
-def _euler_length(radius: Float, angle: Float, p: Float) -> Float:
-    """Length of ``gf.path.euler(radius, angle, p, use_eff=True)``.
-
-    Closed form of the gdsfactory construction (Euler sections of minimum
-    radius 1, an arc in between, scaled so the end points match an arc of
-    ``radius``), written with ``jax.numpy`` so it also works on traced
-    settings inside a jitted ``sax.circuit``.
-    """
-    alpha = jnp.deg2rad(jnp.abs(angle))
-    p = jnp.clip(p, 1e-9, 1.0)
-    sp = jnp.sqrt(p * alpha)
-    rp = 1 / sp
-    s = jnp.linspace(0.0, 1.0, 257) * sp
-    xp = jnp.trapezoid(jnp.cos(s**2 / 2), s)
-    yp = jnp.trapezoid(jnp.sin(s**2 / 2), s)
-    a1, a2 = p * alpha / 2, alpha / 2
-    xh = rp * (jnp.sin(a2) - jnp.sin(a1)) + xp
-    yh = rp * (jnp.cos(a1) - jnp.cos(a2)) + yp
-    ex = xh + jnp.cos(alpha) * xh + jnp.sin(alpha) * yh
-    ey = yh + jnp.sin(alpha) * xh - jnp.cos(alpha) * yh
-    reff = jnp.where(
-        jnp.abs(jnp.rad2deg(alpha) - 180) < 1e-3,
-        ey / 2,
-        ey - jnp.tan(alpha - jnp.pi / 2) * ex,
-    )
-    return radius * (2 * sp + rp * (1 - p) * alpha) / reff
 
 
 def bend_euler(

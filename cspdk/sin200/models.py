@@ -21,15 +21,16 @@ published for 638 nm or 520 nm, so the same bound is used there.
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
-from functools import partial, wraps
+from functools import partial
 from typing import NamedTuple
 
 import jax.numpy as jnp
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
+
+from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3
 
@@ -65,33 +66,6 @@ def _band(cross_section: str) -> Band:
             f"expected one of {sorted(BANDS)}."
         )
         raise ValueError(msg) from None
-
-
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -132,8 +106,8 @@ def straight(
 
 
 straight_n780 = partial(straight, cross_section="xs_n780")
-straight_n638 = partial(straight, cross_section="xs_n638")
-straight_n520 = partial(straight, cross_section="xs_n520")
+straight_n638 = partial(straight, cross_section="xs_n638", wl=0.638)
+straight_n520 = partial(straight, cross_section="xs_n520", wl=0.52)
 
 
 ################
@@ -152,33 +126,36 @@ def bend_euler(
     wl: Float = 0.78,
     radius: float | None = None,
     angle: float = 90.0,
+    p: float = 0.5,
     length: float | None = None,
     loss: float | None = None,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of an euler bend, modelled as a straight.
 
-    Layout netlists pass ``radius`` and ``angle`` but not the path length, so
-    the length defaults to the circular-arc length ``radius * angle``, which
-    underestimates the euler path by a few percent. Pass ``length`` to override.
+    Layout netlists pass ``radius``, ``angle`` and ``p`` but not the path
+    length, so the length defaults to that of the drawn euler bend
+    (``gf.path.euler(radius, angle, p, use_eff=True)``). Pass ``length`` to
+    override.
 
     Args:
         wl: wavelength in um.
-        radius: bend radius in um (defaults to the band radius).
+        radius: effective bend radius in um (defaults to the band radius).
         angle: bend angle in degrees.
-        length: path length in um (overrides radius and angle).
+        p: fraction of the bend that is an euler curve.
+        length: path length in um (overrides radius, angle and p).
         loss: propagation loss in dB/cm (defaults to the band value).
         cross_section: band cross-section name.
     """
     if length is None:
         r = _band(cross_section).radius if radius is None else radius
-        length = r * jnp.deg2rad(jnp.abs(angle))
+        length = _euler_length(r, angle, p)
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
 bend_euler_n780 = partial(bend_euler, cross_section="xs_n780")
-bend_euler_n638 = partial(bend_euler, cross_section="xs_n638")
-bend_euler_n520 = partial(bend_euler, cross_section="xs_n520")
+bend_euler_n638 = partial(bend_euler, cross_section="xs_n638", wl=0.638)
+bend_euler_n520 = partial(bend_euler, cross_section="xs_n520", wl=0.52)
 
 
 def bend_s(
@@ -193,14 +170,14 @@ def bend_s(
 
     Args:
         wl: wavelength in um.
-        size: S-bend (dx, dy) in um; the chord ``hypot(dx, dy)`` is the
-            default path length (a slight underestimate).
+        size: S-bend (dx, dy) in um; the default path length is that of the
+            drawn Bezier S-bend.
         length: path length in um (overrides size).
         loss: propagation loss in dB/cm (defaults to the band value).
         cross_section: band cross-section name.
     """
     if length is None:
-        length = jnp.hypot(size[0], size[1])
+        length = _bend_s_length(size[0], size[1])
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
@@ -228,8 +205,8 @@ def taper(
 
 
 taper_n780 = partial(taper, cross_section="xs_n780")
-taper_n638 = partial(taper, cross_section="xs_n638")
-taper_n520 = partial(taper, cross_section="xs_n520")
+taper_n638 = partial(taper, cross_section="xs_n638", wl=0.638)
+taper_n520 = partial(taper, cross_section="xs_n520", wl=0.52)
 
 
 ################
@@ -261,8 +238,8 @@ def mmi1x2(
 
 
 mmi1x2_n780 = partial(mmi1x2, cross_section="xs_n780")
-mmi1x2_n638 = partial(mmi1x2, cross_section="xs_n638")
-mmi1x2_n520 = partial(mmi1x2, cross_section="xs_n520")
+mmi1x2_n638 = partial(mmi1x2, cross_section="xs_n638", wl=0.638)
+mmi1x2_n520 = partial(mmi1x2, cross_section="xs_n520", wl=0.52)
 
 
 def mmi2x2(
@@ -289,8 +266,8 @@ def mmi2x2(
 
 
 mmi2x2_n780 = partial(mmi2x2, cross_section="xs_n780")
-mmi2x2_n638 = partial(mmi2x2, cross_section="xs_n638")
-mmi2x2_n520 = partial(mmi2x2, cross_section="xs_n520")
+mmi2x2_n638 = partial(mmi2x2, cross_section="xs_n638", wl=0.638)
+mmi2x2_n520 = partial(mmi2x2, cross_section="xs_n520", wl=0.52)
 
 
 ##############################
@@ -321,8 +298,8 @@ def coupler(
 
 
 coupler_n780 = partial(coupler, cross_section="xs_n780")
-coupler_n638 = partial(coupler, cross_section="xs_n638")
-coupler_n520 = partial(coupler, cross_section="xs_n520")
+coupler_n638 = partial(coupler, cross_section="xs_n638", wl=0.638)
+coupler_n520 = partial(coupler, cross_section="xs_n520", wl=0.52)
 
 
 ##############################
@@ -361,10 +338,10 @@ grating_coupler_rectangular_n780 = partial(
     grating_coupler_rectangular, cross_section="xs_n780"
 )
 grating_coupler_rectangular_n638 = partial(
-    grating_coupler_rectangular, cross_section="xs_n638"
+    grating_coupler_rectangular, cross_section="xs_n638", wl=0.638
 )
 grating_coupler_rectangular_n520 = partial(
-    grating_coupler_rectangular, cross_section="xs_n520"
+    grating_coupler_rectangular, cross_section="xs_n520", wl=0.52
 )
 
 
@@ -395,10 +372,10 @@ grating_coupler_elliptical_n780 = partial(
     grating_coupler_elliptical, cross_section="xs_n780"
 )
 grating_coupler_elliptical_n638 = partial(
-    grating_coupler_elliptical, cross_section="xs_n638"
+    grating_coupler_elliptical, cross_section="xs_n638", wl=0.638
 )
 grating_coupler_elliptical_n520 = partial(
-    grating_coupler_elliptical, cross_section="xs_n520"
+    grating_coupler_elliptical, cross_section="xs_n520", wl=0.52
 )
 
 
@@ -409,23 +386,7 @@ grating_coupler_elliptical_n520 = partial(
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if name.startswith("_") or not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except (ValueError, TypeError):
-            continue
-        if (
-            sig.return_annotation == sax.SDict
-            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
-        ):
-            models[name] = func
-    return models
+    return _sdict_models(globals())
 
 
 if __name__ == "__main__":

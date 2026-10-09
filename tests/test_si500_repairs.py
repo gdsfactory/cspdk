@@ -146,15 +146,72 @@ def test_registered_models_evaluate(name, wl):
 
 
 def test_model_registry():
-    """Band aliases are registered; O-band has waveguide models only."""
+    """Band aliases are registered; O-band components are dispatcher-only."""
     for prefix in ("straight", "taper", "bend_euler", "bend_circular"):
         for band in ("rc", "ro"):
             assert PDK.models[f"{prefix}_{band}"] is getattr(models, f"{prefix}_{band}")
     for prefix in ("mmi1x2", "mmi2x2", "coupler", "grating_coupler_rectangular"):
         assert f"{prefix}_rc" in PDK.models
         assert f"{prefix}_ro" not in PDK.models
-        with pytest.raises(ValueError, match="C-band"):
-            getattr(models, prefix)(wl=1.31, cross_section="xs_ro500")
+        with pytest.raises(ValueError, match="xs_unknown"):
+            getattr(models, prefix)(wl=1.31, cross_section="xs_unknown")
+
+
+@pytest.mark.parametrize(
+    ("name", "port"),
+    [
+        ("mmi1x2", "o2"),
+        ("mmi2x2", "o3"),
+        ("coupler", "o3"),
+        ("grating_coupler_rectangular", "o2"),
+        ("grating_coupler_elliptical", "o2"),
+    ],
+)
+def test_o_band_placeholders(name, port):
+    """xs_ro500 components are the C-band placeholders shifted to 1.31 um."""
+    model = getattr(models, name)
+    o_band = model(wl=1.31, cross_section="xs_ro500")["o1", port]
+    c_band = model(wl=1.55, cross_section="xs_rc500")["o1", port]
+    if name.startswith("grating"):
+        # the C-band grating peaks at 1.56 um, the O-band placeholder at 1.31 um
+        c_band = model(wl=models.GRATING_WL0)["o1", port]
+    np.testing.assert_allclose(np.abs(o_band), np.abs(c_band), atol=1e-12)
+
+
+def test_mzi_ro_simulates():
+    """The O-band MZI layout netlist simulates with the placeholder models."""
+    wl = jnp.linspace(1.28, 1.34, 121)
+    component = cells.mzi_ro(delta_length=100)
+    circuit, _ = sax.circuit(component.get_netlist(), models=PDK.models)
+    result = jax.block_until_ready(jax.jit(circuit)(wl=wl))
+    assert {p for pair in result for p in pair} == {p.name for p in component.ports}
+    cross = np.abs(np.asarray(result["o1", "o3"])) ** 2
+    power = cross + np.abs(np.asarray(result["o1", "o2"])) ** 2
+    assert np.all(np.isfinite(power))
+    assert np.all((power > 0.5) & (power <= 1.0))
+    assert np.ptp(cross) > 0.3
+
+
+@pytest.mark.parametrize(
+    ("cross_section", "width"), [("xs_rc500", 0.45), ("xs_ro500", 0.40)]
+)
+def test_taper_width_follows_cross_section(cross_section, width):
+    """The WG layer-transition taper starts at the cross-section width."""
+    component = cells.taper(cross_section=cross_section)
+    assert component.info["width1"] == pytest.approx(width)
+    assert component.ports["o1"].width == pytest.approx(width)
+
+
+def test_layer_stack_heights():
+    """Heater and pads sit on the 2 um top cladding over the 500 nm core."""
+    levels = LAYER_STACK.layers
+    assert levels["core"].zmin == 0
+    assert levels["core"].thickness == pytest.approx(0.5)
+    assert levels["heater"].zmin == pytest.approx(2.5)
+    assert levels["metal"].zmin == levels["heater"].zmin
+    custom = tech.get_layer_stack(zmin_heater=3.0, zmin_metal=3.2).layers
+    assert custom["heater"].zmin == 3.0
+    assert custom["metal"].zmin == 3.2
 
 
 @pytest.mark.parametrize("band,wl0,neff", [("rc", 1.55, 2.990), ("ro", 1.31, 3.099)])

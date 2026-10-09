@@ -157,6 +157,18 @@ def _get_cross_section(
     return gf.get_cross_section(cross_section, **({"width": width} if width else {}))
 
 
+def _core_cross_section(
+    cross_section: CrossSectionSpec, width: float | None = None
+) -> gf.CrossSection:
+    """Return the cross-section without its along-path etch slots.
+
+    The cells here draw their own slots, so building the base component with
+    the xs_sus slot container would only create slot cells to throw away.
+    """
+    x = _get_cross_section(cross_section, width)
+    return x.model_copy(update={"components_along_path": ()})
+
+
 ################
 # Waveguides
 ################
@@ -181,7 +193,9 @@ def straight(
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    base = gf.c.straight(length=length, cross_section=cross_section, **kwargs)
+    base = gf.c.straight(
+        length=length, cross_section=_core_cross_section(cross_section), **kwargs
+    )
     edge = np.full(2, base.info["width"] / 2)
     xs = np.array([0.0, length])
     return _replace_slots(base, _vertical_slots(length, edge, -edge, xs))
@@ -218,7 +232,7 @@ def bend_s(
     path = gf.Path(np.column_stack(center_line(201)))
     path.start_angle = path.end_angle = 0
     # extrude the core only; the slots are drawn below
-    c = gf.path.extrude(path, x.model_copy(update={"components_along_path": ()}))
+    c = gf.path.extrude(path, _core_cross_section(x))
 
     # core edges: offset the center line along its normal, then sample at x
     xs, ys = center_line(max(int(np.ceil(dx / _SAMPLE_STEP)), 2) + 1)
@@ -276,7 +290,7 @@ def bend_euler(
         npoints=None,
         layer=None,
         width=width,
-        cross_section=cross_section,
+        cross_section=_core_cross_section(cross_section),
         allow_min_radius_violation=False,
     )
     x = _get_cross_section(cross_section, width)
@@ -314,7 +328,7 @@ def bend_circular(
         radius=radius,
         angle=angle,
         width=width,
-        cross_section=cross_section,
+        cross_section=_core_cross_section(cross_section),
         allow_min_radius_violation=False,
     )
     radius = base.info["radius"]
@@ -349,7 +363,7 @@ def taper(
         width1=width1,
         width2=width2,
         port=port,
-        cross_section=cross_section,
+        cross_section=_core_cross_section(cross_section),
     )
     w1, w2 = base.info["width1"], base.info["width2"]
     if max(w1, w2) > TECH.max_suspended_width:

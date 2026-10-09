@@ -27,15 +27,14 @@ Lengths are computed with jnp so settings can be traced under ``jax.jit``.
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
-from functools import partial, wraps
 
 import jax.numpy as jnp
-import numpy as np
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
+
+from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
@@ -47,72 +46,7 @@ LOSS_DB_CM = 5.0
 RADIUS = 300.0  # xs_rib default radius (foundry bend centre-line radius)
 
 
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
-
-
 _straight_model = _optical_model(sm.straight, 1, 1)
-
-
-_GL_NODES, _GL_WEIGHTS = np.polynomial.legendre.leggauss(32)
-
-
-def _euler_length(radius: Float, angle: Float, p: Float) -> Float:
-    """Centre-line length of the PDK euler bend (``with_arc_floorplan=True``).
-
-    Closed form of ``gf.path.euler(radius, angle, p, use_eff=True).length()``:
-    the unit clothoid/arc/clothoid curve has length ``s0`` and is scaled so its
-    endpoints match an arc of ``radius``. Uses jnp so circuit settings can be
-    traced under ``jax.jit``.
-    """
-    alpha = jnp.deg2rad(jnp.abs(angle))
-    p = jnp.clip(p, 1e-12, 1.0)  # p -> 0 is the circular-arc limit
-    sp = jnp.sqrt(p * alpha)
-    rp = 1 / sp
-    # Clothoid end point: sqrt(2) * int_0^u (cos t^2, sin t^2) dt, u = sp/sqrt(2).
-    u = sp / np.sqrt(2)
-    t = u * (_GL_NODES + 1) / 2
-    w = u * _GL_WEIGHTS / 2
-    xp = np.sqrt(2) * jnp.sum(w * jnp.cos(t**2))
-    yp = np.sqrt(2) * jnp.sum(w * jnp.sin(t**2))
-    # Midpoint of the symmetric curve (end of the half arc at alpha/2).
-    x1 = rp * (jnp.sin(alpha / 2) - jnp.sin(p * alpha / 2)) + xp
-    y1 = rp * (jnp.cos(p * alpha / 2) - jnp.cos(alpha / 2)) + yp
-    r_eff = (x1 * jnp.cos(alpha / 2) + y1 * jnp.sin(alpha / 2)) / jnp.sin(alpha / 2)
-    s0 = 2 * sp + rp * alpha * (1 - p)
-    return s0 * radius / r_eff
-
-
-def _bend_s_length(dx: Float, dy: Float, npoints: int = 99) -> Float:
-    """Centre-line length of gdsfactory's bend_s (99-point cubic Bezier polyline)."""
-    t = np.linspace(0, 1, npoints)
-    # Control points (0, 0), (dx/2, 0), (dx/2, dy), (dx, dy).
-    x = (3 * (1 - t) ** 2 * t + 3 * (1 - t) * t**2) * dx / 2 + t**3 * dx
-    y = (3 * (1 - t) * t**2 + t**3) * dy
-    return jnp.sum(jnp.hypot(jnp.diff(x), jnp.diff(y)))
 
 
 ################
@@ -246,23 +180,7 @@ def taper(
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if name.startswith("_") or not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except (ValueError, TypeError):
-            continue
-        if (
-            sig.return_annotation == sax.SDict
-            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
-        ):
-            models[name] = func
-    return models
+    return _sdict_models(globals())
 
 
 if __name__ == "__main__":

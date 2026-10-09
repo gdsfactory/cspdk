@@ -19,6 +19,7 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk._cells import _grating_coupler_rectangular
 from cspdk.si340._schematic import (
     bend_circular_schematic,
     bend_euler_schematic,
@@ -181,7 +182,7 @@ bend_circular_rc = partial(bend_circular, cross_section="xs_rc340")
 @gf.cell(tags=["cells"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
-    width1: float = Tech.width_sc,
+    width1: float | None = None,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sc340",
@@ -192,11 +193,13 @@ def taper(
 
     Args:
         length: the length of the taper.
-        width1: the input width of the taper.
+        width1: the input width of the taper (defaults to the cross-section width).
         width2: the output width of the taper (if not given, use port).
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    if width1 is None:
+        width1 = gf.get_cross_section(cross_section).width
     return gf.c.taper(
         length=length,
         width1=width1,
@@ -477,44 +480,19 @@ def grating_coupler_rectangular(
         wavelength: the center wavelength for which the grating is designed.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    xs = gf.get_cross_section(cross_section)
-    w0, w1 = xs.width / 2, width_grating / 2
-    x1 = length_taper
-    x2 = length_taper + length_grating
-    c = gf.Component()
-    c.add_polygon(
-        [(0, -w0), (x1, -w1), (x2, -w1), (x2, w1), (x1, w1), (0, w0)], layer=xs.layer
+    return _grating_coupler_rectangular(
+        period=period,
+        n_periods=n_periods,
+        fill_factor=fill_factor,
+        length_taper=length_taper,
+        width_grating=width_grating,
+        length_grating=length_grating,
+        grating_offset=grating_offset,
+        teeth_overhang=teeth_overhang,
+        wavelength=wavelength,
+        cross_section=cross_section,
+        layer_grating=LAYER.GRA,
     )
-    tooth = gf.snap.snap_to_grid(period * fill_factor)
-    y = width_grating / 2 + teeth_overhang
-    x0 = length_taper + grating_offset
-    for i in range(n_periods):
-        xmin = gf.snap.snap_to_grid(x0 + i * period)
-        c.add_polygon(
-            [(xmin, -y), (xmin + tooth, -y), (xmin + tooth, y), (xmin, y)],
-            layer=LAYER.GRA,
-        )
-    xs.add_bbox(c)
-    c.add_port(
-        name="o1",
-        center=(0, 0),
-        width=xs.width,
-        orientation=180,
-        layer=xs.layer,
-        cross_section=xs,
-    )
-    c.add_port(
-        name="o2",
-        port_type="vertical_te",
-        center=(gf.snap.snap_to_grid(x0 + ((n_periods - 1) * period + tooth) / 2), 0),
-        orientation=0,
-        width=width_grating,
-        layer=LAYER.GRA,
-    )
-    c.info["polarization"] = "te"
-    c.info["wavelength"] = wavelength
-    c.info["fiber_angle"] = 10.0
-    return c
 
 
 # dimensions from the Cornerstone SOI 340nm standard components reference GDS

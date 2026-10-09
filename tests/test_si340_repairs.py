@@ -288,3 +288,17 @@ assert {p for pair in result for p in pair} == {'o1', 'o2', 'o3'}
 assert np.ptp(np.abs(result['o1', 'o3']) ** 2) > 0.3
 """
     subprocess.run([sys.executable, "-c", script], check=True, timeout=120)
+
+
+@pytest.mark.parametrize(
+    ("cross_section", "width"),
+    [("xs_sc340", 0.45), ("xs_so340", 0.40), ("xs_rc340", 0.8)],
+)
+def test_taper_width_follows_cross_section(cross_section, width):
+    """The WG layer-transition taper starts at the cross-section width."""
+    component = cells.taper(cross_section=cross_section)
+    assert component.info["width1"] == pytest.approx(width)
+    assert component.ports["o1"].width == pytest.approx(width)
+    assert cells.taper(width1=1.0, cross_section=cross_section).info[
+        "width1"
+    ] == pytest.approx(1.0)

@@ -35,23 +35,29 @@ Component data (42nd-call standard components)
 
 O-band (``xs_ro500``)
 =====================
-The 500 nm platform is 1550 nm only. Only the waveguide models (straight,
-bends, taper) support ``xs_ro500``; MMI, coupler and grating models raise
-``ValueError`` because the ``_ro`` cells are C-band geometries with no O-band
-foundry data.
+The 500 nm platform is 1550 nm only: there is no O-band foundry data, and
+whether the platform supports the O-band is an open question for
+Cornerstone. The waveguide models (straight, bends, taper) use the
+mode-solved ``xs_ro500`` indices above. The MMI, coupler and grating models
+return O-band placeholders for ``xs_ro500`` so that the ``_ro`` layouts
+(e.g. ``mzi_ro``) simulate: the same generic SAX responses and placeholder
+losses as the C-band models (0.3 dB excess loss and 0.2 um FWHM for MMIs and
+couplers; 5.5 dB loss and 52 nm FWHM for gratings), centred at 1.31 um. They
+have no foundry basis.
 """
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
-from functools import partial, wraps
+from functools import partial
 
 import jax.numpy as jnp
 import numpy as np
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
+
+from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3
 
@@ -75,32 +81,10 @@ GRATING_BANDWIDTH = 30 * nm / _ONE_DB_PER_FWHM
 MMI_LOSS_DB = 0.3
 MMI_FWHM = 0.2
 
-
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
+# Centre wavelengths of the MMI, coupler and grating models per cross-section.
+# The xs_ro500 entries are O-band placeholders (see module docstring).
+MMI_WL0: dict[str, float] = {"xs_rc500": 1.55, "xs_ro500": 1.31}
+GRATING_WL0S: dict[str, float] = {"xs_rc500": GRATING_WL0, "xs_ro500": 1.31}
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -109,22 +93,18 @@ _mmi2x2_model = _optical_model(sm.mmi2x2, 2, 2)
 _grating_model = _optical_model(sm.grating_coupler, 1, 1)
 
 
-def _waveguide(cross_section: str) -> dict[str, float]:
+def _lookup(table: dict, cross_section: str):
     try:
-        return WAVEGUIDES[cross_section]
+        return table[cross_section]
     except KeyError:
         raise ValueError(
-            f"No waveguide model for cross_section={cross_section!r}; "
-            f"expected one of {sorted(WAVEGUIDES)}."
+            f"No model for cross_section={cross_section!r}; "
+            f"expected one of {sorted(table)}."
         ) from None
 
 
-def _c_band_only(cross_section: str, component: str) -> None:
-    if cross_section != "xs_rc500":
-        raise ValueError(
-            f"No {component} model for cross_section={cross_section!r}: the "
-            "500 nm SOI platform only has C-band (xs_rc500) foundry components."
-        )
+def _waveguide(cross_section: str) -> dict[str, float]:
+    return _lookup(WAVEGUIDES, cross_section)
 
 
 ################
@@ -159,7 +139,7 @@ def straight(
 
 
 straight_rc = partial(straight, cross_section="xs_rc500")
-straight_ro = partial(straight, cross_section="xs_ro500")
+straight_ro = partial(straight, cross_section="xs_ro500", wl=1.31)
 
 
 ################
@@ -196,35 +176,7 @@ def bend_circular(
 
 
 bend_circular_rc = partial(bend_circular, cross_section="xs_rc500")
-bend_circular_ro = partial(bend_circular, cross_section="xs_ro500")
-
-
-def _euler_length(radius: Float, angle: Float, p: Float) -> Float:
-    """Length of ``gf.path.euler(radius, angle, p, use_eff=True)``.
-
-    Closed form of the gdsfactory construction (Euler sections of minimum
-    radius 1, an arc in between, scaled so the end points match an arc of
-    ``radius``), written with ``jax.numpy`` so it also works on traced
-    settings inside a jitted ``sax.circuit``.
-    """
-    alpha = jnp.deg2rad(jnp.abs(angle))
-    p = jnp.clip(p, 1e-9, 1.0)
-    sp = jnp.sqrt(p * alpha)
-    rp = 1 / sp
-    s = jnp.linspace(0.0, 1.0, 257) * sp
-    xp = jnp.trapezoid(jnp.cos(s**2 / 2), s)
-    yp = jnp.trapezoid(jnp.sin(s**2 / 2), s)
-    a1, a2 = p * alpha / 2, alpha / 2
-    xh = rp * (jnp.sin(a2) - jnp.sin(a1)) + xp
-    yh = rp * (jnp.cos(a1) - jnp.cos(a2)) + yp
-    ex = xh + jnp.cos(alpha) * xh + jnp.sin(alpha) * yh
-    ey = yh + jnp.sin(alpha) * xh - jnp.cos(alpha) * yh
-    reff = jnp.where(
-        jnp.abs(jnp.rad2deg(alpha) - 180) < 1e-3,
-        ey / 2,
-        ey - jnp.tan(alpha - jnp.pi / 2) * ex,
-    )
-    return radius * (2 * sp + rp * (1 - p) * alpha) / reff
+bend_circular_ro = partial(bend_circular, cross_section="xs_ro500", wl=1.31)
 
 
 def bend_euler(
@@ -252,16 +204,7 @@ def bend_euler(
 
 
 bend_euler_rc = partial(bend_euler, cross_section="xs_rc500")
-bend_euler_ro = partial(bend_euler, cross_section="xs_ro500")
-
-
-def _bend_s_length(dx: Float, dy: Float) -> Float:
-    """Length of the cubic Bezier S-bend drawn by ``gf.components.bend_s``."""
-    t = jnp.linspace(0.0, 1.0, 1001)
-    # derivative of the Bezier with control points (0,0) (dx/2,0) (dx/2,dy) (dx,dy)
-    vx = 3 * (1 - t) ** 2 * dx / 2 + 3 * t**2 * dx / 2
-    vy = 6 * (1 - t) * t * dy
-    return jnp.trapezoid(jnp.hypot(vx, vy), t)
+bend_euler_ro = partial(bend_euler, cross_section="xs_ro500", wl=1.31)
 
 
 def bend_s(
@@ -309,7 +252,7 @@ def taper(
 
 
 taper_rc = partial(taper, cross_section="xs_rc500", length=10.0)
-taper_ro = partial(taper, cross_section="xs_ro500", length=10.0)
+taper_ro = partial(taper, cross_section="xs_ro500", length=10.0, wl=1.31)
 
 
 ################
@@ -326,13 +269,19 @@ def mmi1x2(
 ) -> sax.SDict:
     """Returns the S-matrix of a 1x2 MMI (placeholder loss and bandwidth).
 
+    ``xs_ro500`` is an O-band placeholder centred at 1.31 um (no foundry data).
+
     Args:
         wl: Wavelength of the simulation in um.
         loss_dB: Excess loss of the MMI in dB.
         cross_section: Cross section of the MMI.
     """
-    _c_band_only(cross_section, "mmi1x2")
-    return mmi1x2_rc(wl=jnp.asarray(wl), loss_dB=loss_dB)
+    return _mmi1x2_model(
+        wl=jnp.asarray(wl),
+        wl0=_lookup(MMI_WL0, cross_section),
+        fwhm=MMI_FWHM,
+        loss_dB=loss_dB,
+    )
 
 
 mmi2x2_rc = partial(_mmi2x2_model, wl0=1.55, fwhm=MMI_FWHM, loss_dB=MMI_LOSS_DB)
@@ -345,13 +294,19 @@ def mmi2x2(
 ) -> sax.SDict:
     """Returns the S-matrix of a 2x2 MMI (placeholder loss and bandwidth).
 
+    ``xs_ro500`` is an O-band placeholder centred at 1.31 um (no foundry data).
+
     Args:
         wl: Wavelength of the simulation in um.
         loss_dB: Excess loss of the MMI in dB.
         cross_section: Cross section of the MMI.
     """
-    _c_band_only(cross_section, "mmi2x2")
-    return mmi2x2_rc(wl=jnp.asarray(wl), loss_dB=loss_dB)
+    return _mmi2x2_model(
+        wl=jnp.asarray(wl),
+        wl0=_lookup(MMI_WL0, cross_section),
+        fwhm=MMI_FWHM,
+        loss_dB=loss_dB,
+    )
 
 
 ##############################
@@ -368,13 +323,19 @@ def coupler(
 ) -> sax.SDict:
     """Returns the S-matrix of a coupler (placeholder 50/50 splitter).
 
+    ``xs_ro500`` is an O-band placeholder centred at 1.31 um (no foundry data).
+
     Args:
         wl: Wavelength of the simulation in um.
         loss_dB: Excess loss of the coupler in dB.
         cross_section: Cross section of the coupler.
     """
-    _c_band_only(cross_section, "coupler")
-    return coupler_rc(wl=jnp.asarray(wl), loss_dB=loss_dB)
+    return _mmi2x2_model(
+        wl=jnp.asarray(wl),
+        wl0=_lookup(MMI_WL0, cross_section),
+        fwhm=MMI_FWHM,
+        loss_dB=loss_dB,
+    )
 
 
 ##############################
@@ -396,12 +357,19 @@ def grating_coupler_rectangular(
 ) -> sax.SDict:
     """Returns the S-matrix of the foundry rectangular grating coupler.
 
+    ``xs_ro500`` is an O-band placeholder centred at 1.31 um with the C-band
+    loss and bandwidth (no foundry data).
+
     Args:
         wl: Wavelength of the simulation in um.
         cross_section: Cross section of the grating's waveguide port.
     """
-    _c_band_only(cross_section, "grating_coupler_rectangular")
-    return grating_coupler_rectangular_rc(wl=jnp.asarray(wl))
+    return _grating_model(
+        wl=jnp.asarray(wl),
+        wl0=_lookup(GRATING_WL0S, cross_section),
+        loss=GRATING_LOSS_DB,
+        bandwidth=GRATING_BANDWIDTH,
+    )
 
 
 grating_coupler_elliptical_rc = partial(
@@ -419,12 +387,18 @@ def grating_coupler_elliptical(
 ) -> sax.SDict:
     """Returns the S-matrix of an elliptical grating (placeholder data).
 
+    ``xs_ro500`` is an O-band placeholder centred at 1.31 um (no foundry data).
+
     Args:
         wl: Wavelength of the simulation in um.
         cross_section: Cross section of the grating's waveguide port.
     """
-    _c_band_only(cross_section, "grating_coupler_elliptical")
-    return grating_coupler_elliptical_rc(wl=jnp.asarray(wl))
+    return _grating_model(
+        wl=jnp.asarray(wl),
+        wl0=_lookup(GRATING_WL0S, cross_section),
+        loss=GRATING_LOSS_DB,
+        bandwidth=GRATING_BANDWIDTH,
+    )
 
 
 ################
@@ -434,25 +408,7 @@ def grating_coupler_elliptical(
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if name.startswith("_"):
-            continue
-        if not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except (ValueError, TypeError):
-            continue
-        if (
-            sig.return_annotation == sax.SDict
-            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
-        ):
-            models[name] = func
-    return models
+    return _sdict_models(globals())
 
 
 if __name__ == "__main__":
