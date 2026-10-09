@@ -320,3 +320,29 @@ def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
     assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
         sources
     )
+
+
+# The coupler's geometry defaults mean "use the cell geometry", which depends on the
+# band and type; nothing broadcasts them.
+_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius"}
+
+
+@pytest.mark.parametrize("name", sorted(si220.models.get_models()))
+def test_models_have_concrete_defaults_for_circulax(name: str) -> None:
+    """Circulax bakes model defaults into components and broadcasts ``wl`` to them.
+
+    GDSFactory+'s circulax DC sweep calls ``circuit.dc(wl=...)``, which runs
+    ``jnp.full_like(<default>, wl)`` on every component with a ``wl`` field, so a
+    ``None`` default crashes the sweep.
+    """
+    import dataclasses
+
+    import jax.numpy as jnp
+    from circulax.s_transforms import sax_component
+
+    component = sax_component(si220.PDK.models[name])
+    defaults = {f.name: f.default for f in dataclasses.fields(component)}
+    assert defaults.get("wl") == 1.55
+    jnp.full_like(defaults["wl"], 1.31)
+    none_defaults = {k for k, v in defaults.items() if v is None}
+    assert none_defaults <= _NONE_DEFAULTS_ALLOWED, none_defaults
