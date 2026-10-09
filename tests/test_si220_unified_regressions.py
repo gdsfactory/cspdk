@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import pathlib
 
 import gdsfactory as gf
@@ -165,13 +166,10 @@ def test_models_with_wavelength_sweep(
     model_name: str, ndarrays_regression: NDArraysRegressionFixture
 ) -> None:
     """Test models with different wavelengths to avoid regressions in frequency response."""
-    # Test at different wavelengths
-    wl = [1.53, 1.55, 1.57]
-    try:
-        model = models[model_name]
-        s_params = model(wl=wl)
-    except TypeError:
+    model = models[model_name]
+    if "wl" not in inspect.signature(model).parameters:
         pytest.skip(f"{model_name} does not accept a wl argument")
+    s_params = model(wl=[1.53, 1.55, 1.57])
 
     if not isinstance(s_params, dict):
         pytest.skip(

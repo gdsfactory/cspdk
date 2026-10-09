@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import inspect
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from functools import wraps
 
 import jax.numpy as jnp
@@ -201,7 +201,7 @@ def heater() -> sax.SDict:
 
 
 def straight_heater_metal(
-    wl: float = 1.55,
+    wl: Float | Sequence[float] = 1.55,
     neff: float = 2.34,
     voltage: float = 0,
     vpi: float = 1.0,  # Voltage required for π-phase shift
@@ -224,6 +224,7 @@ def straight_heater_metal(
      o1 =========== o2
     ```
     """
+    wl = jnp.asarray(wl)  # type: ignore
     # Calculate additional phase shift due to applied voltage.
     deltaphi = (voltage / vpi) * jnp.pi
     phase = 2 * jnp.pi * neff * length / wl + deltaphi

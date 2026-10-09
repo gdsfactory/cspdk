@@ -1,10 +1,10 @@
 info: {}
-name: mmi2x2_WNone_WT5p5_LT50_LM126_WM12_GM0p4_CSxs_no
+name: mmi2x2_WNone_WT3p5_LT30_LM126_WM12_GM0p7_CSxs_no
 ports:
   o1:
     center:
-    - -50
-    - -2.95
+    - -30
+    - -2.1
     layer: NITRIDE
     name: o1
     orientation: 180
@@ -12,8 +12,8 @@ ports:
     width: 0.95
   o2:
     center:
-    - -50
-    - 2.95
+    - -30
+    - 2.1
     layer: NITRIDE
     name: o2
     orientation: 180
@@ -21,8 +21,8 @@ ports:
     width: 0.95
   o3:
     center:
-    - 176
-    - 2.95
+    - 156
+    - 2.1
     layer: NITRIDE
     name: o3
     orientation: 0
@@ -30,8 +30,8 @@ ports:
     width: 0.95
   o4:
     center:
-    - 176
-    - -2.95
+    - 156
+    - -2.1
     layer: NITRIDE
     name: o4
     orientation: 0
@@ -39,8 +39,8 @@ ports:
     width: 0.95
 settings:
   cross_section: xs_no
-  gap_mmi: 0.4
+  gap_mmi: 0.7
   length_mmi: 126
-  length_taper: 50
+  length_taper: 30
   width_mmi: 12
-  width_taper: 5.5
+  width_taper: 3.5

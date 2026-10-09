@@ -14,32 +14,16 @@ gf-main:
 	uv pip install "gdsfactory @ git+https://github.com/gdsfactory/gdsfactory.git@main"
 
 test:
-	uv run pytest -s tests/test_si220_unified_regressions.py
-	uv run pytest -s tests/test_si220_unified.py
-	uv run pytest -s tests/test_routing.py
-	uv run pytest -s tests/test_si340.py
-	uv run pytest -s tests/test_sin200.py
-	uv run pytest -s tests/test_ge_on_si.py
-	uv run pytest -s tests/test_si_sus.py
-	# uv run pytest -s tests/test_si500.py
-	# uv run pytest -s tests/test_sin300.py
+	uv run pytest -s
 
 test-ports:
 	uv run pytest -s tests/test_si220_unified_regressions.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
 
 test-force: install
-	uv run pytest -s tests/test_si220_unified_regressions.py --update-gds-refs --force-regen
-	uv run pytest -s tests/test_si340.py --update-gds-refs --force-regen
-	uv run pytest -s tests/test_sin200.py --update-gds-refs --force-regen
-	uv run pytest -s tests/test_ge_on_si.py --update-gds-refs --force-regen
-	uv run pytest -s tests/test_si_sus.py --update-gds-refs --force-regen
-	# uv run pytest -s tests/test_si500.py --update-gds-refs --force-regen
-	# uv run pytest -s tests/test_sin300.py --update-gds-refs --force-regen
+	uv run pytest -s --update-gds-refs --force-regen
 
 test-fail-fast:
-	uv run pytest -s tests/test_si220_unified_regressions.py -x
-	uv run pytest -s tests/test_si500.py -x
-	uv run pytest -s tests/test_sin300.py -x
+	uv run pytest -s -x
 
 update-pre:
 	pre-commit autoupdate
