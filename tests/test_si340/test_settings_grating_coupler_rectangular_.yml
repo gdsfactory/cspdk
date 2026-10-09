@@ -2,7 +2,7 @@ info:
   fiber_angle: 10
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectangular_P0p59_NP60_FF0p5508_LT350_W_0a1f3bfa
+name: grating_coupler_rectangular_P0p59_NP60_FF0p5508_LT350_W_611f9fda
 ports:
   o1:
     center:
@@ -15,17 +15,21 @@ ports:
     width: 0.45
   o2:
     center:
-    - 367.486
+    - 370.265
     - 0
     layer: GRA
     name: o2
     orientation: 0
     port_type: vertical_te
-    width: 11
+    width: 10
 settings:
   cross_section: xs_sc340
   fill_factor: 0.551
+  grating_offset: 2.697
+  length_grating: 42
   length_taper: 350
   n_periods: 60
   period: 0.59
+  teeth_overhang: 0.5
   wavelength: 1.55
+  width_grating: 10

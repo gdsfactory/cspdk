@@ -1,4 +1,4 @@
-"""Schematic annotation tests for cspdk.si340 (no SAX models registered)."""
+"""Schematic annotation tests for cspdk.si340."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from _schematic_checks import (
     check_ports_clockwise_from_left,
     check_ports_subset_of_component,
     check_sax_model_refs,
+    check_sax_port_order_matches_sdict,
     check_symbol_present,
 )
 
@@ -46,5 +47,10 @@ def test_ports_subset_of_component() -> None:
 
 
 def test_sax_model_refs() -> None:
-    """Only the python module resolution is checked (si340 has no SAX models)."""
-    check_sax_model_refs(PDK, has_models=False)
+    """Every SAX model entry resolves to PDK.models and its python module."""
+    check_sax_model_refs(PDK, has_models=True)
+
+
+def test_sax_port_order_matches_sdict() -> None:
+    """Each SAX model's SDict keys are drawn from the declared port_order."""
+    check_sax_port_order_matches_sdict(PDK)

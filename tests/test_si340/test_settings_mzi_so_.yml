@@ -1,5 +1,5 @@
 info: {}
-name: mzi_DL10_Bbend_euler_so_Sstraight_so_Smmi1x2_so_Cmmi2x2_408d080a
+name: mzi_DL10_Bbend_circular_so_Sstraight_so_Smmi1x2_so_Cmmi_ff7e169c
 ports:
   o1:
     center:
@@ -29,7 +29,7 @@ ports:
     port_type: optical
     width: 0.4
 settings:
-  bend: bend_euler_so
+  bend: bend_circular_so
   combiner: mmi2x2_so
   cross_section: xs_so340
   delta_length: 10

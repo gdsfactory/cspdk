@@ -1,162 +1,146 @@
 instances:
   b1:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b2:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b3:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b4:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b5:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b6:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b7:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   b8:
-    component: bend_euler
+    component: bend_circular
     info:
-      dy: 25
-      length: 41.592
-      min_bend_radius: 17.652
-      radius: 25
-      route_info_length: 41.592
-      route_info_min_bend_radius: 17.652
+      dy: 100
+      length: 157.08
+      radius: 100
+      route_info_length: 157.08
+      route_info_min_bend_radius: 100
       route_info_n_bend_90: 1
       route_info_type: xs_rc340
-      route_info_weight: 41.592
-      route_info_xs_rc340_length: 41.592
+      route_info_weight: 157.08
+      route_info_xs_rc340_length: 157.08
       width: 0.8
     settings:
       angle: 90
       cross_section: xs_rc340
-      p: 0.5
       radius: null
       width: null
   cp1:
@@ -295,18 +279,18 @@ placements:
   b2:
     mirror: false
     rotation: 180
-    x: 104.7
-    y: 52.575
+    x: 254.7
+    y: 202.575
   b3:
     mirror: false
     rotation: 90
-    x: 129.8
-    y: 27.575
+    x: 354.8
+    y: 102.575
   b4:
     mirror: false
     rotation: 270
-    x: 129.8
-    y: 26.015
+    x: 354.8
+    y: 101.015
   b5:
     mirror: true
     rotation: 0
@@ -315,17 +299,17 @@ placements:
   b6:
     mirror: false
     rotation: 270
-    x: 79.7
-    y: -32.575
+    x: 154.7
+    y: -107.575
   b7:
     mirror: false
     rotation: 0
-    x: 104.8
-    y: -57.575
+    x: 254.8
+    y: -207.575
   b8:
     mirror: false
     rotation: 180
-    x: 154.8
+    x: 454.8
     y: -1.015
   cp1:
     mirror: false
@@ -335,38 +319,38 @@ placements:
   cp2:
     mirror: true
     rotation: 180
-    x: 221.3
+    x: 521.3
     y: 0
   sxb:
     mirror: false
     rotation: 0
-    x: 104.7
-    y: -57.575
+    x: 254.7
+    y: -207.575
   sxt:
     mirror: false
     rotation: 0
-    x: 104.7
-    y: 52.575
+    x: 254.7
+    y: 202.575
   sybr:
     mirror: false
     rotation: 90
-    x: 129.8
-    y: -32.575
+    x: 354.8
+    y: -107.575
   syl:
     mirror: false
     rotation: 270
-    x: 79.7
-    y: -26.575
+    x: 154.7
+    y: -101.575
   sytl:
     mirror: false
     rotation: 90
-    x: 79.7
-    y: 26.575
+    x: 154.7
+    y: 101.575
   sytr:
     mirror: false
     rotation: 90
-    x: 129.8
-    y: 26.015
+    x: 354.8
+    y: 101.015
 ports:
   o1: cp1,o1
   o2: cp2,o2

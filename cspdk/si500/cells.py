@@ -1,4 +1,12 @@
-"""This module contains the building blocks of the cspdk.si500 library."""
+"""This module contains the building blocks of the cspdk.si500 library.
+
+Foundry-matched defaults follow the CORNERSTONE 500 nm SOI standard
+components (42nd call) and the reference GDS files in ``cspdk/si500/gds``.
+
+The 500 nm platform is C-band (1550 nm) only. The ``_ro`` (O-band rib)
+variants have no foundry basis: they reuse the C-band component geometry on
+a 400 nm wide rib and are kept only for backwards compatibility.
+"""
 
 from functools import partial
 
@@ -12,6 +20,7 @@ from gdsfactory.typings import (
 )
 
 from cspdk.si500._schematic import (
+    bend_circular_schematic,
     bend_euler_schematic,
     bend_s_schematic,
     coupler_schematic,
@@ -127,6 +136,38 @@ def bend_euler(
 bend_euler_rc = partial(bend_euler, cross_section="xs_rc500")
 bend_euler_ro = partial(bend_euler, cross_section="xs_ro500")
 
+
+@gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
+def bend_circular(
+    radius: float | None = None,
+    angle: float = 90.0,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_rc500",
+) -> gf.Component:
+    """A circular bend, as the foundry 90 degree bend (R = 25 um).
+
+    SOI500nm_1550nm_TE_RIB_90_Degree_Bend is a circular arc, so this is the
+    default bend for routing and the MZI. An Euler bend (``bend_euler``) with
+    the same effective radius curves more tightly than the 25 um minimum.
+
+    Args:
+        radius: the radius of the bend; defaults to the cross-section radius.
+        angle: the angle of the bend (usually 90 degrees).
+        width: the width of the waveguide forming the bend.
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.components.bend_circular(
+        radius=radius,
+        angle=angle,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
+    )
+
+
+bend_circular_rc = partial(bend_circular, cross_section="xs_rc500")
+bend_circular_ro = partial(bend_circular, cross_section="xs_ro500")
+
 ################
 # Transitions
 ################
@@ -183,16 +224,18 @@ taper_ro = partial(
 @gf.cell(tags=["cells"], schematic_function=mmi1x2_schematic)
 def mmi1x2(
     width: float | None = None,
-    width_taper=1.5,
-    length_taper=20.0,
+    width_taper: float = 1.6,
+    length_taper: float = 20.0,
     length_mmi: float = 37.5,
-    width_mmi=6.0,
+    width_mmi: float = 6.0,
     gap_mmi: float = 1.47,
     cross_section: CrossSectionSpec = "xs_rc500",
 ) -> gf.Component:
     """An mmi1x2.
 
-    An mmi1x2 is a splitter that splits a single input to two outputs
+    An mmi1x2 is a splitter that splits a single input to two outputs.
+    Defaults match SOI500nm_1550nm_TE_RIB_2x1_MMI without its 10 um port
+    straights: 37.5 x 6 um body, 20 um tapers to 1.6 um.
 
     Args:
         width: the width of the waveguides connecting at the mmi ports.
@@ -223,16 +266,18 @@ mmi1x2_ro = partial(mmi1x2, cross_section="xs_ro500")
 @gf.cell(tags=["cells"], schematic_function=mmi2x2_schematic)
 def mmi2x2(
     width: float | None = None,
-    width_taper: float = 1.5,
-    length_taper: float = 50.2,
-    length_mmi: float = 5.5,
+    width_taper: float = 1.6,
+    length_taper: float = 20.0,
+    length_mmi: float = 50.2,
     width_mmi: float = 6.0,
     gap_mmi: float = 0.4,
     cross_section: CrossSectionSpec = "xs_rc500",
 ) -> gf.Component:
     """An mmi2x2.
 
-    An mmi2x2 is a 2x2 splitter
+    An mmi2x2 is a 2x2 splitter. Defaults match SOI500nm_1550nm_TE_RIB_2x2_MMI
+    without its 10 um port straights: 50.2 x 6 um body, 20 um tapers to
+    1.6 um, 0.4 um gap.
 
     Args:
         width: the width of the waveguides connecting at the mmi ports.
@@ -323,37 +368,74 @@ coupler_ro = partial(coupler, cross_section="xs_ro500")
 
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_rectangular_schematic)
 def grating_coupler_rectangular(
-    period=0.57,
+    period: float = 0.53,
     n_periods: int = 60,
+    fill_factor: float = 0.5283,
     length_taper: float = 350.0,
+    width_grating: float = 10.0,
+    length_grating: float = 42.0,
+    grating_offset: float = 7.116,
+    teeth_overhang: float = 0.5,
     wavelength: float = 1.55,
-    cross_section="xs_rc500",
+    cross_section: CrossSectionSpec = "xs_rc500",
 ) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
+
+    Defaults reproduce SOI500nm_1550nm_TE_RIB_Grating_Coupler: a 350 um
+    linear taper from the waveguide to a 10 um wide, 42 um long grating
+    section with 60 teeth, each 0.28 um etched (GDS layer 6, 160 nm deep) at
+    a 0.53 um period and 11 um tall, the first 7.116 um after the taper.
 
     Args:
         period: the period of the grating.
         n_periods: the number of grating teeth.
+        fill_factor: etched tooth width (GDS layer 6) as a fraction of the period.
         length_taper: the length of the taper tapering up to the grating.
+        width_grating: the width of the waveguide under the grating.
+        length_grating: the length of the full-width waveguide after the taper.
+        grating_offset: distance from the end of the taper to the first tooth.
+        teeth_overhang: how far the teeth extend beyond each side of the waveguide.
         wavelength: the center wavelength for which the grating is designed.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return gf.c.grating_coupler_rectangular(
-        n_periods=n_periods,
-        period=period,
-        fill_factor=0.5,
-        width_grating=11.0,
-        length_taper=length_taper,
-        polarization="te",
-        wavelength=wavelength,
-        taper=taper,
-        layer_slab=LAYER.WG,
-        layer_grating=LAYER.GRA,
-        fiber_angle=10.0,
-        slab_xmin=-1.0,
-        slab_offset=0.0,
-        cross_section=cross_section,
+    xs = gf.get_cross_section(cross_section)
+    w0, w1 = xs.width / 2, width_grating / 2
+    x1 = length_taper
+    x2 = length_taper + length_grating
+    c = gf.Component()
+    c.add_polygon(
+        [(0, -w0), (x1, -w1), (x2, -w1), (x2, w1), (x1, w1), (0, w0)], layer=xs.layer
     )
+    tooth = gf.snap.snap_to_grid(period * fill_factor)
+    y = width_grating / 2 + teeth_overhang
+    x0 = length_taper + grating_offset
+    for i in range(n_periods):
+        xmin = gf.snap.snap_to_grid(x0 + i * period)
+        c.add_polygon(
+            [(xmin, -y), (xmin + tooth, -y), (xmin + tooth, y), (xmin, y)],
+            layer=LAYER.GRA,
+        )
+    xs.add_bbox(c)
+    c.add_port(
+        name="o1",
+        center=(0, 0),
+        width=xs.width,
+        orientation=180,
+        layer=xs.layer,
+        cross_section=xs,
+    )
+    c.add_port(
+        name="o2",
+        port_type="vertical_te",
+        center=(gf.snap.snap_to_grid(x0 + ((n_periods - 1) * period + tooth) / 2), 0),
+        orientation=0,
+        width=width_grating,
+        layer=LAYER.GRA,
+    )
+    c.info["polarization"] = "te"
+    c.info["wavelength"] = wavelength
+    c.info["fiber_angle"] = 10.0
+    return c
 
 
 grating_coupler_rectangular_rc = partial(
@@ -361,6 +443,8 @@ grating_coupler_rectangular_rc = partial(
     cross_section="xs_rc500",
 )
 
+# No foundry basis: the C-band grating (0.53 um period) fed by a 400 nm
+# rib, not an O-band design. Kept for backwards compatibility.
 grating_coupler_rectangular_ro = partial(
     grating_coupler_rectangular,
     cross_section="xs_ro500",
@@ -429,7 +513,7 @@ grating_coupler_elliptical_ro = partial(
 @gf.cell(tags=["cells"], schematic_function=mzi_schematic)
 def mzi(
     delta_length: float = 10.0,
-    bend="bend_euler_rc",
+    bend="bend_circular_rc",
     straight="straight_rc",
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
@@ -475,7 +559,7 @@ def mzi(
 mzi_rc = partial(
     mzi,
     straight="straight_rc",
-    bend="bend_euler_rc",
+    bend="bend_circular_rc",
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
     cross_section="xs_rc500",
@@ -484,7 +568,7 @@ mzi_rc = partial(
 mzi_ro = partial(
     mzi,
     straight="straight_ro",
-    bend="bend_euler_ro",
+    bend="bend_circular_ro",
     splitter="mmi1x2_ro",
     combiner="mmi2x2_ro",
     cross_section="xs_ro500",
@@ -497,9 +581,13 @@ mzi_ro = partial(
 
 
 @gf.cell(tags=["cells"], schematic_function=pad_schematic)
-def pad() -> gf.Component:
-    """An electrical pad."""
-    return gf.c.pad(layer=LAYER.PAD, size=(100.0, 100.0))
+def pad(size: Size = (100.0, 100.0)) -> gf.Component:
+    """An electrical pad.
+
+    Args:
+        size: the pad size in um (the packaging template uses 150 x 200 um).
+    """
+    return gf.c.pad(layer=LAYER.PAD, size=size)
 
 
 @gf.cell(tags=["cells"])
@@ -598,9 +686,28 @@ def grating_coupler_array(
     )
 
 
+# Coordinates of Cell0_SOI500_Full_1550nm_Packaging_Template.gds (um).
+_DIE_SIZE = (11470.0, 4900.0)
+_DIE_GRATING_X = 4922.173  # |x| of the grating waveguide ports (o1)
+_DIE_GRATING_YS = tuple(-1850.0 + 250.0 * i for i in range(16))  # per side
+_DIE_LOOPBACK_RADIUS = 30.0
+_DIE_LOOPBACK_X_TURN = 4842.173  # |x| of the inner loopback turns
+_DIE_LOOPBACK_X_OUT = 5402.173  # |x| of the outer vertical loopback waveguide
+_DIE_LOOPBACK_DY = 60.0  # outer gratings to the horizontal loopback waveguides
+_DIE_PAD_SIZE = (150.0, 200.0)
+_DIE_PAD_XS = tuple(-4615.0 + 300.0 * i for i in range(31))  # per side
+_DIE_PAD_Y = 2300.0  # |y| of the pad centres
+
+
 @gf.cell(tags=["cells"])
-def die(cross_section="xs_rc500") -> gf.Component:
-    """A die template.
+def die(cross_section: CrossSectionSpec = "xs_rc500") -> gf.Component:
+    """A die matching the CORNERSTONE SOI500 1550 nm packaging template.
+
+    Cell0_SOI500_Full_1550nm_Packaging_Template: 11.47 x 4.9 mm floorplan,
+    16 grating couplers per side at a 250 um pitch (y = -1850 ... 1900 um)
+    pointing outwards, the outermost pair on each side joined by a loopback,
+    and 31 pads of 150 x 200 um per side at a 300 um pitch
+    (x = -4615 ... 4385 um, y = +-2300 um).
 
     Args:
         cross_section: a cross section or its name or a function generating a cross section.
@@ -617,20 +724,52 @@ def die(cross_section="xs_rc500") -> gf.Component:
         "xs_rc500": "grating_coupler_rectangular_rc",
         "xs_ro500": "grating_coupler_rectangular_ro",
     }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    return gf.c.die_with_pads(
-        cross_section=cross_section,
-        edge_to_grating_distance=150.0,
-        edge_to_pad_distance=150.0,
-        grating_coupler=grating_coupler,
-        grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
-        ngratings=14,
-        npads=31,
-        pad="pad",
-        pad_pitch=300.0,
-        size=(11470.0, 4900.0),
+    gc = gf.get_component(gcs.get(xs, "grating_coupler_rectangular"))
+
+    c = gf.Component()
+    c << gf.c.rectangle(
+        size=_DIE_SIZE, layer=LAYER.FLOORPLAN, centered=True, port_type=None
     )
+    ys = _DIE_GRATING_YS
+    for side, sign in (("W", -1), ("E", 1)):
+        ports = []
+        for y in ys:
+            ref = c << gc
+            if sign < 0:
+                ref.drotate(180)
+            ref.dmove(ref.ports["o1"].center, (sign * _DIE_GRATING_X, y))
+            ports.append(ref.ports["o1"])
+        x_turn = sign * _DIE_LOOPBACK_X_TURN
+        x_out = sign * _DIE_LOOPBACK_X_OUT
+        y_bot = ys[0] - _DIE_LOOPBACK_DY
+        y_top = ys[-1] + _DIE_LOOPBACK_DY
+        gf.routing.route_single(
+            c,
+            ports[0],
+            ports[-1],
+            waypoints=[
+                (x_turn, ys[0]),
+                (x_turn, y_bot),
+                (x_out, y_bot),
+                (x_out, y_top),
+                (x_turn, y_top),
+                (x_turn, ys[-1]),
+            ],
+            radius=_DIE_LOOPBACK_RADIUS,
+            cross_section=cross_section,
+            bend="bend_circular",
+            straight="straight",
+        )
+        for i, port in enumerate(ports[1:-1]):
+            c.add_port(name=f"{side}{i}", port=port)
+
+    pad_component = pad(size=_DIE_PAD_SIZE)
+    for side, sign, port_name in (("N", 1, "e4"), ("S", -1, "e2")):
+        for i, x in enumerate(_DIE_PAD_XS):
+            ref = c << pad_component
+            ref.dcenter = (x, sign * _DIE_PAD_Y)
+            c.add_port(name=f"{side}{i}", port=ref.ports[port_name])
+    return c
 
 
 die_rc = partial(die, cross_section="xs_rc500")

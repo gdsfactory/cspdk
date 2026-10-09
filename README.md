@@ -25,7 +25,7 @@ The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm 
 |--------|---------|-----------|------------|---------|
 | `cspdk.si220` | SOI 220nm | Strip + Rib | C-band / O-band | Yes |
 | `cspdk.si340` | SOI 340nm | Strip + Rib | C-band / O-band | Yes |
-| `cspdk.si500` | SOI 500nm | Rib | C-band / O-band | Yes |
+| `cspdk.si500` | SOI 500nm | Rib | C-band (O-band `_ro` cells have no foundry data) | Yes |
 | `cspdk.sin300` | SiN 300nm | Strip | C-band / O-band | Yes |
 | `cspdk.sin200` | SiN 200nm | Strip | Visible (520/638/780nm) | Yes |
 | `cspdk.ge_on_si` | Ge-on-Si | Rib | Mid-IR (3800nm) | No |
