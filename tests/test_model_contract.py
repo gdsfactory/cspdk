@@ -34,8 +34,13 @@ FLAVOURS = ["si220", "si340", "si500", "sin200", "sin300", "si_sus", "ge_on_si"]
 NONE_DEFAULTS_ALLOWED = {"radius", "length", "loss", "bandwidth"}
 # sax.models.mmi2x2 itself defaults these to None (derived from loss_dB).
 NONE_DEFAULTS_ALLOWED |= {"loss_dB_cross", "loss_dB_thru"}
-# si220 couplers derive their geometry from the cross-section.
-NONE_DEFAULTS_ALLOWED_SI220 = NONE_DEFAULTS_ALLOWED | {"offset", "bend_radius"}
+# si220 couplers derive their geometry from the cross-section, and si220 MMIs use the
+# foundry-measured loss of their band and type unless given ``loss_dB``.
+NONE_DEFAULTS_ALLOWED_SI220 = NONE_DEFAULTS_ALLOWED | {
+    "offset",
+    "bend_radius",
+    "loss_dB",
+}
 
 # Band-alias suffix -> band centre wavelength (um). si220 has its own band checks
 # (tests/test_si220_unified.py); si_sus and ge_on_si have a single band, no aliases.

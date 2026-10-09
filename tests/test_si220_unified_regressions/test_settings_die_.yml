@@ -1,7 +1,7 @@
 info: {}
-name: die_S16000_3000
+name: die_S11470_4900
 ports: {}
 settings:
   size:
-  - 16000
-  - 3000
+  - 11470
+  - 4900

@@ -7,230 +7,48 @@ from collections.abc import Callable
 
 import jax.numpy as jnp
 import sax
-import sax.models as sm
 from gdsfactory.typings import CrossSectionSpec
 from numpy.typing import NDArray
 
 from cspdk.si220.tech import get_band, is_rib
 
-from . import couplers, oband, waveguides
+from . import couplers, foundry, gratings, oband, waveguides
 
 sax.set_port_naming_strategy("optical")
-
-nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
 
 
 ################
-# MMIs
-################
-
-
-def _mmi1x2_strip(
-    *,
-    wl: Float = 1.55,
-    wl0: float = 1.55,
-    loss_dB: Float = 0.3,
-    fwhm: Float = 0.2,
-) -> sax.SDict:
-    """MMI 1x2 strip model."""
-    return sm.mmi1x2(
-        wl=wl,
-        wl0=wl0,
-        fwhm=fwhm,
-        loss_dB=loss_dB,
-    )
-
-
-def _mmi1x2_rib(
-    *,
-    wl: Float = 1.55,
-    wl0: float = 1.55,
-    loss_dB: Float = 0.3,
-    fwhm: Float = 0.2,
-) -> sax.SDict:
-    """MMI 1x2 rib model."""
-    return sm.mmi1x2(
-        wl=wl,
-        wl0=wl0,
-        fwhm=fwhm,
-        loss_dB=loss_dB,
-    )
-
-
-def _mmi1x2(
-    wl: Float = 1.55,
-    loss_dB: Float = 0.3,
-    cross_section="strip",
-) -> sax.SDict:
-    """MMI 1x2 model."""
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _mmi1x2_strip,
-        "rib": _mmi1x2_rib,
-    }
-    f = fs[cross_section]
-    return f(
-        wl=wl,
-        loss_dB=loss_dB,
-    )
-
-
-def _mmi2x2_strip(
-    *,
-    wl: Float = 1.55,
-    wl0: float = 1.55,
-    loss_dB: Float = 0.3,
-    fwhm: Float = 0.2,
-) -> sax.SDict:
-    """MMI 2x2 strip model."""
-    return sm.mmi2x2(
-        wl=wl,
-        wl0=wl0,
-        fwhm=fwhm,
-        loss_dB=loss_dB,
-    )
-
-
-def _mmi2x2_rib(
-    *,
-    wl: Float = 1.55,
-    wl0: float = 1.55,
-    loss_dB: Float = 0.3,
-    fwhm: Float = 0.2,
-) -> sax.SDict:
-    """MMI 2x2 rib model."""
-    return sm.mmi2x2(
-        wl=wl,
-        wl0=wl0,
-        fwhm=fwhm,
-        loss_dB=loss_dB,
-    )
-
-
-def _mmi2x2(
-    wl: Float = 1.55,
-    loss_dB: Float = 0.3,
-    cross_section="strip",
-) -> sax.SDict:
-    """MMI 2x2 model."""
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _mmi2x2_strip,
-        "rib": _mmi2x2_rib,
-    }
-    f = fs[cross_section]
-    return f(
-        wl=wl,
-        loss_dB=loss_dB,
-    )
-
-
-##############################
-# grating couplers Rectangular
-##############################
-
-
-def _grating_coupler_rectangular_strip(
-    *,
-    wl: Float = 1.55,
-) -> sax.SDict:
-    """Grating coupler rectangular strip model."""
-    return sm.grating_coupler(
-        wl=wl,
-        loss=6,
-        bandwidth=35 * nm,
-    )
-
-
-def _grating_coupler_rectangular_rib(
-    *,
-    wl: Float = 1.55,
-) -> sax.SDict:
-    """Grating coupler rectangular rib model."""
-    return sm.grating_coupler(
-        wl=wl,
-        loss=6,
-        bandwidth=35 * nm,
-    )
-
-
-def _grating_coupler_rectangular(
-    wl: Float = 1.55,
-    cross_section="strip",
-) -> sax.SDict:
-    """Grating coupler rectangular model."""
-    # TODO: take more grating_coupler_rectangular arguments into account
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _grating_coupler_rectangular_strip,
-        "rib": _grating_coupler_rectangular_rib,
-    }
-    f = fs[cross_section]
-    return f(wl=wl)  # type: ignore
-
-
-##############################
-# grating couplers Elliptical
-##############################
-
-
-def _grating_coupler_elliptical(
-    *,
-    wl: Float = 1.55,
-) -> sax.SDict:
-    """Grating coupler elliptical model."""
-    return sm.grating_coupler(
-        wl=wl,
-        loss=6,
-        bandwidth=35 * nm,
-    )
-
-
-################
-# Imported
-################
-
-
-def _crossing_rib(
-    *,
-    wl: Float = 1.55,
-) -> sax.SDict:
-    """Crossing rib model."""
-    return sm.crossing_ideal(wl=wl)
-
-
-def _crossing(
-    *,
-    wl: Float = 1.55,
-) -> sax.SDict:
-    """Crossing model."""
-    return sm.crossing_ideal(wl=wl)
-
-
-################
 # Band dispatch
 ################
+
+
+def _foundry_models(band: str) -> dict[str, Callable[..., sax.SDict]]:
+    """The foundry component models of ``band``, under every model name using them."""
+    models = foundry.get_models(band)
+    return {
+        **models,
+        "mmi1x2_strip": models["mmi1x2"],
+        "mmi1x2_rib": models["mmi1x2"],
+        "mmi2x2_strip": models["mmi2x2"],
+        "mmi2x2_rib": models["mmi2x2"],
+        "crossing_rib": models["crossing"],
+    }
+
 
 _CBAND: dict[str, Callable[..., sax.SDict]] = {
     **waveguides.get_models(),
     **couplers.get_models(),
-    "mmi1x2_strip": _mmi1x2_strip,
-    "mmi1x2_rib": _mmi1x2_rib,
-    "mmi1x2": _mmi1x2,
-    "mmi2x2_strip": _mmi2x2_strip,
-    "mmi2x2_rib": _mmi2x2_rib,
-    "mmi2x2": _mmi2x2,
-    "grating_coupler_rectangular_strip": _grating_coupler_rectangular_strip,
-    "grating_coupler_rectangular_rib": _grating_coupler_rectangular_rib,
-    "grating_coupler_rectangular": _grating_coupler_rectangular,
-    "grating_coupler_elliptical": _grating_coupler_elliptical,
-    "crossing_rib": _crossing_rib,
-    "crossing": _crossing,
+    # Run-50 grating data (models/gratings.py); strip, rib and elliptical share it.
+    "grating_coupler_rectangular_strip": gratings._grating_coupler_cband,
+    "grating_coupler_rectangular_rib": gratings._grating_coupler_cband,
+    "grating_coupler_rectangular": gratings._grating_coupler_cband,
+    "grating_coupler_elliptical": gratings._grating_coupler_cband,
+    **_foundry_models("cband"),
 }
-_OBAND = oband.get_models()
+_OBAND = {**oband.get_models(), **_foundry_models("oband")}
 
 
 def _dispatch(name: str, cross_section: CrossSectionSpec, **kwargs) -> sax.SDict:
@@ -531,64 +349,82 @@ def coupler(
 def mmi1x2_strip(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """MMI 1x2 strip model."""
+    """MMI 1x2 strip model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi1x2_strip", **locals())
 
 
 def mmi1x2_rib(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
-    """MMI 1x2 rib model."""
+    """MMI 1x2 rib model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi1x2_rib", **locals())
 
 
 def mmi1x2(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """MMI 1x2 model."""
+    """MMI 1x2 model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi1x2", **locals())
 
 
 def mmi2x2_strip(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """MMI 2x2 strip model."""
+    """MMI 2x2 strip model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi2x2_strip", **locals())
 
 
 def mmi2x2_rib(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
-    """MMI 2x2 rib model."""
+    """MMI 2x2 rib model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi2x2_rib", **locals())
 
 
 def mmi2x2(
     *,
     wl: Float = 1.55,
-    loss_dB: Float = 0.3,
+    loss_dB: Float | None = None,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """MMI 2x2 model."""
+    """MMI 2x2 model.
+
+    ``loss_dB`` is the excess loss; ``None`` uses the foundry measurement.
+    """
     return _dispatch("mmi2x2", **locals())
 
 
@@ -628,6 +464,46 @@ def grating_coupler_elliptical(
     return _dispatch("grating_coupler_elliptical", **locals())
 
 
+# Run-50 foundry cells. Each is the rectangular grating with its cross-section; the
+# O-band ones default to the O-band centre wavelength.
+
+
+def SOI220_cband_TE_strip_GC(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Run-50 C-band strip grating coupler model."""
+    return _dispatch("grating_coupler_rectangular", **locals())
+
+
+def SOI220_cband_TE_rib_GC(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Run-50 C-band rib grating coupler model."""
+    return _dispatch("grating_coupler_rectangular", **locals())
+
+
+def SOI220_oband_TE_strip_GC(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """Run-50 O-band strip grating coupler model."""
+    return _dispatch("grating_coupler_rectangular", **locals())
+
+
+def SOI220_oband_TE_rib_GC(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "rib_oband",
+) -> sax.SDict:
+    """Run-50 O-band rib grating coupler model."""
+    return _dispatch("grating_coupler_rectangular", **locals())
+
+
 def straight_heater_metal(
     *,
     wl: Float = 1.55,
@@ -659,7 +535,7 @@ def crossing_rib(
     wl: Float = 1.55,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
-    """Crossing rib model."""
+    """Crossing rib model (deprecated cell ``crossing_rib``; use ``crossing``)."""
     return _dispatch("crossing_rib", **locals())
 
 
@@ -668,8 +544,327 @@ def crossing(
     wl: Float = 1.55,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """Crossing model."""
+    """Crossing model with the foundry's measured insertion loss."""
     return _dispatch("crossing", **locals())
+
+
+def bend_circular(
+    *,
+    wl: Float = 1.55,
+    radius: float | None = None,
+    angle: float = 90.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Circular bend model with the foundry's measured loss per 90 degrees.
+
+    ``radius=None`` is the cross-section radius, like the cell.
+    """
+    return _dispatch("bend_circular", **locals())
+
+
+def taper_mm2sm(
+    *,
+    wl: Float = 1.55,
+    length: float = 450.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Multimode-to-single-mode taper model with the foundry's measured loss."""
+    return _dispatch("taper_mm2sm", **locals())
+
+
+def taper_rib_to_strip(
+    *,
+    wl: Float = 1.55,
+    length: float = 50.0,
+    length_rib: float = 5.0,
+    length_strip: float = 5.0,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Rib-to-strip taper model with the foundry's measured loss."""
+    return _dispatch("taper_rib_to_strip", **locals())
+
+
+def heater(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Heater filament with pads: an ideal electrical connection between e1 and e2."""
+    return _dispatch("heater", **locals())
+
+
+def mzi_heater_loop(
+    *,
+    wl: Float = 1.55,
+    delta_length: float = 160.0,
+    length_x: float = 616.3,
+    length_y: float = 35.0,
+    radius: float = 30.0,
+    voltage: float = 0.0,
+    vpi: float = 1.0,
+    loss_dB_cm: float = 3.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MZI with looped arms and a heater on the upper arm."""
+    return _dispatch("mzi_heater_loop", **locals())
+
+
+################
+# Cornerstone Run-50 template cells
+################
+# One model per foundry cell, named like it, with the cell's band and type fixed.
+
+
+def SOI220_cband_TE_strip_1x2_MMI(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip 1x2 MMI."""
+    return _dispatch("mmi1x2", **locals())
+
+
+def SOI220_cband_TE_strip_2x2_MMI(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip 2x2 MMI."""
+    return _dispatch("mmi2x2", **locals())
+
+
+def SOI220_cband_TE_strip_crossing(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip crossing."""
+    return _dispatch("crossing", **locals())
+
+
+def SOI220_cband_TE_rib_1x2_MMI(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib 1x2 MMI."""
+    return _dispatch("mmi1x2", **locals())
+
+
+def SOI220_cband_TE_rib_2x2_MMI(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib 2x2 MMI."""
+    return _dispatch("mmi2x2", **locals())
+
+
+def SOI220_cband_TE_rib_crossing(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib crossing."""
+    return _dispatch("crossing", **locals())
+
+
+def SOI220_oband_TE_strip_1x2_MMI(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """Cornerstone O-band strip 1x2 MMI."""
+    return _dispatch("mmi1x2", **locals())
+
+
+def SOI220_oband_TE_strip_2x2_MMI(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """Cornerstone O-band strip 2x2 MMI."""
+    return _dispatch("mmi2x2", **locals())
+
+
+def SOI220_oband_TE_strip_crossing(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """Cornerstone O-band strip crossing."""
+    return _dispatch("crossing", **locals())
+
+
+def SOI220_oband_TE_rib_1x2_MMI(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "rib_oband",
+) -> sax.SDict:
+    """Cornerstone O-band rib 1x2 MMI."""
+    return _dispatch("mmi1x2", **locals())
+
+
+def SOI220_oband_TE_rib_2x2_MMI(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "rib_oband",
+) -> sax.SDict:
+    """Cornerstone O-band rib 2x2 MMI."""
+    return _dispatch("mmi2x2", **locals())
+
+
+def SOI220_oband_TE_rib_crossing(
+    *,
+    wl: Float = 1.31,
+    cross_section: CrossSectionSpec = "rib_oband",
+) -> sax.SDict:
+    """Cornerstone O-band rib crossing."""
+    return _dispatch("crossing", **locals())
+
+
+################
+# Run 50 fixed cells
+################
+# The foundry measured the Y-splitters by cut-back (CORNERSTONE 50th call standard
+# components, p. 17 C band and p. 45 O band): the transmission through one output of
+# a cascade of splitters falls by 4.0123 dB per splitter in the C band for 450 nm
+# waveguides (3.7101 dB for 400 nm) and 4.5006 dB in the O band. That includes the
+# 3.0103 dB of an ideal 50/50 split, so the excess loss is 1.0020 dB (C band, the
+# 450 nm template cell) and 1.4903 dB (O band). The models are ideal, wavelength-flat
+# 50/50 splitters with that excess loss.
+
+
+def _ysplitter(*, wl: Float, loss_dB: Float) -> sax.SDict:
+    """Lossy ideal 50/50 splitter, flat in wavelength."""
+    one = jnp.ones_like(jnp.asarray(wl, dtype=float))
+    t = jnp.sqrt(0.5 * 10 ** (-jnp.asarray(loss_dB) / 10)) * one
+    return sax.reciprocal({("o1", "o2"): t, ("o1", "o3"): t})
+
+
+def SOI220_cband_TE_strip_1x2_Ysplitter(
+    *,
+    wl: Float = 1.55,
+    loss_dB: Float = 1.002,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """C-band 1x2 Y-splitter of the Run 50 template (450 nm strip).
+
+    Args:
+        wl: wavelength in um.
+        loss_dB: excess loss in dB on top of the 3 dB split (measured 1.0 dB; 0.7 dB
+            for 400 nm waveguides).
+        cross_section: unused; the splitter geometry is fixed.
+    """
+    return _ysplitter(wl=wl, loss_dB=loss_dB)
+
+
+def SOI220_oband_TE_strip_1x2_Ysplitter(
+    *,
+    wl: Float = 1.31,
+    loss_dB: Float = 1.4903,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """O-band 1x2 Y-splitter of the Run 50 template (400 nm strip).
+
+    Args:
+        wl: wavelength in um.
+        loss_dB: excess loss in dB on top of the 3 dB split (measured 1.5 dB).
+        cross_section: unused; the splitter geometry is fixed.
+    """
+    return _ysplitter(wl=wl, loss_dB=loss_dB)
+
+
+def SOI220_cband_TE_strip_90deg_bend(
+    *,
+    wl: Float = 1.55,
+    radius: float = 5.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip 90 degree bend."""
+    return _dispatch("bend_circular", **locals())
+
+
+def SOI220_oband_TE_strip_90deg_bend(
+    *,
+    wl: Float = 1.31,
+    radius: float = 5.0,
+    cross_section: CrossSectionSpec = "strip_oband",
+) -> sax.SDict:
+    """Cornerstone O-band strip 90 degree bend."""
+    return _dispatch("bend_circular", **locals())
+
+
+def SOI220_cband_TE_rib_90deg_bend(
+    *,
+    wl: Float = 1.55,
+    radius: float = 25.0,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib 90 degree bend."""
+    return _dispatch("bend_circular", **locals())
+
+
+def SOI220_cband_TE_strip_MM2SM_taper(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip multimode-to-single-mode taper."""
+    return _dispatch("taper_mm2sm", **locals())
+
+
+def SOI220_cband_TE_rib_MM2SM_taper(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib multimode-to-single-mode taper."""
+    return _dispatch("taper_mm2sm", **locals())
+
+
+def SOI220_cband_TE_rib2strip_taper(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib rib-to-strip taper."""
+    return _dispatch("taper_rib_to_strip", **locals())
+
+
+def SOI220_cband_TE_strip_MZI(
+    *,
+    wl: Float = 1.55,
+    length_x: float = 616.3,
+    voltage: float = 0.0,
+    vpi: float = 1.0,
+    loss_dB_cm: float = 3.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone C-band strip MZI with heater."""
+    return _dispatch("mzi_heater_loop", **locals())
+
+
+def SOI220_cband_TE_rib_MZI(
+    *,
+    wl: Float = 1.55,
+    length_x: float = 649.5,
+    voltage: float = 0.0,
+    vpi: float = 1.0,
+    loss_dB_cm: float = 3.0,
+    cross_section: CrossSectionSpec = "rib_cband",
+) -> sax.SDict:
+    """Cornerstone C-band rib MZI with heater."""
+    return _dispatch("mzi_heater_loop", **locals())
+
+
+def Heater(
+    *,
+    wl: Float = 1.55,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Cornerstone heater."""
+    return _dispatch("heater", **locals())
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
@@ -706,8 +901,40 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         "grating_coupler_rectangular_rib": grating_coupler_rectangular_rib,
         "grating_coupler_rectangular": grating_coupler_rectangular,
         "grating_coupler_elliptical": grating_coupler_elliptical,
+        "SOI220_cband_TE_strip_GC": SOI220_cband_TE_strip_GC,
+        "SOI220_cband_TE_rib_GC": SOI220_cband_TE_rib_GC,
+        "SOI220_oband_TE_strip_GC": SOI220_oband_TE_strip_GC,
+        "SOI220_oband_TE_rib_GC": SOI220_oband_TE_rib_GC,
         "straight_heater_metal": straight_heater_metal,
         "straight_heater_meander": straight_heater_meander,
         "crossing_rib": crossing_rib,
         "crossing": crossing,
+        "SOI220_cband_TE_strip_1x2_Ysplitter": SOI220_cband_TE_strip_1x2_Ysplitter,
+        "SOI220_oband_TE_strip_1x2_Ysplitter": SOI220_oband_TE_strip_1x2_Ysplitter,
+        "bend_circular": bend_circular,
+        "taper_mm2sm": taper_mm2sm,
+        "taper_rib_to_strip": taper_rib_to_strip,
+        "heater": heater,
+        "mzi_heater_loop": mzi_heater_loop,
+        "SOI220_cband_TE_strip_1x2_MMI": SOI220_cband_TE_strip_1x2_MMI,
+        "SOI220_cband_TE_strip_2x2_MMI": SOI220_cband_TE_strip_2x2_MMI,
+        "SOI220_cband_TE_strip_crossing": SOI220_cband_TE_strip_crossing,
+        "SOI220_cband_TE_rib_1x2_MMI": SOI220_cband_TE_rib_1x2_MMI,
+        "SOI220_cband_TE_rib_2x2_MMI": SOI220_cband_TE_rib_2x2_MMI,
+        "SOI220_cband_TE_rib_crossing": SOI220_cband_TE_rib_crossing,
+        "SOI220_oband_TE_strip_1x2_MMI": SOI220_oband_TE_strip_1x2_MMI,
+        "SOI220_oband_TE_strip_2x2_MMI": SOI220_oband_TE_strip_2x2_MMI,
+        "SOI220_oband_TE_strip_crossing": SOI220_oband_TE_strip_crossing,
+        "SOI220_oband_TE_rib_1x2_MMI": SOI220_oband_TE_rib_1x2_MMI,
+        "SOI220_oband_TE_rib_2x2_MMI": SOI220_oband_TE_rib_2x2_MMI,
+        "SOI220_oband_TE_rib_crossing": SOI220_oband_TE_rib_crossing,
+        "SOI220_cband_TE_strip_90deg_bend": SOI220_cband_TE_strip_90deg_bend,
+        "SOI220_oband_TE_strip_90deg_bend": SOI220_oband_TE_strip_90deg_bend,
+        "SOI220_cband_TE_rib_90deg_bend": SOI220_cband_TE_rib_90deg_bend,
+        "SOI220_cband_TE_strip_MM2SM_taper": SOI220_cband_TE_strip_MM2SM_taper,
+        "SOI220_cband_TE_rib_MM2SM_taper": SOI220_cband_TE_rib_MM2SM_taper,
+        "SOI220_cband_TE_rib2strip_taper": SOI220_cband_TE_rib2strip_taper,
+        "SOI220_cband_TE_strip_MZI": SOI220_cband_TE_strip_MZI,
+        "SOI220_cband_TE_rib_MZI": SOI220_cband_TE_rib_MZI,
+        "Heater": Heater,
     }

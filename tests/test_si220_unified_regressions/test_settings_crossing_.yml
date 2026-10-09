@@ -3,8 +3,8 @@ name: crossing_CSstrip_cband
 ports:
   o1:
     center:
-    - 485
-    - 800
+    - -4.62
+    - 0
     layer: WG
     name: o1
     orientation: 180
@@ -12,8 +12,8 @@ ports:
     width: 0.45
   o2:
     center:
-    - 489.62
-    - 804.62
+    - 0
+    - 4.62
     layer: WG
     name: o2
     orientation: 90
@@ -21,8 +21,8 @@ ports:
     width: 0.45
   o3:
     center:
-    - 494.24
-    - 800
+    - 4.62
+    - 0
     layer: WG
     name: o3
     orientation: 0
@@ -30,8 +30,8 @@ ports:
     width: 0.45
   o4:
     center:
-    - 489.62
-    - 795.38
+    - 0
+    - -4.62
     layer: WG
     name: o4
     orientation: 270

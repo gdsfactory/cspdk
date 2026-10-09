@@ -1,0 +1,2186 @@
+instances:
+  grating_coupler_rectangular:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular10:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular11:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular12:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular13:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular14:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular15:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular16:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular17:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular18:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular19:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular2:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular20:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular21:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular22:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular23:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular24:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular25:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular26:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular27:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular28:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular29:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular3:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular30:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular31:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular32:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular4:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular5:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular6:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular7:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular8:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  grating_coupler_rectangular9:
+    component: grating_coupler_rectangular
+    info:
+      fiber_angle: 10
+      n_periods: 60
+      period: 0.63
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: strip_cband
+      fill_factor: 0.5
+      grating_offset: null
+      grating_overhang: 0.5
+      length_grating: 42
+      length_straight: null
+      length_taper: 350
+      n_periods: null
+      period: null
+      slab_taper_start: null
+      wavelength: null
+      width_grating: 10
+  pad:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad10:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad11:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad12:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad13:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad14:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad15:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad16:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad17:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad18:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad19:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad2:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad20:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad21:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad22:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad23:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad24:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad25:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad26:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad27:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad28:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad29:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad3:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad30:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad31:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad32:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad33:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad34:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad35:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad36:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad37:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad38:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad39:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad4:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad40:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad41:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad42:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad43:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad44:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad45:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad46:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad47:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad48:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad49:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad5:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad50:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad51:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad52:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad53:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad54:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad55:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad56:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad57:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad58:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad59:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad6:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad60:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad61:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad62:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad7:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad8:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  pad9:
+    component: pad
+    info:
+      size:
+      - 150
+      - 200
+      xsize: 150
+      ysize: 200
+    settings:
+      layer: PAD
+      port_inclusion: 0
+      port_orientation: 0
+      size:
+      - 150
+      - 200
+  rectangle:
+    component: rectangle
+    info: {}
+    settings:
+      centered: true
+      layer: FLOORPLAN
+      port_orientations:
+      - 180
+      - 90
+      - 0
+      - -90
+      port_type: null
+      size:
+      - 11470
+      - 4900
+nets: []
+placements:
+  grating_coupler_rectangular:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -1125
+  grating_coupler_rectangular10:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 125
+  grating_coupler_rectangular11:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 1375
+  grating_coupler_rectangular12:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 1625
+  grating_coupler_rectangular13:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 1875
+  grating_coupler_rectangular14:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 375
+  grating_coupler_rectangular15:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 625
+  grating_coupler_rectangular16:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 875
+  grating_coupler_rectangular17:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -1125
+  grating_coupler_rectangular18:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -125
+  grating_coupler_rectangular19:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -1375
+  grating_coupler_rectangular2:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -125
+  grating_coupler_rectangular20:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -1625
+  grating_coupler_rectangular21:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -1875
+  grating_coupler_rectangular22:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -375
+  grating_coupler_rectangular23:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -625
+  grating_coupler_rectangular24:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: -875
+  grating_coupler_rectangular25:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 1125
+  grating_coupler_rectangular26:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 125
+  grating_coupler_rectangular27:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 1375
+  grating_coupler_rectangular28:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 1625
+  grating_coupler_rectangular29:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 1875
+  grating_coupler_rectangular3:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -1375
+  grating_coupler_rectangular30:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 375
+  grating_coupler_rectangular31:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 625
+  grating_coupler_rectangular32:
+    mirror: false
+    rotation: 0
+    x: 4923
+    y: 875
+  grating_coupler_rectangular4:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -1625
+  grating_coupler_rectangular5:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -1875
+  grating_coupler_rectangular6:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -375
+  grating_coupler_rectangular7:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -625
+  grating_coupler_rectangular8:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: -875
+  grating_coupler_rectangular9:
+    mirror: false
+    rotation: 180
+    x: -4923
+    y: 1125
+  pad:
+    mirror: false
+    rotation: 0
+    x: -1015
+    y: -2300
+  pad10:
+    mirror: false
+    rotation: 0
+    x: -1915
+    y: 2300
+  pad11:
+    mirror: false
+    rotation: 0
+    x: -2215
+    y: -2300
+  pad12:
+    mirror: false
+    rotation: 0
+    x: -2215
+    y: 2300
+  pad13:
+    mirror: false
+    rotation: 0
+    x: -2515
+    y: -2300
+  pad14:
+    mirror: false
+    rotation: 0
+    x: -2515
+    y: 2300
+  pad15:
+    mirror: false
+    rotation: 0
+    x: -2815
+    y: -2300
+  pad16:
+    mirror: false
+    rotation: 0
+    x: -2815
+    y: 2300
+  pad17:
+    mirror: false
+    rotation: 0
+    x: -3115
+    y: -2300
+  pad18:
+    mirror: false
+    rotation: 0
+    x: -3115
+    y: 2300
+  pad19:
+    mirror: false
+    rotation: 0
+    x: -3415
+    y: -2300
+  pad2:
+    mirror: false
+    rotation: 0
+    x: -1015
+    y: 2300
+  pad20:
+    mirror: false
+    rotation: 0
+    x: -3415
+    y: 2300
+  pad21:
+    mirror: false
+    rotation: 0
+    x: -3715
+    y: -2300
+  pad22:
+    mirror: false
+    rotation: 0
+    x: -3715
+    y: 2300
+  pad23:
+    mirror: false
+    rotation: 0
+    x: -4015
+    y: -2300
+  pad24:
+    mirror: false
+    rotation: 0
+    x: -4015
+    y: 2300
+  pad25:
+    mirror: false
+    rotation: 0
+    x: -415
+    y: -2300
+  pad26:
+    mirror: false
+    rotation: 0
+    x: -415
+    y: 2300
+  pad27:
+    mirror: false
+    rotation: 0
+    x: -4315
+    y: -2300
+  pad28:
+    mirror: false
+    rotation: 0
+    x: -4315
+    y: 2300
+  pad29:
+    mirror: false
+    rotation: 0
+    x: -4615
+    y: -2300
+  pad3:
+    mirror: false
+    rotation: 0
+    x: -115
+    y: -2300
+  pad30:
+    mirror: false
+    rotation: 0
+    x: -4615
+    y: 2300
+  pad31:
+    mirror: false
+    rotation: 0
+    x: -715
+    y: -2300
+  pad32:
+    mirror: false
+    rotation: 0
+    x: -715
+    y: 2300
+  pad33:
+    mirror: false
+    rotation: 0
+    x: 1085
+    y: -2300
+  pad34:
+    mirror: false
+    rotation: 0
+    x: 1085
+    y: 2300
+  pad35:
+    mirror: false
+    rotation: 0
+    x: 1385
+    y: -2300
+  pad36:
+    mirror: false
+    rotation: 0
+    x: 1385
+    y: 2300
+  pad37:
+    mirror: false
+    rotation: 0
+    x: 1685
+    y: -2300
+  pad38:
+    mirror: false
+    rotation: 0
+    x: 1685
+    y: 2300
+  pad39:
+    mirror: false
+    rotation: 0
+    x: 185
+    y: -2300
+  pad4:
+    mirror: false
+    rotation: 0
+    x: -115
+    y: 2300
+  pad40:
+    mirror: false
+    rotation: 0
+    x: 185
+    y: 2300
+  pad41:
+    mirror: false
+    rotation: 0
+    x: 1985
+    y: -2300
+  pad42:
+    mirror: false
+    rotation: 0
+    x: 1985
+    y: 2300
+  pad43:
+    mirror: false
+    rotation: 0
+    x: 2285
+    y: -2300
+  pad44:
+    mirror: false
+    rotation: 0
+    x: 2285
+    y: 2300
+  pad45:
+    mirror: false
+    rotation: 0
+    x: 2585
+    y: -2300
+  pad46:
+    mirror: false
+    rotation: 0
+    x: 2585
+    y: 2300
+  pad47:
+    mirror: false
+    rotation: 0
+    x: 2885
+    y: -2300
+  pad48:
+    mirror: false
+    rotation: 0
+    x: 2885
+    y: 2300
+  pad49:
+    mirror: false
+    rotation: 0
+    x: 3185
+    y: -2300
+  pad5:
+    mirror: false
+    rotation: 0
+    x: -1315
+    y: -2300
+  pad50:
+    mirror: false
+    rotation: 0
+    x: 3185
+    y: 2300
+  pad51:
+    mirror: false
+    rotation: 0
+    x: 3485
+    y: -2300
+  pad52:
+    mirror: false
+    rotation: 0
+    x: 3485
+    y: 2300
+  pad53:
+    mirror: false
+    rotation: 0
+    x: 3785
+    y: -2300
+  pad54:
+    mirror: false
+    rotation: 0
+    x: 3785
+    y: 2300
+  pad55:
+    mirror: false
+    rotation: 0
+    x: 4085
+    y: -2300
+  pad56:
+    mirror: false
+    rotation: 0
+    x: 4085
+    y: 2300
+  pad57:
+    mirror: false
+    rotation: 0
+    x: 4385
+    y: -2300
+  pad58:
+    mirror: false
+    rotation: 0
+    x: 4385
+    y: 2300
+  pad59:
+    mirror: false
+    rotation: 0
+    x: 485
+    y: -2300
+  pad6:
+    mirror: false
+    rotation: 0
+    x: -1315
+    y: 2300
+  pad60:
+    mirror: false
+    rotation: 0
+    x: 485
+    y: 2300
+  pad61:
+    mirror: false
+    rotation: 0
+    x: 785
+    y: -2300
+  pad62:
+    mirror: false
+    rotation: 0
+    x: 785
+    y: 2300
+  pad7:
+    mirror: false
+    rotation: 0
+    x: -1615
+    y: -2300
+  pad8:
+    mirror: false
+    rotation: 0
+    x: -1615
+    y: 2300
+  pad9:
+    mirror: false
+    rotation: 0
+    x: -1915
+    y: -2300
+  rectangle:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+ports:
+  e1: pad29,e2
+  e10: pad9,e2
+  e11: pad7,e2
+  e12: pad5,e2
+  e13: pad,e2
+  e14: pad31,e2
+  e15: pad25,e2
+  e16: pad3,e2
+  e17: pad39,e2
+  e18: pad59,e2
+  e19: pad61,e2
+  e2: pad27,e2
+  e20: pad33,e2
+  e21: pad35,e2
+  e22: pad37,e2
+  e23: pad41,e2
+  e24: pad43,e2
+  e25: pad45,e2
+  e26: pad47,e2
+  e27: pad49,e2
+  e28: pad51,e2
+  e29: pad53,e2
+  e3: pad23,e2
+  e30: pad55,e2
+  e31: pad57,e2
+  e32: pad58,e4
+  e33: pad56,e4
+  e34: pad54,e4
+  e35: pad52,e4
+  e36: pad50,e4
+  e37: pad48,e4
+  e38: pad46,e4
+  e39: pad44,e4
+  e4: pad21,e2
+  e40: pad42,e4
+  e41: pad38,e4
+  e42: pad36,e4
+  e43: pad34,e4
+  e44: pad62,e4
+  e45: pad60,e4
+  e46: pad40,e4
+  e47: pad4,e4
+  e48: pad26,e4
+  e49: pad32,e4
+  e5: pad19,e2
+  e50: pad2,e4
+  e51: pad6,e4
+  e52: pad8,e4
+  e53: pad10,e4
+  e54: pad12,e4
+  e55: pad14,e4
+  e56: pad16,e4
+  e57: pad18,e4
+  e58: pad20,e4
+  e59: pad22,e4
+  e6: pad17,e2
+  e60: pad24,e4
+  e61: pad28,e4
+  e62: pad30,e4
+  e7: pad15,e2
+  e8: pad13,e2
+  e9: pad11,e2
+  o1: grating_coupler_rectangular20,o1
+  o10: grating_coupler_rectangular31,o1
+  o11: grating_coupler_rectangular32,o1
+  o12: grating_coupler_rectangular25,o1
+  o13: grating_coupler_rectangular27,o1
+  o14: grating_coupler_rectangular28,o1
+  o15: grating_coupler_rectangular12,o1
+  o16: grating_coupler_rectangular11,o1
+  o17: grating_coupler_rectangular9,o1
+  o18: grating_coupler_rectangular16,o1
+  o19: grating_coupler_rectangular15,o1
+  o2: grating_coupler_rectangular19,o1
+  o20: grating_coupler_rectangular14,o1
+  o21: grating_coupler_rectangular10,o1
+  o22: grating_coupler_rectangular2,o1
+  o23: grating_coupler_rectangular6,o1
+  o24: grating_coupler_rectangular7,o1
+  o25: grating_coupler_rectangular8,o1
+  o26: grating_coupler_rectangular,o1
+  o27: grating_coupler_rectangular3,o1
+  o28: grating_coupler_rectangular4,o1
+  o3: grating_coupler_rectangular17,o1
+  o4: grating_coupler_rectangular24,o1
+  o5: grating_coupler_rectangular23,o1
+  o6: grating_coupler_rectangular22,o1
+  o7: grating_coupler_rectangular18,o1
+  o8: grating_coupler_rectangular26,o1
+  o9: grating_coupler_rectangular30,o1

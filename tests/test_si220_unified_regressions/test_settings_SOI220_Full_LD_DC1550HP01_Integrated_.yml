@@ -1,0 +1,13 @@
+info: {}
+name: SOI220_Full_LD_DC1550HP01_Integrated
+ports:
+  o1:
+    center:
+    - -3456.39
+    - 0
+    layer: WG
+    name: o1
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings: {}

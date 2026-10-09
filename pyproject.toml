@@ -51,7 +51,7 @@ docs = [
 ]
 
 [tool.codespell]
-ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem, euclidian"
 skip = "references/*"
 
 [tool.gdsfactoryplus]
@@ -62,13 +62,39 @@ pdk = "cspdk"
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
-# Layout-only cells: no ports to model (the fixed foundry heater has none)
+# Layout-only cells: no ports to model (the fixed foundry heater has none).
+# The Run 50 graphene, photodiode, laser and focusing-grating fixed cells have
+# no foundry optical data to build a model from.
 cells_no_model_expected = [
+  "Cell0_SOI220_cband_TE_Full_Packaging_Template",
+  "Cell0_SOI_Full_Institution",
+  "Cell0_SOI_Half_Institution",
   "add_pads_top",
   "compass",
   "heater",
   "text_rectangular",
-  "text_rectangular_multi_layer"
+  "text_rectangular_multi_layer",
+  "SOI220_cband_TE_strip_apodized_GC_focusing_v1p0",
+  "SOI220_cband_TE_strip_SLG_Bolometer",
+  "SOI220_cband_TE_strip_SLG_Bolometer_with_GC",
+  "SOI220_cband_TE_strip_SLG_Bolometer_metallic",
+  "SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC",
+  "SOI220_cband_TE_strip_SLG_Bolometer_no_gate",
+  "SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC",
+  "SOI220_cband_TE_strip_SLG_EAM",
+  "SOI220_cband_TE_strip_SLG_EAM_with_GC",
+  "SOI220_cband_TE_strip_SLG_PTE",
+  "SOI220_cband_TE_strip_SLG_PTE_with_GC",
+  "SOI220_cband_TE_strip_SLG_PTE_metallic",
+  "SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC",
+  "SOI220_PD_FCI300B1_Integrated",
+  "SOI220_PD_FCI300B1_Plain",
+  "SOI220_Full_LD_DC1550HP01_Integrated",
+  "SOI220_Full_LD_DC1550HP01_Integrated_or_GC",
+  "SOI220_Full_LD_DC1550HP01_Integrated_with_GC",
+  "SOI220_Half_LD_DC1550HP01_Integrated",
+  "SOI220_Half_LD_DC1550HP01_Integrated_or_GC",
+  "SOI220_Half_LD_DC1550HP01_Integrated_with_GC"
 ]
 name = "cspdk.si220"
 options = [

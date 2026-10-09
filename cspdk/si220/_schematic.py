@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from functools import partial
+
 from cspdk._schematic import (
     _1X2,
     _2X2,
@@ -63,6 +65,12 @@ bend_euler_schematic = schematic(
     _LEFT_TOP,
     models=[sax_model("bend_euler", _MODULE, ["o1", "o2"])],
 )
+bend_circular_schematic = schematic(
+    "bend",
+    ["bend", "circular"],
+    _LEFT_TOP,
+    models=[sax_model("bend_circular", _MODULE, ["o1", "o2"])],
+)
 bend_s_schematic = schematic(
     "sbend",
     ["bend", "s"],
@@ -93,6 +101,18 @@ transition_schematic = schematic(
     ["taper", "transition"],
     _LEFT_RIGHT,
     models=[sax_model("taper_strip_to_ridge", _MODULE, ["o1", "o2"])],
+)
+taper_mm2sm_schematic = schematic(
+    "taper",
+    ["taper", "mm2sm"],
+    _LEFT_RIGHT,
+    models=[sax_model("taper_mm2sm", _MODULE, ["o1", "o2"])],
+)
+taper_rib_to_strip_schematic = schematic(
+    "taper",
+    ["taper", "transition"],
+    _LEFT_RIGHT,
+    models=[sax_model("taper_rib_to_strip", _MODULE, ["o1", "o2"])],
 )
 
 # MMIs
@@ -130,6 +150,22 @@ ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBL
 # MZI (composite; cband mzi uses 2x2 splitter so 4 ports)
 mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 
+# Foundry MZI: the input faces east, the two outputs west, the heater pads north.
+_MZI_HEATER_LOOP = [
+    {"name": "o1", "side": "right", "type": "photonic"},
+    {"name": "o2", "side": "left", "type": "photonic"},
+    {"name": "o3", "side": "left", "type": "photonic"},
+    {"name": "e1", "side": "top", "type": "electric"},
+    {"name": "e2", "side": "top", "type": "electric"},
+]
+_MZI_HEATER_LOOP_PORTS = ["o1", "o2", "o3", "e1", "e2"]
+mzi_heater_loop_schematic = schematic(
+    "ckt",
+    ["mzi", "heater"],
+    _MZI_HEATER_LOOP,
+    models=[sax_model("mzi_heater_loop", _MODULE, _MZI_HEATER_LOOP_PORTS)],
+)
+
 # Spirals (composite)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
@@ -152,6 +188,17 @@ straight_heater_metal_schematic = schematic(
 )
 straight_heater_meander_schematic = schematic(
     "ckt", ["heater", "modulator", "meander"], _heater_ports, models=_HEATER_MODELS
+)
+# Heater filament with two pads (no optical ports); placed over a waveguide.
+_HEATER_PADS = [
+    {"name": "e1", "side": "top", "type": "electric"},
+    {"name": "e2", "side": "top", "type": "electric"},
+]
+heater_schematic = schematic(
+    "ckt",
+    ["heater"],
+    _HEATER_PADS,
+    models=[sax_model("heater", _MODULE, ["e1", "e2"])],
 )
 
 # Grating couplers
@@ -182,10 +229,73 @@ crossing_rib_schematic = schematic(
     models=[sax_model("crossing_rib", _MODULE, ["o1", "o2", "o3", "o4"])],
 )
 
+# Run 50 fixed Y-splitters (o1 in, o2 top and o3 bottom out, like mmi1x2)
+SOI220_cband_TE_strip_1x2_Ysplitter_schematic = schematic(
+    "mmi-1x2",
+    ["splitter", "1x2", "y-branch"],
+    _1X2,
+    models=[
+        sax_model("SOI220_cband_TE_strip_1x2_Ysplitter", _MODULE, ["o1", "o2", "o3"])
+    ],
+)
+SOI220_oband_TE_strip_1x2_Ysplitter_schematic = schematic(
+    "mmi-1x2",
+    ["splitter", "1x2", "y-branch"],
+    _1X2,
+    models=[
+        sax_model("SOI220_oband_TE_strip_1x2_Ysplitter", _MODULE, ["o1", "o2", "o3"])
+    ],
+)
+
+# Cornerstone Run-50 template cells, each linked to the SAX model of its own name.
+_FOUNDRY_KINDS = {
+    "1x2_MMI": ("mmi-1x2", ["mmi", "1x2"], _1X2),
+    "2x2_MMI": ("mmi-2x2", ["mmi", "2x2"], _2X2),
+    "crossing": ("crossing", ["crossing"], _CROSSING),
+    "90deg_bend": ("bend", ["bend", "circular"], _LEFT_TOP),
+    "MM2SM_taper": ("taper", ["taper", "mm2sm"], _LEFT_RIGHT),
+    "rib2strip_taper": ("taper", ["taper", "transition"], _LEFT_RIGHT),
+    "MZI": ("ckt", ["mzi", "heater"], _MZI_HEATER_LOOP),
+    "Heater": ("ckt", ["heater"], _HEATER_PADS),
+}
+_FOUNDRY_CELLS = [
+    *(
+        f"SOI220_{band}_TE_{kind}_{suffix}"
+        for band in ("cband", "oband")
+        for kind in ("strip", "rib")
+        for suffix in ("1x2_MMI", "2x2_MMI", "crossing")
+    ),
+    "SOI220_cband_TE_strip_90deg_bend",
+    "SOI220_oband_TE_strip_90deg_bend",
+    "SOI220_cband_TE_rib_90deg_bend",
+    "SOI220_cband_TE_strip_MM2SM_taper",
+    "SOI220_cband_TE_rib_MM2SM_taper",
+    "SOI220_cband_TE_rib2strip_taper",
+    "SOI220_cband_TE_strip_MZI",
+    "SOI220_cband_TE_rib_MZI",
+    "Heater",
+]
+
+
+def _foundry_schematic(name: str):
+    kind = next(k for k in _FOUNDRY_KINDS if name.endswith(k))
+    symbol, tags, ports = _FOUNDRY_KINDS[kind]
+    port_order = [p["name"] for p in ports]
+    return schematic(
+        symbol,
+        [*tags, "foundry"],
+        ports,
+        models=[sax_model(name, _MODULE, port_order)],
+    )
+
+
+FOUNDRY_SCHEMATICS = {name: _foundry_schematic(name) for name in _FOUNDRY_CELLS}
+
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)
 via_stack_schematic = schematic("pad", ["via", "stack"], _PAD)
 
 # Die: symbol "die" makes editors render it as a die (no background box).
-# Ports are derived from the factory kwargs and follow the GDS orientations.
-die_schematic = schematic("die", ["die"], _die_ports)
+# Ports are derived from the factory kwargs and follow the GDS orientations; the
+# default of 16 gratings per side is the Run-50 packaging template's.
+die_schematic = schematic("die", ["die"], partial(_die_ports, ngratings=16))

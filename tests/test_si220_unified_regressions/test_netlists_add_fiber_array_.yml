@@ -175,7 +175,7 @@ instances:
       wavelength: 1.55
     settings:
       cross_section: strip_cband
-      grating_line_width: 0.315
+      grating_line_width: 0.35
       wavelength: 1.55
   grating_coupler_elliptical2:
     component: grating_coupler_elliptical
@@ -185,7 +185,7 @@ instances:
       wavelength: 1.55
     settings:
       cross_section: strip_cband
-      grating_line_width: 0.315
+      grating_line_width: 0.35
       wavelength: 1.55
   grating_coupler_elliptical3:
     component: grating_coupler_elliptical
@@ -195,7 +195,7 @@ instances:
       wavelength: 1.55
     settings:
       cross_section: strip_cband
-      grating_line_width: 0.315
+      grating_line_width: 0.35
       wavelength: 1.55
   grating_coupler_elliptical4:
     component: grating_coupler_elliptical
@@ -205,7 +205,7 @@ instances:
       wavelength: 1.55
     settings:
       cross_section: strip_cband
-      grating_line_width: 0.315
+      grating_line_width: 0.35
       wavelength: 1.55
   straight:
     component: straight
@@ -224,29 +224,29 @@ instances:
   straight2:
     component: straight
     info:
-      length: 29.183
-      route_info_length: 29.183
-      route_info_strip_cband_length: 29.183
+      length: 29.2
+      route_info_length: 29.2
+      route_info_strip_cband_length: 29.2
       route_info_type: strip_cband
-      route_info_weight: 29.183
+      route_info_weight: 29.2
       width: 0.45
     settings:
       cross_section: strip_cband
-      length: 29.183
+      length: 29.2
       npoints: 2
       width: 0.45
   straight3:
     component: straight
     info:
-      length: 29.183
-      route_info_length: 29.183
-      route_info_strip_cband_length: 29.183
+      length: 29.2
+      route_info_length: 29.2
+      route_info_strip_cband_length: 29.2
       route_info_type: strip_cband
-      route_info_weight: 29.183
+      route_info_weight: 29.2
       width: 0.45
     settings:
       cross_section: strip_cband
-      length: 29.183
+      length: 29.2
       npoints: 2
       width: 0.45
   straight4:
@@ -361,17 +361,17 @@ placements:
     mirror: true
     rotation: 180
     x: -155.5
-    y: -93.933
+    y: -93.95
   bend_euler2:
     mirror: false
     rotation: 90
     x: -165.5
-    y: -39.183
+    y: -39.2
   bend_euler3:
     mirror: false
     rotation: 180
     x: -175.5
-    y: -29.183
+    y: -29.2
   bend_euler4:
     mirror: true
     rotation: 90
@@ -381,17 +381,17 @@ placements:
     mirror: true
     rotation: 270
     x: 175.5
-    y: -83.933
+    y: -83.95
   bend_euler6:
     mirror: false
     rotation: 180
     x: 185.5
-    y: -29.183
+    y: -29.2
   bend_euler7:
     mirror: false
     rotation: 90
     x: 195.5
-    y: -39.183
+    y: -39.2
   bend_euler8:
     mirror: false
     rotation: 90
@@ -436,17 +436,17 @@ placements:
     mirror: false
     rotation: 0
     x: -155.5
-    y: -93.933
+    y: -93.95
   straight5:
     mirror: false
     rotation: 270
     x: -165.5
-    y: -39.183
+    y: -39.2
   straight6:
     mirror: false
     rotation: 90
     x: 175.5
-    y: -83.933
+    y: -83.95
   straight7:
     mirror: false
     rotation: 180

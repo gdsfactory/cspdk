@@ -174,6 +174,7 @@ instances:
       cross_section: strip_cband
       gap_mmi: null
       length_mmi: null
+      length_straight: null
       length_taper: 20
       width: null
       width_mmi: 6
@@ -185,6 +186,7 @@ instances:
       cross_section: strip_cband
       gap_mmi: null
       length_mmi: null
+      length_straight: null
       length_taper: 20
       width: null
       width_mmi: 6
@@ -220,15 +222,15 @@ instances:
   sybr:
     component: straight
     info:
-      length: 6.57
-      route_info_length: 6.57
-      route_info_strip_cband_length: 6.57
+      length: 6.555
+      route_info_length: 6.555
+      route_info_strip_cband_length: 6.555
       route_info_type: strip_cband
-      route_info_weight: 6.57
+      route_info_weight: 6.555
       width: 0.45
     settings:
       cross_section: strip_cband
-      length: 6.57
+      length: 6.555
       npoints: 2
       width: null
   syl:
@@ -262,15 +264,15 @@ instances:
   sytr:
     component: straight
     info:
-      length: 1.57
-      route_info_length: 1.57
-      route_info_strip_cband_length: 1.57
+      length: 1.555
+      route_info_length: 1.555
+      route_info_strip_cband_length: 1.555
       route_info_type: strip_cband
-      route_info_weight: 1.57
+      route_info_weight: 1.555
       width: 0.45
     settings:
       cross_section: strip_cband
-      length: 1.57
+      length: 1.555
       npoints: 2
       width: null
 nets:
@@ -310,43 +312,43 @@ placements:
   b1:
     mirror: false
     rotation: 0
-    x: 51
+    x: 51.8
     y: 1.57
   b2:
     mirror: false
     rotation: 180
-    x: 71
+    x: 71.8
     y: 22.57
   b3:
     mirror: false
     rotation: 90
-    x: 81.1
+    x: 81.9
     y: 12.57
   b4:
     mirror: false
     rotation: 270
-    x: 81.1
-    y: 11
+    x: 81.9
+    y: 11.015
   b5:
     mirror: true
     rotation: 0
-    x: 51
+    x: 51.8
     y: -1.57
   b6:
     mirror: false
     rotation: 270
-    x: 61
+    x: 61.8
     y: -17.57
   b7:
     mirror: false
     rotation: 0
-    x: 71.1
+    x: 71.9
     y: -27.57
   b8:
     mirror: false
     rotation: 180
-    x: 91.1
-    y: -1
+    x: 91.9
+    y: -1.015
   cp1:
     mirror: false
     rotation: 0
@@ -355,38 +357,38 @@ placements:
   cp2:
     mirror: true
     rotation: 180
-    x: 153.6
+    x: 154.4
     y: 0
   sxb:
     mirror: false
     rotation: 0
-    x: 71
+    x: 71.8
     y: -27.57
   sxt:
     mirror: false
     rotation: 0
-    x: 71
+    x: 71.8
     y: 22.57
   sybr:
     mirror: false
     rotation: 90
-    x: 81.1
+    x: 81.9
     y: -17.57
   syl:
     mirror: false
     rotation: 270
-    x: 61
+    x: 61.8
     y: -11.57
   sytl:
     mirror: false
     rotation: 90
-    x: 61
+    x: 61.8
     y: 11.57
   sytr:
     mirror: false
     rotation: 90
-    x: 81.1
-    y: 11
+    x: 81.9
+    y: 11.015
 ports:
   o1: cp1,o1
   o2: cp2,o2

@@ -1,0 +1,22 @@
+info: {}
+name: SOI220_cband_TE_strip_SLG_Bolometer_no_gate
+ports:
+  o1:
+    center:
+    - 0
+    - 150
+    layer: WG
+    name: o1
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 0
+    - -150
+    layer: WG
+    name: o2
+    orientation: 270
+    port_type: optical
+    width: 0.45
+settings: {}

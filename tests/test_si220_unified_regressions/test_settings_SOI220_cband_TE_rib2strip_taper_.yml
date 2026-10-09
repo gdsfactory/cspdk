@@ -1,0 +1,23 @@
+info:
+  length: 50
+name: SOI220_cband_TE_rib2strip_taper
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 60
+    - 0
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings: {}

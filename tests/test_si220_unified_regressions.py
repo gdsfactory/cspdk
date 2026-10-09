@@ -34,6 +34,12 @@ skip_test = {
     "coupler_symmetric",
     "die_with_pads",
     "spiral_racetrack_heater",
+    # Deprecated alias of crossing (tests/test_si220_run50_parametric.py).
+    "crossing_rib",
+    # Foundry ``Heater``: its reference files would differ from heater's only by
+    # case, which case-insensitive file systems cannot hold. It is XOR-checked
+    # against the foundry template in tests/test_si220_run50_parametric.py.
+    "Heater",
 }
 
 cell_names = cells.keys() - skip_test
@@ -148,7 +154,8 @@ def test_netlists(
         gf.kcl.dkcells[ci].delete()
 
 
-skip_test_models = {}
+# Heater: see skip_test (its data file would clash with heater's by case only).
+skip_test_models = {"Heater"}
 
 
 models = PDK.models

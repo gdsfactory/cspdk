@@ -1,0 +1,31 @@
+info: {}
+name: SOI220_PD_FCI300B1_Integrated
+ports:
+  e1:
+    center:
+    - 0
+    - 325
+    layer: PAD
+    name: e1
+    orientation: 90
+    port_type: electrical
+    width: 202
+  e2:
+    center:
+    - 0
+    - -315
+    layer: PAD
+    name: e2
+    orientation: 270
+    port_type: electrical
+    width: 300
+  o1:
+    center:
+    - 537
+    - 0
+    layer: WG
+    name: o1
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings: {}
