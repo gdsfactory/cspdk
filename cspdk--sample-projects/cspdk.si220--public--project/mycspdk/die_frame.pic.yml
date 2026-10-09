@@ -1,0 +1,105 @@
+# yaml-language-server: $schema=../build/schemas/die_frame.json
+instances:
+  mmi10x:
+    component: mmi1x2
+    settings: {}
+  mmi11x:
+    component: mmi1x2
+    settings: {}
+  mmi12x:
+    component: mmi1x2
+    settings: {}
+  mmi13x:
+    component: mmi1x2
+    settings: {}
+  mmi14x:
+    component: mmi1x2
+    settings: {}
+  mmi15x:
+    component: mmi1x2
+    settings: {}
+  mmi16x:
+    component: mmi1x2
+    settings: {}
+  mmi17x:
+    component: mmi1x2
+    settings: {}
+  mmi18x:
+    component: mmi1x2
+    settings: {}
+  mmi19x:
+    component: mmi1x2
+    settings: {}
+  mmi1x:
+    component: mmi1x2
+    settings: {}
+  mmi20x:
+    component: mmi1x2
+    settings: {}
+  mmi21x:
+    component: mmi1x2
+    settings: {}
+  mmi22x:
+    component: mmi1x2
+    settings: {}
+  mmi23x:
+    component: mmi1x2
+    settings: {}
+  mmi24x:
+    component: mmi1x2
+    settings: {}
+  mmi2x:
+    component: mmi1x2
+    settings: {}
+  mmi3x:
+    component: mmi1x2
+    settings: {}
+  die_template:
+    component: die_with_pads
+    settings: {}
+  mmi5x:
+    component: mmi1x2
+    settings: {}
+  mmi6x:
+    component: mmi1x2
+    settings: {}
+  mmi9x:
+    component: mmi1x2
+    settings: {}
+  mmi8x:
+    component: mmi1x2
+    settings: {}
+  mmi7x:
+    component: mmi1x2
+    settings: {}
+  mmi4x:
+    component: mmi1x2
+    settings: {}
+connections:
+  mmi1x,o1: die_template,o1
+  mmi10x,o1: die_template,o10
+  mmi11x,o1: die_template,o11
+  mmi12x,o1: die_template,o12
+  mmi13x,o1: die_template,o13
+  mmi14x,o1: die_template,o14
+  mmi15x,o1: die_template,o3
+  mmi16x,o1: die_template,o16
+  mmi17x,o1: die_template,o17
+  mmi18x,o1: die_template,o18
+  mmi19x,o1: die_template,o19
+  mmi2x,o1: die_template,o2
+  mmi20x,o1: die_template,o20
+  mmi21x,o1: die_template,o21
+  mmi22x,o1: die_template,o22
+  mmi23x,o1: die_template,o23
+  mmi24x,o1: die_template,o24
+  mmi4x,o1: die_template,o4
+  mmi5x,o1: die_template,o5
+  mmi6x,o1: die_template,o6
+  mmi8x,o1: die_template,o8
+  mmi9x,o1: die_template,o9
+  mmi7x,o1: die_template,o7
+routes: {}
+nets: []
+ports: {}
+placements: {}

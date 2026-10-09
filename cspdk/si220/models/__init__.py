@@ -4,17 +4,16 @@ from __future__ import annotations
 
 import inspect
 from collections.abc import Callable, Sequence
-from functools import wraps
 
 import jax.numpy as jnp
 import sax
 import sax.models as sm
+from gdsfactory.typings import CrossSectionSpec
 from numpy.typing import NDArray
 
 from cspdk.si220.tech import get_band, is_rib
 
-from .couplers import *
-from .waveguides import *
+from . import couplers, oband, waveguides
 
 sax.set_port_naming_strategy("optical")
 
@@ -29,7 +28,7 @@ Float = float | FloatArray
 ################
 
 
-def mmi1x2_strip(
+def _mmi1x2_strip(
     *,
     wl: Float = 1.55,
     wl0: float = 1.55,
@@ -45,7 +44,7 @@ def mmi1x2_strip(
     )
 
 
-def mmi1x2_rib(
+def _mmi1x2_rib(
     *,
     wl: Float = 1.55,
     wl0: float = 1.55,
@@ -61,7 +60,7 @@ def mmi1x2_rib(
     )
 
 
-def mmi1x2(
+def _mmi1x2(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     cross_section="strip",
@@ -69,8 +68,8 @@ def mmi1x2(
     """MMI 1x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi1x2_strip,
-        "rib": mmi1x2_rib,
+        "strip": _mmi1x2_strip,
+        "rib": _mmi1x2_rib,
     }
     f = fs[cross_section]
     return f(
@@ -79,7 +78,7 @@ def mmi1x2(
     )
 
 
-def mmi2x2_strip(
+def _mmi2x2_strip(
     *,
     wl: Float = 1.55,
     wl0: float = 1.55,
@@ -95,7 +94,7 @@ def mmi2x2_strip(
     )
 
 
-def mmi2x2_rib(
+def _mmi2x2_rib(
     *,
     wl: Float = 1.55,
     wl0: float = 1.55,
@@ -111,7 +110,7 @@ def mmi2x2_rib(
     )
 
 
-def mmi2x2(
+def _mmi2x2(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     cross_section="strip",
@@ -119,8 +118,8 @@ def mmi2x2(
     """MMI 2x2 model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": mmi2x2_strip,
-        "rib": mmi2x2_rib,
+        "strip": _mmi2x2_strip,
+        "rib": _mmi2x2_rib,
     }
     f = fs[cross_section]
     return f(
@@ -134,7 +133,7 @@ def mmi2x2(
 ##############################
 
 
-def grating_coupler_rectangular_strip(
+def _grating_coupler_rectangular_strip(
     *,
     wl: Float = 1.55,
 ) -> sax.SDict:
@@ -146,7 +145,7 @@ def grating_coupler_rectangular_strip(
     )
 
 
-def grating_coupler_rectangular_rib(
+def _grating_coupler_rectangular_rib(
     *,
     wl: Float = 1.55,
 ) -> sax.SDict:
@@ -158,7 +157,7 @@ def grating_coupler_rectangular_rib(
     )
 
 
-def grating_coupler_rectangular(
+def _grating_coupler_rectangular(
     wl: Float = 1.55,
     cross_section="strip",
 ) -> sax.SDict:
@@ -166,8 +165,8 @@ def grating_coupler_rectangular(
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
-        "strip": grating_coupler_rectangular_strip,
-        "rib": grating_coupler_rectangular_rib,
+        "strip": _grating_coupler_rectangular_strip,
+        "rib": _grating_coupler_rectangular_rib,
     }
     f = fs[cross_section]
     return f(wl=wl)  # type: ignore
@@ -178,7 +177,7 @@ def grating_coupler_rectangular(
 ##############################
 
 
-def grating_coupler_elliptical(
+def _grating_coupler_elliptical(
     *,
     wl: Float = 1.55,
 ) -> sax.SDict:
@@ -195,12 +194,7 @@ def grating_coupler_elliptical(
 ################
 
 
-def heater() -> sax.SDict:
-    """Heater model."""
-    raise NotImplementedError("No model for 'heater'")
-
-
-def straight_heater_metal(
+def _straight_heater_metal(
     wl: Float | Sequence[float] = 1.55,
     neff: float = 2.34,
     voltage: float = 0,
@@ -241,7 +235,7 @@ def straight_heater_metal(
     )
 
 
-def crossing_rib(
+def _crossing_rib(
     *,
     wl: Float = 1.55,
 ) -> sax.SDict:
@@ -249,7 +243,7 @@ def crossing_rib(
     return sm.crossing_ideal(wl=wl)
 
 
-def crossing(
+def _crossing(
     *,
     wl: Float = 1.55,
 ) -> sax.SDict:
@@ -258,111 +252,522 @@ def crossing(
 
 
 ################
-# Models Dict
+# Band dispatch
 ################
 
+_CBAND: dict[str, Callable[..., sax.SDict]] = {
+    **waveguides.get_models(),
+    **couplers.get_models(),
+    "mmi1x2_strip": _mmi1x2_strip,
+    "mmi1x2_rib": _mmi1x2_rib,
+    "mmi1x2": _mmi1x2,
+    "mmi2x2_strip": _mmi2x2_strip,
+    "mmi2x2_rib": _mmi2x2_rib,
+    "mmi2x2": _mmi2x2,
+    "grating_coupler_rectangular_strip": _grating_coupler_rectangular_strip,
+    "grating_coupler_rectangular_rib": _grating_coupler_rectangular_rib,
+    "grating_coupler_rectangular": _grating_coupler_rectangular,
+    "grating_coupler_elliptical": _grating_coupler_elliptical,
+    "straight_heater_metal": _straight_heater_metal,
+    "crossing_rib": _crossing_rib,
+    "crossing": _crossing,
+}
+_OBAND = oband.get_models()
 
-def _get_cband_models() -> dict[str, Callable[..., sax.SDict]]:
-    """Return the cband models defined in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        # Skip get_models itself and private functions
-        if name.startswith("_") or name in {"get_models", "heater"}:
-            continue
-        if not callable(func):
-            continue
-        try:
-            sig = inspect.signature(func)
-        except (ValueError, TypeError):
-            continue
-        # Check for sax.SDict return type (case-insensitive)
-        return_anno = str(sig.return_annotation)
-        if "sdict" in return_anno.lower():
-            models[name] = func
-    return models
 
-
-def _dispatch_model(
-    cband_model: Callable[..., sax.SDict],
-    oband_model: Callable[..., sax.SDict] | None,
-) -> Callable[..., sax.SDict]:
-    """Return a shared model that selects its implementation by cross-section.
+def _dispatch(name: str, cross_section: CrossSectionSpec, **kwargs) -> sax.SDict:
+    """Call the band implementation of model ``name`` selected by ``cross_section``.
 
     SAX calls a model with every parameter of its signature, filling unset ones with
     the signature defaults, and drops settings that are not in the signature. The
-    wrapper therefore exposes the union of both bands' parameters plus
+    public models below therefore expose the union of both bands' parameters plus
     ``cross_section``, all defaulting to ``None`` ("not set"), so the cross-section
-    always reaches the dispatcher and the selected model applies its own defaults.
+    always reaches this dispatcher and the selected model applies its own defaults.
     """
-    parameters = {}
-    for band_model in (cband_model, oband_model):
-        if band_model is None:
-            continue
-        for parameter in inspect.signature(band_model).parameters.values():
-            if parameter.kind in (
-                inspect.Parameter.VAR_POSITIONAL,
-                inspect.Parameter.VAR_KEYWORD,
-            ):
-                continue
-            parameters.setdefault(
-                parameter.name,
-                parameter.replace(kind=inspect.Parameter.KEYWORD_ONLY, default=None),
-            )
-    parameters["cross_section"] = inspect.Parameter(
-        "cross_section", inspect.Parameter.KEYWORD_ONLY, default="strip_cband"
+    cross_section = cross_section or "strip_cband"
+    target = _CBAND[name]
+    if get_band(cross_section) == "oband" and name in _OBAND:
+        target = _OBAND[name]
+    signature = inspect.signature(target)
+    accepts_kwargs = any(
+        parameter.kind is inspect.Parameter.VAR_KEYWORD
+        for parameter in signature.parameters.values()
     )
-
-    @wraps(cband_model)
-    def model(*args, **kwargs) -> sax.SDict:
-        cross_section = kwargs.pop("cross_section", None) or "strip_cband"
-        target = (
-            oband_model
-            if get_band(cross_section) == "oband" and oband_model is not None
-            else cband_model
-        )
-        signature = inspect.signature(target)
-        accepts_kwargs = any(
-            parameter.kind is inspect.Parameter.VAR_KEYWORD
-            for parameter in signature.parameters.values()
-        )
-        call_kwargs = {
-            key: value
-            for key, value in kwargs.items()
-            if value is not None and (accepts_kwargs or key in signature.parameters)
-        }
-        if "cross_section" in signature.parameters:
-            call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
-        return target(*args, **call_kwargs)
-
-    model.__signature__ = inspect.Signature(  # type: ignore[attr-defined]
-        list(parameters.values()), return_annotation=sax.SDict
-    )
-    return model
-
-
-def _build_models() -> dict[str, Callable[..., sax.SDict]]:
-    """Build the shared model dict dispatching to cband or oband behavior."""
-    from cspdk.si220.models import oband
-
-    cband_models = _get_cband_models()
-    oband_models = oband.get_models()
-    return {
-        name: _dispatch_model(model, oband_models.get(name))
-        for name, model in cband_models.items()
+    call_kwargs = {
+        key: value
+        for key, value in kwargs.items()
+        if value is not None and (accepts_kwargs or key in signature.parameters)
     }
+    if "cross_section" in signature.parameters:
+        call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
+    return target(**call_kwargs)
 
 
-# Build once, before any name can be referenced, and bind the dispatch wrappers
-# into this module's namespace.  Cell SAX metadata references
-# ``module="cspdk.si220.models"`` with ``qualname=<name>``; without this
-# binding that resolves to the raw implementation imported from
-# ``.waveguides``/``.couplers``, which only understands the model-level
-# ``"strip"``/``"rib"`` vocabulary and rejects the PDK-level
-# ``strip_cband``/``strip_oband`` names.
-_MODELS = _build_models()
-globals().update(_MODELS)
+################
+# Models
+################
+# One public ``def`` per model, here and nowhere else: GDSFactory+ finds models by
+# scanning the source of this package for public functions returning ``sax.SDict``,
+# so the band implementations above and in the submodules stay private.
+
+
+def straight_strip(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    wl0: sax.FloatArrayLike | None = None,
+    neff: sax.FloatArrayLike | None = None,
+    ng: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Straight strip waveguide model."""
+    return _dispatch("straight_strip", **locals())
+
+
+def straight_rib(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    wl0: sax.FloatArrayLike | None = None,
+    neff: sax.FloatArrayLike | None = None,
+    ng: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Straight rib waveguide model."""
+    return _dispatch("straight_rib", **locals())
+
+
+def straight(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Straight waveguide model."""
+    return _dispatch("straight", **locals())
+
+
+def wire_corner(
+    *,
+    wl: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Wire corner model."""
+    return _dispatch("wire_corner", **locals())
+
+
+def bend_s(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Bend S model."""
+    return _dispatch("bend_s", **locals())
+
+
+def bend_euler(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Euler bend model."""
+    return _dispatch("bend_euler", **locals())
+
+
+def bend_euler_strip(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Euler bend strip model."""
+    return _dispatch("bend_euler_strip", **locals())
+
+
+def bend_euler_rib(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Euler bend rib model."""
+    return _dispatch("bend_euler_rib", **locals())
+
+
+def taper(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper model."""
+    return _dispatch("taper", **locals())
+
+
+def taper_rib(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper rib model."""
+    return _dispatch("taper_rib", **locals())
+
+
+def taper_strip_to_ridge(
+    *,
+    wl: Float | None = None,
+    length: float | None = None,
+    loss_dB_cm: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper strip to ridge model."""
+    return _dispatch("taper_strip_to_ridge", **locals())
+
+
+def trans_rib10(
+    *,
+    wl: Float | None = None,
+    loss_dB_cm: float | None = None,
+    length: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper strip to ridge 10um model."""
+    return _dispatch("trans_rib10", **locals())
+
+
+def trans_rib20(
+    *,
+    wl: Float | None = None,
+    loss_dB_cm: float | None = None,
+    length: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper strip to ridge 20um model."""
+    return _dispatch("trans_rib20", **locals())
+
+
+def trans_rib50(
+    *,
+    wl: Float | None = None,
+    loss_dB_cm: float | None = None,
+    length: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Taper strip to ridge 50um model."""
+    return _dispatch("trans_rib50", **locals())
+
+
+def directional_coupler_no_phase(
+    *,
+    wl: float | None = None,
+    coupler_length: float | None = None,
+    gap: float | None = None,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Directional coupler coupling-region model (no propagation phase)."""
+    return _dispatch("directional_coupler_no_phase", **locals())
+
+
+def directional_coupler(
+    *,
+    wl: float | None = None,
+    length: float | None = None,
+    gap: float | None = None,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    width: float | None = None,
+    with_euler: bool | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Directional coupler model."""
+    return _dispatch("directional_coupler", **locals())
+
+
+def coupler_ring_coupling_area(
+    *,
+    wl: float | None = None,
+    gap: float | None = None,
+    radius: float | None = None,
+    length_x: float | None = None,
+    loss_dB: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Ring coupler coupling-region model."""
+    return _dispatch("coupler_ring_coupling_area", **locals())
+
+
+def coupler_ring(
+    *,
+    wl: float | None = None,
+    gap: float | None = None,
+    radius: float | None = None,
+    length_x: float | None = None,
+    p: float | None = None,
+    wl0: float | None = None,
+    loss_dB: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Ring coupler model."""
+    return _dispatch("coupler_ring", **locals())
+
+
+def coupler_strip(
+    *,
+    wl: float | None = None,
+    length: float | None = None,
+    gap: float | None = None,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    width: float | None = None,
+    with_euler: bool | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Directional coupler model."""
+    return _dispatch("coupler_strip", **locals())
+
+
+def coupler_rib(
+    *,
+    wl: float | None = None,
+    length: float | None = None,
+    gap: float | None = None,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    width: float | None = None,
+    with_euler: bool | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Directional coupler model."""
+    return _dispatch("coupler_rib", **locals())
+
+
+def coupler(
+    *,
+    wl: float | None = None,
+    length: float | None = None,
+    gap: float | None = None,
+    offset: float | None = None,
+    bend_radius: float | None = None,
+    width: float | None = None,
+    with_euler: bool | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Directional coupler model."""
+    return _dispatch("coupler", **locals())
+
+
+def mmi1x2_strip(
+    *,
+    wl: Float | None = None,
+    wl0: float | None = None,
+    loss_dB: Float | None = None,
+    fwhm: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 1x2 strip model."""
+    return _dispatch("mmi1x2_strip", **locals())
+
+
+def mmi1x2_rib(
+    *,
+    wl: Float | None = None,
+    wl0: float | None = None,
+    loss_dB: Float | None = None,
+    fwhm: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 1x2 rib model."""
+    return _dispatch("mmi1x2_rib", **locals())
+
+
+def mmi1x2(
+    *,
+    wl: Float | None = None,
+    loss_dB: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 1x2 model."""
+    return _dispatch("mmi1x2", **locals())
+
+
+def mmi2x2_strip(
+    *,
+    wl: Float | None = None,
+    wl0: float | None = None,
+    loss_dB: Float | None = None,
+    fwhm: Float | None = None,
+    shift: sax.FloatArrayLike | None = None,
+    loss_dB_cross: sax.FloatArrayLike | None = None,
+    loss_dB_thru: sax.FloatArrayLike | None = None,
+    splitting_ratio_cross: sax.FloatArrayLike | None = None,
+    splitting_ratio_thru: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 2x2 strip model."""
+    return _dispatch("mmi2x2_strip", **locals())
+
+
+def mmi2x2_rib(
+    *,
+    wl: Float | None = None,
+    wl0: float | None = None,
+    loss_dB: Float | None = None,
+    fwhm: Float | None = None,
+    shift: sax.FloatArrayLike | None = None,
+    loss_dB_cross: sax.FloatArrayLike | None = None,
+    loss_dB_thru: sax.FloatArrayLike | None = None,
+    splitting_ratio_cross: sax.FloatArrayLike | None = None,
+    splitting_ratio_thru: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 2x2 rib model."""
+    return _dispatch("mmi2x2_rib", **locals())
+
+
+def mmi2x2(
+    *,
+    wl: Float | None = None,
+    loss_dB: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """MMI 2x2 model."""
+    return _dispatch("mmi2x2", **locals())
+
+
+def grating_coupler_rectangular_strip(
+    *,
+    wl: Float | None = None,
+    wl0: sax.FloatArrayLike | None = None,
+    loss: sax.FloatArrayLike | None = None,
+    reflection: sax.FloatArrayLike | None = None,
+    reflection_fiber: sax.FloatArrayLike | None = None,
+    bandwidth: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Grating coupler rectangular strip model."""
+    return _dispatch("grating_coupler_rectangular_strip", **locals())
+
+
+def grating_coupler_rectangular_rib(
+    *,
+    wl: Float | None = None,
+    wl0: sax.FloatArrayLike | None = None,
+    loss: sax.FloatArrayLike | None = None,
+    reflection: sax.FloatArrayLike | None = None,
+    reflection_fiber: sax.FloatArrayLike | None = None,
+    bandwidth: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Grating coupler rectangular rib model."""
+    return _dispatch("grating_coupler_rectangular_rib", **locals())
+
+
+def grating_coupler_rectangular(
+    *,
+    wl: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Grating coupler rectangular model."""
+    return _dispatch("grating_coupler_rectangular", **locals())
+
+
+def grating_coupler_elliptical(
+    *,
+    wl: Float | None = None,
+    wl0: sax.FloatArrayLike | None = None,
+    loss: sax.FloatArrayLike | None = None,
+    reflection: sax.FloatArrayLike | None = None,
+    reflection_fiber: sax.FloatArrayLike | None = None,
+    bandwidth: sax.FloatArrayLike | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Grating coupler elliptical model."""
+    return _dispatch("grating_coupler_elliptical", **locals())
+
+
+def straight_heater_metal(
+    *,
+    wl: Float | Sequence[float] | None = None,
+    neff: float | None = None,
+    voltage: float | None = None,
+    vpi: float | None = None,
+    length: float | None = None,
+    loss_dB_cm: sax.FloatArrayLike | None = None,
+    loss: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Returns simple phase shifter model."""
+    return _dispatch("straight_heater_metal", **locals())
+
+
+def crossing_rib(
+    *,
+    wl: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Crossing rib model."""
+    return _dispatch("crossing_rib", **locals())
+
+
+def crossing(
+    *,
+    wl: Float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Crossing model."""
+    return _dispatch("crossing", **locals())
 
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
-    """Return shared model names dispatching to cband or oband behavior."""
-    return _MODELS
+    """Return the public models, which dispatch to the C- or O-band behaviour."""
+    return {
+        "straight_strip": straight_strip,
+        "straight_rib": straight_rib,
+        "straight": straight,
+        "wire_corner": wire_corner,
+        "bend_s": bend_s,
+        "bend_euler": bend_euler,
+        "bend_euler_strip": bend_euler_strip,
+        "bend_euler_rib": bend_euler_rib,
+        "taper": taper,
+        "taper_rib": taper_rib,
+        "taper_strip_to_ridge": taper_strip_to_ridge,
+        "trans_rib10": trans_rib10,
+        "trans_rib20": trans_rib20,
+        "trans_rib50": trans_rib50,
+        "directional_coupler_no_phase": directional_coupler_no_phase,
+        "directional_coupler": directional_coupler,
+        "coupler_ring_coupling_area": coupler_ring_coupling_area,
+        "coupler_ring": coupler_ring,
+        "coupler_strip": coupler_strip,
+        "coupler_rib": coupler_rib,
+        "coupler": coupler,
+        "mmi1x2_strip": mmi1x2_strip,
+        "mmi1x2_rib": mmi1x2_rib,
+        "mmi1x2": mmi1x2,
+        "mmi2x2_strip": mmi2x2_strip,
+        "mmi2x2_rib": mmi2x2_rib,
+        "mmi2x2": mmi2x2,
+        "grating_coupler_rectangular_strip": grating_coupler_rectangular_strip,
+        "grating_coupler_rectangular_rib": grating_coupler_rectangular_rib,
+        "grating_coupler_rectangular": grating_coupler_rectangular,
+        "grating_coupler_elliptical": grating_coupler_elliptical,
+        "straight_heater_metal": straight_heater_metal,
+        "crossing_rib": crossing_rib,
+        "crossing": crossing,
+    }

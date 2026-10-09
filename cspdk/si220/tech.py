@@ -387,6 +387,37 @@ routing_strategies = dict(
     route_bundle_sbend_metal=route_bundle_sbend_metal,
 )
 
+# A* routing is optional: doroutes is not a cspdk dependency, so the A*
+# strategies only exist where the user has installed it. Cells are passed as
+# callables because doroutes resolves names through kfactory's global factory
+# registry, which holds whichever flavour registered a cell name last.
+try:
+    from doroutes import add_bundle_astar
+except ImportError:
+    gf.logger.info(
+        "cspdk.si220: doroutes is not installed, so the route_astar and "
+        "route_astar_metal routing strategies are unavailable"
+    )
+else:
+    routing_strategies.update(
+        route_astar=partial(
+            add_bundle_astar,
+            layers=["WG"],
+            bend=partial(gf.get_component, "bend_euler"),
+            straight=partial(gf.get_component, "straight"),
+            grid_unit=500,
+            spacing=3,
+        ),
+        route_astar_metal=partial(
+            add_bundle_astar,
+            layers=["PAD"],
+            bend=partial(gf.get_component, "wire_corner"),
+            straight=partial(gf.get_component, "straight_metal"),
+            grid_unit=500,
+            spacing=15,
+        ),
+    )
+
 if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
 

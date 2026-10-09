@@ -30,6 +30,7 @@ version = "1.4.5"
 
 [project.optional-dependencies]
 dev = [
+  "doroutes",
   "jsondiff",
   "pre-commit",
   "pytest",
@@ -82,9 +83,6 @@ num = 1000
 
 [tool.hatch.build.targets.wheel]
 packages = ["cspdk"]
-
-[tool.hatch.build.targets.wheel.force-include]
-"cspdk--sample-projects" = "cspdk--sample-projects"
 
 [tool.mypy]
 python_version = "3.12"

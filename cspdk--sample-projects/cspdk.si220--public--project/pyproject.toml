@@ -1,0 +1,75 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=68.0"]
+
+[dependency-groups]
+dev = ["pre-commit", "pytest", "ruff"]
+
+[project]
+authors = [{ name = "GDSFactory", email = "support@gdsfactory.com" }]
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+  "cspdk",
+  "doroutes",
+  "gdsfactoryplus",
+  "matplotlib",
+  "playdough"
+]
+description = "Cornerstone Si220 sample project"
+keywords = ["cornerstone", "cspdk", "eda", "photonics", "python"]
+license = { file = "LICENSE" }
+name = "mycspdk"
+optional-dependencies.notebooks = ["ipywidgets", "scipy", "tqdm"]
+readme = "README.md"
+requires-python = "~=3.12.0"
+version = "0.0.0"
+
+[tool.codespell]
+ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+
+[tool.gdsfactoryplus]
+drc.timeout = 300
+pdk.name = "cspdk.si220"
+sim.wls.max = 1.6
+sim.wls.min = 1.5
+sim.wls.num = 3000
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+lint.ignore = [
+  "B008",  # do not perform function calls in argument defaults
+  "B028",  # stacklevel
+  "B904",
+  "B905",  # `zip()` without an explicit `strict=` parameter
+  "C408",  # C408 Unnecessary `dict` call (rewrite as a literal)
+  "C901",  # too complex
+  "D100",  # public module docstrings
+  "D101",  # public class docstrings
+  "D102",  # public method docstrings
+  "D103",  # public function docstrings
+  "D104",  # public package docstrings
+  "E501"  # line too long, handled by black
+]
+lint.pydocstyle.convention = "google"
+lint.select = [
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  "D",  # pydocstyle
+  "E",  # pycodestyle errors
+  "F",  # pyflakes
+  "I",  # isort
+  "T10",  # flake8-debugger
+  "UP",  # pyupgrade
+  "W"  # pycodestyle warnings
+]
+
+[tool.setuptools]
+package-data."*" = ["*.gds", "*.json", "*.nyancir", "*.yaml", "*.yml"]
+packages.find.include = ["mycspdk*"]
+packages.find.namespaces = false
+packages.find.where = ["."]

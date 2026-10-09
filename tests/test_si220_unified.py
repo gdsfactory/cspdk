@@ -263,7 +263,10 @@ def test_dispatched_models_expose_cross_section() -> None:
     """SAX only forwards settings in the model signature, so every model needs it."""
     import inspect
 
-    for name, model in si220.PDK.models.items():
+    from cspdk.si220.models import get_models
+
+    for name, model in get_models().items():
+        assert si220.PDK.models[name] is model, name
         assert "cross_section" in inspect.signature(model).parameters, name
 
 
@@ -294,5 +297,26 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
     heater = si220.cells.straight_heater_metal
     length = heater(cross_section="strip_oband").info["length"]
     circuit = _simulate(_two_in_series(heater, cross_section="strip_oband"), [1.31])
-    expected = oband.straight_heater_metal(wl=1.31, length=2 * length)["o1", "o2"]
+    oband_heater = oband.get_models()["straight_heater_metal"]
+    expected = oband_heater(wl=1.31, length=2 * length)["o1", "o2"]
     assert np.allclose(circuit["o1", "o2"][0], expected)
+
+
+def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
+    """GDSFactory+ scans the package source for models; it must find only dispatchers.
+
+    It registers every public ``def`` returning ``sax.SDict`` by name, so a public
+    band implementation in a submodule would replace the dispatcher of the same name.
+    """
+    from pathlib import Path
+
+    from gdsfactoryplus.core import find_models
+
+    from cspdk.si220.models import get_models
+
+    records = find_models({"cspdk.si220": Path(si220.__file__).parent})
+    sources = {name: Path(record.source).as_posix() for name, record in records.items()}
+    assert sources.keys() == get_models().keys()
+    assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
+        sources
+    )

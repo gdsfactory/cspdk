@@ -1,6 +1,7 @@
 """Directional Couplers."""
 
 import math
+from collections.abc import Callable
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -13,7 +14,7 @@ from jaxtyping import ArrayLike
 from cspdk.si220.tech import TECH
 
 from . import oband
-from .waveguides import bend_euler, straight_rib, straight_strip
+from .waveguides import _bend_euler, _straight_rib, _straight_strip
 
 if TYPE_CHECKING:
     SDict = sax.SDict
@@ -48,12 +49,12 @@ _XARR_RACETRACK = _load_tables("coupler_racetrack")
 xarr_dc_strip = _XARR_DC["cband", "strip"]
 xarr_racetrack_strip = _XARR_RACETRACK["cband", "strip"]
 _STRAIGHT = {
-    ("cband", "strip"): straight_strip,
-    ("cband", "rib"): straight_rib,
-    ("oband", "strip"): oband.straight_strip,
-    ("oband", "rib"): oband.straight_rib,
+    ("cband", "strip"): _straight_strip,
+    ("cband", "rib"): _straight_rib,
+    ("oband", "strip"): oband._straight_strip,
+    ("oband", "rib"): oband._straight_rib,
 }
-_BEND = {"cband": bend_euler, "oband": oband.bend_euler}
+_BEND = {"cband": _bend_euler, "oband": oband._bend_euler}
 _WIDTH = {"cband": TECH.width_cband, "oband": TECH.width_oband}
 
 
@@ -95,7 +96,7 @@ def _sbend_geometry(
     return offset, dx / (2 * math.sin(theta))
 
 
-def directional_coupler_no_phase(
+def _directional_coupler_no_phase(
     *,
     wl: float = 1.55,
     coupler_length: float = 10.0,
@@ -142,7 +143,7 @@ def directional_coupler_no_phase(
     )
 
 
-def directional_coupler(
+def _directional_coupler(
     *,
     wl: float = 1.55,
     length: float | None = None,
@@ -213,7 +214,7 @@ def directional_coupler(
         },
         models={
             "straight": _STRAIGHT[band, cross_section],
-            "coupling_area": directional_coupler_no_phase,
+            "coupling_area": _directional_coupler_no_phase,
         },
     )
 
@@ -243,12 +244,12 @@ def directional_coupler(
     )
 
 
-coupler_strip = directional_coupler
-coupler_rib = directional_coupler
-coupler = directional_coupler
+_coupler_strip = _directional_coupler
+_coupler_rib = _directional_coupler
+_coupler = _directional_coupler
 
 
-def coupler_ring_coupling_area(
+def _coupler_ring_coupling_area(
     *,
     wl: float = 1.55,
     gap: float = 0.1,
@@ -301,7 +302,7 @@ def coupler_ring_coupling_area(
     )
 
 
-def coupler_ring(  # this is not the complete model!!!!
+def _coupler_ring(  # this is not the complete model!!!!
     *,
     wl: float = 1.55,
     gap: float = 0.1,
@@ -351,7 +352,7 @@ def coupler_ring(  # this is not the complete model!!!!
             },
         },
         models={
-            "coupler_ring": coupler_ring_coupling_area,
+            "coupler_ring": _coupler_ring_coupling_area,
             "bend_euler": _BEND[band],
         },
     )
@@ -378,3 +379,16 @@ def coupler_ring(  # this is not the complete model!!!!
             ("o2", "o3"): s["o2", "o3"],
         }
     )
+
+
+def get_models() -> dict[str, Callable[..., sax.SDict]]:
+    """Return the C-band coupler models keyed by model name."""
+    return {
+        "directional_coupler_no_phase": _directional_coupler_no_phase,
+        "directional_coupler": _directional_coupler,
+        "coupler_ring_coupling_area": _coupler_ring_coupling_area,
+        "coupler_ring": _coupler_ring,
+        "coupler_strip": _coupler_strip,
+        "coupler_rib": _coupler_rib,
+        "coupler": _coupler,
+    }
