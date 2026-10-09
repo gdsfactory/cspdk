@@ -42,7 +42,7 @@ def ThermalPhaseShifter(
         signals: Input signals at each port, provided by circulax.
         s: Mutable state container for the ``i_fwd`` branch current.
         ohms_per_um: Heater resistance per unit length (must be positive).
-        eta_pi_per_W: Phase shift efficiency (radians per watt).
+        eta_pi_per_W: Phase shift efficiency (multiples of π per watt).
         length: Heater length in micrometres (must be positive).
         loss_dBcm: Propagation loss in dB/cm.
         neff0: Effective refractive index.

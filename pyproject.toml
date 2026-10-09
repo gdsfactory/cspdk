@@ -62,6 +62,14 @@ pdk = "cspdk"
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
+# Layout-only cells: no ports to model (the fixed foundry heater has none)
+cells_no_model_expected = [
+  "add_pads_top",
+  "compass",
+  "heater",
+  "text_rectangular",
+  "text_rectangular_multi_layer"
+]
 name = "cspdk.si220"
 options = [
   "cspdk.si220",

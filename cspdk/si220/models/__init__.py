@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import inspect
-from collections.abc import Callable, Sequence
+from collections.abc import Callable
 
 import jax.numpy as jnp
 import sax
@@ -194,47 +194,6 @@ def _grating_coupler_elliptical(
 ################
 
 
-def _straight_heater_metal(
-    wl: Float | Sequence[float] = 1.55,
-    neff: float = 2.34,
-    voltage: float = 0,
-    vpi: float = 1.0,  # Voltage required for π-phase shift
-    length: float = 10,
-    loss_dB_cm: sax.FloatArrayLike = 3.0,
-) -> sax.SDict:
-    """Returns simple phase shifter model.
-
-    Args:
-        wl: wavelength.
-        neff: effective index.
-        voltage: applied voltage.
-        vpi: voltage required for a π-phase shift.
-        length: length.
-        loss_dB_cm: The Propagation loss in dB/cm.
-
-
-    ```
-
-     o1 =========== o2
-    ```
-    """
-    wl = jnp.asarray(wl)  # type: ignore
-    # Calculate additional phase shift due to applied voltage.
-    deltaphi = (voltage / vpi) * jnp.pi
-    phase = 2 * jnp.pi * neff * length / wl + deltaphi
-    amplitude = jnp.asarray(10 ** (-1e-4 * loss_dB_cm * length / 20), dtype=complex)
-    transmission = amplitude * jnp.exp(1j * phase)
-    return sax.reciprocal(
-        {
-            ("o1", "o2"): transmission,
-            ("l_e1", "r_e1"): 0.0,
-            ("l_e2", "r_e2"): 0.0,
-            ("l_e3", "r_e3"): 0.0,
-            ("l_e4", "r_e4"): 0.0,
-        }
-    )
-
-
 def _crossing_rib(
     *,
     wl: Float = 1.55,
@@ -268,7 +227,6 @@ _CBAND: dict[str, Callable[..., sax.SDict]] = {
     "grating_coupler_rectangular_rib": _grating_coupler_rectangular_rib,
     "grating_coupler_rectangular": _grating_coupler_rectangular,
     "grating_coupler_elliptical": _grating_coupler_elliptical,
-    "straight_heater_metal": _straight_heater_metal,
     "crossing_rib": _crossing_rib,
     "crossing": _crossing,
 }
@@ -303,7 +261,11 @@ def _dispatch(name: str, cross_section: CrossSectionSpec, **kwargs) -> sax.SDict
         if value is not None and (accepts_kwargs or key in signature.parameters)
     }
     if "cross_section" in signature.parameters:
-        call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
+        # A model named *_rib / *_strip is that geometry whatever the cross-section says.
+        if name.endswith(("_rib", "_strip")):
+            call_kwargs["cross_section"] = name.rsplit("_", 1)[1]
+        else:
+            call_kwargs["cross_section"] = "rib" if is_rib(cross_section) else "strip"
     return target(**call_kwargs)
 
 
@@ -331,7 +293,7 @@ def straight_rib(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Straight rib waveguide model."""
     return _dispatch("straight_rib", **locals())
@@ -395,7 +357,7 @@ def bend_euler_rib(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 3,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Euler bend rib model."""
     return _dispatch("bend_euler_rib", **locals())
@@ -417,7 +379,7 @@ def taper_rib(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Taper rib model."""
     return _dispatch("taper_rib", **locals())
@@ -545,7 +507,7 @@ def coupler_rib(
     bend_radius: float | None = None,
     width: float = 1.0,
     with_euler: bool = False,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Directional coupler model."""
     return _dispatch("coupler_rib", **locals())
@@ -582,7 +544,7 @@ def mmi1x2_rib(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     fwhm: Float = 0.2,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """MMI 1x2 rib model."""
     return _dispatch("mmi1x2_rib", **locals())
@@ -614,7 +576,7 @@ def mmi2x2_rib(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     fwhm: Float = 0.2,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """MMI 2x2 rib model."""
     return _dispatch("mmi2x2_rib", **locals())
@@ -642,7 +604,7 @@ def grating_coupler_rectangular_strip(
 def grating_coupler_rectangular_rib(
     *,
     wl: Float = 1.55,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Grating coupler rectangular rib model."""
     return _dispatch("grating_coupler_rectangular_rib", **locals())
@@ -668,21 +630,34 @@ def grating_coupler_elliptical(
 
 def straight_heater_metal(
     *,
-    wl: Float | Sequence[float] = 1.55,
-    voltage: float = 0,
+    wl: Float = 1.55,
+    voltage: float = 0.0,
     vpi: float = 1.0,
-    length: float = 10,
-    loss_dB_cm: sax.FloatArrayLike = 3.0,
+    length: float = 10.0,
+    loss_dB_cm: float = 3.0,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """Returns simple phase shifter model."""
+    """Thermo-optic phase shifter on a strip waveguide."""
     return _dispatch("straight_heater_metal", **locals())
+
+
+def straight_heater_meander(
+    *,
+    wl: Float = 1.55,
+    voltage: float = 0.0,
+    vpi: float = 1.0,
+    length: float = 10.0,
+    loss_dB_cm: float = 3.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> sax.SDict:
+    """Meander thermo-optic phase shifter (heated length only)."""
+    return _dispatch("straight_heater_meander", **locals())
 
 
 def crossing_rib(
     *,
     wl: Float = 1.55,
-    cross_section: CrossSectionSpec = "strip_cband",
+    cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """Crossing rib model."""
     return _dispatch("crossing_rib", **locals())
@@ -732,6 +707,7 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         "grating_coupler_rectangular": grating_coupler_rectangular,
         "grating_coupler_elliptical": grating_coupler_elliptical,
         "straight_heater_metal": straight_heater_metal,
+        "straight_heater_meander": straight_heater_meander,
         "crossing_rib": crossing_rib,
         "crossing": crossing,
     }

@@ -6,11 +6,13 @@ import pytest
 from _schematic_checks import (
     check_all_ports_match_gds,
     check_bend_ports_left_top,
+    check_circulax_model_refs,
     check_ports_clockwise_from_left,
     check_ports_subset_of_component,
     check_sax_model_refs,
     check_sax_port_order_matches_sdict,
     check_symbol_present,
+    schematic_driven_cells,
 )
 
 from cspdk.si220 import PDK
@@ -54,3 +56,18 @@ def test_sax_model_refs() -> None:
 def test_sax_port_order_matches_sdict() -> None:
     """Each SAX model's SDict keys are drawn from the declared port_order."""
     check_sax_port_order_matches_sdict(PDK)
+
+
+def test_circulax_model_refs() -> None:
+    """Every circulax model entry resolves to a class in its python module."""
+    check_circulax_model_refs(PDK)
+
+
+@pytest.mark.parametrize("cell", ["straight_heater_metal", "straight_heater_meander"])
+def test_heater_schematics_use_thermal_phase_shifter(cell: str) -> None:
+    """GDSFactory+ finds the heaters' circulax model through the schematic."""
+    factory = dict(schematic_driven_cells(PDK))[cell]
+    entries = factory.get_schematic().info["models"]
+    assert [e["qualname"] for e in entries if e["language"] == "circulax"] == [
+        "ThermalPhaseShifter"
+    ]

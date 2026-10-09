@@ -248,6 +248,54 @@ def _trans_rib50(
     )
 
 
+def _straight_heater_metal(
+    *,
+    wl: Float = 1.55,
+    wl0: float = 1.55,
+    neff: float = 2.38,
+    ng: float = 4.30,
+    voltage: float = 0.0,
+    vpi: float = 1.0,
+    length: float = 10.0,
+    loss_dB_cm: float = 3.0,
+) -> sax.SDict:
+    """Thermo-optic phase shifter on a strip waveguide.
+
+    Propagation is the strip waveguide's, dispersive through ``neff`` and ``ng`` at
+    ``wl0``. The heater adds a phase proportional to its dissipated power, so to the
+    voltage squared, with ``vpi`` giving a π shift. Heating raises the index, so the
+    added phase has the same sign as extra waveguide length.
+
+    Args:
+        wl: wavelength [µm].
+        wl0: wavelength at which ``neff`` and ``ng`` are given [µm].
+        neff: effective index of the strip waveguide.
+        ng: group index of the strip waveguide.
+        voltage: heater voltage [V].
+        vpi: heater voltage for a π phase shift [V].
+        length: heated waveguide length [µm].
+        loss_dB_cm: propagation loss [dB/cm].
+    """
+    straight = sm.straight(
+        wl=wl, wl0=wl0, neff=neff, ng=ng, length=length, loss_dB_cm=loss_dB_cm
+    )
+    transmission = straight["o1", "o2"] * jnp.exp(1j * jnp.pi * (voltage / vpi) ** 2)
+    return sax.reciprocal(
+        {
+            ("o1", "o2"): transmission,
+            ("l_e1", "r_e1"): 0.0,
+            ("l_e2", "r_e2"): 0.0,
+            ("l_e3", "r_e3"): 0.0,
+            ("l_e4", "r_e4"): 0.0,
+        }
+    )
+
+
+# The meander's netlist ``length`` is its heated length; the extra optical path through
+# the meander bends is not modelled.
+_straight_heater_meander = _straight_heater_metal
+
+
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Return the C-band waveguide models keyed by model name."""
     return {
@@ -265,4 +313,6 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         "trans_rib10": _trans_rib10,
         "trans_rib20": _trans_rib20,
         "trans_rib50": _trans_rib50,
+        "straight_heater_metal": _straight_heater_metal,
+        "straight_heater_meander": _straight_heater_meander,
     }

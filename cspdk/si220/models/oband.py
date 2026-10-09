@@ -12,6 +12,8 @@ from numpy.typing import NDArray
 
 from cspdk.si220.tech import TECH
 
+from . import waveguides
+
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
@@ -330,38 +332,11 @@ _grating_coupler_elliptical = partial(
 ################
 
 
-def _straight_heater_metal(
-    wl: float = 1.31,
-    neff: float = 2.52,
-    voltage: float = 0,
-    vpi: float = 1.0,  # Voltage required for π-phase shift
-    length: float = 10,
-    loss: float = 0.0,
-) -> sax.SDict:
-    """Returns simple phase shifter model.
-
-    Args:
-        wl: wavelength.
-        neff: effective index.
-        voltage: applied voltage.
-        vpi: voltage required for a π-phase shift.
-        length: length.
-        loss: loss.
-    """
-    # Calculate additional phase shift due to applied voltage.
-    deltaphi = (voltage / vpi) * jnp.pi
-    phase = 2 * jnp.pi * neff * length / wl + deltaphi
-    amplitude = jnp.asarray(10 ** (-loss * length / 20), dtype=complex)
-    transmission = amplitude * jnp.exp(1j * phase)
-    return sax.reciprocal(
-        {
-            ("o1", "o2"): transmission,
-            ("l_e1", "r_e1"): 0.0,
-            ("l_e2", "r_e2"): 0.0,
-            ("l_e3", "r_e3"): 0.0,
-            ("l_e4", "r_e4"): 0.0,
-        }
-    )
+# Same heater as the C-band model, with the O-band strip waveguide's indices.
+_straight_heater_metal = partial(
+    waveguides._straight_heater_metal, wl=1.31, wl0=1.31, neff=2.56, ng=4.34
+)
+_straight_heater_meander = _straight_heater_metal
 
 
 _crossing_rib = sm.crossing_ideal
@@ -407,6 +382,7 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         "grating_coupler_rectangular": _grating_coupler_rectangular,
         "grating_coupler_elliptical": _grating_coupler_elliptical,
         "straight_heater_metal": _straight_heater_metal,
+        "straight_heater_meander": _straight_heater_meander,
         "crossing_rib": _crossing_rib,
         "crossing": _crossing,
     }
