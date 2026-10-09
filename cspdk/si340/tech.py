@@ -155,7 +155,7 @@ xsection = gf.xsection
 
 
 @xsection
-def xs_sc(
+def xs_sc340(
     width: float = TECH.width_sc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_sc,
@@ -173,7 +173,7 @@ def xs_sc(
 
 
 @xsection
-def xs_so(
+def xs_so340(
     width: float = TECH.width_so,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_so,
@@ -191,7 +191,7 @@ def xs_so(
 
 
 @xsection
-def xs_rc(
+def xs_rc340(
     width: float = TECH.width_rc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_rc,
@@ -229,7 +229,7 @@ def metal_routing(
 
 
 @xsection
-def heater_metal(
+def heater_metal_si340(
     width: float = 2.5,
     layer: LayerSpec = "HEATER",
     radius: float | None = None,
@@ -264,7 +264,7 @@ def route_single(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_euler_sc",
 ) -> ManhattanRoute:
@@ -302,7 +302,7 @@ def route_bundle(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | list[float] | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     straight: ComponentSpec = "straight_sc",
     bend: ComponentSpec = "bend_euler_sc",
     taper: ComponentSpec = "taper_sc",
@@ -341,19 +341,19 @@ routing_strategies = dict(
         route_single,
         straight="straight_sc",
         bend="bend_euler_sc",
-        cross_section="xs_sc",
+        cross_section="xs_sc340",
     ),
     route_single_so=partial(
         route_single,
         straight="straight_so",
         bend="bend_euler_so",
-        cross_section="xs_so",
+        cross_section="xs_so340",
     ),
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc340",
     ),
     route_bundle=route_bundle,
     route_bundle_sc=partial(
@@ -361,21 +361,21 @@ routing_strategies = dict(
         straight="straight_sc",
         bend="bend_euler_sc",
         taper="taper_sc",
-        cross_section="xs_sc",
+        cross_section="xs_sc340",
     ),
     route_bundle_so=partial(
         route_bundle,
         straight="straight_so",
         bend="bend_euler_so",
         taper="taper_so",
-        cross_section="xs_so",
+        cross_section="xs_so340",
     ),
     route_bundle_rc=partial(
         route_bundle,
         straight="straight_rc",
         bend="bend_euler_rc",
         taper="taper_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc340",
     ),
 )
 

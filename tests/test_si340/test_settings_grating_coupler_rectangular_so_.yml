@@ -2,7 +2,7 @@ info:
   fiber_angle: 10
   polarization: te
   wavelength: 1.31
-name: grating_coupler_rectangular_P0p47_NP60_FF0p468_LT350_W1_adef4f2b
+name: grating_coupler_rectangular_P0p47_NP60_FF0p468_LT350_W1_785799bf
 ports:
   o1:
     center:
@@ -23,7 +23,7 @@ ports:
     port_type: vertical_te
     width: 11
 settings:
-  cross_section: xs_so
+  cross_section: xs_so340
   fill_factor: 0.468
   length_taper: 350
   n_periods: 60

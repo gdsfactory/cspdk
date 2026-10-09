@@ -9,7 +9,7 @@ info:
   route_info_weight: 20.115
   route_info_xs_sus_length: 20.115
   start_angle: 0
-name: bend_s_S20_1p8_CSxs_sus_AMRVTrue
+name: bend_s_S20_1p8_CSxs_sus_AMRVTrue_WNone
 ports:
   o1:
     center:

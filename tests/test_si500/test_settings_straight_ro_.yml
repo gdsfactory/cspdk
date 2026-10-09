@@ -1,11 +1,11 @@
 info:
   length: 10
   route_info_length: 10
-  route_info_type: xs_ro
+  route_info_type: xs_ro500
   route_info_weight: 10
-  route_info_xs_ro_length: 10
+  route_info_xs_ro500_length: 10
   width: 0.4
-name: straight_L10_CSxs_ro
+name: straight_L10_CSxs_ro500
 ports:
   o1:
     center:
@@ -26,5 +26,5 @@ ports:
     port_type: optical
     width: 0.4
 settings:
-  cross_section: xs_ro
+  cross_section: xs_ro500
   length: 10

@@ -1,5 +1,5 @@
 info: {}
-name: mzi_DL10_Bbend_euler_sc_Sstraight_sc_Smmi1x2_sc_Cmmi2x2_1d19725f
+name: mzi_DL10_Bbend_euler_sc_Sstraight_sc_Smmi1x2_sc_Cmmi2x2_aa64b438
 ports:
   o1:
     center:
@@ -31,7 +31,7 @@ ports:
 settings:
   bend: bend_euler_sc
   combiner: mmi2x2_sc
-  cross_section: xs_sc
+  cross_section: xs_sc340
   delta_length: 10
   splitter: mmi1x2_sc
   straight: straight_sc

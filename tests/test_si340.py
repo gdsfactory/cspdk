@@ -186,20 +186,3 @@ def test_port_orientations_manhattan(component_name: str) -> None:
                 f"Port {port.name} of {component_name} has non-manhattan "
                 f"orientation {port.orientation} degrees."
             )
-
-
-if __name__ == "__main__":
-    component_type = "mzi_no"
-    c = cells[component_type]()
-    n = c.get_netlist()
-    n.pop("connections", None)
-
-    yaml_str = c.write_netlist(n)
-    c2 = gf.read.from_yaml(yaml_str)
-    c2.show()
-    n2 = c2.get_netlist()
-    d = jsondiff.diff(n, n2)
-    d.pop("warnings", None)
-    d.pop("connections", None)
-    d.pop("ports", None)
-    assert len(d) == 0, d

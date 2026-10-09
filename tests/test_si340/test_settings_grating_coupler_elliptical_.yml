@@ -2,7 +2,7 @@ info:
   period: 0.685
   polarization: te
   wavelength: 1.55
-name: grating_coupler_elliptical_W1p55_GLW0p315_CSxs_sc
+name: grating_coupler_elliptical_W1p55_GLW0p315_CSxs_sc340
 ports:
   o1:
     center:
@@ -23,6 +23,6 @@ ports:
     port_type: vertical_te
     width: 10
 settings:
-  cross_section: xs_sc
+  cross_section: xs_sc340
   grating_line_width: 0.315
   wavelength: 1.55

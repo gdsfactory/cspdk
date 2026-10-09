@@ -77,6 +77,7 @@ def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_n780",
     allow_min_radius_violation: bool = True,
+    width: float | None = None,
 ) -> Component:
     """An S-bend.
 
@@ -84,11 +85,13 @@ def bend_s(
         size: the width and height of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
+        width: waveguide width; defaults to the cross-section width.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
         allow_min_radius_violation=allow_min_radius_violation,
+        width=width,
     )
 
 

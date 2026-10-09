@@ -1,5 +1,5 @@
 info: {}
-name: grating_coupler_array_P127_N6_CSxs_sc_CTrue_GCNone_PNo1_28904b2e
+name: grating_coupler_array_P127_N6_CSxs_sc340_CTrue_GCNone_P_ea67e568
 ports:
   o0:
     center:
@@ -57,7 +57,7 @@ ports:
     width: 0.45
 settings:
   centered: true
-  cross_section: xs_sc
+  cross_section: xs_sc340
   n: 6
   pitch: 127
   port_name: o1

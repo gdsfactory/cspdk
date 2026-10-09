@@ -9,7 +9,7 @@ info:
   route_info_weight: 80.222
   route_info_xs_rib_length: 80.222
   start_angle: 0
-name: bend_s_S80_5_CSxs_rib_AMRVTrue
+name: bend_s_S80_5_CSxs_rib_AMRVTrue_WNone
 ports:
   o1:
     center:

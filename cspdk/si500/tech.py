@@ -140,7 +140,7 @@ xsection = gf.xsection
 
 
 @xsection
-def xs_rc(
+def xs_rc500(
     width: float = TECH.width_rc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_rc,
@@ -162,7 +162,7 @@ def xs_rc(
 
 
 @xsection
-def xs_ro(
+def xs_ro500(
     width: float = TECH.width_ro,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_ro,
@@ -200,7 +200,7 @@ def metal_routing(
 
 
 @xsection
-def heater_metal(
+def heater_metal_si500(
     width: float = 4,
     layer: LayerSpec = "HEATER",
     radius: float | None = None,
@@ -235,7 +235,7 @@ def route_single(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | None = None,
-    cross_section: CrossSectionSpec = "xs_rc",
+    cross_section: CrossSectionSpec = "xs_rc500",
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
 ) -> ManhattanRoute:
@@ -273,7 +273,7 @@ def route_bundle(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | list[float] | None = None,
-    cross_section: CrossSectionSpec = "xs_rc",
+    cross_section: CrossSectionSpec = "xs_rc500",
     straight: ComponentSpec = "straight_rc",
     bend: ComponentSpec = "bend_euler_rc",
     taper: ComponentSpec = "taper_rc",
@@ -312,13 +312,13 @@ routing_strategies = dict(
         route_single,
         straight="straight_rc",
         bend="bend_euler_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc500",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
         bend="bend_euler_ro",
-        cross_section="xs_ro",
+        cross_section="xs_ro500",
     ),
     route_bundle=route_bundle,
     route_bundle_rc=partial(
@@ -326,14 +326,14 @@ routing_strategies = dict(
         straight="straight_rc",
         bend="bend_euler_rc",
         taper="taper_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc500",
     ),
     route_bundle_ro=partial(
         route_bundle,
         straight="straight_ro",
         bend="bend_euler_ro",
         taper="taper_ro",
-        cross_section="xs_ro",
+        cross_section="xs_ro500",
     ),
 )
 

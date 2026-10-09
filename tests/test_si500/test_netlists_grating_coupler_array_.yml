@@ -6,7 +6,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -18,7 +18,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -30,7 +30,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -42,7 +42,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -54,7 +54,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57
@@ -66,7 +66,7 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_rc
+      cross_section: xs_rc500
       length_taper: 350
       n_periods: 60
       period: 0.57

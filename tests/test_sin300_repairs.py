@@ -219,7 +219,7 @@ def test_mzi_simulates_and_interferes(band, wl0):
 
 @pytest.mark.parametrize(
     "cross_section,layer,width",
-    [("metal_routing", "PAD", 10.0), ("heater_metal", "HEATER", 4.0)],
+    [("metal_routing", "PAD", 10.0), ("heater_metal_sin300", "HEATER", 4.0)],
 )
 def test_electrical_straight(cross_section, layer, width):
     """Metal wires have two unique electrical ports and no extra heater strip."""
@@ -237,7 +237,7 @@ def test_electrical_straight(cross_section, layer, width):
 
 
 @pytest.mark.parametrize(
-    "cross_section,layer", [("metal_routing", "PAD"), ("heater_metal", "HEATER")]
+    "cross_section,layer", [("metal_routing", "PAD"), ("heater_metal_sin300", "HEATER")]
 )
 @pytest.mark.parametrize("bundle", [False, True])
 def test_electrical_routing(cross_section, layer, bundle):

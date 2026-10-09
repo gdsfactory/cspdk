@@ -1,11 +1,11 @@
 info:
   length: 10
   route_info_length: 10
-  route_info_type: xs_sc
+  route_info_type: xs_sc340
   route_info_weight: 10
-  route_info_xs_sc_length: 10
+  route_info_xs_sc340_length: 10
   width: 0.45
-name: straight_L10_CSxs_sc
+name: straight_L10_CSxs_sc340
 ports:
   o1:
     center:
@@ -26,5 +26,5 @@ ports:
     port_type: optical
     width: 0.45
 settings:
-  cross_section: xs_sc
+  cross_section: xs_sc340
   length: 10

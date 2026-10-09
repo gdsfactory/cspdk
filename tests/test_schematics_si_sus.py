@@ -46,5 +46,5 @@ def test_ports_subset_of_component() -> None:
 
 
 def test_sax_model_refs() -> None:
-    """Only the python module resolution is checked (si500 has no SAX models)."""
+    """Only the python module resolution is checked (si_sus has no SAX models)."""
     check_sax_model_refs(PDK, has_models=False)

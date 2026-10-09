@@ -2,7 +2,7 @@ info:
   period: 0.579
   polarization: te
   wavelength: 1.31
-name: grating_coupler_elliptical_W1p31_GLW0p25_CSxs_ro
+name: grating_coupler_elliptical_W1p31_GLW0p25_CSxs_ro500
 ports:
   o1:
     center:
@@ -23,6 +23,6 @@ ports:
     port_type: vertical_te
     width: 10
 settings:
-  cross_section: xs_ro
+  cross_section: xs_ro500
   grating_line_width: 0.25
   wavelength: 1.31

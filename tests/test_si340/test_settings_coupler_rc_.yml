@@ -1,7 +1,7 @@
 info:
   min_bend_radius: 28.222
   path_length: 50.208
-name: coupler_G0p236_L20_D4_D15_CSxs_rc
+name: coupler_G0p236_L20_D4_D15_CSxs_rc340
 ports:
   o1:
     center:
@@ -40,7 +40,7 @@ ports:
     port_type: optical
     width: 0.8
 settings:
-  cross_section: xs_rc
+  cross_section: xs_rc340
   dx: 15
   dy: 4
   gap: 0.236

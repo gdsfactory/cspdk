@@ -1,5 +1,5 @@
 info: {}
-name: mmi2x2_WNone_WT1p5_LT50p2_LM5p5_WM6_GM0p4_CSxs_ro
+name: mmi2x2_WNone_WT1p5_LT50p2_LM5p5_WM6_GM0p4_CSxs_ro500
 ports:
   o1:
     center:
@@ -38,7 +38,7 @@ ports:
     port_type: optical
     width: 0.4
 settings:
-  cross_section: xs_ro
+  cross_section: xs_ro500
   gap_mmi: 0.4
   length_mmi: 5.5
   length_taper: 50.2

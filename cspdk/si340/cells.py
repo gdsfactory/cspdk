@@ -36,7 +36,7 @@ from cspdk.si340.tech import LAYER, Tech
 @gf.cell(tags=["cells"], schematic_function=straight_schematic)
 def straight(
     length: float = 10.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     **kwargs,
 ) -> gf.Component:
     """A straight waveguide.
@@ -49,9 +49,9 @@ def straight(
     return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
 
 
-straight_sc = partial(straight, cross_section="xs_sc")
-straight_so = partial(straight, cross_section="xs_so")
-straight_rc = partial(straight, cross_section="xs_rc")
+straight_sc = partial(straight, cross_section="xs_sc340")
+straight_so = partial(straight, cross_section="xs_so340")
+straight_rc = partial(straight, cross_section="xs_rc340")
 
 
 ################
@@ -75,8 +75,9 @@ def wire_corner(cross_section="metal_routing", **kwargs) -> gf.Component:
 @gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     allow_min_radius_violation: bool = True,
+    width: float | None = None,
 ) -> gf.Component:
     """An S-bend.
 
@@ -84,11 +85,13 @@ def bend_s(
         size: the width and height of the s-bend.
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
+        width: waveguide width; defaults to the cross-section width.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
         allow_min_radius_violation=allow_min_radius_violation,
+        width=width,
     )
 
 
@@ -98,7 +101,7 @@ def bend_euler(
     angle: float = 90.0,
     p: float = 0.5,
     width: float | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """An euler bend.
 
@@ -122,9 +125,9 @@ def bend_euler(
     )
 
 
-bend_euler_sc = partial(bend_euler, cross_section="xs_sc")
-bend_euler_so = partial(bend_euler, cross_section="xs_so")
-bend_euler_rc = partial(bend_euler, cross_section="xs_rc")
+bend_euler_sc = partial(bend_euler, cross_section="xs_sc340")
+bend_euler_so = partial(bend_euler, cross_section="xs_so340")
+bend_euler_rc = partial(bend_euler, cross_section="xs_rc340")
 
 ################
 # Transitions
@@ -137,7 +140,7 @@ def taper(
     width1: float = Tech.width_sc,
     width2: float | None = None,
     port: gf.Port | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """A taper.
 
@@ -161,21 +164,21 @@ def taper(
 
 taper_sc = partial(
     taper,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
     length=10.0,
     width1=Tech.width_sc,
     width2=None,
 )
 taper_so = partial(
     taper,
-    cross_section="xs_so",
+    cross_section="xs_so340",
     length=10.0,
     width1=Tech.width_so,
     width2=None,
 )
 taper_rc = partial(
     taper,
-    cross_section="xs_rc",
+    cross_section="xs_rc340",
     length=10.0,
     width1=Tech.width_rc,
     width2=None,
@@ -194,7 +197,7 @@ def mmi1x2(
     length_mmi: float = 34.7,
     width_mmi=6.0,
     gap_mmi: float = 1.65,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """An mmi1x2.
 
@@ -223,10 +226,10 @@ def mmi1x2(
 
 
 # dimensions from the Cornerstone SOI 340nm standard components reference GDS
-mmi1x2_sc = partial(mmi1x2, cross_section="xs_sc")
-mmi1x2_so = partial(mmi1x2, length_mmi=42.6, gap_mmi=1.51, cross_section="xs_so")
+mmi1x2_sc = partial(mmi1x2, cross_section="xs_sc340")
+mmi1x2_so = partial(mmi1x2, length_mmi=42.6, gap_mmi=1.51, cross_section="xs_so340")
 # no foundry reference exists for rib MMIs; defaults follow the strip C-band values
-mmi1x2_rc = partial(mmi1x2, cross_section="xs_rc")
+mmi1x2_rc = partial(mmi1x2, cross_section="xs_rc340")
 
 
 @gf.cell(tags=["cells"], schematic_function=mmi2x2_schematic)
@@ -237,7 +240,7 @@ def mmi2x2(
     length_mmi: float = 46.5,
     width_mmi: float = 6.0,
     gap_mmi: float = 0.53,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """An mmi2x2.
 
@@ -266,10 +269,10 @@ def mmi2x2(
 
 
 # dimensions from the Cornerstone SOI 340nm standard components reference GDS
-mmi2x2_sc = partial(mmi2x2, cross_section="xs_sc")
-mmi2x2_so = partial(mmi2x2, length_mmi=57.0, gap_mmi=0.50, cross_section="xs_so")
+mmi2x2_sc = partial(mmi2x2, cross_section="xs_sc340")
+mmi2x2_so = partial(mmi2x2, length_mmi=57.0, gap_mmi=0.50, cross_section="xs_so340")
 # no foundry reference exists for rib MMIs; defaults follow the strip C-band values
-mmi2x2_rc = partial(mmi2x2, cross_section="xs_rc")
+mmi2x2_rc = partial(mmi2x2, cross_section="xs_rc340")
 
 ##############################
 # Evanescent couplers
@@ -280,7 +283,7 @@ mmi2x2_rc = partial(mmi2x2, cross_section="xs_rc")
 def coupler_straight(
     length: float = 20.0,
     gap: float = 0.236,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """The straight part of a coupler.
 
@@ -302,7 +305,7 @@ def coupler(
     length: float = 20.0,
     dy: float = 4.0,
     dx: float = 15.0,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """A coupler.
 
@@ -324,9 +327,9 @@ def coupler(
     )
 
 
-coupler_sc = partial(coupler, cross_section="xs_sc")
-coupler_so = partial(coupler, cross_section="xs_so")
-coupler_rc = partial(coupler, cross_section="xs_rc")
+coupler_sc = partial(coupler, cross_section="xs_sc340")
+coupler_so = partial(coupler, cross_section="xs_so340")
+coupler_rc = partial(coupler, cross_section="xs_rc340")
 
 
 ##############################
@@ -341,7 +344,7 @@ def grating_coupler_rectangular(
     fill_factor: float = 0.5508,
     length_taper: float = 350.0,
     wavelength: float = 1.55,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
 ) -> gf.Component:
     """A grating coupler with straight and parallel teeth.
 
@@ -377,7 +380,7 @@ def grating_coupler_rectangular(
 # dimensions from the Cornerstone SOI 340nm standard components reference GDS
 grating_coupler_rectangular_sc = partial(
     grating_coupler_rectangular,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
 )
 
 grating_coupler_rectangular_so = partial(
@@ -385,12 +388,12 @@ grating_coupler_rectangular_so = partial(
     period=0.47,
     fill_factor=0.468,
     wavelength=1.31,
-    cross_section="xs_so",
+    cross_section="xs_so340",
 )
 
 grating_coupler_rectangular_rc = partial(
     grating_coupler_rectangular,
-    cross_section="xs_rc",
+    cross_section="xs_rc340",
 )
 
 
@@ -403,7 +406,7 @@ grating_coupler_rectangular_rc = partial(
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width=0.315,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
 ) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
@@ -434,21 +437,21 @@ grating_coupler_elliptical_sc = partial(
     grating_coupler_elliptical,
     grating_line_width=0.315,
     wavelength=1.55,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
 )
 
 grating_coupler_elliptical_so = partial(
     grating_coupler_elliptical,
     grating_line_width=0.250,
     wavelength=1.31,
-    cross_section="xs_so",
+    cross_section="xs_so340",
 )
 
 grating_coupler_elliptical_rc = partial(
     grating_coupler_elliptical,
     grating_line_width=0.315,
     wavelength=1.55,
-    cross_section="xs_rc",
+    cross_section="xs_rc340",
 )
 
 ################
@@ -467,7 +470,7 @@ def mzi(
     straight="straight_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
 ) -> gf.Component:
     """A Mach-Zehnder Interferometer.
 
@@ -512,7 +515,7 @@ mzi_sc = partial(
     bend="bend_euler_sc",
     splitter="mmi1x2_sc",
     combiner="mmi2x2_sc",
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
 )
 
 mzi_so = partial(
@@ -521,7 +524,7 @@ mzi_so = partial(
     bend="bend_euler_so",
     splitter="mmi1x2_so",
     combiner="mmi2x2_so",
-    cross_section="xs_so",
+    cross_section="xs_so340",
 )
 
 mzi_rc = partial(
@@ -530,7 +533,7 @@ mzi_rc = partial(
     bend="bend_euler_rc",
     splitter="mmi1x2_rc",
     combiner="mmi2x2_rc",
-    cross_section="xs_rc",
+    cross_section="xs_rc340",
 )
 
 
@@ -589,7 +592,7 @@ def compass(
 def grating_coupler_array(
     pitch: float = 127.0,
     n: int = 6,
-    cross_section="xs_sc",
+    cross_section="xs_sc340",
     centered=True,
     grating_coupler=None,
     port_name="o1",
@@ -622,9 +625,9 @@ def grating_coupler_array(
         else:
             xs = ""
         gcs = {
-            "xs_sc": "grating_coupler_rectangular_sc",
-            "xs_so": "grating_coupler_rectangular_so",
-            "xs_rc": "grating_coupler_rectangular_rc",
+            "xs_sc340": "grating_coupler_rectangular_sc",
+            "xs_so340": "grating_coupler_rectangular_so",
+            "xs_rc340": "grating_coupler_rectangular_rc",
         }
         grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
     assert grating_coupler is not None
@@ -643,7 +646,7 @@ def grating_coupler_array(
 
 
 @gf.cell(tags=["cells"])
-def die(cross_section="xs_sc") -> gf.Component:
+def die(cross_section="xs_sc340") -> gf.Component:
     """A die template.
 
     Args:
@@ -658,9 +661,9 @@ def die(cross_section="xs_sc") -> gf.Component:
     else:
         xs = ""
     gcs = {
-        "xs_sc": "grating_coupler_rectangular_sc",
-        "xs_so": "grating_coupler_rectangular_so",
-        "xs_rc": "grating_coupler_rectangular_rc",
+        "xs_sc340": "grating_coupler_rectangular_sc",
+        "xs_so340": "grating_coupler_rectangular_so",
+        "xs_rc340": "grating_coupler_rectangular_rc",
     }
     grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
     return gf.c.die_with_pads(
@@ -678,9 +681,9 @@ def die(cross_section="xs_sc") -> gf.Component:
     )
 
 
-die_sc = partial(die, cross_section="xs_sc")
-die_so = partial(die, cross_section="xs_so")
-die_rc = partial(die, cross_section="xs_rc")
+die_sc = partial(die, cross_section="xs_sc340")
+die_so = partial(die, cross_section="xs_so340")
+die_rc = partial(die, cross_section="xs_rc340")
 
 
 @gf.cell(tags=["cells"])

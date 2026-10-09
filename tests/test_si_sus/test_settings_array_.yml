@@ -1,5 +1,5 @@
 info: {}
-name: array_Cstraight_C6_R1_APTrue_SNone_CFalse_CP150_RP150
+name: array_CFstraight_Mcspdkpsi_suspcells_SCSxs_sus_C6_R1_AP_79fc18a8
 ports:
   o1_1_1:
     center:
@@ -114,6 +114,6 @@ settings:
   centered: false
   column_pitch: 150
   columns: 6
-  component: straight
+  component: Fstraight_Mcspdkpsi_suspcells_SCSxs_sus
   row_pitch: 150
   rows: 1

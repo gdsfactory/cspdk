@@ -176,7 +176,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     return xs
 
 
-def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+def heater_metal_sin200(width=4.0, **kwargs) -> gf.CrossSection:
     """Returns heater metal cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()
