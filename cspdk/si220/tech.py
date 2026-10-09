@@ -1,5 +1,6 @@
 """Technology definitions."""
 
+import re
 from collections.abc import Callable
 from functools import partial, wraps
 from typing import Any
@@ -191,6 +192,10 @@ def xsection(func: Callable[..., CrossSection]) -> Callable[..., CrossSection]:
         xs = func(**kwargs)
         if xs.name in _cross_section_default_names:
             xs._name = _cross_section_default_names[xs.name]
+        else:
+            # Keep the factory in the name (not gdsfactory's anonymous xs_<hash>) so
+            # netlists, and the models reading them, still know the band and type.
+            xs._name = f"{func.__name__}_{xs.hash[:8]}"
         return xs
 
     cross_sections[func.__name__] = newfunc
@@ -207,6 +212,7 @@ def strip_cband(
     """Return Strip cross_section."""
     return gf.cross_section.cross_section(
         width=width,
+        main_section_name="core_cband",
         layer=layer,
         radius=radius,
         radius_min=radius_min,
@@ -226,6 +232,7 @@ def rib_cband(
     """Return Rib cross_section."""
     return gf.cross_section.cross_section(
         width=width,
+        main_section_name="core_cband",
         layer=layer,
         radius=radius,
         radius_min=radius_min,
@@ -245,6 +252,7 @@ def strip_oband(
     """Return the O-band strip cross-section."""
     return gf.cross_section.cross_section(
         width=width,
+        main_section_name="core_oband",
         layer=layer,
         radius=radius,
         radius_min=radius_min,
@@ -264,6 +272,7 @@ def rib_oband(
     """Return the O-band rib cross-section."""
     return gf.cross_section.cross_section(
         width=width,
+        main_section_name="core_oband",
         layer=layer,
         radius=radius,
         radius_min=radius_min,
@@ -273,26 +282,51 @@ def rib_oband(
     )
 
 
-def _cross_section_name(cross_section: CrossSectionSpec) -> str:
-    """Return the identifying name for a cross-section specification."""
-    return (
-        cross_section
-        if isinstance(cross_section, str)
-        else getattr(cross_section, "name", None)
-        or getattr(cross_section, "__name__", "")
-    )
+_OPTICAL_NAME = re.compile(
+    r"^(?P<kind>strip|rib)_(?P<band>cband|oband)(_[0-9a-f]{8})?$"
+)
+
+
+def _is_slab(layer: LayerSpec) -> bool:
+    if isinstance(layer, str):
+        return layer == "SLAB"
+    return tuple(layer) == (LAYER.SLAB.layer, LAYER.SLAB.datatype)
+
+
+def _band_and_kind(cross_section: CrossSectionSpec) -> tuple[str, str]:
+    """Return ``(band, kind)`` of an optical cross-section spec, e.g. ``("oband", "rib")``.
+
+    Names from the si220 factories carry both, including customised ones such as
+    ``strip_oband_325c89a2``. Other cross-section objects (e.g. copies, which gdsfactory
+    names ``xs_<hash>``) are read from their data: the band from the ``core_<band>``
+    main-section name and rib from a SLAB layer. Anything else is C-band strip.
+    """
+    if isinstance(cross_section, str):
+        name = cross_section
+    else:
+        name = getattr(cross_section, "name", None) or getattr(
+            cross_section, "__name__", ""
+        )
+    if match := _OPTICAL_NAME.match(name):
+        return match["band"], match["kind"]
+    if isinstance(cross_section, str):
+        return "cband", "strip"
+
+    xs = gf.get_cross_section(cross_section)
+    band = "oband" if xs.sections[0].name == "core_oband" else "cband"
+    slab_layers = [*(xs.bbox_layers or ()), *(s.layer for s in xs.sections[1:])]
+    kind = "rib" if any(_is_slab(layer) for layer in slab_layers) else "strip"
+    return band, kind
 
 
 def get_band(cross_section: CrossSectionSpec) -> str:
-    """Return the optical band selected by a registered cross-section spec."""
-    if _cross_section_name(cross_section).endswith("_oband"):
-        return "oband"
-    return "cband"
+    """Return the optical band, ``"cband"`` or ``"oband"``, of a cross-section spec."""
+    return _band_and_kind(cross_section)[0]
 
 
 def is_rib(cross_section: CrossSectionSpec) -> bool:
-    """Return whether a registered cross-section spec selects rib geometry."""
-    return _cross_section_name(cross_section).startswith("rib_")
+    """Return whether a cross-section spec selects rib geometry."""
+    return _band_and_kind(cross_section)[1] == "rib"
 
 
 @xsection
