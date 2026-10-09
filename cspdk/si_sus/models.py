@@ -14,10 +14,9 @@ placeholder (6 dB peak loss, 150nm 3-dB bandwidth at 3.8um).
 from __future__ import annotations
 
 from collections.abc import Callable
-from functools import cache, wraps
+from functools import wraps
 
 import jax.numpy as jnp
-import numpy as np
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
@@ -138,12 +137,32 @@ def bend_circular(
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
-@cache
-def _euler_length_per_radius(angle: float, p: float) -> float:
-    import gdsfactory as gf  # noqa: PLC0415
+def _euler_length(radius: Float, angle: Float, p: Float) -> Float:
+    """Length of ``gf.path.euler(radius, angle, p, use_eff=True)``.
 
-    path = gf.path.euler(radius=1.0, angle=angle, p=p, use_eff=True, npoints=2001)
-    return float(path.length())
+    Closed form of the gdsfactory construction (Euler sections of minimum
+    radius 1, an arc in between, scaled so the end points match an arc of
+    ``radius``), written with ``jax.numpy`` so it also works on traced
+    settings inside a jitted ``sax.circuit``.
+    """
+    alpha = jnp.deg2rad(jnp.abs(angle))
+    p = jnp.clip(p, 1e-9, 1.0)
+    sp = jnp.sqrt(p * alpha)
+    rp = 1 / sp
+    s = jnp.linspace(0.0, 1.0, 257) * sp
+    xp = jnp.trapezoid(jnp.cos(s**2 / 2), s)
+    yp = jnp.trapezoid(jnp.sin(s**2 / 2), s)
+    a1, a2 = p * alpha / 2, alpha / 2
+    xh = rp * (jnp.sin(a2) - jnp.sin(a1)) + xp
+    yh = rp * (jnp.cos(a1) - jnp.cos(a2)) + yp
+    ex = xh + jnp.cos(alpha) * xh + jnp.sin(alpha) * yh
+    ey = yh + jnp.sin(alpha) * xh - jnp.cos(alpha) * yh
+    reff = jnp.where(
+        jnp.abs(jnp.rad2deg(alpha) - 180) < 1e-3,
+        ey / 2,
+        ey - jnp.tan(alpha - jnp.pi / 2) * ex,
+    )
+    return radius * (2 * sp + rp * (1 - p) * alpha) / reff
 
 
 def bend_euler(
@@ -166,15 +185,15 @@ def bend_euler(
         cross_section: cross-section name (only xs_sus exists).
     """
     radius = TECH.radius_sus if radius is None else radius
-    length = radius * _euler_length_per_radius(float(angle), float(p))
+    length = _euler_length(radius, angle, p)
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
-@cache
-def _cosine_sbend_length(dx: float, dy: float) -> float:
-    x = np.linspace(0, dx, 4001)
-    slope = dy / 2 * np.pi / dx * np.sin(np.pi * x / dx)
-    return float(np.trapezoid(np.hypot(1, slope), x))
+def _cosine_sbend_length(dx: Float, dy: Float) -> Float:
+    """Arc length of the raised-cosine centre line, in jax.numpy so it traces."""
+    t = jnp.linspace(0.0, 1.0, 4001)
+    slope = dy / 2 * jnp.pi / dx * jnp.sin(jnp.pi * t)
+    return dx * jnp.trapezoid(jnp.hypot(1, slope), t)
 
 
 def bend_s(
@@ -192,7 +211,7 @@ def bend_s(
         loss: propagation loss in dB/cm.
         cross_section: cross-section name (only xs_sus exists).
     """
-    length = _cosine_sbend_length(float(size[0]), float(size[1]))
+    length = _cosine_sbend_length(size[0], size[1])
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 

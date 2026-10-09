@@ -22,7 +22,6 @@ published for 638 nm or 520 nm, so the same bound is used there.
 from __future__ import annotations
 
 import inspect
-import math
 from collections.abc import Callable
 from functools import partial, wraps
 from typing import NamedTuple
@@ -173,7 +172,7 @@ def bend_euler(
     """
     if length is None:
         r = _band(cross_section).radius if radius is None else radius
-        length = r * math.radians(abs(angle))
+        length = r * jnp.deg2rad(jnp.abs(angle))
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
@@ -201,7 +200,7 @@ def bend_s(
         cross_section: band cross-section name.
     """
     if length is None:
-        length = math.hypot(*size)
+        length = jnp.hypot(size[0], size[1])
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
 
