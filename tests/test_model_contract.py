@@ -24,15 +24,6 @@ from circulax.components.photonic import OpticalSource
 
 FLAVOURS = ["si220", "si340", "si500", "sin200", "sin300", "si_sus", "ge_on_si"]
 
-# si220 couplers on main still build a nested SAX circuit with float() on their
-# inputs, which cannot be traced; #372 rewrites them.
-KNOWN_UNTRACEABLE = {
-    "si220-coupler",
-    "si220-coupler_rib",
-    "si220-coupler_strip",
-    "si220-directional_coupler",
-}
-
 
 def _sax_models():
     for flavour in FLAVOURS:
@@ -47,13 +38,6 @@ def _wl0(model) -> float:
     return inspect.signature(model).parameters["wl"].default
 
 
-def _xfail_if_untraceable(request) -> None:
-    if request.node.callspec.id in KNOWN_UNTRACEABLE:
-        request.applymarker(
-            pytest.mark.xfail(reason="untraceable until #372", strict=True)
-        )
-
-
 @pytest.mark.parametrize("model", _sax_models())
 def test_model_evaluates_with_defaults(model) -> None:
     """Every parameter has a usable default."""
@@ -61,9 +45,8 @@ def test_model_evaluates_with_defaults(model) -> None:
 
 
 @pytest.mark.parametrize("model", _sax_models())
-def test_model_takes_wavelength_arrays_under_jit(model, request) -> None:
+def test_model_takes_wavelength_arrays_under_jit(model) -> None:
     """A wavelength array gives one value per wavelength, also when jitted."""
-    _xfail_if_untraceable(request)
     wl0 = _wl0(model)
     wl = jnp.array([wl0 - 0.01, wl0, wl0 + 0.01])
     result = jax.jit(lambda wl: model(wl=wl))(wl)
@@ -72,9 +55,8 @@ def test_model_takes_wavelength_arrays_under_jit(model, request) -> None:
 
 
 @pytest.mark.parametrize("model", _sax_models())
-def test_model_runs_in_a_circulax_dc_sweep(model, request) -> None:
+def test_model_runs_in_a_circulax_dc_sweep(model) -> None:
     """Drive the first port, load the rest, and sweep wl like GDSFactory+ does."""
-    _xfail_if_untraceable(request)
     first, *rest = sorted(sax.get_ports(model()))
     device = {
         "instances": {"dut": {"component": "dut"}},
