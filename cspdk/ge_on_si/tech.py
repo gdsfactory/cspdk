@@ -43,36 +43,63 @@ LAYER = LayerMapCornerstone
 def get_layer_stack(
     thickness_slab: float = 1200 * nm,
     thickness_wg: float = 3000 * nm,
+    trench_width: float = 20.0,
 ) -> LayerStack:
     """Returns LayerStack.
 
+    The wafer is a 3 um Ge film on a Si substrate with a single 1.8 um partial
+    Ge etch (MPW-4/MPW-7 sec. 4). The etch is NOT blanket: per sec. 5.2 and 8
+    the foundry grows layer 303 by 20 um, subtracts 303 to form the trenches,
+    and merges in the dark-field layer 304 and the label layer 100. So:
+
+    - core: drawn 303 not etched by 304/100, full Ge thickness.
+    - slab: the etched regions (trenches + 304 + 100), 1.2 um Ge left.
+    - field: everything else inside the cell outline (99) keeps the full
+      3 um Ge. It only renders where a floorplan (e.g. ``die``) is drawn,
+      since the unetched wafer has no drawn layer of its own.
+
+    The Si substrate is not drawn on any layer and is not modelled here.
+    ``derived_layer`` (where simulators/3D export put each level's shapes)
+    reuses 303 (core), 304 (etched, slab) and 99 (field).
+
     Args:
-        thickness_slab: Ge slab thickness in um.
-        thickness_wg: Ge rib waveguide thickness in um.
+        thickness_slab: Ge thickness left in etched regions in um.
+        thickness_wg: unetched Ge film thickness in um.
+        trench_width: foundry trench width around layer 303 in um.
     """
-    # Note: the foundry slab is a blanket Ge film (1.2 um left everywhere after
-    # the 1.8 um rib etch), not derivable from the drawn rib layer (303,0)
-    # alone; both levels extrude the same WG polygons. Kept so the 1.2/3.0 um
-    # thicknesses stay visible in the stack.
+    wg = LogicalLayer(layer=LAYER.WG)
+    etched_by_mask = LogicalLayer(layer=LAYER.WG_DF) + LogicalLayer(layer=LAYER.LBL)
+    wg_grown = wg.sized(round(trench_width / nm))
+    trench = wg_grown - wg
     return LayerStack(
         layers=dict(
-            slab=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
-                thickness=thickness_slab,
-                zmin=0.0,
-                material="Ge",
-                info={"mesh_order": 2},
-                sidewall_angle=10,
-                width_to_z=0.5,
-            ),
             core=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
+                layer=wg - etched_by_mask,
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="Ge",
                 info={"mesh_order": 1},
+                # sidewall_angle/width_to_z are not given by Cornerstone;
+                # kept from the original PDK pending foundry confirmation.
                 sidewall_angle=10,
                 width_to_z=0.5,
+                derived_layer=wg,
+            ),
+            slab=LayerLevel(
+                layer=trench + etched_by_mask,
+                thickness=thickness_slab,
+                zmin=0.0,
+                material="Ge",
+                info={"mesh_order": 2},
+                derived_layer=LogicalLayer(layer=LAYER.WG_DF),
+            ),
+            field=LayerLevel(
+                layer=LogicalLayer(layer=LAYER.FLOORPLAN) - wg_grown - etched_by_mask,
+                thickness=thickness_wg,
+                zmin=0.0,
+                material="Ge",
+                info={"mesh_order": 3},
+                derived_layer=LogicalLayer(layer=LAYER.FLOORPLAN),
             ),
         )
     )
@@ -134,9 +161,13 @@ def route_single(
     route_width: float | None = None,
     cross_section: CrossSectionSpec = "xs_rib",
     straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
+    bend: ComponentSpec = "bend_circular",
 ) -> ManhattanRoute:
-    """Route two ports with a single route."""
+    """Route two ports with a single route.
+
+    Bends default to ``bend_circular``, the foundry's r=300 um circular 90 deg
+    bend (Ge_on_Si_3800nm_TE_RIB_90_Degree_Bend).
+    """
     return gf.routing.route_single(
         component=component,
         port1=port1,
@@ -166,11 +197,16 @@ def route_bundle(
     port_type: str | None = None,
     cross_section: CrossSectionSpec = "xs_rib",
     straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
-    taper: ComponentSpec = "taper",
+    bend: ComponentSpec = "bend_circular",
+    taper: ComponentSpec | None = None,
     **kwargs,
 ) -> list[ManhattanRoute]:
-    """Route two bundles of ports."""
+    """Route two bundles of ports.
+
+    Bends default to ``bend_circular`` (the foundry bend). ``taper`` defaults to
+    None: the PDK has a single 3.2 um rib width, so long-straight tapers would be
+    3.2 -> 3.2 um no-ops.
+    """
     return gf.routing.route_bundle(
         component=component,
         ports1=ports1,
@@ -190,6 +226,7 @@ def route_bundle(
     )
 
 
+# Required by the pdk-ci check-tech-structure hook.
 cross_sections = get_cross_sections(sys.modules[__name__])
 
 
