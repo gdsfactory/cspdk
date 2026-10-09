@@ -1,8 +1,9 @@
 """Circulax-native active circuit models for the unified Si220 PDK.
 
 These models implement multi-domain (electrical + optical) components
-that cannot be expressed as SAX S-parameter functions. They are merged
-into the PDK's models dict alongside SAX models.
+that cannot be expressed as SAX S-parameter functions. They are not in
+``PDK.models`` (which holds SAX models); cells reference them through their
+schematic metadata (``circulax_model`` entries in ``cspdk.si220._schematic``).
 """
 
 from __future__ import annotations
@@ -42,7 +43,7 @@ def ThermalPhaseShifter(
         signals: Input signals at each port, provided by circulax.
         s: Mutable state container for the ``i_fwd`` branch current.
         ohms_per_um: Heater resistance per unit length (must be positive).
-        eta_pi_per_W: Phase shift efficiency (radians per watt).
+        eta_pi_per_W: Phase shift efficiency (multiples of π per watt).
         length: Heater length in micrometres (must be positive).
         loss_dBcm: Propagation loss in dB/cm.
         neff0: Effective refractive index.

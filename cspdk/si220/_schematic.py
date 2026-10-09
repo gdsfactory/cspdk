@@ -134,26 +134,24 @@ mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
 # Heaters
+# Rendered as a generic model-driven box ("ckt") so all heater ports show.
+# The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
+# multi-port heater; see the model-driven-modulator follow-up issue.
+# SAX model lists all 8 electrical ports, but Circulax active model only
+# implements o1, o2, l_e2, r_e2; these entries use the Circulax model.
+_HEATER_MODELS = [
+    circulax_model(
+        "ThermalPhaseShifter",
+        _ACTIVE_MODULE,
+        ["o1", "o2", "l_e2", "r_e2"],
+        params={"length": "length"},
+    )
+]
 straight_heater_metal_schematic = schematic(
-    # Rendered as a generic model-driven box ("ckt") so all heater ports show.
-    # The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
-    # multi-port heater; see the model-driven-modulator follow-up issue.
-    # SAX model lists all 8 electrical ports, but Circulax active model only
-    # implements o1, o2, l_e2, r_e2; this entry uses the Circulax model.
-    "ckt",
-    ["heater", "modulator"],
-    _heater_ports,
-    models=[
-        circulax_model(
-            "straight_heater_metal",
-            _ACTIVE_MODULE,
-            ["o1", "o2", "l_e2", "r_e2"],
-            params={"length": "length"},
-        )
-    ],
+    "ckt", ["heater", "modulator"], _heater_ports, models=_HEATER_MODELS
 )
 straight_heater_meander_schematic = schematic(
-    "ckt", ["heater", "modulator", "meander"], _heater_ports
+    "ckt", ["heater", "modulator", "meander"], _heater_ports, models=_HEATER_MODELS
 )
 
 # Grating couplers
