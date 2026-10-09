@@ -9,7 +9,7 @@ if __name__ == "__main__":
         wavelength=1.55,
         core_width=0.45,
         core_thickness=0.22,
-        slab_thickness=0.0,
+        slab_thickness=0.1,
         core_material="Si",
         clad_material="SiO2",
         group_index_step=10 * nm,

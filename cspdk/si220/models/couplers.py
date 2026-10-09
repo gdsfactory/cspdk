@@ -1,5 +1,6 @@
 """Directional Couplers."""
 
+import math
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -9,7 +10,10 @@ import sax
 import xarray as xr
 from jaxtyping import ArrayLike
 
-from .waveguides import bend_euler, straight_strip
+from cspdk.si220.tech import TECH
+
+from . import oband
+from .waveguides import bend_euler, straight_rib, straight_strip
 
 if TYPE_CHECKING:
     SDict = sax.SDict
@@ -18,17 +22,39 @@ else:
 
 CWD = Path(__file__).resolve().parent
 
-with jax.ensure_compile_time_eval():
-    xarr_dc_strip = (
-        xr.open_dataarray(CWD / "directional_coupler_strip.nc")
-        .load()
-        .expand_dims({"kappa": ["kappa"]}, -1)
-    )
-    xarr_racetrack_strip = (
-        xr.open_dataarray(CWD / "coupler_racetrack_strip.nc")
-        .load()
-        .expand_dims({"kappa": ["kappa"]}, -1)
-    )
+
+def _load(name: str) -> xr.DataArray:
+    with jax.ensure_compile_time_eval():
+        return (
+            xr.open_dataarray(CWD / f"{name}.nc")
+            .load()
+            .expand_dims({"kappa": ["kappa"]}, -1)
+        )
+
+
+def _load_tables(prefix: str) -> dict[tuple[str, str], xr.DataArray]:
+    """Load the {(band, cross_section): table} coupling tables for one coupler type."""
+    band_suffixes = {"cband": "", "oband": "_oband"}
+    return {
+        (band, xs): _load(f"{prefix}_{xs}{suffix}")
+        for band, suffix in band_suffixes.items()
+        for xs in ("strip", "rib")
+    }
+
+
+# All coupling tables are generated with samples/coupler_cmt.py
+_XARR_DC = _load_tables("directional_coupler")
+_XARR_RACETRACK = _load_tables("coupler_racetrack")
+xarr_dc_strip = _XARR_DC["cband", "strip"]
+xarr_racetrack_strip = _XARR_RACETRACK["cband", "strip"]
+_STRAIGHT = {
+    ("cband", "strip"): straight_strip,
+    ("cband", "rib"): straight_rib,
+    ("oband", "strip"): oband.straight_strip,
+    ("oband", "rib"): oband.straight_rib,
+}
+_BEND = {"cband": bend_euler, "oband": oband.bend_euler}
+_WIDTH = {"cband": TECH.width_cband, "oband": TECH.width_oband}
 
 
 def _interpolate_kappa(xarr: xr.DataArray, **kwargs: ArrayLike) -> jnp.ndarray:
@@ -53,19 +79,36 @@ def _interpolate_kappa(xarr: xr.DataArray, **kwargs: ArrayLike) -> jnp.ndarray:
     return result.reshape(shape)
 
 
+def _sbend_geometry(
+    gap: float, cross_section: str, band: str = "cband"
+) -> tuple[float, float]:
+    """Return (lateral offset per arm, equivalent circular radius) of the coupler cell.
+
+    The cell's S-bends span dx along the coupler and bring the ports to a pitch of dy.
+    """
+    if cross_section == "rib":
+        dx, dy = TECH.dx_coupler_rib, TECH.dy_coupler_rib
+    else:
+        dx, dy = TECH.dx_coupler, TECH.dy_coupler
+    offset = (dy - gap - _WIDTH[band]) / 2
+    theta = 2 * math.atan(offset / dx)
+    return offset, dx / (2 * math.sin(theta))
+
+
 def directional_coupler_no_phase(
     *,
-    wl: float = 1.3,
+    wl: float = 1.55,
     coupler_length: float = 10.0,
     gap: float = 0.5,
     offset: float = 20,
     bend_radius: float = 25,
     width: float = 1.0,
     cross_section: str = "strip",
+    band: str = "cband",
 ) -> SDict:
-    r"""Ring coupler model.
+    r"""Directional coupler coupling-region model (no propagation phase).
 
-    Semi-analytical model for ring couplers developed by GDSFactory.
+    Semi-analytical model for directional couplers developed by GDSFactory.
     Use at your own risk.
 
     Args:
@@ -76,11 +119,10 @@ def directional_coupler_no_phase(
         bend_radius: bend radius of the ring coupler [µm]; between 5 and 100 µm.
         width: width of the waveguides [µm]; between 0.1 and 10 µm.
         cross_section: cross section of the waveguide.
+        band: "cband" or "oband" coupling table.
     """
-    if cross_section == "strip":
-        xarr = xarr_dc_strip
     kappa = _interpolate_kappa(
-        xarr=xarr,
+        xarr=_XARR_DC[band, cross_section],
         wavelength=wl,
         radius=bend_radius,
         gap=gap,
@@ -102,33 +144,46 @@ def directional_coupler_no_phase(
 
 def directional_coupler(
     *,
-    wl: float = 1.3,
-    length: float = 10.0,
-    gap: float = 0.5,
-    offset: float = 20,
-    bend_radius: float = 25,
+    wl: float = 1.55,
+    length: float | None = None,
+    gap: float = TECH.gap_strip,
+    offset: float | None = None,
+    bend_radius: float | None = None,
     width: float = 1.0,
     with_euler: bool = False,
     cross_section: str = "strip",
+    band: str = "cband",
 ) -> SDict:
     r"""Directional coupler model.
 
     Semi-analytical model for directional couplers developed by GDSFactory.
-    Use at your own risk.
+    Use at your own risk. The coupling tables come from coupled-mode theory on
+    supermode solves (samples/coupler_cmt.py) and are not foundry validated.
 
     Args:
         wl: wavelength [µm]
         gap: gap between the two waveguides [µm]
-        length: length of the ring coupler [µm]
-        offset: offset between the two waveguides [µm]
-        bend_radius: bend radius of the ring coupler [µm]
+        length: length of the coupling region [µm]. Defaults to the cell default.
+        offset: lateral S-bend offset per arm [µm]. Defaults to the cell geometry.
+        bend_radius: equivalent S-bend radius [µm]. Defaults to the cell geometry.
         with_euler: if True, the directional coupler will have an Euler bend.
         width: width of the waveguides [µm].
         cross_section: cross section of the waveguide.
+        band: "cband" or "oband" coupling table and waveguide models.
     """
     if with_euler:
         raise NotImplementedError("Euler bend is not implemented yet")
+    cell_offset, cell_radius = _sbend_geometry(gap, cross_section, band)
+    offset = cell_offset if offset is None else offset
+    bend_radius = cell_radius if bend_radius is None else bend_radius
 
+    if length is None:
+        if cross_section == "rib":
+            length = TECH.length_coupler_rib
+        elif band == "oband":
+            length = TECH.length_coupler_oband
+        else:
+            length = TECH.length_coupler
     coupler_length = length
 
     def sbend_length(radius: float, offset: float) -> float:
@@ -157,7 +212,7 @@ def directional_coupler(
             },
         },
         models={
-            "straight": straight_strip,
+            "straight": _STRAIGHT[band, cross_section],
             "coupling_area": directional_coupler_no_phase,
         },
     )
@@ -167,8 +222,10 @@ def directional_coupler(
         dc={
             "coupler_length": coupler_length,
             "gap": gap,
+            "offset": offset,
             "bend_radius": bend_radius,
             "cross_section": cross_section,
+            "band": band,
         },
         s1={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
         s2={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
@@ -187,36 +244,39 @@ def directional_coupler(
 
 
 coupler_strip = directional_coupler
+coupler_rib = directional_coupler
 coupler = directional_coupler
 
 
 def coupler_ring_coupling_area(
     *,
-    wl: float = 1.3,
+    wl: float = 1.55,
     gap: float = 0.1,
     radius: float = 5.0,
     length_x: float = 1.0,
+    loss_dB: float = 0.0,
     cross_section: str = "strip",
+    band: str = "cband",
 ) -> SDict:
-    r"""Ring coupler model.
+    r"""Ring coupler coupling-region model.
 
     This is a semi-analytical model developed by GDSFactory.
     GDSFactory does not guarantee the accuracy of this model.
-    This model has not been validated by the foundry.
+    The coupling tables come from coupled-mode theory on supermode solves
+    (samples/coupler_cmt.py) and have not been validated by the foundry.
     Please use at your own discretion.
 
     Args:
-        wl: wavelength [µm]; between 1.2 and 1.4 µm.
-        gap: gap between the two waveguides [µm]; between 0.05 and 1.1 µm.
-        radius: radius of the ring [µm]; between 5 and 200 µm.
-        length_x: length of the ring coupler [µm]; between 0 and 20 µm.
+        wl: wavelength [µm]; 1.5-1.6 µm (cband) or 1.26-1.36 µm (oband).
+        gap: gap between the two waveguides [µm]; between 0.05 and 1.05 µm.
+        radius: radius of the ring [µm]; between 5 and 245 µm.
+        length_x: length of the ring coupler [µm]; between 0 and 28 µm.
+        loss_dB: excess loss of the coupling region [dB].
         cross_section: cross section of the waveguide.
+        band: "cband" or "oband" coupling table and waveguide models.
     """
-    if cross_section == "strip":
-        xarr = xarr_racetrack_strip
-
     kappa = _interpolate_kappa(
-        xarr=xarr,
+        xarr=_XARR_RACETRACK[band, cross_section],
         wavelength=wl,
         gap=gap,
         radius=radius,
@@ -225,8 +285,11 @@ def coupler_ring_coupling_area(
 
     tau = jnp.sqrt(1 - jnp.array(kappa) ** 2)
 
-    kappa *= 0.95  # adding 5% loss to the coupler
-    tau *= 0.95  # adding 5% loss to the coupler
+    # propagation phase and loss through the straight coupling section
+    t = _STRAIGHT[band, cross_section](wl=wl, length=length_x)["o1", "o2"]
+    t = t * 10 ** (-loss_dB / 20)
+    kappa = kappa * t
+    tau = tau * t
 
     return sax.reciprocal(
         {
@@ -240,29 +303,34 @@ def coupler_ring_coupling_area(
 
 def coupler_ring(  # this is not the complete model!!!!
     *,
-    wl: float = 1.3,
+    wl: float = 1.55,
     gap: float = 0.1,
     radius: float = 40.0,
     length_x: float = 1.0,
     p: float = 0,
     wl0: float = 0,  # this is not used in the model
+    loss_dB: float = 0.0,
     cross_section: str = "strip",
+    band: str = "cband",
 ) -> SDict:
     r"""Ring coupler model.
 
     This is a semi-analytical model developed by GDSFactory.
     GDSFactory does not guarantee the accuracy of this model.
-    This model has not been validated by the foundry.
+    This model has not been validated by the foundry (see
+    coupler_ring_coupling_area for the provenance of the coupling tables).
     Please use at your own discretion.
 
     Args:
-        wl: wavelength [µm]; between 1.5 and 1.6 µm.
-        gap: gap between the two waveguides [µm]; between 0.01 and 1.5 µm.
-        radius: radius of the ring [µm]; between 25 and 200 µm.
-        length_x: length of the ring coupler [µm]; between 0 and 20 µm.
-        p: bend parameter percentage (0: circular, 1: euler).
+        wl: wavelength [µm]; 1.5-1.6 µm (cband) or 1.26-1.36 µm (oband).
+        gap: gap between the two waveguides [µm]; between 0.05 and 1.05 µm.
+        radius: radius of the ring [µm]; between 5 and 245 µm.
+        length_x: length of the ring coupler [µm]; between 0 and 28 µm.
+        p: ignored; circular bends are assumed.
         wl0: center wavelength (um).
+        loss_dB: excess loss of the coupling region [dB].
         cross_section: cross section of the waveguide.
+        band: "cband" or "oband" coupling table and waveguide models.
     """
     coupler_circuit, info = sax.circuit(
         netlist={
@@ -284,7 +352,7 @@ def coupler_ring(  # this is not the complete model!!!!
         },
         models={
             "coupler_ring": coupler_ring_coupling_area,
-            "bend_euler": bend_euler,
+            "bend_euler": _BEND[band],
         },
     )
 
@@ -294,10 +362,12 @@ def coupler_ring(  # this is not the complete model!!!!
             "length_x": length_x,
             "gap": gap,
             "radius": radius,
+            "loss_dB": loss_dB,
             "cross_section": cross_section,
+            "band": band,
         },
-        bl={"radius": radius},
-        br={"radius": radius},
+        bl={"length": jnp.pi * radius / 2, "cross_section": cross_section},
+        br={"length": jnp.pi * radius / 2, "cross_section": cross_section},
     )
 
     return sax.reciprocal(

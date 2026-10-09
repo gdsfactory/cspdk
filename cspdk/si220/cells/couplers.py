@@ -4,7 +4,7 @@ import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 from cspdk.si220._schematic import coupler_ring_schematic, coupler_schematic
-from cspdk.si220.tech import TECH, get_band
+from cspdk.si220.tech import TECH, get_band, is_rib
 
 
 @gf.cell(tags=["couplers"], schematic_function=coupler_schematic)
@@ -20,18 +20,21 @@ def coupler(
         gap: of coupling region in um.
         cross_section: optical cross-section selecting the operating band.
     """
-    length = (
-        length
-        if length is not None
-        else 20.0
-        if get_band(cross_section) == "oband"
-        else 14.5
-    )
+    if is_rib(cross_section):
+        # rib bends need a longer, shallower S-bend to respect radius_min
+        dx, dy = TECH.dx_coupler_rib, TECH.dy_coupler_rib
+        default_length = TECH.length_coupler_rib
+    else:
+        dx, dy = TECH.dx_coupler, TECH.dy_coupler
+        if get_band(cross_section) == "oband":
+            default_length = TECH.length_coupler_oband
+        else:
+            default_length = TECH.length_coupler
     return gf.c.coupler(
-        length=length,
+        length=default_length if length is None else length,
         gap=gap,
-        dy=4.0,
-        dx=10.0,
+        dy=dy,
+        dx=dx,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )
@@ -50,12 +53,12 @@ def coupler_rib(
         gap: of coupling region in um.
         cross_section: rib cross-section selecting the operating band.
     """
-    length = length if length is not None else 20.0
+    length = length if length is not None else TECH.length_coupler_rib
     return gf.c.coupler(
         length=length,
         gap=gap,
-        dy=3.5,
-        dx=16,
+        dy=TECH.dy_coupler_rib,
+        dx=TECH.dx_coupler_rib,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )

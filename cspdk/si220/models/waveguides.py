@@ -43,13 +43,14 @@ def straight_rib(
     loss_dB_cm: float = 3.0,
 ) -> sax.SDict:
     """Straight rib waveguide model."""
+    # 450 nm x 220 nm rib with 100 nm slab, from samples/mode_solver_r.py
     return sm.straight(
         wl=wl,
         length=length,
         loss_dB_cm=loss_dB_cm,
         wl0=1.55,
-        neff=2.38,
-        ng=4.30,
+        neff=2.54,
+        ng=3.87,
     )
 
 
@@ -109,7 +110,6 @@ def bend_euler(
     length: float = 10.0,
     loss_dB_cm: float = 3,
     cross_section="strip",
-    **kwargs,
 ) -> sax.SDict:
     """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
@@ -122,7 +122,7 @@ def bend_euler(
 
 
 def bend_euler_strip(
-    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3, **kwargs
+    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
 ) -> sax.SDict:
     """Euler bend strip model."""
     return bend_euler(
@@ -134,7 +134,7 @@ def bend_euler_strip(
 
 
 def bend_euler_rib(
-    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3, **kwargs
+    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
 ) -> sax.SDict:
     """Euler bend rib model."""
     return bend_euler(

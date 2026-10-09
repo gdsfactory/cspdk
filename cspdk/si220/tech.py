@@ -151,6 +151,16 @@ class Tech:
     gap_strip = 0.27
     gap_rib = 0.27
 
+    length_coupler = 14.5
+    length_coupler_rib = 20.0
+    length_coupler_oband = 20.0
+
+    # coupler S-bend extent: dx along the coupler, dy = port pitch
+    dx_coupler = 10.0
+    dy_coupler = 4.0
+    dx_coupler_rib = 16.0
+    dy_coupler_rib = 3.5
+
 
 TECH = Tech()
 
