@@ -3,7 +3,7 @@ name: mzi_DL10_Bbend_euler_no_Sstraight_no_Smmi1x2_no_Cmmi2x2_d1777d6b
 ports:
   o1:
     center:
-    - -50
+    - -30
     - 0
     layer: NITRIDE
     name: o1
@@ -12,8 +12,8 @@ ports:
     width: 0.95
   o2:
     center:
-    - 438.1
-    - 2.95
+    - 378.1
+    - 2.1
     layer: NITRIDE
     name: o2
     orientation: 0
@@ -21,8 +21,8 @@ ports:
     width: 0.95
   o3:
     center:
-    - 438.1
-    - -2.95
+    - 378.1
+    - -2.1
     layer: NITRIDE
     name: o3
     orientation: 0

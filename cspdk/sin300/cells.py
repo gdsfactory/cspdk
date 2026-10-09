@@ -215,17 +215,26 @@ def mmi1x2(
 
 
 mmi1x2_nc = partial(mmi1x2, length_mmi=64.7, cross_section="xs_nc")
-mmi1x2_no = partial(mmi1x2, length_mmi=42.0, cross_section="xs_no")
+# Dimensions from the bundled SiN300nm_1310nm_TE_STRIP_2x1_MMI.gds.
+mmi1x2_no = partial(
+    mmi1x2,
+    length_mmi=42.0,
+    width_mmi=8.0,
+    width_taper=3.5,
+    length_taper=30.0,
+    gap_mmi=0.5,
+    cross_section="xs_no",
+)
 
 
 @gf.cell(tags=["cells"], schematic_function=mmi2x2_schematic)
 def mmi2x2(
     width: float | None = None,
-    width_taper: float = 5.5,
+    width_taper: float = 4.5,
     length_taper: float = 50.0,
-    length_mmi: float = 5.5,
-    width_mmi: float = 12.0,
-    gap_mmi: float = 0.4,
+    length_mmi: float = 232.0,
+    width_mmi: float = 18.0,
+    gap_mmi: float = 1.6,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
     """An mmi2x2.
@@ -255,7 +264,16 @@ def mmi2x2(
 
 
 mmi2x2_nc = partial(mmi2x2, length_mmi=232.0, cross_section="xs_nc")
-mmi2x2_no = partial(mmi2x2, length_mmi=126.0, cross_section="xs_no")
+# Dimensions from the bundled SiN300nm_1310nm_TE_STRIP_2x2_MMI.gds.
+mmi2x2_no = partial(
+    mmi2x2,
+    length_mmi=126.0,
+    width_mmi=12.0,
+    width_taper=3.5,
+    length_taper=30.0,
+    gap_mmi=0.7,
+    cross_section="xs_no",
+)
 
 
 ##############################
@@ -322,8 +340,8 @@ coupler_no = partial(coupler, cross_section="xs_no")
 
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_rectangular_schematic)
 def grating_coupler_rectangular(
-    period: float = 0.66,
-    n_periods: int = 30,
+    period: float = 1.32,
+    n_periods: int = 22,
     length_taper: float = 200.0,
     wavelength: float = 1.55,
     cross_section="xs_nc",
@@ -357,7 +375,7 @@ def grating_coupler_rectangular(
 
 grating_coupler_rectangular_nc = partial(
     grating_coupler_rectangular,
-    period=0.66,
+    period=1.32,
     wavelength=1.55,
     cross_section="xs_nc",
 )
@@ -365,6 +383,7 @@ grating_coupler_rectangular_nc = partial(
 grating_coupler_rectangular_no = partial(
     grating_coupler_rectangular,
     period=0.964,
+    n_periods=36,
     wavelength=1.31,
     cross_section="xs_no",
 )

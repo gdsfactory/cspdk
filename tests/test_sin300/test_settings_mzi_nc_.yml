@@ -13,7 +13,7 @@ ports:
   o2:
     center:
     - 566.8
-    - 2.95
+    - 3.05
     layer: NITRIDE
     name: o2
     orientation: 0
@@ -22,7 +22,7 @@ ports:
   o3:
     center:
     - 566.8
-    - -2.95
+    - -3.05
     layer: NITRIDE
     name: o3
     orientation: 0

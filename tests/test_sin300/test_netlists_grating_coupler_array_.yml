@@ -8,8 +8,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
   grating_coupler_rectangular2:
     component: grating_coupler_rectangular
@@ -20,8 +20,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
   grating_coupler_rectangular3:
     component: grating_coupler_rectangular
@@ -32,8 +32,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
   grating_coupler_rectangular4:
     component: grating_coupler_rectangular
@@ -44,8 +44,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
   grating_coupler_rectangular5:
     component: grating_coupler_rectangular
@@ -56,8 +56,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
   grating_coupler_rectangular6:
     component: grating_coupler_rectangular
@@ -68,8 +68,8 @@ instances:
     settings:
       cross_section: xs_nc
       length_taper: 200
-      n_periods: 30
-      period: 0.66
+      n_periods: 22
+      period: 1.32
       wavelength: 1.55
 nets: []
 placements:
