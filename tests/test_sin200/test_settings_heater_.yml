@@ -1,0 +1,22 @@
+info: {}
+name: heater
+ports:
+  e1:
+    center:
+    - 75
+    - 235.004
+    layer: PAD
+    name: e1
+    orientation: 90
+    port_type: electrical
+    width: 80
+  e2:
+    center:
+    - 175
+    - 235.004
+    layer: PAD
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 80
+settings: {}

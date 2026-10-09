@@ -6,6 +6,7 @@ import gdsfactory as gf
 from gdsfactory.component import Component
 from gdsfactory.cross_section import CrossSection
 from gdsfactory.typings import (
+    ComponentSpec,
     CrossSectionSpec,
     Ints,
     LayerSpec,
@@ -27,7 +28,8 @@ from cspdk.sin200._schematic import (
     taper_schematic,
     wire_corner_schematic,
 )
-from cspdk.sin200.tech import LAYER, Tech
+from cspdk.sin200.config import PATH
+from cspdk.sin200.tech import LAYER
 
 ################
 # Straights
@@ -137,7 +139,7 @@ bend_euler_n520 = partial(bend_euler, cross_section="xs_n520")
 @gf.cell(tags=["cells"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
-    width1: float = Tech.width_n780,
+    width1: float | None = None,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_n780",
@@ -148,11 +150,13 @@ def taper(
 
     Args:
         length: the length of the taper
-        width1: the input width of the taper
+        width1: the input width of the taper (defaults to the cross-section width)
         width2: the output width of the taper (if not given, use port)
         port: the port (with certain width) to taper towards (if not given, use width2)
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    if width1 is None:
+        width1 = gf.get_cross_section(cross_section).width
     return gf.c.taper(
         length=length,
         width1=width1,
@@ -162,27 +166,9 @@ def taper(
     )
 
 
-taper_n780 = partial(
-    taper,
-    cross_section="xs_n780",
-    length=10.0,
-    width1=Tech.width_n780,
-    width2=None,
-)
-taper_n638 = partial(
-    taper,
-    cross_section="xs_n638",
-    length=10.0,
-    width1=Tech.width_n638,
-    width2=None,
-)
-taper_n520 = partial(
-    taper,
-    cross_section="xs_n520",
-    length=10.0,
-    width1=Tech.width_n520,
-    width2=None,
-)
+taper_n780 = partial(taper, cross_section="xs_n780")
+taper_n638 = partial(taper, cross_section="xs_n638")
+taper_n520 = partial(taper, cross_section="xs_n520")
 
 
 ################
@@ -371,44 +357,90 @@ def grating_coupler_rectangular(
     n_periods: int = 30,
     fill_factor: float = 0.5,
     length_taper: float = 200.0,
+    width_slab: float = 6.0,
     width_grating: float = 7.0,
+    length_start: float = 3.594,
+    length_end: float = 9.988,
     wavelength: float = 0.78,
-    cross_section="xs_n780",
+    fiber_angle: float = 22.0,
+    cross_section: CrossSectionSpec = "xs_n780",
 ) -> Component:
     """A grating coupler with straight and parallel teeth.
 
-    Defaults from the SiN200nm_780nm_TE_STRIP_Grating_Coupler reference
-    GDS: 30 teeth, 0.668um period, 7um wide, 200um taper, teeth on
-    NITRIDE_ETCH.
+    Draws the Cornerstone SiN200 visible grating couplers: a linear NITRIDE
+    taper from the waveguide width to a ``width_slab`` wide NITRIDE slab, with
+    ``n_periods`` etched trenches on NITRIDE_ETCH (GDS 204, dark field) that
+    overhang the slab on both sides. Defaults reproduce
+    SiN200nm_780nm_TE_STRIP_Grating_Coupler.gds exactly: 200 um taper to a
+    6 um slab, 30 trenches of 0.334 um on a 0.668 um pitch starting 3.594 um
+    after the taper, 7 um tall, and 9.988 um of slab after the last trench.
+
+    ``o1`` is the waveguide port at x=0; ``o2`` (the fibre port) sits at the
+    centre of the teeth.
 
     Args:
-        period: the period of the grating
-        n_periods: the number of grating teeth
-        fill_factor: tooth width as a fraction of the period
-        length_taper: the length of the taper tapering up to the grating
-        width_grating: the width of the grating teeth
-        wavelength: the center wavelength for which the grating is designed
-        cross_section: a cross section or its name or a function generating a cross section.
+        period: grating pitch in um.
+        n_periods: number of etched trenches.
+        fill_factor: etched trench width as a fraction of the period.
+        length_taper: length of the taper from the waveguide to the slab.
+        width_slab: width of the NITRIDE slab under the grating.
+        width_grating: height (y extent) of the etched trenches.
+        length_start: distance from the end of the taper to the first trench.
+        length_end: slab length after the last trench.
+        wavelength: centre wavelength in um.
+        fiber_angle: fibre angle from vertical in degrees (foundry value).
+        cross_section: waveguide cross-section at o1.
     """
-    return gf.c.grating_coupler_rectangular(
-        n_periods=n_periods,
-        period=period,
-        length_taper=length_taper,
-        wavelength=wavelength,
-        taper=taper,
-        cross_section=cross_section,
-        fill_factor=fill_factor,
-        width_grating=width_grating,
-        polarization="te",
-        layer_slab=LAYER.NITRIDE,
-        layer_grating=LAYER.NITRIDE_ETCH,
-        fiber_angle=20.0,
-        slab_xmin=-1.0,
-        slab_offset=0.0,
+    xs = gf.get_cross_section(cross_section)
+    snap = gf.snap.snap_to_grid
+    width = xs.width
+    trench = snap(period * fill_factor)
+    x_teeth = [snap(length_taper + length_start + i * period) for i in range(n_periods)]
+    x_end = snap(x_teeth[-1] + trench + length_end)
+
+    c = gf.Component()
+    c.add_polygon(
+        [
+            (0, -width / 2),
+            (0, width / 2),
+            (length_taper, width_slab / 2),
+            (x_end, width_slab / 2),
+            (x_end, -width_slab / 2),
+            (length_taper, -width_slab / 2),
+        ],
+        layer=xs.layer,
     )
+    for x in x_teeth:
+        c.add_polygon(
+            [
+                (x, -width_grating / 2),
+                (x, width_grating / 2),
+                (x + trench, width_grating / 2),
+                (x + trench, -width_grating / 2),
+            ],
+            layer=LAYER.NITRIDE_ETCH,
+        )
+    c.add_port("o1", center=(0, 0), orientation=180, cross_section=xs)
+    c.add_port(
+        "o2",
+        center=(snap((x_teeth[0] + x_teeth[-1] + trench) / 2), 0),
+        orientation=0,
+        width=width_grating,
+        layer=LAYER.NITRIDE_ETCH,
+        port_type="vertical_te",
+    )
+    xs.add_bbox(c)
+    c.info["polarization"] = "te"
+    c.info["wavelength"] = wavelength
+    c.info["fiber_angle"] = fiber_angle
+    c.info["period"] = period
+    return c
 
 
-# dimensions from the Cornerstone SiN200 standard components reference GDS
+# Geometry from the Cornerstone SiN200 visible standard-component GDS
+# (cspdk/sin200/gds/SiN200nm_<band>_TE_STRIP_Grating_Coupler.gds); fibre angles
+# from the standard-components PDF (780 nm: experimental optimum, 22 deg; the
+# simulated optimum is 18 deg).
 grating_coupler_rectangular_n780 = partial(
     grating_coupler_rectangular,
     cross_section="xs_n780",
@@ -419,8 +451,12 @@ grating_coupler_rectangular_n638 = partial(
     period=0.504,
     fill_factor=0.472,
     length_taper=150.0,
+    width_slab=5.5,
     width_grating=6.5,
+    length_start=3.538,
+    length_end=9.988,
     wavelength=0.638,
+    fiber_angle=18.0,
     cross_section="xs_n638",
 )
 
@@ -430,8 +466,12 @@ grating_coupler_rectangular_n520 = partial(
     fill_factor=0.4988,
     n_periods=20,
     length_taper=150.0,
-    width_grating=6.0,
+    width_slab=5.0,
+    width_grating=6.006,
+    length_start=5.035,
+    length_end=5.0,
     wavelength=0.52,
+    fiber_angle=22.0,
     cross_section="xs_n520",
 )
 
@@ -444,14 +484,24 @@ grating_coupler_rectangular_n520 = partial(
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_elliptical_schematic)
 def grating_coupler_elliptical(
     wavelength: float = 0.78,
-    grating_line_width=0.26,
-    cross_section="xs_n780",
+    grating_line_width: float = 0.334,
+    neff: float = 1.7082,
+    fiber_angle: float = 22.0,
+    cross_section: CrossSectionSpec = "xs_n780",
 ) -> Component:
-    """A grating coupler with curved but parallel teeth.
+    """A focusing grating coupler with elliptical trenches (not a foundry cell).
+
+    gdsfactory sets the pitch to ``wavelength / (neff - 1.443 sin(fiber_angle))``.
+    The per-band ``neff`` defaults are chosen so that this pitch equals the
+    foundry rectangular grating pitch (0.668/0.504/0.417 um) at the foundry
+    fibre angle, and ``grating_line_width`` keeps the foundry unetched tooth
+    width, so the elliptical and rectangular gratings share one design point.
 
     Args:
         wavelength: the center wavelength for which the grating is designed
-        grating_line_width: the line width of the grating
+        grating_line_width: width of the unetched SiN line between trenches
+        neff: grating effective index used by the gdsfactory ellipse equation
+        fiber_angle: fibre angle in degrees
         cross_section: a cross section or its name or a function generating a cross section.
     """
     return gf.c.grating_coupler_elliptical_trenches(
@@ -461,8 +511,8 @@ def grating_coupler_elliptical(
         taper_length=16.6,
         taper_angle=30.0,
         trenches_extra_angle=9.0,
-        fiber_angle=20.0,
-        neff=1.5,
+        fiber_angle=fiber_angle,
+        neff=neff,
         ncladding=1.443,
         layer_trench=LAYER.NITRIDE_ETCH,
         p_start=26,
@@ -474,21 +524,23 @@ def grating_coupler_elliptical(
 
 grating_coupler_elliptical_n780 = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.52 / 2,
-    wavelength=0.78,
     cross_section="xs_n780",
 )
 
 grating_coupler_elliptical_n638 = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.44 / 2,
+    grating_line_width=0.266,
+    neff=1.7118,
+    fiber_angle=18.0,
     wavelength=0.638,
     cross_section="xs_n638",
 )
 
 grating_coupler_elliptical_n520 = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.37 / 2,
+    grating_line_width=0.209,
+    neff=1.7876,
+    fiber_angle=22.0,
     wavelength=0.52,
     cross_section="xs_n520",
 )
@@ -589,6 +641,27 @@ def pad() -> Component:
 
 
 @gf.cell(tags=["cells"])
+def heater() -> Component:
+    """The foundry heater (Heater.gds): a 2 um x 202 um filament with pads.
+
+    The filament (GDS 39) runs along x at y = 0.004..2.004 um and lands on two
+    80 um x 150 um contact pads (GDS 41). Electrical ports ``e1`` (left) and
+    ``e2`` (right) sit on the top edge of each pad.
+    """
+    c = gf.import_gds(PATH.gds / "Heater.gds")
+    for name, x in (("e1", 75.0), ("e2", 175.0)):
+        c.add_port(
+            name,
+            center=(x, 235.004),
+            width=80.0,
+            orientation=90,
+            layer=LAYER.PAD,
+            port_type="electrical",
+        )
+    return c
+
+
+@gf.cell(tags=["cells"])
 def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
     """A rectangle.
 
@@ -628,6 +701,26 @@ def compass(
     )
 
 
+_BAND_GRATING_COUPLERS = {
+    "xs_n780": "grating_coupler_rectangular_n780",
+    "xs_n638": "grating_coupler_rectangular_n638",
+    "xs_n520": "grating_coupler_rectangular_n520",
+}
+
+
+def _band_grating_coupler(cross_section: CrossSectionSpec) -> str:
+    """Returns the rectangular grating coupler cell name for a band cross-section."""
+    if isinstance(cross_section, str):
+        name = cross_section
+    elif callable(cross_section):
+        name = cross_section().name
+    elif isinstance(cross_section, CrossSection):
+        name = cross_section.name
+    else:
+        name = ""
+    return _BAND_GRATING_COUPLERS.get(name, "grating_coupler_rectangular")
+
+
 @gf.cell(tags=["cells"])
 def grating_coupler_array(
     pitch: float = 127.0,
@@ -640,6 +733,8 @@ def grating_coupler_array(
     straight_to_grating_spacing=10.0,
     with_loopback=False,
     radius: float | None = None,
+    bend: ComponentSpec = "bend_euler",
+    mirror_grating_coupler: bool = False,
 ) -> Component:
     """An array of grating couplers.
 
@@ -649,28 +744,16 @@ def grating_coupler_array(
         centered: if True, centers the array around the origin.
         grating_coupler: the name of the grating coupler to use in the array.
         port_name: port name
-        with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
+        with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = -90.
         rotation: rotation angle for each reference.
         straight_to_grating_spacing: spacing between the last grating coupler and the loopback.
         cross_section: a cross section or its name or a function generating a cross section.
         radius: the radius of the loopback.
+        bend: the bend used in the loopback.
+        mirror_grating_coupler: if True, mirrors the grating couplers.
     """
     if grating_coupler is None:
-        if isinstance(cross_section, str):
-            xs = cross_section
-        elif callable(cross_section):
-            xs = cross_section().name
-        elif isinstance(cross_section, CrossSection):
-            xs = cross_section.name
-        else:
-            xs = ""
-        gcs = {
-            "xs_n780": "grating_coupler_rectangular_n780",
-            "xs_n638": "grating_coupler_rectangular_n638",
-            "xs_n520": "grating_coupler_rectangular_n520",
-        }
-        grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    assert grating_coupler is not None
+        grating_coupler = _band_grating_coupler(cross_section)
     return gf.c.grating_coupler_array(
         grating_coupler=grating_coupler,
         pitch=pitch,
@@ -682,42 +765,43 @@ def grating_coupler_array(
         centered=centered,
         cross_section=cross_section,
         radius=radius,
+        bend=bend,
+        mirror_grating_coupler=mirror_grating_coupler,
     )
 
 
 @gf.cell(tags=["cells"])
-def die(cross_section="xs_n780") -> Component:
-    """A die template.
+def die_frame(
+    size: Size = (11470.0, 15450.0),
+    layer_floorplan: LayerSpec = "FLOORPLAN",
+) -> Component:
+    """The user-cell floorplan: 11.47 x 15.45 mm2 (design guidelines 5.1).
+
+    Args:
+        size: die frame size (width, height) in um.
+        layer_floorplan: cell outline layer (GDS 99).
+    """
+    return gf.c.die_frame(size=size, layer_floorplan=layer_floorplan)
+
+
+@gf.cell(tags=["cells"])
+def die(cross_section: CrossSectionSpec = "xs_n780") -> Component:
+    """A die template: the 11.47 x 15.45 mm2 user cell (design guidelines 5.1).
 
     Args:
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    if isinstance(cross_section, str):
-        xs = cross_section
-    elif callable(cross_section):
-        xs = cross_section().name
-    elif isinstance(cross_section, CrossSection):
-        xs = cross_section.name
-    else:
-        xs = ""
-    gcs = {
-        "xs_n780": "grating_coupler_rectangular_n780",
-        "xs_n638": "grating_coupler_rectangular_n638",
-        "xs_n520": "grating_coupler_rectangular_n520",
-    }
-    grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    return gf.c.die_with_pads(
+    return gf.c.die_frame_with_pads(
+        die_frame="die_frame",
         cross_section=cross_section,
         edge_to_grating_distance=150.0,
         edge_to_pad_distance=150.0,
-        grating_coupler=grating_coupler,
+        grating_coupler=_band_grating_coupler(cross_section),
         grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
         ngratings=14,
         npads=31,
         pad="pad",
         pad_pitch=300.0,
-        size=(11470.0, 4900.0),
     )
 
 

@@ -14,12 +14,10 @@ class Path:
     module = module
     repo = repo
     gds = module / "gds"
+    # output directory for `python -m cspdk.sin200.tech` (KLayout technology);
+    # no KLayout technology files are shipped for this flavour.
     klayout = module / "klayout"
-
-    lyp = klayout / "tech" / "layers.lyp"
-    lyt = klayout / "tech" / "tech.lyt"
     lyp_yaml = module / "layers.yaml"
-    tech = module / "klayout" / "tech"
 
 
 PATH = Path()

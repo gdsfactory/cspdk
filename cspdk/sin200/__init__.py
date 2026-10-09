@@ -7,10 +7,12 @@ from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.get_factories import get_cells
 from gdsfactory.pdk import Pdk
 
-from cspdk.sin200 import cells, config, tech
+from cspdk.sin200 import cells, config, models, tech
 from cspdk.sin200.config import PATH
+from cspdk.sin200.models import get_models
 from cspdk.sin200.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
+_models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 
@@ -33,6 +35,7 @@ def get_pdk() -> Pdk:
         connectivity=tech.CONNECTIVITY,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
+        models=_models,
         routing_strategies=routing_strategies,
         layer_transitions=layer_transitions,
     )
@@ -53,5 +56,6 @@ __all__ = [
     "PATH",
     "cells",
     "config",
+    "models",
     "tech",
 ]
