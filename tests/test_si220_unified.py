@@ -198,16 +198,57 @@ def test_fiber_array_puts_any_optical_cell_in_the_band() -> None:
         if port.port_type == "optical"
     ]
     assert optical_ports
+    # C-band strip is 0.45 um wide, so this fails if the ring is built in C-band.
     assert all(port.width == pytest.approx(0.40) for port in optical_ports)
+    rings = [i.cell for i in component.insts if i.cell.name.startswith("ring_single")]
+    assert [ring.settings["cross_section"] for ring in rings] == ["strip_oband"]
 
 
-def test_rib_only_cells_stay_rib_in_a_strip_container() -> None:
-    """A rib cell in a strip container switches band but keeps rib."""
+@pytest.mark.parametrize(
+    ("make_component", "make_container_xs", "rib", "width"),
+    [
+        (lambda c, t: "mmi1x2_rib", lambda t: "strip_oband", True, 0.40),
+        (lambda c, t: "mmi1x2_rib", lambda t: t.strip_oband(width=0.5), True, 0.5),
+        (
+            lambda c, t: partial(c.mmi1x2, cross_section="rib_cband"),
+            lambda t: "strip_oband",
+            True,
+            0.40,
+        ),
+        (
+            lambda c, t: partial(c.straight, cross_section=t.strip_cband(width=0.6)),
+            lambda t: "strip_oband",
+            False,
+            0.6,
+        ),
+        (
+            lambda c, t: {
+                "component": "straight",
+                "settings": {"cross_section": "rib_cband"},
+            },
+            lambda t: "strip_oband",
+            True,
+            0.40,
+        ),
+    ],
+    ids=["rib-only", "rib-only-custom-width", "bound-partial", "bound-custom", "dict"],
+)
+def test_container_children_switch_band_keep_type_and_width(
+    make_component, make_container_xs, rib: bool, width: float
+) -> None:
+    """Children follow the container's band; rib stays rib and custom widths are kept."""
     from cspdk.si220._utils import get_band_component
 
     si220.PDK.activate()
-    component = get_band_component("mmi1x2_rib", "strip_oband")
-    assert component.settings["cross_section"] == "rib_oband"
+    component = get_band_component(
+        make_component(si220.cells, si220.tech), make_container_xs(si220.tech)
+    )
+    cross_section = component.settings["cross_section"]
+    assert si220.tech.get_band(cross_section) == "oband"
+    assert si220.tech.is_rib(cross_section) is rib
+    widths = [p.width for p in component.ports if p.port_type == "optical"]
+    assert widths
+    assert all(w == pytest.approx(width) for w in widths)
 
 
 @pytest.mark.parametrize(

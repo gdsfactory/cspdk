@@ -6,30 +6,45 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
-from cspdk.si220.tech import _OPTICAL_NAME, get_band, is_rib
+from cspdk.si220.tech import _OPTICAL_NAME, cross_sections, get_band, is_rib
 
 
-def _default_optical_cross_section(component: ComponentSpec) -> str | None:
-    """Return the component's default optical cross-section, if it still uses it.
+def _is_optical(cross_section: CrossSectionSpec) -> bool:
+    """Whether a spec is one of the si220 optical (strip/rib, C/O-band) cross-sections."""
+    if isinstance(cross_section, str):
+        return bool(_OPTICAL_NAME.match(cross_section))
+    xs = gf.get_cross_section(cross_section)
+    return xs.sections[0].name in ("core_cband", "core_oband")
 
-    ``None`` when the component is already built, has no optical ``cross_section``
-    parameter (e.g. metal cells default to ``metal_routing``), or the caller already
-    chose a cross-section for it.
-    """
-    if isinstance(component, gf.Component):
-        return None
+
+def _current_cross_section(
+    component: ComponentSpec,
+) -> tuple[CrossSectionSpec | None, bool]:
+    """Return the cross-section a component spec would use, and whether it was set explicitly."""
     if isinstance(component, dict):
-        if "cross_section" in component.get("settings", {}):
-            return None
+        settings = component.get("settings", {})
+        if "cross_section" in settings:
+            return settings["cross_section"], True
         component = component["component"]
     if isinstance(component, partial) and "cross_section" in component.keywords:
-        return None
+        return component.keywords["cross_section"], True
     factory = gf.get_active_pdk().get_cell(component)
     parameter = inspect.signature(factory).parameters.get("cross_section")
-    default = None if parameter is None else parameter.default
-    if isinstance(default, str) and _OPTICAL_NAME.match(default):
-        return default
-    return None
+    return (None if parameter is None else parameter.default), False
+
+
+def _variant(cross_section: CrossSectionSpec, band: str, rib: bool) -> CrossSectionSpec:
+    """``cross_section`` as the given band and type, keeping a custom width."""
+    source_band = get_band(cross_section)
+    source_rib = is_rib(cross_section)
+    if source_band == band and source_rib == rib:
+        return cross_section
+    factory = cross_sections[f"{'rib' if rib else 'strip'}_{band}"]
+    source_factory = cross_sections[f"{'rib' if source_rib else 'strip'}_{source_band}"]
+    width = gf.get_cross_section(cross_section).width
+    if width == source_factory().width:
+        return factory.__name__
+    return factory(width=width)
 
 
 def get_band_component(
@@ -37,13 +52,21 @@ def get_band_component(
 ) -> gf.Component:
     """Build a Si220 component in the band of ``cross_section``.
 
-    Any cell with an optical ``cross_section`` parameter gets ``cross_section``, so a
-    container never mixes bands. Rib-only cells (default ``rib_*``) stay rib and only
-    switch band.
+    A container never mixes bands. A child without an explicit cross-section gets
+    ``cross_section``, as rib if the child is rib-only. A child given an explicit
+    cross-section keeps its type and width and only switches band. Metal and other
+    non-optical children are built as they are.
     """
-    default = _default_optical_cross_section(component)
-    if default is None:
+    if isinstance(component, gf.Component):
+        return component
+    current, explicit = _current_cross_section(component)
+    if current is None or not _is_optical(current):
         return gf.get_component(component)
-    if is_rib(default) and not is_rib(cross_section):
-        cross_section = f"rib_{get_band(cross_section)}"
-    return gf.get_component(component, cross_section=cross_section)
+    band = get_band(cross_section)
+    if explicit:
+        target = _variant(current, band, is_rib(current))
+    elif is_rib(current):
+        target = _variant(cross_section, band, rib=True)
+    else:
+        target = cross_section
+    return gf.get_component(component, cross_section=target)
