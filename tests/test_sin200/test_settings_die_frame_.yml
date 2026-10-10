@@ -1,0 +1,8 @@
+info: {}
+name: die_frame_S11470_15450_LFFLOORPLAN
+ports: {}
+settings:
+  layer_floorplan: FLOORPLAN
+  size:
+  - 11470
+  - 15450

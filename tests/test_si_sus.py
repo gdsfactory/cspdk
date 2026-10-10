@@ -1,4 +1,4 @@
-"""Tests for netlists of all cells in the PDK."""
+"""Regression tests for the cspdk.si_sus cells (GDS, settings, netlists, ports)."""
 
 from __future__ import annotations
 
@@ -84,17 +84,10 @@ def test_settings(component_name: str, data_regression: DataRegressionFixture) -
     data_regression.check(component.to_dict(with_ports=True))
 
 
-# the tether containers produced by xs_sus (ComponentAlongPath) are not PDK
-# factories, so gf.read.from_yaml cannot rebuild these cells from their own
-# netlist; skip the netlist roundtrip for them
-skip_test_netlists = {
-    "straight",
-    "bend_euler",
-    "bend_circular",
-    "bend_s",
-    "taper",
-    "grating_coupler_rectangular",
-}
+# straights built by other gdsfactory functions get the xs_sus along-path
+# slot container, which is not a PDK factory; every si_sus cell is flat, so
+# all of them roundtrip through their netlist
+skip_test_netlists: set[str] = set()
 netlist_names = [n for n in cell_names if n not in skip_test_netlists]
 
 
@@ -202,20 +195,3 @@ def test_port_orientations_manhattan(component_name: str) -> None:
                 f"Port {port.name} of {component_name} has non-manhattan "
                 f"orientation {port.orientation} degrees."
             )
-
-
-if __name__ == "__main__":
-    component_type = "mzi_no"
-    c = cells[component_type]()
-    n = c.get_netlist()
-    n.pop("connections", None)
-
-    yaml_str = c.write_netlist(n)
-    c2 = gf.read.from_yaml(yaml_str)
-    c2.show()
-    n2 = c2.get_netlist()
-    d = jsondiff.diff(n, n2)
-    d.pop("warnings", None)
-    d.pop("connections", None)
-    d.pop("ports", None)
-    assert len(d) == 0, d

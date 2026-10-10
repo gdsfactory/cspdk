@@ -1,5 +1,5 @@
 info: {}
-name: mmi1x2_WNone_WT1p5_LT20_LM34p7_WM6_GM1p65_CSxs_rc
+name: mmi1x2_WNone_WT1p5_LT20_LM34p7_WM6_GM1p65_CSxs_rc340
 ports:
   o1:
     center:
@@ -29,7 +29,7 @@ ports:
     port_type: optical
     width: 0.8
 settings:
-  cross_section: xs_rc
+  cross_section: xs_rc340
   gap_mmi: 1.65
   length_mmi: 34.7
   length_taper: 20

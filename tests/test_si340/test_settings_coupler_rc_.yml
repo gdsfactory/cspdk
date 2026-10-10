@@ -1,11 +1,11 @@
 info:
-  min_bend_radius: 28.222
-  path_length: 50.208
-name: coupler_G0p236_L20_D4_D15_CSxs_rc
+  min_bend_radius: 110.744
+  path_length: 80.104
+name: coupler_G0p236_L20_D4_D30_CSxs_rc340
 ports:
   o1:
     center:
-    - -15
+    - -30
     - -1.482
     layer: WG
     name: o1
@@ -14,7 +14,7 @@ ports:
     width: 0.8
   o2:
     center:
-    - -15
+    - -30
     - 2.518
     layer: WG
     name: o2
@@ -23,7 +23,7 @@ ports:
     width: 0.8
   o3:
     center:
-    - 35
+    - 50
     - 2.518
     layer: WG
     name: o3
@@ -32,7 +32,7 @@ ports:
     width: 0.8
   o4:
     center:
-    - 35
+    - 50
     - -1.482
     layer: WG
     name: o4
@@ -40,8 +40,8 @@ ports:
     port_type: optical
     width: 0.8
 settings:
-  cross_section: xs_rc
-  dx: 15
+  cross_section: xs_rc340
+  dx: 30
   dy: 4
   gap: 0.236
   length: 20

@@ -2,87 +2,117 @@ instances:
   grating_coupler_rectangular:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
   grating_coupler_rectangular2:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
   grating_coupler_rectangular3:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
   grating_coupler_rectangular4:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
   grating_coupler_rectangular5:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
   grating_coupler_rectangular6:
     component: grating_coupler_rectangular
     info:
-      fiber_angle: 20
+      fiber_angle: 22
+      period: 0.668
       polarization: te
       wavelength: 0.78
     settings:
       cross_section: xs_n780
+      fiber_angle: 22
       fill_factor: 0.5
+      length_end: 9.988
+      length_start: 3.594
       length_taper: 200
       n_periods: 30
       period: 0.668
       wavelength: 0.78
       width_grating: 7
+      width_slab: 6
 nets: []
 placements:
   grating_coupler_rectangular:

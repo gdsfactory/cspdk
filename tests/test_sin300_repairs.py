@@ -219,7 +219,7 @@ def test_mzi_simulates_and_interferes(band, wl0):
 
 @pytest.mark.parametrize(
     "cross_section,layer,width",
-    [("metal_routing", "PAD", 10.0), ("heater_metal", "HEATER", 4.0)],
+    [("metal_routing", "PAD", 10.0), ("heater_metal_sin300", "HEATER", 4.0)],
 )
 def test_electrical_straight(cross_section, layer, width):
     """Metal wires have two unique electrical ports and no extra heater strip."""
@@ -237,7 +237,7 @@ def test_electrical_straight(cross_section, layer, width):
 
 
 @pytest.mark.parametrize(
-    "cross_section,layer", [("metal_routing", "PAD"), ("heater_metal", "HEATER")]
+    "cross_section,layer", [("metal_routing", "PAD"), ("heater_metal_sin300", "HEATER")]
 )
 @pytest.mark.parametrize("bundle", [False, True])
 def test_electrical_routing(cross_section, layer, bundle):
@@ -274,3 +274,26 @@ def test_electrical_routing(cross_section, layer, bundle):
             and polygon.inside(kdb.DPoint(*end.center).to_itype(component.kcl.dbu))
             for polygon in connected
         )
+
+
+@pytest.mark.parametrize("xs", ["xs_nc", "xs_no"])
+def test_taper_width_follows_cross_section(xs):
+    """Without width1, a taper starts at its cross-section's width."""
+    PDK.activate()
+    width = gf.get_cross_section(xs).width
+    component = cells.taper(cross_section=xs, width2=1.0)
+    assert component.ports["o1"].width == pytest.approx(width)
+    assert component.ports["o2"].width == pytest.approx(1.0)
+
+
+def test_layer_stack_nitride_minus_etch():
+    """GDS 204 is a dark-field etch: it removes nitride instead of adding it."""
+    from cspdk.sin300.tech import LAYER_STACK
+
+    PDK.activate()
+    assert "nitride_etch" not in LAYER_STACK.layers
+    component = cells.grating_coupler_rectangular_nc()
+    nitride = LAYER_STACK.layers["nitride"].layer.get_shapes(component).merged()
+    expected = component.get_region("NITRIDE") - component.get_region("NITRIDE_ETCH")
+    assert (nitride ^ expected).is_empty()
+    assert nitride.area() < component.get_region("NITRIDE").area()

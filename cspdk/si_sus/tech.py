@@ -62,7 +62,9 @@ def get_layer_stack(
     # the physical core is the UN-drawn Si between the etch windows. The core
     # level extrudes the abstract WG_MARK layer that xs_sus draws along the
     # waveguide center for exactly this purpose. The surrounding un-etched Si
-    # mesa and the rib slab (404 AND 405 regions, 150nm) are not modeled.
+    # (field minus 404) is not modeled: cells carry no field shape to
+    # subtract from. The rib slab thickness (150nm, 404 AND 405 regions) has
+    # no foundry source; the MPW #7 process figure suggests 175nm after HF.
     return LayerStack(
         layers=dict(
             core=LayerLevel(
@@ -94,23 +96,33 @@ LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
 class Tech:
     """Technology parameters.
 
-    Values from the Cornerstone suspended-Si spec ('bias' variant) and the
-    Suspendedsilicon500nm_3800nm_TE_Waveguide reference GDS: total
+    Geometry from the Cornerstone suspended-Si standard components library
+    and its Suspendedsilicon500nm_3800nm_TE_Waveguide GDS: total
     cross-section width 8.5um = 3.5um etch window + 1.5um core + 3.5um etch
     window; each window is drawn as periodic 0.3um etch slots at 0.55um
     pitch, leaving 0.25um Si tethers that support the suspended core.
+
+    Like the foundry library, all cells are drawn un-biased, for submission
+    with the 'CORNERSTONE to bias' option (MPW #7 guidelines, Table 2: on
+    layer 404 the drawn features must be >= 270nm and the gaps >= 180nm).
     """
 
-    # spec minimum bend radius is 20um, but a nominal-20 euler bend dips to
-    # ~14um local curvature; default to the 40.75um center-line radius of the
-    # Suspendedsilicon500nm_3800nm_TE_90_DegreeBend reference GDS
+    # radius_min_sus (20um) has no foundry source; the default is the 40.75um
+    # center-line radius of the Suspendedsilicon500nm_3800nm_TE_90_DegreeBend
+    # GDS (the library's 'suggested bend radius: 40um' is its inner core edge)
     radius_sus = 40.75
     radius_min_sus = 20
     width_sus = 1.5  # un-etched Si core between the two etch windows
     width_etch_window = 3.5  # width of each etch band drawn on (404, 0)
-    offset_etch_window = 2.5  # center offset of each etch band
     tether_period = 0.55  # pitch of the etch slots along the waveguide
     etch_slot_length = 0.3  # etched slot length; 0.25um tether in between
+    # first slot center >= 0.275um from a cell end, so the slot edge is at
+    # least 0.125um inside the cell and abutting cells keep >= 0.25um tethers
+    etch_slot_padding = 0.275
+    # MPW #7 Table 2, 'CORNERSTONE to bias' option, layer 404
+    min_feature_404 = 0.27
+    min_gap_404 = 0.18
+    max_suspended_width = 16.0
 
 
 TECH = Tech()
@@ -123,21 +135,23 @@ xsection = gf.xsection
 
 
 @gf.cell
-def _etch_slot_pair() -> gf.Component:
+def _etch_slot_pair(width: float = TECH.width_sus) -> gf.Component:
     """One pair of etch slots (one per etch window), centered at the origin.
 
-    Placing the pair as a single component along the path center line keeps
-    the two windows radially aligned in bends, like the foundry reference
-    bend GDS (same slot count on both sides, slots pointing at the bend
-    center). Built with raw kdb shapes (not gf.c.rectangle) so it can be
-    created at import time, before any PDK is active.
+    The windows start at the core edges (+-width/2), so the slot centers sit
+    at +-(width + width_etch_window)/2. Built with raw kdb shapes (not
+    gf.c.rectangle) so it can be created at import time, before any PDK is
+    active.
+
+    Args:
+        width: width of the un-etched core between the two windows.
     """
     import kfactory as kf  # noqa: PLC0415
 
     c = gf.Component()
     dx = TECH.etch_slot_length / 2
     dy = TECH.width_etch_window / 2
-    o = TECH.offset_etch_window
+    o = width / 2 + dy
     layer_index = c.kcl.layout.layer(*LAYER.WG)
     c.shapes(layer_index).insert(kf.kdb.DBox(-dx, o - dy, dx, o + dy))
     c.shapes(layer_index).insert(kf.kdb.DBox(-dx, -o - dy, dx, -o + dy))
@@ -150,24 +164,25 @@ def xs_sus(
     radius: float = TECH.radius_sus,
     radius_min: float = TECH.radius_min_sus,
 ) -> CrossSection:
-    """Return Suspended Si cross_section for 3800nm TE (bias variant).
+    """Return the suspended-Si strip cross_section for 3800nm TE.
 
     (404, 0) is dark field: drawn shapes are etched to BOX, so the waveguide
-    core is the UN-drawn 1.5um of Si between two 3.5um etch windows. Each
-    window is drawn as periodic 0.3um etch slots (0.55um pitch), leaving
-    0.25um tethers that hold the suspended core, matching the
-    Suspendedsilicon500nm_3800nm_TE_Waveguide reference GDS. The core
-    Section is drawn on the abstract WG_MARK (404, 10) marker layer, which
-    carries the optical ports and the LayerStack core level; it is not a
-    foundry mask layer.
+    core is the UN-drawn Si between two 3.5um etch windows. Each window is
+    drawn as periodic 0.3um etch slots (0.55um pitch), leaving 0.25um tethers
+    that hold the suspended core, matching the
+    Suspendedsilicon500nm_3800nm_TE_Waveguide GDS. The core Section is drawn
+    on the abstract WG_MARK (404, 10) marker layer, which carries the
+    optical ports and the LayerStack core level; it is not a foundry mask
+    layer.
 
-    Only the 'bias' variant is modeled; the rib cross-section (solid etch
-    windows + SLAB (405, 0) protect) is not implemented.
+    The along-path slot pairs serve straights extruded by generic gdsfactory
+    functions and are only correct on straight paths; the cspdk.si_sus cells
+    draw their own slots at exact positions, following bends. The rib
+    cross-section (solid etch windows + SLAB (405, 0) protect) is not
+    implemented.
 
     Args:
-        width: width of the un-etched core. The etch windows stay at
-            +-offset_etch_window, so only the default width matches the
-            foundry cross-section.
+        width: width of the un-etched core; the etch windows follow its edges.
         radius: bend radius.
         radius_min: minimum allowed bend radius.
     """
@@ -183,7 +198,11 @@ def xs_sus(
         radius=radius,
         radius_min=radius_min,
         components_along_path=(
-            ComponentAlongPath(component=_etch_slot_pair(), spacing=TECH.tether_period),
+            ComponentAlongPath(
+                component=_etch_slot_pair(width=width),
+                spacing=TECH.tether_period,
+                padding=TECH.etch_slot_padding,
+            ),
         ),
     )
 
@@ -206,9 +225,9 @@ def route_single(
     route_width: float | None = None,
     cross_section: CrossSectionSpec = "xs_sus",
     straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
+    bend: ComponentSpec = "bend_circular",
 ) -> ManhattanRoute:
-    """Route two ports with a single route."""
+    """Route two ports with a single route (circular bends, like the foundry)."""
     return gf.routing.route_single(
         component=component,
         port1=port1,
@@ -230,7 +249,7 @@ def route_bundle(
     component: gf.Component,
     ports1: list[gf.Port],
     ports2: list[gf.Port],
-    separation: float = 10.0,
+    separation: float = 75.0,
     sort_ports: bool = False,
     start_straight_length: float = 0.0,
     end_straight_length: float = 0.0,
@@ -238,11 +257,15 @@ def route_bundle(
     port_type: str | None = None,
     cross_section: CrossSectionSpec = "xs_sus",
     straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_euler",
+    bend: ComponentSpec = "bend_circular",
     taper: ComponentSpec = "taper",
     **kwargs,
 ) -> list[ManhattanRoute]:
-    """Route two bundles of ports."""
+    """Route two bundles of ports.
+
+    The default separation is the MPW #7 guideline (section 5.3): at least
+    75um between suspended waveguides to avoid collapse.
+    """
     return gf.routing.route_bundle(
         component=component,
         ports1=ports1,

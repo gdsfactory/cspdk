@@ -314,115 +314,85 @@
 
 ---
 
-## Suspended Silicon Platform (February 2022)
+## Suspended Silicon Platform (library February 2022, MPW #7 guidelines February 2025)
+
+Sources: `CORNERSTONE-Suspended-Si-Standard-Components-Library-Feb-2022.pdf`,
+`CORNERSTONE_Suspended-Si_MPW_7-_Design_Guidelines1.pdf` and the library GDS in
+`cspdk/si_sus/gds/`. The library reports no measured data for any component
+("No data at the moment").
 
 ### Process Overview
 
-- Platform: Suspended Silicon Waveguides
-- Base: SOI wafer (220 nm Si / 2 um BOX)
-- Etch: Full etch of silicon + undercut of BOX
-- Waveguides are suspended in air (no cladding)
-- Target application: Mid-infrared photonics (3-8 um)
-- Can also operate at telecom wavelengths with higher index contrast
+- SOI: 500 nm ± 15 nm Si (100) on 3 um thermal BOX, 750 Ohm.cm substrate
+- Etch 1 (layer 404, dark field): 300 nm ± 15 nm partial etch through a 200 nm SiO2 hard mask
+- Etch 2: 200 nm continuation etch to the BOX wherever layer 405 does not protect, then HF release
+- The HF undercuts the BOX by ~8 um in each direction; every strip waveguide is suspended in air
+- After HF the Si is 450 nm ± 20 nm thick and lateral features shrink by ~70 nm
+- Operating wavelength of the library: 3800 nm, TE
 
 ### Layer Definitions
 
-| Layer Name | GDS Layer | Description |
-|------------|-----------|-------------|
-| Si_Full Etch | 1 | 220 nm full etch (device patterning) |
-| Anchor | 4 | Regions where BOX is NOT removed (mechanical support) |
-| Release | 5 | BOX undercut window |
-| FloorPlan | 100 | Die boundary |
+| Layer | GDS | Field | Description |
+|-------|-----|-------|-------------|
+| Silicon Etch 1 | 404 | Dark | Drawn shapes are etched; grating couplers, suspended and rib waveguides |
+| Silicon Etch 2 (rib protect) | 405 | Light | Drawn shapes are protected from the etch to BOX (rib slab) |
+| Cell outline | 99 | - | 11.47 x 4.9 mm2 or 5.5 x 4.9 mm2 design area |
+| Labels | 100 | Dark | Merged into layer 404 by Cornerstone |
 
-### Key Concept
+### Bias Options
 
-The BOX layer beneath the silicon waveguides is selectively removed (HF etch) to create free-standing / suspended silicon structures. Anchor regions keep the waveguide mechanically connected to the substrate.
+The library cells are drawn un-biased; Cornerstone recommends combining them
+with un-biased user designs and selecting "CORNERSTONE to bias", which shrinks
+layer 404 by 35 nm in every direction (etched features 70 nm narrower).
 
-### Design Rules
+### Design Rules (MPW #7 Table 2 and section 5.3)
 
-| Parameter | Value |
-|-----------|-------|
-| Minimum waveguide width | 300 nm |
-| Minimum feature size | 100 nm |
-| Maximum unsupported span | ~20 um |
-| Anchor spacing | Every 10-20 um |
-| Anchor width | > 1 um |
-| Minimum spacing | 200 nm |
-| Undercut margin | 2 um beyond release window |
+| Layer | Option | Min feature | Min gap | Max suspended width | Max support width |
+|-------|--------|-------------|---------|---------------------|-------------------|
+| 404 | NOT to bias | 200 nm | 250 nm | 16 um | 6 um |
+| 404 | CORNERSTONE to bias | 270 nm | 180 nm | 16 um | 6 um |
+| 405 | - | 200 nm | 250 nm | - | - |
+| 100 | - | 250 nm | 250 nm | - | - |
 
-### Waveguides
+- No islands < 20 um on layers 404 and 100 (lifted off during the HF release)
+- Gaps < 350 nm on layers 404 and 100 must be at most 20 um long
+- At least 75 um between waveguides is recommended to avoid suspended waveguides collapsing
+- Quality target: straight single-mode suspended waveguide loss < 5 dB/cm (TE, 3.8 um)
 
-#### Suspended Strip Waveguide
+### Components (3800 nm TE, etch depth 500 nm)
 
-| Parameter | Value |
-|-----------|-------|
-| Width | 300-500 nm (telecom) / 1-3 um (mid-IR) |
-| Height | 220 nm |
-| Surrounding medium | Air (n=1) |
-| Effective index contrast | Very high (Si/Air) |
-| Propagation loss (telecom) | ~5 dB/cm |
+#### Suspendedsilicon500nm_3800nm_TE_Waveguide
 
-#### Subwavelength Grating (SWG) Waveguide
+- 1.5 um core between two 3.5 um etch windows (8.5 um total)
+- Windows drawn as sub-wavelength slots: period 550 nm, Si fill factor 0.4545 (0.3 um slots, 0.25 um tethers)
+- GDS: 500 um long, 909 slot pairs
 
-- Periodic silicon/air structure below diffraction limit
-- Effective index tunable via duty cycle
-- Lower effective index than strip waveguide
-- Used for couplers and mode engineering
+#### Suspendedsilicon500nm_3800nm_TE_90_DegreeBend
 
-### Components
+- Suggested bend radius 40 um (GDS: 40 um at the inner core edge, 40.75 um center line)
+- GDS: polar-wedge slots of 0.0075 rad at 0.01375 rad pitch (0.3 um / 0.55 um at r = 40 um), 115 slot pairs
 
-#### Suspended Grating Coupler
+#### Suspendedsilicon500nm_3800nm_TE_SBend
 
-| Parameter | Value |
-|-----------|-------|
-| Center wavelength | 1550 nm (or mid-IR) |
-| Coupling loss | ~7 dB |
-| Bandwidth | ~20 nm |
+- 40 um long, 8 um offset
+- GDS: cosine-like center line, 72 vertical slot pairs (0.3 um wide, 0.55 um x-pitch)
 
-#### Suspended 1x2 MMI
+#### Suspendedsilicon500nm_3800nm_TE_Grating_Coupler
 
-| Parameter | Value |
-|-----------|-------|
-| Insertion loss | < 0.5 dB |
-| Imbalance | < 0.3 dB |
+- Fiber coupling angle 19 degrees
+- 300 um slotted taper from the 1.5 um waveguide to a 15 um wide grating
+- Hole array: period 1.1 um x 2.3 um, fill factor 0.51 x 0.5
+- Holes: 13 across the width; the PDF says 30 along the grating, the GDS has 20
 
-#### Suspended Y-Branch
+### cspdk.si_sus Implementation Notes
 
-| Parameter | Value |
-|-----------|-------|
-| Splitting ratio | 50:50 |
-| Insertion loss | < 0.5 dB |
-
-#### Suspended Directional Coupler
-
-| Parameter | Value |
-|-----------|-------|
-| Gap | 150-300 nm |
-| Excess loss | < 0.2 dB |
-
-### Bends
-
-| Minimum Radius | Loss (90-degree) |
-|---------------|------------------|
-| 3 um | < 0.1 dB |
-| 5 um | < 0.05 dB |
-
-### Ring Resonators
-
-| Parameter | Value |
-|-----------|-------|
-| Radius | 3-10 um |
-| Q factor | 5,000-30,000 |
-| FSR (R=5 um) | ~24 nm |
-
-### Design Considerations
-
-- Mechanical anchors must be placed periodically to prevent waveguide collapse
-- The release window must extend sufficiently beyond waveguide features to fully undercut the BOX
-- Suspended structures are fragile; handle with care during processing
-- No upper cladding is present; structures are exposed to air
-- Well-suited for mid-infrared applications due to removal of silica (which absorbs beyond ~3.5 um)
-- SWG structures can provide mode engineering and gradual effective index transitions
+- `xs_sus` draws the core on the abstract marker (404, 10) and the slots on (404, 0)
+- `straight(500)` reproduces the foundry waveguide GDS; `grating_coupler_rectangular` imports the foundry GDS
+- `bend_circular` (default radius 40.75 um) uses the foundry wedges but 114 slot pairs per 90 degrees,
+  so no wedge overhangs the port plane; `bend_s` (default 40 x 8 um) uses the foundry vertical slots
+- Every cell keeps its slots >= 0.125 um inside its ports, so abutting cells keep >= 0.25 um tethers
+- SAX models: femwell neff/ng with an effective-medium slotted cladding, 5 dB/cm loss; the
+  grating-coupler model is a placeholder
 
 ---
 
@@ -430,12 +400,12 @@ The BOX layer beneath the silicon waveguides is selectively removed (HF etch) to
 
 | Property | SOI (220 nm) | SiN (300 nm) | Suspended Si |
 |----------|-------------|-------------|-------------|
-| Waveguide material | c-Si | Si3N4 | c-Si (air clad) |
-| Core height | 220 nm | 300 nm | 220 nm |
-| Cladding | SiO2 | SiO2 | Air |
-| Loss (dB/cm) | ~3 | < 1 | ~5 |
-| Min bend radius | 5 um | 20 um | 3 um |
+| Waveguide material | c-Si | Si3N4 | c-Si (suspended in air) |
+| Core height | 220 nm | 300 nm | 450 nm (500 nm SOI after HF) |
+| Cladding | SiO2 | SiO2 | Air + slotted Si side cladding |
+| Loss (dB/cm) | ~3 | < 1 | < 5 (target, 3.8 um) |
+| Min bend radius | 5 um | 20 um | 40 um (suggested) |
 | Active devices | Yes (PN, Ge PD) | No (heaters only) | No |
-| Operating range | C/O-band | Vis to C-band | Telecom + Mid-IR |
-| Lithography | e-beam | e-beam | e-beam |
+| Operating range | C/O-band | Vis to C-band | Mid-IR (3.8 um library) |
+| Lithography | e-beam | e-beam | not stated |
 | Key advantage | Active integration | Low loss | Mid-IR transparency |

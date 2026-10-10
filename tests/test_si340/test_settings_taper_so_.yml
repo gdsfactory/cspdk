@@ -2,7 +2,7 @@ info:
   length: 10
   width1: 0.4
   width2: 0.4
-name: taper_L10_W0p4_WNone_PNone_CSxs_so
+name: taper_L10_W0p4_WNone_PNone_CSxs_so340
 ports:
   o1:
     center:
@@ -23,6 +23,6 @@ ports:
     port_type: optical
     width: 0.4
 settings:
-  cross_section: xs_so
+  cross_section: xs_so340
   length: 10
   width1: 0.4

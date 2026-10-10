@@ -63,22 +63,36 @@ def get_layer_stack(
     thickness_wg: float = 340 * nm,
     thickness_slab: float = 200 * nm,
     thickness_grating: float = 200 * nm,
-    zmin_heater: float = 1.1,
+    thickness_clad: float = 1.0,
+    zmin_heater: float | None = None,
     thickness_heater: float = 150 * nm,
-    zmin_metal: float = 1.1,
+    zmin_metal: float | None = None,
     thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
+
+    Based on the CORNERSTONE 340 nm SOI MPW #49 design guidelines: 340 nm Si
+    core on 2 um BOX with a 1 um SiO2 top cladding. Silicon Etch 1 (140 nm,
+    GDS layers 3, 4 and 6) leaves a 200 nm slab for rib waveguides and
+    200 nm of silicon under the grating teeth; Silicon Etch 2 etches the
+    remaining 200 nm to the BOX outside the rib protect layer (GDS layer 5).
+    The heater filaments (GDS layer 39) sit on the top cladding and the
+    contact pads (GDS layer 41) on top of the filaments.
 
     Args:
         thickness_wg: waveguide thickness in um.
         thickness_slab: slab thickness in um.
         thickness_grating: grating residual Si thickness in um.
-        zmin_heater: TiN heater.
+        thickness_clad: top cladding thickness above the waveguide in um.
+        zmin_heater: TiN heater bottom in um; defaults to the cladding top.
         thickness_heater: TiN thickness.
-        zmin_metal: metal thickness in um.
-        thickness_metal: top metal thickness.
+        zmin_metal: contact pad bottom in um; defaults to the heater top.
+        thickness_metal: contact pad thickness.
     """
+    if zmin_heater is None:
+        zmin_heater = thickness_wg + thickness_clad
+    if zmin_metal is None:
+        zmin_metal = zmin_heater + thickness_heater
     return LayerStack(
         layers=dict(
             core=LayerLevel(
@@ -120,7 +134,7 @@ def get_layer_stack(
             metal=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
-                zmin=zmin_metal + thickness_metal,
+                zmin=zmin_metal,
                 material="Al",
                 info={"mesh_order": 2},
             ),
@@ -137,7 +151,7 @@ class Tech:
 
     radius_sc = 10
     radius_so = 10
-    radius_rc = 25
+    radius_rc = 100
     width_sc = 0.45
     width_so = 0.40
     width_rc = 0.80
@@ -155,7 +169,7 @@ xsection = gf.xsection
 
 
 @xsection
-def xs_sc(
+def xs_sc340(
     width: float = TECH.width_sc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_sc,
@@ -173,7 +187,7 @@ def xs_sc(
 
 
 @xsection
-def xs_so(
+def xs_so340(
     width: float = TECH.width_so,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_so,
@@ -191,7 +205,7 @@ def xs_so(
 
 
 @xsection
-def xs_rc(
+def xs_rc340(
     width: float = TECH.width_rc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_rc,
@@ -200,7 +214,7 @@ def xs_rc(
     bbox_offsets: Floats = (TECH.width_slab,),
     **kwargs,
 ) -> CrossSection:
-    """Return Rib C-band cross_section."""
+    """Return Rib C-band cross_section (foundry 800 nm rib, R = 100 um)."""
     return gf.cross_section.cross_section(
         width=width,
         layer=layer,
@@ -229,7 +243,7 @@ def metal_routing(
 
 
 @xsection
-def heater_metal(
+def heater_metal_si340(
     width: float = 2.5,
     layer: LayerSpec = "HEATER",
     radius: float | None = None,
@@ -264,9 +278,9 @@ def route_single(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_euler_sc",
+    bend: ComponentSpec = "bend_circular_sc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -290,7 +304,7 @@ def route_bundle(
     component: gf.Component,
     ports1: list[gf.Port],
     ports2: list[gf.Port],
-    separation: float = 3.0,
+    separation: float = 5.0,
     sort_ports: bool = False,
     start_straight_length: float = 0.0,
     end_straight_length: float = 0.0,
@@ -302,9 +316,9 @@ def route_bundle(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | list[float] | None = None,
-    cross_section: CrossSectionSpec = "xs_sc",
+    cross_section: CrossSectionSpec = "xs_sc340",
     straight: ComponentSpec = "straight_sc",
-    bend: ComponentSpec = "bend_euler_sc",
+    bend: ComponentSpec = "bend_circular_sc",
     taper: ComponentSpec = "taper_sc",
 ) -> list[ManhattanRoute]:
     """Route two bundles of ports."""
@@ -340,42 +354,42 @@ routing_strategies = dict(
     route_single_sc=partial(
         route_single,
         straight="straight_sc",
-        bend="bend_euler_sc",
-        cross_section="xs_sc",
+        bend="bend_circular_sc",
+        cross_section="xs_sc340",
     ),
     route_single_so=partial(
         route_single,
         straight="straight_so",
-        bend="bend_euler_so",
-        cross_section="xs_so",
+        bend="bend_circular_so",
+        cross_section="xs_so340",
     ),
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
-        bend="bend_euler_rc",
-        cross_section="xs_rc",
+        bend="bend_circular_rc",
+        cross_section="xs_rc340",
     ),
     route_bundle=route_bundle,
     route_bundle_sc=partial(
         route_bundle,
         straight="straight_sc",
-        bend="bend_euler_sc",
+        bend="bend_circular_sc",
         taper="taper_sc",
-        cross_section="xs_sc",
+        cross_section="xs_sc340",
     ),
     route_bundle_so=partial(
         route_bundle,
         straight="straight_so",
-        bend="bend_euler_so",
+        bend="bend_circular_so",
         taper="taper_so",
-        cross_section="xs_so",
+        cross_section="xs_so340",
     ),
     route_bundle_rc=partial(
         route_bundle,
         straight="straight_rc",
-        bend="bend_euler_rc",
+        bend="bend_circular_rc",
         taper="taper_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc340",
     ),
 )
 

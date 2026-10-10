@@ -1,0 +1,1013 @@
+instances:
+  die_frame:
+    component: die_frame
+    info: {}
+    settings:
+      layer_floorplan: FLOORPLAN
+      size:
+      - 11470
+      - 15450
+  grating_coupler_array:
+    component: grating_coupler_array
+    info: {}
+    settings:
+      bend: bend_euler
+      centered: true
+      cross_section: xs_n638
+      grating_coupler: grating_coupler_rectangular_n638
+      mirror_grating_coupler: false
+      n: 14
+      pitch: 250
+      port_name: o1
+      radius: null
+      rotation: -90
+      straight_to_grating_spacing: 10
+      with_loopback: true
+  grating_coupler_array2:
+    component: grating_coupler_array
+    info: {}
+    settings:
+      bend: bend_euler
+      centered: true
+      cross_section: xs_n638
+      grating_coupler: grating_coupler_rectangular_n638
+      mirror_grating_coupler: false
+      n: 14
+      pitch: 250
+      port_name: o1
+      radius: null
+      rotation: -90
+      straight_to_grating_spacing: 10
+      with_loopback: true
+  pad:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad10:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad11:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad12:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad13:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad14:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad15:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad16:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad17:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad18:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad19:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad2:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad20:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad21:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad22:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad23:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad24:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad25:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad26:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad27:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad28:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad29:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad3:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad30:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad31:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad32:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad33:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad34:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad35:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad36:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad37:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad38:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad39:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad4:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad40:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad41:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad42:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad43:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad44:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad45:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad46:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad47:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad48:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad49:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad5:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad50:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad51:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad52:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad53:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad54:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad55:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad56:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad57:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad58:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad59:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad6:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad60:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad61:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad62:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad7:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad8:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+  pad9:
+    component: pad
+    info:
+      size:
+      - 100
+      - 100
+      xsize: 100
+      ysize: 100
+    settings: {}
+nets: []
+placements:
+  die_frame:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  grating_coupler_array:
+    mirror: false
+    rotation: 270
+    x: -5356.44
+    y: 0
+  grating_coupler_array2:
+    mirror: false
+    rotation: 90
+    x: 5356.44
+    y: 0
+  pad:
+    mirror: false
+    rotation: 0
+    x: -1150
+    y: -7525
+  pad10:
+    mirror: false
+    rotation: 0
+    x: -2350
+    y: 7525
+  pad11:
+    mirror: false
+    rotation: 0
+    x: -250
+    y: -7525
+  pad12:
+    mirror: false
+    rotation: 0
+    x: -250
+    y: 7525
+  pad13:
+    mirror: false
+    rotation: 0
+    x: -2650
+    y: -7525
+  pad14:
+    mirror: false
+    rotation: 0
+    x: -2650
+    y: 7525
+  pad15:
+    mirror: false
+    rotation: 0
+    x: -2950
+    y: -7525
+  pad16:
+    mirror: false
+    rotation: 0
+    x: -2950
+    y: 7525
+  pad17:
+    mirror: false
+    rotation: 0
+    x: -3250
+    y: -7525
+  pad18:
+    mirror: false
+    rotation: 0
+    x: -3250
+    y: 7525
+  pad19:
+    mirror: false
+    rotation: 0
+    x: -3550
+    y: -7525
+  pad2:
+    mirror: false
+    rotation: 0
+    x: -1150
+    y: 7525
+  pad20:
+    mirror: false
+    rotation: 0
+    x: -3550
+    y: 7525
+  pad21:
+    mirror: false
+    rotation: 0
+    x: -3850
+    y: -7525
+  pad22:
+    mirror: false
+    rotation: 0
+    x: -3850
+    y: 7525
+  pad23:
+    mirror: false
+    rotation: 0
+    x: -4150
+    y: -7525
+  pad24:
+    mirror: false
+    rotation: 0
+    x: -4150
+    y: 7525
+  pad25:
+    mirror: false
+    rotation: 0
+    x: -4450
+    y: -7525
+  pad26:
+    mirror: false
+    rotation: 0
+    x: -4450
+    y: 7525
+  pad27:
+    mirror: false
+    rotation: 0
+    x: -550
+    y: -7525
+  pad28:
+    mirror: false
+    rotation: 0
+    x: -550
+    y: 7525
+  pad29:
+    mirror: false
+    rotation: 0
+    x: -850
+    y: -7525
+  pad3:
+    mirror: false
+    rotation: 0
+    x: -1450
+    y: -7525
+  pad30:
+    mirror: false
+    rotation: 0
+    x: -850
+    y: 7525
+  pad31:
+    mirror: false
+    rotation: 0
+    x: 1250
+    y: -7525
+  pad32:
+    mirror: false
+    rotation: 0
+    x: 1250
+    y: 7525
+  pad33:
+    mirror: false
+    rotation: 0
+    x: 1550
+    y: -7525
+  pad34:
+    mirror: false
+    rotation: 0
+    x: 1550
+    y: 7525
+  pad35:
+    mirror: false
+    rotation: 0
+    x: 1850
+    y: -7525
+  pad36:
+    mirror: false
+    rotation: 0
+    x: 1850
+    y: 7525
+  pad37:
+    mirror: false
+    rotation: 0
+    x: 2150
+    y: -7525
+  pad38:
+    mirror: false
+    rotation: 0
+    x: 2150
+    y: 7525
+  pad39:
+    mirror: false
+    rotation: 0
+    x: 2450
+    y: -7525
+  pad4:
+    mirror: false
+    rotation: 0
+    x: -1450
+    y: 7525
+  pad40:
+    mirror: false
+    rotation: 0
+    x: 2450
+    y: 7525
+  pad41:
+    mirror: false
+    rotation: 0
+    x: 2750
+    y: -7525
+  pad42:
+    mirror: false
+    rotation: 0
+    x: 2750
+    y: 7525
+  pad43:
+    mirror: false
+    rotation: 0
+    x: 3050
+    y: -7525
+  pad44:
+    mirror: false
+    rotation: 0
+    x: 3050
+    y: 7525
+  pad45:
+    mirror: false
+    rotation: 0
+    x: 3350
+    y: -7525
+  pad46:
+    mirror: false
+    rotation: 0
+    x: 3350
+    y: 7525
+  pad47:
+    mirror: false
+    rotation: 0
+    x: 350
+    y: -7525
+  pad48:
+    mirror: false
+    rotation: 0
+    x: 350
+    y: 7525
+  pad49:
+    mirror: false
+    rotation: 0
+    x: 3650
+    y: -7525
+  pad5:
+    mirror: false
+    rotation: 0
+    x: -1750
+    y: -7525
+  pad50:
+    mirror: false
+    rotation: 0
+    x: 3650
+    y: 7525
+  pad51:
+    mirror: false
+    rotation: 0
+    x: 3950
+    y: -7525
+  pad52:
+    mirror: false
+    rotation: 0
+    x: 3950
+    y: 7525
+  pad53:
+    mirror: false
+    rotation: 0
+    x: 4250
+    y: -7525
+  pad54:
+    mirror: false
+    rotation: 0
+    x: 4250
+    y: 7525
+  pad55:
+    mirror: false
+    rotation: 0
+    x: 4550
+    y: -7525
+  pad56:
+    mirror: false
+    rotation: 0
+    x: 4550
+    y: 7525
+  pad57:
+    mirror: false
+    rotation: 0
+    x: 50
+    y: -7525
+  pad58:
+    mirror: false
+    rotation: 0
+    x: 50
+    y: 7525
+  pad59:
+    mirror: false
+    rotation: 0
+    x: 650
+    y: -7525
+  pad6:
+    mirror: false
+    rotation: 0
+    x: -1750
+    y: 7525
+  pad60:
+    mirror: false
+    rotation: 0
+    x: 650
+    y: 7525
+  pad61:
+    mirror: false
+    rotation: 0
+    x: 950
+    y: -7525
+  pad62:
+    mirror: false
+    rotation: 0
+    x: 950
+    y: 7525
+  pad7:
+    mirror: false
+    rotation: 0
+    x: -2050
+    y: -7525
+  pad8:
+    mirror: false
+    rotation: 0
+    x: -2050
+    y: 7525
+  pad9:
+    mirror: false
+    rotation: 0
+    x: -2350
+    y: -7525
+ports:
+  e1: pad25,e2
+  e10: pad5,e2
+  e11: pad3,e2
+  e12: pad,e2
+  e13: pad29,e2
+  e14: pad27,e2
+  e15: pad11,e2
+  e16: pad57,e2
+  e17: pad47,e2
+  e18: pad59,e2
+  e19: pad61,e2
+  e2: pad23,e2
+  e20: pad31,e2
+  e21: pad33,e2
+  e22: pad35,e2
+  e23: pad37,e2
+  e24: pad39,e2
+  e25: pad41,e2
+  e26: pad43,e2
+  e27: pad45,e2
+  e28: pad49,e2
+  e29: pad51,e2
+  e3: pad21,e2
+  e30: pad53,e2
+  e31: pad55,e2
+  e32: pad56,e4
+  e33: pad54,e4
+  e34: pad52,e4
+  e35: pad50,e4
+  e36: pad46,e4
+  e37: pad44,e4
+  e38: pad42,e4
+  e39: pad40,e4
+  e4: pad19,e2
+  e40: pad38,e4
+  e41: pad36,e4
+  e42: pad34,e4
+  e43: pad32,e4
+  e44: pad62,e4
+  e45: pad60,e4
+  e46: pad48,e4
+  e47: pad58,e4
+  e48: pad12,e4
+  e49: pad28,e4
+  e5: pad17,e2
+  e50: pad30,e4
+  e51: pad2,e4
+  e52: pad4,e4
+  e53: pad6,e4
+  e54: pad8,e4
+  e55: pad10,e4
+  e56: pad14,e4
+  e57: pad16,e4
+  e58: pad18,e4
+  e59: pad20,e4
+  e6: pad15,e2
+  e60: pad22,e4
+  e61: pad24,e4
+  e62: pad26,e4
+  e7: pad13,e2
+  e8: pad9,e2
+  e9: pad7,e2
+  o1: grating_coupler_array2,o1
+  o10: grating_coupler_array2,o10
+  o11: grating_coupler_array2,o11
+  o12: grating_coupler_array2,o12
+  o13: grating_coupler_array,o1
+  o14: grating_coupler_array,o2
+  o15: grating_coupler_array,o3
+  o16: grating_coupler_array,o4
+  o17: grating_coupler_array,o5
+  o18: grating_coupler_array,o6
+  o19: grating_coupler_array,o7
+  o2: grating_coupler_array2,o2
+  o20: grating_coupler_array,o8
+  o21: grating_coupler_array,o9
+  o22: grating_coupler_array,o10
+  o23: grating_coupler_array,o11
+  o24: grating_coupler_array,o12
+  o3: grating_coupler_array2,o3
+  o4: grating_coupler_array2,o4
+  o5: grating_coupler_array2,o5
+  o6: grating_coupler_array2,o6
+  o7: grating_coupler_array2,o7
+  o8: grating_coupler_array2,o8
+  o9: grating_coupler_array2,o9

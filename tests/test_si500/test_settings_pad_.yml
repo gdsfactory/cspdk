@@ -4,7 +4,7 @@ info:
   - 100
   xsize: 100
   ysize: 100
-name: pad
+name: pad_S100_100
 ports:
   e1:
     center:
@@ -51,4 +51,7 @@ ports:
     orientation: 0
     port_type: pad
     width: 100
-settings: {}
+settings:
+  size:
+  - 100
+  - 100

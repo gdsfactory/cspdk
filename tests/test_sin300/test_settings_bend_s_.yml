@@ -9,7 +9,7 @@ info:
   route_info_weight: 15.152
   route_info_xs_nc_length: 15.152
   start_angle: 0
-name: bend_s_S15_1p8_CSxs_nc_AMRVTrue
+name: bend_s_S15_1p8_CSxs_nc_AMRVTrue_WNone
 ports:
   o1:
     center:
