@@ -26,7 +26,7 @@ license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
-version = "1.4.5"
+version = "2.0.0"
 
 [project.optional-dependencies]
 dev = [
@@ -116,7 +116,7 @@ min = 1.5
 num = 1000
 
 [tool.hatch.build.targets.sdist]
-# Package only, like the flit sdists up to v1.4.5: no tests, references or samples.
+# Package only (no tests, references or samples), as the flit-built sdists were.
 exclude = ["cspdk/*/samples"]
 include = ["/cspdk", "/CHANGELOG.md", "/LICENSE", "/README.md"]
 
@@ -214,7 +214,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "1.4.5"
+current = "2.0.0"
 # Example of a semver regexp.
 # Make sure this matches current_version before
 # using tbump
