@@ -115,7 +115,13 @@ max = 1.6
 min = 1.5
 num = 1000
 
+[tool.hatch.build.targets.sdist]
+# Package only, like the flit sdists up to v1.4.5: no tests, references or samples.
+exclude = ["cspdk/*/samples"]
+include = ["/cspdk", "/CHANGELOG.md", "/LICENSE", "/README.md"]
+
 [tool.hatch.build.targets.wheel]
+exclude = ["cspdk/*/samples"]
 packages = ["cspdk"]
 
 [tool.mypy]
