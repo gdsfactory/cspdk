@@ -769,7 +769,7 @@ wheels = [
 
 [[package]]
 name = "cspdk"
-version = "1.4.5"
+version = "2.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "circulax" },

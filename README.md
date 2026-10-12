@@ -1,5 +1,5 @@
 
-# CORNERSTONE PDK 1.4.5
+# CORNERSTONE PDK 2.0.0
 
 The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm SOI multi-project-wafer process built for accessible, low-cost prototyping.
 
