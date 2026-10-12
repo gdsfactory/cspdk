@@ -1,6 +1,42 @@
 info: {}
 name: SOI220_cband_TE_strip_SLG_PTE_with_GC
 ports:
+  e1:
+    center:
+    - -65
+    - 0
+    layer: GRAPHENE_PAD1
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 60
+  e2:
+    center:
+    - -65
+    - 70
+    layer: GRAPHENE_PAD2
+    name: e2
+    orientation: 180
+    port_type: electrical
+    width: 60
+  e3:
+    center:
+    - 65
+    - 70
+    layer: GRAPHENE_PAD2
+    name: e3
+    orientation: 0
+    port_type: electrical
+    width: 60
+  e4:
+    center:
+    - 65
+    - 0
+    layer: GRAPHENE_PAD1
+    name: e4
+    orientation: 0
+    port_type: electrical
+    width: 60
   o1:
     center:
     - 0

@@ -21,7 +21,8 @@ from cspdk.si220.config import PATH
 # follow them, as in the grating couplers (o1 waveguide, o2 fibre). A fibre port
 # sits at the centre of the grating teeth and points away from the grating's
 # waveguide. Electrical ports are named e1, e2, ... clockwise from the west and sit
-# on the outer edge of each PAD (41/0) contact pad.
+# on the outer edge of each contact pad, on the pad's own layer: PAD (41/0), or
+# GRAPHENE_PAD1/2 (165/2, 166/2) for the graphene devices.
 
 _FIBER_PORT_WIDTH = 10.0  # um, fibre mode-field diameter
 
@@ -64,14 +65,15 @@ def _add_pad_port(
     center: tuple[float, float],
     orientation: float,
     width: float,
+    layer: str = "PAD",
 ) -> None:
-    """Add an electrical port on the outer edge of a PAD contact pad."""
+    """Add an electrical port on the outer edge of a contact pad on ``layer``."""
     c.add_port(
         name,
         center=center,
         orientation=orientation,
         width=width,
-        layer="PAD",
+        layer=layer,
         port_type="electrical",
     )
 
@@ -132,10 +134,50 @@ def SOI220_cband_TE_strip_apodized_GC_focusing_v1p0() -> gf.Component:
 # Graphene (single-layer graphene, SLG) devices
 # A 450 nm strip waveguide runs along y through the device: o1 is its top end and
 # o2 its bottom end. In the _with_GC cells it ends in a grating coupler at each end
-# instead, so o1 and o2 are the fibre ports of the top and bottom gratings. The
-# devices are probed on their Au/Ti pads (GRAPHENE_PAD1/2): the design rules keep
-# PAD (41/0) 50 um away from the graphene exclusion zone, so there are no
-# electrical ports.
+# instead, so o1 and o2 are the fibre ports of the top and bottom gratings; the
+# device and its pads are at the same place as in the bare cell.
+#
+# The devices are probed on their Au/Ti pads, GRAPHENE_PAD1 (165/2) and
+# GRAPHENE_PAD2 (166/2), labelled S (signal), G (ground) and Gate in the
+# standard-components datasheet (pp. 30-35). The design rules keep PAD (41/0)
+# 50 um away from the graphene exclusion zone (169/1), so the pad ports are on the
+# pad's own layer and nothing is drawn on PAD. Every pad lies beside the
+# waveguide (x = 0), so each port is on the pad edge facing away from it: west of
+# the waveguide the ports point west, east of it they point east. The pad
+# positions were measured on the template (tests/test_si220_run50_fixed.py).
+
+
+def _add_bolometer_pads(c: gf.Component, gate: bool = True) -> None:
+    """Add the S (e1), Gate (e2) and G (e3, or e2 without a gate) pad ports.
+
+    The S and G pads (GRAPHENE_PAD1, 60 um x 90 um) contact the graphene channel
+    either side of the waveguide; the Gate pad (GRAPHENE_PAD2) is above G.
+    """
+    _add_pad_port(c, "e1", (-65, 0), 180, 90, "GRAPHENE_PAD1")
+    if gate:
+        _add_pad_port(c, "e2", (65, 100), 0, 90, "GRAPHENE_PAD2")
+    _add_pad_port(c, "e3" if gate else "e2", (65, 0), 0, 90, "GRAPHENE_PAD1")
+
+
+def _add_eam_pads(c: gf.Component) -> None:
+    """Add the S (e1, 1st graphene) and G (e2, 2nd graphene) pad ports.
+
+    The two 60 um x 90 um pads contact the two graphene layers of the capacitor.
+    """
+    _add_pad_port(c, "e1", (-65, 0), 180, 90, "GRAPHENE_PAD1")
+    _add_pad_port(c, "e2", (65, 0), 0, 90, "GRAPHENE_PAD2")
+
+
+def _add_pte_pads(c: gf.Component) -> None:
+    """Add the S (e1), Gate1 (e2), Gate2 (e3) and G (e4) pad ports.
+
+    The 60 um x 60 um S and G pads (GRAPHENE_PAD1) contact the graphene channel;
+    the split-gate pads Gate1 and Gate2 (GRAPHENE_PAD2) are above them.
+    """
+    _add_pad_port(c, "e1", (-65, 0), 180, 60, "GRAPHENE_PAD1")
+    _add_pad_port(c, "e2", (-65, 70), 180, 60, "GRAPHENE_PAD2")
+    _add_pad_port(c, "e3", (65, 70), 0, 60, "GRAPHENE_PAD2")
+    _add_pad_port(c, "e4", (65, 0), 0, 60, "GRAPHENE_PAD1")
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
@@ -144,6 +186,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
+    _add_bolometer_pads(c)
     return c
 
 
@@ -153,6 +196,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_with_GC")
     _add_fiber_port(c, "o1", (0, 584.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
+    _add_bolometer_pads(c)
     return c
 
 
@@ -162,6 +206,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer_metallic() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_metallic")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
+    _add_bolometer_pads(c)
     return c
 
 
@@ -171,6 +216,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC")
     _add_fiber_port(c, "o1", (0, 574.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
+    _add_bolometer_pads(c)
     return c
 
 
@@ -180,6 +226,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer_no_gate() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_no_gate")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
+    _add_bolometer_pads(c, gate=False)
     return c
 
 
@@ -189,6 +236,7 @@ def SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC")
     _add_fiber_port(c, "o1", (0, 574.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
+    _add_bolometer_pads(c, gate=False)
     return c
 
 
@@ -198,6 +246,7 @@ def SOI220_cband_TE_strip_SLG_EAM() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_EAM")
     _add_optical_port(c, "o1", (0, 100), 90)
     _add_optical_port(c, "o2", (0, -100), 270)
+    _add_eam_pads(c)
     return c
 
 
@@ -207,6 +256,7 @@ def SOI220_cband_TE_strip_SLG_EAM_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_EAM_with_GC")
     _add_fiber_port(c, "o1", (0, 524.085), 90)
     _add_fiber_port(c, "o2", (0, -524.085), 270)
+    _add_eam_pads(c)
     return c
 
 
@@ -216,6 +266,7 @@ def SOI220_cband_TE_strip_SLG_PTE() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE")
     _add_optical_port(c, "o1", (0, 110), 90)
     _add_optical_port(c, "o2", (0, -110), 270)
+    _add_pte_pads(c)
     return c
 
 
@@ -225,6 +276,7 @@ def SOI220_cband_TE_strip_SLG_PTE_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_with_GC")
     _add_fiber_port(c, "o1", (0, 534.085), 90)
     _add_fiber_port(c, "o2", (0, -534.085), 270)
+    _add_pte_pads(c)
     return c
 
 
@@ -234,6 +286,7 @@ def SOI220_cband_TE_strip_SLG_PTE_metallic() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_metallic")
     _add_optical_port(c, "o1", (0, 110), 90)
     _add_optical_port(c, "o2", (0, -110), 270)
+    _add_pte_pads(c)
     return c
 
 
@@ -243,6 +296,7 @@ def SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC() -> gf.Component:
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC")
     _add_fiber_port(c, "o1", (0, 534.085), 90)
     _add_fiber_port(c, "o2", (0, -534.085), 270)
+    _add_pte_pads(c)
     return c
 
 

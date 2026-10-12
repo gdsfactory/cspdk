@@ -19,18 +19,21 @@ YSPLITTERS = [
     "SOI220_cband_TE_strip_1x2_Ysplitter",
     "SOI220_oband_TE_strip_1x2_Ysplitter",
 ]
+# Number of probe pads (S, G and gates) of each graphene device.
+GRAPHENE_PADS = {
+    "Bolometer": 3,
+    "Bolometer_metallic": 3,
+    "Bolometer_no_gate": 2,
+    "EAM": 2,
+    "PTE": 4,
+    "PTE_metallic": 4,
+}
 GRAPHENE = [
     f"SOI220_cband_TE_strip_SLG_{device}{suffix}"
-    for device in (
-        "Bolometer",
-        "Bolometer_metallic",
-        "Bolometer_no_gate",
-        "EAM",
-        "PTE",
-        "PTE_metallic",
-    )
+    for device in GRAPHENE_PADS
     for suffix in ("", "_with_GC")
 ]
+GRAPHENE_PAD_LAYERS = [(165, 2), (166, 2)]  # GRAPHENE_PAD1, GRAPHENE_PAD2
 PHOTODIODES = ["SOI220_PD_FCI300B1_Integrated", "SOI220_PD_FCI300B1_Plain"]
 LASERS = [
     f"SOI220_{size}_LD_DC1550HP01_Integrated{suffix}"
@@ -49,7 +52,11 @@ RUN50_CELLS = [
 PORT_COUNTS = {
     **dict.fromkeys(YSPLITTERS, (3, 0, 0)),
     "SOI220_cband_TE_strip_apodized_GC_focusing_v1p0": (1, 1, 0),
-    **{name: (0, 2, 0) if "_with_GC" in name else (2, 0, 0) for name in GRAPHENE},
+    **{
+        f"SOI220_cband_TE_strip_SLG_{device}{suffix}": (*optical, pads)
+        for device, pads in GRAPHENE_PADS.items()
+        for suffix, optical in (("", (2, 0)), ("_with_GC", (0, 2)))
+    },
     "SOI220_PD_FCI300B1_Integrated": (1, 0, 2),
     "SOI220_PD_FCI300B1_Plain": (0, 0, 2),
     **{
@@ -245,22 +252,75 @@ def test_fiber_ports_sit_on_grating_centres(name: str) -> None:
         assert (port.layer_info.layer, port.layer_info.datatype) == (6, 0)
 
 
-@pytest.mark.parametrize("name", PHOTODIODES)
+def _pad_layers(name: str) -> list[tuple[int, int]]:
+    """The layers of the probe pads of cell ``name``."""
+    return GRAPHENE_PAD_LAYERS if name in GRAPHENE else [(41, 0)]
+
+
+@pytest.mark.parametrize("name", PHOTODIODES + GRAPHENE)
 def test_pad_ports_sit_on_pad_edges(name: str) -> None:
-    """e1 (cathode) and e2 (anode) span the outer edge of their PAD pad."""
+    """Each pad port spans the outer edge of a pad on its own layer.
+
+    Every pad has exactly one port: the pads are found from the template geometry.
+    """
     component = getattr(cells, name)()
-    pads = template_region(name, (41, 0))
-    edges = pads.edges()
-    for port in component.ports.filter(port_type="electrical"):
-        assert (port.layer_info.layer, port.layer_info.datatype) == (41, 0)
+    ports = list(component.ports.filter(port_type="electrical"))
+    pads_with_ports = set()
+    for port in ports:
+        layer = (port.layer_info.layer, port.layer_info.datatype)
+        assert layer in _pad_layers(name), (name, port.name)
+        pads = template_region(name, layer)
         x, y = port.center
-        edge = [e.to_dtype(0.001) for e in edges.interacting(_marker(x, y))]
-        assert len(edge) == 1
-        assert edge[0].length() == pytest.approx(port.width)
+        edge = [e.to_dtype(0.001) for e in pads.edges().interacting(_marker(x, y))]
+        assert len(edge) == 1, (name, port.name)
+        assert edge[0].length() == pytest.approx(port.width), (name, port.name)
         angle = math.radians(port.orientation)
-        assert _inside(pads, x - math.cos(angle), y - math.sin(angle))
-        assert not _inside(pads, x + math.cos(angle), y + math.sin(angle))
+        dx, dy = round(math.cos(angle)), round(math.sin(angle))
+        assert edge[0].dx() * dx + edge[0].dy() * dy == 0  # across the port
+        assert _inside(pads, x - dx, y - dy), (name, port.name)
+        assert not _inside(pads, x + dx, y + dy), (name, port.name)
+        (pad,) = (p for p in pads.each() if p.inside(_point(x - dx, y - dy)))
+        pads_with_ports.add((layer, pad.bbox().to_s()))
+    n_pads = sum(template_region(name, layer).count() for layer in _pad_layers(name))
+    assert len(pads_with_ports) == len(ports) == n_pads, name
+
+
+@pytest.mark.parametrize("name", PHOTODIODES)
+def test_photodiode_pad_ports(name: str) -> None:
+    """e1 (cathode) is above e2 (anode)."""
+    component = getattr(cells, name)()
     assert component.ports["e1"].center[1] > component.ports["e2"].center[1]
+
+
+@pytest.mark.parametrize("name", GRAPHENE)
+def test_graphene_pad_ports_face_away_from_the_waveguide(name: str) -> None:
+    """The pads beside the waveguide (x = 0) have their port on the far edge.
+
+    Nothing is drawn on PAD: the design rules keep it 50 um from the graphene
+    exclusion zone, so the ports stay on GRAPHENE_PAD1/2.
+    """
+    component = getattr(cells, name)()
+    for port in component.ports.filter(port_type="electrical"):
+        x, _ = port.center
+        assert port.orientation == (180 if x < 0 else 0), (name, port.name)
+    assert template_region(name, (41, 0)).is_empty()
+
+
+def test_graphene_pad_ports_route_on_their_own_layer() -> None:
+    """A route on the pad's layer connects to a graphene pad port in the netlist."""
+    c = gf.Component()
+    device = c.add_ref(cells.SOI220_cband_TE_strip_SLG_EAM(), name="eam")
+    for name, dx in (("e1", -200), ("e2", 200)):
+        port = device.ports[name]
+        xs = gf.get_cross_section(
+            "metal_routing", layer=port.layer_info.name, width=port.width
+        )
+        lead = c << gf.components.straight(length=10, cross_section=xs)
+        lead.move((port.center[0] + dx, port.center[1]))
+        end = lead.ports["e2"] if dx < 0 else lead.ports["e1"]
+        gf.routing.route_bundle_electrical(c, [port], [end], cross_section=xs)
+    connected = {p for net in c.get_netlist()["nets"] for p in net.values()}
+    assert {"eam,e1", "eam,e2"} <= connected
 
 
 def test_no_model_cells_are_listed_in_pyproject() -> None:
