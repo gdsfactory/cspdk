@@ -18,3 +18,7 @@ In `october-2026/`:
 - **`CORNERSTONE-MPW-Run-50-GDSII-Template.gds`** — SOI 220 template with the full standard-component library (`SOI220_cband/oband_*`, laser, photodiode and graphene cells). Die outlines are unchanged; the packaging-template grating couplers moved 25 um down.
 
 Keep `CORNERSTONE-GDSII-Template_All-Platforms_Jan_2024-1.gds`: Run 50 only covers SOI 220, and the other platforms' tests read the older template.
+
+## si220 cells from before Run 50
+
+`si220-pre-run50/` keeps the old si220 GDS files that exist in no other reference (old MZIs, modulators, defect detector, EBL apodised grating, the older SOI 220 template). See its README.
