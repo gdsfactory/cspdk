@@ -6,7 +6,6 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec, Size
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import (
     heater_schematic,
     straight_heater_meander_schematic,
@@ -110,12 +109,6 @@ def heater(
         )
     c.info["length"] = length
     return c
-
-
-@gf.cell(tags=["heaters", "foundry"], schematic_function=_FOUNDRY["Heater"])
-def Heater() -> gf.Component:
-    """Cornerstone heater filament with pads (Run-50 template cell ``Heater``)."""
-    return heater()
 
 
 @gf.cell(tags=["heaters"], schematic_function=straight_heater_metal_schematic)

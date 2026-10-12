@@ -1,12 +1,9 @@
 """Waveguide crossings drawn from the Cornerstone Run-50 foundry geometry."""
 
-import warnings
-
 import gdsfactory as gf
 import kfactory as kf
 from gdsfactory.typings import CrossSectionSpec
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import crossing_rib_schematic, crossing_schematic
 from cspdk.si220.tech import LAYER, get_band, is_rib
 
@@ -137,53 +134,11 @@ def crossing(cross_section: CrossSectionSpec = "strip_cband") -> gf.Component:
 
 @gf.cell(tags=["crossings"], schematic_function=crossing_rib_schematic)
 def crossing_rib(cross_section: CrossSectionSpec = "rib_cband") -> gf.Component:
-    """Deprecated: use ``crossing`` with a rib cross-section.
+    """Return the foundry rib waveguide crossing for the cross-section's band.
+
+    The same geometry as ``crossing`` with a rib cross-section.
 
     Args:
-        cross_section: rib cross-section selecting the band.
+        cross_section: rib C- or O-band cross-section.
     """
-    warnings.warn(
-        "crossing_rib is deprecated; use crossing", DeprecationWarning, stacklevel=2
-    )
     return crossing(cross_section=cross_section)
-
-
-################
-# Foundry cells
-################
-
-
-@gf.cell(
-    tags=["crossings", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_strip_crossing"],
-)
-def SOI220_cband_TE_strip_crossing() -> gf.Component:
-    """Cornerstone C-band strip crossing (Run-50 template cell)."""
-    return crossing(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["crossings", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_rib_crossing"],
-)
-def SOI220_cband_TE_rib_crossing() -> gf.Component:
-    """Cornerstone C-band rib crossing (Run-50 template cell)."""
-    return crossing(cross_section="rib_cband")
-
-
-@gf.cell(
-    tags=["crossings", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_oband_TE_strip_crossing"],
-)
-def SOI220_oband_TE_strip_crossing() -> gf.Component:
-    """Cornerstone O-band strip crossing (Run-50 template cell)."""
-    return crossing(cross_section="strip_oband")
-
-
-@gf.cell(
-    tags=["crossings", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_oband_TE_rib_crossing"],
-)
-def SOI220_oband_TE_rib_crossing() -> gf.Component:
-    """Cornerstone O-band rib crossing (Run-50 template cell)."""
-    return crossing(cross_section="rib_oband")

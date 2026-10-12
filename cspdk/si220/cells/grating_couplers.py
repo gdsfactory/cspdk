@@ -15,7 +15,6 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
-from cspdk._schematic import _GRATING, sax_model, schematic
 from cspdk.si220._schematic import (
     grating_coupler_elliptical_schematic,
     grating_coupler_rectangular_schematic,
@@ -195,56 +194,6 @@ grating_coupler_rectangular_rib = partial(
     grating_coupler_rectangular,
     cross_section="rib_cband",
 )
-
-
-##############################
-# Run-50 foundry cells
-##############################
-
-
-def _foundry_gc_schematic(name: str):
-    return schematic(
-        "grating-coupler",
-        ["grating-coupler", "rectangular"],
-        _GRATING,
-        models=[sax_model(name, "cspdk.si220.models", ["o1", "o2"])],
-    )
-
-
-@gf.cell(
-    tags=["grating_couplers"],
-    schematic_function=_foundry_gc_schematic("SOI220_cband_TE_strip_GC"),
-)
-def SOI220_cband_TE_strip_GC() -> gf.Component:
-    """Run-50 C-band strip grating coupler, rotated so ``o1`` faces west."""
-    return grating_coupler_rectangular(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["grating_couplers"],
-    schematic_function=_foundry_gc_schematic("SOI220_cband_TE_rib_GC"),
-)
-def SOI220_cband_TE_rib_GC() -> gf.Component:
-    """Run-50 C-band rib grating coupler, rotated so ``o1`` faces west."""
-    return grating_coupler_rectangular(cross_section="rib_cband")
-
-
-@gf.cell(
-    tags=["grating_couplers"],
-    schematic_function=_foundry_gc_schematic("SOI220_oband_TE_strip_GC"),
-)
-def SOI220_oband_TE_strip_GC() -> gf.Component:
-    """Run-50 O-band strip grating coupler, rotated so ``o1`` faces west."""
-    return grating_coupler_rectangular(cross_section="strip_oband")
-
-
-@gf.cell(
-    tags=["grating_couplers"],
-    schematic_function=_foundry_gc_schematic("SOI220_oband_TE_rib_GC"),
-)
-def SOI220_oband_TE_rib_GC() -> gf.Component:
-    """Run-50 O-band rib grating coupler, rotated so ``o1`` faces west."""
-    return grating_coupler_rectangular(cross_section="rib_oband")
 
 
 ##############################

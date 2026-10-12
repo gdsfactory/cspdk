@@ -1,20 +1,20 @@
 """Fixed foundry cells imported from the Cornerstone MPW Run 50 template."""
 
 import gdsfactory as gf
+from gdsfactory.typings import CrossSectionSpec
 
-from cspdk.si220._schematic import (
-    SOI220_cband_TE_strip_1x2_Ysplitter_schematic,
-    SOI220_oband_TE_strip_1x2_Ysplitter_schematic,
-)
+from cspdk.si220._schematic import ysplitter_schematic
 from cspdk.si220.config import PATH
+from cspdk.si220.tech import get_band, is_rib
 
 ################
 # Imported from the CORNERSTONE MPW Run 50 GDSII template
 ################
-# Each cell is the foundry cell of the same name, extracted unchanged by
-# scripts/extract_si220_run50.py. The port positions were measured on the template
-# geometry; tests/test_si220_run50_fixed.py checks every optical port against the
-# waveguide end it sits on.
+# Each cell is a foundry cell, named in its docstring, extracted unchanged by
+# scripts/extract_si220_run50.py into the GDS file of the foundry cell's name. The
+# port positions were measured on the template geometry;
+# tests/test_si220_run50_fixed.py checks every optical port against the waveguide
+# end it sits on.
 #
 # Waveguide ports are named o1, o2, ... clockwise from the west (the gdsfactory
 # convention, as in mmi1x2), and grating-coupler fibre ports (``vertical_te``)
@@ -78,38 +78,32 @@ def _add_pad_port(
     )
 
 
-# Y-splitters
+# Y-splitter
 
 
-@gf.cell(
-    tags=["fixed", "splitter", "1x2"],
-    schematic_function=SOI220_cband_TE_strip_1x2_Ysplitter_schematic,
-)
-def SOI220_cband_TE_strip_1x2_Ysplitter() -> gf.Component:
-    """C-band 1x2 Y-splitter for 450 nm strip waveguides (40 um x 20 um).
+@gf.cell(tags=["fixed", "splitter", "1x2"], schematic_function=ysplitter_schematic)
+def ysplitter(cross_section: CrossSectionSpec = "strip_cband") -> gf.Component:
+    """1x2 Y-splitter (40 um x 20 um) for the cross-section's band.
 
-    o1 is the input at (0, 0); o2 and o3 are the outputs at (40, 10) and (40, -10).
+    The Cornerstone Run 50 cell ``SOI220_cband_TE_strip_1x2_Ysplitter`` (450 nm
+    strip) or ``SOI220_oband_TE_strip_1x2_Ysplitter`` (400 nm strip). o1 is the
+    input at (0, 0); o2 and o3 are the outputs at (40, 10) and (40, -10).
+
+    Args:
+        cross_section: strip C- or O-band cross-section. The foundry has no rib
+            Y-splitter.
     """
-    c = _import_run50("SOI220_cband_TE_strip_1x2_Ysplitter")
-    _add_optical_port(c, "o1", (0, 0), 180, "strip_cband")
-    _add_optical_port(c, "o2", (40, 10), 0, "strip_cband")
-    _add_optical_port(c, "o3", (40, -10), 0, "strip_cband")
-    return c
-
-
-@gf.cell(
-    tags=["fixed", "splitter", "1x2"],
-    schematic_function=SOI220_oband_TE_strip_1x2_Ysplitter_schematic,
-)
-def SOI220_oband_TE_strip_1x2_Ysplitter() -> gf.Component:
-    """O-band 1x2 Y-splitter for 400 nm strip waveguides (40 um x 20 um).
-
-    o1 is the input at (0, 0); o2 and o3 are the outputs at (40, 10) and (40, -10).
-    """
-    c = _import_run50("SOI220_oband_TE_strip_1x2_Ysplitter")
-    _add_optical_port(c, "o1", (0, 0), 180, "strip_oband")
-    _add_optical_port(c, "o2", (40, 10), 0, "strip_oband")
-    _add_optical_port(c, "o3", (40, -10), 0, "strip_oband")
+    if is_rib(cross_section):
+        raise ValueError(
+            "ysplitter is a strip cell (the foundry has no rib Y-splitter); "
+            "use a strip cross-section such as 'strip_cband' or 'strip_oband'"
+        )
+    band = get_band(cross_section)
+    strip = f"strip_{band}"
+    c = _import_run50(f"SOI220_{band}_TE_strip_1x2_Ysplitter")
+    _add_optical_port(c, "o1", (0, 0), 180, strip)
+    _add_optical_port(c, "o2", (40, 10), 0, strip)
+    _add_optical_port(c, "o3", (40, -10), 0, strip)
     return c
 
 
@@ -117,9 +111,10 @@ def SOI220_oband_TE_strip_1x2_Ysplitter() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "grating_couplers"])
-def SOI220_cband_TE_strip_apodized_GC_focusing_v1p0() -> gf.Component:
+def grating_coupler_focusing_apodized() -> gf.Component:
     """C-band apodized focusing grating coupler for 450 nm strip waveguides.
 
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_apodized_GC_focusing_v1p0``.
     The grating lies west of the waveguide port o1 at (0, 0), which points east.
     The fibre port o2 is at the centre of the teeth, (-42.351, 0).
     """
@@ -133,7 +128,7 @@ def SOI220_cband_TE_strip_apodized_GC_focusing_v1p0() -> gf.Component:
 
 # Graphene (single-layer graphene, SLG) devices
 # A 450 nm strip waveguide runs along y through the device: o1 is its top end and
-# o2 its bottom end. In the _with_GC cells it ends in a grating coupler at each end
+# o2 its bottom end. In the _with_gc cells it ends in a grating coupler at each end
 # instead, so o1 and o2 are the fibre ports of the top and bottom gratings; the
 # device and its pads are at the same place as in the bare cell.
 #
@@ -181,8 +176,11 @@ def _add_pte_pads(c: gf.Component) -> None:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer() -> gf.Component:
-    """Gated graphene bolometric photodetector (310 um x 320 um)."""
+def graphene_bolometer() -> gf.Component:
+    """Gated graphene bolometric photodetector (310 um x 320 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
@@ -191,8 +189,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer_with_GC() -> gf.Component:
-    """Gated graphene bolometric photodetector between two grating couplers."""
+def graphene_bolometer_with_gc() -> gf.Component:
+    """Gated graphene bolometric photodetector between two grating couplers.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_with_GC")
     _add_fiber_port(c, "o1", (0, 584.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
@@ -201,8 +202,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer_metallic() -> gf.Component:
-    """Graphene bolometric photodetector with a metallic gate (310 um x 310 um)."""
+def graphene_bolometer_metallic() -> gf.Component:
+    """Graphene bolometric photodetector with a metallic gate (310 um x 310 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer_metallic``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_metallic")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
@@ -211,8 +215,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer_metallic() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC() -> gf.Component:
-    """Metallic-gate graphene bolometer between two grating couplers."""
+def graphene_bolometer_metallic_with_gc() -> gf.Component:
+    """Metallic-gate graphene bolometer between two grating couplers.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC")
     _add_fiber_port(c, "o1", (0, 574.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
@@ -221,8 +228,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer_metallic_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer_no_gate() -> gf.Component:
-    """Graphene bolometric photodetector without a gate (310 um x 320 um)."""
+def graphene_bolometer_no_gate() -> gf.Component:
+    """Graphene bolometric photodetector without a gate (310 um x 320 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer_no_gate``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_no_gate")
     _add_optical_port(c, "o1", (0, 150), 90)
     _add_optical_port(c, "o2", (0, -150), 270)
@@ -231,8 +241,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer_no_gate() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC() -> gf.Component:
-    """Ungated graphene bolometer between two grating couplers."""
+def graphene_bolometer_no_gate_with_gc() -> gf.Component:
+    """Ungated graphene bolometer between two grating couplers.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC")
     _add_fiber_port(c, "o1", (0, 574.085), 90)
     _add_fiber_port(c, "o2", (0, -574.085), 270)
@@ -241,8 +254,11 @@ def SOI220_cband_TE_strip_SLG_Bolometer_no_gate_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "modulator"])
-def SOI220_cband_TE_strip_SLG_EAM() -> gf.Component:
-    """Double-layer graphene electro-absorption modulator (210 um x 210 um)."""
+def graphene_eam() -> gf.Component:
+    """Double-layer graphene electro-absorption modulator (210 um x 210 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_EAM``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_EAM")
     _add_optical_port(c, "o1", (0, 100), 90)
     _add_optical_port(c, "o2", (0, -100), 270)
@@ -251,8 +267,11 @@ def SOI220_cband_TE_strip_SLG_EAM() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "modulator"])
-def SOI220_cband_TE_strip_SLG_EAM_with_GC() -> gf.Component:
-    """Graphene electro-absorption modulator between two grating couplers."""
+def graphene_eam_with_gc() -> gf.Component:
+    """Graphene electro-absorption modulator between two grating couplers.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_EAM_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_EAM_with_GC")
     _add_fiber_port(c, "o1", (0, 524.085), 90)
     _add_fiber_port(c, "o2", (0, -524.085), 270)
@@ -261,8 +280,11 @@ def SOI220_cband_TE_strip_SLG_EAM_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_PTE() -> gf.Component:
-    """Graphene photo-thermoelectric detector (210 um x 230 um)."""
+def graphene_pte() -> gf.Component:
+    """Graphene photo-thermoelectric detector (210 um x 230 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_PTE``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE")
     _add_optical_port(c, "o1", (0, 110), 90)
     _add_optical_port(c, "o2", (0, -110), 270)
@@ -271,8 +293,11 @@ def SOI220_cband_TE_strip_SLG_PTE() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_PTE_with_GC() -> gf.Component:
-    """Graphene photo-thermoelectric detector between two grating couplers."""
+def graphene_pte_with_gc() -> gf.Component:
+    """Graphene photo-thermoelectric detector between two grating couplers.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_PTE_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_with_GC")
     _add_fiber_port(c, "o1", (0, 534.085), 90)
     _add_fiber_port(c, "o2", (0, -534.085), 270)
@@ -281,8 +306,11 @@ def SOI220_cband_TE_strip_SLG_PTE_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_PTE_metallic() -> gf.Component:
-    """Metallic-gate graphene photo-thermoelectric detector (210 um x 230 um)."""
+def graphene_pte_metallic() -> gf.Component:
+    """Metallic-gate graphene photo-thermoelectric detector (210 um x 230 um).
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_PTE_metallic``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_metallic")
     _add_optical_port(c, "o1", (0, 110), 90)
     _add_optical_port(c, "o2", (0, -110), 270)
@@ -291,8 +319,11 @@ def SOI220_cband_TE_strip_SLG_PTE_metallic() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "graphene", "detector"])
-def SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC() -> gf.Component:
-    """Metallic-gate graphene photo-thermoelectric detector between two gratings."""
+def graphene_pte_metallic_with_gc() -> gf.Component:
+    """Metallic-gate graphene photo-thermoelectric detector between two gratings.
+
+    Cornerstone Run 50 cell ``SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC``.
+    """
     c = _import_run50("SOI220_cband_TE_strip_SLG_PTE_metallic_with_GC")
     _add_fiber_port(c, "o1", (0, 534.085), 90)
     _add_fiber_port(c, "o2", (0, -534.085), 270)
@@ -312,17 +343,21 @@ def _add_photodiode_pads(c: gf.Component) -> None:
 
 
 @gf.cell(tags=["fixed", "photodiode", "detector"])
-def SOI220_PD_FCI300B1_Plain() -> gf.Component:
-    """Flip-chip InGaAs photodiode site with its contact pads and no waveguide."""
+def photodiode() -> gf.Component:
+    """Flip-chip InGaAs photodiode site with its contact pads and no waveguide.
+
+    Cornerstone Run 50 cell ``SOI220_PD_FCI300B1_Plain``.
+    """
     c = _import_run50("SOI220_PD_FCI300B1_Plain")
     _add_photodiode_pads(c)
     return c
 
 
 @gf.cell(tags=["fixed", "photodiode", "detector"])
-def SOI220_PD_FCI300B1_Integrated() -> gf.Component:
+def photodiode_integrated() -> gf.Component:
     """Flip-chip InGaAs photodiode fed by a grating coupler under its active area.
 
+    Cornerstone Run 50 cell ``SOI220_PD_FCI300B1_Integrated``.
     Light enters through the strip waveguide port o1 at the east edge, (537, 0).
     """
     c = _import_run50("SOI220_PD_FCI300B1_Integrated")
@@ -335,23 +370,29 @@ def SOI220_PD_FCI300B1_Integrated() -> gf.Component:
 # Each cell is a complete Full (11.47 mm x 4.9 mm) or Half (5.5 mm x 4.9 mm) user
 # cell with the laser site on its west side. The laser edge-couples into a taper
 # whose 450 nm end, o1, is the laser output at the edge of the laser exclusion
-# zone. In _or_GC a focusing grating coupler (fibre port o2) on the laser site
-# feeds o1 instead of a laser. In _with_GC a 2x1 combiner joins the laser and a
+# zone. In _or_gc a focusing grating coupler (fibre port o2) on the laser site
+# feeds o1 instead of a laser. In _with_gc a 2x1 combiner joins the laser and a
 # focusing grating coupler (fibre port o2) north of it into o1. The laser contacts
 # are probed directly, so there are no electrical ports.
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Full_LD_DC1550HP01_Integrated() -> gf.Component:
-    """Full user cell with an integrated 1550 nm laser feeding o1."""
+def laser_full() -> gf.Component:
+    """Full user cell with an integrated 1550 nm laser feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Full_LD_DC1550HP01_Integrated``.
+    """
     c = _import_run50("SOI220_Full_LD_DC1550HP01_Integrated")
     _add_optical_port(c, "o1", (-3456.39, 0), 0)
     return c
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Full_LD_DC1550HP01_Integrated_or_GC() -> gf.Component:
-    """Full user cell with a focusing grating coupler on the laser site feeding o1."""
+def laser_full_or_gc() -> gf.Component:
+    """Full user cell with a focusing grating coupler on the laser site feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Full_LD_DC1550HP01_Integrated_or_GC``.
+    """
     c = _import_run50("SOI220_Full_LD_DC1550HP01_Integrated_or_GC")
     _add_optical_port(c, "o1", (-3456.39, 0), 0)
     _add_fiber_port(c, "o2", (-3977.351, 0), 180)
@@ -359,8 +400,11 @@ def SOI220_Full_LD_DC1550HP01_Integrated_or_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Full_LD_DC1550HP01_Integrated_with_GC() -> gf.Component:
-    """Full user cell with an integrated laser and a grating coupler feeding o1."""
+def laser_full_with_gc() -> gf.Component:
+    """Full user cell with an integrated laser and a grating coupler feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Full_LD_DC1550HP01_Integrated_with_GC``.
+    """
     c = _import_run50("SOI220_Full_LD_DC1550HP01_Integrated_with_GC")
     _add_optical_port(c, "o1", (-3456.39, 1.57), 0)
     _add_fiber_port(c, "o2", (-3630.541, 800), 180)
@@ -368,16 +412,22 @@ def SOI220_Full_LD_DC1550HP01_Integrated_with_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Half_LD_DC1550HP01_Integrated() -> gf.Component:
-    """Half user cell with an integrated 1550 nm laser feeding o1."""
+def laser_half() -> gf.Component:
+    """Half user cell with an integrated 1550 nm laser feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Half_LD_DC1550HP01_Integrated``.
+    """
     c = _import_run50("SOI220_Half_LD_DC1550HP01_Integrated")
     _add_optical_port(c, "o1", (-471.39, 0), 0)
     return c
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Half_LD_DC1550HP01_Integrated_or_GC() -> gf.Component:
-    """Half user cell with a focusing grating coupler on the laser site feeding o1."""
+def laser_half_or_gc() -> gf.Component:
+    """Half user cell with a focusing grating coupler on the laser site feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Half_LD_DC1550HP01_Integrated_or_GC``.
+    """
     c = _import_run50("SOI220_Half_LD_DC1550HP01_Integrated_or_GC")
     _add_optical_port(c, "o1", (-471.39, 0), 0)
     _add_fiber_port(c, "o2", (-992.351, 0), 180)
@@ -385,8 +435,11 @@ def SOI220_Half_LD_DC1550HP01_Integrated_or_GC() -> gf.Component:
 
 
 @gf.cell(tags=["fixed", "laser"])
-def SOI220_Half_LD_DC1550HP01_Integrated_with_GC() -> gf.Component:
-    """Half user cell with an integrated laser and a grating coupler feeding o1."""
+def laser_half_with_gc() -> gf.Component:
+    """Half user cell with an integrated laser and a grating coupler feeding o1.
+
+    Cornerstone Run 50 cell ``SOI220_Half_LD_DC1550HP01_Integrated_with_GC``.
+    """
     c = _import_run50("SOI220_Half_LD_DC1550HP01_Integrated_with_GC")
     _add_optical_port(c, "o1", (-471.39, 1.57), 0)
     _add_fiber_port(c, "o2", (-645.541, 800), 180)

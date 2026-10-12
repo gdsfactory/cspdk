@@ -69,6 +69,13 @@ MM2SM_LOSS_DB = {
 # Rib-to-strip taper loss (dB) against slab taper length (um), p. 21.
 RIB_TO_STRIP_LOSS_DB = ((10.0, 0.11916), (20.0, 0.09023), (50.0, 0.068069))
 
+# Y-splitter excess loss (dB), by cut-back (p. 17 C band, p. 45 O band): through
+# one output of a cascade the transmission falls by 4.0123 dB per splitter in the
+# C band for 450 nm waveguides (3.7101 dB for 400 nm) and 4.5006 dB in the O band.
+# That includes the 3 dB of an ideal 50/50 split, so the excess loss is 1.0020 dB
+# (C band, the 450 nm template cell) and 1.4903 dB (O band).
+YSPLITTER_EXCESS_DB = {"cband": 1.002, "oband": 1.4903}
+
 # Offset (um) of the 1x2 MMI outputs minus that of the 2x2 MMI ports: the extra
 # length of each MZI arm's combiner-side vertical (see cells.mzis.mzi_heater_loop).
 _MZI_PORT_OFFSET = {"cband": 0.555, "oband": 0.51}
@@ -233,6 +240,17 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             }
         )
 
+    def _ysplitter(*, wl=wl0, loss_dB=None) -> sax.SDict:
+        """Ideal 50/50 Y-splitter, flat in wavelength, with the measured excess loss.
+
+        ``loss_dB`` overrides the excess loss on top of the 3 dB split.
+        """
+        if loss_dB is None:
+            loss_dB = YSPLITTER_EXCESS_DB[band]
+        one = jnp.ones_like(jnp.asarray(wl, dtype=float))
+        t = jnp.sqrt(0.5) * _amplitude(loss_dB) * one
+        return sax.reciprocal({("o1", "o2"): t, ("o1", "o3"): t})
+
     return {
         "mmi1x2": _mmi1x2,
         "mmi2x2": _mmi2x2,
@@ -242,6 +260,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         "taper_rib_to_strip": _taper_rib_to_strip,
         "heater": _heater,
         "mzi_heater_loop": _mzi_heater_loop,
+        "ysplitter": _ysplitter,
     }
 
 

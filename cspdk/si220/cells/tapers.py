@@ -6,7 +6,6 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import (
     taper_metal_schematic,
     taper_mm2sm_schematic,
@@ -231,35 +230,3 @@ def taper_rib_to_strip(
     _add_ports(c, total, width, width)
     c.info["length"] = length
     return c
-
-
-################
-# Foundry cells
-################
-
-
-@gf.cell(
-    tags=["tapers", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_strip_MM2SM_taper"],
-)
-def SOI220_cband_TE_strip_MM2SM_taper() -> gf.Component:
-    """Cornerstone C-band strip multimode-to-single-mode taper (Run-50 template cell)."""
-    return taper_mm2sm(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["tapers", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_rib_MM2SM_taper"],
-)
-def SOI220_cband_TE_rib_MM2SM_taper() -> gf.Component:
-    """Cornerstone C-band rib multimode-to-single-mode taper (Run-50 template cell)."""
-    return taper_mm2sm(cross_section="rib_cband")
-
-
-@gf.cell(
-    tags=["tapers", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_rib2strip_taper"],
-)
-def SOI220_cband_TE_rib2strip_taper() -> gf.Component:
-    """Cornerstone C-band rib-to-strip taper (Run-50 template cell)."""
-    return taper_rib_to_strip(cross_section="rib_cband")

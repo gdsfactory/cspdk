@@ -1,8 +1,9 @@
-"""Si220 cells remade from the Cornerstone MPW Run-50 template, and their models."""
+"""Si220 parametric cells against the Cornerstone MPW Run-50 template, and models."""
 
 from __future__ import annotations
 
 import warnings
+from functools import partial
 
 import gdsfactory as gf
 import jax.numpy as jnp
@@ -15,64 +16,49 @@ import cspdk.si220 as si220
 from cspdk.si220 import cells
 from cspdk.si220.models import foundry
 
-# Cells of the Run-50 template remade by code, each by a cell of the same name.
-FOUNDRY_CELLS = [
-    *(
-        f"SOI220_{band}_TE_{kind}_{suffix}"
-        for band in ("cband", "oband")
-        for kind in ("strip", "rib")
-        for suffix in ("1x2_MMI", "2x2_MMI", "crossing")
-    ),
-    "SOI220_cband_TE_strip_90deg_bend",
-    "SOI220_oband_TE_strip_90deg_bend",
-    "SOI220_cband_TE_rib_90deg_bend",
-    "SOI220_cband_TE_strip_MM2SM_taper",
-    "SOI220_cband_TE_rib_MM2SM_taper",
-    "SOI220_cband_TE_rib2strip_taper",
-    "Heater",
-]
-
-# The parametric cells at the settings each foundry cell uses.
-PARAMETRIC = [
-    *(
-        pytest.param(
-            factory,
-            {"cross_section": f"{kind}_{band}"},
-            f"SOI220_{band}_TE_{kind}_{suffix}",
-            id=f"{factory}-{kind}_{band}",
+# The Run-50 template cells and the parametric calls that reproduce them.
+TEMPLATE_CELLS = {
+    **{
+        f"SOI220_{band}_TE_{kind}_{suffix}": partial(
+            factory, cross_section=f"{kind}_{band}"
         )
         for band in ("cband", "oband")
         for kind in ("strip", "rib")
         for factory, suffix in (
-            ("mmi1x2", "1x2_MMI"),
-            ("mmi2x2", "2x2_MMI"),
-            ("crossing", "crossing"),
+            (cells.mmi1x2, "1x2_MMI"),
+            (cells.mmi2x2, "2x2_MMI"),
+            (cells.crossing, "crossing"),
         )
+    },
+    **{
+        f"SOI220_{band}_TE_strip_90deg_bend": partial(
+            cells.bend_circular,
+            radius=5,
+            npoints=31,
+            cross_section=f"strip_{band}",
+            allow_min_radius_violation=True,
+        )
+        for band in ("cband", "oband")
+    },
+    "SOI220_cband_TE_rib_90deg_bend": partial(
+        cells.bend_circular, radius=25, npoints=156, cross_section="rib_cband"
     ),
-    pytest.param(
-        "bend_circular",
-        {"radius": 5, "npoints": 31, "allow_min_radius_violation": True},
-        "SOI220_cband_TE_strip_90deg_bend",
-        id="bend_circular-strip_cband",
+    "SOI220_cband_TE_strip_MM2SM_taper": partial(
+        cells.taper_mm2sm, cross_section="strip_cband"
     ),
-    pytest.param(
-        "bend_circular",
-        {"radius": 25, "npoints": 156, "cross_section": "rib_cband"},
-        "SOI220_cband_TE_rib_90deg_bend",
-        id="bend_circular-rib_cband",
+    "SOI220_cband_TE_rib_MM2SM_taper": partial(
+        cells.taper_mm2sm, cross_section="rib_cband"
     ),
-    pytest.param("taper_mm2sm", {}, "SOI220_cband_TE_strip_MM2SM_taper", id="mm2sm"),
-    pytest.param(
-        "taper_mm2sm",
-        {"cross_section": "rib_cband"},
-        "SOI220_cband_TE_rib_MM2SM_taper",
-        id="mm2sm-rib",
+    "SOI220_cband_TE_rib2strip_taper": partial(
+        cells.taper_rib_to_strip, cross_section="rib_cband"
     ),
-    pytest.param(
-        "taper_rib_to_strip", {}, "SOI220_cband_TE_rib2strip_taper", id="rib2strip"
-    ),
-    pytest.param("heater", {}, "Heater", id="heater"),
-]
+    "Heater": cells.heater,
+}
+# The template MZIs (interferometer only, see below).
+TEMPLATE_MZIS = {
+    "SOI220_cband_TE_strip_MZI": {"cross_section": "strip_cband"},
+    "SOI220_cband_TE_rib_MZI": {"cross_section": "rib_cband", "length_x": 649.5},
+}
 
 
 @pytest.fixture(autouse=True)
@@ -120,31 +106,24 @@ def _same(a: gf.Component, b: gf.Component) -> bool:
     )
 
 
-@pytest.mark.parametrize("name", FOUNDRY_CELLS)
-def test_foundry_cell_matches_template(name: str) -> None:
-    """Each foundry-named cell is the template cell of that name, XOR == 0."""
-    xor = _xor(si220.PDK.cells[name](), name)
+@pytest.mark.parametrize("name", sorted(TEMPLATE_CELLS))
+def test_parametric_cell_matches_template(name: str) -> None:
+    """The parametric cell reproduces the template cell ``name``, XOR == 0."""
+    xor = _xor(TEMPLATE_CELLS[name](), name)
     assert not any(xor.values()), xor
 
 
-@pytest.mark.parametrize(("factory", "settings", "template"), PARAMETRIC)
-def test_parametric_cell_matches_template(
-    factory: str, settings: dict, template: str
-) -> None:
-    """The parametric cells reproduce the template cells, XOR == 0."""
-    xor = _xor(gf.get_component(factory, **settings), template)
+@pytest.mark.parametrize("band", ["cband", "oband"])
+def test_crossing_rib_matches_template(band: str) -> None:
+    """``crossing_rib`` reproduces the template rib crossing, XOR == 0."""
+    name = f"SOI220_{band}_TE_rib_crossing"
+    xor = _xor(cells.crossing_rib(cross_section=f"rib_{band}"), name)
     assert not any(xor.values()), xor
 
 
-@pytest.mark.parametrize(
-    ("name", "settings"),
-    [
-        ("SOI220_cband_TE_strip_MZI", {"cross_section": "strip_cband"}),
-        ("SOI220_cband_TE_rib_MZI", {"cross_section": "rib_cband", "length_x": 649.5}),
-    ],
-)
-def test_foundry_mzi_matches_template_interferometer(name: str, settings: dict) -> None:
-    """The foundry MZI is the template MZI without its grating couplers and routes.
+@pytest.mark.parametrize("name", sorted(TEMPLATE_MZIS))
+def test_mzi_matches_template_interferometer(name: str) -> None:
+    """``mzi_heater_loop`` is the template MZI without its grating couplers and routes.
 
     The template also holds three grating couplers, routed to the MMIs inside the
     loop of the arms. Outside the box between the MMIs' inner ports the geometry
@@ -152,8 +131,7 @@ def test_foundry_mzi_matches_template_interferometer(name: str, settings: dict) 
     that the slab of a rib straight runs 5 um past its ends (a bbox slab), beside
     the bends, in slivers under 0.4 um wide.
     """
-    component = si220.PDK.cells[name]()
-    assert _same(component, gf.get_component("mzi_heater_loop", **settings))
+    component = cells.mzi_heater_loop(**TEMPLATE_MZIS[name])
     ours, theirs = _regions(component), _template_regions(name)
     for layer in ((39, 0), (41, 0)):
         assert (ours[layer] ^ theirs[layer]).is_empty(), layer
@@ -185,16 +163,19 @@ def test_mzi_arms_and_heater() -> None:
     assert component.ports["e1"].port_type == "electrical"
 
 
-def test_crossing_rib_is_deprecated() -> None:
-    """crossing_rib warns and returns the rib crossing."""
-    gf.clear_cache()
-    with pytest.warns(DeprecationWarning, match="crossing_rib is deprecated"):
-        old = cells.crossing_rib(cross_section="rib_oband")
-    new = cells.crossing(cross_section="rib_oband")
-    assert _same(old, new)
-    assert [(p.name, p.center, p.orientation, p.width) for p in old.ports] == [
-        (p.name, p.center, p.orientation, p.width) for p in new.ports
+@pytest.mark.parametrize("band", ["cband", "oband"])
+def test_crossing_rib_is_the_rib_crossing(band: str) -> None:
+    """crossing_rib is the rib crossing, with the same ports.
+
+    That it does not warn is checked in test_repo_cells_raise_no_deprecation_warning.
+    """
+    rib = cells.crossing_rib(cross_section=f"rib_{band}")
+    crossing = cells.crossing(cross_section=f"rib_{band}")
+    assert _same(rib, crossing)
+    assert [(p.name, p.center, p.orientation, p.width) for p in rib.ports] == [
+        (p.name, p.center, p.orientation, p.width) for p in crossing.ports
     ]
+    assert _same(cells.crossing_rib(), cells.crossing(cross_section="rib_cband"))
 
 
 def test_repo_cells_raise_no_deprecation_warning() -> None:
@@ -202,7 +183,13 @@ def test_repo_cells_raise_no_deprecation_warning() -> None:
     gf.clear_cache()
     with warnings.catch_warnings():
         warnings.simplefilter("error", DeprecationWarning)
-        for name in ("crossing", "mzi_lattice", "mzi_heater_loop", "heater"):
+        for name in (
+            "crossing",
+            "crossing_rib",
+            "mzi_lattice",
+            "mzi_heater_loop",
+            "heater",
+        ):
             si220.PDK.cells[name]()
 
 
@@ -288,43 +275,50 @@ def _db(value) -> float:
 
 
 @pytest.mark.parametrize(
-    ("name", "wl", "loss"),
+    ("cross_section", "wl", "loss"),
     [
-        ("SOI220_cband_TE_strip_crossing", 1.55, 0.1195),
-        ("SOI220_cband_TE_rib_crossing", 1.55, 0.12467),
-        ("SOI220_oband_TE_strip_crossing", 1.31, 0.24359),
-        ("SOI220_oband_TE_rib_crossing", 1.31, 0.2123),
+        ("strip_cband", 1.55, 0.1195),
+        ("rib_cband", 1.55, 0.12467),
+        ("strip_oband", 1.31, 0.24359),
+        ("rib_oband", 1.31, 0.2123),
     ],
 )
-def test_crossing_models_use_measured_loss(name: str, wl: float, loss: float) -> None:
-    """Crossing models carry the measured insertion loss and no crosstalk."""
-    model = si220.PDK.models[name]
-    s = model(wl=jnp.array([wl]))
+def test_crossing_models_use_measured_loss(
+    cross_section: str, wl: float, loss: float
+) -> None:
+    """The crossing model of each template crossing has its measured loss.
+
+    No crosstalk; ``crossing_rib`` is the rib crossing's model.
+    """
+    s = si220.PDK.models["crossing"](wl=jnp.array([wl]), cross_section=cross_section)
     assert _db(s["o1", "o3"]) == pytest.approx(loss, abs=1e-6)
     assert ("o1", "o2") not in s
-    generic = si220.PDK.models["crossing"](
-        wl=jnp.array([wl]), cross_section=model.__kwdefaults__["cross_section"]
-    )
-    assert np.allclose(generic["o1", "o3"], s["o1", "o3"])
+    if cross_section.startswith("rib"):
+        rib = si220.PDK.models["crossing_rib"](
+            wl=jnp.array([wl]), cross_section=cross_section
+        )
+        assert np.allclose(rib["o1", "o3"], s["o1", "o3"])
 
 
 @pytest.mark.parametrize(
-    ("name", "wl", "measured"),
+    ("cross_section", "wl", "measured"),
     [
-        ("SOI220_cband_TE_strip_1x2_MMI", 1.55, 3.3056),
-        ("SOI220_cband_TE_rib_1x2_MMI", 1.55, 3.0621),
-        ("SOI220_oband_TE_strip_1x2_MMI", 1.31, 3.2885),
+        ("strip_cband", 1.55, 3.3056),
+        ("rib_cband", 1.55, 3.0621),
+        ("strip_oband", 1.31, 3.2885),
     ],
 )
-def test_mmi1x2_models_use_measured_loss(name: str, wl: float, measured: float) -> None:
+def test_mmi1x2_models_use_measured_loss(
+    cross_section: str, wl: float, measured: float
+) -> None:
     """At the band centre, each output is the measured per-MMI insertion loss."""
-    s = si220.PDK.models[name](wl=jnp.array([wl]))
+    s = si220.PDK.models["mmi1x2"](wl=jnp.array([wl]), cross_section=cross_section)
     assert _db(s["o1", "o2"]) == pytest.approx(measured, abs=1e-4)
 
 
 def test_mmi2x2_model_uses_measured_bar_and_cross_loss() -> None:
     """C-band strip 2x2 MMI: bar 3.3673 dB, cross 3.3073 dB (p. 16)."""
-    s = si220.PDK.models["SOI220_cband_TE_strip_2x2_MMI"](wl=jnp.array([1.55]))
+    s = si220.PDK.models["mmi2x2"](wl=jnp.array([1.55]), cross_section="strip_cband")
     assert _db(s["o1", "o4"]) == pytest.approx(3.3673, abs=1e-4)
     assert _db(s["o1", "o3"]) == pytest.approx(3.3073, abs=1e-4)
 
@@ -336,21 +330,40 @@ def test_mmi_loss_can_be_overridden() -> None:
 
 
 @pytest.mark.parametrize(
-    ("name", "loss"),
+    ("model", "settings", "wl", "loss"),
     [
-        ("SOI220_cband_TE_strip_90deg_bend", 0.013603),
-        ("SOI220_oband_TE_strip_90deg_bend", 0.010597),
-        ("SOI220_cband_TE_rib_90deg_bend", 0.030998),
-        ("SOI220_cband_TE_strip_MM2SM_taper", 0.11019),
-        ("SOI220_cband_TE_rib_MM2SM_taper", 0.13498),
-        ("SOI220_cband_TE_rib2strip_taper", 0.068069),
+        (
+            "bend_circular",
+            {"radius": 5.0, "cross_section": "strip_cband"},
+            1.55,
+            0.013603,
+        ),
+        (
+            "bend_circular",
+            {"radius": 5.0, "cross_section": "strip_oband"},
+            1.31,
+            0.010597,
+        ),
+        (
+            "bend_circular",
+            {"radius": 25.0, "cross_section": "rib_cband"},
+            1.55,
+            0.030998,
+        ),
+        ("taper_mm2sm", {"cross_section": "strip_cband"}, 1.55, 0.11019),
+        ("taper_mm2sm", {"cross_section": "rib_cband"}, 1.55, 0.13498),
+        ("taper_rib_to_strip", {"cross_section": "rib_cband"}, 1.55, 0.068069),
     ],
 )
-def test_two_port_models_use_measured_loss(name: str, loss: float) -> None:
-    """Bends and tapers lose the measured amount (their waveguide is lossless here)."""
-    model = si220.PDK.models[name]
-    wl = model.__kwdefaults__["wl"]
-    assert _db(model(wl=jnp.array([wl]))["o1", "o2"]) == pytest.approx(loss, abs=1e-6)
+def test_two_port_models_use_measured_loss(
+    model: str, settings: dict, wl: float, loss: float
+) -> None:
+    """Bends and tapers lose the measured amount (their waveguide is lossless here).
+
+    Each row is the model of a template cell's parametric cell at its settings.
+    """
+    s = si220.PDK.models[model](wl=jnp.array([wl]), **settings)
+    assert _db(s["o1", "o2"]) == pytest.approx(loss, abs=1e-6)
 
 
 def test_rib_to_strip_loss_follows_taper_length() -> None:
@@ -363,7 +376,7 @@ def test_rib_to_strip_loss_follows_taper_length() -> None:
 
 def test_mzi_model_interferes_and_tunes() -> None:
     """The MZI model conserves power at most, has fringes, and the heater shifts them."""
-    model = si220.PDK.models["SOI220_cband_TE_strip_MZI"]
+    model = si220.PDK.models["mzi_heater_loop"]
     wl = jnp.linspace(1.54, 1.56, 401)
     s = model(wl=wl)
     total = np.abs(s["o1", "o2"]) ** 2 + np.abs(s["o1", "o3"]) ** 2
@@ -374,18 +387,17 @@ def test_mzi_model_interferes_and_tunes() -> None:
     assert not np.allclose(lower, tuned)
 
 
-@pytest.mark.parametrize(
-    "name", ["SOI220_cband_TE_strip_MZI", "SOI220_cband_TE_rib_MZI"]
-)
+@pytest.mark.parametrize("name", sorted(TEMPLATE_MZIS))
 def test_mzi_model_matches_its_netlist(name: str) -> None:
     """The flat MZI model equals a SAX simulation of the cell's netlist."""
     import jax
     import sax
 
-    netlist = si220.PDK.cells[name]().get_netlist()
+    settings = TEMPLATE_MZIS[name]
+    netlist = cells.mzi_heater_loop(**settings).get_netlist()
     circuit, _ = sax.circuit(netlist, models=si220.PDK.models)
     wl = jnp.linspace(1.545, 1.555, 11)
     simulated = jax.block_until_ready(circuit(wl=wl))
-    flat = si220.PDK.models[name](wl=wl)
+    flat = si220.PDK.models["mzi_heater_loop"](wl=wl, **settings)
     for port in ("o2", "o3"):
         assert np.allclose(simulated["o1", port], flat["o1", port], atol=1e-6)

@@ -5,7 +5,6 @@ from gdsfactory.add_pins import add_electrical_pins
 from gdsfactory.cross_section import port_names_electrical, port_types_electrical
 from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import (
     bend_circular_schematic,
     bend_euler_schematic,
@@ -159,46 +158,6 @@ def bend_circular(
         cross_section=_slab_as_sections(xs),
         allow_min_radius_violation=allow_min_radius_violation,
     )
-
-
-@gf.cell(
-    tags=["waveguides", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_strip_90deg_bend"],
-)
-def SOI220_cband_TE_strip_90deg_bend() -> gf.Component:
-    """Cornerstone C-band strip 90 degree bend, 5 um radius (Run-50 template cell)."""
-    return bend_circular(
-        radius=5,
-        npoints=31,
-        cross_section="strip_cband",
-        allow_min_radius_violation=True,
-    )
-
-
-@gf.cell(
-    tags=["waveguides", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_oband_TE_strip_90deg_bend"],
-)
-def SOI220_oband_TE_strip_90deg_bend() -> gf.Component:
-    """Cornerstone O-band strip 90 degree bend, 5 um radius (Run-50 template cell).
-
-    The 50th-call components PDF quotes a 30 um radius; the template cell is 5 um.
-    """
-    return bend_circular(
-        radius=5,
-        npoints=31,
-        cross_section="strip_oband",
-        allow_min_radius_violation=True,
-    )
-
-
-@gf.cell(
-    tags=["waveguides", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_rib_90deg_bend"],
-)
-def SOI220_cband_TE_rib_90deg_bend() -> gf.Component:
-    """Cornerstone C-band rib 90 degree bend, 25 um radius (Run-50 template cell)."""
-    return bend_circular(radius=25, npoints=156, cross_section="rib_cband")
 
 
 @gf.cell(tags=["waveguides"], schematic_function=bend_s_schematic)

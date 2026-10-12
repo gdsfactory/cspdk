@@ -229,67 +229,13 @@ crossing_rib_schematic = schematic(
     models=[sax_model("crossing_rib", _MODULE, ["o1", "o2", "o3", "o4"])],
 )
 
-# Run 50 fixed Y-splitters (o1 in, o2 top and o3 bottom out, like mmi1x2)
-SOI220_cband_TE_strip_1x2_Ysplitter_schematic = schematic(
+# Run 50 fixed Y-splitter (o1 in, o2 top and o3 bottom out, like mmi1x2)
+ysplitter_schematic = schematic(
     "mmi-1x2",
     ["splitter", "1x2", "y-branch"],
     _1X2,
-    models=[
-        sax_model("SOI220_cband_TE_strip_1x2_Ysplitter", _MODULE, ["o1", "o2", "o3"])
-    ],
+    models=[sax_model("ysplitter", _MODULE, ["o1", "o2", "o3"])],
 )
-SOI220_oband_TE_strip_1x2_Ysplitter_schematic = schematic(
-    "mmi-1x2",
-    ["splitter", "1x2", "y-branch"],
-    _1X2,
-    models=[
-        sax_model("SOI220_oband_TE_strip_1x2_Ysplitter", _MODULE, ["o1", "o2", "o3"])
-    ],
-)
-
-# Cornerstone Run-50 template cells, each linked to the SAX model of its own name.
-_FOUNDRY_KINDS = {
-    "1x2_MMI": ("mmi-1x2", ["mmi", "1x2"], _1X2),
-    "2x2_MMI": ("mmi-2x2", ["mmi", "2x2"], _2X2),
-    "crossing": ("crossing", ["crossing"], _CROSSING),
-    "90deg_bend": ("bend", ["bend", "circular"], _LEFT_TOP),
-    "MM2SM_taper": ("taper", ["taper", "mm2sm"], _LEFT_RIGHT),
-    "rib2strip_taper": ("taper", ["taper", "transition"], _LEFT_RIGHT),
-    "MZI": ("ckt", ["mzi", "heater"], _MZI_HEATER_LOOP),
-    "Heater": ("ckt", ["heater"], _HEATER_PADS),
-}
-_FOUNDRY_CELLS = [
-    *(
-        f"SOI220_{band}_TE_{kind}_{suffix}"
-        for band in ("cband", "oband")
-        for kind in ("strip", "rib")
-        for suffix in ("1x2_MMI", "2x2_MMI", "crossing")
-    ),
-    "SOI220_cband_TE_strip_90deg_bend",
-    "SOI220_oband_TE_strip_90deg_bend",
-    "SOI220_cband_TE_rib_90deg_bend",
-    "SOI220_cband_TE_strip_MM2SM_taper",
-    "SOI220_cband_TE_rib_MM2SM_taper",
-    "SOI220_cband_TE_rib2strip_taper",
-    "SOI220_cband_TE_strip_MZI",
-    "SOI220_cband_TE_rib_MZI",
-    "Heater",
-]
-
-
-def _foundry_schematic(name: str):
-    kind = next(k for k in _FOUNDRY_KINDS if name.endswith(k))
-    symbol, tags, ports = _FOUNDRY_KINDS[kind]
-    port_order = [p["name"] for p in ports]
-    return schematic(
-        symbol,
-        [*tags, "foundry"],
-        ports,
-        models=[sax_model(name, _MODULE, port_order)],
-    )
-
-
-FOUNDRY_SCHEMATICS = {name: _foundry_schematic(name) for name in _FOUNDRY_CELLS}
 
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)

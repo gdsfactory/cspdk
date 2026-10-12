@@ -30,27 +30,34 @@ def _region(component: gf.Component, layer: tuple[int, int]) -> kdb.Region:
     return kdb.Region(component.begin_shapes_rec(index))
 
 
-GRATINGS = [
-    ("SOI220_cband_TE_strip_GC", "strip_cband"),
-    ("SOI220_cband_TE_rib_GC", "rib_cband"),
-    ("SOI220_oband_TE_strip_GC", "strip_oband"),
-    ("SOI220_oband_TE_rib_GC", "rib_oband"),
-]
+# Template grating cells and the cross-section that reproduces each.
+GRATINGS = {
+    "SOI220_cband_TE_strip_GC": "strip_cband",
+    "SOI220_cband_TE_rib_GC": "rib_cband",
+    "SOI220_oband_TE_strip_GC": "strip_oband",
+    "SOI220_oband_TE_rib_GC": "rib_oband",
+}
+# Template die outlines and the cells that reproduce them, with their size.
+DIES = {
+    "Cell0_SOI_Full_Institution": (si220.cells.die, (11470, 4900)),
+    "Cell0_SOI_Half_Institution": (si220.cells.die_half, (5500, 4900)),
+}
 
 
-@pytest.mark.parametrize(("name", "cross_section"), GRATINGS)
-def test_grating_coupler_matches_template(name: str, cross_section: str) -> None:
-    """The foundry-named cell and the parametric cell equal the template cell."""
-    for component in (
-        getattr(si220.cells, name)(),
-        si220.cells.grating_coupler_rectangular(cross_section=cross_section),
-    ):
-        for layer in LAYERS:
-            ours = _region(component, layer)
-            theirs = template_region(name, layer).transformed(R180)
-            assert (ours ^ theirs).is_empty(), (name, layer)
-        assert component.ports["o1"].center == (0, 0)
-        assert component.ports["o1"].orientation == 180
+def _assert_grating_matches(component: gf.Component, name: str) -> None:
+    for layer in LAYERS:
+        ours = _region(component, layer)
+        theirs = template_region(name, layer).transformed(R180)
+        assert (ours ^ theirs).is_empty(), (name, layer)
+    assert component.ports["o1"].center == (0, 0)
+    assert component.ports["o1"].orientation == 180
+
+
+@pytest.mark.parametrize("name", sorted(GRATINGS))
+def test_grating_coupler_matches_template(name: str) -> None:
+    """The rectangular grating with the cross-section equals the template cell."""
+    component = si220.cells.grating_coupler_rectangular(cross_section=GRATINGS[name])
+    _assert_grating_matches(component, name)
 
 
 def test_rib_partial_is_the_cband_rib_grating() -> None:
@@ -58,18 +65,14 @@ def test_rib_partial_is_the_cband_rib_grating() -> None:
     component = si220.cells.grating_coupler_rectangular_rib()
     assert component.info["period"] == 0.63
     assert component.info["n_periods"] == 60
+    _assert_grating_matches(component, "SOI220_cband_TE_rib_GC")
 
 
-@pytest.mark.parametrize(
-    ("name", "size"),
-    [
-        ("Cell0_SOI_Full_Institution", (11470, 4900)),
-        ("Cell0_SOI_Half_Institution", (5500, 4900)),
-    ],
-)
-def test_die_outlines_match_template(name: str, size: tuple[float, float]) -> None:
+@pytest.mark.parametrize("name", sorted(DIES))
+def test_die_outlines_match_template(name: str) -> None:
     """The full and half design-area outlines equal the template ones."""
-    component = getattr(si220.cells, name)()
+    factory, size = DIES[name]
+    component = factory()
     for layer in LAYERS:
         ours = _region(component, layer)
         theirs = template_region(name, layer)
@@ -85,13 +88,15 @@ def test_die_defaults_to_the_full_design_area() -> None:
 
 
 def test_packaging_template_matches() -> None:
-    """Gratings, pads and outline match exactly; the loopback arcs to within 1 nm.
+    """``die_with_pads`` is the template's packaging cell.
+
+    Gratings, pads and outline match exactly; the loopback arcs to within 1 nm.
 
     The template's loopback arcs are discretised differently (370 and 374 segments
     on the two edges of a 180 degree arc), so their XOR is a sub-nanometre sliver.
     """
     name = "Cell0_SOI220_cband_TE_Full_Packaging_Template"
-    component = si220.cells.Cell0_SOI220_cband_TE_Full_Packaging_Template()
+    component = si220.cells.die_with_pads()
     for layer in LAYERS:
         xor = _region(component, layer) ^ template_region(name, layer)
         if layer == (3, 0):
@@ -167,10 +172,6 @@ def drc(component: gf.Component) -> dict[str, int]:
         "grating_coupler_rectangular",
         "grating_coupler_rectangular_rib",
         "grating_coupler_elliptical",
-        "SOI220_cband_TE_strip_GC",
-        "SOI220_cband_TE_rib_GC",
-        "SOI220_oband_TE_strip_GC",
-        "SOI220_oband_TE_rib_GC",
         "text_rectangular",
         "text_rectangular_multi_layer",
         "die",
@@ -181,6 +182,13 @@ def drc(component: gf.Component) -> dict[str, int]:
 def test_cell_passes_cornerstone_rules(name: str) -> None:
     """The default cell passes the deck rules on the layers it draws."""
     assert drc(si220.PDK.get_component(name)) == {}
+
+
+@pytest.mark.parametrize("cross_section", sorted(set(GRATINGS.values())))
+def test_rectangular_grating_passes_rules_in_every_band(cross_section: str) -> None:
+    """The rectangular grating of every template cell passes the deck rules."""
+    component = si220.cells.grating_coupler_rectangular(cross_section=cross_section)
+    assert drc(component) == {}
 
 
 @pytest.mark.parametrize("cross_section", ["strip_oband", "rib_oband", "rib_cband"])
@@ -214,14 +222,16 @@ def test_rules_catch_the_old_geometry() -> None:
         ("SOI220_oband_TE_rib_GC", 1.315, 5.5, 0.030),
     ],
 )
-def test_foundry_grating_models(
+def test_grating_models_match_template_data(
     name: str, wl0: float, loss: float, one_db_width: float
 ) -> None:
-    """Measured Run-50 data: loss at the centre and the 1 dB bandwidth."""
-    assert name in si220.PDK.cells
-    model = si220.PDK.models[name]
-    assert model is getattr(si220.models, name)
-    peak = model(wl=wl0)["o1", "o2"]
+    """Measured Run-50 data of template grating ``name``: centre loss, 1 dB width.
+
+    The model is the rectangular grating's, with the template cell's cross-section.
+    """
+    model = si220.PDK.models["grating_coupler_rectangular"]
+    cross_section = GRATINGS[name]
+    peak = model(wl=wl0, cross_section=cross_section)["o1", "o2"]
     assert -20 * np.log10(abs(peak)) == pytest.approx(loss)
-    edge = model(wl=wl0 + one_db_width / 2)["o1", "o2"]
+    edge = model(wl=wl0 + one_db_width / 2, cross_section=cross_section)["o1", "o2"]
     assert -20 * np.log10(abs(edge)) == pytest.approx(loss + 1, abs=1e-6)

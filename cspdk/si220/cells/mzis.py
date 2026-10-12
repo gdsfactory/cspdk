@@ -8,7 +8,6 @@ MZIs are used in a variety of applications, including optical communications, qu
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec, Size
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import mzi_heater_loop_schematic, mzi_schematic
 from cspdk.si220._utils import get_band_component as _get_band_component
 from cspdk.si220.cells.heaters import heater
@@ -236,32 +235,3 @@ def mzi_heater_loop(
     c.add_port("e2", port=filament.ports["e2"])
     c.info["delta_length"] = delta_length
     return c
-
-
-################
-# Foundry cells
-################
-
-
-@gf.cell(
-    tags=["mzis", "foundry"], schematic_function=_FOUNDRY["SOI220_cband_TE_strip_MZI"]
-)
-def SOI220_cband_TE_strip_MZI() -> gf.Component:
-    """Cornerstone C-band strip MZI with heater, without its grating couplers.
-
-    The Run-50 template cell also holds three grating couplers and the routes to
-    them; this is its interferometer: MMIs, arms and heater.
-    """
-    return mzi_heater_loop(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["mzis", "foundry"], schematic_function=_FOUNDRY["SOI220_cband_TE_rib_MZI"]
-)
-def SOI220_cband_TE_rib_MZI() -> gf.Component:
-    """Cornerstone C-band rib MZI with heater, without its grating couplers.
-
-    The Run-50 template cell also holds three grating couplers and the routes to
-    them; this is its interferometer: MMIs, arms and heater.
-    """
-    return mzi_heater_loop(length_x=649.5, cross_section="rib_cband")

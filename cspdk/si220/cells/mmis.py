@@ -7,7 +7,6 @@ import gdsfactory as gf
 import kfactory as kf
 from gdsfactory.typings import CrossSectionSpec
 
-from cspdk.si220._schematic import FOUNDRY_SCHEMATICS as _FOUNDRY
 from cspdk.si220._schematic import mmi1x2_schematic, mmi2x2_schematic
 from cspdk.si220.tech import LAYER, get_band, is_rib
 
@@ -282,76 +281,3 @@ def mmi2x2(
 
 
 mmi2x2_rib = partial(mmi2x2, cross_section="rib_cband")
-
-
-################
-# Foundry cells
-################
-
-
-@gf.cell(
-    tags=["mmis", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_strip_1x2_MMI"],
-)
-def SOI220_cband_TE_strip_1x2_MMI() -> gf.Component:
-    """Cornerstone C-band strip 1x2 MMI (Run-50 template cell)."""
-    return mmi1x2(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"], schematic_function=_FOUNDRY["SOI220_cband_TE_rib_1x2_MMI"]
-)
-def SOI220_cband_TE_rib_1x2_MMI() -> gf.Component:
-    """Cornerstone C-band rib 1x2 MMI (Run-50 template cell)."""
-    return mmi1x2(cross_section="rib_cband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_oband_TE_strip_1x2_MMI"],
-)
-def SOI220_oband_TE_strip_1x2_MMI() -> gf.Component:
-    """Cornerstone O-band strip 1x2 MMI (Run-50 template cell)."""
-    return mmi1x2(cross_section="strip_oband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"], schematic_function=_FOUNDRY["SOI220_oband_TE_rib_1x2_MMI"]
-)
-def SOI220_oband_TE_rib_1x2_MMI() -> gf.Component:
-    """Cornerstone O-band rib 1x2 MMI (Run-50 template cell)."""
-    return mmi1x2(cross_section="rib_oband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_cband_TE_strip_2x2_MMI"],
-)
-def SOI220_cband_TE_strip_2x2_MMI() -> gf.Component:
-    """Cornerstone C-band strip 2x2 MMI (Run-50 template cell)."""
-    return mmi2x2(cross_section="strip_cband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"], schematic_function=_FOUNDRY["SOI220_cband_TE_rib_2x2_MMI"]
-)
-def SOI220_cband_TE_rib_2x2_MMI() -> gf.Component:
-    """Cornerstone C-band rib 2x2 MMI (Run-50 template cell)."""
-    return mmi2x2(cross_section="rib_cband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"],
-    schematic_function=_FOUNDRY["SOI220_oband_TE_strip_2x2_MMI"],
-)
-def SOI220_oband_TE_strip_2x2_MMI() -> gf.Component:
-    """Cornerstone O-band strip 2x2 MMI (Run-50 template cell)."""
-    return mmi2x2(cross_section="strip_oband")
-
-
-@gf.cell(
-    tags=["mmis", "foundry"], schematic_function=_FOUNDRY["SOI220_oband_TE_rib_2x2_MMI"]
-)
-def SOI220_oband_TE_rib_2x2_MMI() -> gf.Component:
-    """Cornerstone O-band rib 2x2 MMI (Run-50 template cell)."""
-    return mmi2x2(cross_section="rib_oband")

@@ -256,6 +256,7 @@ def test_container_children_switch_band_keep_type_and_width(
     [
         (si220.cells.crossing, "strip_oband"),
         (si220.cells.crossing, "rib_oband"),
+        (si220.cells.crossing_rib, "rib_oband"),
     ],
 )
 def test_fixed_crossings_select_oband_geometry(factory, cross_section: str) -> None:
@@ -440,8 +441,8 @@ def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
 
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
 # band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
-# cross-section's) and an MMI's ``loss_dB`` (the foundry measurement of the band and
-# type).
+# cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
+# of the band and type).
 _NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius", "radius", "loss_dB"}
 
 
@@ -460,8 +461,7 @@ def test_models_have_concrete_defaults_for_circulax(name: str) -> None:
 
     component = sax_component(si220.PDK.models[name])
     defaults = {f.name: f.default for f in dataclasses.fields(component)}
-    # Models of O-band foundry cells (SOI220_oband_*) default to the O-band centre.
-    assert defaults.get("wl") == (1.31 if "_oband_" in name else 1.55)
+    assert defaults.get("wl") == 1.55
     jnp.full_like(defaults["wl"], 1.31)
     none_defaults = {k for k, v in defaults.items() if v is None}
     assert none_defaults <= _NONE_DEFAULTS_ALLOWED, none_defaults

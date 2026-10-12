@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import tomllib
+from functools import partial
 
 import gdsfactory as gf
 import jax.numpy as jnp
@@ -15,10 +16,14 @@ from _run50 import template, template_region
 from cspdk.si220 import LAYER, LAYER_VIEWS, PDK, cells, models
 from cspdk.si220.config import PATH
 
-YSPLITTERS = [
-    "SOI220_cband_TE_strip_1x2_Ysplitter",
-    "SOI220_oband_TE_strip_1x2_Ysplitter",
-]
+# Each Run 50 template cell imported as a fixed cell, and the cspdk cell call that
+# imports it. The tests below are keyed by template cell name.
+YSPLITTERS = {
+    f"SOI220_{band}_TE_strip_1x2_Ysplitter": partial(
+        cells.ysplitter, cross_section=f"strip_{band}"
+    )
+    for band in ("cband", "oband")
+}
 # Number of probe pads (S, G and gates) of each graphene device.
 GRAPHENE_PADS = {
     "Bolometer": 3,
@@ -28,27 +33,36 @@ GRAPHENE_PADS = {
     "PTE": 4,
     "PTE_metallic": 4,
 }
-GRAPHENE = [
-    f"SOI220_cband_TE_strip_SLG_{device}{suffix}"
+GRAPHENE = {
+    f"SOI220_cband_TE_strip_SLG_{device}{suffix}": getattr(
+        cells, f"graphene_{device.lower()}{suffix.lower()}"
+    )
     for device in GRAPHENE_PADS
     for suffix in ("", "_with_GC")
-]
+}
 GRAPHENE_PAD_LAYERS = [(165, 2), (166, 2)]  # GRAPHENE_PAD1, GRAPHENE_PAD2
-PHOTODIODES = ["SOI220_PD_FCI300B1_Integrated", "SOI220_PD_FCI300B1_Plain"]
-LASERS = [
-    f"SOI220_{size}_LD_DC1550HP01_Integrated{suffix}"
+PHOTODIODES = {
+    "SOI220_PD_FCI300B1_Integrated": cells.photodiode_integrated,
+    "SOI220_PD_FCI300B1_Plain": cells.photodiode,
+}
+LASERS = {
+    f"SOI220_{size}_LD_DC1550HP01_Integrated{suffix}": getattr(
+        cells, f"laser_{size.lower()}{suffix.lower()}"
+    )
     for size in ("Full", "Half")
     for suffix in ("", "_or_GC", "_with_GC")
-]
-RUN50_CELLS = [
-    *YSPLITTERS,
-    "SOI220_cband_TE_strip_apodized_GC_focusing_v1p0",
-    *GRAPHENE,
-    *PHOTODIODES,
-    *LASERS,
-]
+}
+RUN50_CELLS = {
+    **YSPLITTERS,
+    "SOI220_cband_TE_strip_apodized_GC_focusing_v1p0": (
+        cells.grating_coupler_focusing_apodized
+    ),
+    **GRAPHENE,
+    **PHOTODIODES,
+    **LASERS,
+}
 
-# (cell, number of waveguide ports, number of fibre ports, number of pad ports)
+# Template cell: (number of waveguide ports, fibre ports, pad ports).
 PORT_COUNTS = {
     **dict.fromkeys(YSPLITTERS, (3, 0, 0)),
     "SOI220_cband_TE_strip_apodized_GC_focusing_v1p0": (1, 1, 0),
@@ -63,6 +77,11 @@ PORT_COUNTS = {
         name: (1, 0, 0) if name.endswith("Integrated") else (1, 1, 0) for name in LASERS
     },
 }
+
+
+def _cell_name(factory) -> str:
+    """The cspdk cell name of ``factory`` (a cell function or a partial of one)."""
+    return getattr(factory, "func", factory).__name__
 
 
 @pytest.fixture(autouse=True)
@@ -156,17 +175,61 @@ def test_lyp_lists_every_layer_view() -> None:
 
 
 def test_run50_cells_are_in_the_pdk() -> None:
-    """Each fixed cell is a public PDK cell named exactly as its foundry cell."""
-    for name in RUN50_CELLS:
+    """Each fixed cell is a public PDK cell with a cspdk name, not the foundry one.
+
+    The written GDS cell is named by gdsfactory after the cspdk cell.
+    """
+    for name, factory in RUN50_CELLS.items():
         assert template().cell(name) is not None, name
-        assert name in PDK.cells
-        assert getattr(cells, name)().name == name
+        cell_name = _cell_name(factory)
+        assert cell_name in PDK.cells, cell_name
+        assert name not in PDK.cells, name
+        component = factory()
+        assert component.name.startswith(cell_name), (name, component.name)
+        assert "SOI220" not in component.name, (name, component.name)
 
 
-@pytest.mark.parametrize("name", RUN50_CELLS)
+def test_fixed_cell_names() -> None:
+    """The 22 cell functions importing the 23 template cells."""
+    assert sorted({_cell_name(f) for f in RUN50_CELLS.values()}) == sorted(
+        [
+            "ysplitter",
+            "grating_coupler_focusing_apodized",
+            *(
+                f"graphene_{device}{suffix}"
+                for device in (
+                    "bolometer",
+                    "bolometer_metallic",
+                    "bolometer_no_gate",
+                    "eam",
+                    "pte",
+                    "pte_metallic",
+                )
+                for suffix in ("", "_with_gc")
+            ),
+            "photodiode",
+            "photodiode_integrated",
+            *(
+                f"laser_{size}{suffix}"
+                for size in ("full", "half")
+                for suffix in ("", "_or_gc", "_with_gc")
+            ),
+        ]
+    )
+
+
+def test_ysplitter_selects_the_band() -> None:
+    """``ysplitter`` imports the C- or O-band splitter and has no rib version."""
+    assert cells.ysplitter().ports["o1"].width == 0.45
+    assert cells.ysplitter(cross_section="strip_oband").ports["o1"].width == 0.4
+    with pytest.raises(ValueError, match="strip"):
+        cells.ysplitter(cross_section="rib_cband")
+
+
+@pytest.mark.parametrize("name", sorted(RUN50_CELLS))
 def test_cell_matches_template(name: str) -> None:
     """The cell is the template cell: the XOR on every layer is empty."""
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     assert component.kcl.dbu == template().dbu
     layers = _template_layers(template().cell(name))
     layers |= {
@@ -179,13 +242,13 @@ def test_cell_matches_template(name: str) -> None:
         assert xor.is_empty(), (name, layer)
 
 
-@pytest.mark.parametrize("name", RUN50_CELLS)
+@pytest.mark.parametrize("name", sorted(RUN50_CELLS))
 def test_port_counts_and_names(name: str) -> None:
     """Waveguide ports, then fibre ports, are o1, o2, ...; pad ports are e1, ...
 
     Within each kind the ports are numbered clockwise from the west.
     """
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     optical = [p for p in component.ports if p.port_type == "optical"]
     fiber = [p for p in component.ports if p.port_type == "vertical_te"]
     electrical = [p for p in component.ports if p.port_type == "electrical"]
@@ -201,10 +264,10 @@ def test_port_counts_and_names(name: str) -> None:
     assert names(electrical) == [f"e{i}" for i in range(1, len(electrical) + 1)]
 
 
-@pytest.mark.parametrize("name", RUN50_CELLS)
+@pytest.mark.parametrize("name", sorted(RUN50_CELLS))
 def test_waveguide_ports_sit_on_waveguide_ends(name: str) -> None:
     """Each waveguide port is the centre of a waveguide end of the port's width."""
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     band = "oband" if "_oband_" in name else "cband"
     waveguide = template_region(name, (3, 0))
     edges = waveguide.edges()
@@ -232,10 +295,10 @@ def test_waveguide_ports_sit_on_waveguide_ends(name: str) -> None:
         assert not _inside(waveguide, x + dx * 0.001, y + dy * 0.001), (name, port.name)
 
 
-@pytest.mark.parametrize("name", RUN50_CELLS)
+@pytest.mark.parametrize("name", sorted(RUN50_CELLS))
 def test_fiber_ports_sit_on_grating_centres(name: str) -> None:
     """A fibre port is at the centre of a grating's teeth, facing away from it."""
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     teeth = template_region(name, (6, 0))
     gratings = list(teeth.sized(2000).merged().each())
     for port in component.ports:
@@ -257,13 +320,13 @@ def _pad_layers(name: str) -> list[tuple[int, int]]:
     return GRAPHENE_PAD_LAYERS if name in GRAPHENE else [(41, 0)]
 
 
-@pytest.mark.parametrize("name", PHOTODIODES + GRAPHENE)
+@pytest.mark.parametrize("name", sorted(PHOTODIODES.keys() | GRAPHENE.keys()))
 def test_pad_ports_sit_on_pad_edges(name: str) -> None:
     """Each pad port spans the outer edge of a pad on its own layer.
 
     Every pad has exactly one port: the pads are found from the template geometry.
     """
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     ports = list(component.ports.filter(port_type="electrical"))
     pads_with_ports = set()
     for port in ports:
@@ -285,21 +348,21 @@ def test_pad_ports_sit_on_pad_edges(name: str) -> None:
     assert len(pads_with_ports) == len(ports) == n_pads, name
 
 
-@pytest.mark.parametrize("name", PHOTODIODES)
+@pytest.mark.parametrize("name", sorted(PHOTODIODES))
 def test_photodiode_pad_ports(name: str) -> None:
     """e1 (cathode) is above e2 (anode)."""
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     assert component.ports["e1"].center[1] > component.ports["e2"].center[1]
 
 
-@pytest.mark.parametrize("name", GRAPHENE)
+@pytest.mark.parametrize("name", sorted(GRAPHENE))
 def test_graphene_pad_ports_face_away_from_the_waveguide(name: str) -> None:
     """The pads beside the waveguide (x = 0) have their port on the far edge.
 
     Nothing is drawn on PAD: the design rules keep it 50 um from the graphene
     exclusion zone, so the ports stay on GRAPHENE_PAD1/2.
     """
-    component = getattr(cells, name)()
+    component = RUN50_CELLS[name]()
     for port in component.ports.filter(port_type="electrical"):
         x, _ = port.center
         assert port.orientation == (180 if x < 0 else 0), (name, port.name)
@@ -309,7 +372,7 @@ def test_graphene_pad_ports_face_away_from_the_waveguide(name: str) -> None:
 def test_graphene_pad_ports_route_on_their_own_layer() -> None:
     """A route on the pad's layer connects to a graphene pad port in the netlist."""
     c = gf.Component()
-    device = c.add_ref(cells.SOI220_cband_TE_strip_SLG_EAM(), name="eam")
+    device = c.add_ref(cells.graphene_eam(), name="eam")
     for name, dx in (("e1", -200), ("e2", 200)):
         port = device.ports[name]
         xs = gf.get_cross_section(
@@ -329,7 +392,8 @@ def test_no_model_cells_are_listed_in_pyproject() -> None:
         expected = set(
             tomllib.load(f)["tool"]["gdsfactoryplus"]["pdk"]["cells_no_model_expected"]
         )
-    for name in RUN50_CELLS:
+    for factory in RUN50_CELLS.values():
+        name = _cell_name(factory)
         assert (name in PDK.models) != (name in expected), name
 
 
@@ -339,25 +403,22 @@ def test_no_model_cells_are_listed_in_pyproject() -> None:
 
 
 @pytest.mark.parametrize(
-    ("name", "wl", "loss_per_unit_dB"),
-    [
-        ("SOI220_cband_TE_strip_1x2_Ysplitter", 1.55, 4.0123),
-        ("SOI220_oband_TE_strip_1x2_Ysplitter", 1.31, 4.5006),
-    ],
+    ("cross_section", "wl", "loss_per_unit_dB"),
+    [("strip_cband", 1.55, 4.0123), ("strip_oband", 1.31, 4.5006)],
 )
 def test_ysplitter_model_matches_measured_loss(
-    name: str, wl: float, loss_per_unit_dB: float
+    cross_section: str, wl: float, loss_per_unit_dB: float
 ) -> None:
     """Each output carries the measured cut-back loss per splitter, flat in wl."""
-    model = PDK.models[name]
-    assert model is getattr(models, name)
-    s = model(wl=jnp.array([wl - 0.05, wl, wl + 0.05]))
+    model = PDK.models["ysplitter"]
+    assert model is models.ysplitter
+    s = model(wl=jnp.array([wl - 0.05, wl, wl + 0.05]), cross_section=cross_section)
     for out in ("o2", "o3"):
         loss = -10 * np.log10(np.abs(np.asarray(s["o1", out])) ** 2)
         assert loss == pytest.approx(np.full(3, loss_per_unit_dB), abs=1e-4)
         assert np.allclose(s["o1", out], s[out, "o1"])
     assert np.allclose(s["o1", "o2"], s["o1", "o3"])
-    assert set(model().keys()) == {
+    assert set(model(cross_section=cross_section).keys()) == {
         ("o1", "o2"),
         ("o1", "o3"),
         ("o2", "o1"),
@@ -365,13 +426,18 @@ def test_ysplitter_model_matches_measured_loss(
     }
 
 
-@pytest.mark.parametrize("name", YSPLITTERS)
+def test_ysplitter_loss_can_be_overridden() -> None:
+    """``loss_dB`` sets the excess loss on top of the 3 dB split."""
+    s = PDK.models["ysplitter"](wl=1.31, loss_dB=0.0, cross_section="strip_oband")
+    assert np.abs(np.asarray(s["o1", "o2"])) ** 2 == pytest.approx(0.5)
+
+
+@pytest.mark.parametrize("name", sorted(YSPLITTERS))
 def test_ysplitter_schematic_links_its_model(name: str) -> None:
     """The splitter schematic points GDSFactory+ to the splitter's SAX model."""
-    factory = getattr(cells, name)
-    component = factory()
-    schematic = component.kcl.factories[name].get_schematic()
+    component = YSPLITTERS[name]()
+    schematic = component.kcl.factories["ysplitter"].get_schematic()
     (entry,) = schematic.info["models"]
-    assert entry["name"] == name
+    assert entry["name"] == "ysplitter"
     assert entry["module"] == "cspdk.si220.models"
     assert entry["port_order"] == [p.name for p in component.ports]

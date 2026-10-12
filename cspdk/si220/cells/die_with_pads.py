@@ -232,26 +232,3 @@ def die_with_pads(
         c.add_port(name=f"S{i}", port=bottom.ports["e2"])
     c.auto_rename_ports()
     return c
-
-
-##############################
-# Run-50 foundry cells
-##############################
-
-
-@gf.cell(tags=["die"])
-def Cell0_SOI220_cband_TE_Full_Packaging_Template() -> gf.Component:
-    """Run-50 full-die packaging template: gratings, loopbacks, pads and outline."""
-    return die_with_pads()
-
-
-@gf.cell(tags=["die"])
-def Cell0_SOI_Full_Institution() -> gf.Component:
-    """Run-50 full design area outline (GDS 99), 11470 x 4900 um."""
-    return die()
-
-
-@gf.cell(tags=["die"])
-def Cell0_SOI_Half_Institution() -> gf.Component:
-    """Run-50 half design area outline (GDS 99), 5500 x 4900 um."""
-    return die_half()
