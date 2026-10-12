@@ -45,6 +45,33 @@ class LayerMapCornerstone(LayerMap):
     LBL: Layer = (100, 0)  # type: ignore
     PAD: Layer = (41, 0)  # type: ignore
 
+    # Integration layers of the Run 50 template, named after the CORNERSTONE 50th
+    # call design guideline, section 5.2 (pp. 19-20) and Table 6 (pp. 21-22).
+    # Integrated laser die (DC1550HP01)
+    LASER_CONTACT: Layer = (43, 2)  # type: ignore  # laser bottom contacts (Ti/Pt/Au)
+    LASER_TRENCH: Layer = (47, 2)  # type: ignore  # laser trench etch
+    # Table 6 labels 143/1 "Physical PD Area"; section 5.2 and the template use it
+    # for the physical laser area (the laser top n-contact).
+    LASER_AREA: Layer = (143, 1)  # type: ignore  # information only
+    LASER_WG: Layer = (144, 1)  # type: ignore  # laser waveguide, information only
+    LASER_EXCLUSION: Layer = (151, 1)  # type: ignore  # laser exclusion zone
+    # Flip-chip photodiode (FCI-InGaAs-300B1), information only
+    PD_AREA: Layer = (140, 1)  # type: ignore  # physical PD area
+    PD_ACTIVE: Layer = (147, 1)  # type: ignore  # PD active area
+    PD_EXCLUSION: Layer = (150, 1)  # type: ignore  # PD exclusion zone
+    # Graphene (single-layer graphene, SLG). The names of 163/2-166/2 follow
+    # Table 6, which matches the template geometry: 163/2 and 164/2 are the narrow
+    # Au strips on the 1st and 2nd graphene, 165/2 and 166/2 the Au/Ti pads that
+    # feed them. Section 5.2 calls them "Au/Ti Metallization", "Au/Graphene
+    # Metallization", "1st SLG Contact Pad" and "2nd SLG Contact Pad".
+    GRAPHENE1: Layer = (161, 2)  # type: ignore  # 1st graphene channel formation
+    GRAPHENE2: Layer = (162, 2)  # type: ignore  # 2nd graphene channel formation
+    GRAPHENE_CONTACT1: Layer = (163, 2)  # type: ignore  # 1st Au/graphene contacts
+    GRAPHENE_CONTACT2: Layer = (164, 2)  # type: ignore  # 2nd Au/graphene contacts
+    GRAPHENE_PAD1: Layer = (165, 2)  # type: ignore  # 1st Au/Ti metallization (pads)
+    GRAPHENE_PAD2: Layer = (166, 2)  # type: ignore  # 2nd Au/Ti metallization (pads)
+    GRAPHENE_EXCLUSION: Layer = (169, 1)  # type: ignore  # graphene exclusion zone
+
     # labels for gdsfactory
     LABEL_SETTINGS: Layer = (100, 0)  # type: ignore
     LABEL_INSTANCE: Layer = (101, 0)  # type: ignore

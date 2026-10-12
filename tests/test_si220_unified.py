@@ -83,8 +83,8 @@ def test_band_variants_coexist_without_cell_cache_collision() -> None:
 @pytest.mark.parametrize(
     ("cross_section", "coupler_right", "mmi1x2_right", "mmi2x2_right"),
     [
-        ("strip_cband", 24.5, 51.0, 62.5),
-        ("strip_oband", 30.0, 60.0, 73.5),
+        ("strip_cband", 24.5, 51.8, 62.5),
+        ("strip_oband", 30.0, 60.1, 73.5),
     ],
 )
 def test_band_sensitive_cell_defaults(
@@ -255,11 +255,12 @@ def test_container_children_switch_band_keep_type_and_width(
     ("factory", "cross_section"),
     [
         (si220.cells.crossing, "strip_oband"),
+        (si220.cells.crossing, "rib_oband"),
         (si220.cells.crossing_rib, "rib_oband"),
     ],
 )
 def test_fixed_crossings_select_oband_geometry(factory, cross_section: str) -> None:
-    """Fixed crossings load the 1310 nm geometry and expose O-band ports."""
+    """Crossings draw the 1310 nm geometry and expose O-band ports."""
     si220.PDK.activate()
     component = factory(cross_section=cross_section)
     assert all(port.width == pytest.approx(0.40) for port in component.ports)
@@ -343,14 +344,23 @@ def _two_in_series(cell, **settings) -> gf.Component:
 @pytest.mark.parametrize(
     "name", ["grating_coupler_rectangular", "grating_coupler_elliptical"]
 )
-@pytest.mark.parametrize("cross_section", ["strip_oband", "rib_oband"])
-def test_oband_grating_couplers_are_centred_at_1310(
-    name: str, cross_section: str
+@pytest.mark.parametrize(
+    ("cross_section", "centre_range"),
+    [
+        ("strip_oband", (1.30, 1.33)),
+        ("rib_oband", (1.30, 1.33)),
+        ("strip_cband", (1.55, 1.58)),
+        ("rib_cband", (1.55, 1.58)),
+    ],
+)
+def test_grating_couplers_peak_in_their_band(
+    name: str, cross_section: str, centre_range: tuple[float, float]
 ) -> None:
-    """O-band grating models transmit at 1.31 um, like C-band ones at 1.55 um."""
-    oband = si220.PDK.models[name](wl=np.array([1.31]), cross_section=cross_section)
-    cband = si220.PDK.models[name](wl=np.array([1.55]), cross_section="strip_cband")
-    assert abs(oband["o1", "o2"][0]) == pytest.approx(abs(cband["o1", "o2"][0]))
+    """Grating models peak inside the measured Run-50 centre-wavelength range."""
+    wl = np.linspace(1.2, 1.7, 5001)
+    response = si220.PDK.models[name](wl=wl, cross_section=cross_section)
+    peak = wl[np.argmax(np.abs(response["o1", "o2"]))]
+    assert centre_range[0] <= peak <= centre_range[1]
 
 
 def test_dispatched_models_expose_cross_section() -> None:
@@ -430,8 +440,10 @@ def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
 
 
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
-# band and type; nothing broadcasts them.
-_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius"}
+# band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
+# cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
+# of the band and type).
+_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius", "radius", "loss_dB"}
 
 
 @pytest.mark.parametrize("name", sorted(si220.models.get_models()))

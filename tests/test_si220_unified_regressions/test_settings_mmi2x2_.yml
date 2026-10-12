@@ -1,10 +1,10 @@
 info: {}
-name: mmi2x2_WNone_WT1p5_LT20_LMNone_WM6_GMNone_CSstrip_cband
+name: mmi2x2_WNone_WT1p5_LT20_LMNone_WM6_GMNone_LSNone_CSstrip_cband
 ports:
   o1:
     center:
     - -20
-    - -1
+    - -1.015
     layer: WG
     name: o1
     orientation: 180
@@ -13,7 +13,7 @@ ports:
   o2:
     center:
     - -20
-    - 1
+    - 1.015
     layer: WG
     name: o2
     orientation: 180
@@ -22,7 +22,7 @@ ports:
   o3:
     center:
     - 62.5
-    - 1
+    - 1.015
     layer: WG
     name: o3
     orientation: 0
@@ -31,7 +31,7 @@ ports:
   o4:
     center:
     - 62.5
-    - -1
+    - -1.015
     layer: WG
     name: o4
     orientation: 0

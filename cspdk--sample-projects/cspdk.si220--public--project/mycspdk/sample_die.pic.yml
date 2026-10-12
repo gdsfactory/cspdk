@@ -17,15 +17,15 @@ connections: {}
 routes:
   bundle5:
     links:
-      ring1,o1: d,o1
-      ring2,o2: d,o2
+      ring1,o1: d,o2
+      ring2,o2: d,o3
     routing_strategy: route_bundle
     settings:
       start_straight_length: 500
   bundle6:
     links:
-      d,o23: m2,o2
-      d,o24: m2,o1
+      d,o26: m2,o2
+      d,o27: m2,o1
     routing_strategy: route_bundle
     settings:
       start_straight_length: 20

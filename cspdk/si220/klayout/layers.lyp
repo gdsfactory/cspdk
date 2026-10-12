@@ -48,7 +48,7 @@
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>RIB 4/0</name>
+  <name>WG_DF 4/0</name>
   <source>4/0@1</source>
  </properties>
  <properties>
@@ -67,6 +67,23 @@
   <animation>0</animation>
   <name>GRA 6/0</name>
   <source>6/0@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ff00ff</frame-color>
+  <fill-color>#ff00ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I3</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRA_EBL 60/0</name>
+  <source>60/0@1</source>
  </properties>
  <properties>
   <frame-color>#ebc634</frame-color>
@@ -101,6 +118,261 @@
   <animation>0</animation>
   <name>PAD 41/0</name>
   <source>41/0@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ffd700</frame-color>
+  <fill-color>#ffd700</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I4</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LASER_CONTACT 43/2</name>
+  <source>43/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#8b4513</frame-color>
+  <fill-color>#8b4513</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I9</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LASER_TRENCH 47/2</name>
+  <source>47/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ff8c00</frame-color>
+  <fill-color>#ff8c00</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>PD_AREA 140/1</name>
+  <source>140/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#dc143c</frame-color>
+  <fill-color>#dc143c</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LASER_AREA 143/1</name>
+  <source>143/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ff1493</frame-color>
+  <fill-color>#ff1493</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I3</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LASER_WG 144/1</name>
+  <source>144/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ffa500</frame-color>
+  <fill-color>#ffa500</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I5</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>PD_ACTIVE 147/1</name>
+  <source>147/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ff7f50</frame-color>
+  <fill-color>#ff7f50</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>2</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>PD_EXCLUSION 150/1</name>
+  <source>150/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#b22222</frame-color>
+  <fill-color>#b22222</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>2</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LASER_EXCLUSION 151/1</name>
+  <source>151/1@1</source>
+ </properties>
+ <properties>
+  <frame-color>#6a5acd</frame-color>
+  <fill-color>#6a5acd</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I5</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE1 161/2</name>
+  <source>161/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#9370db</frame-color>
+  <fill-color>#9370db</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I9</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>true</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE2 162/2</name>
+  <source>162/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#daa520</frame-color>
+  <fill-color>#daa520</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I6</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE_CONTACT1 163/2</name>
+  <source>163/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#b8860b</frame-color>
+  <fill-color>#b8860b</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I10</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE_CONTACT2 164/2</name>
+  <source>164/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#2e8b57</frame-color>
+  <fill-color>#2e8b57</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I4</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE_PAD1 165/2</name>
+  <source>165/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#3cb371</frame-color>
+  <fill-color>#3cb371</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I8</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width/>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE_PAD2 166/2</name>
+  <source>166/2@1</source>
+ </properties>
+ <properties>
+  <frame-color>#4b0082</frame-color>
+  <fill-color>#4b0082</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>2</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>GRAPHENE_EXCLUSION 169/1</name>
+  <source>169/1@1</source>
  </properties>
  <properties>
   <frame-color>#008000</frame-color>
@@ -152,5 +424,22 @@
   <animation>0</animation>
   <name>LABEL_INSTANCE 101/0</name>
   <source>101/0@1</source>
+ </properties>
+ <properties>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I3</dither-pattern>
+  <line-style/>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>routing_error_marker</name>
+  <source>1000/0@1</source>
  </properties>
 </layer-properties>

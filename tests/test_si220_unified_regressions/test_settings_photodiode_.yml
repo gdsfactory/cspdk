@@ -1,0 +1,22 @@
+info: {}
+name: photodiode
+ports:
+  e1:
+    center:
+    - 0
+    - 325
+    layer: PAD
+    name: e1
+    orientation: 90
+    port_type: electrical
+    width: 202
+  e2:
+    center:
+    - 0
+    - -315
+    layer: PAD
+    name: e2
+    orientation: 270
+    port_type: electrical
+    width: 300
+settings: {}

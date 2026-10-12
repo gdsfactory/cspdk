@@ -2,6 +2,7 @@
 
 from .containers import *
 from .couplers import *
+from .crossings import *
 from .die_with_pads import *
 from .fixed import *
 from .grating_couplers import *

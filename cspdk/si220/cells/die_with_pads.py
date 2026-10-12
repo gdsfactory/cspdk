@@ -96,8 +96,11 @@ def pad(
 
 
 @gf.cell(tags=["die"])
-def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
-    """Return the die floorplan.
+def die(size: tuple[float, float] = (11470.0, 4900.0)) -> gf.Component:
+    """Return the die floorplan (GDS 99), centred on the origin.
+
+    The default is the Run-50 full design area, 11470 x 4900 um; ``die_half`` is the
+    5500 x 4900 um half design area.
 
     Args:
         size: Die width and height in micrometres.
@@ -109,10 +112,39 @@ def die(size: tuple[float, float] = (16000.0, 1 * 3000.0)) -> gf.Component:
     return c
 
 
+@gf.cell(tags=["die"])
+def die_half() -> gf.Component:
+    """Return the Run-50 half design area floorplan, 5500 x 4900 um."""
+    return die(size=(5500.0, 4900.0))
+
+
+def _loopback_path(
+    gc_length: float, span: float, radius: float, straight: float, clearance: float
+) -> gf.Path:
+    """Centreline from the bottom grating port (heading east) to the top one.
+
+    It leaves the port for ``straight``, turns back under the grating with a 180
+    degree arc, runs up ``clearance`` behind the far end of the gratings and returns
+    the same way into the top grating. ``span`` is the distance between the ports.
+    """
+    back = straight + gc_length + clearance - radius
+    p = gf.Path()
+    p.append(gf.path.straight(length=straight))
+    p.append(gf.path.arc(radius=radius, angle=-180, npoints=373))
+    p.append(gf.path.straight(length=back))
+    p.append(gf.path.arc(radius=radius, angle=-90, npoints=187))
+    p.append(gf.path.straight(length=span + 2 * radius))
+    p.append(gf.path.arc(radius=radius, angle=-90, npoints=187))
+    p.append(gf.path.straight(length=back))
+    p.append(gf.path.arc(radius=radius, angle=-180, npoints=373))
+    p.append(gf.path.straight(length=straight))
+    return p
+
+
 @gf.cell(tags=["die"], schematic_function=die_schematic)
 def die_with_pads(
     size: tuple[float, float] = (11470.0, 4900.0),
-    ngratings: int = 14,
+    ngratings: int = 16,
     npads: int = 31,
     grating_pitch: float = 250.0,
     pad_pitch: float = 300.0,
@@ -120,63 +152,83 @@ def die_with_pads(
     cross_section: CrossSectionSpec = "strip_cband",
     pad: ComponentSpec = "pad",
     layer_floorplan: LayerSpec = "FLOORPLAN",
-    edge_to_pad_distance: float = 150.0,
-    edge_to_grating_distance: float = 150.0,
+    edge_to_pad_distance: float = 50.0,
+    edge_to_grating_distance: float = 420.0,
     with_loopback: bool = True,
+    pad_size: tuple[float, float] | None = (150.0, 200.0),
+    pad_offset_x: float = -115.0,
+    loopback_radius: float = 30.0,
 ) -> gf.Component:
-    """A die with grating couplers and pads.
+    """A die with grating couplers and pads: the Run-50 full packaging template.
+
+    The defaults reproduce ``Cell0_SOI220_cband_TE_Full_Packaging_Template``: an
+    11470 x 4900 um floorplan, 16 C-band strip gratings per side at 250 um pitch
+    (y = -1875 ... 1875 um, ports at x = +-4923 um) and 31 pads of 150 x 200 um per
+    side at 300 um pitch (x = -4615 ... 4385 um, y = +-2300 um). With
+    ``with_loopback`` the outermost gratings of each side are joined by a loopback
+    waveguide that runs 70 um behind the gratings, with 30 um radius arcs.
 
     Args:
         size: the size of the die, in um.
-        ngratings: the number of grating couplers.
-        npads: the number of pads.
+        ngratings: the number of grating couplers per side, loopback ones included.
+        npads: the number of pads per side.
         grating_pitch: the pitch of the grating couplers, in um.
         pad_pitch: the pitch of the pads, in um.
         grating_coupler: the grating coupler component. None skips the grating couplers.
         cross_section: the cross section.
         pad: the pad component.
         layer_floorplan: the layer of the floorplan.
-        edge_to_pad_distance: the distance from the edge to the pads, in um.
-        edge_to_grating_distance: the distance from the edge to the grating couplers, in um.
-        with_loopback: if True, adds a loopback between edge GCs. Only works for rotation = 90 for now.
+        edge_to_pad_distance: the distance from the top/bottom die edge to the pads, in um.
+        edge_to_grating_distance: the distance from the left/right die edge to the
+            far end of the grating couplers, in um.
+        with_loopback: if True, joins the outermost grating couplers of each side
+            with a loopback waveguide.
+        pad_size: size of the pads, passed to ``pad``. None keeps the pad's own size.
+        pad_offset_x: x of the centre of the pad rows, in um.
+        loopback_radius: bend radius of the loopback waveguide, in um.
     """
     c = gf.Component()
-    fp = c << gf.c.rectangle(
+    _ = c << gf.c.rectangle(
         size=size, layer=layer_floorplan, centered=True, port_type=None
     )
     xs, ys = size
-    x0 = xs / 2 + edge_to_grating_distance
-    if grating_coupler:
-        grating_coupler = _get_band_component(grating_coupler, cross_section)
-        gca = gf.c.grating_coupler_array(
-            n=ngratings,
-            pitch=grating_pitch,
-            with_loopback=with_loopback,
-            grating_coupler=grating_coupler,
-            cross_section=cross_section,
-        )
-        left = c << gca
-        left.rotate(-90)
-        left.xmin = -xs / 2 + edge_to_grating_distance
-        left.y = fp.y
-        c.add_ports(left.ports, prefix="W")
-        right = c << gca
-        right.rotate(+90)
-        right.xmax = xs / 2 - edge_to_grating_distance
-        right.y = fp.y
-        c.add_ports(right.ports, prefix="E")
-    pad = gf.get_component(pad)
-    x0 = -npads * pad_pitch / 2 + edge_to_pad_distance
+    if grating_coupler and ngratings:
+        gc = _get_band_component(grating_coupler, cross_section)
+        x_port = xs / 2 - edge_to_grating_distance - gc.xsize
+        loopback = with_loopback and ngratings > 1
+        for side, rotation, x in (("W", 180, -x_port), ("E", 0, x_port)):
+            for i in range(ngratings):
+                ref = c << gc
+                ref.rotate(rotation)
+                y = (i - (ngratings - 1) / 2) * grating_pitch
+                ref.move(ref.ports["o1"].center, (x, y))
+                if not (loopback and i in (0, ngratings - 1)):
+                    c.add_port(f"{side}{i}", port=ref.ports["o1"])
+        if loopback:
+            span = (ngratings - 1) * grating_pitch
+            path = _loopback_path(gc.xsize, span, loopback_radius, 10.0, 70.0)
+            # Drawn into the die (not as an anonymous child cell) so the cell and
+            # its netlist only reference named PDK cells.
+            loop = path.extrude(cross_section=cross_section)
+            west = c << loop
+            west.move((-x_port, -span / 2))
+            east = c << loop
+            east.dmirror_x()
+            east.move((x_port, -span / 2))
+            west.flatten()
+            east.flatten()
+    pad = gf.get_component(pad, size=pad_size) if pad_size else gf.get_component(pad)
     for i in range(npads):
-        pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
-        pad_ref.ymax = ys / 2 - edge_to_pad_distance
-        c.add_port(name=f"N{i}", port=pad_ref.ports["e4"])
-    x0 = -npads * pad_pitch / 2 + edge_to_pad_distance
+        x = pad_offset_x + (i - (npads - 1) / 2) * pad_pitch
+        top = c << pad
+        top.x = x
+        top.ymax = ys / 2 - edge_to_pad_distance
+        c.add_port(name=f"N{i}", port=top.ports["e4"])
     for i in range(npads):
-        pad_ref = c << pad
-        pad_ref.xmin = x0 + i * pad_pitch
-        pad_ref.ymin = -ys / 2 + edge_to_pad_distance
-        c.add_port(name=f"S{i}", port=pad_ref.ports["e2"])
+        x = pad_offset_x + (i - (npads - 1) / 2) * pad_pitch
+        bottom = c << pad
+        bottom.x = x
+        bottom.ymin = -ys / 2 + edge_to_pad_distance
+        c.add_port(name=f"S{i}", port=bottom.ports["e2"])
     c.auto_rename_ports()
     return c

@@ -1,0 +1,26 @@
+info:
+  length: 450
+name: taper_mm2sm_L450_WM10_WNone_CSstrip_cband
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 10
+  o2:
+    center:
+    - 450
+    - 0
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  cross_section: strip_cband
+  length: 450
+  width_mm: 10

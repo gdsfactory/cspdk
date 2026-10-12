@@ -12,8 +12,8 @@ instances:
       - -90
       port_type: null
       size:
-      - 16000
-      - 3000
+      - 11470
+      - 4900
 nets: []
 placements:
   rectangle:

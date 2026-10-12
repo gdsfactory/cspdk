@@ -12,9 +12,7 @@ from numpy.typing import NDArray
 
 from cspdk.si220.tech import TECH
 
-from . import waveguides
-
-nm = 1e-3
+from . import gratings, waveguides
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
@@ -162,53 +160,7 @@ _trans_rib10 = partial(_taper_strip_to_ridge, length=10.0)
 _trans_rib20 = partial(_taper_strip_to_ridge, length=20.0)
 _trans_rib50 = partial(_taper_strip_to_ridge, length=50.0)
 
-################
-# MMIs
-################
-
-_mmi1x2_strip = partial(sm.mmi1x2, wl0=1.31, fwhm=0.2)
-_mmi1x2_rib = _mmi1x2_strip
-
-
-def _mmi1x2(
-    wl: Float = 1.31,
-    loss_dB: Float = 0.3,
-    cross_section="strip",
-) -> sax.SDict:
-    """MMI 1x2 model."""
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _mmi1x2_strip,
-        "rib": _mmi1x2_rib,
-    }
-    f = fs[cross_section]
-    return f(
-        wl=wl,
-        loss_dB=loss_dB,
-    )
-
-
-_mmi2x2_strip = partial(sm.mmi2x2, wl0=1.31, fwhm=0.2)
-_mmi2x2_rib = _mmi2x2_strip
-
-
-def _mmi2x2(
-    wl: Float = 1.31,
-    loss_dB: Float = 0.3,
-    cross_section="strip",
-) -> sax.SDict:
-    """MMI 2x2 model."""
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _mmi2x2_strip,
-        "rib": _mmi2x2_rib,
-    }
-    f = fs[cross_section]
-    return f(
-        wl=wl,
-        loss_dB=loss_dB,
-    )
-
+# MMIs, crossings and the other Cornerstone components: see foundry.py.
 
 ##############################
 # Evanescent couplers
@@ -294,39 +246,6 @@ def _coupler_ring(
     )
 
 
-##############################
-# grating couplers Rectangular
-##############################
-
-_grating_coupler_rectangular_strip = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
-)
-_grating_coupler_rectangular_rib = _grating_coupler_rectangular_strip
-
-
-def _grating_coupler_rectangular(
-    wl: Float = 1.31,
-    cross_section="strip",
-) -> sax.SDict:
-    """Grating coupler rectangular model."""
-    # TODO: take more grating_coupler_rectangular arguments into account
-    wl = jnp.asarray(wl)  # type: ignore
-    fs = {
-        "strip": _grating_coupler_rectangular_strip,
-        "rib": _grating_coupler_rectangular_rib,
-    }
-    f = fs[cross_section]
-    return f(wl=wl)  # type: ignore
-
-
-##############################
-# grating couplers Elliptical
-##############################
-
-_grating_coupler_elliptical = partial(
-    sm.grating_coupler, loss=6, bandwidth=35 * nm, wl=1.31, wl0=1.31
-)
-
 ################
 # Imported
 ################
@@ -337,10 +256,6 @@ _straight_heater_metal = partial(
     waveguides._straight_heater_metal, wl=1.31, wl0=1.31, neff=2.56, ng=4.34
 )
 _straight_heater_meander = _straight_heater_metal
-
-
-_crossing_rib = sm.crossing_ideal
-_crossing = sm.crossing_ideal
 
 
 ################
@@ -365,24 +280,16 @@ def get_models() -> dict[str, Callable[..., sax.SDict]]:
         "trans_rib10": _trans_rib10,
         "trans_rib20": _trans_rib20,
         "trans_rib50": _trans_rib50,
-        "mmi1x2_strip": _mmi1x2_strip,
-        "mmi1x2_rib": _mmi1x2_rib,
-        "mmi1x2": _mmi1x2,
-        "mmi2x2_strip": _mmi2x2_strip,
-        "mmi2x2_rib": _mmi2x2_rib,
-        "mmi2x2": _mmi2x2,
         "directional_coupler": _directional_coupler,
         "coupler": _coupler,
         "coupler_strip": _coupler_strip,
         "coupler_rib": _coupler_rib,
         "coupler_ring_coupling_area": _coupler_ring_coupling_area,
         "coupler_ring": _coupler_ring,
-        "grating_coupler_rectangular_strip": _grating_coupler_rectangular_strip,
-        "grating_coupler_rectangular_rib": _grating_coupler_rectangular_rib,
-        "grating_coupler_rectangular": _grating_coupler_rectangular,
-        "grating_coupler_elliptical": _grating_coupler_elliptical,
+        "grating_coupler_rectangular_strip": gratings._grating_coupler_oband,
+        "grating_coupler_rectangular_rib": gratings._grating_coupler_oband,
+        "grating_coupler_rectangular": gratings._grating_coupler_oband,
+        "grating_coupler_elliptical": gratings._grating_coupler_oband,
         "straight_heater_metal": _straight_heater_metal,
         "straight_heater_meander": _straight_heater_meander,
-        "crossing_rib": _crossing_rib,
-        "crossing": _crossing,
     }

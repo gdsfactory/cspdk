@@ -6,10 +6,12 @@ MZIs are used in a variety of applications, including optical communications, qu
 """
 
 import gdsfactory as gf
-from gdsfactory.typings import ComponentSpec, CrossSectionSpec
+from gdsfactory.typings import ComponentSpec, CrossSectionSpec, Size
 
-from cspdk.si220._schematic import mzi_schematic
+from cspdk.si220._schematic import mzi_heater_loop_schematic, mzi_schematic
 from cspdk.si220._utils import get_band_component as _get_band_component
+from cspdk.si220.cells.heaters import heater
+from cspdk.si220.cells.waveguides import bend_circular, straight
 
 
 @gf.cell(tags=["mzis"], schematic_function=mzi_schematic)
@@ -126,3 +128,110 @@ def mzi_lattice(
         splitter=_splitter,
         combiner=_combiner,
     )
+
+
+def _route(
+    c: gf.Component,
+    port: gf.Port,
+    steps: list[str | float],
+    bend: gf.Component,
+    cross_section: CrossSectionSpec,
+) -> gf.Port:
+    """Follow ``steps`` from ``port``: "L"/"R" turn with ``bend``, numbers are straights."""
+    for step in steps:
+        if step in ("L", "R"):
+            ref = c << bend
+            entry, exit_ = ("o1", "o2") if step == "L" else ("o2", "o1")
+            ref.connect(entry, port)
+            port = ref.ports[exit_]
+        elif step:
+            ref = c << straight(length=step, cross_section=cross_section)
+            ref.connect("o1", port)
+            port = ref.ports["o2"]
+    return port
+
+
+@gf.cell(tags=["mzis"], schematic_function=mzi_heater_loop_schematic)
+def mzi_heater_loop(
+    delta_length: float = 160.0,
+    length_x: float = 616.3,
+    length_y: float = 35.0,
+    radius: float = 30.0,
+    npoints: int | None = 187,
+    splitter: ComponentSpec = "mmi1x2",
+    combiner: ComponentSpec = "mmi2x2",
+    heater_length: float = 200.0,
+    heater_pad_size: Size = (200.0, 100.0),
+    heater_pad_pitch: float = 250.0,
+    cross_section: CrossSectionSpec = "strip_cband",
+) -> gf.Component:
+    """MZI whose arms loop around the outside, with a heater on the upper arm.
+
+    The layout of the Cornerstone MZI: the 1x2 splitter faces west with its input
+    (o1) on the east, the 2x2 combiner sits ``length_x`` east of the splitter
+    outputs with its free ports (o2 lower, o3 upper) facing west, and each arm
+    leaves the splitter, loops round with four circular bends and enters the
+    combiner from the east. The lower arm is ``delta_length`` longer. A heater
+    filament runs along the middle of the upper arm's horizontal straight, with
+    its pads (e1, e2) to the north.
+
+    Args:
+        delta_length: lower arm length minus upper arm length (um).
+        length_x: horizontal arm straight, splitter outputs to combiner ports (um).
+        length_y: vertical straight on the splitter side of the upper arm (um).
+        radius: bend radius (um).
+        npoints: points per 90 degree bend. Defaults to the foundry MZI's.
+        splitter: 1x2 splitter.
+        combiner: 2x2 combiner.
+        heater_length: heater filament length (um).
+        heater_pad_size: heater pad width and height (um).
+        heater_pad_pitch: distance between the heater pad centres (um).
+        cross_section: waveguide cross-section.
+    """
+    c = gf.Component()
+    spl = c << _get_band_component(splitter, cross_section)
+    spl.drotate(180)
+    upper, lower = spl.ports["o3"], spl.ports["o2"]
+    comb = c << _get_band_component(combiner, cross_section)
+    comb.dmovex(upper.x + length_x - comb.ports["o3"].x)
+    bend = bend_circular(
+        radius=radius,
+        npoints=npoints,
+        cross_section=cross_section,
+        allow_min_radius_violation=True,
+    )
+
+    y_top = upper.y + 2 * radius + length_y
+    y_bottom = lower.y - 2 * radius - length_y - delta_length / 2
+    right_top = y_top - 2 * radius - comb.ports["o3"].y
+    right_bottom = comb.ports["o4"].y - 2 * radius - y_bottom
+    _route(
+        c,
+        upper,
+        ["R", length_y, "R", length_x, "R", right_top, "R"],
+        bend,
+        cross_section,
+    )
+    _route(
+        c,
+        lower,
+        ["L", length_y + delta_length / 2, "L", length_x, "L", right_bottom, "L"],
+        bend,
+        cross_section,
+    )
+
+    filament = c << heater(
+        length=heater_length,
+        pad_size=heater_pad_size,
+        pad_pitch=heater_pad_pitch,
+        pad_taper_length=0,
+    )
+    filament.dmove((upper.x + (length_x - heater_length) / 2, y_top))
+
+    c.add_port("o1", port=spl.ports["o1"])
+    c.add_port("o2", port=comb.ports["o1"])
+    c.add_port("o3", port=comb.ports["o2"])
+    c.add_port("e1", port=filament.ports["e1"])
+    c.add_port("e2", port=filament.ports["e2"])
+    c.info["delta_length"] = delta_length
+    return c

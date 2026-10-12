@@ -1,0 +1,22 @@
+info: {}
+name: laser_full_with_gc
+ports:
+  o1:
+    center:
+    - -3456.39
+    - 1.57
+    layer: WG
+    name: o1
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -3630.541
+    - 800
+    layer: GRA
+    name: o2
+    orientation: 180
+    port_type: vertical_te
+    width: 10
+settings: {}

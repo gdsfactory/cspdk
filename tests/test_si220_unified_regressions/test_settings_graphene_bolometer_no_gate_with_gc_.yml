@@ -1,0 +1,40 @@
+info: {}
+name: graphene_bolometer_no_gate_with_gc
+ports:
+  e1:
+    center:
+    - -65
+    - 0
+    layer: GRAPHENE_PAD1
+    name: e1
+    orientation: 180
+    port_type: electrical
+    width: 90
+  e2:
+    center:
+    - 65
+    - 0
+    layer: GRAPHENE_PAD1
+    name: e2
+    orientation: 0
+    port_type: electrical
+    width: 90
+  o1:
+    center:
+    - 0
+    - 574.085
+    layer: GRA
+    name: o1
+    orientation: 90
+    port_type: vertical_te
+    width: 10
+  o2:
+    center:
+    - 0
+    - -574.085
+    layer: GRA
+    name: o2
+    orientation: 270
+    port_type: vertical_te
+    width: 10
+settings: {}

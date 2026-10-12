@@ -1,8 +1,10 @@
 info:
   fiber_angle: 10
+  n_periods: 60
+  period: 0.63
   polarization: te
   wavelength: 1.55
-name: grating_coupler_rectangular_PNone_NP60_LT350_W1p55_CSstrip_cband
+name: grating_coupler_rectangular_PNone_NPNone_LT350_WNone_CS_bf7684c3
 ports:
   o1:
     center:
@@ -15,7 +17,7 @@ ports:
     width: 0.45
   o2:
     center:
-    - 368.664
+    - 369.084
     - 0
     layer: GRA
     name: o2
@@ -24,6 +26,8 @@ ports:
     width: 11
 settings:
   cross_section: strip_cband
+  fill_factor: 0.5
+  grating_overhang: 0.5
+  length_grating: 42
   length_taper: 350
-  n_periods: 60
-  wavelength: 1.55
+  width_grating: 10

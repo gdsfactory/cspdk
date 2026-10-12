@@ -51,7 +51,7 @@ docs = [
 ]
 
 [tool.codespell]
-ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem"
+ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem, euclidian"
 skip = "references/*"
 
 [tool.gdsfactoryplus]
@@ -62,13 +62,39 @@ pdk = "cspdk"
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
-# Layout-only cells: no ports to model (the fixed foundry heater has none)
+# Layout-only cells: no ports to model (the fixed foundry heater has none).
+# The Run 50 dies are layout only, and the graphene, photodiode, laser and
+# focusing-grating fixed cells have no foundry optical data to build a model from.
 cells_no_model_expected = [
   "add_pads_top",
   "compass",
+  "die",
+  "die_half",
+  "die_with_pads",
   "heater",
   "text_rectangular",
-  "text_rectangular_multi_layer"
+  "text_rectangular_multi_layer",
+  "grating_coupler_focusing_apodized",
+  "graphene_bolometer",
+  "graphene_bolometer_with_gc",
+  "graphene_bolometer_metallic",
+  "graphene_bolometer_metallic_with_gc",
+  "graphene_bolometer_no_gate",
+  "graphene_bolometer_no_gate_with_gc",
+  "graphene_eam",
+  "graphene_eam_with_gc",
+  "graphene_pte",
+  "graphene_pte_with_gc",
+  "graphene_pte_metallic",
+  "graphene_pte_metallic_with_gc",
+  "photodiode",
+  "photodiode_integrated",
+  "laser_full",
+  "laser_full_or_gc",
+  "laser_full_with_gc",
+  "laser_half",
+  "laser_half_or_gc",
+  "laser_half_with_gc"
 ]
 name = "cspdk.si220"
 options = [
@@ -89,7 +115,13 @@ max = 1.6
 min = 1.5
 num = 1000
 
+[tool.hatch.build.targets.sdist]
+# Package only, like the flit sdists up to v1.4.5: no tests, references or samples.
+exclude = ["cspdk/*/samples"]
+include = ["/cspdk", "/CHANGELOG.md", "/LICENSE", "/README.md"]
+
 [tool.hatch.build.targets.wheel]
+exclude = ["cspdk/*/samples"]
 packages = ["cspdk"]
 
 [tool.mypy]

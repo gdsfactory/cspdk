@@ -4,7 +4,7 @@ instances:
     info: {}
     settings:
       justify: left
-      layer: PAD
+      layer: SLAB
       size: 3
       text: abc
   text_rectangular2:
