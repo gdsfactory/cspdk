@@ -437,14 +437,20 @@ grating_coupler_rectangular_ro = partial(
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_elliptical_schematic)
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
-    grating_line_width=0.315,
+    grating_line_width: float = 0.35,
     cross_section="xs_rc500",
 ) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
+    ``grating_line_width`` is the width of the unetched ridge between two
+    trenches (GDS 6). The CORNERSTONE SOI pre-DRC deck limits GDS 6 gaps narrower
+    than 350 nm to 20 um length, and the ridges here are longer arcs, so they are
+    350 nm wide (as for si220).
+
     Args:
         wavelength: the center wavelength for which the grating is designed.
-        grating_line_width: the line width of the grating.
+        grating_line_width: width of the unetched ridge between trenches, in um.
+            Keep it at 0.35 or more to pass the CORNERSTONE deck.
         cross_section: a cross section or its name or a function generating a cross section.
     """
     return gf.c.grating_coupler_elliptical_trenches(
@@ -467,14 +473,14 @@ def grating_coupler_elliptical(
 
 grating_coupler_elliptical_rc = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.315,
+    grating_line_width=0.35,
     wavelength=1.55,
     cross_section="xs_rc500",
 )
 
 grating_coupler_elliptical_ro = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.250,
+    grating_line_width=0.35,
     wavelength=1.31,
     cross_section="xs_ro500",
 )

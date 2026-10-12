@@ -1,12 +1,12 @@
 info:
-  min_bend_radius: 57.149
+  min_bend_radius: 57.456
   path_length: 60.116
-name: coupler_G0p236_L20_D4_D20_CSxs_nc
+name: coupler_G0p25_L20_D4_D20_CSxs_nc
 ports:
   o1:
     center:
     - -20
-    - -1.282
+    - -1.275
     layer: NITRIDE
     name: o1
     orientation: 180
@@ -15,7 +15,7 @@ ports:
   o2:
     center:
     - -20
-    - 2.718
+    - 2.725
     layer: NITRIDE
     name: o2
     orientation: 180
@@ -24,7 +24,7 @@ ports:
   o3:
     center:
     - 40
-    - 2.718
+    - 2.725
     layer: NITRIDE
     name: o3
     orientation: 0
@@ -33,7 +33,7 @@ ports:
   o4:
     center:
     - 40
-    - -1.282
+    - -1.275
     layer: NITRIDE
     name: o4
     orientation: 0
@@ -43,5 +43,5 @@ settings:
   cross_section: xs_nc
   dx: 20
   dy: 4
-  gap: 0.236
+  gap: 0.25
   length: 20
