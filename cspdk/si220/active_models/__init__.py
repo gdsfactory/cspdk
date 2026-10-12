@@ -69,7 +69,9 @@ def ThermalPhaseShifter(
     loss_val = loss_dBcm * (length / 10000.0)
     T_mag = 10.0 ** (-loss_val / 20.0)
     phi = 2.0 * jnp.pi * (neff0 * (length / wl)) + dphi
-    T = T_mag * jnp.exp(-1j * phi)
+    # SAX's phase convention (exp(+1j * phi)), not circulax's own (exp(-1j * phi)):
+    # the rest of a cspdk circuit is SAX models, so the heater must turn with them.
+    T = T_mag * jnp.exp(1j * phi)
 
     constraint = signals.o2 - T * signals.o1
     i_elec = v_bias / R
