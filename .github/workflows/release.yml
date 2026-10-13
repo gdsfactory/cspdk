@@ -1,7 +1,7 @@
 name: Release package
 on:
   push:
-    tags: "v*"
+    tags: ["v*"]
 jobs:
   release_pypi:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
@@ -25,16 +25,43 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           make build
-          twine upload --verbose dist/*
+          # --skip-existing lets a re-run continue to the GitHub release step after
+          # an earlier attempt already uploaded this version.
+          twine upload --verbose --skip-existing dist/*
   release_environment:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+    # Publish on GitHub only once the package is on PyPI.
+    needs: release_pypi
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v7.0.1
-      - name: Publish Latest Draft
+      - name: Extract the release notes from CHANGELOG.md
+        env:
+          TAG: ${{ github.ref_name }}
         run: |
-          gh release edit ${{ github.ref_name }} --draft=false
+          # The "## [X.Y.Z]" section of the tag, up to the next version heading.
+          awk -v h="## [${TAG#v}]" 'index($0, h) == 1 {found = 1; next} found && /^## \[/ {exit} found' \
+            CHANGELOG.md > release_notes.md
+          echo "Release notes: $(grep -c . release_notes.md) non-empty lines"
+      - name: Create or publish the GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          # A draft made by hand for this tag is published as it is; otherwise the
+          # release is created from the CHANGELOG section, or from GitHub's
+          # generated notes when CHANGELOG.md has no section for the tag.
+          if gh release view "$TAG" --json isDraft -q .isDraft 2>/dev/null | grep -qx true; then
+            gh release edit "$TAG" --draft=false
+          elif gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG is already published."
+          elif [ -s release_notes.md ]; then
+            # A concurrent run may create it first; then it exists, which is success.
+            gh release create "$TAG" --title "$TAG" --verify-tag --notes-file release_notes.md \
+              || gh release view "$TAG" >/dev/null
+          else
+            gh release create "$TAG" --title "$TAG" --verify-tag --generate-notes \
+              || gh release view "$TAG" >/dev/null
+          fi

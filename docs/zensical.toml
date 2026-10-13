@@ -2,6 +2,9 @@
 docs_dir = "."
 nav = [
   { "Home" = "index.md" },
+  { "Guides" = [
+    { "MPW Run 50 submission (si220)" = "mpw50_submission.md" }
+  ] },
   { "Reference" = [
     { "Layer Stack" = "layer_stack.md" },
     { "Cells Si220" = "cells_si220.md" },

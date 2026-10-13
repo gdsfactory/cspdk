@@ -2,11 +2,11 @@ info:
   period: 0.579
   polarization: te
   wavelength: 1.31
-name: grating_coupler_elliptical_W1p31_GLW0p25_CSxs_so340
+name: grating_coupler_elliptical_W1p31_GLW0p35_CSxs_so340_TEA11
 ports:
   o1:
     center:
-    - -2
+    - -1.95
     - 0
     layer: WG
     name: o1
@@ -24,5 +24,6 @@ ports:
     width: 10
 settings:
   cross_section: xs_so340
-  grating_line_width: 0.25
+  grating_line_width: 0.35
+  trenches_extra_angle: 11
   wavelength: 1.31

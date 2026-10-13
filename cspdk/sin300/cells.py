@@ -289,7 +289,7 @@ mmi2x2_no = partial(
 @gf.cell(tags=["cells"], schematic_function=coupler_straight_schematic)
 def coupler_straight(
     length: float = 20.0,
-    gap: float = 0.236,
+    gap: float = 0.25,
     cross_section: CrossSectionSpec = "xs_nc",
 ) -> Component:
     """The straight part of a coupler.
@@ -308,7 +308,7 @@ def coupler_straight(
 
 @gf.cell(tags=["cells"], schematic_function=coupler_schematic)
 def coupler(
-    gap: float = 0.236,
+    gap: float = 0.25,
     length: float = 20.0,
     dy: float = 4.0,
     dx: float = 20.0,

@@ -526,15 +526,29 @@ grating_coupler_rectangular_rc = partial(
 @gf.cell(tags=["cells"], schematic_function=grating_coupler_elliptical_schematic)
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
-    grating_line_width=0.315,
+    grating_line_width: float = 0.35,
     cross_section="xs_sc340",
+    trenches_extra_angle: float = 9.0,
 ) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
+    ``grating_line_width`` is the width of the unetched ridge between two
+    trenches (GDS 6). The CORNERSTONE SOI pre-DRC deck limits GDS 6 gaps narrower
+    than 350 nm to 20 um length, and the ridges here are longer arcs, so they are
+    350 nm wide (as for si220). The optics are not re-optimised for the wider
+    ridge: the period still follows ``wavelength`` with the same ``neff``, so the
+    centre wavelength and coupling efficiency shift somewhat (most at O-band,
+    where the ridge fill factor rises from about 43% to 60%); simulate the
+    grating before relying on its passband.
+
     Args:
         wavelength: the center wavelength for which the grating is designed.
-        grating_line_width: the line width of the grating.
+        grating_line_width: width of the unetched ridge between trenches, in um.
+            Keep it at 0.35 or more to pass the CORNERSTONE deck.
         cross_section: a cross section or its name or a function generating a cross section.
+        trenches_extra_angle: how far the trenches extend past the grating region,
+            in degrees. Each trench must reach 200 nm beyond GDS 3; at O-band the
+            9 deg default falls short for the first trenches, so ``_so`` uses 11.
     """
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
@@ -542,7 +556,7 @@ def grating_coupler_elliptical(
         grating_line_width=grating_line_width,
         taper_length=16.6,
         taper_angle=30.0,
-        trenches_extra_angle=9.0,
+        trenches_extra_angle=trenches_extra_angle,
         fiber_angle=15.0,
         neff=2.638,
         ncladding=1.443,
@@ -556,21 +570,22 @@ def grating_coupler_elliptical(
 
 grating_coupler_elliptical_sc = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.315,
+    grating_line_width=0.35,
     wavelength=1.55,
     cross_section="xs_sc340",
 )
 
 grating_coupler_elliptical_so = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.250,
+    grating_line_width=0.35,
+    trenches_extra_angle=11.0,
     wavelength=1.31,
     cross_section="xs_so340",
 )
 
 grating_coupler_elliptical_rc = partial(
     grating_coupler_elliptical,
-    grating_line_width=0.315,
+    grating_line_width=0.35,
     wavelength=1.55,
     cross_section="xs_rc340",
 )

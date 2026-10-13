@@ -24,8 +24,10 @@ def ThermalPhaseShifter(
     ohms_per_um: float = 0.375,
     eta_pi_per_W: float = 12.5,
     length: float = 320.0,
-    loss_dBcm: float = 1.0,
-    neff0: float = 2.4,
+    loss_dBcm: float = 3.0,
+    neff0: float = 2.38,
+    ng: float = 4.30,
+    wl0: float = 1.55,
     wl: float = 1.55,
 ) -> PhysicsReturn:
     """Thermal phase shifter driven by ohmic dissipation.
@@ -37,7 +39,10 @@ def ThermalPhaseShifter(
     denominator that blows up when |T| ≈ 1. A naive VCVS with shared
     branch current (o1: i_fwd) has S11 = (1-T)/(1+T), producing
     phase-dependent back-reflection; stamping Y_in = 1 gives S11 = 0.
-    ``wl`` is in micrometres (SAX convention).
+    ``wl`` is in micrometres (SAX convention). Propagation follows the SAX heater
+    (``straight_heater_metal``): the C-band strip waveguide's ``neff`` and ``ng``
+    at ``wl0``, with the same first-order dispersion and loss, so both backends
+    give the same transmission for the same cell.
 
     Args:
         signals: Input signals at each port, provided by circulax.
@@ -46,7 +51,9 @@ def ThermalPhaseShifter(
         eta_pi_per_W: Phase shift efficiency (multiples of π per watt).
         length: Heater length in micrometres (must be positive).
         loss_dBcm: Propagation loss in dB/cm.
-        neff0: Effective refractive index.
+        neff0: Effective refractive index at ``wl0``.
+        ng: Group index at ``wl0``.
+        wl0: Wavelength at which ``neff0`` and ``ng`` are given, in micrometres.
         wl: Wavelength in micrometres.
 
     @tags eo dc sweep, circulax simulation
@@ -68,8 +75,11 @@ def ThermalPhaseShifter(
 
     loss_val = loss_dBcm * (length / 10000.0)
     T_mag = 10.0 ** (-loss_val / 20.0)
-    phi = 2.0 * jnp.pi * (neff0 * (length / wl)) + dphi
-    T = T_mag * jnp.exp(-1j * phi)
+    neff = neff0 - (wl - wl0) * (ng - neff0) / wl0
+    phi = 2.0 * jnp.pi * neff * length / wl + dphi
+    # SAX's phase convention (exp(+1j * phi)), not circulax's own (exp(-1j * phi)):
+    # the rest of a cspdk circuit is SAX models, so the heater must turn with them.
+    T = T_mag * jnp.exp(1j * phi)
 
     constraint = signals.o2 - T * signals.o1
     i_elec = v_bias / R

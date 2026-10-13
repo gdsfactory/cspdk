@@ -1,5 +1,5 @@
 info: {}
-name: coupler_straight_L20_G0p236_CSxs_nc
+name: coupler_straight_L20_G0p25_CSxs_nc
 ports:
   o1:
     center:
@@ -13,7 +13,7 @@ ports:
   o2:
     center:
     - 0
-    - 1.436
+    - 1.45
     layer: NITRIDE
     name: o2
     orientation: 180
@@ -22,7 +22,7 @@ ports:
   o3:
     center:
     - 20
-    - 1.436
+    - 1.45
     layer: NITRIDE
     name: o3
     orientation: 0
@@ -39,5 +39,5 @@ ports:
     width: 1.2
 settings:
   cross_section: xs_nc
-  gap: 0.236
+  gap: 0.25
   length: 20
