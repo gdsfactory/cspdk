@@ -5,6 +5,7 @@ Usage: python .github/write_models.py <flavour>, e.g. si220 or sin300.
 
 import importlib
 import inspect
+import shutil
 import sys
 
 import jax.numpy as jnp
@@ -32,9 +33,11 @@ if flavour not in TITLES:
 pdk = importlib.import_module(f"cspdk.{flavour}").PDK
 PATH = importlib.import_module(f"cspdk.{flavour}.config").PATH
 page = PATH.repo / "docs" / f"models_{flavour}.md"
-# One folder per flavour: model names repeat across flavours.
+# One folder per flavour: model names repeat across flavours. Rebuilt from
+# scratch so plots of removed or renamed models don't linger in the site.
 plot_dir = PATH.repo / "docs" / "models" / flavour
-plot_dir.mkdir(parents=True, exist_ok=True)
+shutil.rmtree(plot_dir, ignore_errors=True)
+plot_dir.mkdir(parents=True)
 
 
 def _summary(model) -> str:
