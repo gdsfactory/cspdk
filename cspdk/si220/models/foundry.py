@@ -121,29 +121,29 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
     def _mmi1x2(
         *,
         wl=wl0,
-        loss_dB=None,
+        extra_loss_dB=0.0,
         fwhm=0.2,
         cross_section: str = "strip",
     ) -> sax.SDict:
-        """1x2 MMI with the foundry's measured excess loss unless ``loss_dB`` is set."""
-        if loss_dB is None:
-            loss_dB = MMI1X2_EXCESS_DB[band, cross_section]
+        """1x2 MMI with the foundry's measured excess loss plus ``extra_loss_dB``."""
+        loss_dB = MMI1X2_EXCESS_DB[band, cross_section] + extra_loss_dB
         return sm.mmi1x2(wl=wl, wl0=wl0, fwhm=fwhm, loss_dB=loss_dB)
 
     def _mmi2x2(
         *,
         wl=wl0,
-        loss_dB=None,
+        extra_loss_dB=0.0,
         fwhm=0.2,
         cross_section: str = "strip",
     ) -> sax.SDict:
-        """2x2 MMI with the foundry's measured excess losses unless ``loss_dB`` is set."""
-        if loss_dB is None:
-            thru, cross = MMI2X2_EXCESS_DB[band, cross_section]
-        else:
-            thru = cross = loss_dB
+        """2x2 MMI with the foundry's measured excess losses plus ``extra_loss_dB``."""
+        thru, cross = MMI2X2_EXCESS_DB[band, cross_section]
         return _mmi2x2_asymmetric(
-            wl=wl, wl0=wl0, fwhm=fwhm, loss_dB_thru=thru, loss_dB_cross=cross
+            wl=wl,
+            wl0=wl0,
+            fwhm=fwhm,
+            loss_dB_thru=thru + extra_loss_dB,
+            loss_dB_cross=cross + extra_loss_dB,
         )
 
     def _crossing(*, wl=wl0, cross_section: str = "strip") -> sax.SDict:
@@ -240,13 +240,12 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             }
         )
 
-    def _ysplitter(*, wl=wl0, loss_dB=None) -> sax.SDict:
+    def _ysplitter(*, wl=wl0, extra_loss_dB=0.0) -> sax.SDict:
         """Ideal 50/50 Y-splitter, flat in wavelength, with the measured excess loss.
 
-        ``loss_dB`` overrides the excess loss on top of the 3 dB split.
+        ``extra_loss_dB`` is added to the measured excess loss on top of the 3 dB split.
         """
-        if loss_dB is None:
-            loss_dB = YSPLITTER_EXCESS_DB[band]
+        loss_dB = YSPLITTER_EXCESS_DB[band] + extra_loss_dB
         one = jnp.ones_like(jnp.asarray(wl, dtype=float))
         t = jnp.sqrt(0.5) * _amplitude(loss_dB) * one
         return sax.reciprocal({("o1", "o2"): t, ("o1", "o3"): t})
