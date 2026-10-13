@@ -25,8 +25,6 @@ coupler:
 coupler_nc:
   fwhm: 0.2
   loss_dB: 0.3
-  loss_dB_cross: null
-  loss_dB_thru: null
   shift: 0.0
   splitting_ratio_cross: 0.5
   splitting_ratio_thru: 0.5
@@ -35,8 +33,6 @@ coupler_nc:
 coupler_no:
   fwhm: 0.2
   loss_dB: 0.3
-  loss_dB_cross: null
-  loss_dB_thru: null
   shift: 0.0
   splitting_ratio_cross: 0.5
   splitting_ratio_thru: 0.5
@@ -100,8 +96,6 @@ mmi2x2:
 mmi2x2_nc:
   fwhm: 0.2
   loss_dB: 0.3
-  loss_dB_cross: null
-  loss_dB_thru: null
   shift: 0.0
   splitting_ratio_cross: 0.5
   splitting_ratio_thru: 0.5
@@ -110,8 +104,6 @@ mmi2x2_nc:
 mmi2x2_no:
   fwhm: 0.2
   loss_dB: 0.3
-  loss_dB_cross: null
-  loss_dB_thru: null
   shift: 0.0
   splitting_ratio_cross: 0.5
   splitting_ratio_thru: 0.5

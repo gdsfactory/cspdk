@@ -2,7 +2,7 @@ bend_euler:
   angle: 90.0
   cross_section: xs_n780
   length: null
-  loss: null
+  loss: 5.0
   p: 0.5
   radius: null
   wl: 0.78
@@ -10,7 +10,7 @@ bend_euler_n520:
   angle: 90.0
   cross_section: xs_n520
   length: null
-  loss: null
+  loss: 5.0
   p: 0.5
   radius: null
   wl: 0.52
@@ -18,7 +18,7 @@ bend_euler_n638:
   angle: 90.0
   cross_section: xs_n638
   length: null
-  loss: null
+  loss: 5.0
   p: 0.5
   radius: null
   wl: 0.638
@@ -26,14 +26,14 @@ bend_euler_n780:
   angle: 90.0
   cross_section: xs_n780
   length: null
-  loss: null
+  loss: 5.0
   p: 0.5
   radius: null
   wl: 0.78
 bend_s:
   cross_section: xs_n780
   length: null
-  loss: null
+  loss: 5.0
   size:
   - 15.0
   - 1.8
@@ -59,44 +59,44 @@ coupler_n780:
   loss_dB: 0.3
   wl: 0.78
 grating_coupler_elliptical:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n780
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.78
 grating_coupler_elliptical_n520:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n520
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.52
 grating_coupler_elliptical_n638:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n638
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.638
 grating_coupler_elliptical_n780:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n780
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.78
 grating_coupler_rectangular:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n780
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.78
 grating_coupler_rectangular_n520:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n520
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.52
 grating_coupler_rectangular_n638:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n638
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.638
 grating_coupler_rectangular_n780:
-  bandwidth: null
+  bandwidth_scale: 1.0
   cross_section: xs_n780
-  loss: null
+  extra_loss_dB: 0.0
   wl: 0.78
 mmi1x2:
   cross_section: xs_n780
@@ -141,42 +141,42 @@ mmi2x2_n780:
 straight:
   cross_section: xs_n780
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.78
 straight_n520:
   cross_section: xs_n520
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.52
 straight_n638:
   cross_section: xs_n638
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.638
 straight_n780:
   cross_section: xs_n780
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.78
 taper:
   cross_section: xs_n780
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.78
 taper_n520:
   cross_section: xs_n520
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.52
 taper_n638:
   cross_section: xs_n638
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.638
 taper_n780:
   cross_section: xs_n780
   length: 10.0
-  loss: null
+  loss: 5.0
   wl: 0.78
 wire_corner:
   wl: 0.78

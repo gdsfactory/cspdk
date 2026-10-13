@@ -106,31 +106,31 @@ heater:
   wl: 1.55
 mmi1x2:
   cross_section: strip_cband
-  loss_dB: null
+  extra_loss_dB: 0.0
   wl: 1.55
 mmi1x2_rib:
   cross_section: rib_cband
+  extra_loss_dB: 0.0
   fwhm: 0.2
-  loss_dB: null
   wl: 1.55
 mmi1x2_strip:
   cross_section: strip_cband
+  extra_loss_dB: 0.0
   fwhm: 0.2
-  loss_dB: null
   wl: 1.55
 mmi2x2:
   cross_section: strip_cband
-  loss_dB: null
+  extra_loss_dB: 0.0
   wl: 1.55
 mmi2x2_rib:
   cross_section: rib_cband
+  extra_loss_dB: 0.0
   fwhm: 0.2
-  loss_dB: null
   wl: 1.55
 mmi2x2_strip:
   cross_section: strip_cband
+  extra_loss_dB: 0.0
   fwhm: 0.2
-  loss_dB: null
   wl: 1.55
 mzi_heater_loop:
   cross_section: strip_cband
@@ -213,5 +213,5 @@ wire_corner:
   wl: 1.55
 ysplitter:
   cross_section: strip_cband
-  loss_dB: null
+  extra_loss_dB: 0.0
   wl: 1.55

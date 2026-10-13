@@ -2,14 +2,14 @@ bend_circular:
   angle: 90.0
   cross_section: xs_rib
   loss: 5.0
-  radius: null
+  radius: 300.0
   wl: 3.8
 bend_euler:
   angle: 90.0
   cross_section: xs_rib
   loss: 5.0
   p: 0.5
-  radius: null
+  radius: 300.0
   wl: 3.8
 bend_s:
   cross_section: xs_rib
