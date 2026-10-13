@@ -802,18 +802,19 @@ def die(cross_section="xs_sc340") -> gf.Component:
         "xs_rc340": "grating_coupler_rectangular_rc",
     }
     grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    return gf.c.die_with_pads(
+    return gf.c.die_frame_with_pads(
+        die_frame=partial(
+            gf.c.die_frame, size=(11470.0, 4900.0), layer_floorplan=LAYER.FLOORPLAN
+        ),
         cross_section=cross_section,
         edge_to_grating_distance=150.0,
         edge_to_pad_distance=150.0,
         grating_coupler=grating_coupler,
         grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
         ngratings=14,
         npads=31,
         pad="pad",
         pad_pitch=300.0,
-        size=(11470.0, 4900.0),
     )
 
 
