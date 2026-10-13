@@ -158,6 +158,12 @@ class Tech:
 
     width_slab = 5
 
+    # Design-rule minimums checked by the cells (cspdk._checks.check_min), in um:
+    # the gap between waveguides, and the unetched ridge between grating trenches.
+    gap_min = 0.2
+    grating_gap_min = 0.25
+    design_rules = "CORNERSTONE 42nd-call guideline, Table 2"
+
 
 TECH = Tech()
 

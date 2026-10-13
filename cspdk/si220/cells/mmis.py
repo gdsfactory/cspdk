@@ -7,8 +7,9 @@ import gdsfactory as gf
 import kfactory as kf
 from gdsfactory.typings import CrossSectionSpec
 
+from cspdk._checks import check_min
 from cspdk.si220._schematic import mmi1x2_schematic, mmi2x2_schematic
-from cspdk.si220.tech import LAYER, get_band, is_rib
+from cspdk.si220.tech import LAYER, TECH, get_band, is_rib
 
 # Foundry defaults, keyed by (ports, band, rib): (MMI length, gap between the
 # access tapers at the MMI body). From the SOI220_{band}_TE_{kind}_{1x2,2x2}_MMI
@@ -217,6 +218,7 @@ def mmi1x2(
             5 um for rib and none for strip.
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     length_mmi, gap_mmi, length_straight = _defaults(
         "1x2", cross_section, length_mmi, gap_mmi, length_straight
     )
@@ -264,6 +266,7 @@ def mmi2x2(
             5 um for rib and none for strip.
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     length_mmi, gap_mmi, length_straight = _defaults(
         "2x2", cross_section, length_mmi, gap_mmi, length_straight
     )

@@ -189,6 +189,12 @@ class Tech:
     dx_coupler_rib = 16.0
     dy_coupler_rib = 3.5
 
+    # Design-rule minimums checked by the cells (cspdk._checks.check_min), in um:
+    # the gap between waveguides, and the unetched ridge between grating trenches.
+    gap_min = 0.2
+    grating_gap_min = 0.25
+    design_rules = "CORNERSTONE 50th-call guideline, Table 6"
+
 
 TECH = Tech()
 

@@ -13,6 +13,7 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk._checks import check_min
 from cspdk.sin200._schematic import (
     bend_euler_schematic,
     bend_s_schematic,
@@ -29,7 +30,7 @@ from cspdk.sin200._schematic import (
     wire_corner_schematic,
 )
 from cspdk.sin200.config import PATH
-from cspdk.sin200.tech import LAYER
+from cspdk.sin200.tech import LAYER, TECH
 
 ################
 # Straights
@@ -199,6 +200,7 @@ def mmi1x2(
         gap_mmi: the gap between the tapers at the mmi body
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     return gf.c.mmi1x2(
         width=width,
         width_taper=width_taper,
@@ -255,6 +257,7 @@ def mmi2x2(
         gap_mmi: the gap between the tapers at the mmi body
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     return gf.c.mmi2x2(
         width=width,
         width_taper=width_taper,
@@ -306,6 +309,7 @@ def coupler_straight(
         gap: the gap between the waveguides forming the straight part of the coupler
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
     return gf.c.coupler_straight(
         length=length,
         gap=gap,
@@ -332,6 +336,7 @@ def coupler(
         dx: the length of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
     return gf.c.coupler(
         gap=gap,
         length=length,
@@ -504,6 +509,12 @@ def grating_coupler_elliptical(
         fiber_angle: fibre angle in degrees
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min(
+        "grating_line_width",
+        grating_line_width,
+        TECH.grating_gap_min,
+        TECH.design_rules,
+    )
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
         wavelength=wavelength,
