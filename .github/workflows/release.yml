@@ -25,7 +25,9 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           make build
-          twine upload --verbose dist/*
+          # --skip-existing lets a re-run continue to the GitHub release step after
+          # an earlier attempt already uploaded this version.
+          twine upload --verbose --skip-existing dist/*
   release_environment:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     # Publish on GitHub only once the package is on PyPI.
@@ -56,7 +58,10 @@ jobs:
           elif gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG is already published."
           elif [ -s release_notes.md ]; then
-            gh release create "$TAG" --title "$TAG" --verify-tag --notes-file release_notes.md
+            # A concurrent run may create it first; then it exists, which is success.
+            gh release create "$TAG" --title "$TAG" --verify-tag --notes-file release_notes.md \
+              || gh release view "$TAG" >/dev/null
           else
-            gh release create "$TAG" --title "$TAG" --verify-tag --generate-notes
+            gh release create "$TAG" --title "$TAG" --verify-tag --generate-notes \
+              || gh release view "$TAG" >/dev/null
           fi
