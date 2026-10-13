@@ -94,8 +94,11 @@ def test_command_line(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> Non
     good = _design(tmp_path, "Cell0_Southampton")
     bad = _design(tmp_path, "my_design")
     assert main([str(good)]) == 0
+    out = capsys.readouterr().out
+    assert "OK" in out
+    assert "gfp check drc" in out  # points to the GDSFactory+ DRC next
     assert main([str(good), str(bad)]) == 1
-    assert "OK" in capsys.readouterr().out
+    assert "gfp check drc" not in capsys.readouterr().out
 
 
 def test_off_grid_points(tmp_path: Path) -> None:

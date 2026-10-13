@@ -4,8 +4,9 @@ The rules are those of the 50th-call design guideline
 (``references/october-2026/CORNERSTONE-50th-Call-Design-Guideline.pdf``): file
 format (section 5.5), designated GDS layers (section 5.2 and Table 6), the 1 nm
 manufacturing grid (section 5.5), the design area (section 5.1) and the top-cell
-name (section 8). They do not replace CORNERSTONE's KLayout pre-DRC script, which
-checks the geometric design rules.
+name (section 8). They are not a DRC: check the geometric design rules with
+GDSFactory+'s DRC for the ``si220_passive`` process (``gfp check drc``), and
+optionally with CORNERSTONE's KLayout pre-DRC script.
 
 Run from the command line with::
 
@@ -57,13 +58,16 @@ CELL_OUTLINE = (99, 0)
 GRID_UM = 0.001
 FORMATS = (".gds", ".gds2", ".gdsii", ".oas")
 TOP_CELL = re.compile(r"^Cell0_\w+$")
+# GDSFactory+ DRC arguments for MPW Run 50 (SOI 220 nm passive process).
+DRC_ARGS = "--pdk cspdk --process si220_passive"
 
 
 def check_submission(path: str | Path) -> list[str]:
     """Return the problems that would stop CORNERSTONE accepting the layout.
 
     An empty list means the layout meets the format, layer, grid, design-area and
-    top-cell rules of MPW Run 50. Run CORNERSTONE's pre-DRC script as well.
+    top-cell rules of MPW Run 50. Check the geometric design rules as well, with
+    GDSFactory+'s DRC (``gfp check drc``, process ``si220_passive``).
 
     Args:
         path: GDSII or OASIS file to check.
@@ -181,6 +185,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{path}: {status}")
         for problem in problems:
             print(f"  - {problem}")
+    if not failed:
+        print(f"Next, check the design rules: gfp check drc <file> {DRC_ARGS}")
     return int(failed)
 
 

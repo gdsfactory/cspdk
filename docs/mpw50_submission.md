@@ -30,7 +30,7 @@ c.write_gds("Cell0_MyUniversity.gds")
 
 ## 2. Check the file
 
-`cspdk.si220.submission.check_submission` checks the rules in the guideline that aren't geometric design rules. It checks that:
+`cspdk.si220.submission.check_submission` checks the submission rules in the guideline that aren't geometric design rules; DRC covers those in step 3. It checks that:
 
 - the file is GDSII or OASIS (section 5.5);
 - there is exactly one top cell, named `Cell0_<Name of Institution>` (section 8);
@@ -53,11 +53,27 @@ python -m cspdk.si220.submission Cell0_MyUniversity.gds
 
 Every `cspdk.si220` cell draws only on designated layers, so problems usually come from your own shapes or from the die setup.
 
-## 3. Run CORNERSTONE's pre-DRC script
+## 3. Run DRC with GDSFactory+
 
-The geometric design rules are minimum feature sizes, gaps, overlaps and exclusion zones (section 5.3 and Table 6). Check them with CORNERSTONE's KLayout pre-DRC script, which you can download from the [live calls page](https://cornerstone.sotonfab.co.uk/mpw/live-calls/). CORNERSTONE's team also runs a full DRC after submission.
+The geometric design rules are minimum feature sizes, gaps, overlaps and exclusion zones (section 5.3 and Table 6). Check them with GDSFactory+'s DRC, which runs CORNERSTONE's rules for the process you select. For MPW Run 50 that's `si220_passive`: the SOI 220 nm passive process, including the 50th call's graphene rules.
 
-The guideline also offers 20-minute one-to-one drop-in sessions to review a layout before the deadline. The booking link is in the guideline.
+Set the process once in your project's `pyproject.toml`, so the GDSFactory+ extension in VS Code and the command line both use it:
+
+```toml
+[tool.gdsfactoryplus.drc]
+pdk = "cspdk"
+process = "si220_passive"
+```
+
+Then run DRC from the GDSFactory+ extension in VS Code, or from the command line:
+
+```bash
+gfp check drc Cell0_MyUniversity.gds
+```
+
+The results are saved as a KLayout report database (`.lyrdb`). DRC runs on the GDSFactory+ service, so it needs a GDSFactory+ API key (`gfp configure`).
+
+You can also cross-check with CORNERSTONE's own KLayout pre-DRC script, from the [live calls page](https://cornerstone.sotonfab.co.uk/mpw/live-calls/). CORNERSTONE's team runs a full DRC after submission, and the guideline offers 20-minute one-to-one drop-in sessions to review a layout before the deadline; the booking link is in the guideline.
 
 ## 4. Optional services
 
