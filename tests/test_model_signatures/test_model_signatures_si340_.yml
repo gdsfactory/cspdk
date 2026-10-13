@@ -1,0 +1,240 @@
+bend_circular:
+  angle: 90.0
+  cross_section: xs_sc340
+  loss: 0.0
+  radius: null
+  wl: 1.55
+bend_circular_rc:
+  angle: 90.0
+  cross_section: xs_rc340
+  loss: 0.0
+  radius: null
+  wl: 1.55
+bend_circular_sc:
+  angle: 90.0
+  cross_section: xs_sc340
+  loss: 0.0
+  radius: null
+  wl: 1.55
+bend_circular_so:
+  angle: 90.0
+  cross_section: xs_so340
+  loss: 0.0
+  radius: null
+  wl: 1.31
+bend_euler:
+  angle: 90.0
+  cross_section: xs_sc340
+  loss: 0.0
+  p: 0.5
+  radius: null
+  wl: 1.55
+bend_euler_rc:
+  angle: 90.0
+  cross_section: xs_rc340
+  loss: 0.0
+  p: 0.5
+  radius: null
+  wl: 1.55
+bend_euler_sc:
+  angle: 90.0
+  cross_section: xs_sc340
+  loss: 0.0
+  p: 0.5
+  radius: null
+  wl: 1.55
+bend_euler_so:
+  angle: 90.0
+  cross_section: xs_so340
+  loss: 0.0
+  p: 0.5
+  radius: null
+  wl: 1.31
+bend_s:
+  cross_section: xs_sc340
+  loss: 0.0
+  size:
+  - 20.0
+  - 1.8
+  wl: 1.55
+coupler:
+  cross_section: xs_sc340
+  loss_dB: 0.3
+  wl: 1.55
+coupler_rc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+coupler_sc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+coupler_so:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.31
+  wl0: 1.31
+grating_coupler_elliptical:
+  cross_section: xs_sc340
+  wl: 1.55
+grating_coupler_elliptical_rc:
+  bandwidth: 0.06072575604209279
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.56
+grating_coupler_elliptical_sc:
+  bandwidth: 0.06072575604209279
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.56
+grating_coupler_elliptical_so:
+  bandwidth: 0.035
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.31
+  wl0: 1.31
+grating_coupler_rectangular:
+  cross_section: xs_sc340
+  wl: 1.55
+grating_coupler_rectangular_rc:
+  bandwidth: 0.06072575604209279
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.56
+grating_coupler_rectangular_sc:
+  bandwidth: 0.06072575604209279
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.56
+grating_coupler_rectangular_so:
+  bandwidth: 0.035
+  loss: 6.0
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.31
+  wl0: 1.31
+mmi1x2:
+  cross_section: xs_sc340
+  loss_dB: 0.3
+  wl: 1.55
+mmi1x2_rc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  wl: 1.55
+  wl0: 1.55
+mmi1x2_sc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  wl: 1.55
+  wl0: 1.55
+mmi1x2_so:
+  fwhm: 0.2
+  loss_dB: 0.3
+  wl: 1.31
+  wl0: 1.31
+mmi2x2:
+  cross_section: xs_sc340
+  loss_dB: 0.3
+  wl: 1.55
+mmi2x2_rc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+mmi2x2_sc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+mmi2x2_so:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.31
+  wl0: 1.31
+straight:
+  cross_section: xs_sc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+straight_rc:
+  cross_section: xs_rc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+straight_sc:
+  cross_section: xs_sc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+straight_so:
+  cross_section: xs_so340
+  length: 10.0
+  loss: 0.0
+  wl: 1.31
+taper:
+  cross_section: xs_sc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+taper_rc:
+  cross_section: xs_rc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+taper_rib_to_strip:
+  length: 200.0
+  loss: 0.0
+  wl: 1.55
+taper_sc:
+  cross_section: xs_sc340
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+taper_so:
+  cross_section: xs_so340
+  length: 10.0
+  loss: 0.0
+  wl: 1.31
+wire_corner:
+  wl: 1.55

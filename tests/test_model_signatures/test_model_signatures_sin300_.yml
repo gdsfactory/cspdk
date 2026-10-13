@@ -1,0 +1,155 @@
+bend_euler:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.03
+  wl: 1.55
+bend_euler_nc:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.03
+  wl: 1.55
+bend_euler_no:
+  cross_section: xs_no
+  length: 10.0
+  loss: 0.03
+  wl: 1.31
+bend_s:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.03
+  wl: 1.55
+coupler:
+  cross_section: xs_nc
+  loss_dB: 0.3
+  wl: 1.55
+coupler_nc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+coupler_no:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.31
+  wl0: 1.31
+crossing_no:
+  wl: 1.31
+grating_coupler_elliptical:
+  bandwidth: 0.035
+  cross_section: xs_nc
+  wl: 1.55
+grating_coupler_elliptical_nc:
+  bandwidth: 0.035
+  loss: 6
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.55
+grating_coupler_elliptical_no:
+  bandwidth: 0.035
+  loss: 6
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.31
+  wl0: 1.31
+grating_coupler_rectangular:
+  cross_section: xs_nc
+  wl: 1.55
+grating_coupler_rectangular_nc:
+  bandwidth: 0.035
+  loss: 6
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.55
+  wl0: 1.55
+grating_coupler_rectangular_no:
+  bandwidth: 0.035
+  loss: 6
+  reflection: 0.0
+  reflection_fiber: 0.0
+  wl: 1.31
+  wl0: 1.31
+mmi1x2:
+  cross_section: xs_nc
+  loss_dB: 0.3
+  wl: 1.55
+mmi1x2_nc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  wl: 1.55
+  wl0: 1.55
+mmi1x2_no:
+  fwhm: 0.2
+  loss_dB: 0.3
+  wl: 1.31
+  wl0: 1.31
+mmi2x2:
+  cross_section: xs_nc
+  loss_dB: 0.3
+  wl: 1.55
+mmi2x2_nc:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.55
+  wl0: 1.55
+mmi2x2_no:
+  fwhm: 0.2
+  loss_dB: 0.3
+  loss_dB_cross: null
+  loss_dB_thru: null
+  shift: 0.0
+  splitting_ratio_cross: 0.5
+  splitting_ratio_thru: 0.5
+  wl: 1.31
+  wl0: 1.31
+straight:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+straight_nc:
+  length: 10.0
+  loss: 0.0
+  neff: 1.6
+  ng: 1.95
+  wl: 1.55
+  wl0: 1.55
+straight_no:
+  length: 10.0
+  loss: 0.0
+  neff: 1.63
+  ng: 2.0
+  wl: 1.31
+  wl0: 1.31
+taper:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+taper_nc:
+  cross_section: xs_nc
+  length: 10.0
+  loss: 0.0
+  wl: 1.55
+taper_no:
+  cross_section: xs_no
+  length: 10.0
+  loss: 0.0
+  wl: 1.31
+wire_corner:
+  wl: 1.55

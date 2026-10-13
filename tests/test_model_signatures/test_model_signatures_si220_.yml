@@ -1,0 +1,217 @@
+bend_circular:
+  angle: 90.0
+  cross_section: strip_cband
+  radius: null
+  wl: 1.55
+bend_euler:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3
+  wl: 1.55
+bend_euler_rib:
+  cross_section: rib_cband
+  length: 10.0
+  loss_dB_cm: 3
+  wl: 1.55
+bend_euler_strip:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3
+  wl: 1.55
+bend_s:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  wl: 1.55
+coupler:
+  bend_radius: null
+  cross_section: strip_cband
+  gap: 0.27
+  length: null
+  offset: null
+  width: 1.0
+  with_euler: false
+  wl: 1.55
+coupler_rib:
+  bend_radius: null
+  cross_section: rib_cband
+  gap: 0.27
+  length: null
+  offset: null
+  width: 1.0
+  with_euler: false
+  wl: 1.55
+coupler_ring:
+  cross_section: strip_cband
+  gap: 0.1
+  length_x: 1.0
+  loss_dB: 0.0
+  p: 0
+  radius: 40.0
+  wl: 1.55
+  wl0: 0
+coupler_ring_coupling_area:
+  cross_section: strip_cband
+  gap: 0.1
+  length_x: 1.0
+  loss_dB: 0.0
+  radius: 5.0
+  wl: 1.55
+coupler_strip:
+  bend_radius: null
+  cross_section: strip_cband
+  gap: 0.27
+  length: null
+  offset: null
+  width: 1.0
+  with_euler: false
+  wl: 1.55
+crossing:
+  cross_section: strip_cband
+  wl: 1.55
+crossing_rib:
+  cross_section: rib_cband
+  wl: 1.55
+directional_coupler:
+  bend_radius: null
+  cross_section: strip_cband
+  gap: 0.27
+  length: null
+  offset: null
+  width: 1.0
+  with_euler: false
+  wl: 1.55
+directional_coupler_no_phase:
+  bend_radius: 25
+  coupler_length: 10.0
+  cross_section: strip_cband
+  gap: 0.5
+  offset: 20
+  width: 1.0
+  wl: 1.55
+grating_coupler_elliptical:
+  cross_section: strip_cband
+  wl: 1.55
+grating_coupler_rectangular:
+  cross_section: strip_cband
+  wl: 1.55
+grating_coupler_rectangular_rib:
+  cross_section: rib_cband
+  wl: 1.55
+grating_coupler_rectangular_strip:
+  cross_section: strip_cband
+  wl: 1.55
+heater:
+  cross_section: strip_cband
+  wl: 1.55
+mmi1x2:
+  cross_section: strip_cband
+  loss_dB: null
+  wl: 1.55
+mmi1x2_rib:
+  cross_section: rib_cband
+  fwhm: 0.2
+  loss_dB: null
+  wl: 1.55
+mmi1x2_strip:
+  cross_section: strip_cband
+  fwhm: 0.2
+  loss_dB: null
+  wl: 1.55
+mmi2x2:
+  cross_section: strip_cband
+  loss_dB: null
+  wl: 1.55
+mmi2x2_rib:
+  cross_section: rib_cband
+  fwhm: 0.2
+  loss_dB: null
+  wl: 1.55
+mmi2x2_strip:
+  cross_section: strip_cband
+  fwhm: 0.2
+  loss_dB: null
+  wl: 1.55
+mzi_heater_loop:
+  cross_section: strip_cband
+  delta_length: 160.0
+  length_x: 616.3
+  length_y: 35.0
+  loss_dB_cm: 3.0
+  radius: 30.0
+  voltage: 0.0
+  vpi: 1.0
+  wl: 1.55
+straight:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  wl: 1.55
+straight_heater_meander:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  voltage: 0.0
+  vpi: 1.0
+  wl: 1.55
+straight_heater_metal:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  voltage: 0.0
+  vpi: 1.0
+  wl: 1.55
+straight_rib:
+  cross_section: rib_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  wl: 1.55
+straight_strip:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 3.0
+  wl: 1.55
+taper:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 0.0
+  wl: 1.55
+taper_mm2sm:
+  cross_section: strip_cband
+  length: 450.0
+  wl: 1.55
+taper_rib:
+  cross_section: rib_cband
+  length: 10.0
+  loss_dB_cm: 0.0
+  wl: 1.55
+taper_rib_to_strip:
+  cross_section: rib_cband
+  length: 50.0
+  length_rib: 5.0
+  length_strip: 5.0
+  wl: 1.55
+taper_strip_to_ridge:
+  cross_section: strip_cband
+  length: 10.0
+  loss_dB_cm: 0.0
+  wl: 1.55
+trans_rib10:
+  cross_section: strip_cband
+  loss_dB_cm: 0.0
+  wl: 1.55
+trans_rib20:
+  cross_section: strip_cband
+  loss_dB_cm: 0.0
+  wl: 1.55
+trans_rib50:
+  cross_section: strip_cband
+  loss_dB_cm: 0.0
+  wl: 1.55
+wire_corner:
+  cross_section: strip_cband
+  wl: 1.55
+ysplitter:
+  cross_section: strip_cband
+  loss_dB: null
+  wl: 1.55
