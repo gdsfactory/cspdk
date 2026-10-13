@@ -73,11 +73,15 @@ def check_submission(path: str | Path) -> list[str]:
         return [f"{path.name}: submit a GDSII (.gds) or OASIS (.oas) file"]
 
     layout = kdb.Layout()
-    layout.read(str(path))
+    try:
+        layout.read(str(path))
+    except RuntimeError as error:
+        return [f"{path.name}: could not read the layout ({error})"]
 
     tops = list(layout.top_cells())
     if len(tops) != 1:
-        names = ", ".join(c.name for c in tops) or "none"
+        # repr() keeps control characters in untrusted cell names out of the output.
+        names = ", ".join(repr(c.name) for c in tops) or "none"
         return [f"expected exactly one top cell, found {len(tops)}: {names}"]
     top = tops[0]
     problems: list[str] = []
@@ -86,30 +90,49 @@ def check_submission(path: str | Path) -> list[str]:
             f"top cell {top.name!r} must be named 'Cell0_<Name of Institution>'"
         )
 
-    used = {
-        (info.layer, info.datatype): index
-        for index in layout.layer_indexes()
-        if not (info := layout.get_info(index)).is_named()
-        and not top.bbox_per_layer(index).empty()
-    }
+    used: dict[tuple[int, int], int] = {}
+    for index in layout.layer_indexes():
+        if top.bbox_per_layer(index).empty():
+            continue
+        info = layout.get_info(index)
+        if info.is_named():  # OASIS layers with a name but no layer number
+            problems.append(
+                f"layer {info.name!r} has no GDS layer number; it is not a "
+                "designated MPW-50 layer"
+            )
+        else:
+            used[info.layer, info.datatype] = index
     for layer, datatype in sorted(set(used) - set(DESIGNATED_LAYERS)):
         problems.append(f"layer {layer}/{datatype} is not a designated MPW-50 layer")
 
-    grid_dbu = round(GRID_UM / layout.dbu)
-    if layout.dbu > GRID_UM or abs(grid_dbu * layout.dbu - GRID_UM) > 1e-12:
-        problems.append(
-            f"database unit {layout.dbu} um is not compatible with the 1 nm grid"
-        )
-    elif grid_dbu > 1:
-        for (layer, datatype), index in used.items():
-            region = kdb.Region(top.begin_shapes_rec(index))
-            if not region.grid_check(grid_dbu, grid_dbu).is_empty():
-                problems.append(
-                    f"layer {layer}/{datatype} has points off the 1 nm grid"
-                )
+    for (layer, datatype), index in used.items():
+        if _off_grid(layout, top, index):
+            problems.append(f"layer {layer}/{datatype} has points off the 1 nm grid")
 
     problems.extend(_design_area_problems(layout, top, used))
     return problems
+
+
+def _off_grid(layout: kdb.Layout, top: kdb.Cell, index: int) -> bool:
+    """Whether any polygon point or text anchor on the layer is off the 1 nm grid."""
+    steps = GRID_UM / layout.dbu  # database units per nm
+    if steps <= 1 and abs(1 / steps - round(1 / steps)) < 1e-9:
+        return False  # the database unit is a whole number of nm: always on grid
+    region = kdb.Region(top.begin_shapes_rec(index))
+    points = [t.position() for t in kdb.Texts(top.begin_shapes_rec(index)).each()]
+    if abs(steps - round(steps)) < 1e-9:
+        step = round(steps)
+        return not region.grid_check(step, step).is_empty() or any(
+            p.x % step or p.y % step for p in points
+        )
+    # A database unit that does not divide 1 nm: check every point, in nm.
+    for poly in region.each():
+        points.extend(poly.each_point_hull())
+        for hole in range(poly.holes()):
+            points.extend(poly.each_point_hole(hole))
+    return any(
+        abs(v / steps - round(v / steps)) > 1e-6 for p in points for v in (p.x, p.y)
+    )
 
 
 def _design_area_problems(
@@ -136,7 +159,8 @@ def _design_area_problems(
         if (layer, datatype) == CELL_OUTLINE:
             continue
         outside = kdb.Region(top.begin_shapes_rec(index)) - outline
-        if not outside.is_empty():
+        texts_outside = kdb.Texts(top.begin_shapes_rec(index)).not_interacting(outline)
+        if not outside.is_empty() or not texts_outside.is_empty():
             problems.append(
                 f"layer {layer}/{datatype} extends outside the cell outline"
             )

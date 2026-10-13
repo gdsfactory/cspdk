@@ -110,3 +110,68 @@ def test_off_grid_points(tmp_path: Path) -> None:
     path = tmp_path / "grid.gds"
     layout.write(str(path))
     assert check_submission(path) == ["layer 3/0 has points off the 1 nm grid"]
+
+
+def _outline_layout(dbu: float = 0.001) -> tuple:
+    """A layout whose top cell holds only the full design-area outline."""
+    import klayout.db as kdb
+
+    layout = kdb.Layout()
+    layout.dbu = dbu
+    top = layout.create_cell("Cell0_Test")
+    top.shapes(layout.layer(99, 0)).insert(kdb.DBox(-5735, -2450, 5735, 2450))
+    return layout, top
+
+
+def test_unreadable_file_is_a_problem(tmp_path: Path) -> None:
+    """A broken file is reported, and the command line carries on to the next."""
+    broken = tmp_path / "broken.gds"
+    broken.write_bytes(b"not a gds file")
+    (problem,) = check_submission(broken)
+    assert "could not read the layout" in problem
+    assert main([str(broken), str(_design(tmp_path, "Cell0_Southampton"))]) == 1
+
+
+def test_text_labels_on_grid_and_inside(tmp_path: Path) -> None:
+    """Text labels are checked like shapes: on the grid and inside the outline."""
+    import klayout.db as kdb
+
+    layout, top = _outline_layout(dbu=0.0005)
+    labels = top.shapes(layout.layer(100, 0))
+    labels.insert(kdb.DText("off grid", 10.0005, 0))
+    labels.insert(kdb.DText("outside", 6000, 0))
+    path = tmp_path / "labels.gds"
+    layout.write(str(path))
+    assert check_submission(path) == [
+        "layer 100/0 has points off the 1 nm grid",
+        "layer 100/0 extends outside the cell outline",
+    ]
+
+
+def test_coarser_database_unit_is_on_grid(tmp_path: Path) -> None:
+    """A 2 nm database unit keeps every coordinate on the 1 nm grid."""
+    import klayout.db as kdb
+
+    layout, top = _outline_layout(dbu=0.002)
+    top.shapes(layout.layer(3, 0)).insert(kdb.DBox(0, 0, 10.002, 0.5))
+    path = tmp_path / "dbu2nm.gds"
+    layout.write(str(path))
+    assert check_submission(path) == []
+
+
+def test_cell_names_are_escaped(tmp_path: Path) -> None:
+    """Cell names are quoted with repr(), so untrusted names can't inject control codes.
+
+    KLayout's own writers already replace control characters, so this checks the
+    quoting; files from other tools are covered by the same repr().
+    """
+    import klayout.db as kdb
+
+    layout = kdb.Layout()
+    layout.create_cell("Cell0_A\x1b[2J")
+    layout.create_cell("Cell0_B")
+    path = tmp_path / "two_tops.oas"
+    layout.write(str(path))
+    (problem,) = check_submission(path)
+    assert "'Cell0_B'" in problem
+    assert "\x1b" not in problem
