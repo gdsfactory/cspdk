@@ -19,12 +19,18 @@ import sax
 _GL_NODES, _GL_WEIGHTS = np.polynomial.legendre.leggauss(32)
 
 
-def _optical_model(model: Callable, inputs: int, outputs: int) -> Callable:
+def _optical_model(
+    model: Callable, inputs: int, outputs: int, hide: tuple[str, ...] = ()
+) -> Callable:
     """Normalize SAX ports without changing its process-wide naming strategy.
 
     Translate input/output and zero-based optical keys, preserving one-based
     optical keys. Inspect the returned keys because jitted models may retain
     a naming convention cached before the current strategy was selected.
+
+    ``hide`` removes parameters from the signature, so SAX and circulax never
+    see them and the wrapped model keeps its own default (e.g. the ``None``
+    asymmetric losses of ``sax.models.mmi2x2``, which fall back to ``loss_dB``).
     """
     port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
     port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
@@ -43,6 +49,11 @@ def _optical_model(model: Callable, inputs: int, outputs: int) -> Callable:
             for (p, q), value in result.items()
         }
 
+    if hide:
+        signature = inspect.signature(model)
+        optical.__signature__ = signature.replace(
+            parameters=[p for p in signature.parameters.values() if p.name not in hide]
+        )
     return optical
 
 

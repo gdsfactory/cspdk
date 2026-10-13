@@ -28,19 +28,13 @@ from circulax.s_transforms import sax_component
 
 FLAVOURS = ["si220", "si340", "si500", "sin200", "sin300", "si_sus", "ge_on_si"]
 
-# None means "take it from the cross-section or band" (bend radius, band loss and
-# grating bandwidth, or a path length derived from the geometry); a single concrete
-# value would be wrong for the other cross-sections, and none of these is broadcast.
-NONE_DEFAULTS_ALLOWED = {"radius", "length", "loss", "bandwidth"}
-# sax.models.mmi2x2 itself defaults these to None (derived from loss_dB).
-NONE_DEFAULTS_ALLOWED |= {"loss_dB_cross", "loss_dB_thru"}
-# si220 couplers derive their geometry from the cross-section, and si220 MMIs use the
-# foundry-measured loss of their band and type unless given ``loss_dB``.
-NONE_DEFAULTS_ALLOWED_SI220 = NONE_DEFAULTS_ALLOWED | {
-    "offset",
-    "bend_radius",
-    "loss_dB",
-}
+# None means "use the cell geometry": a path length derived from the drawn shape, a
+# bend radius taken from the cross-section (one model serves every band, each with
+# its own radius), and si220's coupler offset and bend radius (#375). No single
+# concrete value would be right for every cross-section, and none of these is
+# broadcast. Every other default is concrete.
+NONE_DEFAULTS_ALLOWED = {"length", "radius"}
+NONE_DEFAULTS_ALLOWED_SI220 = NONE_DEFAULTS_ALLOWED | {"offset", "bend_radius"}
 
 # Band-alias suffix -> band centre wavelength (um). si220 has its own band checks
 # (tests/test_si220_unified.py); si_sus and ge_on_si have a single band, no aliases.

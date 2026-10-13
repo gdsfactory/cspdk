@@ -45,16 +45,19 @@ class Band(NamedTuple):
     neff: float  # strip TE0 effective index at wl0
     ng: float  # strip TE0 group index at wl0
     radius: float  # default bend radius (um), from tech.Tech
-    loss: float  # propagation loss (dB/cm)
     gc_loss: float  # grating coupler insertion loss (dB)
     gc_bandwidth: float  # grating coupler 3 dB bandwidth (um)
 
 
 BANDS: dict[str, Band] = {
-    "xs_n780": Band(0.78, 1.6609, 2.1009, 60.0, 5.0, 9.0, 64 * nm),
-    "xs_n638": Band(0.638, 1.6951, 2.1823, 40.0, 5.0, 15.06, 43 * nm),
-    "xs_n520": Band(0.52, 1.7381, 2.2756, 30.0, 5.0, 13.25, 28 * nm),
+    "xs_n780": Band(0.78, 1.6609, 2.1009, 60.0, 9.0, 64 * nm),
+    "xs_n638": Band(0.638, 1.6951, 2.1823, 40.0, 15.06, 43 * nm),
+    "xs_n520": Band(0.52, 1.7381, 2.2756, 30.0, 13.25, 28 * nm),
 }
+
+
+# Propagation loss (dB/cm), the same in every band.
+LOSS_DB_CM = 5.0
 
 
 def _band(cross_section: str) -> Band:
@@ -83,7 +86,7 @@ def straight(
     *,
     wl: Float = 0.78,
     length: float = 10.0,
-    loss: float | None = None,
+    loss: float = LOSS_DB_CM,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of a straight waveguide.
@@ -91,14 +94,14 @@ def straight(
     Args:
         wl: wavelength in um.
         length: length in um.
-        loss: propagation loss in dB/cm (defaults to the band value).
+        loss: propagation loss in dB/cm.
         cross_section: band cross-section name.
     """
     band = _band(cross_section)
     return _straight_model(
         wl=jnp.asarray(wl),
         length=length,
-        loss_dB_cm=band.loss if loss is None else loss,
+        loss_dB_cm=loss,
         wl0=band.wl0,
         neff=band.neff,
         ng=band.ng,
@@ -128,7 +131,7 @@ def bend_euler(
     angle: float = 90.0,
     p: float = 0.5,
     length: float | None = None,
-    loss: float | None = None,
+    loss: float = LOSS_DB_CM,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of an euler bend, modelled as a straight.
@@ -144,7 +147,7 @@ def bend_euler(
         angle: bend angle in degrees.
         p: fraction of the bend that is an euler curve.
         length: path length in um (overrides radius, angle and p).
-        loss: propagation loss in dB/cm (defaults to the band value).
+        loss: propagation loss in dB/cm.
         cross_section: band cross-section name.
     """
     if length is None:
@@ -163,7 +166,7 @@ def bend_s(
     wl: Float = 0.78,
     size: tuple[float, float] = (15.0, 1.8),
     length: float | None = None,
-    loss: float | None = None,
+    loss: float = LOSS_DB_CM,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of an S-bend, modelled as a straight.
@@ -173,7 +176,7 @@ def bend_s(
         size: S-bend (dx, dy) in um; the default path length is that of the
             drawn Bezier S-bend.
         length: path length in um (overrides size).
-        loss: propagation loss in dB/cm (defaults to the band value).
+        loss: propagation loss in dB/cm.
         cross_section: band cross-section name.
     """
     if length is None:
@@ -190,7 +193,7 @@ def taper(
     *,
     wl: Float = 0.78,
     length: float = 10.0,
-    loss: float | None = None,
+    loss: float = LOSS_DB_CM,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of a taper, modelled as a straight of the band.
@@ -198,7 +201,7 @@ def taper(
     Args:
         wl: wavelength in um.
         length: taper length in um.
-        loss: propagation loss in dB/cm (defaults to the band value).
+        loss: propagation loss in dB/cm.
         cross_section: band cross-section name.
     """
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
@@ -310,8 +313,6 @@ coupler_n520 = partial(coupler, cross_section="xs_n520", wl=0.52)
 def grating_coupler_rectangular(
     *,
     wl: Float = 0.78,
-    loss: float | None = None,
-    bandwidth: float | None = None,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of a foundry rectangular grating coupler.
@@ -321,16 +322,14 @@ def grating_coupler_rectangular(
 
     Args:
         wl: wavelength in um.
-        loss: peak insertion loss in dB (defaults to the band value).
-        bandwidth: 3 dB bandwidth in um (defaults to the band value).
         cross_section: band cross-section name.
     """
     band = _band(cross_section)
     return _grating_model(
         wl=jnp.asarray(wl),
         wl0=band.wl0,
-        loss=band.gc_loss if loss is None else loss,
-        bandwidth=band.gc_bandwidth if bandwidth is None else bandwidth,
+        loss=band.gc_loss,
+        bandwidth=band.gc_bandwidth,
     )
 
 
@@ -348,8 +347,6 @@ grating_coupler_rectangular_n520 = partial(
 def grating_coupler_elliptical(
     *,
     wl: Float = 0.78,
-    loss: float | None = None,
-    bandwidth: float | None = None,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of an elliptical grating coupler.
@@ -359,13 +356,9 @@ def grating_coupler_elliptical(
 
     Args:
         wl: wavelength in um.
-        loss: peak insertion loss in dB (defaults to the band value).
-        bandwidth: 3 dB bandwidth in um (defaults to the band value).
         cross_section: band cross-section name.
     """
-    return grating_coupler_rectangular(
-        wl=wl, loss=loss, bandwidth=bandwidth, cross_section=cross_section
-    )
+    return grating_coupler_rectangular(wl=wl, cross_section=cross_section)
 
 
 grating_coupler_elliptical_n780 = partial(

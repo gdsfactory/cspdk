@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import warnings
 from functools import partial
 
@@ -323,10 +324,17 @@ def test_mmi2x2_model_uses_measured_bar_and_cross_loss() -> None:
     assert _db(s["o1", "o3"]) == pytest.approx(3.3073, abs=1e-4)
 
 
-def test_mmi_loss_can_be_overridden() -> None:
-    """``loss_dB`` still sets the excess loss explicitly."""
-    s = si220.PDK.models["mmi1x2"](wl=jnp.array([1.55]), loss_dB=1.0)
-    assert _db(s["o1", "o2"]) == pytest.approx(1.0 + 10 * np.log10(2), abs=1e-4)
+@pytest.mark.parametrize(
+    "name",
+    ["mmi1x2", "mmi1x2_strip", "mmi1x2_rib", "mmi2x2", "mmi2x2_strip", "mmi2x2_rib"],
+)
+def test_mmi_loss_is_not_a_model_parameter(name: str) -> None:
+    """The measured loss depends on band and type, so it stays out of the signature.
+
+    SAX fills every signature parameter with its default, so a C-band default would
+    reach O-band and rib circuits as if it had been set.
+    """
+    assert "loss_dB" not in inspect.signature(si220.PDK.models[name]).parameters
 
 
 @pytest.mark.parametrize(
