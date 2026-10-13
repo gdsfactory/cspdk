@@ -1,0 +1,29 @@
+name: waveguide_loop
+instances:
+  lower:
+    component: straight
+    settings:
+      length: 500
+      cross_section: xs_sus
+  upper:
+    component: straight
+    settings:
+      length: 500
+      cross_section: xs_sus
+placements:
+  lower:
+    x: 0
+    y: 0
+  upper:
+    x: 0
+    y: 163
+routes:
+  loop:
+    links:
+      lower,o2: upper,o2
+    routing_strategy: route_bundle
+    settings:
+      cross_section: xs_sus
+ports:
+  o1: lower,o1
+  o2: upper,o1
