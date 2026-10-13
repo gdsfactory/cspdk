@@ -15,17 +15,27 @@ import inspect
 from typing import Any
 
 import pytest
+from test_model_contract import FLAVOURS
 
-FLAVOURS = ["si220", "si340", "si500", "sin200", "sin300", "si_sus", "ge_on_si"]
+_VARIADIC = {
+    inspect.Parameter.VAR_POSITIONAL: "<*args>",
+    inspect.Parameter.VAR_KEYWORD: "<**kwargs>",
+}
 
 
-def _default(value: Any) -> Any:
+def _default(parameter: inspect.Parameter) -> Any:
+    if parameter.kind in _VARIADIC:
+        return _VARIADIC[parameter.kind]
+    return _value(parameter.default)
+
+
+def _value(value: Any) -> Any:
     if value is inspect.Parameter.empty:
         return "<required>"
     if value is None or isinstance(value, bool | int | float | str):
         return value
     if isinstance(value, tuple | list):
-        return [_default(v) for v in value]
+        return [_value(v) for v in value]
     return repr(value)
 
 
@@ -36,7 +46,7 @@ def test_model_signatures(flavour: str, data_regression) -> None:
     data_regression.check(
         {
             name: {
-                parameter.name: _default(parameter.default)
+                parameter.name: _default(parameter)
                 for parameter in inspect.signature(model).parameters.values()
             }
             for name, model in sorted(pdk.models.items())
