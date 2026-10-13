@@ -792,7 +792,9 @@ def die_frame(
         size: die frame size (width, height) in um.
         layer_floorplan: cell outline layer (GDS 99).
     """
-    return gf.c.die_frame(size=size, layer_floorplan=layer_floorplan)
+    # The undecorated function: this cell has gdsfactory's name and arguments, so
+    # calling the decorated one would make kfactory duplicate it under its own name.
+    return gf.c.die_frame.__wrapped__(size=size, layer_floorplan=layer_floorplan)
 
 
 @gf.cell(tags=["cells"])
