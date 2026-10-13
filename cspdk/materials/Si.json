@@ -1,0 +1,144 @@
+{
+ "name": "Si",
+ "optical": {
+  "temperature_ref": 293.0,
+  "provenance": {
+   "source": "literature",
+   "label": "Li 1980 crystalline silicon",
+   "maturity": "empirical",
+   "citations": [
+    {
+     "role": "fit",
+     "doi": "10.1063/1.555624",
+     "journal": "Journal of Physical and Chemical Reference Data 9, 561-658 (1980)",
+     "authors": "H. H. Li",
+     "url": "https://doi.org/10.1063/1.555624"
+    }
+   ],
+   "comment": "Crystalline silicon refractive index over 1.2-14 um and 100-750 K, with 293 K as the reference temperature.",
+   "url": "https://doi.org/10.1063/1.555624",
+   "data_url": null,
+   "info": {}
+  },
+  "permittivity": {
+   "conductivity": null,
+   "validity": {
+    "at": null,
+    "over": {
+     "wavelength": {
+      "min": 1.2,
+      "max": 14.0,
+      "unit": "um",
+      "label": null
+     }
+    },
+    "on_out_of_range": "raise"
+   },
+   "variation": null,
+   "kind": "index",
+   "n": {
+    "unit": "",
+    "type": "tabulated",
+    "data": {
+     "dims": [
+      "wavelength"
+     ],
+     "coords": {
+      "wavelength": {
+       "values": [
+        1.2,
+        1.22,
+        1.24,
+        1.26,
+        1.28,
+        1.3,
+        1.32,
+        1.34,
+        1.36,
+        1.38,
+        1.4,
+        1.45,
+        1.5,
+        1.55,
+        1.6,
+        1.65,
+        1.7,
+        1.8,
+        1.9,
+        2.0,
+        2.25,
+        2.5,
+        2.75,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0
+       ],
+       "unit": "um"
+      }
+     },
+     "values": [
+      3.5166680788227906,
+      3.5133595288297097,
+      3.510206877793292,
+      3.5072005219985334,
+      3.504331583228576,
+      3.5015918442085803,
+      3.498973690631232,
+      3.4964700590103734,
+      3.4940743897046462,
+      3.4917805845352623,
+      3.48958296849297,
+      3.4844759350588785,
+      3.4798646175988956,
+      3.475687046286856,
+      3.4718906170445614,
+      3.468430446748567,
+      3.465268055128072,
+      3.4597085209259846,
+      3.4549964981848977,
+      3.450968358024698,
+      3.4431294061706406,
+      3.437511283612269,
+      3.4333485910293673,
+      3.430179139698696,
+      3.4228730831337915,
+      3.4194861379248676,
+      3.4176449089725414,
+      3.4165342264524927,
+      3.4158131575117463,
+      3.4153187070538817,
+      3.414964985630891,
+      3.4147032481967003,
+      3.4145041619796554,
+      3.4143492180567234,
+      3.4142262697938226
+     ],
+     "attrs": {},
+     "interp": "linear"
+    }
+   },
+   "k": null
+  },
+  "conductivity": null,
+  "permeability": null,
+  "perturbations": [],
+  "info": {
+   "source_model": "temperature-dependent dispersion equation",
+   "reference_temperature_k": 293.0,
+   "temperature_slice": "293 K column of the Li 1980 table"
+  }
+ },
+ "rf": null,
+ "info": {
+  "composition": "crystalline silicon"
+ }
+}

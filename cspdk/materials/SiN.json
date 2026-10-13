@@ -1,0 +1,62 @@
+{
+ "name": "SiN",
+ "optical": {
+  "temperature_ref": null,
+  "provenance": {
+   "source": "literature",
+   "label": "Luke et al. 2015 silicon nitride",
+   "maturity": "empirical",
+   "citations": [
+    {
+     "role": "fit",
+     "doi": "10.1364/OL.40.004823",
+     "journal": "Optics Letters 40, 4823-4826 (2015)",
+     "authors": "K. Luke, Y. Okawachi, M. R. E. Lamont, A. L. Gaeta, and M. Lipson",
+     "url": "https://doi.org/10.1364/OL.40.004823"
+    }
+   ],
+   "comment": "Silicon-nitride Sellmeier equation derived from film measurements from the ultraviolet to the infrared.",
+   "url": "https://doi.org/10.1364/OL.40.004823",
+   "data_url": null,
+   "info": {}
+  },
+  "permittivity": {
+   "conductivity": null,
+   "validity": {
+    "at": null,
+    "over": {
+     "wavelength": {
+      "min": 0.31,
+      "max": 5.504,
+      "unit": "um",
+      "label": null
+     }
+    },
+    "on_out_of_range": "raise"
+   },
+   "variation": null,
+   "kind": "sellmeier",
+   "terms": [
+    {
+     "b": 3.0249,
+     "c_um": 0.1353406
+    },
+    {
+     "b": 40314.0,
+     "c_um": 1239.842
+    }
+   ],
+   "offset": 0.0
+  },
+  "conductivity": null,
+  "permeability": null,
+  "perturbations": [],
+  "info": {
+   "source_model": "two-term Sellmeier"
+  }
+ },
+ "rf": null,
+ "info": {
+  "composition": "Si3N4 film"
+ }
+}
