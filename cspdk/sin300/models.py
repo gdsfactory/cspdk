@@ -2,46 +2,20 @@
 
 from __future__ import annotations
 
-import inspect
 from collections.abc import Callable
-from functools import partial, wraps
+from functools import partial
 
 import jax.numpy as jnp
 import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._models import _optical_model, _sdict_models
+
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
-
-
-def _optical_model(model, inputs: int, outputs: int):
-    """Normalize SAX ports without changing its process-wide naming strategy.
-
-    Translate input/output and zero-based optical keys, preserving one-based
-    optical keys. Inspect the returned keys because jitted models may retain
-    a naming convention cached before the current strategy was selected.
-    """
-    port_map = {f"in{i}": f"o{i + 1}" for i in range(inputs)}
-    port_map.update({f"out{i}": f"o{inputs + outputs - i}" for i in range(outputs)})
-
-    @wraps(model)
-    def optical(*args, **kwargs) -> sax.SDict:
-        result = model(*args, **kwargs)
-        mapping = port_map
-        if any("o0" in pair for pair in result):
-            mapping = {
-                **port_map,
-                **{f"o{i}": f"o{i + 1}" for i in range(inputs + outputs)},
-            }
-        return {
-            (mapping.get(p, p), mapping.get(q, q)): value
-            for (p, q), value in result.items()
-        }
-
-    return optical
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -80,6 +54,7 @@ straight_nc = partial(
 
 straight_no = partial(
     _straight,
+    wl=1.31,
     length=10.0,
     loss=0.0,
     wl0=1.31,
@@ -180,7 +155,7 @@ def bend_euler(
 
 
 bend_euler_nc = partial(bend_euler, cross_section="xs_nc")
-bend_euler_no = partial(bend_euler, cross_section="xs_no")
+bend_euler_no = partial(bend_euler, cross_section="xs_no", wl=1.31)
 
 
 ################
@@ -215,7 +190,7 @@ def taper(
 
 
 taper_nc = partial(taper, cross_section="xs_nc", length=10.0)
-taper_no = partial(taper, cross_section="xs_no", length=10.0)
+taper_no = partial(taper, cross_section="xs_no", length=10.0, wl=1.31)
 
 
 ################
@@ -223,7 +198,7 @@ taper_no = partial(taper, cross_section="xs_no", length=10.0)
 ################
 
 mmi1x2_nc = partial(_mmi1x2_model, wl0=1.55, fwhm=0.2)
-mmi1x2_no = partial(_mmi1x2_model, wl0=1.31, fwhm=0.2)
+mmi1x2_no = partial(_mmi1x2_model, wl=1.31, wl0=1.31, fwhm=0.2)
 
 
 def mmi1x2(
@@ -251,7 +226,7 @@ def mmi1x2(
 
 
 mmi2x2_nc = partial(_mmi2x2_model, wl0=1.55, fwhm=0.2)
-mmi2x2_no = partial(_mmi2x2_model, wl0=1.31, fwhm=0.2)
+mmi2x2_no = partial(_mmi2x2_model, wl=1.31, wl0=1.31, fwhm=0.2)
 
 
 def mmi2x2(
@@ -296,7 +271,7 @@ def coupler_symmetric() -> sax.SDict:
 
 
 coupler_nc = partial(_mmi2x2_model, wl0=1.55, fwhm=0.2)
-coupler_no = partial(_mmi2x2_model, wl0=1.31, fwhm=0.2)
+coupler_no = partial(_mmi2x2_model, wl=1.31, wl0=1.31, fwhm=0.2)
 
 
 def coupler(
@@ -407,7 +382,7 @@ def heater() -> sax.SDict:
     raise NotImplementedError("No model for 'heater'")
 
 
-crossing_no = _optical_model(sm.crossing_ideal, 2, 2)
+crossing_no = partial(_optical_model(sm.crossing_ideal, 2, 2), wl=1.31)
 
 
 ################
@@ -417,29 +392,9 @@ crossing_no = _optical_model(sm.crossing_ideal, 2, 2)
 
 def get_models() -> dict[str, Callable[..., sax.SDict]]:
     """Returns a dictionary of all models in this module."""
-    models = {}
-    for name, func in list(globals().items()):
-        if name.startswith("_") or name in {
-            "heater",
-            "coupler_straight",
-            "coupler_symmetric",
-        }:
-            continue
-        if not callable(func):
-            continue
-        _func = func
-        while isinstance(_func, partial):
-            _func = _func.func
-        try:
-            sig = inspect.signature(_func)
-        except (ValueError, TypeError):
-            continue
-        if (
-            sig.return_annotation == sax.SDict
-            or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
-        ):
-            models[name] = func
-    return models
+    return _sdict_models(
+        globals(), exclude={"heater", "coupler_straight", "coupler_symmetric"}
+    )
 
 
 if __name__ == "__main__":

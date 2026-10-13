@@ -246,6 +246,18 @@ def check_sax_model_refs(pdk, *, has_models: bool) -> None:
             )
 
 
+def check_circulax_model_refs(pdk) -> None:
+    for name, factory in schematic_driven_cells(pdk):
+        s = factory.get_schematic()
+        for entry in s.info.get("models") or []:
+            if entry["language"] != "circulax":
+                continue
+            module = importlib.import_module(entry["module"])
+            assert hasattr(module, entry["qualname"]), (
+                f"{name}: {entry['module']}.{entry['qualname']} missing"
+            )
+
+
 def check_sax_port_order_matches_sdict(pdk) -> None:
     """For each SAX model, the SDict keys must be drawn from the declared port_order."""
     for name, factory in schematic_driven_cells(pdk):

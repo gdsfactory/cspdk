@@ -17,10 +17,10 @@ routes:
       mzi1,o4: mzi2,o1
     routing_strategy: route_astar
     settings:
-      spacing: 2  # the MMI output/input pitch
+      spacing: 2.03  # the MMI output/input pitch
       fan_in:
         type: manhattan
-        y_bundle: 1  # tracks at y_bundle - spacing and y_bundle: on the MMI ports at y = -1, 1
+        y_bundle: 1.015  # tracks at y_bundle - spacing and y_bundle: on the MMI ports at y = -1.015, 1.015
 nets: []
 ports:
   o1: mzi1,o1

@@ -1,6 +1,5 @@
 """Directional Couplers."""
 
-import math
 from collections.abc import Callable
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -92,8 +91,8 @@ def _sbend_geometry(
     else:
         dx, dy = TECH.dx_coupler, TECH.dy_coupler
     offset = (dy - gap - _WIDTH[band]) / 2
-    theta = 2 * math.atan(offset / dx)
-    return offset, dx / (2 * math.sin(theta))
+    theta = 2 * jnp.arctan(offset / dx)
+    return offset, dx / (2 * jnp.sin(theta))
 
 
 def _directional_coupler_no_phase(
@@ -185,61 +184,26 @@ def _directional_coupler(
             length = TECH.length_coupler_oband
         else:
             length = TECH.length_coupler
-    coupler_length = length
-
-    def sbend_length(radius: float, offset: float) -> float:
-        return float(2 * radius * jnp.arccos(1 - offset / 2 / radius))
-
-    coupler_circuit, info = sax.circuit(
-        netlist={
-            "instances": {
-                "s1": "straight",
-                "s2": "straight",
-                "s3": "straight",
-                "s4": "straight",
-                "dc": "coupling_area",
-            },
-            "connections": {
-                "s1,o1": "dc,o1",
-                "s2,o1": "dc,o2",
-                "s3,o1": "dc,o3",
-                "s4,o1": "dc,o4",
-            },
-            "ports": {
-                "o1": "s1,o2",
-                "o2": "s2,o2",
-                "o3": "s3,o2",
-                "o4": "s4,o2",
-            },
-        },
-        models={
-            "straight": _STRAIGHT[band, cross_section],
-            "coupling_area": _directional_coupler_no_phase,
-        },
-    )
-
-    s = coupler_circuit(
+    # Each arm (half the coupling length plus an S-bend) is a straight before or after
+    # the coupling region, so every path picks up one input and one output arm.
+    sbend_length = 2 * bend_radius * jnp.arccos(1 - offset / 2 / bend_radius)
+    arm = _STRAIGHT[band, cross_section](wl=wl, length=length / 2 + sbend_length)
+    arms = arm["o1", "o2"] ** 2
+    dc = _directional_coupler_no_phase(
         wl=wl,
-        dc={
-            "coupler_length": coupler_length,
-            "gap": gap,
-            "offset": offset,
-            "bend_radius": bend_radius,
-            "cross_section": cross_section,
-            "band": band,
-        },
-        s1={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
-        s2={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
-        s3={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
-        s4={"length": coupler_length / 2 + sbend_length(bend_radius, offset)},
+        coupler_length=length,
+        gap=gap,
+        offset=offset,
+        bend_radius=bend_radius,
+        cross_section=cross_section,
+        band=band,
     )
-
     return sax.reciprocal(
         {
-            ("o1", "o4"): s["o1", "o4"],
-            ("o1", "o3"): s["o1", "o3"],
-            ("o2", "o4"): s["o2", "o4"],
-            ("o2", "o3"): s["o2", "o3"],
+            ("o1", "o4"): dc["o1", "o4"] * arms,
+            ("o1", "o3"): dc["o1", "o3"] * arms,
+            ("o2", "o4"): dc["o2", "o4"] * arms,
+            ("o2", "o3"): dc["o2", "o3"] * arms,
         }
     )
 
@@ -333,50 +297,25 @@ def _coupler_ring(  # this is not the complete model!!!!
         cross_section: cross section of the waveguide.
         band: "cband" or "oband" coupling table and waveguide models.
     """
-    coupler_circuit, info = sax.circuit(
-        netlist={
-            "instances": {
-                "bl": "bend_euler",
-                "c": "coupler_ring",
-                "br": "bend_euler",
-            },
-            "connections": {
-                "bl,o2": "c,o2",
-                "c,o3": "br,o1",
-            },
-            "ports": {
-                "o1": "c,o1",
-                "o2": "bl,o1",
-                "o3": "br,o2",
-                "o4": "c,o4",
-            },
-        },
-        models={
-            "coupler_ring": _coupler_ring_coupling_area,
-            "bend_euler": _BEND[band],
-        },
-    )
-
-    s = coupler_circuit(
+    # Quarter-circle bends sit on ports o2 and o3 only; o1 and o4 are the bus.
+    quarter_circle = jnp.pi * radius / 2
+    bend_sdict = _BEND[band](wl=wl, length=quarter_circle, cross_section=cross_section)
+    bend = bend_sdict["o1", "o2"]
+    c = _coupler_ring_coupling_area(
         wl=wl,
-        c={
-            "length_x": length_x,
-            "gap": gap,
-            "radius": radius,
-            "loss_dB": loss_dB,
-            "cross_section": cross_section,
-            "band": band,
-        },
-        bl={"length": jnp.pi * radius / 2, "cross_section": cross_section},
-        br={"length": jnp.pi * radius / 2, "cross_section": cross_section},
+        gap=gap,
+        radius=radius,
+        length_x=length_x,
+        loss_dB=loss_dB,
+        cross_section=cross_section,
+        band=band,
     )
-
     return sax.reciprocal(
         {
-            ("o1", "o4"): s["o1", "o4"],
-            ("o1", "o3"): s["o1", "o3"],
-            ("o2", "o4"): s["o2", "o4"],
-            ("o2", "o3"): s["o2", "o3"],
+            ("o1", "o4"): c["o1", "o4"],
+            ("o1", "o3"): c["o1", "o3"] * bend,
+            ("o2", "o4"): bend * c["o2", "o4"],
+            ("o2", "o3"): bend * c["o2", "o3"] * bend,
         }
     )
 

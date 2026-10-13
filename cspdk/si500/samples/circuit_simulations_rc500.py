@@ -7,9 +7,9 @@ import sax
 from cspdk.si500 import PDK, cells
 
 if __name__ == "__main__":
-    c = cells.mzi_sc(delta_length=100)
+    PDK.activate()
+    c = cells.mzi_rc(delta_length=100)
     c.show()
-    c.plot_netlist()
     netlist = c.get_netlist()
     models = PDK.models
     circuit, _ = sax.circuit(netlist, models=models)  # type: ignore

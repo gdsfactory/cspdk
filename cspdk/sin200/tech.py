@@ -45,39 +45,51 @@ CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
 
 def get_layer_stack(
     thickness_nitride: float = 200 * nm,
-    zmin_heater: float = 1.1,
+    thickness_cladding: float = 2.0,
     thickness_heater: float = 150 * nm,
-    zmin_metal: float = 1.1,
     thickness_metal: float = 220 * nm,
+    zmin_heater: float | None = None,
+    zmin_metal: float | None = None,
 ) -> LayerStack:
     """Returns LayerStack.
 
+    Per the SiN200-Visible MPW design guidelines (section 4): 200 nm LPCVD SiN
+    on a 2 um thermal BOX, fully etched to the BOX, under a 2 um SiO2 top
+    cladding. Heater filaments (GDS 39) and heater contact pads (GDS 41) are
+    both lifted off on top of the cladding, so they start at the same height.
+
+    GDS 203 is light field (drawn SiN remains) and GDS 204 is dark field (drawn
+    shapes are etched through the SiN, e.g. grating trenches), so the nitride
+    level is NITRIDE minus NITRIDE_ETCH.
+
+    The heater and pad metal materials and thicknesses are not published by
+    the foundry; the values here are placeholders.
+
     Args:
-        thickness_nitride: nitride thickness in um.
-        zmin_heater: TiN heater.
-        thickness_heater: TiN thickness.
-        zmin_metal: metal thickness in um.
-        thickness_metal: metal2 thickness.
+        thickness_nitride: nitride core thickness in um.
+        thickness_cladding: SiO2 top-cladding thickness over the nitride in um.
+        thickness_heater: heater filament (GDS 39) thickness in um.
+        thickness_metal: heater contact pad (GDS 41) thickness in um.
+        zmin_heater: bottom of the heater filaments in um; defaults to the top
+            of the cladding (thickness_nitride + thickness_cladding).
+        zmin_metal: bottom of the contact pads in um; defaults to zmin_heater.
     """
+    if zmin_heater is None:
+        zmin_heater = thickness_nitride + thickness_cladding
+    if zmin_metal is None:
+        zmin_metal = zmin_heater
     return LayerStack(
         layers=dict(
             nitride=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.NITRIDE),
+                layer=LogicalLayer(layer=LAYER.NITRIDE)
+                - LogicalLayer(layer=LAYER.NITRIDE_ETCH),
                 thickness=thickness_nitride,
                 zmin=0.0,
                 material="SiN",
                 info={"mesh_order": 2},
                 sidewall_angle=10,
                 width_to_z=0.5,
-            ),
-            nitride_etch=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.NITRIDE_ETCH),
-                thickness=thickness_nitride,
-                zmin=0.0,
-                material="SiN",
-                info={"mesh_order": 1},
-                sidewall_angle=10,
-                width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.NITRIDE),
             ),
             heater=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.HEATER),
@@ -89,7 +101,7 @@ def get_layer_stack(
             metal=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
-                zmin=zmin_metal + thickness_metal,
+                zmin=zmin_metal,
                 material="Al",
                 info={"mesh_order": 2},
             ),
@@ -176,8 +188,12 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     return xs
 
 
-def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
-    """Returns heater metal cross-section."""
+def heater_metal_sin200(width=2.0, **kwargs) -> gf.CrossSection:
+    """Returns heater filament (GDS 39) cross-section.
+
+    The 2 um default is the filament width of the foundry Heater.gds and the
+    width recommended in the design guidelines (section 5.2).
+    """
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()
     if xs.name in DEFAULT_CROSS_SECTION_NAMES:
@@ -283,7 +299,24 @@ def route_bundle(
     )
 
 
+# Electrical routing on the contact-pad metal (GDS 41). Explicit straight
+# lengths avoid the upstream electrical router's handling of None as an empty
+# list in the installed gdsfactory/kfactory versions.
+route_single_metal = partial(
+    gf.routing.route_single_electrical,
+    cross_section="metal_routing",
+    start_straight_length=0.0,
+    end_straight_length=0.0,
+)
+route_bundle_metal = partial(
+    gf.routing.route_bundle_electrical,
+    cross_section="metal_routing",
+)
+
+
 routing_strategies = dict(
+    route_single_metal=route_single_metal,
+    route_bundle_metal=route_bundle_metal,
     route_single=route_single,
     route_single_n780=partial(
         route_single,

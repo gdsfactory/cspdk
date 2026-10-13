@@ -1,8 +1,8 @@
 info: {}
-name: text_rectangular_Tabc_S3_Jleft_LPAD
+name: text_rectangular_Tabc_S3_Jleft_LLBL
 ports: {}
 settings:
   justify: left
-  layer: PAD
+  layer: LBL
   size: 3
   text: abc

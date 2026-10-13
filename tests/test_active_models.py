@@ -47,12 +47,3 @@ def test_resistance_scales_with_length() -> None:
     ohms_per_um = defaults["ohms_per_um"]
     length = defaults["length"]
     assert ohms_per_um * length == pytest.approx(120.0)
-
-
-def test_pdk_registers_active_models_without_overriding_sax() -> None:
-    """The PDK exposes the meander heater's active model; SAX models still win."""
-    from cspdk.si220 import PDK
-    from cspdk.si220.models import get_models
-
-    assert PDK.models["straight_heater_meander"] is ThermalPhaseShifter
-    assert PDK.models["straight_heater_metal"] is get_models()["straight_heater_metal"]

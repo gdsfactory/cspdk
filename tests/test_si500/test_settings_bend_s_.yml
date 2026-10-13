@@ -5,11 +5,11 @@ info:
   route_info_length: 20.115
   route_info_min_bend_radius: 41.13
   route_info_n_bend_s: 1
-  route_info_type: xs_rc
+  route_info_type: xs_rc500
   route_info_weight: 20.115
-  route_info_xs_rc_length: 20.115
+  route_info_xs_rc500_length: 20.115
   start_angle: 0
-name: bend_s_S20_1p8_CSxs_rc_AMRVTrue
+name: bend_s_S20_1p8_CSxs_rc500_AMRVTrue_WNone
 ports:
   o1:
     center:
@@ -31,7 +31,7 @@ ports:
     width: 0.45
 settings:
   allow_min_radius_violation: true
-  cross_section: xs_rc
+  cross_section: xs_rc500
   size:
   - 20
   - 1.8

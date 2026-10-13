@@ -7,8 +7,8 @@ from cspdk.si500 import PDK, cells
 if __name__ == "__main__":
     PDK.activate()
 
-    c1 = cells.straight(cross_section="xs_rc", length=5)
-    c2 = cells.straight(cross_section="xs_ro", length=5)
+    c1 = cells.straight(cross_section="xs_rc500", length=5)
+    c2 = cells.straight(cross_section="xs_ro500", length=5)
 
     c = gf.grid([c1, c2])
     c.show()

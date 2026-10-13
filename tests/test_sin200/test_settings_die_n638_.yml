@@ -1,0 +1,779 @@
+info: {}
+name: die_CSxs_n638
+ports:
+  e1:
+    center:
+    - -4450
+    - -7475
+    layer: PAD
+    name: e1
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e10:
+    center:
+    - -1750
+    - -7475
+    layer: PAD
+    name: e10
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e11:
+    center:
+    - -1450
+    - -7475
+    layer: PAD
+    name: e11
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e12:
+    center:
+    - -1150
+    - -7475
+    layer: PAD
+    name: e12
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e13:
+    center:
+    - -850
+    - -7475
+    layer: PAD
+    name: e13
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e14:
+    center:
+    - -550
+    - -7475
+    layer: PAD
+    name: e14
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e15:
+    center:
+    - -250
+    - -7475
+    layer: PAD
+    name: e15
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e16:
+    center:
+    - 50
+    - -7475
+    layer: PAD
+    name: e16
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e17:
+    center:
+    - 350
+    - -7475
+    layer: PAD
+    name: e17
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e18:
+    center:
+    - 650
+    - -7475
+    layer: PAD
+    name: e18
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e19:
+    center:
+    - 950
+    - -7475
+    layer: PAD
+    name: e19
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2:
+    center:
+    - -4150
+    - -7475
+    layer: PAD
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e20:
+    center:
+    - 1250
+    - -7475
+    layer: PAD
+    name: e20
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e21:
+    center:
+    - 1550
+    - -7475
+    layer: PAD
+    name: e21
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e22:
+    center:
+    - 1850
+    - -7475
+    layer: PAD
+    name: e22
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e23:
+    center:
+    - 2150
+    - -7475
+    layer: PAD
+    name: e23
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e24:
+    center:
+    - 2450
+    - -7475
+    layer: PAD
+    name: e24
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e25:
+    center:
+    - 2750
+    - -7475
+    layer: PAD
+    name: e25
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e26:
+    center:
+    - 3050
+    - -7475
+    layer: PAD
+    name: e26
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e27:
+    center:
+    - 3350
+    - -7475
+    layer: PAD
+    name: e27
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e28:
+    center:
+    - 3650
+    - -7475
+    layer: PAD
+    name: e28
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e29:
+    center:
+    - 3950
+    - -7475
+    layer: PAD
+    name: e29
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e3:
+    center:
+    - -3850
+    - -7475
+    layer: PAD
+    name: e3
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e30:
+    center:
+    - 4250
+    - -7475
+    layer: PAD
+    name: e30
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e31:
+    center:
+    - 4550
+    - -7475
+    layer: PAD
+    name: e31
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e32:
+    center:
+    - 4550
+    - 7475
+    layer: PAD
+    name: e32
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e33:
+    center:
+    - 4250
+    - 7475
+    layer: PAD
+    name: e33
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e34:
+    center:
+    - 3950
+    - 7475
+    layer: PAD
+    name: e34
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e35:
+    center:
+    - 3650
+    - 7475
+    layer: PAD
+    name: e35
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e36:
+    center:
+    - 3350
+    - 7475
+    layer: PAD
+    name: e36
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e37:
+    center:
+    - 3050
+    - 7475
+    layer: PAD
+    name: e37
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e38:
+    center:
+    - 2750
+    - 7475
+    layer: PAD
+    name: e38
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e39:
+    center:
+    - 2450
+    - 7475
+    layer: PAD
+    name: e39
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e4:
+    center:
+    - -3550
+    - -7475
+    layer: PAD
+    name: e4
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e40:
+    center:
+    - 2150
+    - 7475
+    layer: PAD
+    name: e40
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e41:
+    center:
+    - 1850
+    - 7475
+    layer: PAD
+    name: e41
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e42:
+    center:
+    - 1550
+    - 7475
+    layer: PAD
+    name: e42
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e43:
+    center:
+    - 1250
+    - 7475
+    layer: PAD
+    name: e43
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e44:
+    center:
+    - 950
+    - 7475
+    layer: PAD
+    name: e44
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e45:
+    center:
+    - 650
+    - 7475
+    layer: PAD
+    name: e45
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e46:
+    center:
+    - 350
+    - 7475
+    layer: PAD
+    name: e46
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e47:
+    center:
+    - 50
+    - 7475
+    layer: PAD
+    name: e47
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e48:
+    center:
+    - -250
+    - 7475
+    layer: PAD
+    name: e48
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e49:
+    center:
+    - -550
+    - 7475
+    layer: PAD
+    name: e49
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e5:
+    center:
+    - -3250
+    - -7475
+    layer: PAD
+    name: e5
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e50:
+    center:
+    - -850
+    - 7475
+    layer: PAD
+    name: e50
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e51:
+    center:
+    - -1150
+    - 7475
+    layer: PAD
+    name: e51
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e52:
+    center:
+    - -1450
+    - 7475
+    layer: PAD
+    name: e52
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e53:
+    center:
+    - -1750
+    - 7475
+    layer: PAD
+    name: e53
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e54:
+    center:
+    - -2050
+    - 7475
+    layer: PAD
+    name: e54
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e55:
+    center:
+    - -2350
+    - 7475
+    layer: PAD
+    name: e55
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e56:
+    center:
+    - -2650
+    - 7475
+    layer: PAD
+    name: e56
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e57:
+    center:
+    - -2950
+    - 7475
+    layer: PAD
+    name: e57
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e58:
+    center:
+    - -3250
+    - 7475
+    layer: PAD
+    name: e58
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e59:
+    center:
+    - -3550
+    - 7475
+    layer: PAD
+    name: e59
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e6:
+    center:
+    - -2950
+    - -7475
+    layer: PAD
+    name: e6
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e60:
+    center:
+    - -3850
+    - 7475
+    layer: PAD
+    name: e60
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e61:
+    center:
+    - -4150
+    - 7475
+    layer: PAD
+    name: e61
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e62:
+    center:
+    - -4450
+    - 7475
+    layer: PAD
+    name: e62
+    orientation: 270
+    port_type: electrical
+    width: 100
+  e7:
+    center:
+    - -2650
+    - -7475
+    layer: PAD
+    name: e7
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e8:
+    center:
+    - -2350
+    - -7475
+    layer: PAD
+    name: e8
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e9:
+    center:
+    - -2050
+    - -7475
+    layer: PAD
+    name: e9
+    orientation: 90
+    port_type: electrical
+    width: 100
+  o1:
+    center:
+    - 5356.44
+    - -1375
+    layer: NITRIDE
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o10:
+    center:
+    - 5356.44
+    - 875
+    layer: NITRIDE
+    name: o10
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o11:
+    center:
+    - 5356.44
+    - 1125
+    layer: NITRIDE
+    name: o11
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o12:
+    center:
+    - 5356.44
+    - 1375
+    layer: NITRIDE
+    name: o12
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o13:
+    center:
+    - -5356.44
+    - 1375
+    layer: NITRIDE
+    name: o13
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o14:
+    center:
+    - -5356.44
+    - 1125
+    layer: NITRIDE
+    name: o14
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o15:
+    center:
+    - -5356.44
+    - 875
+    layer: NITRIDE
+    name: o15
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o16:
+    center:
+    - -5356.44
+    - 625
+    layer: NITRIDE
+    name: o16
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o17:
+    center:
+    - -5356.44
+    - 375
+    layer: NITRIDE
+    name: o17
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o18:
+    center:
+    - -5356.44
+    - 125
+    layer: NITRIDE
+    name: o18
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o19:
+    center:
+    - -5356.44
+    - -125
+    layer: NITRIDE
+    name: o19
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o2:
+    center:
+    - 5356.44
+    - -1125
+    layer: NITRIDE
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o20:
+    center:
+    - -5356.44
+    - -375
+    layer: NITRIDE
+    name: o20
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o21:
+    center:
+    - -5356.44
+    - -625
+    layer: NITRIDE
+    name: o21
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o22:
+    center:
+    - -5356.44
+    - -875
+    layer: NITRIDE
+    name: o22
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o23:
+    center:
+    - -5356.44
+    - -1125
+    layer: NITRIDE
+    name: o23
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o24:
+    center:
+    - -5356.44
+    - -1375
+    layer: NITRIDE
+    name: o24
+    orientation: 0
+    port_type: optical
+    width: 0.36
+  o3:
+    center:
+    - 5356.44
+    - -875
+    layer: NITRIDE
+    name: o3
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o4:
+    center:
+    - 5356.44
+    - -625
+    layer: NITRIDE
+    name: o4
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o5:
+    center:
+    - 5356.44
+    - -375
+    layer: NITRIDE
+    name: o5
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o6:
+    center:
+    - 5356.44
+    - -125
+    layer: NITRIDE
+    name: o6
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o7:
+    center:
+    - 5356.44
+    - 125
+    layer: NITRIDE
+    name: o7
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o8:
+    center:
+    - 5356.44
+    - 375
+    layer: NITRIDE
+    name: o8
+    orientation: 180
+    port_type: optical
+    width: 0.36
+  o9:
+    center:
+    - 5356.44
+    - 625
+    layer: NITRIDE
+    name: o9
+    orientation: 180
+    port_type: optical
+    width: 0.36
+settings:
+  cross_section: xs_n638

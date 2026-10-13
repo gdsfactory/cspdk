@@ -18,8 +18,8 @@ _config = {"update_gds_refs": False}
 def clear_cell_cache():
     """Start every test module with an empty cell cache.
 
-    Flavours share cell names (e.g. si340 and si500 both define ``xs_rc``), so a
-    cached cell from one PDK would otherwise be reused by the next.
+    Flavours share cell function names (``straight``, ``mmi1x2``, ...), so a cached
+    cell built through one PDK could otherwise be reused by the next.
     """
     gf.clear_cache()
 

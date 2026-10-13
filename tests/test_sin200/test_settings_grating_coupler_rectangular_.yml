@@ -1,8 +1,9 @@
 info:
-  fiber_angle: 20
+  fiber_angle: 22
+  period: 0.668
   polarization: te
   wavelength: 0.78
-name: grating_coupler_rectangular_P0p668_NP30_FF0p5_LT200_WG7_f4690313
+name: grating_coupler_rectangular_P0p668_NP30_FF0p5_LT200_WS6_5ffd74ad
 ports:
   o1:
     center:
@@ -15,7 +16,7 @@ ports:
     width: 0.5
   o2:
     center:
-    - 209.77
+    - 213.447
     - 0
     layer: NITRIDE_ETCH
     name: o2
@@ -24,9 +25,13 @@ ports:
     width: 7
 settings:
   cross_section: xs_n780
+  fiber_angle: 22
   fill_factor: 0.5
+  length_end: 9.988
+  length_start: 3.594
   length_taper: 200
   n_periods: 30
   period: 0.668
   wavelength: 0.78
   width_grating: 7
+  width_slab: 6

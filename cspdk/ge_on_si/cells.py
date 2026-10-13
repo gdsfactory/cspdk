@@ -1,9 +1,12 @@
 """Building blocks for the cspdk.ge_on_si library."""
 
+from functools import partial
+
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec
+from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
 from cspdk.ge_on_si._schematic import (
+    bend_circular_schematic,
     bend_euler_schematic,
     bend_s_schematic,
     straight_schematic,
@@ -30,21 +33,27 @@ def straight(
 
 @gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
 def bend_s(
-    size: tuple[float, float] = (80.0, 5.0),
+    size: tuple[float, float] = (100.0, 5.0),
     cross_section: CrossSectionSpec = "xs_rib",
     allow_min_radius_violation: bool = True,
+    width: float | None = None,
 ) -> gf.Component:
     """An S-bend.
+
+    The default size keeps the minimum bend radius (~365 um) above the 300 um
+    rib minimum; (80, 5) dipped to ~234 um.
 
     Args:
         size: the width and height of the s-bend.
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
+        width: waveguide width; defaults to the cross-section width.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
         allow_min_radius_violation=allow_min_radius_violation,
+        width=width,
     )
 
 
@@ -72,6 +81,34 @@ def bend_euler(
         with_arc_floorplan=True,
         npoints=None,
         layer=None,
+        width=width,
+        cross_section=cross_section,
+        allow_min_radius_violation=False,
+    )
+
+
+@gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
+def bend_circular(
+    radius: float | None = None,
+    angle: float = 90.0,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "xs_rib",
+) -> gf.Component:
+    """A circular bend, matching the foundry reference bend geometry.
+
+    The Ge_on_Si_3800nm_TE_RIB_90_Degree_Bend reference GDS is a circular arc
+    with a 300 um center-line radius (the xs_rib default). This is the routing
+    bend of the PDK.
+
+    Args:
+        radius: the radius of the bend (defaults to the cross-section radius).
+        angle: the angle of the bend (usually 90 degrees).
+        width: the width of the waveguide forming the bend.
+        cross_section: a cross section or its name or a function generating a cross section.
+    """
+    return gf.components.bend_circular(
+        radius=radius,
+        angle=angle,
         width=width,
         cross_section=cross_section,
         allow_min_radius_violation=False,
@@ -117,7 +154,7 @@ def rectangle(layer=LAYER.FLOORPLAN, **kwargs) -> gf.Component:
 
 @gf.cell(tags=["cells"])
 def array(
-    component="straight",
+    component: ComponentSpec = partial(straight, cross_section="xs_rib"),
     columns: int = 6,
     rows: int = 1,
     add_ports: bool = True,
@@ -148,3 +185,31 @@ def array(
         column_pitch=column_pitch,
         row_pitch=row_pitch,
     )
+
+
+@gf.cell(tags=["cells"])
+def die(
+    size: tuple[float, float] = (11470.0, 15450.0),
+    bleed_width: float = 35.0,
+) -> gf.Component:
+    """The Ge-on-Si user cell outline, centred on the origin.
+
+    Matches Cell0_Ge_on_Si_Institution_Name in the Cornerstone GDSII template
+    and MPW-7 sec. 5.1/5.2: an 11.47 x 15.45 mm cell outline on layer 99 with
+    35 um bleed (dicing) strips on layer 98 inside the east and west edges.
+    Edge-coupler waveguides must extend fully into the bleed strips.
+
+    Args:
+        size: cell outline (width, height) in um.
+        bleed_width: width of the east/west bleed strips in um.
+    """
+    c = gf.Component()
+    w, h = size
+
+    def full_height(x0: float, x1: float) -> list[tuple[float, float]]:
+        return [(x0, -h / 2), (x1, -h / 2), (x1, h / 2), (x0, h / 2)]
+
+    c.add_polygon(full_height(-w / 2, w / 2), layer=LAYER.FLOORPLAN)
+    for x0, x1 in ((-w / 2, -w / 2 + bleed_width), (w / 2 - bleed_width, w / 2)):
+        c.add_polygon(full_height(x0, x1), layer=LAYER.BLEED)
+    return c

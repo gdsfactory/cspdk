@@ -12,7 +12,10 @@ instances:
       - 100
       xsize: 100
       ysize: 100
-    settings: {}
+    settings:
+      size:
+      - 100
+      - 100
 nets: []
 placements:
   pad:

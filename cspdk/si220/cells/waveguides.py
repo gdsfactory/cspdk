@@ -6,6 +6,7 @@ from gdsfactory.cross_section import port_names_electrical, port_types_electrica
 from gdsfactory.typings import CrossSectionSpec, LayerSpec, Size
 
 from cspdk.si220._schematic import (
+    bend_circular_schematic,
     bend_euler_schematic,
     bend_metal_schematic,
     bend_s_metal_schematic,
@@ -107,6 +108,55 @@ def bend_euler(
         with_arc_floorplan=True,
         npoints=None,
         layer=None,
+    )
+
+
+def _slab_as_sections(cross_section: CrossSectionSpec) -> gf.CrossSection:
+    """``cross_section`` with its slab (bbox) layers drawn along the path instead.
+
+    A bbox slab is a rectangle around the whole component; on a bend the foundry
+    slab follows the core at a constant offset.
+    """
+    xs = gf.get_cross_section(cross_section)
+    if not xs.bbox_layers:
+        return xs
+    slabs = tuple(
+        gf.Section(width=xs.width + 2 * offset, layer=layer, name=f"slab_{i}")
+        for i, (layer, offset) in enumerate(zip(xs.bbox_layers, xs.bbox_offsets))
+    )
+    return xs.copy(sections=(*xs.sections, *slabs), bbox_layers=(), bbox_offsets=())
+
+
+@gf.cell(tags=["waveguides"], schematic_function=bend_circular_schematic)
+def bend_circular(
+    radius: float | None = None,
+    angle: float = 90,
+    npoints: int | None = None,
+    width: float | None = None,
+    cross_section: CrossSectionSpec = "strip_cband",
+    allow_min_radius_violation: bool = False,
+) -> gf.Component:
+    """Circular bend, like the Cornerstone 90 degree bends.
+
+    A rib cross-section's slab follows the bend at a constant offset.
+
+    Args:
+        radius: in um. Defaults to the cross-section radius.
+        angle: total angle of the curve.
+        npoints: number of points along the arc. Defaults to gdsfactory's.
+        width: width to use. Defaults to cross_section.width.
+        cross_section: specification (CrossSection, string, CrossSectionFactory dict).
+        allow_min_radius_violation: if True allows radius to be smaller than cross_section radius.
+    """
+    xs = gf.get_cross_section(cross_section)
+    if width is not None:
+        xs = xs.copy(width=width)
+    return gf.c.bend_circular(
+        radius=radius if radius is not None else xs.radius,
+        angle=angle,
+        npoints=npoints,
+        cross_section=_slab_as_sections(xs),
+        allow_min_radius_violation=allow_min_radius_violation,
     )
 
 

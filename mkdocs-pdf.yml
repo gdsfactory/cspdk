@@ -5,8 +5,12 @@ nav:
   - Home: index.md
   - Reference:
       - Cells Si220: cells_si220.md
+      - Cells Si340: cells_si340.md
       - Cells Si500: cells_si500.md
-      - Cells Sin300: cells_sin300.md
+      - Cells SiN200: cells_sin200.md
+      - Cells SiN300: cells_sin300.md
+      - Cells Suspended Si: cells_si_sus.md
+      - Cells Ge-on-Si: cells_ge_on_si.md
       - Changelog: changelog.md
 markdown_extensions:
   - pymdownx.tabbed:

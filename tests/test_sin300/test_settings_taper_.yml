@@ -2,7 +2,7 @@ info:
   length: 10
   width1: 1.2
   width2: 1.2
-name: taper_L10_W1p2_WNone_PNone_CSxs_nc
+name: taper_L10_WNone_WNone_PNone_CSxs_nc
 ports:
   o1:
     center:
@@ -25,4 +25,3 @@ ports:
 settings:
   cross_section: xs_nc
   length: 10
-  width1: 1.2

@@ -1,0 +1,8 @@
+info: {}
+name: die_S11470_15450_BW35
+ports: {}
+settings:
+  bleed_width: 35
+  size:
+  - 11470
+  - 15450

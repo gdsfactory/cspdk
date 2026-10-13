@@ -1,15 +1,114 @@
 """Heater components."""
 
+import math
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec
+from gdsfactory.typings import ComponentSpec, CrossSectionSpec, LayerSpec, Size
 
 from cspdk.si220._schematic import (
+    heater_schematic,
     straight_heater_meander_schematic,
     straight_heater_metal_schematic,
 )
 from cspdk.si220.tech import LAYER, get_band, strip_heater_metal
+
+
+@gf.cell(tags=["heaters"], schematic_function=heater_schematic)
+def heater(
+    length: float = 200.0,
+    width: float = 2.0,
+    lead_length: float = 50.0,
+    lead_width: float = 50.0,
+    pad_size: Size = (100.0, 100.0),
+    pad_pitch: float = 120.0,
+    pad_taper_length: float = 30.0,
+    layer_heater: LayerSpec = "HEATER",
+    layer_pad: LayerSpec = "PAD",
+) -> gf.Component:
+    """Return a heater filament with a contact pad at each end.
+
+    Drawn like the Cornerstone ``Heater`` cell, which the defaults reproduce. The
+    filament runs along x from 0 to ``length``, centred on y = 0, so it sits on a
+    waveguide placed on the x axis. At each end a lead fans out from the filament
+    (``width`` wide) to ``lead_width`` over ``lead_length``; it is drawn on both
+    the heater and the pad layer so the two overlap. A taper of
+    ``pad_taper_length`` then widens the lead to the pad. As on the foundry cell,
+    a disc of radius ``width / 2`` sits on the inner corner where each lead
+    leaves the filament.
+
+    Args:
+        length: filament length (um).
+        width: filament width (um).
+        lead_length: length of the lead from the filament to the pad taper (um).
+        lead_width: width of the lead at the pad taper (um).
+        pad_size: pad width and height (um).
+        pad_pitch: distance between the pad centres (um), centred on the filament.
+        pad_taper_length: length of the taper from the lead to the pad (um); 0
+            puts the pad on the lead.
+        layer_heater: filament layer.
+        layer_pad: pad layer.
+    """
+    pad_width, pad_height = pad_size
+    y_stub = width / 2
+    y_lead = y_stub + lead_length
+    y_pad = y_lead + pad_taper_length
+    radius = width / 2
+
+    c = gf.Component()
+    c.add_polygon(
+        [(0, -y_stub), (0, y_stub), (length, y_stub), (length, -y_stub)],
+        layer=layer_heater,
+    )
+    for sign, x_end, name in ((1, 0.0, "e1"), (-1, length, "e2")):
+        x_lead = x_end + sign * width / 2
+        x_pad = length / 2 - sign * pad_pitch / 2
+        lead = [
+            (x_end, y_stub),
+            (x_end + sign * width, y_stub),
+            (x_lead + sign * lead_width / 2, y_lead),
+            (x_lead - sign * lead_width / 2, y_lead),
+        ]
+        corner = (x_end + sign * width, y_stub)
+        round_corner = [
+            (
+                corner[0] + radius * math.cos(math.radians(2.5 * i)),
+                corner[1] + radius * math.sin(math.radians(2.5 * i)),
+            )
+            for i in range(144)
+        ]
+        c.add_polygon(lead, layer=layer_heater)
+        c.add_polygon(round_corner, layer=layer_heater)
+        c.add_polygon(lead, layer=layer_pad)
+        if pad_taper_length:
+            c.add_polygon(
+                [
+                    (x_lead - lead_width / 2, y_lead),
+                    (x_lead + lead_width / 2, y_lead),
+                    (x_pad + pad_width / 2, y_pad),
+                    (x_pad - pad_width / 2, y_pad),
+                ],
+                layer=layer_pad,
+            )
+        c.add_polygon(
+            [
+                (x_pad - pad_width / 2, y_pad),
+                (x_pad - pad_width / 2, y_pad + pad_height),
+                (x_pad + pad_width / 2, y_pad + pad_height),
+                (x_pad + pad_width / 2, y_pad),
+            ],
+            layer=layer_pad,
+        )
+        c.add_port(
+            name,
+            center=(x_pad, y_pad + pad_height),
+            orientation=90,
+            width=pad_width,
+            layer=layer_pad,
+            port_type="electrical",
+        )
+    c.info["length"] = length
+    return c
 
 
 @gf.cell(tags=["heaters"], schematic_function=straight_heater_metal_schematic)

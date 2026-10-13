@@ -1,169 +1,153 @@
 instances:
   b1:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b2:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b3:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b4:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b5:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b6:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b7:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   b8:
-    component: bend_euler
+    component: bend_circular
     info:
       dy: 10
-      length: 16.637
-      min_bend_radius: 7.061
+      length: 15.708
       radius: 10
-      route_info_length: 16.637
-      route_info_min_bend_radius: 7.061
+      route_info_length: 15.708
+      route_info_min_bend_radius: 10
       route_info_n_bend_90: 1
-      route_info_type: xs_sc
-      route_info_weight: 16.637
-      route_info_xs_sc_length: 16.637
+      route_info_type: xs_sc340
+      route_info_weight: 15.708
+      route_info_xs_sc340_length: 15.708
       width: 0.45
     settings:
       angle: 90
-      cross_section: xs_sc
-      p: 0.5
+      cross_section: xs_sc340
       radius: null
       width: null
   cp1:
     component: mmi1x2
     info: {}
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       gap_mmi: 1.65
       length_mmi: 34.7
       length_taper: 20
@@ -174,7 +158,7 @@ instances:
     component: mmi2x2
     info: {}
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       gap_mmi: 0.53
       length_mmi: 46.5
       length_taper: 20
@@ -186,72 +170,72 @@ instances:
     info:
       length: 0.1
       route_info_length: 0.1
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 0.1
-      route_info_xs_sc_length: 0.1
+      route_info_xs_sc340_length: 0.1
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 0.1
   sxt:
     component: straight
     info:
       length: 0.1
       route_info_length: 0.1
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 0.1
-      route_info_xs_sc_length: 0.1
+      route_info_xs_sc340_length: 0.1
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 0.1
   sybr:
     component: straight
     info:
       length: 6.56
       route_info_length: 6.56
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 6.56
-      route_info_xs_sc_length: 6.56
+      route_info_xs_sc340_length: 6.56
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 6.56
   syl:
     component: straight
     info:
       length: 6
       route_info_length: 6
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 6
-      route_info_xs_sc_length: 6
+      route_info_xs_sc340_length: 6
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 6
   sytl:
     component: straight
     info:
       length: 1
       route_info_length: 1
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 1
-      route_info_xs_sc_length: 1
+      route_info_xs_sc340_length: 1
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 1
   sytr:
     component: straight
     info:
       length: 1.56
       route_info_length: 1.56
-      route_info_type: xs_sc
+      route_info_type: xs_sc340
       route_info_weight: 1.56
-      route_info_xs_sc_length: 1.56
+      route_info_xs_sc340_length: 1.56
       width: 0.45
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       length: 1.56
 nets:
 - p1: b1,o1

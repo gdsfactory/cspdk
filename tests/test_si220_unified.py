@@ -1,5 +1,6 @@
 """Contract tests for the unified Cornerstone Si220 PDK."""
 
+from functools import partial
 from pathlib import Path
 
 import gdsfactory as gf
@@ -42,6 +43,33 @@ def test_band_detection_accepts_registered_names_factories_and_objects() -> None
     assert si220.tech.is_rib(si220.tech.rib_cband())
 
 
+@pytest.mark.parametrize(
+    ("make_spec", "band", "rib"),
+    [
+        (lambda t: t.strip_oband(width=0.5), "oband", False),
+        (lambda t: t.rib_oband(width=0.6), "oband", True),
+        (lambda t: t.strip_oband(width=0.5).name, "oband", False),
+        (lambda t: t.rib_oband().copy(width=0.7), "oband", True),
+        (lambda t: partial(t.rib_oband, width=0.5), "oband", True),
+        (
+            lambda t: {"cross_section": "rib_oband", "settings": {"width": 0.5}},
+            "oband",
+            True,
+        ),
+        (lambda t: t.rib_cband(width=0.6), "cband", True),
+    ],
+    ids=["custom", "custom-rib", "custom-name", "copy", "partial", "dict", "cband-rib"],
+)
+def test_band_detection_survives_customised_cross_sections(
+    make_spec, band, rib
+) -> None:
+    """Custom widths keep their band and rib/strip type instead of falling back."""
+    si220.PDK.activate()
+    spec = make_spec(si220.tech)
+    assert si220.tech.get_band(spec) == band
+    assert si220.tech.is_rib(spec) is rib
+
+
 def test_band_variants_coexist_without_cell_cache_collision() -> None:
     """Shared factories create distinct geometry for each band in one process."""
     si220.PDK.activate()
@@ -55,8 +83,8 @@ def test_band_variants_coexist_without_cell_cache_collision() -> None:
 @pytest.mark.parametrize(
     ("cross_section", "coupler_right", "mmi1x2_right", "mmi2x2_right"),
     [
-        ("strip_cband", 24.5, 51.0, 62.5),
-        ("strip_oband", 30.0, 60.0, 73.5),
+        ("strip_cband", 24.5, 51.8, 62.5),
+        ("strip_oband", 30.0, 60.1, 73.5),
     ],
 )
 def test_band_sensitive_cell_defaults(
@@ -157,15 +185,82 @@ def test_fiber_container_propagates_oband_cross_section() -> None:
     assert all(port.width == pytest.approx(0.40) for port in optical_ports)
 
 
+def test_fiber_array_puts_any_optical_cell_in_the_band() -> None:
+    """Cells outside the old band-aware list (here a ring) follow the container."""
+    si220.PDK.activate()
+    component = si220.cells.add_fiber_array(
+        component="ring_single", cross_section="strip_oband"
+    )
+    optical_ports = [
+        port
+        for instance in component.insts
+        for port in instance.ports
+        if port.port_type == "optical"
+    ]
+    assert optical_ports
+    # C-band strip is 0.45 um wide, so this fails if the ring is built in C-band.
+    assert all(port.width == pytest.approx(0.40) for port in optical_ports)
+    rings = [i.cell for i in component.insts if i.cell.name.startswith("ring_single")]
+    assert [ring.settings["cross_section"] for ring in rings] == ["strip_oband"]
+
+
+@pytest.mark.parametrize(
+    ("make_component", "make_container_xs", "rib", "width"),
+    [
+        (lambda c, t: "mmi1x2_rib", lambda t: "strip_oband", True, 0.40),
+        (lambda c, t: "mmi1x2_rib", lambda t: t.strip_oband(width=0.5), True, 0.5),
+        (
+            lambda c, t: partial(c.mmi1x2, cross_section="rib_cband"),
+            lambda t: "strip_oband",
+            True,
+            0.40,
+        ),
+        (
+            lambda c, t: partial(c.straight, cross_section=t.strip_cband(width=0.6)),
+            lambda t: "strip_oband",
+            False,
+            0.6,
+        ),
+        (
+            lambda c, t: {
+                "component": "straight",
+                "settings": {"cross_section": "rib_cband"},
+            },
+            lambda t: "strip_oband",
+            True,
+            0.40,
+        ),
+    ],
+    ids=["rib-only", "rib-only-custom-width", "bound-partial", "bound-custom", "dict"],
+)
+def test_container_children_switch_band_keep_type_and_width(
+    make_component, make_container_xs, rib: bool, width: float
+) -> None:
+    """Children follow the container's band; rib stays rib and custom widths are kept."""
+    from cspdk.si220._utils import get_band_component
+
+    si220.PDK.activate()
+    component = get_band_component(
+        make_component(si220.cells, si220.tech), make_container_xs(si220.tech)
+    )
+    cross_section = component.settings["cross_section"]
+    assert si220.tech.get_band(cross_section) == "oband"
+    assert si220.tech.is_rib(cross_section) is rib
+    widths = [p.width for p in component.ports if p.port_type == "optical"]
+    assert widths
+    assert all(w == pytest.approx(width) for w in widths)
+
+
 @pytest.mark.parametrize(
     ("factory", "cross_section"),
     [
         (si220.cells.crossing, "strip_oband"),
+        (si220.cells.crossing, "rib_oband"),
         (si220.cells.crossing_rib, "rib_oband"),
     ],
 )
 def test_fixed_crossings_select_oband_geometry(factory, cross_section: str) -> None:
-    """Fixed crossings load the 1310 nm geometry and expose O-band ports."""
+    """Crossings draw the 1310 nm geometry and expose O-band ports."""
     si220.PDK.activate()
     component = factory(cross_section=cross_section)
     assert all(port.width == pytest.approx(0.40) for port in component.ports)
@@ -249,14 +344,23 @@ def _two_in_series(cell, **settings) -> gf.Component:
 @pytest.mark.parametrize(
     "name", ["grating_coupler_rectangular", "grating_coupler_elliptical"]
 )
-@pytest.mark.parametrize("cross_section", ["strip_oband", "rib_oband"])
-def test_oband_grating_couplers_are_centred_at_1310(
-    name: str, cross_section: str
+@pytest.mark.parametrize(
+    ("cross_section", "centre_range"),
+    [
+        ("strip_oband", (1.30, 1.33)),
+        ("rib_oband", (1.30, 1.33)),
+        ("strip_cband", (1.55, 1.58)),
+        ("rib_cband", (1.55, 1.58)),
+    ],
+)
+def test_grating_couplers_peak_in_their_band(
+    name: str, cross_section: str, centre_range: tuple[float, float]
 ) -> None:
-    """O-band grating models transmit at 1.31 um, like C-band ones at 1.55 um."""
-    oband = si220.PDK.models[name](wl=np.array([1.31]), cross_section=cross_section)
-    cband = si220.PDK.models[name](wl=np.array([1.55]), cross_section="strip_cband")
-    assert abs(oband["o1", "o2"][0]) == pytest.approx(abs(cband["o1", "o2"][0]))
+    """Grating models peak inside the measured Run-50 centre-wavelength range."""
+    wl = np.linspace(1.2, 1.7, 5001)
+    response = si220.PDK.models[name](wl=wl, cross_section=cross_section)
+    peak = wl[np.argmax(np.abs(response["o1", "o2"]))]
+    assert centre_range[0] <= peak <= centre_range[1]
 
 
 def test_dispatched_models_expose_cross_section() -> None:
@@ -285,6 +389,19 @@ def test_straight_in_circuit_matches_direct_model(
     )
     direct = si220.PDK.models["straight"](
         wl=np.array([wl]), length=1000, cross_section=cross_section
+    )
+    assert np.allclose(circuit["o1", "o2"], direct["o1", "o2"])
+
+
+def test_customised_oband_cross_section_in_circuit_uses_oband_model() -> None:
+    """A cross-section object with a custom width still selects the O-band model."""
+    si220.PDK.activate()
+    xs = si220.tech.strip_oband(width=0.42)
+    circuit = _simulate(
+        _two_in_series(si220.cells.straight, length=500, cross_section=xs), [1.31]
+    )
+    direct = si220.PDK.models["straight"](
+        wl=np.array([1.31]), length=1000, cross_section="strip_oband"
     )
     assert np.allclose(circuit["o1", "o2"], direct["o1", "o2"])
 
@@ -320,3 +437,31 @@ def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
     assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
         sources
     )
+
+
+# The coupler's geometry defaults mean "use the cell geometry", which depends on the
+# band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
+# cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
+# of the band and type).
+_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius", "radius", "loss_dB"}
+
+
+@pytest.mark.parametrize("name", sorted(si220.models.get_models()))
+def test_models_have_concrete_defaults_for_circulax(name: str) -> None:
+    """Circulax bakes model defaults into components and broadcasts ``wl`` to them.
+
+    GDSFactory+'s circulax DC sweep calls ``circuit.dc(wl=...)``, which runs
+    ``jnp.full_like(<default>, wl)`` on every component with a ``wl`` field, so a
+    ``None`` default crashes the sweep.
+    """
+    import dataclasses
+
+    import jax.numpy as jnp
+    from circulax.s_transforms import sax_component
+
+    component = sax_component(si220.PDK.models[name])
+    defaults = {f.name: f.default for f in dataclasses.fields(component)}
+    assert defaults.get("wl") == 1.55
+    jnp.full_like(defaults["wl"], 1.31)
+    none_defaults = {k for k, v in defaults.items() if v is None}
+    assert none_defaults <= _NONE_DEFAULTS_ALLOWED, none_defaults

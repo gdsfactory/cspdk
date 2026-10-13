@@ -9,8 +9,8 @@ from cspdk.si500 import PDK, cells, tech
 def sample_routing_different_widths() -> gf.Component:
     """Route two straights with different widths to test auto-taper."""
     c = gf.Component()
-    s1 = c << cells.straight(length=10, cross_section=tech.xs_rc(width=0.4))
-    s2 = c << cells.straight(length=10, cross_section=tech.xs_rc(width=1.0))
+    s1 = c << cells.straight(length=10, cross_section=tech.xs_rc500(width=0.4))
+    s2 = c << cells.straight(length=10, cross_section=tech.xs_rc500(width=1.0))
     s2.dmove((100, 50))
     tech.route_single(
         c,

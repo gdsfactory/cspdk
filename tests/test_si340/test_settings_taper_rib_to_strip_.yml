@@ -1,0 +1,29 @@
+info:
+  length: 200
+name: taper_rib_to_strip_L200_WR0p8_WS0p45_WS10p8_CSRxs_rc340_b26041b0
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.8
+  o2:
+    center:
+    - 200
+    - 0
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  cross_section_rib: xs_rc340
+  cross_section_strip: xs_sc340
+  length: 200
+  width_rib: 0.8
+  width_slab: 10.8
+  width_strip: 0.45

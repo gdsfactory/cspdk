@@ -42,6 +42,88 @@ LayerViews:
     layer_in_name: true
     fill_color: "teal"
     hatch_pattern: coarsely dotted
+  LASER_CONTACT:
+    layer: [43, 2]
+    layer_in_name: true
+    color: "gold"
+    hatch_pattern: left-hatched
+  LASER_TRENCH:
+    layer: [47, 2]
+    layer_in_name: true
+    color: "#8b4513"
+    hatch_pattern: lightly right-hatched
+    transparent: true
+  PD_AREA:
+    layer: [140, 1]
+    layer_in_name: true
+    color: "#ff8c00"
+    hatch_pattern: hollow
+  LASER_AREA:
+    layer: [143, 1]
+    layer_in_name: true
+    color: "#dc143c"
+    hatch_pattern: hollow
+  LASER_WG:
+    layer: [144, 1]
+    layer_in_name: true
+    color: "#ff1493"
+    hatch_pattern: coarsely dotted
+  PD_ACTIVE:
+    layer: [147, 1]
+    layer_in_name: true
+    color: "#ffa500"
+    hatch_pattern: lightly left-hatched
+    transparent: true
+  PD_EXCLUSION:
+    layer: [150, 1]
+    layer_in_name: true
+    color: "#ff7f50"
+    hatch_pattern: hollow
+    width: 2
+  LASER_EXCLUSION:
+    layer: [151, 1]
+    layer_in_name: true
+    color: "#b22222"
+    hatch_pattern: hollow
+    width: 2
+  GRAPHENE1:
+    layer: [161, 2]
+    layer_in_name: true
+    color: "#6a5acd"
+    hatch_pattern: lightly left-hatched
+    transparent: true
+  GRAPHENE2:
+    layer: [162, 2]
+    layer_in_name: true
+    color: "#9370db"
+    hatch_pattern: lightly right-hatched
+    transparent: true
+  GRAPHENE_CONTACT1:
+    layer: [163, 2]
+    layer_in_name: true
+    color: "#daa520"
+    hatch_pattern: strongly left-hatched dense
+  GRAPHENE_CONTACT2:
+    layer: [164, 2]
+    layer_in_name: true
+    color: "#b8860b"
+    hatch_pattern: strongly right-hatched dense
+  GRAPHENE_PAD1:
+    layer: [165, 2]
+    layer_in_name: true
+    color: "#2e8b57"
+    hatch_pattern: left-hatched
+  GRAPHENE_PAD2:
+    layer: [166, 2]
+    layer_in_name: true
+    color: "#3cb371"
+    hatch_pattern: right-hatched
+  GRAPHENE_EXCLUSION:
+    layer: [169, 1]
+    layer_in_name: true
+    color: "#4b0082"
+    hatch_pattern: hollow
+    width: 2
   FLOORPLAN:
     layer: [99, 0]
     layer_in_name: true

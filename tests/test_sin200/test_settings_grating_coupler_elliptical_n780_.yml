@@ -1,12 +1,12 @@
 info:
-  period: 0.775
+  period: 0.668
   polarization: te
   wavelength: 0.78
-name: grating_coupler_elliptical_W0p78_GLW0p26_CSxs_n780
+name: grating_coupler_elliptical_W0p78_GLW0p334_N1p7082_FA22_CSxs_n780
 ports:
   o1:
     center:
-    - 2.905
+    - 0.267
     - 0
     layer: NITRIDE
     name: o1
@@ -15,7 +15,7 @@ ports:
     width: 0.5
   o2:
     center:
-    - 28.225
+    - 26.62
     - 0
     layer: NITRIDE
     name: o2
@@ -24,5 +24,7 @@ ports:
     width: 10
 settings:
   cross_section: xs_n780
-  grating_line_width: 0.26
+  fiber_angle: 22
+  grating_line_width: 0.334
+  neff: 1.708
   wavelength: 0.78

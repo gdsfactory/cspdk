@@ -1,5 +1,5 @@
 info: {}
-name: mzi_DL10_Bbend_euler_rc_Sstraight_rc_Smmi1x2_rc_Cmmi2x2_de758620
+name: mzi_DL10_Bbend_circular_rc_Sstraight_rc_Smmi1x2_rc_Cmmi_edff5a21
 ports:
   o1:
     center:
@@ -12,7 +12,7 @@ ports:
     width: 0.8
   o2:
     center:
-    - 241.3
+    - 541.3
     - 1.015
     layer: WG
     name: o2
@@ -21,7 +21,7 @@ ports:
     width: 0.8
   o3:
     center:
-    - 241.3
+    - 541.3
     - -1.015
     layer: WG
     name: o3
@@ -29,9 +29,9 @@ ports:
     port_type: optical
     width: 0.8
 settings:
-  bend: bend_euler_rc
+  bend: bend_circular_rc
   combiner: mmi2x2_rc
-  cross_section: xs_rc
+  cross_section: xs_rc340
   delta_length: 10
   splitter: mmi1x2_rc
   straight: straight_rc

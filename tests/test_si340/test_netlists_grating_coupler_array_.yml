@@ -6,12 +6,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
   grating_coupler_rectangular2:
     component: grating_coupler_rectangular
     info:
@@ -19,12 +23,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
   grating_coupler_rectangular3:
     component: grating_coupler_rectangular
     info:
@@ -32,12 +40,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
   grating_coupler_rectangular4:
     component: grating_coupler_rectangular
     info:
@@ -45,12 +57,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
   grating_coupler_rectangular5:
     component: grating_coupler_rectangular
     info:
@@ -58,12 +74,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
   grating_coupler_rectangular6:
     component: grating_coupler_rectangular
     info:
@@ -71,12 +91,16 @@ instances:
       polarization: te
       wavelength: 1.55
     settings:
-      cross_section: xs_sc
+      cross_section: xs_sc340
       fill_factor: 0.551
+      grating_offset: 2.697
+      length_grating: 42
       length_taper: 350
       n_periods: 60
       period: 0.59
+      teeth_overhang: 0.5
       wavelength: 1.55
+      width_grating: 10
 nets: []
 placements:
   grating_coupler_rectangular:

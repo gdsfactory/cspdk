@@ -76,6 +76,7 @@ def bend_s(
     size: tuple[float, float] = (15.0, 1.8),
     cross_section: CrossSectionSpec = "xs_nc",
     allow_min_radius_violation: bool = True,
+    width: float | None = None,
 ) -> Component:
     """An S-bend.
 
@@ -83,11 +84,13 @@ def bend_s(
         size: the width and height of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
+        width: waveguide width; defaults to the cross-section width.
     """
     return gf.components.bend_s(
         size=size,
         cross_section=cross_section,
         allow_min_radius_violation=allow_min_radius_violation,
+        width=width,
     )
 
 
@@ -132,7 +135,7 @@ bend_euler_no = partial(bend_euler, cross_section="xs_no")
 @gf.cell(tags=["cells"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
-    width1: float = Tech.width_nc,
+    width1: float | None = None,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_nc",
@@ -143,11 +146,13 @@ def taper(
 
     Args:
         length: the length of the taper
-        width1: the input width of the taper
+        width1: the input width of the taper (defaults to the cross-section width)
         width2: the output width of the taper (if not given, use port)
         port: the port (with certain width) to taper towards (if not given, use width2)
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    if width1 is None:
+        width1 = gf.get_cross_section(cross_section).width
     return gf.c.taper(
         length=length,
         width1=width1,

@@ -1,4 +1,34 @@
-info: {}
-name: heater
-ports: {}
-settings: {}
+info:
+  length: 200
+name: heater_L200_W2_LL50_LW50_PS100_100_PP120_PTL30_LHHEATER_LPPAD
+ports:
+  e1:
+    center:
+    - 40
+    - 181
+    layer: PAD
+    name: e1
+    orientation: 90
+    port_type: electrical
+    width: 100
+  e2:
+    center:
+    - 160
+    - 181
+    layer: PAD
+    name: e2
+    orientation: 90
+    port_type: electrical
+    width: 100
+settings:
+  layer_heater: HEATER
+  layer_pad: PAD
+  lead_length: 50
+  lead_width: 50
+  length: 200
+  pad_pitch: 120
+  pad_size:
+  - 100
+  - 100
+  pad_taper_length: 30
+  width: 2

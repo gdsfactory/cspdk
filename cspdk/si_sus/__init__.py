@@ -9,16 +9,19 @@ from gdsfactory.pdk import Pdk
 
 from cspdk.si_sus import cells, config, tech
 from cspdk.si_sus.config import PATH
+from cspdk.si_sus.models import get_models
 from cspdk.si_sus.tech import LAYER, LAYER_STACK, LAYER_VIEWS, routing_strategies
 
+_models = get_models()
 _cells = get_cells(cells)
 _cross_sections = get_cross_sections(tech)
 
 CONF.pdk = "cspdk.si_sus"
 
 
+# optical ports sit on the WG_MARK core marker, so width tapers key on it
 layer_transitions = {
-    LAYER.WG: cells.taper,
+    LAYER.WG_MARK: cells.taper,
 }
 
 
@@ -32,6 +35,7 @@ def get_pdk() -> Pdk:
         layers=LAYER,
         layer_stack=LAYER_STACK,
         layer_views=LAYER_VIEWS,
+        models=_models,
         routing_strategies=routing_strategies,
         layer_transitions=layer_transitions,
     )

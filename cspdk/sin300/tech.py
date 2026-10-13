@@ -63,23 +63,17 @@ def get_layer_stack(
     """
     return LayerStack(
         layers=dict(
+            # GDS 204 is dark field: drawn shapes are etched through the SiN.
             nitride=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.NITRIDE),
+                layer=LogicalLayer(layer=LAYER.NITRIDE)
+                - LogicalLayer(layer=LAYER.NITRIDE_ETCH),
                 thickness=thickness_nitride,
                 zmin=0.0,
                 material="SiN",
                 info={"mesh_order": 2},
                 sidewall_angle=10,
                 width_to_z=0.5,
-            ),
-            nitride_etch=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.NITRIDE_ETCH),
-                thickness=thickness_nitride,
-                zmin=0.0,
-                material="SiN",
-                info={"mesh_order": 1},
-                sidewall_angle=10,
-                width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.NITRIDE),
             ),
             heater=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.HEATER),
@@ -173,7 +167,7 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     return xs
 
 
-def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
+def heater_metal_sin300(width=4.0, **kwargs) -> gf.CrossSection:
     """Returns heater metal cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
     xs = metal_routing(width=width, **kwargs).copy()

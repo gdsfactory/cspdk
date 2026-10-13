@@ -1,5 +1,5 @@
 info: {}
-name: grating_coupler_array_P127_N6_CSxs_n780_CTrue_GCNone_PN_1a53b716
+name: grating_coupler_array_P127_N6_CSxs_n780_CTrue_GCNone_PN_debced57
 ports:
   o0:
     center:
@@ -56,8 +56,10 @@ ports:
     port_type: optical
     width: 0.5
 settings:
+  bend: bend_euler
   centered: true
   cross_section: xs_n780
+  mirror_grating_coupler: false
   n: 6
   pitch: 127
   port_name: o1

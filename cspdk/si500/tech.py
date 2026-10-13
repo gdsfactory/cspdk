@@ -60,33 +60,62 @@ CONNECTIVITY: list[ConnectivitySpec] = [("HEATER", "HEATER", "PAD")]
 def get_layer_stack(
     thickness_wg: float = 500 * nm,
     thickness_slab: float = 200 * nm,
-    zmin_heater: float = 1.1,
+    thickness_grating: float = 340 * nm,
+    thickness_clad: float = 2.0,
+    zmin_heater: float | None = None,
     thickness_heater: float = 150 * nm,
-    zmin_metal: float = 1.1,
+    zmin_metal: float | None = None,
     thickness_metal: float = 220 * nm,
 ) -> LayerStack:
     """Returns LayerStack.
 
-    based on paper https://www.degruyter.com/document/doi/10.1515/nanoph-2013-0034/html
+    Based on the CORNERSTONE 500 nm SOI MPW #42 design guidelines: 500 nm Si
+    core on 3 um BOX, 2 um SiO2 top cladding. Silicon Etch 2 (GDS layer 3,
+    300 nm) defines the rib, leaving a 200 nm slab; Silicon Etch 1 (GDS
+    layer 6, 160 nm) defines the grating teeth, leaving 340 nm of silicon.
+
+    The heater filaments (GDS layer 39) and contact pads (GDS layer 41) sit
+    on top of the 2 um top cladding, so both start 2.5 um above the BOX. The
+    heater and pad thicknesses and materials are not given in the design
+    guidelines and are placeholders.
 
     Args:
         thickness_wg: waveguide thickness in um.
-        thickness_slab: slab thickness in um.
-        zmin_heater: TiN heater.
+        thickness_slab: slab thickness in um (500 nm - 300 nm rib etch).
+        thickness_grating: residual Si thickness under the grating etch in um
+            (500 nm - 160 nm grating etch).
+        thickness_clad: top cladding thickness above the waveguide in um.
+        zmin_heater: TiN heater bottom in um; defaults to the cladding top
+            (thickness_wg + thickness_clad).
         thickness_heater: TiN thickness.
-        zmin_metal: metal thickness in um.
-        thickness_metal: metal2 thickness.
+        zmin_metal: contact pad bottom in um; defaults to zmin_heater.
+        thickness_metal: contact pad thickness.
     """
+    if zmin_heater is None:
+        zmin_heater = thickness_wg + thickness_clad
+    if zmin_metal is None:
+        zmin_metal = zmin_heater
     return LayerStack(
         layers=dict(
             core=LayerLevel(
-                layer=LogicalLayer(layer=LAYER.WG),
+                layer=LogicalLayer(layer=LAYER.WG) - LogicalLayer(layer=LAYER.GRA),
                 thickness=thickness_wg,
                 zmin=0.0,
                 material="Si",
                 info={"mesh_order": 1},
                 sidewall_angle=10,
                 width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.WG),
+            ),
+            grating=LayerLevel(
+                layer=LogicalLayer(layer=LAYER.WG) & LogicalLayer(layer=LAYER.GRA),
+                thickness=thickness_grating,
+                zmin=0.0,
+                material="Si",
+                info={"mesh_order": 1},
+                sidewall_angle=10,
+                width_to_z=0.5,
+                derived_layer=LogicalLayer(layer=LAYER.GRA),
             ),
             slab=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.SLAB),
@@ -107,7 +136,7 @@ def get_layer_stack(
             metal=LayerLevel(
                 layer=LogicalLayer(layer=LAYER.PAD),
                 thickness=thickness_metal,
-                zmin=zmin_metal + thickness_metal,
+                zmin=zmin_metal,
                 material="Al",
                 info={"mesh_order": 2},
             ),
@@ -140,7 +169,7 @@ xsection = gf.xsection
 
 
 @xsection
-def xs_rc(
+def xs_rc500(
     width: float = TECH.width_rc,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_rc,
@@ -149,7 +178,7 @@ def xs_rc(
     bbox_offsets: Floats = (TECH.width_slab,),
     **kwargs,
 ) -> CrossSection:
-    """Return Rib cross_section."""
+    """Return C-band Rib cross_section (foundry 450 nm rib, R = 25 um)."""
     return gf.cross_section.cross_section(
         width=width,
         layer=layer,
@@ -162,7 +191,7 @@ def xs_rc(
 
 
 @xsection
-def xs_ro(
+def xs_ro500(
     width: float = TECH.width_ro,
     layer: LayerSpec = "WG",
     radius: float = TECH.radius_ro,
@@ -171,7 +200,10 @@ def xs_ro(
     bbox_offsets: Floats = (TECH.width_slab,),
     **kwargs,
 ) -> CrossSection:
-    """Return Rib cross_section."""
+    """Return O-band Rib cross_section.
+
+    No foundry basis: the 500 nm SOI platform is 1550 nm only.
+    """
     return gf.cross_section.cross_section(
         width=width,
         layer=layer,
@@ -200,7 +232,7 @@ def metal_routing(
 
 
 @xsection
-def heater_metal(
+def heater_metal_si500(
     width: float = 4,
     layer: LayerSpec = "HEATER",
     radius: float | None = None,
@@ -235,9 +267,9 @@ def route_single(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | None = None,
-    cross_section: CrossSectionSpec = "xs_rc",
+    cross_section: CrossSectionSpec = "xs_rc500",
     straight: ComponentSpec = "straight_rc",
-    bend: ComponentSpec = "bend_euler_rc",
+    bend: ComponentSpec = "bend_circular_rc",
 ) -> ManhattanRoute:
     """Route two ports with a single route."""
     return gf.routing.route_single(
@@ -261,7 +293,7 @@ def route_bundle(
     component: gf.Component,
     ports1: list[gf.Port],
     ports2: list[gf.Port],
-    separation: float = 3.0,
+    separation: float = 5.0,
     sort_ports: bool = False,
     start_straight_length: float = 0.0,
     end_straight_length: float = 0.0,
@@ -273,9 +305,9 @@ def route_bundle(
     allow_width_mismatch: bool = False,
     radius: float | None = None,
     route_width: float | list[float] | None = None,
-    cross_section: CrossSectionSpec = "xs_rc",
+    cross_section: CrossSectionSpec = "xs_rc500",
     straight: ComponentSpec = "straight_rc",
-    bend: ComponentSpec = "bend_euler_rc",
+    bend: ComponentSpec = "bend_circular_rc",
     taper: ComponentSpec = "taper_rc",
 ) -> list[ManhattanRoute]:
     """Route two bundles of ports."""
@@ -311,29 +343,29 @@ routing_strategies = dict(
     route_single_rc=partial(
         route_single,
         straight="straight_rc",
-        bend="bend_euler_rc",
-        cross_section="xs_rc",
+        bend="bend_circular_rc",
+        cross_section="xs_rc500",
     ),
     route_single_ro=partial(
         route_single,
         straight="straight_ro",
-        bend="bend_euler_ro",
-        cross_section="xs_ro",
+        bend="bend_circular_ro",
+        cross_section="xs_ro500",
     ),
     route_bundle=route_bundle,
     route_bundle_rc=partial(
         route_bundle,
         straight="straight_rc",
-        bend="bend_euler_rc",
+        bend="bend_circular_rc",
         taper="taper_rc",
-        cross_section="xs_rc",
+        cross_section="xs_rc500",
     ),
     route_bundle_ro=partial(
         route_bundle,
         straight="straight_ro",
-        bend="bend_euler_ro",
+        bend="bend_circular_ro",
         taper="taper_ro",
-        cross_section="xs_ro",
+        cross_section="xs_ro500",
     ),
 )
 

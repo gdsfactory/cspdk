@@ -1,5 +1,5 @@
 info: {}
-name: array_Cstraight_C6_R1_APTrue_SNone_CFalse_CP150_RP150
+name: array_CFstraight_Mcspdkpge_on_sipcells_SCSxs_rib_C6_R1__5d5c6937
 ports:
   o1_1_1:
     center:
@@ -114,6 +114,6 @@ settings:
   centered: false
   column_pitch: 150
   columns: 6
-  component: straight
+  component: Fstraight_Mcspdkpge_on_sipcells_SCSxs_rib
   row_pitch: 150
   rows: 1

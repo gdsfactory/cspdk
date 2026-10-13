@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from functools import partial
+
 from cspdk._schematic import (
     _1X2,
     _2X2,
@@ -63,6 +65,12 @@ bend_euler_schematic = schematic(
     _LEFT_TOP,
     models=[sax_model("bend_euler", _MODULE, ["o1", "o2"])],
 )
+bend_circular_schematic = schematic(
+    "bend",
+    ["bend", "circular"],
+    _LEFT_TOP,
+    models=[sax_model("bend_circular", _MODULE, ["o1", "o2"])],
+)
 bend_s_schematic = schematic(
     "sbend",
     ["bend", "s"],
@@ -93,6 +101,18 @@ transition_schematic = schematic(
     ["taper", "transition"],
     _LEFT_RIGHT,
     models=[sax_model("taper_strip_to_ridge", _MODULE, ["o1", "o2"])],
+)
+taper_mm2sm_schematic = schematic(
+    "taper",
+    ["taper", "mm2sm"],
+    _LEFT_RIGHT,
+    models=[sax_model("taper_mm2sm", _MODULE, ["o1", "o2"])],
+)
+taper_rib_to_strip_schematic = schematic(
+    "taper",
+    ["taper", "transition"],
+    _LEFT_RIGHT,
+    models=[sax_model("taper_rib_to_strip", _MODULE, ["o1", "o2"])],
 )
 
 # MMIs
@@ -130,30 +150,55 @@ ring_double_schematic = schematic("ring-double", ["ring", "double"], _RING_DOUBL
 # MZI (composite; cband mzi uses 2x2 splitter so 4 ports)
 mzi_schematic = schematic("mzi-2x2", ["mzi"], _2X2)
 
+# Foundry MZI: the input faces east, the two outputs west, the heater pads north.
+_MZI_HEATER_LOOP = [
+    {"name": "o1", "side": "right", "type": "photonic"},
+    {"name": "o2", "side": "left", "type": "photonic"},
+    {"name": "o3", "side": "left", "type": "photonic"},
+    {"name": "e1", "side": "top", "type": "electric"},
+    {"name": "e2", "side": "top", "type": "electric"},
+]
+_MZI_HEATER_LOOP_PORTS = ["o1", "o2", "o3", "e1", "e2"]
+mzi_heater_loop_schematic = schematic(
+    "ckt",
+    ["mzi", "heater"],
+    _MZI_HEATER_LOOP,
+    models=[sax_model("mzi_heater_loop", _MODULE, _MZI_HEATER_LOOP_PORTS)],
+)
+
 # Spirals (composite)
 spiral_schematic = schematic("spiral", ["spiral"], _LEFT_RIGHT)
 
 # Heaters
+# Rendered as a generic model-driven box ("ckt") so all heater ports show.
+# The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
+# multi-port heater; see the model-driven-modulator follow-up issue.
+# SAX model lists all 8 electrical ports, but Circulax active model only
+# implements o1, o2, l_e2, r_e2; these entries use the Circulax model.
+_HEATER_MODELS = [
+    circulax_model(
+        "ThermalPhaseShifter",
+        _ACTIVE_MODULE,
+        ["o1", "o2", "l_e2", "r_e2"],
+        params={"length": "length"},
+    )
+]
 straight_heater_metal_schematic = schematic(
-    # Rendered as a generic model-driven box ("ckt") so all heater ports show.
-    # The Mosaic "modulator" symbol uses hardcoded conn and cannot represent a
-    # multi-port heater; see the model-driven-modulator follow-up issue.
-    # SAX model lists all 8 electrical ports, but Circulax active model only
-    # implements o1, o2, l_e2, r_e2; this entry uses the Circulax model.
-    "ckt",
-    ["heater", "modulator"],
-    _heater_ports,
-    models=[
-        circulax_model(
-            "straight_heater_metal",
-            _ACTIVE_MODULE,
-            ["o1", "o2", "l_e2", "r_e2"],
-            params={"length": "length"},
-        )
-    ],
+    "ckt", ["heater", "modulator"], _heater_ports, models=_HEATER_MODELS
 )
 straight_heater_meander_schematic = schematic(
-    "ckt", ["heater", "modulator", "meander"], _heater_ports
+    "ckt", ["heater", "modulator", "meander"], _heater_ports, models=_HEATER_MODELS
+)
+# Heater filament with two pads (no optical ports); placed over a waveguide.
+_HEATER_PADS = [
+    {"name": "e1", "side": "top", "type": "electric"},
+    {"name": "e2", "side": "top", "type": "electric"},
+]
+heater_schematic = schematic(
+    "ckt",
+    ["heater"],
+    _HEATER_PADS,
+    models=[sax_model("heater", _MODULE, ["e1", "e2"])],
 )
 
 # Grating couplers
@@ -184,10 +229,19 @@ crossing_rib_schematic = schematic(
     models=[sax_model("crossing_rib", _MODULE, ["o1", "o2", "o3", "o4"])],
 )
 
+# Run 50 fixed Y-splitter (o1 in, o2 top and o3 bottom out, like mmi1x2)
+ysplitter_schematic = schematic(
+    "mmi-1x2",
+    ["splitter", "1x2", "y-branch"],
+    _1X2,
+    models=[sax_model("ysplitter", _MODULE, ["o1", "o2", "o3"])],
+)
+
 # Pads / via stacks
 pad_schematic = schematic("pad", ["pad"], _PAD)
 via_stack_schematic = schematic("pad", ["via", "stack"], _PAD)
 
 # Die: symbol "die" makes editors render it as a die (no background box).
-# Ports are derived from the factory kwargs and follow the GDS orientations.
-die_schematic = schematic("die", ["die"], _die_ports)
+# Ports are derived from the factory kwargs and follow the GDS orientations; the
+# default of 16 gratings per side is the Run-50 packaging template's.
+die_schematic = schematic("die", ["die"], partial(_die_ports, ngratings=16))
