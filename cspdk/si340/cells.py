@@ -527,24 +527,28 @@ grating_coupler_rectangular_rc = partial(
 def grating_coupler_elliptical(
     wavelength: float = 1.55,
     grating_line_width: float = 0.35,
-    trenches_extra_angle: float = 9.0,
     cross_section="xs_sc340",
+    trenches_extra_angle: float = 9.0,
 ) -> gf.Component:
     """A grating coupler with curved but parallel teeth.
 
     ``grating_line_width`` is the width of the unetched ridge between two
     trenches (GDS 6). The CORNERSTONE SOI pre-DRC deck limits GDS 6 gaps narrower
     than 350 nm to 20 um length, and the ridges here are longer arcs, so they are
-    350 nm wide (as for si220).
+    350 nm wide (as for si220). The optics are not re-optimised for the wider
+    ridge: the period still follows ``wavelength`` with the same ``neff``, so the
+    centre wavelength and coupling efficiency shift somewhat (most at O-band,
+    where the ridge fill factor rises from about 43% to 60%); simulate the
+    grating before relying on its passband.
 
     Args:
         wavelength: the center wavelength for which the grating is designed.
         grating_line_width: width of the unetched ridge between trenches, in um.
             Keep it at 0.35 or more to pass the CORNERSTONE deck.
+        cross_section: a cross section or its name or a function generating a cross section.
         trenches_extra_angle: how far the trenches extend past the grating region,
             in degrees. Each trench must reach 200 nm beyond GDS 3; at O-band the
             9 deg default falls short for the first trenches, so ``_so`` uses 11.
-        cross_section: a cross section or its name or a function generating a cross section.
     """
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",

@@ -2,7 +2,7 @@ info:
   period: 0.685
   polarization: te
   wavelength: 1.55
-name: grating_coupler_elliptical_W1p55_GLW0p35_TEA9_CSxs_rc340
+name: grating_coupler_elliptical_W1p55_GLW0p35_CSxs_rc340_TEA9
 ports:
   o1:
     center:

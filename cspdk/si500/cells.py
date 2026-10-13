@@ -445,7 +445,11 @@ def grating_coupler_elliptical(
     ``grating_line_width`` is the width of the unetched ridge between two
     trenches (GDS 6). The CORNERSTONE SOI pre-DRC deck limits GDS 6 gaps narrower
     than 350 nm to 20 um length, and the ridges here are longer arcs, so they are
-    350 nm wide (as for si220).
+    350 nm wide (as for si220). The optics are not re-optimised for the wider
+    ridge: the period still follows ``wavelength`` with the same ``neff``, so the
+    centre wavelength and coupling efficiency shift somewhat (most at O-band,
+    where the ridge fill factor rises from about 43% to 60%); simulate the
+    grating before relying on its passband.
 
     Args:
         wavelength: the center wavelength for which the grating is designed.
