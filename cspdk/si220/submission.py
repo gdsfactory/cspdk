@@ -5,8 +5,8 @@ The rules are those of the 50th-call design guideline
 format (section 5.5), designated GDS layers (section 5.2 and Table 6), the 1 nm
 manufacturing grid (section 5.5), the design area (section 5.1) and the top-cell
 name (section 8). They are not a DRC: check the geometric design rules with
-GDSFactory+'s DRC for the ``si220_passive`` process (``gfp check drc``), and
-optionally with CORNERSTONE's KLayout pre-DRC script.
+GDSFactory+'s DRC (``gfp check drc``), and optionally with CORNERSTONE's KLayout
+pre-DRC script.
 
 Run from the command line with::
 
@@ -58,8 +58,8 @@ CELL_OUTLINE = (99, 0)
 GRID_UM = 0.001
 FORMATS = (".gds", ".gds2", ".gdsii", ".oas")
 TOP_CELL = re.compile(r"^Cell0_\w+$")
-# GDSFactory+ DRC arguments for MPW Run 50 (SOI 220 nm passive process).
-DRC_ARGS = "--pdk cspdk --process si220_passive"
+# GDSFactory+ DRC arguments; the PDK name selects CORNERSTONE's SOI 220 nm rules.
+DRC_ARGS = "--pdk cspdk.si220"
 
 
 def check_submission(path: str | Path) -> list[str]:
@@ -67,7 +67,7 @@ def check_submission(path: str | Path) -> list[str]:
 
     An empty list means the layout meets the format, layer, grid, design-area and
     top-cell rules of MPW Run 50. Check the geometric design rules as well, with
-    GDSFactory+'s DRC (``gfp check drc``, process ``si220_passive``).
+    GDSFactory+'s DRC (``gfp check drc``).
 
     Args:
         path: GDSII or OASIS file to check.

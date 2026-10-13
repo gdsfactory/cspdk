@@ -55,21 +55,15 @@ Every `cspdk.si220` cell draws only on designated layers, so problems usually co
 
 ## 3. Run DRC with GDSFactory+
 
-The geometric design rules are minimum feature sizes, gaps, overlaps and exclusion zones (section 5.3 and Table 6). Check them with GDSFactory+'s DRC, which runs CORNERSTONE's rules for the process you select. For MPW Run 50 that's `si220_passive`: the SOI 220 nm passive process, including the 50th call's graphene rules.
+The geometric design rules are minimum feature sizes, gaps, overlaps and exclusion zones (section 5.3 and Table 6). Check them with GDSFactory+'s DRC. For `cspdk.si220` it runs CORNERSTONE's SOI 220 nm passive rules, including the 50th call's graphene rules, with nothing to configure.
 
-Set the process once in your project's `pyproject.toml`, so the GDSFactory+ extension in VS Code and the command line both use it:
-
-```toml
-[tool.gdsfactoryplus.drc]
-pdk = "cspdk"
-process = "si220_passive"
-```
-
-Then run DRC from the GDSFactory+ extension in VS Code, or from the command line:
+Run DRC from the GDSFactory+ extension in VS Code, or from the command line:
 
 ```bash
-gfp check drc Cell0_MyUniversity.gds
+gfp check drc Cell0_MyUniversity.gds --pdk cspdk.si220
 ```
+
+Inside a GDSFactory+ project for `cspdk.si220` you can leave out `--pdk`.
 
 The results are saved as a KLayout report database (`.lyrdb`). DRC runs on the GDSFactory+ service, so it needs a GDSFactory+ API key (`gfp configure`).
 
