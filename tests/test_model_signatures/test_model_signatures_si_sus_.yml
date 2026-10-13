@@ -1,0 +1,35 @@
+bend_circular:
+  angle: 90.0
+  cross_section: xs_sus
+  loss: 5.0
+  radius: null
+  wl: 3.8
+bend_euler:
+  angle: 90.0
+  cross_section: xs_sus
+  loss: 5.0
+  p: 0.5
+  radius: null
+  wl: 3.8
+bend_s:
+  cross_section: xs_sus
+  loss: 5.0
+  size:
+  - 40.0
+  - 8.0
+  wl: 3.8
+grating_coupler_rectangular:
+  bandwidth: 0.15
+  cross_section: xs_sus
+  loss: 6.0
+  wl: 3.8
+straight:
+  cross_section: xs_sus
+  length: 10.0
+  loss: 5.0
+  wl: 3.8
+taper:
+  cross_section: xs_sus
+  length: 10.0
+  loss: 5.0
+  wl: 3.8
