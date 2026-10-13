@@ -49,13 +49,14 @@ def test_resistance_scales_with_length() -> None:
     assert ohms_per_um * length == pytest.approx(120.0)
 
 
+@pytest.mark.parametrize("wl", [1.50, 1.55, 1.60])
 @pytest.mark.parametrize("voltage", [0.0, 1.0, 2.2, 3.0])
-def test_circulax_heater_matches_sax_heater_phase(voltage: float) -> None:
+def test_circulax_heater_matches_sax_heater(wl: float, voltage: float) -> None:
     """The circulax heater and the SAX heater give the same transmission (#374).
 
-    Both turn the phase the same way as SAX propagation (``exp(+1j * phi)``), so in
-    a mixed circuit the circulax heater's phase adds to the SAX parts' phase. The
-    SAX ``vpi`` is chosen so both dissipate to the same phase shift:
+    Both use SAX's phase convention (``exp(+1j * phi)``), the same C-band strip
+    ``neff``, ``ng``, dispersion and loss, so their defaults agree across the band.
+    The SAX ``vpi`` is chosen so both dissipate to the same phase shift:
     ``pi * eta * V**2 / R == pi * (V / vpi)**2``.
     """
     import jax.numpy as jnp
@@ -63,24 +64,20 @@ def test_circulax_heater_matches_sax_heater_phase(voltage: float) -> None:
 
     from cspdk.si220 import PDK
 
-    length, ohms_per_um, eta = 320.0, 0.375, 12.5
-    heater = ThermalPhaseShifter(
-        ohms_per_um=ohms_per_um,
-        eta_pi_per_W=eta,
-        length=length,
-        loss_dBcm=3.0,
-        neff0=2.38,  # the C-band strip neff the SAX model uses at wl0 = 1.55 um
-        wl=1.55,
-    )
-    # Ports (o1, o2, l_e2, r_e2) then the i_fwd state. With o1 = 1 and o2 = 0 the
-    # i_fwd residual o2 - T * o1 is -T.
-    y = jnp.array([1.0, 0.0, voltage, 0.0, 0.0], dtype=complex)
-    residual, _ = ThermalPhaseShifter.solver_call(0.0, y, heater)
-    t_circulax = -complex(residual[4])
+    heater = ThermalPhaseShifter(wl=wl)  # every other parameter at its default
 
-    vpi = float(np.sqrt(ohms_per_um * length / eta))
+    # Drive o1 = 1 with o2 = 0: the i_fwd residual (o2 - T * o1) is then -T.
+    names = (*ThermalPhaseShifter.ports, *ThermalPhaseShifter.states)
+    values = {"o1": 1.0, "l_e2": voltage}
+    y = jnp.array([values.get(name, 0.0) for name in names], dtype=complex)
+    residual, _ = ThermalPhaseShifter.solver_call(0.0, y, heater)
+    t_circulax = -complex(residual[names.index("i_fwd")])
+
+    # Only the drive and the length are shared; the SAX loss stays at its default,
+    # so the test also catches the two models' defaults drifting apart.
+    vpi = float(np.sqrt(heater.ohms_per_um * heater.length / heater.eta_pi_per_W))
     s = PDK.models["straight_heater_metal"](
-        wl=1.55, voltage=voltage, vpi=vpi, length=length, loss_dB_cm=3.0
+        wl=wl, voltage=voltage, vpi=vpi, length=heater.length
     )
     t_sax = complex(np.asarray(s["o1", "o2"]))
 
