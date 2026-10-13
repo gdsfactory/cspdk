@@ -1,2 +1,5 @@
 *.gds binary
 *.oas binary
+# Foundry reference files are hashed in references/manifest.json: check them out
+# byte-for-byte, with no line-ending conversion.
+references/** -text
