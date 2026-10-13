@@ -1,0 +1,268 @@
+{
+  "CORNERSTONE-42nd-Call-Design-Guidelines.pdf": {
+    "sha256": "782ecfc9bc3d89c092883c26827e942d1779a88a3f99bc34c0d6b7263fd83336",
+    "bytes": 795895,
+    "revision": "42nd call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-42nd-Call-Standard-Components.pdf": {
+    "sha256": "9a6fdc20ac5e3ce9b48593e533f470cb5c5b9fa536020e19e7a864ba9fba75d2",
+    "bytes": 908250,
+    "revision": "42nd call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-47th-Call-Design-Guidelines_final-1.pdf": {
+    "sha256": "304b927a1d49316877461ba78f0cb799fb97af1e8320726d81a79b22f8e6c4d2",
+    "bytes": 1008330,
+    "revision": "47th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-47th-Call-Standard-Components-Library.pdf": {
+    "sha256": "26f94e7091b8166fdf87a8de867aa9d57f022d042c26be93d39436bda58ec9b8",
+    "bytes": 1453548,
+    "revision": "47th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-48th-Call-Design-Guidelines-3.pdf": {
+    "sha256": "9ec66d440a8510e7203407a442aceec90cfa1dc3ba687f05a842abe53e428f37",
+    "bytes": 2590194,
+    "revision": "48th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-48th-Call-Standard-Components-1.pdf": {
+    "sha256": "5a621f7aef4e1ee30717a9987531ac5cc56dbb585230161a3c7ebc46078e223a",
+    "bytes": 1770258,
+    "revision": "48th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-49th-Call-Design-Guidelines-1.pdf": {
+    "sha256": "6205268d198bb5d1431a909bf77a1e448a36693ef6fbe51ef06fd29702a65191",
+    "bytes": 2251438,
+    "revision": "49th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-49th-Call-Standard-Components.pdf": {
+    "sha256": "fa5220b77aac3d7e5607935ffc4f30b048a29789910e99da982097621a77dcf3",
+    "bytes": 583193,
+    "revision": "49th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-GDSII-Template_All-Platforms_Jan_2024-1.gds": {
+    "sha256": "7ef35036165e9b59cfc230a379b2a41ed362c3647a568efcd6fc4765cf9be14a",
+    "bytes": 637050,
+    "revision": "all platforms, January 2024",
+    "added": "2026-06-05",
+    "commit": "d822010"
+  },
+  "CORNERSTONE-Ge-on-Si-6-Call-Standard-Components.pdf": {
+    "sha256": "44457f2a1fe6dca0d1f4937b9b2b5e99d3c4d7db3e9d659c23c1d5d5d40e4925",
+    "bytes": 207843,
+    "revision": "Ge-on-Si 6th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Ge-on-Si-7-Call-Standard-Components.pdf": {
+    "sha256": "2e09c25187360bebcdcd0dc69a507ed04734bac9eb9798fdd61c6d3c0056b1d8",
+    "bytes": 296664,
+    "revision": "Ge-on-Si 7th call",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Ge-on-Si-MPW-4-Design-Rules.pdf": {
+    "sha256": "12bcd79b9b0aff5d2f47759fb538e94dcc3dd055550cf9d0592041aabf905c4c",
+    "bytes": 717654,
+    "revision": "Ge-on-Si MPW-4",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-GeonSi-MPW-7-Design-Guidelines.pdf": {
+    "sha256": "ef2d2811c6462f91fa6c12a590b990880477722e2f93c82c7157cbe85aad4d0e",
+    "bytes": 1645864,
+    "revision": "Ge-on-Si MPW-7",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-SOI-Standard-Components-Library-Mar-2023.pdf": {
+    "sha256": "fda8dcc202fbb4e66cf143bce2970e1636720273306fa83719fdf0e1ba319167",
+    "bytes": 1855176,
+    "revision": "SOI library, March 2023",
+    "added": "2026-06-05",
+    "commit": "d822010"
+  },
+  "CORNERSTONE-SiN-Standard-Components-Library-Feb-2022.pdf": {
+    "sha256": "e3e998d31d665e9cb8e2f2179131c92451b727d7bb6a1f6d6a99edaec864c3e2",
+    "bytes": 501606,
+    "revision": "SiN library, February 2022",
+    "added": "2026-06-05",
+    "commit": "d822010"
+  },
+  "CORNERSTONE-Silicon-Nitride-MPW-13-Design-Guidelines.pdf": {
+    "sha256": "10ad02eaa39abcf1fcb82b09ce10bc08b9795e54ed094f44007c860b0b2d9f71",
+    "bytes": 3374145,
+    "revision": "SiN MPW-13",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Silicon-Nitride-MPW-13-Standard-Components.pdf": {
+    "sha256": "797a0031e8f6fbde1fd3080a4df9bfef5f42acbd6c8d6189ae3121cd7eb8527e",
+    "bytes": 794900,
+    "revision": "SiN MPW-13",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Silicon-Nitride-Visible-MPW-3-Design-Guidelines.pdf": {
+    "sha256": "aa1f3a0c03cfb9aeb610408376563771dffc9b96ce020d0e19917b603adb6cbc",
+    "bytes": 3301339,
+    "revision": "visible SiN MPW-3",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Silicon-Nitride-Visible-MPW-3-Standard-Components.pdf": {
+    "sha256": "174ef6f8bc0c600be7a5339d0782bfabce4de666488f30539f9eb246a60af399",
+    "bytes": 869190,
+    "revision": "visible SiN MPW-3",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Student-Batch-2026-Design-Guidelines.pdf": {
+    "sha256": "cc3e6d312f50bf13f571908729da158be076b725b9c7a5c448ab9aa48f692d12",
+    "bytes": 373055,
+    "revision": "student batch 2026",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE-Suspended-Si-Standard-Components-Library-Feb-2022.pdf": {
+    "sha256": "25f173452e9409c5064efbd43fe16c9c11c248a7f7b8b7c93196ed863fc52551",
+    "bytes": 371160,
+    "revision": "suspended Si library, February 2022",
+    "added": "2026-06-05",
+    "commit": "d822010"
+  },
+  "CORNERSTONE_Pre_DRC.pdf": {
+    "sha256": "f464027c638956ac44c0a13c322e2f6ecb89474e573fb88f30541e8d6f4516e2",
+    "bytes": 234351,
+    "revision": "pre-DRC instructions, SOI DRC deck v3.1",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE_STANDARD_COMPONENTS_LIBRARY_SuspendedSilicon1.pdf": {
+    "sha256": "1332b579182c2c8893087b09a472e123fbb097cb053f871b481c05d7f62ca577",
+    "bytes": 371569,
+    "revision": "suspended Si library, May 2023",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "CORNERSTONE_Suspended-Si_MPW_7-_Design_Guidelines1.pdf": {
+    "sha256": "8530056af60507fa3eb974cff69e0a71ecb2b055a68eb4e65a5cd2b6d055682e",
+    "bytes": 314991,
+    "revision": "suspended Si MPW-7",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "Standard-Components-Library.pdf": {
+    "sha256": "7838d950b4d5d7fee9560da3ffd2827573387281d19c135e497fe0b6738e4af3",
+    "bytes": 586601,
+    "revision": "student MPW-9 library",
+    "added": "2026-06-12",
+    "commit": "973acec"
+  },
+  "october-2026/CORNERSTONE-50th-Call-Design-Guideline.pdf": {
+    "sha256": "f2c6dd9f9a98b54d4036f595c3651b04a142cf06352fd96ae86e33104f14b112",
+    "bytes": 5685300,
+    "revision": "SOI 220 nm, MPW Run 50 (50th call)",
+    "added": "2026-10-09",
+    "commit": "b5f81d9"
+  },
+  "october-2026/CORNERSTONE-50th-Call-Standard-Components.pdf": {
+    "sha256": "8292a9e5edb4696c267cf5da0398dc9f9abf6f89378d5252325ef853d2962d28",
+    "bytes": 2534133,
+    "revision": "SOI 220 nm, MPW Run 50 (50th call)",
+    "added": "2026-10-09",
+    "commit": "b5f81d9"
+  },
+  "october-2026/CORNERSTONE-MPW-Run-50-GDSII-Template.gds": {
+    "sha256": "45175094d50a5a7558474cb31a1725095b6819326ee430d9fb11898f1a052690",
+    "bytes": 812520,
+    "revision": "SOI 220 nm, MPW Run 50 (50th call)",
+    "added": "2026-10-09",
+    "commit": "b5f81d9"
+  },
+  "si220-pre-run50/CORNERSTONE MPW SOI 220nm GDSII Template.gds": {
+    "sha256": "616a9dde76b4b51c15a52faa80c1e63310e4ac98cbb576188c2fed93d7cc8f4b",
+    "bytes": 90112,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2024-03-02",
+    "commit": "45b38e3"
+  },
+  "si220-pre-run50/Cell0_Institution_Name.gds": {
+    "sha256": "72a42a800bfc21548082eeda66c11272a92fae7b7c94fa94b32dd6a2c4c548d0",
+    "bytes": 192,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2024-03-03",
+    "commit": "ae25127"
+  },
+  "si220-pre-run50/Layer_Designations.gds": {
+    "sha256": "c7ef3de3ef04a6c848529edb7169ed57f3f03106258d10f2c016554f8b7e3fa9",
+    "bytes": 20356,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2024-03-02",
+    "commit": "45b38e3"
+  },
+  "si220-pre-run50/SOI220nm_1310nm_TE_MZI_Modulator.gds": {
+    "sha256": "f0349612a787ff4ec243d3aa3d893dbdd30ba8128a9b95108182f4287e80c797",
+    "bytes": 55222,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_Defect_Detector.gds": {
+    "sha256": "54fe7257d4cdc947f3732ed9e081dbc4b045f233615c48a116696db23c5bcdb3",
+    "bytes": 8680,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_MZI_Modulator.gds": {
+    "sha256": "e0fcc311e09fa8bcdb21ad7c6cf9e5bc0232062af75908dc4757244a7edcf768",
+    "bytes": 69134,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_RIB_EBL_Apodised_Grating_Coupler.gds": {
+    "sha256": "0bc32961a3d071fe856cc99f9a8d8d74af6ed0baaca47a00abc7e44eec5c99a5",
+    "bytes": 27282,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_RIB_MZI.gds": {
+    "sha256": "18cdeca57ceac3ca6d07168d938331fa74720ec6345fee3d11dc99c8cffc7439",
+    "bytes": 114304,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_STRIP_Grating_Coupler.gds": {
+    "sha256": "4d6e0a27818a8dde3ca51b1e81d1c8ecfcce827aebdfaf221c2e7698dc351d86",
+    "bytes": 4110,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  },
+  "si220-pre-run50/SOI220nm_1550nm_TE_STRIP_MZI.gds": {
+    "sha256": "5b815d8f57685a4322eb11dac0f609692ce3fbb82b9e040d2efd9abcd1403429",
+    "bytes": 65490,
+    "revision": "SOI 220 nm, before MPW Run 50",
+    "added": "2026-06-08",
+    "commit": "35b2f2e"
+  }
+}
