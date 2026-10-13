@@ -409,3 +409,29 @@ def test_bend_model_length_matches_cell(band, _wavelength, wl0, cell, kwargs):
     # phase per um of length at wl0 is 2 pi neff / wl0
     max_phase = 2 * np.pi * models.BANDS[xs].neff * 1e-3 / wl0
     assert abs(np.angle(model / reference)) <= max_phase
+
+
+@pytest.mark.parametrize("band", ["n780", "n638", "n520"])
+def test_grating_loss_and_bandwidth_can_be_adjusted(band: str) -> None:
+    """``extra_loss_dB`` adds to the band's insertion loss; ``bandwidth_scale`` widens it.
+
+    Peak transmission drops by exactly ``extra_loss_dB``; with the bandwidth doubled,
+    the point that was 3 dB down is now well within the passband.
+    """
+    xs = f"xs_{band}"
+    wl0 = models.BANDS[xs].wl0
+    half_width = models.BANDS[xs].gc_bandwidth / 2
+    model = models.grating_coupler_rectangular
+
+    def peak_db(**kwargs) -> float:
+        s = model(wl=wl0, cross_section=xs, **kwargs)["o1", "o2"]
+        return float(-20 * np.log10(np.abs(s)))
+
+    assert peak_db(extra_loss_dB=2.0) - peak_db() == pytest.approx(2.0, abs=1e-6)
+
+    def edge_drop_db(**kwargs) -> float:
+        s = model(wl=wl0 + half_width, cross_section=xs, **kwargs)["o1", "o2"]
+        return float(-20 * np.log10(np.abs(s))) - peak_db(**kwargs)
+
+    assert edge_drop_db() == pytest.approx(3.0, abs=0.1)
+    assert edge_drop_db(bandwidth_scale=2.0) < 1.0

@@ -349,12 +349,14 @@ def coupler(
 def mmi1x2_strip(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
     """MMI 1x2 strip model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi1x2_strip", **locals())
 
@@ -362,12 +364,14 @@ def mmi1x2_strip(
 def mmi1x2_rib(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """MMI 1x2 rib model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi1x2_rib", **locals())
 
@@ -375,11 +379,13 @@ def mmi1x2_rib(
 def mmi1x2(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
     """MMI 1x2 model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi1x2", **locals())
 
@@ -387,12 +393,14 @@ def mmi1x2(
 def mmi2x2_strip(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
     """MMI 2x2 strip model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi2x2_strip", **locals())
 
@@ -400,12 +408,14 @@ def mmi2x2_strip(
 def mmi2x2_rib(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     fwhm: Float = 0.2,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
     """MMI 2x2 rib model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi2x2_rib", **locals())
 
@@ -413,11 +423,13 @@ def mmi2x2_rib(
 def mmi2x2(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
     """MMI 2x2 model.
 
-    The excess loss is the foundry measurement for the band and type.
+    The excess loss is the foundry measurement for the band and type, plus
+    ``extra_loss_dB`` (e.g. to show a worse or better MMI in a demo).
     """
     return _dispatch("mmi2x2", **locals())
 
@@ -566,12 +578,13 @@ def mzi_heater_loop(
 def ysplitter(
     *,
     wl: Float = 1.55,
+    extra_loss_dB: Float = 0.0,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
     """1x2 Y-splitter model: an ideal 50/50 split, flat in wavelength.
 
     The excess loss on top of the 3 dB split is the foundry measurement of the
-    band.
+    band, plus ``extra_loss_dB``.
     """
     return _dispatch("ysplitter", **locals())
 

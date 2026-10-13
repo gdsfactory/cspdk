@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import inspect
 import warnings
 from functools import partial
 
@@ -328,13 +327,25 @@ def test_mmi2x2_model_uses_measured_bar_and_cross_loss() -> None:
     "name",
     ["mmi1x2", "mmi1x2_strip", "mmi1x2_rib", "mmi2x2", "mmi2x2_strip", "mmi2x2_rib"],
 )
-def test_mmi_loss_is_not_a_model_parameter(name: str) -> None:
-    """The measured loss depends on band and type, so it stays out of the signature.
+@pytest.mark.parametrize(
+    ("cross_section", "wl"), [("strip_cband", 1.55), ("strip_oband", 1.31)]
+)
+def test_mmi_extra_loss_adds_to_the_measured_loss(
+    name: str, cross_section: str, wl: float
+) -> None:
+    """``extra_loss_dB`` lowers every output by exactly that much, in each band.
 
-    SAX fills every signature parameter with its default, so a C-band default would
-    reach O-band and rib circuits as if it had been set.
+    The default (0 dB) is the foundry measurement, so it is right for every band and
+    type; a single concrete ``loss_dB`` default would not be.
     """
-    assert "loss_dB" not in inspect.signature(si220.PDK.models[name]).parameters
+    model = si220.PDK.models[name]
+    base = model(wl=jnp.array([wl]), cross_section=cross_section)
+    lossy = model(wl=jnp.array([wl]), cross_section=cross_section, extra_loss_dB=1.0)
+    outputs = ("o3", "o4") if name.startswith("mmi2x2") else ("o2", "o3")
+    for port in outputs:
+        assert _db(lossy["o1", port]) - _db(base["o1", port]) == pytest.approx(
+            1.0, abs=1e-6
+        )
 
 
 @pytest.mark.parametrize(

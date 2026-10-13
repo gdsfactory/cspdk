@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import inspect
 import math
 import tomllib
 from functools import partial
@@ -427,9 +426,18 @@ def test_ysplitter_model_matches_measured_loss(
     }
 
 
-def test_ysplitter_loss_is_not_a_model_parameter() -> None:
-    """The measured loss depends on the band, so it stays out of the signature."""
-    assert "loss_dB" not in inspect.signature(PDK.models["ysplitter"]).parameters
+@pytest.mark.parametrize(
+    ("cross_section", "wl"), [("strip_cband", 1.55), ("strip_oband", 1.31)]
+)
+def test_ysplitter_extra_loss_adds_to_the_measured_loss(
+    cross_section: str, wl: float
+) -> None:
+    """``extra_loss_dB`` adds to the band's measured excess loss."""
+    model = PDK.models["ysplitter"]
+    base = model(wl=wl, cross_section=cross_section)["o1", "o2"]
+    lossy = model(wl=wl, cross_section=cross_section, extra_loss_dB=1.0)["o1", "o2"]
+    ratio_db = 20 * math.log10(float(np.abs(base)) / float(np.abs(lossy)))
+    assert ratio_db == pytest.approx(1.0, abs=1e-6)
 
 
 @pytest.mark.parametrize("name", sorted(YSPLITTERS))

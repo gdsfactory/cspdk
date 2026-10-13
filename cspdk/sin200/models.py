@@ -313,23 +313,27 @@ coupler_n520 = partial(coupler, cross_section="xs_n520", wl=0.52)
 def grating_coupler_rectangular(
     *,
     wl: Float = 0.78,
+    extra_loss_dB: float = 0.0,
+    bandwidth_scale: float = 1.0,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of a foundry rectangular grating coupler.
 
-    Defaults are the standard-components PDF values: 9 / 15.06 / 13.25 dB
-    insertion loss and 64 / 43 / 28 nm 3 dB bandwidth at 780 / 638 / 520 nm.
+    The band's standard-components PDF values are 9 / 15.06 / 13.25 dB insertion
+    loss and 64 / 43 / 28 nm 3 dB bandwidth at 780 / 638 / 520 nm.
 
     Args:
         wl: wavelength in um.
+        extra_loss_dB: added to the band's insertion loss, in dB.
+        bandwidth_scale: multiplies the band's 3 dB bandwidth.
         cross_section: band cross-section name.
     """
     band = _band(cross_section)
     return _grating_model(
         wl=jnp.asarray(wl),
         wl0=band.wl0,
-        loss=band.gc_loss,
-        bandwidth=band.gc_bandwidth,
+        loss=band.gc_loss + extra_loss_dB,
+        bandwidth=band.gc_bandwidth * bandwidth_scale,
     )
 
 
@@ -347,6 +351,8 @@ grating_coupler_rectangular_n520 = partial(
 def grating_coupler_elliptical(
     *,
     wl: Float = 0.78,
+    extra_loss_dB: float = 0.0,
+    bandwidth_scale: float = 1.0,
     cross_section: str = "xs_n780",
 ) -> sax.SDict:
     """Returns the S-matrix of an elliptical grating coupler.
@@ -356,9 +362,16 @@ def grating_coupler_elliptical(
 
     Args:
         wl: wavelength in um.
+        extra_loss_dB: added to the band's insertion loss, in dB.
+        bandwidth_scale: multiplies the band's 3 dB bandwidth.
         cross_section: band cross-section name.
     """
-    return grating_coupler_rectangular(wl=wl, cross_section=cross_section)
+    return grating_coupler_rectangular(
+        wl=wl,
+        extra_loss_dB=extra_loss_dB,
+        bandwidth_scale=bandwidth_scale,
+        cross_section=cross_section,
+    )
 
 
 grating_coupler_elliptical_n780 = partial(
