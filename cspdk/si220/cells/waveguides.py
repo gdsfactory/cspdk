@@ -248,7 +248,9 @@ def wire_corner45_straight(
         radius: of the corner. Defaults to width.
         cross_section: metal_routing.
     """
-    return gf.c.wire_corner45_straight(
+    # The undecorated function: this cell has gdsfactory's name and arguments, so
+    # calling the decorated one would make kfactory duplicate it under its own name.
+    return gf.c.wire_corner45_straight.__wrapped__(
         width=width,
         radius=radius,
         cross_section=cross_section,
