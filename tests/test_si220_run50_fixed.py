@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import math
 import tomllib
 from functools import partial
@@ -426,10 +427,9 @@ def test_ysplitter_model_matches_measured_loss(
     }
 
 
-def test_ysplitter_loss_can_be_overridden() -> None:
-    """``loss_dB`` sets the excess loss on top of the 3 dB split."""
-    s = PDK.models["ysplitter"](wl=1.31, loss_dB=0.0, cross_section="strip_oband")
-    assert np.abs(np.asarray(s["o1", "o2"])) ** 2 == pytest.approx(0.5)
+def test_ysplitter_loss_is_not_a_model_parameter() -> None:
+    """The measured loss depends on the band, so it stays out of the signature."""
+    assert "loss_dB" not in inspect.signature(PDK.models["ysplitter"]).parameters
 
 
 @pytest.mark.parametrize("name", sorted(YSPLITTERS))

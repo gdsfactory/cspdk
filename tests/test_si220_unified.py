@@ -441,9 +441,8 @@ def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
 
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
 # band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
-# cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
-# of the band and type).
-_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius", "radius", "loss_dB"}
+# cross-section's).
+_NONE_DEFAULTS_ALLOWED = {"length", "offset", "bend_radius", "radius"}
 
 
 @pytest.mark.parametrize("name", sorted(si220.models.get_models()))

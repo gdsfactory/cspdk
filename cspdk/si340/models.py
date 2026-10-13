@@ -79,7 +79,7 @@ MMI_FWHM = 0.2
 
 _straight_model = _optical_model(sm.straight, 1, 1)
 _mmi1x2_model = _optical_model(sm.mmi1x2, 1, 2)
-_mmi2x2_model = _optical_model(sm.mmi2x2, 2, 2)
+_mmi2x2_model = _optical_model(sm.mmi2x2, 2, 2, hide=("loss_dB_cross", "loss_dB_thru"))
 _grating_model = _optical_model(sm.grating_coupler, 1, 1)
 
 

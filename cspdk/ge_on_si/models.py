@@ -88,7 +88,7 @@ def straight(
 def bend_circular(
     *,
     wl: Float = WL0,
-    radius: float | None = None,
+    radius: float | None = RADIUS,
     angle: float = 90.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
@@ -110,7 +110,7 @@ def bend_circular(
 def bend_euler(
     *,
     wl: Float = WL0,
-    radius: float | None = None,
+    radius: float | None = RADIUS,
     angle: float = 90.0,
     p: float = 0.5,
     loss: float = LOSS_DB_CM,
