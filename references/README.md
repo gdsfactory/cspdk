@@ -22,3 +22,9 @@ Keep `CORNERSTONE-GDSII-Template_All-Platforms_Jan_2024-1.gds`: Run 50 only cove
 ## si220 cells from before Run 50
 
 `si220-pre-run50/` keeps the old si220 GDS files that exist in no other reference (old MZIs, modulators, defect detector, EBL apodised grating, the older SOI 220 template). See its README.
+
+## Manifest
+
+`manifest.json` lists every foundry file here with its SHA-256, size in bytes, the call or revision it belongs to, and the date and commit that added it. `tests/test_reference_manifest.py` fails if a file changes or is added without an entry.
+
+Keep each delivery untouched: add a new call's files in a new folder (as `october-2026/`) rather than replacing old ones. For each new file, add an entry with `sha256sum <file>` and `wc -c < <file>`.
