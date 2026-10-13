@@ -46,6 +46,8 @@ notebooks:
 
 docs-pdf:
 	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
+	for f in $(FLAVOURS); do uv run python .github/write_models.py $$f || exit 1; done
+	uv run --extra docs python .github/write_notebooks.py
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
@@ -53,6 +55,8 @@ docs-pdf:
 
 docs:
 	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
+	for f in $(FLAVOURS); do uv run python .github/write_models.py $$f || exit 1; done
+	uv run --extra docs python .github/write_notebooks.py
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md
@@ -60,6 +64,8 @@ docs:
 
 docs-serve:
 	for f in $(FLAVOURS); do uv run python .github/write_cells.py $$f || exit 1; done
+	for f in $(FLAVOURS); do uv run python .github/write_models.py $$f || exit 1; done
+	uv run --extra docs python .github/write_notebooks.py
 	uv run python .github/write_layer_stack.py
 	cp CHANGELOG.md docs/changelog.md
 	cp README.md docs/index.md

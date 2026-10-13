@@ -9,6 +9,9 @@ Pipfile
 docs/cells_*.md
 docs/kwasm/
 docs/layer_stack.md
+docs/models_*.md
+docs/models/
+docs/notebooks/*.md
 
 sim-data-*/
 

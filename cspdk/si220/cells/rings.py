@@ -3,6 +3,7 @@
 import gdsfactory as gf
 from gdsfactory.typings import ComponentSpec, CrossSectionSpec
 
+from cspdk._checks import check_min
 from cspdk.si220._schematic import ring_double_schematic, ring_single_schematic
 from cspdk.si220.tech import TECH, get_band
 
@@ -53,6 +54,7 @@ def ring_single(
                  o1──────▼─────────o2
     ```
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
     if length_extension is None and get_band(cross_section) == "cband":
         length_extension = 10.0
     return gf.c.ring_single(
@@ -98,6 +100,9 @@ def ring_double(
         cross_section: cross_section spec.
         length_extension: straight length extension at the end of the coupler bottom ports.
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
+    check_min("gap_top", gap_top, TECH.gap_min, TECH.design_rules)
+    check_min("gap_bot", gap_bot, TECH.gap_min, TECH.design_rules)
     if length_extension is None and get_band(cross_section) == "cband":
         length_extension = 10.0
     return gf.c.ring_double(

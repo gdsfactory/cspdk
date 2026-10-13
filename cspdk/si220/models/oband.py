@@ -71,7 +71,7 @@ def _wire_corner(*, wl: Float = 1.31) -> sax.SDict:
     """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
-    return {"e1": zero, "e2": zero}  # type: ignore
+    return sax.reciprocal({("e1", "e2"): zero})
 
 
 def _bend_s(

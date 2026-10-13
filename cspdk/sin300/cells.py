@@ -12,6 +12,7 @@ from gdsfactory.typings import (
     Size,
 )
 
+from cspdk._checks import check_min
 from cspdk.sin300._schematic import (
     bend_euler_schematic,
     bend_s_schematic,
@@ -27,7 +28,7 @@ from cspdk.sin300._schematic import (
     taper_schematic,
     wire_corner_schematic,
 )
-from cspdk.sin300.tech import LAYER, Tech
+from cspdk.sin300.tech import LAYER, TECH, Tech
 
 ################
 # Straights
@@ -206,6 +207,7 @@ def mmi1x2(
         gap_mmi: the gap between the tapers at the mmi body
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     return gf.c.mmi1x2(
         width=width,
         width_taper=width_taper,
@@ -255,6 +257,7 @@ def mmi2x2(
         gap_mmi: the gap between the tapers at the mmi body
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap_mmi", gap_mmi, TECH.gap_min, TECH.design_rules)
     return gf.c.mmi2x2(
         width=width,
         width_taper=width_taper,
@@ -299,6 +302,7 @@ def coupler_straight(
         gap: the gap between the waveguides forming the straight part of the coupler
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
     return gf.c.coupler_straight(
         length=length,
         gap=gap,
@@ -325,6 +329,7 @@ def coupler(
         dx: the length of the s-bend
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min("gap", gap, TECH.gap_min, TECH.design_rules)
     return gf.c.coupler(
         gap=gap,
         length=length,
@@ -412,6 +417,12 @@ def grating_coupler_elliptical(
         grating_line_width: the line width of the grating
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min(
+        "grating_line_width",
+        grating_line_width,
+        TECH.grating_gap_min,
+        TECH.design_rules,
+    )
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
         wavelength=wavelength,
@@ -646,18 +657,19 @@ def die(cross_section="xs_nc") -> Component:
         "xs_no": "grating_coupler_rectangular_no",
     }
     grating_coupler = gcs.get(xs, "grating_coupler_rectangular")
-    return gf.c.die_with_pads(
+    return gf.c.die_frame_with_pads(
+        die_frame=partial(
+            gf.c.die_frame, size=(11470.0, 4900.0), layer_floorplan=LAYER.FLOORPLAN
+        ),
         cross_section=cross_section,
         edge_to_grating_distance=150.0,
         edge_to_pad_distance=150.0,
         grating_coupler=grating_coupler,
         grating_pitch=250.0,
-        layer_floorplan=LAYER.FLOORPLAN,
         ngratings=14,
         npads=31,
         pad="pad",
         pad_pitch=300.0,
-        size=(11470.0, 4900.0),
     )
 
 

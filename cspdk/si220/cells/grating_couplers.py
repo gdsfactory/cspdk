@@ -15,11 +15,12 @@ from functools import partial
 import gdsfactory as gf
 from gdsfactory.typings import CrossSectionSpec
 
+from cspdk._checks import check_min
 from cspdk.si220._schematic import (
     grating_coupler_elliptical_schematic,
     grating_coupler_rectangular_schematic,
 )
-from cspdk.si220.tech import LAYER, get_band, is_rib
+from cspdk.si220.tech import LAYER, TECH, get_band, is_rib
 
 ##############################
 # grating couplers Rectangular
@@ -225,6 +226,12 @@ def grating_coupler_elliptical(
             Keep it at 0.35 or more to pass the Cornerstone deck.
         cross_section: a cross section or its name or a function generating a cross section.
     """
+    check_min(
+        "grating_line_width",
+        grating_line_width,
+        TECH.grating_gap_min,
+        TECH.design_rules,
+    )
     return gf.c.grating_coupler_elliptical_trenches(
         polarization="te",
         wavelength=wavelength,
