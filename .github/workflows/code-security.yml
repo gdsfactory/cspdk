@@ -17,5 +17,4 @@ jobs:
   security:
     permissions:
       contents: read
-    # TEMP: local copy of doplaydo/pdk-ci-workflow#374 until it reaches pdk-ci-workflow-public
-    uses: ./.github/workflows/code-security-reusable.yml
+    uses: doplaydo/pdk-ci-workflow-public/.github/workflows/code-security.yml@main
