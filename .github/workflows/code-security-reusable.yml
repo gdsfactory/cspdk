@@ -1,0 +1,82 @@
+name: Code Security
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    env:
+      # Installed from PyPI instead of the semgrep/semgrep Docker Hub image: anonymous Docker Hub
+      # pulls are rate-limited and the image tag is mutable. Bump the pin here.
+      SEMGREP_VERSION: "1.180.0"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Semgrep
+        run: |
+          pipx install "semgrep==${SEMGREP_VERSION}"
+          semgrep --version
+      # Findings are advisory: without --error Semgrep exits 0 on findings and non-zero only on
+      # scanner errors, which fail the job.
+      - name: Run Semgrep SAST and secret scan
+        run: semgrep scan --config p/ci --config p/secrets --text --output semgrep-results.txt
+      - name: Publish findings
+        if: ${{ !cancelled() && hashFiles('semgrep-results.txt') != '' }}
+        run: |
+          cat semgrep-results.txt
+          {
+            echo "## Semgrep findings"
+            if [ -s semgrep-results.txt ]; then
+              echo '```'
+              head -c 900000 semgrep-results.txt
+              echo '```'
+            else
+              echo "No findings."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: ${{ !cancelled() && hashFiles('semgrep-results.txt') != '' }}
+        with:
+          name: semgrep-results
+          path: semgrep-results.txt
+
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # exit-code 0 keeps findings advisory; scanner errors still fail the job.
+      - name: Run Trivy vulnerability, misconfiguration, and secret scan
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,misconfig,secret
+          format: table
+          output: trivy-results.txt
+          exit-code: '0'
+      - name: Publish findings
+        if: ${{ !cancelled() && hashFiles('trivy-results.txt') != '' }}
+        run: |
+          cat trivy-results.txt
+          {
+            echo "## Trivy findings"
+            if [ -s trivy-results.txt ]; then
+              echo '```'
+              head -c 900000 trivy-results.txt
+              echo '```'
+            else
+              echo "No findings."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: ${{ !cancelled() && hashFiles('trivy-results.txt') != '' }}
+        with:
+          name: trivy-results
+          path: trivy-results.txt
