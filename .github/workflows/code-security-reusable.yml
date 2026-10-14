@@ -24,7 +24,7 @@ jobs:
       # Findings are advisory: without --error Semgrep exits 0 on findings and non-zero only on
       # scanner errors, which fail the job.
       - name: Run Semgrep SAST and secret scan
-        run: semgrep scan --config p/ci --config p/secrets --text --output semgrep-results.txt
+        run: semgrep scan --metrics=off --config p/ci --config p/secrets --text --output semgrep-results.txt
       - name: Publish findings
         if: ${{ !cancelled() && hashFiles('semgrep-results.txt') != '' }}
         run: |
