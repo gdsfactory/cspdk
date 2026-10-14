@@ -1,4 +1,0 @@
-# protobuf is held at 4.x by vlsir 7.0.0 (protobuf~=4.23, latest release), pulled in via gdsfactoryplus.
-# CVE-2026-0994 is a DoS when parsing untrusted protobuf messages; cspdk doesn't parse untrusted protobuf.
-# Remove once vlsir allows protobuf>=5.29.6.
-CVE-2026-0994
