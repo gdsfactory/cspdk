@@ -58,7 +58,8 @@ skip = "references/*"
 name = "cspdk.si220"
 
 [tool.gdsfactoryplus.drc]
-pdk = "cspdk"
+# No `pdk` here: the DRC service picks each flavour's CORNERSTONE rules from its
+# PDK name (cspdk.si220, cspdk.si340, ...), so none is fixed for all of cspdk.
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
