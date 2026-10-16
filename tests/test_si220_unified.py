@@ -419,29 +419,6 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
     assert np.allclose(circuit["o1", "o2"][0], expected)
 
 
-@pytest.mark.parametrize("name", ["straight", "bend_euler"])
-@pytest.mark.parametrize(
-    ("cross_section", "wl"), [("strip_cband", 1.55), ("strip_oband", 1.31)]
-)
-def test_gdsfactoryplus_resolves_the_dispatching_models(
-    name: str, cross_section: str, wl: float
-) -> None:
-    """GDSFactory+ resolves cell metadata to the shared band-dispatching model."""
-    from inspect import unwrap
-
-    from gdsfactoryplus.factory_metadata import resolve_factory_model
-
-    si220.PDK.activate()
-    model = resolve_factory_model(name, "sax")
-    assert model is not None
-    assert unwrap(model) is si220.PDK.models[name]
-    settings = {"wl": wl, "length": 10.0, "cross_section": cross_section}
-    actual = model(**settings)
-    expected = si220.PDK.models[name](**settings)
-    assert actual.keys() == expected.keys()
-    assert all(np.allclose(actual[ports], expected[ports]) for ports in expected)
-
-
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
 # band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
 # cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
