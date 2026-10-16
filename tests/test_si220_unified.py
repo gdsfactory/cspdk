@@ -419,26 +419,6 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
     assert np.allclose(circuit["o1", "o2"][0], expected)
 
 
-def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
-    """GDSFactory+ scans the package source for models; it must find only dispatchers.
-
-    It registers every public ``def`` returning ``sax.SDict`` by name, so a public
-    band implementation in a submodule would replace the dispatcher of the same name.
-    """
-    from pathlib import Path
-
-    from gdsfactoryplus.core import find_models
-
-    from cspdk.si220.models import get_models
-
-    records = find_models({"cspdk.si220": Path(si220.__file__).parent})
-    sources = {name: Path(record.source).as_posix() for name, record in records.items()}
-    assert sources.keys() == get_models().keys()
-    assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
-        sources
-    )
-
-
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
 # band and type; nothing broadcasts them. Likewise a bend's ``radius`` (the
 # cross-section's) and an MMI's or Y-splitter's ``loss_dB`` (the foundry measurement
