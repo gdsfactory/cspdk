@@ -49,7 +49,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 ### Installation for users
 
-Use python 3.11, 3.12 or 3.13. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
+Use Python 3.12. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
 
 ```
 uv pip install cspdk --upgrade
