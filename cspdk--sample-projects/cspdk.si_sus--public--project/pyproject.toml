@@ -11,7 +11,7 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12"
 ]
-dependencies = ["cspdk", "gdsfactoryplus", "matplotlib"]
+dependencies = ["cspdk", "gdsfactoryplus>=2.1", "matplotlib"]
 description = "Cornerstone suspended Si sample project"
 keywords = ["cornerstone", "cspdk", "eda", "photonics", "python"]
 license = { file = "LICENSE" }

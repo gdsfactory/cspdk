@@ -49,10 +49,16 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 ### Installation for users
 
-Use python 3.11, 3.12 or 3.13. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
+Use Python 3.12, 3.13 or 3.14. We recommend [VSCode](https://code.visualstudio.com/) as an IDE.
 
 ```
 uv pip install cspdk --upgrade
+```
+
+To use cspdk with [GDSFactory+](https://gdsfactory.com), install the extra instead (Python 3.12 only, as GDSFactory+ ships Python 3.12 wheels only):
+
+```
+uv pip install "cspdk[gdsfactoryplus]" --upgrade
 ```
 
 Then you need to restart Klayout to make sure the new technology installed appears.
