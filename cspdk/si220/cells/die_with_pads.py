@@ -22,6 +22,7 @@ def compass(
     port_inclusion: float = 0.0,
     port_orientations: Ints | None = (180, 90, 0, -90),
     auto_rename_ports: bool = True,
+    cross_section: CrossSectionSpec | None = None,
 ) -> gf.Component:
     """Rectangle with ports on each edge (north, south, east, and west).
 
@@ -32,6 +33,7 @@ def compass(
         port_inclusion: from edge.
         port_orientations: list of port_orientations to add. None does not add ports.
         auto_rename_ports: auto rename ports.
+        cross_section: profile of the edge ports, resized to each edge's length.
     """
     return gf.c.compass(
         size=size,
@@ -40,6 +42,7 @@ def compass(
         port_inclusion=port_inclusion,
         port_orientations=port_orientations,
         auto_rename_ports=auto_rename_ports,
+        cross_section=cross_section,
     )
 
 
@@ -72,26 +75,26 @@ def rectangle(
 @gf.cell(tags=["die"], schematic_function=pad_schematic)
 def pad(
     size: tuple[float, float] = (90.0, 90.0),
-    layer: LayerSpec = "PAD",
+    layer: LayerSpec | None = None,
     port_inclusion: float = 0,
     port_orientation: float = 0,
+    cross_section: CrossSectionSpec = "metal_routing",
 ) -> gf.Component:
     """Returns rectangular pad with ports.
 
     Args:
         size: x, y size.
-        layer: pad layer.
-        bbox_layers: list of layers.
-        bbox_offsets: Optional offsets for each layer with respect to size.
-            positive grows, negative shrinks the size.
+        layer: pad layer. Defaults to the cross section's layer.
         port_inclusion: from edge.
         port_orientation: in degrees.
+        cross_section: profile of the pad ports, resized to each port's width.
     """
     return gf.components.pad(
         size=size,
         layer=layer,
         port_inclusion=port_inclusion,
         port_orientation=port_orientation,
+        cross_section=cross_section,
     )
 
 

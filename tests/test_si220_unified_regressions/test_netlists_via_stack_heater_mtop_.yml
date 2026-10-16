@@ -4,6 +4,7 @@ instances:
     info: {}
     settings:
       auto_rename_ports: true
+      cross_section: null
       layer: HEATER
       port_inclusion: 0
       port_orientations:
@@ -20,6 +21,7 @@ instances:
     info: {}
     settings:
       auto_rename_ports: false
+      cross_section: metal_routing
       layer: PAD
       port_inclusion: 0
       port_orientations:

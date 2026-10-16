@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 
+import gdsfactory as gf
 from gdsfactory.config import CONF
 from gdsfactory.cross_section import get_cross_sections
 from gdsfactory.get_factories import get_cells
@@ -23,6 +24,14 @@ layer_transitions = {
     LAYER.PAD: cells.taper_metal,
 }
 
+# Profiles of ports that gdsfactory creates from a layer and width. Only the
+# heater strip of a heater cross section still needs one: an auxiliary strip
+# can't name a cross section for its ports. It needs the same radii as this
+# PDK's heater cross sections of the same geometry.
+port_cross_sections = {
+    (LAYER.HEATER.layer, LAYER.HEATER.datatype): gf.cross_section.heater_metal,
+}
+
 
 @lru_cache
 def get_pdk() -> Pdk:
@@ -38,6 +47,7 @@ def get_pdk() -> Pdk:
         models=_models,
         routing_strategies=routing_strategies,
         layer_transitions=layer_transitions,
+        port_cross_sections=port_cross_sections,
     )
 
 

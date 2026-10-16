@@ -2,7 +2,7 @@ info:
   length: 10
   width1: 0.4
   width2: 0.4
-name: taper_L10_W0p4_WNone_PNone_CSxs_ro
+name: taper_L10_W0p4_WNone_PNone_CSxs_ro_LNone_PNo1_o2_PTopti_0c761681
 ports:
   o1:
     center:
@@ -25,4 +25,11 @@ ports:
 settings:
   cross_section: xs_ro
   length: 10
+  port_names:
+  - o1
+  - o2
+  port_types:
+  - optical
+  - optical
   width1: 0.4
+  with_bbox: true

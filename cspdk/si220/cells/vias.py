@@ -32,4 +32,5 @@ def via_stack_heater_mtop(size: Size = (20.0, 10.0)) -> gf.Component:
         slot_horizontal=False,
         slot_vertical=False,
         port_orientations=(180, 90, 0, -90),
+        cross_section="metal_routing",
     )

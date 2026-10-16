@@ -14,7 +14,7 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "gdsfactory~=9.51.0",
+  "gdsfactory>=10.0.0rc0",
   "gdsfactoryplus",
   "gplugins[sax,femwell,tidy3d]~=2.1.0",
   "circulax>=0.2.3",
@@ -197,3 +197,6 @@ start_string = "<!-- towncrier release notes start -->\n"
 template = ".changelog.d/changelog_template.jinja"
 title_format = "## [{version}](https://github.com/gdsfactory/cspdk/releases/tag/v{version}) - {project_date}"
 underlines = ["", "", ""]
+
+[tool.uv.sources]
+gdsfactory = {path = "../gdsfactory", editable = true}

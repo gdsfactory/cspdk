@@ -1,7 +1,7 @@
 """Building blocks for the cspdk.ge_on_si library."""
 
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec
+from gdsfactory.typings import CrossSectionSpec, LayerSpec
 
 from cspdk.ge_on_si._schematic import (
     bend_euler_schematic,
@@ -85,6 +85,10 @@ def taper(
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_rib",
+    layer: LayerSpec | None = None,
+    port_names: tuple[str, str] = ("o1", "o2"),
+    port_types: tuple[str, str] = ("optical", "optical"),
+    with_bbox: bool = True,
 ) -> gf.Component:
     """A taper.
 
@@ -94,6 +98,10 @@ def taper(
         width2: the output width of the taper (if not given, use port).
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
+        layer: layer of the taper. Defaults to the cross section's main layer.
+        port_names: input and output port names.
+        port_types: input and output port types.
+        with_bbox: whether to draw the cross section's bbox layers.
     """
     return gf.c.taper(
         length=length,
@@ -101,6 +109,10 @@ def taper(
         width2=width2,
         port=port,
         cross_section=cross_section,
+        layer=layer,
+        port_names=port_names,
+        port_types=port_types,
+        with_bbox=with_bbox,
     )
 
 

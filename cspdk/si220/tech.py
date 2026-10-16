@@ -1,8 +1,7 @@
 """Technology definitions."""
 
 from collections.abc import Callable
-from functools import partial, wraps
-from typing import Any
+from functools import partial
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
@@ -169,32 +168,7 @@ TECH = Tech()
 ############################
 
 cross_sections: dict[str, Callable[..., CrossSection]] = {}
-_cross_section_default_names: dict[str, str] = {}
-
-
-def xsection(func: Callable[..., CrossSection]) -> Callable[..., CrossSection]:
-    """Returns decorated to register a cross section function.
-
-    Ensures that the cross-section name matches the name of the function that generated it when created using default parameters
-
-    ```python
-        @xsection
-        def strip_cband(width=TECH.width_cband, radius=TECH.radius_strip):
-            return gf.cross_section.cross_section(width=width, radius=radius)
-    ```
-    """
-    default_xs = func()
-    _cross_section_default_names[default_xs.name] = func.__name__
-
-    @wraps(func)
-    def newfunc(**kwargs: Any) -> CrossSection:
-        xs = func(**kwargs)
-        if xs.name in _cross_section_default_names:
-            xs._name = _cross_section_default_names[xs.name]
-        return xs
-
-    cross_sections[func.__name__] = newfunc
-    return newfunc
+xsection = partial(gf.cross_section.xsection, xs_container=cross_sections)
 
 
 @xsection

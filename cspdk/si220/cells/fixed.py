@@ -5,7 +5,7 @@ from gdsfactory.typings import CrossSectionSpec
 
 from cspdk.si220._schematic import crossing_rib_schematic, crossing_schematic
 from cspdk.si220.config import PATH
-from cspdk.si220.tech import LAYER, get_band
+from cspdk.si220.tech import get_band
 
 ################
 # Imported from Cornerstone MPW SOI 220nm GDSII Template
@@ -39,12 +39,10 @@ def crossing_rib(
     xr = xc
     yb = -dx
     yt = +dx
-    width = gf.get_cross_section(cross_section).width
-
-    c.add_port("o1", orientation=180, center=(xl, 0), width=width, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, 0), width=width, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
+    c.add_port("o1", orientation=180, center=(xl, 0), cross_section=cross_section)
+    c.add_port("o2", orientation=90, center=(x, yt), cross_section=cross_section)
+    c.add_port("o3", orientation=0, center=(xr, 0), cross_section=cross_section)
+    c.add_port("o4", orientation=270, center=(x, yb), cross_section=cross_section)
     return c
 
 
@@ -70,10 +68,8 @@ def crossing(
     xr = xc
     yb = yc - dx
     yt = yc + dx
-    width = gf.get_cross_section(cross_section).width
-
-    c.add_port("o1", orientation=180, center=(xl, yc), width=width, layer=LAYER.WG)
-    c.add_port("o2", orientation=90, center=(x, yt), width=width, layer=LAYER.WG)
-    c.add_port("o3", orientation=0, center=(xr, yc), width=width, layer=LAYER.WG)
-    c.add_port("o4", orientation=270, center=(x, yb), width=width, layer=LAYER.WG)
+    c.add_port("o1", orientation=180, center=(xl, yc), cross_section=cross_section)
+    c.add_port("o2", orientation=90, center=(x, yt), cross_section=cross_section)
+    c.add_port("o3", orientation=0, center=(xr, yc), cross_section=cross_section)
+    c.add_port("o4", orientation=270, center=(x, yb), cross_section=cross_section)
     return c

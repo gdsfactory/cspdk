@@ -1,7 +1,9 @@
 """Building blocks for the cspdk.si_sus library."""
 
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec
+import numpy as np
+from gdsfactory.component_functions.bends.bend_s import bezier_curve
+from gdsfactory.typings import CrossSectionSpec, LayerSpec
 
 from cspdk.si_sus._schematic import (
     bend_circular_schematic,
@@ -11,28 +13,10 @@ from cspdk.si_sus._schematic import (
     straight_schematic,
     taper_schematic,
 )
-from cspdk.si_sus.tech import LAYER, Tech
+from cspdk.si_sus.tech import LAYER, Tech, add_tethers
 
 
-def _stabilize_tether_names(c: gf.Component) -> None:
-    """Rename the unnamed along-path tether containers deterministically.
-
-    Stopgap for https://github.com/gdsfactory/gdsfactory/issues/4598:
-    gdsfactory's ComponentAlongPath support (used by xs_sus for the tether
-    slots) places the slots inside an auto-named 'Unnamed_N' container cell.
-    N depends on global creation order, which would make GDS and netlist
-    regression files nondeterministic. Remove once the fix is released.
-    """
-    for i, inst in enumerate(c.insts):
-        if inst.cell.name.startswith("Unnamed"):
-            inst.cell.name = f"{c.name}_tethers_{i}"
-
-
-@gf.cell(
-    tags=["cells"],
-    schematic_function=straight_schematic,
-    post_process=[_stabilize_tether_names],
-)
+@gf.cell(tags=["cells"], schematic_function=straight_schematic)
 def straight(
     length: float = 10.0,
     cross_section: CrossSectionSpec = "xs_sus",
@@ -45,14 +29,15 @@ def straight(
         cross_section: a cross section or its name or a function generating a cross section.
         kwargs: additional arguments to pass to the straight function.
     """
-    return gf.c.straight(length=length, cross_section=cross_section, **kwargs)
+    c = gf.component_functions.straight(
+        length=length, cross_section=cross_section, **kwargs
+    )
+    path = gf.path.straight(length=length, npoints=kwargs.get("npoints", 2))
+    add_tethers(c, path, cross_section)
+    return c
 
 
-@gf.cell(
-    tags=["cells"],
-    schematic_function=bend_s_schematic,
-    post_process=[_stabilize_tether_names],
-)
+@gf.cell(tags=["cells"], schematic_function=bend_s_schematic)
 def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     cross_section: CrossSectionSpec = "xs_sus",
@@ -65,18 +50,23 @@ def bend_s(
         cross_section: a cross section or its name or a function generating a cross section.
         allow_min_radius_violation: if True, allows the s-bend to have a smaller radius than the minimum radius.
     """
-    return gf.components.bend_s(
-        size=size,
+    dx, dy = size
+    if dy == 0:
+        return straight(length=dx, cross_section=cross_section)
+    control_points = ((0, 0), (dx / 2, 0), (dx / 2, dy), (dx, dy))
+    npoints = 99
+    c = gf.component_functions.bezier(
+        control_points=control_points,
+        npoints=npoints,
         cross_section=cross_section,
         allow_min_radius_violation=allow_min_radius_violation,
     )
+    path = gf.Path(bezier_curve(np.linspace(0, 1, npoints), control_points))
+    add_tethers(c, path, cross_section)
+    return c
 
 
-@gf.cell(
-    tags=["cells"],
-    schematic_function=bend_euler_schematic,
-    post_process=[_stabilize_tether_names],
-)
+@gf.cell(tags=["cells"], schematic_function=bend_euler_schematic)
 def bend_euler(
     radius: float | None = None,
     angle: float = 90.0,
@@ -93,7 +83,7 @@ def bend_euler(
         width: the width of the waveguide forming the bend.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return gf.components.bend_euler(
+    c = gf.component_functions.bend_euler(
         radius=radius,
         angle=angle,
         p=p,
@@ -104,13 +94,18 @@ def bend_euler(
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )
+    path = gf.path.euler(
+        radius=radius or gf.get_cross_section(cross_section).radius,
+        angle=angle,
+        p=p,
+        use_eff=True,
+        npoints=None,
+    )
+    add_tethers(c, path, cross_section)
+    return c
 
 
-@gf.cell(
-    tags=["cells"],
-    schematic_function=bend_circular_schematic,
-    post_process=[_stabilize_tether_names],
-)
+@gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
 def bend_circular(
     radius: float | None = None,
     angle: float = 90.0,
@@ -128,26 +123,31 @@ def bend_circular(
         width: the width of the waveguide forming the bend.
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return gf.components.bend_circular(
+    c = gf.component_functions.bend_circular(
         radius=radius,
         angle=angle,
         width=width,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )
+    path = gf.path.arc(
+        radius=radius or gf.get_cross_section(cross_section).radius, angle=angle
+    )
+    add_tethers(c, path, cross_section)
+    return c
 
 
-@gf.cell(
-    tags=["cells"],
-    schematic_function=taper_schematic,
-    post_process=[_stabilize_tether_names],
-)
+@gf.cell(tags=["cells"], schematic_function=taper_schematic)
 def taper(
     length: float = 10.0,
     width1: float = Tech.width_sus,
     width2: float | None = None,
     port: gf.Port | None = None,
     cross_section: CrossSectionSpec = "xs_sus",
+    layer: LayerSpec | None = None,
+    port_names: tuple[str, str] = ("o1", "o2"),
+    port_types: tuple[str, str] = ("optical", "optical"),
+    with_bbox: bool = True,
 ) -> gf.Component:
     """A taper.
 
@@ -157,6 +157,10 @@ def taper(
         width2: the output width of the taper (if not given, use port).
         port: the port (with certain width) to taper towards (if not given, use width2).
         cross_section: a cross section or its name or a function generating a cross section.
+        layer: layer of the taper. Defaults to the cross section's main layer.
+        port_names: input and output port names.
+        port_types: input and output port types.
+        with_bbox: whether to draw the cross section's bbox layers.
     """
     return gf.c.taper(
         length=length,
@@ -164,6 +168,10 @@ def taper(
         width2=width2,
         port=port,
         cross_section=cross_section,
+        layer=layer,
+        port_names=port_names,
+        port_types=port_types,
+        with_bbox=with_bbox,
     )
 
 

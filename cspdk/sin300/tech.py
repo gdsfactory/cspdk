@@ -1,11 +1,14 @@
 """Technology definitions."""
 
-import sys
 from collections.abc import Iterable
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.cross_section import CrossSectionSpec, get_cross_sections
+from gdsfactory.cross_section import (
+    CrossSectionFactory,
+    CrossSectionSpec,
+    xsection,
+)
 from gdsfactory.routing.route_bundle import ManhattanRoute
 from gdsfactory.technology import (
     LayerLevel,
@@ -119,30 +122,29 @@ TECH = Tech()
 # Cross-sections functions
 ############################
 
-# will be filled after all cross sections are defined:
-DEFAULT_CROSS_SECTION_NAMES: dict[str, str] = {}
+cross_sections: dict[str, CrossSectionFactory] = {}
+_xsection = partial(xsection, xs_container=cross_sections)
 
 
+@_xsection
 def xs_nc(width=Tech.width_nc, radius=Tech.radius_nc, **kwargs) -> gf.CrossSection:
     """Returns nitride cband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
+@_xsection
 def xs_no(width=Tech.width_no, radius=Tech.radius_no, **kwargs) -> gf.CrossSection:
     """Returns nitride oband cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
     kwargs["radius_min"] = kwargs.get("radius_min", radius)
     xs = gf.cross_section.strip(width=width, radius=radius, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
+@_xsection
 def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
     """Returns nitride cband cross-section with heater metal."""
     kwargs["layer"] = kwargs.get("layer", LAYER.NITRIDE)
@@ -151,11 +153,10 @@ def xs_nc_heater_metal(width=Tech.width_nc, **kwargs) -> gf.CrossSection:
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
     xs = gf.cross_section.strip_heater_metal(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
+@_xsection
 def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     """Returns a single-layer electrical routing cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.PAD)
@@ -168,32 +169,15 @@ def metal_routing(width=10.0, **kwargs) -> gf.CrossSection:
     kwargs["radius"] = kwargs.get("radius", 0)
     kwargs["radius_min"] = kwargs.get("radius_min", kwargs["radius"])
     xs = gf.cross_section.cross_section(width=width, **kwargs)
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
     return xs
 
 
+@_xsection
 def heater_metal(width=4.0, **kwargs) -> gf.CrossSection:
     """Returns heater metal cross-section."""
     kwargs["layer"] = kwargs.get("layer", LAYER.HEATER)
-    xs = metal_routing(width=width, **kwargs).copy()
-    if xs.name in DEFAULT_CROSS_SECTION_NAMES:
-        xs._name = DEFAULT_CROSS_SECTION_NAMES[xs.name]
+    xs = metal_routing(width=width, **kwargs)
     return xs
-
-
-def populate_default_cross_section_names():
-    """Populates default cross-section names."""
-    xss = {k: v() for k, v in get_cross_sections(sys.modules[__name__]).items()}
-    for k, xs in xss.items():
-        xs._name = ""
-        _k = xs.name
-        xs._name = k
-        DEFAULT_CROSS_SECTION_NAMES[_k] = xs.name
-
-
-populate_default_cross_section_names()
-cross_sections = get_cross_sections(sys.modules[__name__])
 
 
 ############################

@@ -3,7 +3,7 @@
 from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.typings import CrossSectionSpec
+from gdsfactory.typings import CrossSectionSpec, LayerSpec
 
 from cspdk.si220._schematic import (
     taper_metal_schematic,
@@ -19,6 +19,10 @@ def taper(
     width1: float = TECH.width,
     width2: float | None = None,
     cross_section: CrossSectionSpec = "strip_cband",
+    layer: LayerSpec | None = None,
+    port_names: tuple[str, str] = ("o1", "o2"),
+    port_types: tuple[str, str] = ("optical", "optical"),
+    with_bbox: bool = True,
 ) -> gf.Component:
     """Linear taper, which tapers only the main cross section section.
 
@@ -27,18 +31,22 @@ def taper(
         width1: width of the west/left port.
         width2: width of the east/right port. Defaults to width1.
         cross_section: specification (CrossSection, string, CrossSectionFactory dict).
+        layer: layer of the taper. Defaults to the cross section's main layer.
+        port_names: input and output port names.
+        port_types: input and output port types.
+        with_bbox: whether to draw the cross section's bbox layers.
     """
     return gf.c.taper(
         length=length,
         width1=width1,
         width2=width2,
         cross_section=cross_section,
-        layer=None,
+        layer=layer,
         port=None,
         with_two_ports=True,
-        port_names=("o1", "o2"),
-        port_types=("optical", "optical"),
-        with_bbox=True,
+        port_names=port_names,
+        port_types=port_types,
+        with_bbox=with_bbox,
     )
 
 
@@ -48,6 +56,10 @@ def taper_metal(
     width1: float = TECH.width_metal,
     width2: float | None = None,
     cross_section: CrossSectionSpec = "metal_routing",
+    layer: LayerSpec | None = None,
+    port_names: tuple[str, str] = ("e1", "e2"),
+    port_types: tuple[str, str] = ("electrical", "electrical"),
+    with_bbox: bool = True,
 ) -> gf.Component:
     """Linear taper, which tapers only the main cross section section.
 
@@ -56,18 +68,22 @@ def taper_metal(
         width1: width of the west/left port.
         width2: width of the east/right port. Defaults to width1.
         cross_section: specification (CrossSection, string, CrossSectionFactory dict).
+        layer: layer of the taper. Defaults to the cross section's main layer.
+        port_names: input and output port names.
+        port_types: input and output port types.
+        with_bbox: whether to draw the cross section's bbox layers.
     """
     return gf.c.taper(
         length=length,
         width1=width1,
         width2=width2,
         cross_section=cross_section,
-        layer=None,
+        layer=layer,
         port=None,
         with_two_ports=True,
-        port_names=("e1", "e2"),
-        port_types=("electrical", "electrical"),
-        with_bbox=True,
+        port_names=port_names,
+        port_types=port_types,
+        with_bbox=with_bbox,
     )
 
 

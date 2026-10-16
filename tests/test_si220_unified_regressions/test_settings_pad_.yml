@@ -4,7 +4,7 @@ info:
   - 90
   xsize: 90
   ysize: 90
-name: pad_S90_90_LPAD_PI0_PO0
+name: pad_S90_90_LNone_PI0_PO0_CSmetal_routing
 ports:
   e1:
     center:
@@ -52,7 +52,7 @@ ports:
     port_type: pad
     width: 90
 settings:
-  layer: PAD
+  cross_section: metal_routing
   port_inclusion: 0
   port_orientation: 0
   size:

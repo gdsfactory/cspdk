@@ -11,8 +11,6 @@ instances:
     settings:
       cross_section: xs_n780
       length: 20
-      npoints: 2
-      width: null
   straight2:
     component: straight
     info:
@@ -25,8 +23,6 @@ instances:
     settings:
       cross_section: xs_n780
       length: 20
-      npoints: 2
-      width: null
 nets: []
 placements:
   straight:

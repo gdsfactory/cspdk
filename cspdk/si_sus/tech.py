@@ -4,10 +4,8 @@ import sys
 
 import gdsfactory as gf
 from gdsfactory.cross_section import (
-    ComponentAlongPath,
     CrossSection,
     CrossSectionSpec,
-    Section,
     get_cross_sections,
 )
 from gdsfactory.routing.route_bundle import ManhattanRoute
@@ -129,8 +127,8 @@ def _etch_slot_pair() -> gf.Component:
     Placing the pair as a single component along the path center line keeps
     the two windows radially aligned in bends, like the foundry reference
     bend GDS (same slot count on both sides, slots pointing at the bend
-    center). Built with raw kdb shapes (not gf.c.rectangle) so it can be
-    created at import time, before any PDK is active.
+    center). Built with raw kdb shapes (not gf.c.rectangle) so it doesn't
+    depend on the active PDK's layers.
     """
     import kfactory as kf  # noqa: PLC0415
 
@@ -171,20 +169,38 @@ def xs_sus(
         radius: bend radius.
         radius_min: minimum allowed bend radius.
     """
-    return CrossSection(
-        sections=(
-            Section(
-                width=width,
-                layer=LAYER.WG_MARK,
-                port_names=("o1", "o2"),
-                port_types=("optical", "optical"),
-            ),
-        ),
+    return gf.cross_section.cross_section(
+        width=width,
+        layer=LAYER.WG_MARK,
+        port_names=("o1", "o2"),
+        port_types="optical",
         radius=radius,
         radius_min=radius_min,
-        components_along_path=(
-            ComponentAlongPath(component=_etch_slot_pair(), spacing=TECH.tether_period),
-        ),
+    )
+
+
+def add_tethers(
+    component: gf.Component, path: gf.Path, cross_section: CrossSectionSpec
+) -> None:
+    """Draw the etch slots of a suspended waveguide along `path`.
+
+    Cross sections don't carry components along their path, so every cell
+    that extrudes a suspended waveguide adds the slots itself. Only cross
+    sections with a WG_MARK core are suspended; others get no slots.
+
+    Args:
+        component: component to add the slots to.
+        path: center line of the extruded waveguide.
+        cross_section: cross section of the waveguide.
+    """
+    xs = gf.get_cross_section(cross_section)
+    if (xs.layer.layer, xs.layer.datatype) != (
+        LAYER.WG_MARK.layer,
+        LAYER.WG_MARK.datatype,
+    ):
+        return
+    component << gf.path.along_path(
+        p=path, component=_etch_slot_pair(), spacing=TECH.tether_period, padding=0
     )
 
 
