@@ -419,24 +419,27 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
     assert np.allclose(circuit["o1", "o2"][0], expected)
 
 
-def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
-    """GDSFactory+ scans the package source for models; it must find only dispatchers.
+@pytest.mark.parametrize("name", ["straight", "bend_euler"])
+@pytest.mark.parametrize(
+    ("cross_section", "wl"), [("strip_cband", 1.55), ("strip_oband", 1.31)]
+)
+def test_gdsfactoryplus_resolves_the_dispatching_models(
+    name: str, cross_section: str, wl: float
+) -> None:
+    """GDSFactory+ resolves cell metadata to the shared band-dispatching model."""
+    from inspect import unwrap
 
-    It registers every public ``def`` returning ``sax.SDict`` by name, so a public
-    band implementation in a submodule would replace the dispatcher of the same name.
-    """
-    from pathlib import Path
+    from gdsfactoryplus.factory_metadata import resolve_factory_model
 
-    from gdsfactoryplus.core import find_models
-
-    from cspdk.si220.models import get_models
-
-    records = find_models({"cspdk.si220": Path(si220.__file__).parent})
-    sources = {name: Path(record.source).as_posix() for name, record in records.items()}
-    assert sources.keys() == get_models().keys()
-    assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
-        sources
-    )
+    si220.PDK.activate()
+    model = resolve_factory_model(name, "sax")
+    assert model is not None
+    assert unwrap(model) is si220.PDK.models[name]
+    settings = {"wl": wl, "length": 10.0, "cross_section": cross_section}
+    actual = model(**settings)
+    expected = si220.PDK.models[name](**settings)
+    assert actual.keys() == expected.keys()
+    assert all(np.allclose(actual[ports], expected[ports]) for ports in expected)
 
 
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
