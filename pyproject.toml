@@ -25,7 +25,7 @@ license = { file = "LICENSE" }
 name = "cspdk"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
-version = "2.0.0"
+version = "2.1.0"
 
 [project.optional-dependencies]
 dev = [
@@ -61,7 +61,9 @@ skip = "references/*"
 name = "cspdk.si220"
 
 [tool.gdsfactoryplus.drc]
-pdk = "cspdk"
+# No `pdk` here: the DRC service picks the CORNERSTONE rules from the PDK name.
+# At the repo root that is cspdk.si220 (see [tool.gdsfactoryplus.pdk]); each
+# sample project checks its own flavour. DRC for every flavour here is #380.
 timeout = 300
 
 [tool.gdsfactoryplus.pdk]
@@ -217,7 +219,7 @@ message_template = "Bump to {new_version}"
 tag_template = "v{new_version}"
 
 [tool.tbump.version]
-current = "2.0.0"
+current = "2.1.0"
 # Example of a semver regexp.
 # Make sure this matches current_version before
 # using tbump

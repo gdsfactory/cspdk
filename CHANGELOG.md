@@ -2,6 +2,59 @@
 
 <!-- towncrier release notes start -->
 
+## [2.1.0](https://github.com/gdsfactory/cspdk/releases/tag/v2.1.0) - 2026-10-16
+
+cspdk 2.1.0 checks design rules in the cells and fixes the cells that broke CORNERSTONE's rules. It also lets each flavour's DRC use its own rules, adds a submission checker for MPW Run 50 (designs due 11 November 2026), and adds a sample project for every flavour.
+
+### Changes that affect existing designs
+
+- **Cells reject gaps below the design-rule minimum (#406).** A gap parameter below its flavour's minimum now raises a `ValueError`.
+  - A value exactly at the minimum passes.
+  - `None`, meaning the cell's default geometry, isn't checked.
+  - The minimums come from the CORNERSTONE design guidelines:
+
+    | Flavour | `gap_min` (µm) | `grating_gap_min` (µm) |
+    |---|---|---|
+    | si220, si340, si500 | 0.2 | 0.25 |
+    | sin200 | 0.2 | 0.2 |
+    | sin300 | 0.25 | 0.25 |
+
+- **Cells that broke CORNERSTONE's rules have new defaults (#387):**
+  - si340 and si500 `grating_coupler_elliptical`, all variants: 350 nm unetched ridges, as si220 has had since 2.0.0.
+  - si340 `grating_coupler_elliptical_so`: a new `trenches_extra_angle` parameter (default 9), set to 11 so the first trenches reach 200 nm beyond the waveguide.
+  - sin300 `coupler` and `coupler_straight`: default `gap` 0.25 µm (was 0.236).
+- **DRC uses each project's PDK name (#421).** cspdk no longer fixes `pdk = "cspdk"` in its DRC settings, so GDSFactory+ checks a project against the rules of the flavour set in its `pdk.name`, for example `cspdk.si340`.
+- **si220 circulax heater (#386):**
+  - `ThermalPhaseShifter` now uses the same phase convention as the SAX models, `exp(+1j·φ)`.
+  - Its defaults now match SAX's `straight_heater_metal`: C-band strip neff 2.38, ng 4.30, dispersion, 3 dB/cm.
+  - Mixed SAX and circulax circuits, such as the thermal MZI sample, now agree, and their results change.
+
+### New
+
+- **MPW Run 50 submission checker (#389):** `cspdk.si220.submission.check_submission(path)` checks the submission rules from the 50th-call design guideline that geometric DRC doesn't cover. A guide comes with it.
+- **Sample projects for si340, si500, sin200, si_sus and ge_on_si (#407).** Every flavour now has one.
+- **Docs (#405):** a models page per flavour, giving each SAX model's parameters, defaults and spectrum, plus published notebooks.
+
+### Bug fixes
+
+- si340 and sin300 `die` use `die_frame_with_pads` instead of the deprecated `die_with_pads`. The geometry is unchanged (#403).
+- si220 `wire_corner45_straight` and sin200 `die_frame` no longer log kfactory duplicate-name errors (#412).
+- The si220 sample notebook runs with GDSFactory+ 2.x (#414).
+
+<details>
+<summary>Packaging, CI and tests</summary>
+
+- The release workflow creates the GitHub release from this file, and can be re-run safely (#388).
+- CI workflow templates synced; code-security scanning (Semgrep, Trivy) now runs (#414).
+- Tests:
+  - every SAX model is finite, passive and reciprocal (#404);
+  - regression data for every model's parameters and defaults (#409);
+  - no duplicate cell names (#412);
+  - a manifest of reference-file hashes (#413).
+
+</details>
+
+
 ## [2.0.0](https://github.com/gdsfactory/cspdk/releases/tag/v2.0.0) - 2026-10-12
 
 cspdk 2.0.0 merges the si220 C-band and O-band PDKs into one, matches si220 to the Cornerstone MPW Run 50 library (designs due 11 November 2026), and repairs the other six flavours against their foundry GDS. Existing designs will need changes: see **Breaking changes** below.
