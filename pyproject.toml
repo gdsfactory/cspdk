@@ -15,7 +15,6 @@ classifiers = [
 ]
 dependencies = [
   "gdsfactory~=9.51.0",
-  "gdsfactoryplus",
   "gplugins[sax,femwell,tidy3d]~=2.1.0",
   "circulax>=0.2.3",
   "klujax>=0.5.1"
@@ -31,6 +30,8 @@ version = "2.1.0"
 [project.optional-dependencies]
 dev = [
   "doroutes",
+  # GDSFactory+ ships Python 3.12 wheels only; its tests skip without it.
+  "gdsfactoryplus>=1.8; python_version < '3.13'",
   "jsondiff",
   "pre-commit",
   "pytest",
@@ -49,6 +50,8 @@ docs = [
   "mkdocstrings[python]>=0.27.0",
   "zensical>=0.0.40,<0.1.0"
 ]
+# Install with GDSFactory+: pip install "cspdk[gdsfactoryplus]" (Python 3.12 only).
+gdsfactoryplus = ["gdsfactoryplus>=1.8"]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem, euclidian"

@@ -420,14 +420,18 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
 
 
 def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
-    """GDSFactory+ scans the package source for models; it must find only dispatchers.
+    """GDSFactory+ 1.x scans the package source for models; it must find only dispatchers.
 
     It registers every public ``def`` returning ``sax.SDict`` by name, so a public
     band implementation in a submodule would replace the dispatcher of the same name.
+    GDSFactory+ 2.x reads ``PDK.models`` instead and has no ``find_models``.
     """
     from pathlib import Path
 
-    from gdsfactoryplus.core import find_models
+    core = pytest.importorskip("gdsfactoryplus.core")
+    if not hasattr(core, "find_models"):
+        pytest.skip("GDSFactory+ 2.x resolves models from PDK.models")
+    find_models = core.find_models
 
     from cspdk.si220.models import get_models
 
