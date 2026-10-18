@@ -1,0 +1,130 @@
+instances:
+  bend_circular:
+    component: bend_circular
+    info:
+      dy: 25
+      length: 39.27
+      radius: 25
+      route_info_length: 39.27
+      route_info_min_bend_radius: 25
+      route_info_n_bend_90: 1
+      route_info_rib_length: 39.27
+      route_info_type: rib
+      route_info_weight: 39.27
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: rib
+      radius: 25
+  bend_circular2:
+    component: bend_circular
+    info:
+      dy: 25
+      length: 39.27
+      radius: 25
+      route_info_length: 39.27
+      route_info_min_bend_radius: 25
+      route_info_n_bend_90: 1
+      route_info_rib_length: 39.27
+      route_info_type: rib
+      route_info_weight: 39.27
+      width: 0.45
+    settings:
+      angle: 90
+      cross_section: rib
+      radius: 25
+  coupler_ring:
+    component: coupler_ring
+    info:
+      radius: 25
+    settings:
+      bend: bend_circular
+      cross_section: rib
+      gap: 0.25
+      length_extension: 30
+      length_x: 4
+      radius: 25
+      straight: straight
+  straight:
+    component: straight
+    info:
+      length: 0.6
+      route_info_length: 0.6
+      route_info_rib_length: 0.6
+      route_info_type: rib
+      route_info_weight: 0.6
+      width: 0.45
+    settings:
+      cross_section: rib
+      length: 0.6
+  straight2:
+    component: straight
+    info:
+      length: 0.6
+      route_info_length: 0.6
+      route_info_rib_length: 0.6
+      route_info_type: rib
+      route_info_weight: 0.6
+      width: 0.45
+    settings:
+      cross_section: rib
+      length: 0.6
+  straight3:
+    component: straight
+    info:
+      length: 4
+      route_info_length: 4
+      route_info_rib_length: 4
+      route_info_type: rib
+      route_info_weight: 4
+      width: 0.45
+    settings:
+      cross_section: rib
+      length: 4
+nets:
+- p1: bend_circular2,o1
+  p2: straight2,o1
+- p1: bend_circular2,o2
+  p2: straight3,o1
+- p1: bend_circular,o1
+  p2: straight3,o2
+- p1: bend_circular,o2
+  p2: straight,o2
+- p1: coupler_ring,o2
+  p2: straight,o1
+- p1: coupler_ring,o3
+  p2: straight2,o2
+placements:
+  bend_circular:
+    mirror: false
+    rotation: 180
+    x: -4
+    y: 51.3
+  bend_circular2:
+    mirror: false
+    rotation: 90
+    x: 25
+    y: 26.3
+  coupler_ring:
+    mirror: false
+    rotation: 0
+    x: 0
+    y: 0
+  straight:
+    mirror: false
+    rotation: 90
+    x: -29
+    y: 25.7
+  straight2:
+    mirror: false
+    rotation: 270
+    x: 25
+    y: 26.3
+  straight3:
+    mirror: false
+    rotation: 180
+    x: 0
+    y: 51.3
+ports:
+  o1: coupler_ring,o1
+  o2: coupler_ring,o4

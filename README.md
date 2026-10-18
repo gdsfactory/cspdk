@@ -30,8 +30,13 @@ The University of Southampton's CORNERSTONE silicon photonics platform, a 220nm 
 | `cspdk.sin200` | SiN 200nm | Strip | Visible (520/638/780nm) | Yes |
 | `cspdk.ge_on_si` | Ge-on-Si | Rib | Mid-IR (3800nm) | No |
 | `cspdk.si_sus` | Suspended Si | Suspended | Mid-IR (3800nm) | No |
+| `cspdk.si220_ebeam_event` | SOI 220nm e-beam, **EVENT-ONLY** (see below) | Rib | C-band | No |
 
 Every variant includes SAX circuit models for its optical cells.
+
+`cspdk.si220_ebeam_event` is for the CORNERSTONE e-beam workshop event only. It
+is not for regular CORNERSTONE MPW submissions, and its rules are provisional:
+see [its README](cspdk/si220_ebeam_event/README.md).
 
 ## Installation
 

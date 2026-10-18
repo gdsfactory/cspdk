@@ -10,6 +10,7 @@ import pytest
 
 from cspdk.ge_on_si.tech import LAYER_STACK as LAYER_STACK_GE_ON_SI
 from cspdk.si220.tech import LAYER_STACK as LAYER_STACK_SI220
+from cspdk.si220_ebeam_event.tech import LAYER_STACK as LAYER_STACK_SI220_EBEAM_EVENT
 from cspdk.si340.tech import LAYER_STACK as LAYER_STACK_SI340
 from cspdk.si500.tech import LAYER_STACK as LAYER_STACK_SI500
 from cspdk.si_sus.tech import LAYER_STACK as LAYER_STACK_SI_SUS
@@ -27,6 +28,7 @@ LAYER_STACKS = {
     "sin200": LAYER_STACK_SIN200,
     "sin300": LAYER_STACK_SIN300,
     "ge_on_si": LAYER_STACK_GE_ON_SI,
+    "si220_ebeam_event": LAYER_STACK_SI220_EBEAM_EVENT,
 }
 
 

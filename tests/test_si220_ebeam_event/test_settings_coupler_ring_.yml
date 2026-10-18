@@ -1,0 +1,47 @@
+info:
+  radius: 25
+name: coupler_ring_G0p25_R25_LX4_Bbend_circular_Sstraight_CSrib_LENone
+ports:
+  o1:
+    center:
+    - -34
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -29
+    - 25.7
+    layer: WG
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 25
+    - 25.7
+    layer: WG
+    name: o3
+    orientation: 90
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - 30
+    - 0
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  bend: bend_circular
+  cross_section: rib
+  gap: 0.25
+  length_x: 4
+  radius: 25
+  straight: straight

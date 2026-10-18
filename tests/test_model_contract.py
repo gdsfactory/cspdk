@@ -26,7 +26,16 @@ from circulax.components.electronic import Resistor
 from circulax.components.photonic import OpticalSource
 from circulax.s_transforms import sax_component
 
-FLAVOURS = ["si220", "si340", "si500", "sin200", "sin300", "si_sus", "ge_on_si"]
+FLAVOURS = [
+    "si220",
+    "si340",
+    "si500",
+    "sin200",
+    "sin300",
+    "si_sus",
+    "ge_on_si",
+    "si220_ebeam_event",
+]
 
 # None means "take it from the cross-section or band" (bend radius, band loss and
 # grating bandwidth, or a path length derived from the geometry); a single concrete
@@ -43,7 +52,8 @@ NONE_DEFAULTS_ALLOWED_SI220 = NONE_DEFAULTS_ALLOWED | {
 }
 
 # Band-alias suffix -> band centre wavelength (um). si220 has its own band checks
-# (tests/test_si220_unified.py); si_sus and ge_on_si have a single band, no aliases.
+# (tests/test_si220_unified.py); si_sus, ge_on_si and si220_ebeam_event have a
+# single band, no aliases.
 BAND_CENTRES = {
     "si340": {"sc": 1.55, "so": 1.31, "rc": 1.55},
     "si500": {"rc": 1.55, "ro": 1.31},

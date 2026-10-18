@@ -67,6 +67,7 @@ timeout = 300
 # Layout-only cells: no ports to model (the fixed foundry heater has none).
 # The Run 50 dies are layout only, and the graphene, photodiode, laser and
 # focusing-grating fixed cells have no foundry optical data to build a model from.
+# grating_coupler_sweep (si220_ebeam_event) is a layout-only test array.
 cells_no_model_expected = [
   "add_pads_top",
   "compass",
@@ -96,7 +97,8 @@ cells_no_model_expected = [
   "laser_full_with_gc",
   "laser_half",
   "laser_half_or_gc",
-  "laser_half_with_gc"
+  "laser_half_with_gc",
+  "grating_coupler_sweep"
 ]
 name = "cspdk.si220"
 options = [
@@ -106,7 +108,8 @@ options = [
   "cspdk.si340",
   "cspdk.si_sus",
   "cspdk.sin200",
-  "cspdk.ge_on_si"
+  "cspdk.ge_on_si",
+  "cspdk.si220_ebeam_event"
 ]
 
 [tool.gdsfactoryplus.project]

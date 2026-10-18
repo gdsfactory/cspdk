@@ -1,0 +1,46 @@
+bend_circular:
+  angle: 90.0
+  cross_section: rib
+  loss: 2.5
+  radius: null
+  wl: 1.55
+bend_euler:
+  angle: 90.0
+  cross_section: rib
+  loss: 2.5
+  p: 0.5
+  radius: 36.0
+  wl: 1.55
+bend_s:
+  cross_section: rib
+  loss: 2.5
+  size:
+  - 50.0
+  - 5.0
+  wl: 1.55
+coupler:
+  coupling: 0.5
+  cross_section: rib
+  dx: 16.0
+  dy: 3.5
+  gap: 0.25
+  length: 20.0
+  loss: 2.5
+  wl: 1.55
+coupler_ring:
+  coupling: 0.1
+  cross_section: rib
+  length_x: 4.0
+  loss: 2.5
+  radius: 25.0
+  wl: 1.55
+grating_coupler:
+  bandwidth: 0.06072575604209279
+  cross_section: rib
+  loss: 6.0
+  wl: 1.55
+straight:
+  cross_section: rib
+  length: 10.0
+  loss: 2.5
+  wl: 1.55

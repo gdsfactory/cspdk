@@ -1,0 +1,37 @@
+info:
+  dy: 36
+  length: 59.893
+  min_bend_radius: 25.419
+  radius: 36
+  route_info_length: 59.893
+  route_info_min_bend_radius: 25.419
+  route_info_n_bend_90: 1
+  route_info_rib_length: 59.893
+  route_info_type: rib
+  route_info_weight: 59.893
+  width: 0.45
+name: bend_euler_R36_A90_P0p5_CSrib
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 36
+    - 36
+    layer: WG
+    name: o2
+    orientation: 90
+    port_type: optical
+    width: 0.45
+settings:
+  angle: 90
+  cross_section: rib
+  p: 0.5
+  radius: 36

@@ -1,0 +1,156 @@
+info:
+  io_separation: 5751.81
+name: die_S6000_3000_NI8_IP250_EM100_GCgrating_coupler
+ports:
+  o1:
+    center:
+    - -2505.972
+    - -875
+    layer: WG
+    name: o1
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o10:
+    center:
+    - 2505.972
+    - 625
+    layer: WG
+    name: o10
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o11:
+    center:
+    - 2505.972
+    - 375
+    layer: WG
+    name: o11
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o12:
+    center:
+    - 2505.972
+    - 125
+    layer: WG
+    name: o12
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o13:
+    center:
+    - 2505.972
+    - -125
+    layer: WG
+    name: o13
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o14:
+    center:
+    - 2505.972
+    - -375
+    layer: WG
+    name: o14
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o15:
+    center:
+    - 2505.972
+    - -625
+    layer: WG
+    name: o15
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o16:
+    center:
+    - 2505.972
+    - -875
+    layer: WG
+    name: o16
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -2505.972
+    - -625
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - -2505.972
+    - -375
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - -2505.972
+    - -125
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o5:
+    center:
+    - -2505.972
+    - 125
+    layer: WG
+    name: o5
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o6:
+    center:
+    - -2505.972
+    - 375
+    layer: WG
+    name: o6
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o7:
+    center:
+    - -2505.972
+    - 625
+    layer: WG
+    name: o7
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o8:
+    center:
+    - -2505.972
+    - 875
+    layer: WG
+    name: o8
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o9:
+    center:
+    - 2505.972
+    - 875
+    layer: WG
+    name: o9
+    orientation: 180
+    port_type: optical
+    width: 0.45
+settings:
+  edge_margin: 100
+  grating_coupler: grating_coupler
+  io_pitch: 250
+  n_io: 8
+  size:
+  - 6000
+  - 3000
