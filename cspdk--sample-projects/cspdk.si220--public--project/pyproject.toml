@@ -13,8 +13,10 @@ classifiers = [
 ]
 dependencies = [
   "cspdk",
-  "gdsfactoryplus>=2.1",
-  "matplotlib"
+  "doroutes",
+  "gdsfactoryplus",
+  "matplotlib",
+  "playdough"
 ]
 description = "Cornerstone Si220 sample project"
 keywords = ["cornerstone", "cspdk", "eda", "photonics", "python"]

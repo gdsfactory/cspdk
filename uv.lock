@@ -900,8 +900,8 @@ requires-dist = [
     { name = "circulax", specifier = ">=0.2.3" },
     { name = "doroutes", marker = "extra == 'dev'" },
     { name = "gdsfactory", specifier = "~=9.51.0" },
-    { name = "gdsfactoryplus", marker = "python_full_version < '3.13' and extra == 'dev'", specifier = ">=2.1" },
-    { name = "gdsfactoryplus", marker = "extra == 'gdsfactoryplus'", specifier = ">=2.1" },
+    { name = "gdsfactoryplus", marker = "python_full_version < '3.13' and extra == 'dev'", specifier = ">=1.8" },
+    { name = "gdsfactoryplus", marker = "extra == 'gdsfactoryplus'", specifier = ">=1.8" },
     { name = "gplugins", extras = ["sax", "femwell", "tidy3d"], specifier = "~=2.1.0" },
     { name = "jsondiff", marker = "extra == 'dev'" },
     { name = "jupyter", marker = "extra == 'docs'" },
@@ -920,7 +920,7 @@ requires-dist = [
     { name = "towncrier", marker = "extra == 'dev'" },
     { name = "zensical", marker = "extra == 'docs'", specifier = ">=0.0.40,<0.1.0" },
 ]
-provides-extras = ["dev", "gdsfactoryplus", "docs"]
+provides-extras = ["dev", "docs", "gdsfactoryplus"]
 
 [[package]]
 name = "cssselect2"

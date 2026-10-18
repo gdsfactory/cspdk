@@ -22,9 +22,9 @@ from __future__ import annotations
 
 import gdsfactory as gf
 import jax
+import playdough as pld
 from cspdk.si220 import cells
 from gdsfactory.typings import ComponentSpec, LayerSpec
-from gdsfactoryplus.routing import playdough as pld
 
 from mycspdk.samples._die_layout_common import (
     _SHELF_HI,

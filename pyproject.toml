@@ -31,7 +31,7 @@ version = "2.0.0"
 dev = [
   "doroutes",
   # GDSFactory+ ships Python 3.12 wheels only; its tests skip without it.
-  "gdsfactoryplus>=2.1; python_version < '3.13'",
+  "gdsfactoryplus>=1.8; python_version < '3.13'",
   "jsondiff",
   "pre-commit",
   "pytest",
@@ -51,7 +51,7 @@ docs = [
   "zensical>=0.0.40,<0.1.0"
 ]
 # Install with GDSFactory+: pip install "cspdk[gdsfactoryplus]" (Python 3.12 only).
-gdsfactoryplus = ["gdsfactoryplus>=2.1"]
+gdsfactoryplus = ["gdsfactoryplus>=1.8"]
 
 [tool.codespell]
 ignore-words-list = "te, te/tm, te, ba, fpr, fpr_spacing, ro, nd, donot, schem, euclidian"

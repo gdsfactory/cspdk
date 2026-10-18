@@ -12,8 +12,9 @@ from __future__ import annotations
 from functools import partial
 
 import gdsfactory as gf
+from doroutes import add_bundle_astar
+from doroutes.routing import add_route_manual
 from gdsfactory.typings import ComponentSpec
-from gdsfactoryplus.routing import add_bundle_astar, add_route_manual
 
 # Escape stub lengths from the l_e2 / r_e2 heater ports to their
 # shelves; r_e2 shelves higher to pass over its sibling's via pad.
