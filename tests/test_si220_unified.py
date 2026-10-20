@@ -420,23 +420,17 @@ def test_oband_heater_in_circuit_uses_oband_model() -> None:
 
 
 def test_gdsfactoryplus_finds_the_dispatching_models() -> None:
-    """GDSFactory+ scans the package source for models; it must find only dispatchers.
+    """The public model registry must expose only the band dispatchers.
 
-    It registers every public ``def`` returning ``sax.SDict`` by name, so a public
-    band implementation in a submodule would replace the dispatcher of the same name.
+    GDSFactory+ 2.x uses the active PDK's models rather than scanning source files.
     """
-    from pathlib import Path
-
-    from gdsfactoryplus.core import find_models
-
     from cspdk.si220.models import get_models
 
-    records = find_models({"cspdk.si220": Path(si220.__file__).parent})
-    sources = {name: Path(record.source).as_posix() for name, record in records.items()}
-    assert sources.keys() == get_models().keys()
-    assert all(s.endswith("si220/models/__init__.py") for s in sources.values()), (
-        sources
-    )
+    models = get_models()
+    assert si220.PDK.models.keys() == models.keys()
+    for name, model in models.items():
+        assert model.__module__ == "cspdk.si220.models"
+        assert si220.PDK.models[name] is model
 
 
 # The coupler's geometry defaults mean "use the cell geometry", which depends on the
