@@ -263,6 +263,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight2:
     component: straight
     info:
@@ -275,6 +276,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight3:
     component: straight
     info:
@@ -287,6 +289,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight4:
     component: straight
     info:
@@ -299,6 +302,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight5:
     component: straight
     info:
@@ -311,6 +315,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight6:
     component: straight
     info:
@@ -323,6 +328,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight7:
     component: straight
     info:
@@ -335,6 +341,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight8:
     component: straight
     info:
@@ -347,6 +354,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
   straight9:
     component: straight
     info:
@@ -359,6 +367,7 @@ instances:
     settings:
       cross_section: rib
       length: 100
+      width: null
 nets:
 - p1: grating_coupler2,o1
   p2: straight,o2

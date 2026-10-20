@@ -16,6 +16,7 @@ instances:
       angle: 90
       cross_section: rib
       radius: 25
+      width: null
   bend_circular2:
     component: bend_circular
     info:
@@ -33,6 +34,7 @@ instances:
       angle: 90
       cross_section: rib
       radius: 25
+      width: null
   coupler_ring:
     component: coupler_ring
     info:
@@ -57,6 +59,7 @@ instances:
     settings:
       cross_section: rib
       length: 0.6
+      width: null
   straight2:
     component: straight
     info:
@@ -69,6 +72,7 @@ instances:
     settings:
       cross_section: rib
       length: 0.6
+      width: null
   straight3:
     component: straight
     info:
@@ -81,6 +85,7 @@ instances:
     settings:
       cross_section: rib
       length: 4
+      width: null
 nets:
 - p1: bend_circular2,o1
   p2: straight2,o1

@@ -10,7 +10,7 @@ info:
   route_info_type: rib
   route_info_weight: 59.893
   width: 0.45
-name: bend_euler_R36_A90_P0p5_CSrib
+name: bend_euler_R36_A90_P0p5_WNone_CSrib
 ports:
   o1:
     center:

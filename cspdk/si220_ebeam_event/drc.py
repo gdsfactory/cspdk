@@ -8,17 +8,18 @@ Rules (event spec, 17 Oct 2026, provisional):
 * ``EXPOSURE.A``: the post-processed exposure on 4/0
   (:func:`cspdk.si220_ebeam_event.mask.exposure_region`) is at most
   2,000,000 um^2;
+* ``DESIGN.SIZE``: the post-processed exposure fits in the 6 mm x 3 mm design
+  area of one submission (6 mm east-west, 3 mm north-south);
 * ``TRENCH_TMP.R``: nothing is drawn on 3/1, which the foundry uses as a
   temporary layer during post-processing (a cspdk check, not a foundry rule).
 
-Width and space use klayout's projection metric: only edges that face each
-other with overlapping projections are measured (the distance is taken
-perpendicular to the edges), so corner-to-corner diagonals are not flagged,
-and edges meeting at 80 degrees or more are not compared with each other.
-This is the usual reading of a minimum feature/gap and avoids false errors on
-discretised curves; acute spikes (< 80 degrees) are still caught. Width/space
-run on the drawn layers; the spec does not give width/space rules for the
-post-processed 4/0.
+Width uses klayout's projection metric: only edges that face each other with
+overlapping projections are measured, perpendicular to the edges. Space uses
+the Euclidean metric, so a gap between two corners on a diagonal is measured
+too. In both, edges meeting at 80 degrees or more are not compared with each
+other, which avoids false errors on discretised curves; acute spikes
+(< 80 degrees) are still caught. Width/space run on the drawn layers; the spec
+does not give width/space rules for the post-processed 4/0.
 """
 
 from __future__ import annotations
@@ -97,14 +98,18 @@ def check(component: gf.Component) -> list[Violation]:
     violations: list[Violation] = []
     for name, layer in CHECKED_LAYERS.items():
         region = layer_region(component, layer)
-        for rule, kind, minimum, run_check in (
-            ("W", "feature", TECH.min_width, region.width_check),
-            ("S", "gap", TECH.min_space, region.space_check),
+        for rule, kind, minimum, run_check, metrics in (
+            (
+                "W",
+                "feature",
+                TECH.min_width,
+                region.width_check,
+                kdb.Metrics.Projection,
+            ),
+            ("S", "gap", TECH.min_space, region.space_check, kdb.Metrics.Euclidian),
         ):
             markers = run_check(
-                round(minimum / dbu),
-                metrics=kdb.Metrics.Projection,
-                ignore_angle=IGNORE_ANGLE,
+                round(minimum / dbu), metrics=metrics, ignore_angle=IGNORE_ANGLE
             )
             if markers.is_empty():
                 continue
@@ -118,7 +123,8 @@ def check(component: gf.Component) -> list[Violation]:
                 )
             )
 
-    area = exposure_region(component).area() * dbu**2
+    exposure = exposure_region(component)
+    area = exposure.area() * dbu**2
     if area > TECH.max_exposure_area:
         violations.append(
             Violation(
@@ -127,6 +133,25 @@ def check(component: gf.Component) -> list[Violation]:
                 description=f"exposure area > {TECH.max_exposure_area:,.0f} um^2",
                 count=1,
                 value=area,
+            )
+        )
+
+    # The post-processed exposure contains every drawn core (sized by 5 um), so
+    # its bounding box is the extent of the design.
+    width, height = TECH.die_size
+    extent = exposure.bbox()
+    if not extent.empty() and (
+        extent.width() * dbu > width or extent.height() * dbu > height
+    ):
+        violations.append(
+            Violation(
+                rule="DESIGN.SIZE",
+                layer=_layer_name("EXPOSURE") + " post-processed",
+                description=(
+                    f"design larger than the {width:g} x {height:g} um design area"
+                ),
+                count=1,
+                locations=_locations(kdb.Region(extent), dbu),
             )
         )
 

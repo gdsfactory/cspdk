@@ -52,6 +52,7 @@ layout passes). It uses klayout.db only, with no external deck.
 | `WG.W`, `EXPOSURE.W`, `GRA.W` | minimum feature 200 nm on 3/0, 4/0 (as drawn), 6/0 |
 | `WG.S`, `EXPOSURE.S`, `GRA.S` | minimum gap 200 nm on the same layers |
 | `EXPOSURE.A` | post-processed 4/0 area at most 2,000,000 um^2 |
+| `DESIGN.SIZE` | post-processed 4/0 fits in 6 mm (east-west) x 3 mm (north-south) |
 | `TRENCH_TMP.R` | nothing drawn on 3/1 (a cspdk check, not a foundry rule) |
 
 Width and space use the projection metric: only edges that face each other
@@ -62,6 +63,25 @@ Minimum bend radius 25 um: the cells reject smaller radii. `bend_euler` and
 of about 36 um (the default) at p=0.5.
 
 Design area per submission: 6 mm x 3 mm (`die`).
+
+## Sample project
+
+`cspdk--sample-projects/cspdk.si220_ebeam_event--public--project` is a
+template for one submission: a ring and a loopback routed to the die's
+placeholder I/O, passing `check`.
+
+## Tapeout
+
+Check submitted GDS files, report each one's exposure area against the
+2,000,000 um^2 budget, and write the post-processed layouts:
+
+```bash
+python -m cspdk.si220_ebeam_event.tapeout design1.gds design2.gds -o out/
+```
+
+It prints `PASS` or `FAIL` per file with the violated rules, writes
+`out/<name>_exposure.gds` with the merged exposure on 4/0, and exits with 1 if
+any file fails. Use `--cell` to choose the top cell of a file with several.
 
 ## Cells
 
@@ -88,6 +108,12 @@ Design area per submission: 6 mm x 3 mm (`die`).
 
 ## Not known yet (TODO)
 
+- Do the 200 nm rules also apply to the post-processed 4/0? `check` applies
+  them to 4/0 as drawn. After post-processing, the default `ring_single` would
+  fail them: where the ring's trench meets the bus trench, the unetched Si
+  between them ends in a sharp (~47 degree) tip. Sizing the inside of a
+  25 um arc by 5 um on the 1 nm grid also leaves 1-2 nm notches.
+- Are labels on 100/0 and 101/0 etched or ignored? The cells draw none.
 - Write-field size, and whether devices may cross write-field boundaries.
 - Final measurement setup, and the final I/O (grating) placement rules.
 - Raw measured data for the models (neff, coupling, grating response).

@@ -16,9 +16,17 @@ import pytest
 from conftest import difftest
 from pytest_regressions.data_regression import DataRegressionFixture
 
-from cspdk.si220_ebeam_event import PDK, TECH, cells, check, models, post_process
+from cspdk.si220_ebeam_event import (
+    PDK,
+    TECH,
+    cells,
+    check,
+    models,
+    post_process,
+    tapeout,
+)
 from cspdk.si220_ebeam_event.mask import exposure_region, layer_region
-from cspdk.si220_ebeam_event.tech import LAYER
+from cspdk.si220_ebeam_event.tech import LAYER, route_bundle, route_single
 
 
 @pytest.fixture(autouse=True)
@@ -130,10 +138,13 @@ def test_default_cells_pass_drc(component_name: str) -> None:
         ("ring_single", {"gap": 0.19}),
         ("grating_coupler", {"fill_factor": 0.25}),
         ("grating_coupler", {"fill_factor": 0.75}),
+        ("straight", {"width": 0.19}),
+        ("bend_circular", {"width": 0.19}),
+        ("bend_euler", {"width": 0.19}),
     ],
 )
 def test_cells_reject_rule_violations(cell: str, kwargs: dict) -> None:
-    """Radius < 25 um, gap < 0.2 um and teeth/gaps < 0.2 um raise ValueError."""
+    """Radius < 25 um, gap or width < 0.2 um and teeth/gaps < 0.2 um raise ValueError."""
     with pytest.raises(ValueError, match="minimum"):
         gf.get_component(cell, **kwargs)
 
@@ -167,6 +178,32 @@ def test_grating_coupler_sweep_rows() -> None:
     assert sweep.info["rows"] == [[0.66, 0.5], [0.68, 0.5]]
     assert layer_region(sweep, LAYER.GRA).count() == 2 * 2 * 60
     assert sweep.ysize == pytest.approx(TECH.io_pitch + 10)
+
+
+################
+# Routing
+################
+
+
+def test_routing_strategies_route_with_bends() -> None:
+    """route_single and route_bundle turn corners with 25 um bends and pass DRC."""
+    c = gf.Component()
+    a = c << cells.straight()
+    b = c << cells.straight()
+    b.rotate(90)
+    b.move((200, 200))
+    route_single(c, a.ports["o2"], b.ports["o1"])
+
+    left = [c << cells.straight() for _ in range(2)]
+    right = [c << cells.straight() for _ in range(2)]
+    for i, (s1, s2) in enumerate(zip(left, right)):
+        s1.move((0, 400 + 10 * i))
+        s2.rotate(90)
+        s2.move((310 - 10 * i, 700))  # the lower route takes the outer corner
+    route_bundle(c, [s.ports["o2"] for s in left], [s.ports["o1"] for s in right])
+    # a failed route draws markers on routing_error_marker instead of raising
+    assert layer_region(c, LAYER.routing_error_marker).is_empty()
+    assert check(c) == []
 
 
 ################
@@ -234,6 +271,20 @@ def test_drc_catches_150nm_gap_and_feature(layer, name: str) -> None:
     assert _rules(_two_lines(gap=0.2, width=0.2, layer=layer)) == set()
 
 
+def test_drc_catches_diagonal_corner_gap() -> None:
+    """Two cores whose corners are 150 nm apart on a diagonal fail; 200 nm passes."""
+
+    def corners(gap: float) -> gf.Component:
+        c = gf.Component()
+        c.add_polygon([(0, 0), (1, 0), (1, 1), (0, 1)], layer=LAYER.WG)
+        d = 1 + gap / 2**0.5
+        c.add_polygon([(d, d), (d + 1, d), (d + 1, d + 1), (d, d + 1)], layer=LAYER.WG)
+        return c
+
+    assert _rules(corners(0.15)) == {"WG.S"}
+    assert _rules(corners(0.21)) == set()
+
+
 def test_drc_catches_150nm_ring_gap() -> None:
     """A ring drawn with a 150 nm gap (bypassing the cell check) is flagged."""
     c = gf.Component()
@@ -271,9 +322,25 @@ def test_drc_counts_trenches_in_exposure_area() -> None:
     assert check(square) == []  # 1.9 mm^2
     c = gf.Component()
     c << square
-    # 20 mm of straight waveguide adds ~0.2 mm^2 of trench
-    c << cells.straight(length=20_000)
+    # 4 x 5 mm of straight waveguide adds ~0.2 mm^2 of trench
+    for i in range(4):
+        wg = c << cells.straight(length=5_000)
+        wg.movey(1200 + 100 * i)
     assert _rules(c) == {"EXPOSURE.A"}
+
+
+def test_drc_catches_design_larger_than_6x3mm() -> None:
+    """The design, trenches included, fits in 6 mm east-west by 3 mm north-south."""
+    assert check(cells.straight(length=5_990)) == []  # 6 mm with its 5 um trenches
+    assert _rules(cells.straight(length=5_991)) == {"DESIGN.SIZE"}
+
+    tall = gf.Component()
+    tall.add_polygon([(0, 0), (1, 0), (1, 3001), (0, 3001)], layer=LAYER.GRA)
+    assert _rules(tall) == {"DESIGN.SIZE"}
+    # 3 x 6 mm (rotated) does not fit: the I/O runs east-west
+    turned = gf.Component()
+    turned.add_polygon([(0, 0), (1, 0), (1, 5000), (0, 5000)], layer=LAYER.GRA)
+    assert _rules(turned) == {"DESIGN.SIZE"}
 
 
 def test_drc_flags_drawn_trench_tmp() -> None:
@@ -281,6 +348,34 @@ def test_drc_flags_drawn_trench_tmp() -> None:
     c = gf.Component()
     c.add_polygon([(0, 0), (1, 0), (1, 1), (0, 1)], layer=LAYER.TRENCH_TMP)
     assert _rules(c) == {"TRENCH_TMP.R"}
+
+
+################
+# Tapeout
+################
+
+
+def test_tapeout_passes_die_and_writes_exposure(tmp_path, capsys) -> None:
+    """A clean GDS passes (exit 0) and its post-processed 4/0 is written."""
+    gds = cells.die().write_gds(tmp_path / "die.gds")
+    assert tapeout.main([str(gds), "-o", str(tmp_path / "out")]) == 0
+    output = capsys.readouterr().out
+    assert output.startswith("PASS")
+    assert "of 2,000,000" in output
+
+    exposed = gf.import_gds(tmp_path / "out" / "die_exposure.gds")
+    assert _area(layer_region(exposed, LAYER.EXPOSURE)) == pytest.approx(
+        _area(exposure_region(cells.die())), rel=1e-6
+    )
+
+
+def test_tapeout_fails_on_violations(tmp_path, capsys) -> None:
+    """A GDS that breaks a rule fails (exit 1) and lists the rule."""
+    gds = _two_lines(gap=0.15).write_gds(tmp_path / "gap.gds")
+    assert tapeout.main([str(gds)]) == 1
+    output = capsys.readouterr().out
+    assert output.startswith("FAIL")
+    assert "WG.S" in output
 
 
 ################

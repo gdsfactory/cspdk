@@ -32,6 +32,10 @@ def _check_gap(gap: float) -> None:
     check_min("gap", gap, TECH.min_space, TECH.design_rules)
 
 
+def _check_width(width: float | None) -> None:
+    check_min("width", width, TECH.min_width, TECH.design_rules)
+
+
 ################
 # Waveguides
 ################
@@ -40,21 +44,25 @@ def _check_gap(gap: float) -> None:
 @gf.cell(tags=["cells"], schematic_function=straight_schematic)
 def straight(
     length: float = 10.0,
+    width: float | None = None,
     cross_section: CrossSectionSpec = "rib",
 ) -> gf.Component:
     """A straight rib waveguide.
 
     Args:
         length: the length of the waveguide in um.
+        width: the width of the waveguide (defaults to the cross-section width).
         cross_section: a cross section or its name or a function generating a cross section.
     """
-    return gf.c.straight(length=length, cross_section=cross_section)
+    _check_width(width)
+    return gf.c.straight(length=length, width=width, cross_section=cross_section)
 
 
 @gf.cell(tags=["cells"], schematic_function=bend_circular_schematic)
 def bend_circular(
     radius: float | None = None,
     angle: float = 90.0,
+    width: float | None = None,
     cross_section: CrossSectionSpec = "rib",
 ) -> gf.Component:
     """A circular bend; the routing bend of the PDK.
@@ -62,12 +70,16 @@ def bend_circular(
     Args:
         radius: centre-line radius in um (defaults to the 25 um minimum).
         angle: the angle of the bend in degrees.
+        width: the width of the waveguide forming the bend (defaults to the
+            cross-section width).
         cross_section: a cross section or its name or a function generating a cross section.
     """
     _check_radius(radius)
+    _check_width(width)
     return gf.components.bend_circular(
         radius=radius,
         angle=angle,
+        width=width,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )
@@ -78,6 +90,7 @@ def bend_euler(
     radius: float = TECH.radius_euler,
     angle: float = 90.0,
     p: float = 0.5,
+    width: float | None = None,
     cross_section: CrossSectionSpec = "rib",
 ) -> gf.Component:
     """An Euler bend whose tightest curvature respects the 25 um minimum radius.
@@ -91,16 +104,20 @@ def bend_euler(
         radius: effective radius in um.
         angle: the angle of the bend in degrees.
         p: the fraction of the bend that is an Euler curve.
+        width: the width of the waveguide forming the bend (defaults to the
+            cross-section width).
         cross_section: a cross section or its name or a function generating a cross section.
     """
     _check_radius(radius)
     path = gf.path.euler(radius=radius, angle=angle, p=p, use_eff=True)
     _check_radius(float(path.info["Rmin"]), "minimum radius of curvature")
+    _check_width(width)
     return gf.components.bend_euler(
         radius=radius,
         angle=angle,
         p=p,
         with_arc_floorplan=True,
+        width=width,
         cross_section=cross_section,
         allow_min_radius_violation=False,
     )

@@ -35,6 +35,7 @@ import sax.models as sm
 from numpy.typing import NDArray
 
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
+from cspdk.si220_ebeam_event.tech import TECH
 
 nm = 1e-3
 
@@ -45,10 +46,11 @@ WL0 = 1.55
 NEFF = 2.54  # placeholder: si220 rib mode solve (see module docstring)
 NG = 3.85  # event spec
 LOSS_DB_CM = 2.5  # event spec
-RADIUS = 25.0  # rib cross-section radius (minimum bend radius)
-WIDTH = 0.45  # rib width
-GAP = 0.25  # coupler and ring cell default gap
-RADIUS_EULER = 36.0  # bend_euler cell default
+# Cell defaults, from TECH so the models follow the cells when the rules change.
+RADIUS = TECH.radius_rib  # rib cross-section radius (minimum bend radius)
+WIDTH = TECH.width_rib  # rib width
+GAP = TECH.gap  # coupler and ring cell default gap
+RADIUS_EULER = TECH.radius_euler  # bend_euler cell default
 
 # 1 dB full width of a Gaussian in units of its 3 dB full width.
 _ONE_DB_PER_FWHM = float(np.sqrt(np.log(10**0.1) / np.log(2)))
