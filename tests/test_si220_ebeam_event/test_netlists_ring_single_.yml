@@ -43,7 +43,7 @@ instances:
       bend: bend_circular
       cross_section: rib
       gap: 0.25
-      length_extension: 30
+      length_extension: null
       length_x: 4
       radius: 25
       straight: straight

@@ -1,27 +1,14 @@
-"""SAX models of the EVENT-ONLY CORNERSTONE e-beam flavour (1550 nm TE).
+"""SAX models of cspdk.si220_ebeam_event (1550 nm TE).
 
-Sources
-=======
-* Group index 3.85 and propagation loss 2.5 dB/cm: CORNERSTONE e-beam event
-  specification (17 Oct 2026), approximate values for the rib waveguide.
-* Effective index 2.54 at 1.55 um: NOT from the event spec (placeholder). It
-  is the mode-solved index of the cspdk si220 rib of the same geometry
-  (450 nm x 220 nm, 120 nm etch, 100 nm slab, SiO2 cladding;
-  ``cspdk/si220/models/waveguides.py``). The event cladding is not known yet.
-* Grating coupler: CORNERSTONE student-batch rib grating
-  (SOI220nm_1550nm_TE_RIB_Grating_Coupler, student MPW9 standard components):
-  5.5-6.5 dB coupling loss, 1 dB bandwidth > 35 nm, centre 1550-1580 nm.
-  Modelled as a Gaussian with 6 dB loss at 1.565 um; the 1 dB bandwidth lower
-  bound is converted to a 3 dB (FWHM) bandwidth of 35 nm / 0.5764 = 61 nm.
-  Not measured on the e-beam process.
-* Couplers: PLACEHOLDERS. No coupling data exists for this process, so the
-  directional coupler and the ring coupler take their power coupling ratio
-  as a parameter (``coupling``) instead of deriving it from the gap. Their
-  phase and loss are those of the rib waveguide over the coupler's path.
+* Rib n_g 3.85 and 2.5 dB/cm: CORNERSTONE's event spec.
+* neff 2.54: placeholder, the cspdk si220 rib mode solve of the same geometry.
+* Grating: the student-batch rib grating datasheet (5.5-6.5 dB, 1 dB bandwidth
+  > 35 nm, centre 1550-1580 nm), as a Gaussian: 6 dB at 1.565 um, 61 nm FWHM.
+* Couplers: placeholders. The power coupling is a parameter, with no gap
+  dependence; phase and loss are the rib's over the coupler's path.
 
-Bend models take the cell's geometry settings (radius, angle, p) because SAX
-only passes instance settings, not the cell's ``info["length"]``. Bends use
-the straight propagation loss; no bend radiation loss is modelled.
+Bend models take the cell's geometry settings because SAX passes instance
+settings, not ``info["length"]``. No bend radiation loss is modelled.
 """
 
 from __future__ import annotations
@@ -35,22 +22,15 @@ import sax.models as sm
 from numpy.typing import NDArray
 
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
-from cspdk.si220_ebeam_event.tech import TECH
-
-nm = 1e-3
+from cspdk.si220_ebeam_event.tech import TECH, nm
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
 
 WL0 = 1.55
-NEFF = 2.54  # placeholder: si220 rib mode solve (see module docstring)
-NG = 3.85  # event spec
-LOSS_DB_CM = 2.5  # event spec
-# Cell defaults, from TECH so the models follow the cells when the rules change.
-RADIUS = TECH.radius_rib  # rib cross-section radius (minimum bend radius)
-WIDTH = TECH.width_rib  # rib width
-GAP = TECH.gap  # coupler and ring cell default gap
-RADIUS_EULER = TECH.radius_euler  # bend_euler cell default
+NEFF = 2.54  # placeholder
+NG = 3.85
+LOSS_DB_CM = 2.5
 
 # 1 dB full width of a Gaussian in units of its 3 dB full width.
 _ONE_DB_PER_FWHM = float(np.sqrt(np.log(10**0.1) / np.log(2)))
@@ -59,7 +39,7 @@ GRATING_WL0 = 1.565
 GRATING_LOSS_DB = 6.0
 GRATING_BANDWIDTH = 35 * nm / _ONE_DB_PER_FWHM
 
-# Placeholder power coupling ratios (no data for the e-beam process).
+# Placeholder power coupling ratios.
 COUPLER_COUPLING = 0.5
 COUPLER_RING_COUPLING = 0.1
 
@@ -140,7 +120,7 @@ def bend_circular(
         loss: Propagation loss in dB/cm.
         cross_section: Cross section of the bend.
     """
-    radius = RADIUS if radius is None else radius
+    radius = TECH.radius_rib if radius is None else radius
     length = radius * jnp.deg2rad(jnp.abs(angle))
     return straight(wl=wl, length=length, loss=loss, cross_section=cross_section)
 
@@ -148,7 +128,7 @@ def bend_circular(
 def bend_euler(
     *,
     wl: Float = WL0,
-    radius: float = RADIUS_EULER,
+    radius: float = TECH.radius_euler,
     angle: float = 90.0,
     p: float = 0.5,
     loss: float = LOSS_DB_CM,
@@ -195,7 +175,7 @@ def bend_s(
 def coupler(
     *,
     wl: Float = WL0,
-    gap: float = GAP,
+    gap: float = TECH.gap,
     length: float = 20.0,
     dx: float = 16.0,
     dy: float = 3.5,
@@ -205,10 +185,8 @@ def coupler(
 ) -> sax.SDict:
     """Returns the S-matrix of a directional coupler (placeholder coupling).
 
-    The power coupling ratio is a parameter (default 0.5, a placeholder): the
-    gap-to-coupling relation of the e-beam process is unknown. Each arm has the
-    rib phase and loss of the coupling straight plus two S-bends, whose offset
-    gdsfactory derives as (dy - gap - width) / 2.
+    Each arm is the coupling straight plus two S-bends of offset
+    (dy - gap - width) / 2.
 
     Args:
         wl: Wavelength in um.
@@ -221,7 +199,7 @@ def coupler(
         cross_section: Cross section of the coupler.
     """
     del cross_section
-    offset = (dy - gap - WIDTH) / 2
+    offset = (dy - gap - TECH.width_rib) / 2
     arm = _transmission(wl, length + 2 * _bend_s_length(dx, offset), loss)
     return _coupler_sdict(
         through=jnp.sqrt(1 - coupling) * arm, cross=1j * jnp.sqrt(coupling) * arm
@@ -231,7 +209,7 @@ def coupler(
 def coupler_ring(
     *,
     wl: Float = WL0,
-    radius: float = RADIUS,
+    radius: float = TECH.radius_rib,
     length_x: float = 4.0,
     coupling: float = COUPLER_RING_COUPLING,
     loss: float = LOSS_DB_CM,
@@ -239,12 +217,8 @@ def coupler_ring(
 ) -> sax.SDict:
     """Returns the S-matrix of a ring coupler (placeholder coupling).
 
-    Port layout of gdsfactory's coupler_ring: bus o1 (west) to o4 (east), ring
-    ports o2 (west) and o3 (east) at the top of the two quarter-circle bends.
-    The power coupling ratio is a parameter (default 0.1, a placeholder).
-    Every path has the rib phase and loss of the ``length_x`` coupling
-    straight; paths through the ring side add a quarter circle per bend.
-    The bus extensions (``length_extension``) are not modelled.
+    Bus o1 to o4; ring ports o2 and o3 at the ends of the quarter-circle bends.
+    The bus extensions are not modelled.
 
     Args:
         wl: Wavelength in um.
@@ -281,11 +255,7 @@ def grating_coupler(
     bandwidth: float = GRATING_BANDWIDTH,
     cross_section: str = "rib",
 ) -> sax.SDict:
-    """Returns the S-matrix of the rectangular grating coupler (student-batch data).
-
-    Gaussian response centred at 1.565 um with the student-batch rib grating
-    loss and bandwidth (see module docstring); not measured on the e-beam
-    process.
+    """Returns the S-matrix of the grating coupler (student-batch datasheet).
 
     Args:
         wl: Wavelength in um.

@@ -1,9 +1,4 @@
-"""A ring and a loopback in the 6 x 3 mm design area of the e-beam event.
-
-EVENT-ONLY: the CORNERSTONE e-beam event rules are provisional, and the die's
-grating I/O is a placeholder. The ring sits on the bottom I/O row and a
-loopback (a straight, for normalising the grating response) on the next row.
-"""
+"""A ring and a loopback (for normalising the gratings) in the e-beam event die."""
 
 from __future__ import annotations
 
@@ -18,7 +13,7 @@ WL0 = 1.55  # um
 
 @gf.cell
 def ring_die(gap: float = 0.25, radius: float = 25.0) -> gf.Component:
-    """The event die with a ring on the bottom row and a loopback above it.
+    """The die with a ring on the bottom I/O row and a loopback above it.
 
     Args:
         gap: gap between the bus and the ring in um (>= 0.2).
@@ -26,9 +21,7 @@ def ring_die(gap: float = 0.25, radius: float = 25.0) -> gf.Component:
     """
     c = gf.Component()
     die = c << cells.die()
-    n_io = len(die.ports) // 2
-    # Inputs o1..o{n_io} run bottom to top; outputs run top to bottom, so input
-    # o{i} faces output o{2 n_io + 1 - i} on the same row.
+    n_io = len(die.ports) // 2  # input o{i} shares a row with o{2 n_io + 1 - i}
     ring = c << cells.ring_single(gap=gap, radius=radius)
     ring.move((-ring.x, die.ports["o1"].y - ring.ports["o1"].y))
     route_single(c, die.ports["o1"], ring.ports["o1"])
@@ -42,9 +35,7 @@ def ring_transmission(
 ) -> tuple[jnp.ndarray, jnp.ndarray]:
     """Return wavelengths and the ring's through-port power transmission.
 
-    The ring coupler model is a placeholder (fixed power coupling, no gap
-    dependence); the waveguide uses the event's group index (3.85) and loss
-    (2.5 dB/cm), so the free spectral range is meaningful.
+    The coupling is a placeholder; the free spectral range uses the measured n_g.
 
     Args:
         gap: gap between the bus and the ring in um.

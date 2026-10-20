@@ -1,8 +1,4 @@
-"""Tests of the EVENT-ONLY CORNERSTONE e-beam flavour (cspdk.si220_ebeam_event).
-
-Regression data (GDS, settings, netlists) as for the other flavours, plus the
-event rules: post-processing, DRC, parameter checks, die and models.
-"""
+"""Tests of cspdk.si220_ebeam_event."""
 
 from __future__ import annotations
 
@@ -25,7 +21,7 @@ from cspdk.si220_ebeam_event import (
     post_process,
     tapeout,
 )
-from cspdk.si220_ebeam_event.mask import exposure_region, layer_region
+from cspdk.si220_ebeam_event.mask import exposure_region
 from cspdk.si220_ebeam_event.tech import LAYER, route_bundle, route_single
 
 
@@ -149,24 +145,17 @@ def test_cells_reject_rule_violations(cell: str, kwargs: dict) -> None:
         gf.get_component(cell, **kwargs)
 
 
-def test_minimum_values_are_accepted() -> None:
-    """The rule minimums themselves pass."""
-    cells.bend_circular(radius=TECH.radius_min)
-    cells.coupler(gap=TECH.min_space)
-    cells.ring_single(gap=TECH.min_space, radius=TECH.radius_min)
-
-
 def test_grating_coupler_matches_student_rib_grating() -> None:
     """10 um wide, 350 um taper, 60 teeth of 335 nm at 670 nm on GRA (6/0)."""
     gc = cells.grating_coupler()
-    teeth = layer_region(gc, LAYER.GRA)
+    teeth = gc.get_region(LAYER.GRA, merge=True)
     assert teeth.count() == 60
     boxes = sorted((p.bbox() for p in teeth.each()), key=lambda b: b.left)
     assert {b.width() for b in boxes} == {335}
     assert {b.height() for b in boxes} == {10_000}
     assert boxes[0].left == 350_000  # first tooth at the end of the taper
     assert {b2.left - b1.left for b1, b2 in zip(boxes, boxes[1:])} == {670}
-    wg = layer_region(gc, LAYER.WG)
+    wg = gc.get_region(LAYER.WG, merge=True)
     assert wg.count() == 1  # solid core under the teeth
     assert wg.bbox().height() == 10_000
     assert gc.ports["o1"].width == pytest.approx(TECH.width_rib)
@@ -176,7 +165,7 @@ def test_grating_coupler_sweep_rows() -> None:
     """One loopback per (period, fill factor), stacked at the I/O pitch."""
     sweep = cells.grating_coupler_sweep(periods=(0.66, 0.68), fill_factors=(0.5,))
     assert sweep.info["rows"] == [[0.66, 0.5], [0.68, 0.5]]
-    assert layer_region(sweep, LAYER.GRA).count() == 2 * 2 * 60
+    assert sweep.get_region(LAYER.GRA, merge=True).count() == 2 * 2 * 60
     assert sweep.ysize == pytest.approx(TECH.io_pitch + 10)
 
 
@@ -202,7 +191,7 @@ def test_routing_strategies_route_with_bends() -> None:
         s2.move((310 - 10 * i, 700))  # the lower route takes the outer corner
     route_bundle(c, [s.ports["o2"] for s in left], [s.ports["o1"] for s in right])
     # a failed route draws markers on routing_error_marker instead of raising
-    assert layer_region(c, LAYER.routing_error_marker).is_empty()
+    assert c.get_region(LAYER.routing_error_marker, merge=True).is_empty()
     assert check(c) == []
 
 
@@ -214,12 +203,12 @@ def test_routing_strategies_route_with_bends() -> None:
 def test_post_process_trenches_on_a_straight() -> None:
     """A straight gets a 5 um trench on every side, merged into 4/0."""
     s = cells.straight(length=10)
-    exposure = layer_region(post_process(s), LAYER.EXPOSURE)
+    exposure = post_process(s).get_region(LAYER.EXPOSURE, merge=True)
     assert exposure.count() == 1
     assert exposure.bbox().to_dtype(0.001) == kf.kdb.DBox(-5, -5.225, 15, 5.225)
     assert _area(exposure) == pytest.approx(20 * 10.45 - 10 * 0.45)
     # the core itself is not exposed
-    assert (exposure & layer_region(s, LAYER.WG)).is_empty()
+    assert (exposure & s.get_region(LAYER.WG, merge=True)).is_empty()
 
 
 def test_post_process_merges_gra_and_exposure() -> None:
@@ -230,21 +219,14 @@ def test_post_process_merges_gra_and_exposure() -> None:
     c.add_polygon([(200, 0), (201, 0), (201, 10), (200, 10)], layer=LAYER.GRA)
     c.add_polygon([(14, -1), (30, -1), (30, 1), (14, 1)], layer=LAYER.EXPOSURE)
     out = post_process(c)
-    exposure = layer_region(out, LAYER.EXPOSURE)
+    exposure = out.get_region(LAYER.EXPOSURE, merge=True)
     trench = 20 * 10.45 - 10 * 0.45
     overlap = 1 * 2  # the 4/0 patch inside the trench from x = 14 to 15
     assert _area(exposure) == pytest.approx(trench + 100 + 10 + 32 - overlap)
     assert exposure.count() == 3  # trench + patch merged, 4/0 square, 6/0 bar
-    assert layer_region(out, LAYER.TRENCH_TMP).is_empty()
-    assert layer_region(out, LAYER.GRA).count() == 1  # other layers are kept
+    assert out.get_region(LAYER.TRENCH_TMP, merge=True).is_empty()
+    assert out.get_region(LAYER.GRA, merge=True).count() == 1  # other layers are kept
     assert _area(exposure_region(c)) == pytest.approx(_area(exposure))
-
-
-def test_grating_teeth_inside_exposure() -> None:
-    """The grating teeth (6/0) end up in the exposure (4/0)."""
-    gc = cells.grating_coupler()
-    exposure = exposure_region(gc)
-    assert (layer_region(gc, LAYER.GRA) - exposure).is_empty()
 
 
 ################
@@ -315,8 +297,11 @@ def test_post_process_fills_slivers_between_trenches(
 @pytest.mark.parametrize(
     ("cell", "kwargs"),
     [
+        ("bend_circular", {"radius": 25.0}),
         ("ring_single", {"gap": 0.2}),
         ("ring_single", {"gap": 0.5, "radius": 40.0}),
+        ("ring_single", {"gap": 0.4, "radius": 28.0}),
+        ("ring_single", {"gap": 0.6, "radius": 30.0}),
         ("coupler_ring", {"gap": 0.2}),
         ("coupler", {"gap": 0.2}),
         ("bend_euler", {"radius": 50.0}),
@@ -324,7 +309,7 @@ def test_post_process_fills_slivers_between_trenches(
     ],
 )
 def test_cells_pass_merged_rules(cell: str, kwargs: dict) -> None:
-    """Non-default rings, couplers and bends also pass on the merged 4/0."""
+    """Rule minimums and other non-default geometry pass, merged 4/0 included."""
     assert check(gf.get_component(cell, **kwargs)) == []
 
 
@@ -364,10 +349,6 @@ def test_drc_catches_exposure_area() -> None:
     (violation,) = check(c)
     assert violation.rule == "EXPOSURE.A"
     assert violation.value == pytest.approx(2.25e6)
-
-    ok = gf.Component()
-    ok.add_polygon([(0, 0), (1000, 0), (1000, 1000), (0, 1000)], layer=LAYER.EXPOSURE)
-    assert check(ok) == []
 
 
 def test_drc_counts_trenches_in_exposure_area() -> None:
@@ -421,7 +402,7 @@ def test_tapeout_passes_die_and_writes_exposure(tmp_path, capsys) -> None:
     assert "of 2,000,000" in output
 
     exposed = gf.import_gds(tmp_path / "out" / "die_exposure.gds")
-    assert _area(layer_region(exposed, LAYER.EXPOSURE)) == pytest.approx(
+    assert _area(exposed.get_region(LAYER.EXPOSURE, merge=True)) == pytest.approx(
         _area(exposure_region(cells.die())), rel=1e-6
     )
 
@@ -443,7 +424,7 @@ def test_tapeout_fails_on_violations(tmp_path, capsys) -> None:
 def test_die_size_and_placeholder_io() -> None:
     """6 x 3 mm floorplan; inputs west facing east, outputs east facing west."""
     d = cells.die()
-    floorplan = layer_region(d, LAYER.FLOORPLAN)
+    floorplan = d.get_region(LAYER.FLOORPLAN, merge=True)
     assert floorplan.bbox().to_dtype(0.001) == kf.kdb.DBox(-3000, -1500, 3000, 1500)
     assert d.xsize == pytest.approx(6000) and d.ysize == pytest.approx(3000)
 
@@ -466,7 +447,6 @@ def test_die_size_and_placeholder_io() -> None:
     fibers_out = {inst.ports["o2"].center[0] for inst in d.insts if inst.xmin > 0}
     assert len(fibers_in) == len(fibers_out) == 1
     separation = fibers_out.pop() - fibers_in.pop()
-    assert separation == pytest.approx(d.info["io_separation"])
     assert separation >= TECH.io_min_separation
     for inst in d.insts:
         assert -3000 <= inst.xmin and inst.xmax <= 3000

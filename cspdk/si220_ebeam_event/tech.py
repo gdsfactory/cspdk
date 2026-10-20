@@ -1,19 +1,10 @@
-"""Technology definitions of the EVENT-ONLY CORNERSTONE e-beam flavour.
-
-Every number below comes from the CORNERSTONE e-beam workshop specification
-(Bilge, 17 Oct 2026) unless marked as a placeholder. The rules are provisional
-and apply to the e-beam event only, not to regular CORNERSTONE MPW runs.
-"""
+"""Technology definitions."""
 
 import sys
+from functools import partial
 
 import gdsfactory as gf
-from gdsfactory.cross_section import (
-    CrossSection,
-    CrossSectionSpec,
-    get_cross_sections,
-)
-from gdsfactory.routing.route_bundle import ManhattanRoute
+from gdsfactory.cross_section import CrossSection, get_cross_sections
 from gdsfactory.technology import (
     LayerLevel,
     LayerMap,
@@ -21,23 +12,19 @@ from gdsfactory.technology import (
     LayerViews,
     LogicalLayer,
 )
-from gdsfactory.typings import ComponentSpec, Layer, LayerSpec
+from gdsfactory.typings import Layer, LayerSpec
 
+from cspdk._checks import check_min
 from cspdk.si220_ebeam_event.config import PATH
 
 nm = 1e-3
 
 
 class LayerMapCornerstone(LayerMap):
-    """Layer map of the CORNERSTONE e-beam event.
-
-    Only WG (3/0), EXPOSURE (4/0) and GRA (6/0) are design layers. TRENCH_TMP
-    (3/1) is the temporary layer of the foundry post-processing
-    (:func:`cspdk.si220_ebeam_event.mask.post_process`) and must not be drawn.
-    """
+    """Layer map. Design layers are WG, EXPOSURE and GRA."""
 
     WG: Layer = (3, 0)  # waveguide cores, light field
-    TRENCH_TMP: Layer = (3, 1)  # post-processing only: WG sized by +5 um
+    TRENCH_TMP: Layer = (3, 1)  # foundry temporary layer: do not draw
     EXPOSURE: Layer = (4, 0)  # e-beam exposure, dark field (extra etch allowed)
     GRA: Layer = (6, 0)  # grating teeth
     FLOORPLAN: Layer = (99, 0)
@@ -52,11 +39,7 @@ LAYER = LayerMapCornerstone
 
 
 class Tech:
-    """Process numbers and design rules of the e-beam event, in um.
-
-    The single source of the rules used by the cells, ``mask.post_process`` and
-    ``drc.check``.
-    """
+    """Process numbers and design rules, in um."""
 
     design_rules = "CORNERSTONE e-beam event rules (17 Oct 2026, provisional)"
 
@@ -72,9 +55,9 @@ class Tech:
     max_exposure_area = 2_000_000.0  # um^2 on 4/0 after post-processing
     radius_min = 25.0
 
-    # Rib waveguide, as the CORNERSTONE student-batch rib (450 nm, R = 25 um).
+    # Rib waveguide, as the CORNERSTONE student-batch rib.
     width_rib = 0.45
-    radius_rib = 25.0
+    radius_rib = radius_min
     # Euler bend default: its tightest curvature is ~0.706 x radius at p=0.5,
     # so radius 36 keeps it at 25.4 um, above radius_min.
     radius_euler = 36.0
@@ -82,7 +65,7 @@ class Tech:
     # Default coupling gap of couplers and rings (placeholder, >= min_space).
     gap = 0.25
 
-    # Design area and provisional placeholder I/O.
+    # Design area and placeholder I/O.
     die_size = (6000.0, 3000.0)
     io_pitch = 250.0  # vertical pitch between inputs (and between outputs)
     io_min_separation = 500.0  # min horizontal distance, inputs to outputs
@@ -98,16 +81,8 @@ def get_layer_stack(
 ) -> LayerStack:
     """Returns LayerStack.
 
-    220 nm Si on BOX with a single 120 nm etch. The etched area is the
-    post-processed exposure: the 5 um trenches around WG (3/0) plus EXPOSURE
-    (4/0) and GRA (6/0). So:
-
-    - core: WG not etched by 4/0 or 6/0, full 220 nm Si.
-    - slab: the etched area, 100 nm Si left.
-    - field: everything else inside FLOORPLAN keeps the full 220 nm Si. It
-      only renders where a floorplan (e.g. ``die``) is drawn.
-
-    Cladding and BOX thicknesses for the event are not known yet (TODO).
+    core: unetched WG. slab: the etched area (trenches, 4/0, 6/0). field: the
+    unetched Si elsewhere inside FLOORPLAN (only rendered where one is drawn).
 
     Args:
         thickness_si: unetched Si thickness in um.
@@ -149,7 +124,7 @@ def get_layer_stack(
 
 
 LAYER_STACK = get_layer_stack()
-LAYER_VIEWS = gf.technology.LayerViews(PATH.lyp_yaml)
+LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
 
 
 ############################
@@ -166,10 +141,7 @@ def rib(
     radius_min: float = TECH.radius_min,
     **kwargs,
 ) -> CrossSection:
-    """Return the 450 nm rib cross-section (core on WG 3/0, 1550 nm TE).
-
-    Only the core is drawn: the foundry post-processing etches a 5 um trench
-    around it, so the slab is not drawn.
+    """Return the rib cross-section: the core only; the trench is etched at mask prep.
 
     Args:
         width: core width in um.
@@ -178,6 +150,7 @@ def rib(
         radius_min: minimum bend radius in um (design rule).
         kwargs: passed to gdsfactory's cross_section.
     """
+    check_min("width", width, TECH.min_width, TECH.design_rules)
     return gf.cross_section.cross_section(
         width=width,
         layer=layer,
@@ -191,78 +164,17 @@ def rib(
 # Routing functions
 ############################
 
-
-def route_single(
-    component: gf.Component,
-    port1: gf.Port,
-    port2: gf.Port,
-    start_straight_length: float = 0.0,
-    end_straight_length: float = 0.0,
-    waypoints: list[tuple[float, float]] | None = None,
-    port_type: str | None = None,
-    allow_width_mismatch: bool = False,
-    radius: float | None = None,
-    route_width: float | None = None,
-    cross_section: CrossSectionSpec = "rib",
-    straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_circular",
-) -> ManhattanRoute:
-    """Route two ports with a single route.
-
-    Bends default to ``bend_circular`` at the 25 um minimum radius (an Euler
-    bend of the same radius would be tighter than 25 um in its middle).
-    """
-    return gf.routing.route_single(
-        component=component,
-        port1=port1,
-        port2=port2,
-        start_straight_length=start_straight_length,
-        end_straight_length=end_straight_length,
-        cross_section=cross_section,
-        waypoints=waypoints,
-        port_type=port_type,
-        allow_width_mismatch=allow_width_mismatch,
-        radius=radius,
-        route_width=route_width,
-        straight=straight,
-        bend=bend,
-    )
-
-
-def route_bundle(
-    component: gf.Component,
-    ports1: list[gf.Port],
-    ports2: list[gf.Port],
-    separation: float = 5.0,
-    sort_ports: bool = False,
-    start_straight_length: float = 0.0,
-    end_straight_length: float = 0.0,
-    port_type: str | None = None,
-    cross_section: CrossSectionSpec = "rib",
-    straight: ComponentSpec = "straight",
-    bend: ComponentSpec = "bend_circular",
-    **kwargs,
-) -> list[ManhattanRoute]:
-    """Route two bundles of ports with 25 um circular bends.
-
-    There is a single rib width, so no tapers are inserted.
-    """
-    return gf.routing.route_bundle(
-        component=component,
-        ports1=ports1,
-        ports2=ports2,
-        separation=separation,
-        sort_ports=sort_ports,
-        start_straight_length=start_straight_length,
-        end_straight_length=end_straight_length,
-        port_type=port_type,
-        cross_section=cross_section,
-        straight=straight,
-        bend=bend,
-        taper=None,
-        auto_taper=False,
-        **kwargs,
-    )
+# Circular bends: an Euler bend of radius 25 um is tighter than 25 um mid-bend.
+route_single = partial(
+    gf.routing.route_single, cross_section="rib", bend="bend_circular"
+)
+route_bundle = partial(
+    gf.routing.route_bundle,
+    cross_section="rib",
+    bend="bend_circular",
+    taper=None,
+    auto_taper=False,
+)
 
 
 # Required by the pdk-ci check-tech-structure hook.
@@ -277,8 +189,6 @@ routing_strategies = dict(
 
 if __name__ == "__main__":
     from gdsfactory.technology.klayout_tech import KLayoutTechnology
-
-    LAYER_VIEWS = LayerViews(PATH.lyp_yaml)
 
     t = KLayoutTechnology(
         name="Cornerstone_si220_ebeam_event",

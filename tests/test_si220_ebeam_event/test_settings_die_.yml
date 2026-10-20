@@ -1,5 +1,4 @@
-info:
-  io_separation: 5751.81
+info: {}
 name: die_S6000_3000_NI8_IP250_EM100_GCgrating_coupler
 ports:
   o1:

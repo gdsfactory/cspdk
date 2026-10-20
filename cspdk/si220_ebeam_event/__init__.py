@@ -1,14 +1,4 @@
-"""CORNERSTONE e-beam workshop PDK -- EVENT-ONLY.
-
-This flavour is for the CORNERSTONE e-beam workshop event only. It is NOT for
-regular CORNERSTONE MPW submissions. Its rules are provisional (CORNERSTONE
-spec of 17 Oct 2026) and may change; use the cspdk release tagged for the
-event. See ``README.md`` in this package.
-
-SOI 220 nm, one 120 nm e-beam etch: draw cores on WG (3/0), extra etch on
-EXPOSURE (4/0) and grating teeth on GRA (6/0). ``post_process`` builds the
-exposure the foundry writes; ``check`` runs the event design rules.
-"""
+"""CORNERSTONE e-beam workshop PDK. EVENT-ONLY, provisional rules: see README.md."""
 
 from functools import lru_cache
 
@@ -39,7 +29,7 @@ CONF.pdk = "cspdk.si220_ebeam_event"
 
 @lru_cache
 def get_pdk() -> Pdk:
-    """Return the EVENT-ONLY CORNERSTONE e-beam PDK."""
+    """Return the PDK."""
     return Pdk(
         name="cornerstone_si220_ebeam_event",
         cells=_cells,
@@ -53,7 +43,7 @@ def get_pdk() -> Pdk:
 
 
 def activate_pdk() -> None:
-    """Activate the EVENT-ONLY CORNERSTONE e-beam PDK."""
+    """Activate the PDK."""
     pdk = get_pdk()
     pdk.activate()
 

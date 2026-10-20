@@ -14,8 +14,6 @@ class Path:
     module = module
     repo = repo
     lyp_yaml = module / "layers.yaml"
-    # Output directory of `python -m cspdk.si220_ebeam_event.tech` (KLayout
-    # technology); generated on demand, not shipped.
     klayout = module / "klayout"
 
 

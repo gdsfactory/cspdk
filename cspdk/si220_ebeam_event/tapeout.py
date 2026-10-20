@@ -1,12 +1,9 @@
-"""Check and post-process submitted GDS files of the CORNERSTONE e-beam event.
-
-For each GDS: run the event design rules (:func:`cspdk.si220_ebeam_event.check`),
-report the post-processed exposure area against its 2,000,000 um^2 budget and,
-with ``--output-dir``, write the post-processed layout
-(:func:`cspdk.si220_ebeam_event.post_process`) as ``<name>_exposure.gds``.
-The exit status is 1 if any file breaks a rule, else 0::
+"""Check GDS files against the e-beam event rules and write their merged exposure.
 
     python -m cspdk.si220_ebeam_event.tapeout design1.gds design2.gds -o out/
+
+Prints PASS/FAIL and the exposure area per file, writes
+``<name>_exposure.gds`` with ``-o``, and exits 1 if any file fails.
 """
 
 from __future__ import annotations
@@ -29,33 +26,26 @@ __all__ = ["main"]
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m cspdk.si220_ebeam_event.tapeout",
-        description=(
-            "Check and post-process GDS files for the CORNERSTONE e-beam event "
-            "(EVENT-ONLY rules, provisional)."
-        ),
+        description="Check GDS files against the e-beam event rules.",
     )
     parser.add_argument("gds", nargs="+", type=Path, help="GDS files to check")
     parser.add_argument(
         "--cell",
         default=None,
-        help="top cell to check (needed when a file has several top cells)",
+        help="top cell, for files with several",
     )
     parser.add_argument(
         "-o",
         "--output-dir",
         type=Path,
         default=None,
-        help="write each post-processed layout here as <name>_exposure.gds",
+        help="write <name>_exposure.gds files here",
     )
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Check, report and optionally post-process GDS files; return the exit status.
-
-    Args:
-        argv: command-line arguments (defaults to ``sys.argv[1:]``).
-    """
+    """Run the CLI on ``argv`` (default ``sys.argv[1:]``); return the exit status."""
     args = _parser().parse_args(argv)
     PDK.activate()
     if args.output_dir is not None:
@@ -64,8 +54,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     failed = False
     for path in args.gds:
         component = gf.import_gds(path, cellname=args.cell)
-        violations = check(component)
-        area = exposure_region(component).area() * component.kcl.dbu**2
+        exposure = exposure_region(component)
+        violations = check(component, exposure)
+        area = exposure.area() * component.kcl.dbu**2
         share = area / TECH.max_exposure_area
         status = "FAIL" if violations else "PASS"
         print(
@@ -76,7 +67,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(f"  {violation}")
         if args.output_dir is not None:
             output = args.output_dir / f"{path.stem}_exposure.gds"
-            exposed = post_process(component)
+            exposed = post_process(component, exposure)
             exposed.name = output.stem
             exposed.write_gds(output)
             print(f"  wrote {output}")
