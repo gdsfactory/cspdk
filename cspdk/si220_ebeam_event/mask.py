@@ -8,6 +8,18 @@ The event spec (17 Oct 2026) prepares the single e-beam exposure on 4/0 as:
 The result is what is written and etched (120 nm). :func:`exposure_region`
 returns it as a klayout region; :func:`post_process` returns a flat component
 with it on 4/0, so designers can see and check what will be exposed.
+
+The 200 nm rules apply to this merged 4/0 too (CORNERSTONE, Oct 2026), and
+plain sizing breaks them in two places, both on the outer edge of the grown
+3/1, at least 5 um from any core:
+
+* sizing a discretised arc leaves 1-2 nm jogs, which are smoothed away;
+* where two trenches meet at a shallow angle (a ring and its bus), the unetched
+  Si between them narrows to a point; gaps in 3/1 narrower than the minimum
+  space (plus a 10 nm margin) are filled, so they are etched.
+
+CORNERSTONE agreed that cspdk may prepare the exposure this way. Gaps formed
+by drawn 4/0 or 6/0 are left alone, for ``check`` to report.
 """
 
 from __future__ import annotations
@@ -19,6 +31,14 @@ from gdsfactory.typings import LayerSpec
 from cspdk.si220_ebeam_event.tech import LAYER, TECH
 
 __all__ = ["exposure_region", "layer_region", "post_process"]
+
+# Smoothing tolerance for the sizing jogs and margin on the gap fill, in um.
+SMOOTH = 0.005
+FILL_MARGIN = 0.01
+# Edge pairs meeting at this angle or more are not measured: rectangle corners
+# (90 deg) and the slightly-under-90 deg corners where a discretised arc meets
+# a port face would otherwise be flagged as zero-width features.
+IGNORE_ANGLE = 80
 
 
 def layer_region(component: gf.Component, layer: LayerSpec) -> kdb.Region:
@@ -38,14 +58,24 @@ def exposure_region(component: gf.Component) -> kdb.Region:
     """Return the post-processed e-beam exposure (4/0) of ``component``.
 
     EXPOSURE (4/0) + GRA (6/0) + (WG sized by +5 um - WG), merged, in
-    database units of ``component``'s layout.
+    database units of ``component``'s layout. The sized WG is cleaned first
+    (see the module docstring).
 
     Args:
         component: the design to post-process.
     """
+    dbu = component.kcl.dbu
     wg = layer_region(component, LAYER.WG)
-    trench_width = round(TECH.trench_width / component.kcl.dbu)
-    trench_tmp = wg.sized(trench_width)  # 3/1
+    trench_tmp = wg.sized(round(TECH.trench_width / dbu))  # 3/1
+    trench_tmp = trench_tmp.smoothed(round(SMOOTH / dbu), False)
+    fill_below = round((TECH.min_space + FILL_MARGIN) / dbu)
+    for _ in range(3):  # a fill can expose a new gap; one pass is the usual case
+        gaps = trench_tmp.space_check(
+            fill_below, metrics=kdb.Metrics.Euclidian, ignore_angle=IGNORE_ANGLE
+        )
+        if gaps.is_empty():
+            break
+        trench_tmp = (trench_tmp + gaps.polygons()).merged()
     exposure = (
         layer_region(component, LAYER.EXPOSURE)
         + layer_region(component, LAYER.GRA)

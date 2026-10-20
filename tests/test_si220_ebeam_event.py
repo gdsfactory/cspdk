@@ -261,14 +261,71 @@ def _two_lines(gap: float, width: float = 0.45, layer=LAYER.WG) -> gf.Component:
 
 
 @pytest.mark.parametrize(
-    ("layer", "name"),
-    [(LAYER.WG, "WG"), (LAYER.EXPOSURE, "EXPOSURE"), (LAYER.GRA, "GRA")],
+    ("layer", "name", "merged_gap", "merged_feature"),
+    [
+        # cores are unexposed, so a gap between cores is an exposed feature
+        (LAYER.WG, "WG", "MERGED.W", "MERGED.S"),
+        (LAYER.EXPOSURE, "EXPOSURE", "MERGED.S", "MERGED.W"),
+        (LAYER.GRA, "GRA", "MERGED.S", "MERGED.W"),
+    ],
 )
-def test_drc_catches_150nm_gap_and_feature(layer, name: str) -> None:
-    """A 150 nm gap or 150 nm feature fails on 3/0, 4/0 and 6/0; 200 nm passes."""
-    assert _rules(_two_lines(gap=0.15, layer=layer)) == {f"{name}.S"}
-    assert _rules(_two_lines(gap=1.0, width=0.15, layer=layer)) == {f"{name}.W"}
+def test_drc_catches_150nm_gap_and_feature(
+    layer, name: str, merged_gap: str, merged_feature: str
+) -> None:
+    """A 150 nm gap or feature fails on 3/0, 4/0, 6/0 and the merged 4/0; 200 nm passes."""
+    assert _rules(_two_lines(gap=0.15, layer=layer)) == {f"{name}.S", merged_gap}
+    assert _rules(_two_lines(gap=1.0, width=0.15, layer=layer)) == {
+        f"{name}.W",
+        merged_feature,
+    }
     assert _rules(_two_lines(gap=0.2, width=0.2, layer=layer)) == set()
+
+
+def _straight_with_patch(distance: float) -> gf.Component:
+    """A straight, plus a drawn 4/0 patch ``distance`` um above its trench."""
+    c = gf.Component()
+    c << cells.straight(length=10)
+    y = TECH.width_rib / 2 + TECH.trench_width + distance
+    c.add_polygon([(0, y), (10, y), (10, y + 1), (0, y + 1)], layer=LAYER.EXPOSURE)
+    return c
+
+
+def test_drc_catches_sliver_on_merged_exposure() -> None:
+    """A drawn 4/0 patch 150 nm from a trench leaves a sliver of Si on the merged 4/0."""
+    assert _rules(_straight_with_patch(0.15)) == {"MERGED.S"}
+    assert _rules(_straight_with_patch(0.2)) == set()
+
+
+@pytest.mark.parametrize(
+    ("trench_gap", "exposed_parts"),
+    [(0.05, 1), (0.15, 1), (0.2, 1), (0.25, 2)],
+)
+def test_post_process_fills_slivers_between_trenches(
+    trench_gap: float, exposed_parts: int
+) -> None:
+    """Gaps between two trenches narrower than 210 nm are etched; wider ones stay."""
+    c = gf.Component()
+    c << cells.straight(length=10)
+    other = c << cells.straight(length=10)
+    other.movey(TECH.width_rib + 2 * TECH.trench_width + trench_gap)
+    assert exposure_region(c).count() == exposed_parts
+    assert check(c) == []
+
+
+@pytest.mark.parametrize(
+    ("cell", "kwargs"),
+    [
+        ("ring_single", {"gap": 0.2}),
+        ("ring_single", {"gap": 0.5, "radius": 40.0}),
+        ("coupler_ring", {"gap": 0.2}),
+        ("coupler", {"gap": 0.2}),
+        ("bend_euler", {"radius": 50.0}),
+        ("bend_s", {"size": (100.0, 20.0)}),
+    ],
+)
+def test_cells_pass_merged_rules(cell: str, kwargs: dict) -> None:
+    """Non-default rings, couplers and bends also pass on the merged 4/0."""
+    assert check(gf.get_component(cell, **kwargs)) == []
 
 
 def test_drc_catches_diagonal_corner_gap() -> None:
@@ -296,7 +353,7 @@ def test_drc_catches_150nm_ring_gap() -> None:
         cross_section="rib",
     )
     violations = check(c)
-    assert [v.rule for v in violations] == ["WG.S"]
+    assert [v.rule for v in violations] == ["WG.S", "MERGED.W"]
     assert "gap < 200 nm" in str(violations[0])
 
 

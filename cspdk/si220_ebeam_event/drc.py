@@ -5,6 +5,9 @@ Rules (event spec, 17 Oct 2026, provisional):
 * ``<LAYER>.W``: minimum feature 200 nm on WG (3/0), EXPOSURE (4/0, as drawn)
   and GRA (6/0);
 * ``<LAYER>.S``: minimum gap 200 nm on the same layers;
+* ``MERGED.W``, ``MERGED.S``: the same 200 nm rules on the post-processed
+  exposure on 4/0 (:func:`cspdk.si220_ebeam_event.mask.exposure_region`), the
+  layer that is written (CORNERSTONE, Oct 2026);
 * ``EXPOSURE.A``: the post-processed exposure on 4/0
   (:func:`cspdk.si220_ebeam_event.mask.exposure_region`) is at most
   2,000,000 um^2;
@@ -18,8 +21,7 @@ overlapping projections are measured, perpendicular to the edges. Space uses
 the Euclidean metric, so a gap between two corners on a diagonal is measured
 too. In both, edges meeting at 80 degrees or more are not compared with each
 other, which avoids false errors on discretised curves; acute spikes
-(< 80 degrees) are still caught. Width/space run on the drawn layers; the spec
-does not give width/space rules for the post-processed 4/0.
+(< 80 degrees) are still caught.
 """
 
 from __future__ import annotations
@@ -30,7 +32,7 @@ from itertools import islice
 import gdsfactory as gf
 import klayout.db as kdb
 
-from cspdk.si220_ebeam_event.mask import exposure_region, layer_region
+from cspdk.si220_ebeam_event.mask import IGNORE_ANGLE, exposure_region, layer_region
 from cspdk.si220_ebeam_event.tech import LAYER, TECH
 
 __all__ = ["Violation", "check"]
@@ -38,10 +40,6 @@ __all__ = ["Violation", "check"]
 # Layers with width/space rules: name -> layer.
 CHECKED_LAYERS = {"WG": LAYER.WG, "EXPOSURE": LAYER.EXPOSURE, "GRA": LAYER.GRA}
 MAX_LOCATIONS = 10
-# Edge pairs meeting at this angle or more are not measured: rectangle corners
-# (90 deg) and the slightly-under-90 deg corners where a discretised arc meets
-# a port face would otherwise be flagged as zero-width features.
-IGNORE_ANGLE = 80
 
 
 @dataclass(frozen=True)
@@ -86,6 +84,31 @@ def _locations(markers: kdb.EdgePairs | kdb.Region, dbu: float) -> tuple:
     )
 
 
+def _width_space(
+    region: kdb.Region, name: str, layer: str, dbu: float
+) -> list[Violation]:
+    """Return the 200 nm feature and gap violations of ``region``."""
+    violations = []
+    for rule, kind, minimum, run_check, metrics in (
+        ("W", "feature", TECH.min_width, region.width_check, kdb.Metrics.Projection),
+        ("S", "gap", TECH.min_space, region.space_check, kdb.Metrics.Euclidian),
+    ):
+        markers = run_check(
+            round(minimum / dbu), metrics=metrics, ignore_angle=IGNORE_ANGLE
+        )
+        if not markers.is_empty():
+            violations.append(
+                Violation(
+                    rule=f"{name}.{rule}",
+                    layer=layer,
+                    description=f"{kind} < {minimum * 1e3:g} nm",
+                    count=markers.count(),
+                    locations=_locations(markers, dbu),
+                )
+            )
+    return violations
+
+
 def check(component: gf.Component) -> list[Violation]:
     """Return the e-beam event design-rule violations of ``component``.
 
@@ -98,32 +121,11 @@ def check(component: gf.Component) -> list[Violation]:
     violations: list[Violation] = []
     for name, layer in CHECKED_LAYERS.items():
         region = layer_region(component, layer)
-        for rule, kind, minimum, run_check, metrics in (
-            (
-                "W",
-                "feature",
-                TECH.min_width,
-                region.width_check,
-                kdb.Metrics.Projection,
-            ),
-            ("S", "gap", TECH.min_space, region.space_check, kdb.Metrics.Euclidian),
-        ):
-            markers = run_check(
-                round(minimum / dbu), metrics=metrics, ignore_angle=IGNORE_ANGLE
-            )
-            if markers.is_empty():
-                continue
-            violations.append(
-                Violation(
-                    rule=f"{name}.{rule}",
-                    layer=_layer_name(name),
-                    description=f"{kind} < {minimum * 1e3:g} nm",
-                    count=markers.count(),
-                    locations=_locations(markers, dbu),
-                )
-            )
+        violations += _width_space(region, name, _layer_name(name), dbu)
 
     exposure = exposure_region(component)
+    merged = _layer_name("EXPOSURE") + " post-processed"
+    violations += _width_space(exposure, "MERGED", merged, dbu)
     area = exposure.area() * dbu**2
     if area > TECH.max_exposure_area:
         violations.append(

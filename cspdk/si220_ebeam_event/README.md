@@ -42,6 +42,17 @@ So every core gets a 5 um etched trench on each side.
 `post_process(component)` returns a flat copy with the result on 4/0, and
 `exposure_region(component)` returns it as a klayout region.
 
+The 200 nm rules also apply to the merged 4/0, the layer that is written.
+Plain sizing would break them on the outer edge of the trenches, at least
+5 um from any core, so cspdk cleans 3/1 before merging (CORNERSTONE agreed to
+this):
+
+- 1-2 nm jogs, left by sizing discretised arcs, are smoothed away;
+- gaps between trenches narrower than 210 nm are filled (etched). They form
+  where two trenches meet at a shallow angle, such as a ring and its bus.
+
+Gaps formed by drawn 4/0 or 6/0 are not filled: `check` reports them.
+
 ## Design rules
 
 `check(component)` returns a list of `Violation` records (empty when the
@@ -51,12 +62,14 @@ layout passes). It uses klayout.db only, with no external deck.
 |------|-------|
 | `WG.W`, `EXPOSURE.W`, `GRA.W` | minimum feature 200 nm on 3/0, 4/0 (as drawn), 6/0 |
 | `WG.S`, `EXPOSURE.S`, `GRA.S` | minimum gap 200 nm on the same layers |
+| `MERGED.W`, `MERGED.S` | minimum feature and gap 200 nm on the post-processed 4/0 |
 | `EXPOSURE.A` | post-processed 4/0 area at most 2,000,000 um^2 |
 | `DESIGN.SIZE` | post-processed 4/0 fits in 6 mm (east-west) x 3 mm (north-south) |
 | `TRENCH_TMP.R` | nothing drawn on 3/1 (a cspdk check, not a foundry rule) |
 
-Width and space use the projection metric: only edges that face each other
-are measured, and edges meeting at 80 degrees or more are not compared.
+Width uses the projection metric (only edges that face each other are
+measured); space uses the Euclidean metric, so corner-to-corner gaps count.
+Edges meeting at 80 degrees or more are not compared.
 
 Minimum bend radius 25 um: the cells reject smaller radii. `bend_euler` and
 `bend_s` also check their tightest curvature, so an Euler bend needs a radius
@@ -108,14 +121,12 @@ any file fails. Use `--cell` to choose the top cell of a file with several.
 
 ## Not known yet (TODO)
 
-- Do the 200 nm rules also apply to the post-processed 4/0? `check` applies
-  them to 4/0 as drawn. After post-processing, the default `ring_single` would
-  fail them: where the ring's trench meets the bus trench, the unetched Si
-  between them ends in a sharp (~47 degree) tip. Sizing the inside of a
-  25 um arc by 5 um on the 1 nm grid also leaves 1-2 nm notches.
 - Are labels on 100/0 and 101/0 etched or ignored? The cells draw none.
 - Write-field size, and whether devices may cross write-field boundaries.
 - Final measurement setup, and the final I/O (grating) placement rules.
-- Raw measured data for the models (neff, coupling, grating response).
+- Measured data on the e-beam process (neff, coupling versus gap, grating
+  response). CORNERSTONE has no ring or coupler data yet, and its grating
+  measurement is of the MPW rib grating (630 nm period, shallow etch), not
+  this one. It plans to fabricate test structures in the upcoming run.
 - Event date, and the cspdk release to pin to it.
 - Cladding and BOX thicknesses.
