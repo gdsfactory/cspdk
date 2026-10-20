@@ -167,6 +167,8 @@ def test_grating_coupler_sweep_rows() -> None:
     assert sweep.info["rows"] == [[0.66, 0.5], [0.68, 0.5]]
     assert sweep.get_region(LAYER.GRA, merge=True).count() == 2 * 2 * 60
     assert sweep.ysize == pytest.approx(TECH.io_pitch + 10)
+    # each row is one continuous core from grating to grating
+    assert sweep.get_region(LAYER.WG, merge=True).count() == 2
 
 
 ################
@@ -381,11 +383,39 @@ def test_drc_catches_design_larger_than_6x3mm() -> None:
     assert _rules(turned) == {"DESIGN.SIZE"}
 
 
-def test_drc_flags_drawn_trench_tmp() -> None:
-    """3/1 is reserved for post-processing."""
+@pytest.mark.parametrize(
+    ("layer", "rule"),
+    [
+        (LAYER.TRENCH_TMP, "TRENCH_TMP.R"),  # reserved for post-processing
+        (LAYER.routing_error_marker, "ROUTING.E"),  # left by a failed route
+        ((5, 0), "LAYER.U"),  # not written, e.g. a core on the wrong layer
+    ],
+)
+def test_drc_flags_shapes_that_are_not_written(layer, rule: str) -> None:
+    """Shapes the foundry would drop or that mark a failed route are reported."""
     c = gf.Component()
-    c.add_polygon([(0, 0), (1, 0), (1, 1), (0, 1)], layer=LAYER.TRENCH_TMP)
-    assert _rules(c) == {"TRENCH_TMP.R"}
+    c.add_polygon([(0, 0), (1, 0), (1, 1), (0, 1)], layer=layer)
+    assert _rules(c) == {rule}
+
+
+def test_drc_catches_gap_at_a_sharp_tip() -> None:
+    """A gap between separate shapes is measured whatever the edge angles."""
+    c = gf.Component()
+    c.add_polygon([(0, -5), (1, -5), (1, 5), (0, 5)], layer=LAYER.GRA)
+    # a 1 um wide wedge whose tip is 150 nm from the bar
+    c.add_polygon([(1.15, 0), (6.15, -0.5), (6.15, 0.5)], layer=LAYER.GRA)
+    assert "GRA.S" in _rules(c)
+
+
+def test_drc_catches_exposure_outside_floorplan() -> None:
+    """With a FLOORPLAN drawn, the exposure must lie inside it."""
+    c = gf.Component()
+    c.add_polygon([(0, 0), (100, 0), (100, 100), (0, 100)], layer=LAYER.FLOORPLAN)
+    wg = c << cells.straight(length=50)
+    wg.move((25, 50))
+    assert check(c) == []
+    wg.movex(60)
+    assert _rules(c) == {"DESIGN.SIZE"}
 
 
 ################
@@ -414,6 +444,26 @@ def test_tapeout_fails_on_violations(tmp_path, capsys) -> None:
     output = capsys.readouterr().out
     assert output.startswith("FAIL")
     assert "WG.S" in output
+
+
+def test_tapeout_reports_unreadable_files_and_continues(tmp_path, capsys) -> None:
+    """An unreadable GDS fails without stopping the other files."""
+    bad = tmp_path / "bad.gds"
+    bad.write_bytes(b"not a gds")
+    good = cells.straight().write_gds(tmp_path / "good.gds")
+    assert tapeout.main([str(bad), str(good)]) == 1
+    output = capsys.readouterr().out
+    assert f"FAIL {bad}: cannot read" in output
+    assert f"PASS {good}" in output
+
+
+def test_tapeout_rejects_clashing_output_names(tmp_path) -> None:
+    """With -o, two inputs named alike would overwrite each other's output."""
+    (tmp_path / "a").mkdir()
+    (tmp_path / "b").mkdir()
+    gds = [cells.straight().write_gds(tmp_path / d / "x.gds") for d in "ab"]
+    with pytest.raises(SystemExit):
+        tapeout.main([*map(str, gds), "-o", str(tmp_path / "out")])
 
 
 ################
@@ -503,6 +553,14 @@ def test_bend_models_match_cell_lengths() -> None:
         s21 = getattr(models, name)(loss=loss)["o1", "o2"]
         length_um = -20 * np.log10(abs(s21)) / loss * 1e4
         assert length_um == pytest.approx(cell.info["length"], rel=1e-3), name
+
+
+@pytest.mark.parametrize("name", sorted(models.get_models()))
+def test_models_follow_wavelength_arrays(name: str) -> None:
+    """Every S-parameter has one value per wavelength."""
+    sdict = models.get_models()[name](wl=np.array([1.53, 1.55, 1.57]))
+    for value in sdict.values():
+        assert np.shape(value) == (3,), name
 
 
 def test_grating_model_peak() -> None:

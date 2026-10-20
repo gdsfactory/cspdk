@@ -6,15 +6,23 @@ Rules (see README.md):
   feature and gap on 3/0, 4/0 (as drawn) and 6/0;
 * ``MERGED.W``/``.S``: the same on the merged exposure (4/0);
 * ``EXPOSURE.A``: merged exposure at most 2,000,000 um^2;
-* ``DESIGN.SIZE``: the design fits in 6 mm (east-west) x 3 mm;
-* ``TRENCH_TMP.R``: nothing drawn on 3/1 (a cspdk check).
+* ``DESIGN.SIZE``: the design fits in 6 mm (east-west) x 3 mm, and inside
+  FLOORPLAN (99/0) when one is drawn;
 
-Width uses the projection metric, space the Euclidean one, so corner-to-corner
-gaps count.
+and cspdk checks that the foundry would ignore or reject:
+
+* ``TRENCH_TMP.R``: nothing drawn on 3/1;
+* ``ROUTING.E``: no routing-error markers (1000/0) from failed routes;
+* ``LAYER.U``: no shapes on other layers (they would not be written).
+
+Width uses the projection metric; space is Euclidean, so corner-to-corner gaps
+count. Edges meeting at 80 degrees or more are not compared within a polygon
+(curves would give false errors), but gaps between polygons always are.
 """
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from itertools import islice
 
@@ -27,6 +35,17 @@ from cspdk.si220_ebeam_event.tech import LAYER, TECH
 __all__ = ["Violation", "check"]
 
 MAX_LOCATIONS = 10
+# Layers that may hold shapes; anything else is reported as LAYER.U.
+ALLOWED_LAYERS = (
+    LAYER.WG,
+    LAYER.EXPOSURE,
+    LAYER.GRA,
+    LAYER.TRENCH_TMP,
+    LAYER.FLOORPLAN,
+    LAYER.LABEL_SETTINGS,
+    LAYER.LABEL_INSTANCE,
+    LAYER.routing_error_marker,
+)
 
 
 @dataclass(frozen=True)
@@ -75,13 +94,26 @@ def _width_space(
     region: kdb.Region, name: str, layer: str, dbu: float
 ) -> list[Violation]:
     violations = []
-    for rule, kind, minimum, run_check, metrics in (
-        ("W", "feature", TECH.min_width, region.width_check, kdb.Metrics.Projection),
-        ("S", "gap", TECH.min_space, region.space_check, kdb.Metrics.Euclidian),
+    width = math.ceil(TECH.min_width / dbu - 1e-9)
+    space = math.ceil(TECH.min_space / dbu - 1e-9)
+    euclidian = kdb.Metrics.Euclidian
+    for rule, kind, minimum, markers in (
+        (
+            "W",
+            "feature",
+            TECH.min_width,
+            region.width_check(
+                width, metrics=kdb.Metrics.Projection, ignore_angle=IGNORE_ANGLE
+            ),
+        ),
+        (
+            "S",
+            "gap",
+            TECH.min_space,
+            region.notch_check(space, metrics=euclidian, ignore_angle=IGNORE_ANGLE)
+            + region.isolated_check(space, metrics=euclidian),
+        ),
     ):
-        markers = run_check(
-            round(minimum / dbu), metrics=metrics, ignore_angle=IGNORE_ANGLE
-        )
         if not markers.is_empty():
             violations.append(
                 Violation(
@@ -131,28 +163,54 @@ def check(
     # The exposure contains every core sized by 5 um, so its bbox is the design's.
     width, height = TECH.die_size
     extent = exposure.bbox()
+    floorplan = component.get_region(LAYER.FLOORPLAN, merge=True)
     if not extent.empty() and (
-        extent.width() * dbu > width or extent.height() * dbu > height
+        extent.width() * dbu > width
+        or extent.height() * dbu > height
+        or not (floorplan.is_empty() or (exposure - floorplan).is_empty())
     ):
         violations.append(
             Violation(
                 rule="DESIGN.SIZE",
                 layer=merged,
-                description=f"design larger than {width:g} x {height:g} um",
+                description=(
+                    f"design larger than {width:g} x {height:g} um or outside FLOORPLAN"
+                ),
                 count=1,
                 locations=_locations(kdb.Region(extent), dbu),
             )
         )
 
-    reserved = component.get_region(LAYER.TRENCH_TMP, merge=True)
-    if not reserved.is_empty():
-        violations.append(
-            Violation(
-                rule="TRENCH_TMP.R",
-                layer=_layer_name("TRENCH_TMP"),
-                description="reserved for post-processing, must be empty",
-                count=reserved.count(),
-                locations=_locations(reserved, dbu),
+    for rule, name, description in (
+        ("TRENCH_TMP.R", "TRENCH_TMP", "reserved for post-processing, must be empty"),
+        ("ROUTING.E", "routing_error_marker", "failed route"),
+    ):
+        region = component.get_region(getattr(LAYER, name), merge=True)
+        if not region.is_empty():
+            violations.append(
+                Violation(
+                    rule=rule,
+                    layer=_layer_name(name),
+                    description=description,
+                    count=region.count(),
+                    locations=_locations(region, dbu),
+                )
             )
-        )
+
+    allowed = {gf.get_layer(layer) for layer in ALLOWED_LAYERS}
+    for index in component.kcl.layer_indexes():
+        if index in allowed:
+            continue
+        region = kdb.Region(component.begin_shapes_rec(index))
+        if not region.is_empty():
+            info = component.kcl.get_info(index)
+            violations.append(
+                Violation(
+                    rule="LAYER.U",
+                    layer=f"{info.layer}/{info.datatype}",
+                    description="shapes on a layer that is not written",
+                    count=region.count(),
+                    locations=_locations(region, dbu),
+                )
+            )
     return violations

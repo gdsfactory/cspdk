@@ -47,8 +47,10 @@ drawn 4/0 or 6/0 are left for `check` to report.
 | `WG`, `EXPOSURE`, `GRA` `.W`/`.S` | 200 nm minimum feature/gap on 3/0, 4/0 (as drawn), 6/0 |
 | `MERGED.W`/`.S` | the same on the merged 4/0 |
 | `EXPOSURE.A` | merged 4/0 at most 2,000,000 µm² |
-| `DESIGN.SIZE` | design fits in 6 mm (east-west) × 3 mm |
+| `DESIGN.SIZE` | design fits in 6 mm (east-west) × 3 mm, and inside FLOORPLAN if drawn |
 | `TRENCH_TMP.R` | nothing drawn on 3/1 |
+| `ROUTING.E` | no failed routes (markers on 1000/0) |
+| `LAYER.U` | no shapes on layers that are not written |
 
 The cells reject radii below 25 µm, including the tightest point of Euler and
 S-bends: an Euler bend needs a radius of about 36 µm (the default) at p=0.5.

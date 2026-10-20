@@ -46,14 +46,23 @@ def _parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the CLI on ``argv`` (default ``sys.argv[1:]``); return the exit status."""
-    args = _parser().parse_args(argv)
-    PDK.activate()
+    parser = _parser()
+    args = parser.parse_args(argv)
     if args.output_dir is not None:
+        stems = [path.stem for path in args.gds]
+        if len(set(stems)) < len(stems):
+            parser.error("with -o, input files need distinct names")
         args.output_dir.mkdir(parents=True, exist_ok=True)
+    PDK.activate()
 
     failed = False
     for path in args.gds:
-        component = gf.import_gds(path, cellname=args.cell)
+        try:
+            component = gf.import_gds(path, cellname=args.cell)
+        except Exception as error:  # report it and check the other files
+            print(f"FAIL {path}: cannot read: {error}")
+            failed = True
+            continue
         exposure = exposure_region(component)
         violations = check(component, exposure)
         area = exposure.area() * component.kcl.dbu**2
