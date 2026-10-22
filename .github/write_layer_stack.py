@@ -23,6 +23,7 @@ _optional = [
     ("SiN200", "cspdk.sin200"),
     ("Ge-on-Si", "cspdk.ge_on_si"),
     ("Si Suspended", "cspdk.si_sus"),
+    ("Si220 e-beam (EVENT-ONLY)", "cspdk.si220_ebeam_event"),
 ]
 
 for _label, _mod_path in _optional:

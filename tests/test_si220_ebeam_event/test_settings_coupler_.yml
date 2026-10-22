@@ -1,0 +1,47 @@
+info:
+  min_bend_radius: 33.805
+  path_length: 52.174
+name: coupler_G0p25_L20_D16_D3p5_CSrib
+ports:
+  o1:
+    center:
+    - -16
+    - -1.4
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - -16
+    - 2.1
+    layer: WG
+    name: o2
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o3:
+    center:
+    - 36
+    - 2.1
+    layer: WG
+    name: o3
+    orientation: 0
+    port_type: optical
+    width: 0.45
+  o4:
+    center:
+    - 36
+    - -1.4
+    layer: WG
+    name: o4
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  cross_section: rib
+  dx: 16
+  dy: 3.5
+  gap: 0.25
+  length: 20

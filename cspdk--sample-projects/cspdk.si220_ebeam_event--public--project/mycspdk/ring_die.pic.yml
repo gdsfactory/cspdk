@@ -1,0 +1,42 @@
+name: ring_die
+instances:
+  die:
+    component: die
+  ring:
+    component: ring_single
+    settings:
+      gap: 0.25
+      radius: 25
+  loopback:
+    component: straight
+    settings:
+      length: 100
+placements:
+  die:
+    x: 0
+    y: 0
+  ring:
+    port: o1
+    x: -100
+    y: die,o1
+  loopback:
+    port: o1
+    x: -50
+    y: die,o2
+routes:
+  ring_in:
+    links:
+      die,o1: ring,o1
+    routing_strategy: route_bundle
+  ring_out:
+    links:
+      ring,o2: die,o16
+    routing_strategy: route_bundle
+  loopback_in:
+    links:
+      die,o2: loopback,o1
+    routing_strategy: route_bundle
+  loopback_out:
+    links:
+      loopback,o2: die,o15
+    routing_strategy: route_bundle

@@ -23,6 +23,7 @@ TITLES = {
     "sin300": "Models SiN300",
     "si_sus": "Models suspended Si",
     "ge_on_si": "Models Ge-on-Si",
+    "si220_ebeam_event": "Models Si SOI 220nm e-beam (EVENT-ONLY)",
 }
 MAX_CURVES = 6  # transmission curves per plot
 

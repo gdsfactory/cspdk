@@ -1,0 +1,28 @@
+info:
+  radius: 25
+name: ring_single_G0p25_R25_LX4_LY0p6_CSrib_LENone
+ports:
+  o1:
+    center:
+    - -34
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 30
+    - 0
+    layer: WG
+    name: o2
+    orientation: 0
+    port_type: optical
+    width: 0.45
+settings:
+  cross_section: rib
+  gap: 0.25
+  length_x: 4
+  length_y: 0.6
+  radius: 25

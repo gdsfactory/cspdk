@@ -1,0 +1,32 @@
+info:
+  fiber_angle: 10
+  polarization: te
+  wavelength: 1.55
+name: grating_coupler_P0p67_FF0p5_NP60_LT350_WG10_LE4p163_CSrib
+ports:
+  o1:
+    center:
+    - 0
+    - 0
+    layer: WG
+    name: o1
+    orientation: 180
+    port_type: optical
+    width: 0.45
+  o2:
+    center:
+    - 369.933
+    - 0
+    layer: GRA
+    name: o2
+    orientation: 0
+    port_type: vertical_te
+    width: 10
+settings:
+  cross_section: rib
+  fill_factor: 0.5
+  length_end: 4.163
+  length_taper: 350
+  n_periods: 60
+  period: 0.67
+  width_grating: 10

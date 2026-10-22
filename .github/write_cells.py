@@ -27,6 +27,7 @@ TITLES = {
     "sin300": "Cells SiN300",
     "si_sus": "Cells suspended Si",
     "ge_on_si": "Cells Ge-on-Si",
+    "si220_ebeam_event": "Cells Si SOI 220nm e-beam (EVENT-ONLY)",
 }
 
 flavour = sys.argv[1]

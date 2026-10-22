@@ -1,0 +1,1 @@
+**New flavour `cspdk.si220_ebeam_event` for the CORNERSTONE e-beam workshop (#424).** Event-only, with provisional rules. It has cells, SAX models, `post_process()` for the foundry's 4/0 merge, `check()` for the event rules, and `python -m cspdk.si220_ebeam_event.tapeout` to check GDS files. See its README.

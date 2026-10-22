@@ -1,0 +1,46 @@
+LayerViews:
+  WG:
+    layer: [3, 0]
+    layer_in_name: true
+    width: 1
+    color: "#ff9d9d"
+    hatch_pattern: coarsely dotted
+  TRENCH_TMP:
+    layer: [3, 1]
+    layer_in_name: true
+    color: "#ffc6c6"
+    hatch_pattern: hollow
+  EXPOSURE:
+    layer: [4, 0]
+    layer_in_name: true
+    hatch_pattern: coarsely dotted
+    transparent: true
+    width: 1
+    color: "cyan"
+  GRA:
+    layer: [6, 0]
+    layer_in_name: true
+    width: 1
+    color: "#0000ff"
+    hatch_pattern: dotted
+  FLOORPLAN:
+    layer: [99, 0]
+    layer_in_name: true
+    color: "green"
+    hatch_pattern: hollow
+  LABEL_SETTINGS:
+    layer: [100, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  LABEL_INSTANCE:
+    layer: [101, 0]
+    layer_in_name: true
+    color: "cyan"
+    hatch_pattern: hollow
+  routing_error_marker:
+    layer: [1000, 0]
+    layer_in_name: false
+    width: 1
+    color: "red"
+    hatch_pattern: coarsely dotted

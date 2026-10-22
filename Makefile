@@ -1,4 +1,4 @@
-FLAVOURS = si220 si340 si500 sin200 sin300 si_sus ge_on_si
+FLAVOURS = si220 si340 si500 sin200 sin300 si_sus ge_on_si si220_ebeam_event
 
 install:
 	uv venv --python 3.12

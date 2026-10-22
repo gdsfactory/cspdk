@@ -1,0 +1,324 @@
+instances:
+  grating_coupler:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler10:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler11:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler12:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler13:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler14:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler15:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler16:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler2:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler3:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler4:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler5:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler6:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler7:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler8:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+  grating_coupler9:
+    component: grating_coupler
+    info:
+      fiber_angle: 10
+      polarization: te
+      wavelength: 1.55
+    settings:
+      cross_section: rib
+      fill_factor: 0.5
+      length_end: 4.163
+      length_taper: 350
+      n_periods: 60
+      period: 0.67
+      width_grating: 10
+nets: []
+placements:
+  grating_coupler:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: -125
+  grating_coupler10:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: -375
+  grating_coupler11:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: -625
+  grating_coupler12:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: -875
+  grating_coupler13:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: 125
+  grating_coupler14:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: 375
+  grating_coupler15:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: 625
+  grating_coupler16:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: 875
+  grating_coupler2:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: -375
+  grating_coupler3:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: -625
+  grating_coupler4:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: -875
+  grating_coupler5:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: 125
+  grating_coupler6:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: 375
+  grating_coupler7:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: 625
+  grating_coupler8:
+    mirror: false
+    rotation: 180
+    x: -2505.972
+    y: 875
+  grating_coupler9:
+    mirror: false
+    rotation: 0
+    x: 2505.972
+    y: -125
+ports:
+  o1: grating_coupler4,o1
+  o10: grating_coupler15,o1
+  o11: grating_coupler14,o1
+  o12: grating_coupler13,o1
+  o13: grating_coupler9,o1
+  o14: grating_coupler10,o1
+  o15: grating_coupler11,o1
+  o16: grating_coupler12,o1
+  o2: grating_coupler3,o1
+  o3: grating_coupler2,o1
+  o4: grating_coupler,o1
+  o5: grating_coupler5,o1
+  o6: grating_coupler6,o1
+  o7: grating_coupler7,o1
+  o8: grating_coupler8,o1
+  o9: grating_coupler16,o1

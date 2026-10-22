@@ -11,6 +11,7 @@ nav:
       - Cells SiN300: cells_sin300.md
       - Cells Suspended Si: cells_si_sus.md
       - Cells Ge-on-Si: cells_ge_on_si.md
+      - Cells Si220 e-beam (event only): cells_si220_ebeam_event.md
       - Models Si220: models_si220.md
       - Models Si340: models_si340.md
       - Models Si500: models_si500.md
@@ -18,6 +19,7 @@ nav:
       - Models SiN300: models_sin300.md
       - Models Suspended Si: models_si_sus.md
       - Models Ge-on-Si: models_ge_on_si.md
+      - Models Si220 e-beam (event only): models_si220_ebeam_event.md
       - Changelog: changelog.md
   - Notebooks:
       - "FDTD: directional coupler (Meep)": notebooks/meep_dc.md
