@@ -1,0 +1,638 @@
+{
+  "connection_18": {
+    "type": "wire",
+    "id": "connection_18",
+    "name": "pic_net4",
+    "x": 19.0,
+    "y": 0.0,
+    "rx": -14.0,
+    "ry": -4.0,
+    "net": "net4"
+  },
+  "mmi9x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi9x",
+    "nets": {
+      "o1": "net22"
+    },
+    "transform": [
+      -1.0,
+      -1.2246467991473532e-16,
+      1.2246467991473532e-16,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "x": -5.0,
+    "y": -11.0
+  },
+  "connection_15": {
+    "type": "wire",
+    "id": "connection_15",
+    "name": "pic_net22",
+    "x": 19.0,
+    "y": 3.0,
+    "rx": -20.0,
+    "ry": -12.0,
+    "net": "net22"
+  },
+  "mmi16x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi16x",
+    "nets": {
+      "o1": "net8"
+    },
+    "x": 53.0,
+    "y": 2.0
+  },
+  "mmi14x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi14x",
+    "nets": {
+      "o1": "net6"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -17.0,
+    "y": -2.0
+  },
+  "mmi4x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi4x",
+    "nets": {
+      "o1": "net18"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 1.0,
+    "y": 3.0
+  },
+  "mmi3x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi3x",
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -10.0,
+    "y": 7.0
+  },
+  "mmi8x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi8x",
+    "nets": {
+      "o1": "net21"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -11.0,
+    "y": 0.0
+  },
+  "mmi1x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi1x",
+    "nets": {
+      "o1": "net1"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 7.0,
+    "y": -0.0
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 19.0,
+    "y": 11.0,
+    "rx": -8.0,
+    "ry": -9.0,
+    "net": "net1"
+  },
+  "connection_8": {
+    "type": "wire",
+    "id": "connection_8",
+    "name": "pic_net16",
+    "x": 51.0,
+    "y": 10.0,
+    "rx": 8.0,
+    "ry": -11.0,
+    "net": "net16"
+  },
+  "mmi17x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi17x",
+    "nets": {
+      "o1": "net9"
+    },
+    "x": 83.0,
+    "y": -0.0
+  },
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "pic_net13",
+    "x": 51.0,
+    "y": 7.0,
+    "rx": 50.0,
+    "ry": -6.0,
+    "net": "net13"
+  },
+  "mmi6x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi6x",
+    "nets": {
+      "o1": "net20"
+    },
+    "transform": [
+      -1.0,
+      -1.2246467991473532e-16,
+      1.2246467991473532e-16,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "x": -5.0,
+    "y": -5.0
+  },
+  "connection_20": {
+    "type": "wire",
+    "id": "connection_20",
+    "name": "pic_net6",
+    "x": 51.0,
+    "y": 1.0,
+    "rx": -64.0,
+    "ry": -1.0,
+    "net": "net6"
+  },
+  "connection_16": {
+    "type": "wire",
+    "id": "connection_16",
+    "name": "pic_net23",
+    "x": 19.0,
+    "y": 5.0,
+    "rx": -26.0,
+    "ry": -10.0,
+    "net": "net23"
+  },
+  "mmi12x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi12x",
+    "nets": {
+      "o1": "net4"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 1.0,
+    "y": -6.0
+  },
+  "connection_6": {
+    "type": "wire",
+    "id": "connection_6",
+    "name": "pic_net14",
+    "x": 51.0,
+    "y": 8.0,
+    "rx": 14.0,
+    "ry": -8.0,
+    "net": "net14"
+  },
+  "mmi22x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi22x",
+    "nets": {
+      "o1": "net15"
+    },
+    "x": 95.0,
+    "y": -3.0
+  },
+  "connection_10": {
+    "type": "wire",
+    "id": "connection_10",
+    "name": "pic_net18",
+    "x": 19.0,
+    "y": 8.0,
+    "rx": -14.0,
+    "ry": -3.0,
+    "net": "net18"
+  },
+  "mmi5x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi5x",
+    "nets": {
+      "o1": "net19"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -5.0,
+    "y": 1.0
+  },
+  "mmi23x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi23x",
+    "nets": {
+      "o1": "net16"
+    },
+    "x": 59.0,
+    "y": -3.0
+  },
+  "connection_13": {
+    "type": "wire",
+    "id": "connection_13",
+    "name": "pic_net20",
+    "x": 19.0,
+    "y": 6.0,
+    "rx": -20.0,
+    "ry": -9.0,
+    "net": "net20"
+  },
+  "connection_17": {
+    "type": "wire",
+    "id": "connection_17",
+    "name": "pic_net3",
+    "x": 19.0,
+    "y": 1.0,
+    "rx": -8.0,
+    "ry": -5.0,
+    "net": "net3"
+  },
+  "connection_22": {
+    "type": "wire",
+    "id": "connection_22",
+    "name": "pic_net8",
+    "x": 51.0,
+    "y": 3.0,
+    "rx": 2.0,
+    "ry": 1.0,
+    "net": "net8"
+  },
+  "mmi18x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi18x",
+    "nets": {
+      "o1": "net10"
+    },
+    "x": 71.0,
+    "y": -1.0
+  },
+  "connection_12": {
+    "type": "wire",
+    "id": "connection_12",
+    "name": "pic_net2",
+    "x": 19.0,
+    "y": 2.0,
+    "rx": -2.0,
+    "ry": -4.0,
+    "net": "net2"
+  },
+  "mmi13x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi13x",
+    "nets": {
+      "o1": "net5"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 19.0,
+    "y": -9.0
+  },
+  "mmi11x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi11x",
+    "nets": {
+      "o1": "net3"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 7.0,
+    "y": -6.0
+  },
+  "mmi24x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi24x",
+    "nets": {
+      "o1": "net17"
+    },
+    "x": 53.0,
+    "y": -5.0
+  },
+  "mmi2x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi2x",
+    "nets": {
+      "o1": "net12"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -16.0,
+    "y": 7.0
+  },
+  "mmi15x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi15x",
+    "nets": {
+      "o1": "net7"
+    },
+    "x": 77.0,
+    "y": -3.0
+  },
+  "die_template": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.die_with_pads.die_with_pads",
+    "name": "die_template",
+    "nets": {
+      "o10": "net22",
+      "o11": "net2",
+      "o12": "net3",
+      "o13": "net4",
+      "o16": "net5",
+      "o17": "net6",
+      "o19": "net8",
+      "o2": "net1",
+      "o20": "net9",
+      "o21": "net10",
+      "o22": "net11",
+      "o23": "net13",
+      "o24": "net14",
+      "o25": "net15",
+      "o26": "net16",
+      "o27": "net17",
+      "o3": "net12",
+      "o4": "net7",
+      "o5": "net18",
+      "o6": "net19",
+      "o7": "net20",
+      "o8": "net23",
+      "o9": "net21"
+    },
+    "x": 19.0,
+    "y": -2.0
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net10",
+    "x": 51.0,
+    "y": 5.0,
+    "rx": 20.0,
+    "ry": -4.0,
+    "net": "net10"
+  },
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "pic_net11",
+    "x": 51.0,
+    "y": 6.0,
+    "rx": 38.0,
+    "ry": -5.0,
+    "net": "net11"
+  },
+  "connection_7": {
+    "type": "wire",
+    "id": "connection_7",
+    "name": "pic_net15",
+    "x": 51.0,
+    "y": 9.0,
+    "rx": 44.0,
+    "ry": -10.0,
+    "net": "net15"
+  },
+  "connection_9": {
+    "type": "wire",
+    "id": "connection_9",
+    "name": "pic_net17",
+    "x": 51.0,
+    "y": 11.0,
+    "rx": 2.0,
+    "ry": -14.0,
+    "net": "net17"
+  },
+  "mmi10x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi10x",
+    "nets": {
+      "o1": "net2"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": 13.0,
+    "y": -4.0
+  },
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "pic_net12",
+    "x": 19.0,
+    "y": 10.0,
+    "rx": -31.0,
+    "ry": -1.0,
+    "net": "net12"
+  },
+  "connection_11": {
+    "type": "wire",
+    "id": "connection_11",
+    "name": "pic_net19",
+    "x": 19.0,
+    "y": 7.0,
+    "rx": -20.0,
+    "ry": -4.0,
+    "net": "net19"
+  },
+  "mmi20x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi20x",
+    "nets": {
+      "o1": "net13"
+    },
+    "x": 101.0,
+    "y": -1.0
+  },
+  "mmi7x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi7x",
+    "nets": {
+      "o1": "net23"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-8,
+      -8.742278000372475e-8,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "x": -11.0,
+    "y": -7.0
+  },
+  "connection_19": {
+    "type": "wire",
+    "id": "connection_19",
+    "name": "pic_net5",
+    "x": 51.0,
+    "y": 0.0,
+    "rx": -28.0,
+    "ry": -7.0,
+    "net": "net5"
+  },
+  "connection_21": {
+    "type": "wire",
+    "id": "connection_21",
+    "name": "pic_net7",
+    "x": 19.0,
+    "y": 9.0,
+    "rx": 58.0,
+    "ry": -10.0,
+    "net": "net7"
+  },
+  "mmi21x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi21x",
+    "nets": {
+      "o1": "net14"
+    },
+    "x": 65.0,
+    "y": -2.0
+  },
+  "connection_14": {
+    "type": "wire",
+    "id": "connection_14",
+    "name": "pic_net21",
+    "x": 19.0,
+    "y": 4.0,
+    "rx": -26.0,
+    "ry": -2.0,
+    "net": "net21"
+  },
+  "mmi19x": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi19x",
+    "nets": {
+      "o1": "net11"
+    },
+    "x": 89.0,
+    "y": -1.0
+  },
+  "connection_23": {
+    "type": "wire",
+    "id": "connection_23",
+    "name": "pic_net9",
+    "x": 51.0,
+    "y": 4.0,
+    "rx": 32.0,
+    "ry": -2.0,
+    "net": "net9"
+  }
+}

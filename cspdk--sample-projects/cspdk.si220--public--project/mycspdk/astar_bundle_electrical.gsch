@@ -1,0 +1,278 @@
+{
+  "l3": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": 100.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "l3",
+    "nets": {
+      "e2": "net3"
+    },
+    "x": 4.0,
+    "y": -2.0
+  },
+  "r4": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 200.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "r4",
+    "nets": {
+      "e1": "net4"
+    },
+    "x": 8.0,
+    "y": -4.0
+  },
+  "l4": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": 200.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "l4",
+    "nets": {
+      "e2": "net4"
+    },
+    "x": 0.0,
+    "y": -4.0
+  },
+  "l1": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -100.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "l1",
+    "nets": {
+      "e2": "net1"
+    },
+    "x": 5.0,
+    "y": 2.0
+  },
+  "o3": {
+    "type": "ckt",
+    "bbox_height": 20.0,
+    "bbox_width": 100.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -10.0,
+    "id": null,
+    "irl_x": 113.663,
+    "irl_y": 195.996,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "o3",
+    "props": {
+      "length": 100,
+      "width": 20
+    },
+    "x": -3.0,
+    "y": 4.0
+  },
+  "my_bundle_0": {
+    "type": "polyline",
+    "id": "my_bundle_0",
+    "name": "my_bundle_0",
+    "terminals": {
+      "start": {
+        "device": "r1",
+        "port": "e1"
+      },
+      "finish": {
+        "device": "l1",
+        "port": "e2"
+      }
+    },
+    "routing_strategy": "route_astar_metal",
+    "net": "net1"
+  },
+  "o1": {
+    "type": "ckt",
+    "bbox_height": 100.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -50.0,
+    "id": null,
+    "irl_x": 106.107,
+    "irl_y": -22.411,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "o1",
+    "props": {
+      "length": 20,
+      "width": 100
+    },
+    "x": 13.0,
+    "y": 4.0
+  },
+  "my_bundle_1": {
+    "type": "polyline",
+    "id": "my_bundle_1",
+    "name": "my_bundle_1",
+    "terminals": {
+      "start": {
+        "device": "r2",
+        "port": "e1"
+      },
+      "finish": {
+        "device": "l2",
+        "port": "e2"
+      }
+    },
+    "routing_strategy": "route_astar_metal",
+    "net": "net2"
+  },
+  "r3": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 100.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "r3",
+    "nets": {
+      "e1": "net3"
+    },
+    "x": 12.0,
+    "y": -2.0
+  },
+  "l2": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "l2",
+    "nets": {
+      "e2": "net2"
+    },
+    "x": 0.0,
+    "y": 0.0
+  },
+  "o4": {
+    "type": "ckt",
+    "bbox_height": 100.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -50.0,
+    "id": null,
+    "irl_x": 105.702,
+    "irl_y": 64.505,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "o4",
+    "props": {
+      "length": 20,
+      "width": 100
+    },
+    "x": 1.0,
+    "y": 4.0
+  },
+  "o2": {
+    "type": "ckt",
+    "bbox_height": 20.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -10.0,
+    "id": null,
+    "irl_x": 143.433,
+    "irl_y": -91.94300000000001,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "o2",
+    "props": {
+      "length": 20,
+      "width": 20
+    },
+    "x": 9.0,
+    "y": 4.0
+  },
+  "my_bundle_2": {
+    "type": "polyline",
+    "id": "my_bundle_2",
+    "name": "my_bundle_2",
+    "terminals": {
+      "start": {
+        "device": "r3",
+        "port": "e1"
+      },
+      "finish": {
+        "device": "l3",
+        "port": "e2"
+      }
+    },
+    "routing_strategy": "route_astar_metal",
+    "net": "net3"
+  },
+  "my_bundle_3": {
+    "type": "polyline",
+    "id": "my_bundle_3",
+    "name": "my_bundle_3",
+    "terminals": {
+      "start": {
+        "device": "r4",
+        "port": "e1"
+      },
+      "finish": {
+        "device": "l4",
+        "port": "e2"
+      }
+    },
+    "routing_strategy": "route_astar_metal",
+    "net": "net4"
+  },
+  "r1": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": -100.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "r1",
+    "nets": {
+      "e1": "net1"
+    },
+    "x": 20.0,
+    "y": 2.0
+  },
+  "r2": {
+    "type": "ckt",
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight_metal",
+    "name": "r2",
+    "nets": {
+      "e1": "net2"
+    },
+    "x": 16.0,
+    "y": 0.0
+  }
+}

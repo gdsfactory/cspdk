@@ -11,7 +11,7 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
 
 ## What's inside
 
-- **`mycspdk/mzi_gratings_rc.pic.yml`**: an MZI between an input grating
+- **`mycspdk/mzi_gratings_rc.gsch`**: an MZI between an input grating
   coupler and two output grating couplers (C-band rib).
 - **`mycspdk/samples/mzi_with_gratings.py`**: the same circuit in Python for every
   band, plus `mzi_spectrum()`, which simulates both outputs with SAX.

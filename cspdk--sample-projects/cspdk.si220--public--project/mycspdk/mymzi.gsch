@@ -1,0 +1,10 @@
+{
+  "mzi": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.mzis.mzi",
+    "name": "mzi",
+    "x": 0.0,
+    "y": 0.0
+  }
+}
