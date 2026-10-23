@@ -10,11 +10,11 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
 
 ## What's inside
 
-- **Schematics** (`mycspdk/*.pic.yml`, `*.scm.yml`): MZIs, ring filters, lattice
+- **Schematics** (`mycspdk/*.gsch`, `*.scm.yml`): MZIs, ring filters, lattice
   filters, routing bundles, pads and die frames.
 - **Python cells** (`mycspdk/*.py`, `mycspdk/samples/`): routed MZIs, splitter
   trees, an OPA-style MZI tree and a Clements mesh with heater-to-pad routing.
-- **A\* routing** (`astar*.pic.yml`, `lattice.pic.yml`): bundles routed with the
+- **A\* routing** (`astar*.gsch`, `lattice.gsch`): bundles routed with the
   `route_astar` and `route_astar_metal` strategies, including around obstacles.
   These come from [doroutes](https://pypi.org/project/doroutes/), which this
   project installs.

@@ -12,7 +12,7 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
 A waveguide loop for cut-back loss measurement: a waveguide of a given length,
 folded into a U with bends.
 
-- **`mycspdk/waveguide_loop.pic.yml`**: the loop as a schematic.
+- **`mycspdk/waveguide_loop.gsch`**: the loop as a schematic.
 - **`mycspdk/samples/waveguide_loop.py`**: the loop in Python, plus
   `loop_transmission()`, which simulates its transmission with SAX. Comparing
   loops of different lengths gives the propagation loss.
