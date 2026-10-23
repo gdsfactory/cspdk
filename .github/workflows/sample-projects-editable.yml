@@ -10,8 +10,9 @@ permissions:
 
 jobs:
   test-sample-projects:
-    uses: doplaydo/pdk-ci-workflow-public/.github/workflows/sample-projects.yml@main
+    uses: doplaydo/pdk-ci-workflow/.github/workflows/sample-projects.yml@donotmerge/test-402
     with:
       pdk_source: editable
     secrets:
       GFP_API_KEY: ${{ secrets.GFP_API_KEY }}
+      PDK_CI_WORKFLOW_TOKEN: ${{ secrets.PDK_CI_WORKFLOW_TOKEN }}
