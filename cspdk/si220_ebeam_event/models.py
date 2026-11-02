@@ -15,12 +15,15 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import numpy as np
-import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 from cspdk.si220_ebeam_event.tech import TECH, nm
 
@@ -52,12 +55,12 @@ def _transmission(wl: Float, length: Float, loss: float) -> Float:
     return straight(wl=wl, length=length, loss=loss)["o1", "o2"]
 
 
-def _coupler_sdict(through: Float, cross: Float) -> sax.SDict:
+def _coupler_sdict(through: Float, cross: Float) -> SDict:
     """2x2 coupler with ports o1, o2 (west) and o3, o4 (east).
 
     o1 faces o4 and o2 faces o3 (the gdsfactory coupler port layout).
     """
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): through,
             ("o1", "o3"): cross,
@@ -78,7 +81,7 @@ def straight(
     length: float = 10.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight rib waveguide.
 
     Args:
@@ -110,7 +113,7 @@ def bend_circular(
     angle: float = 90.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a circular bend.
 
     Args:
@@ -133,7 +136,7 @@ def bend_euler(
     p: float = 0.5,
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an Euler bend.
 
     Args:
@@ -154,7 +157,7 @@ def bend_s(
     size: tuple[float, float] = (50.0, 5.0),
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a Bezier S-bend.
 
     Args:
@@ -182,7 +185,7 @@ def coupler(
     coupling: float = COUPLER_COUPLING,
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a directional coupler (placeholder coupling).
 
     Each arm is the coupling straight plus two S-bends of offset
@@ -214,7 +217,7 @@ def coupler_ring(
     coupling: float = COUPLER_RING_COUPLING,
     loss: float = LOSS_DB_CM,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a ring coupler (placeholder coupling).
 
     Bus o1 to o4; ring ports o2 and o3 at the ends of the quarter-circle bends.
@@ -233,7 +236,7 @@ def coupler_ring(
     bend = _transmission(wl, jnp.pi * radius / 2, loss)
     tau = jnp.sqrt(1 - coupling) * t
     kappa = 1j * jnp.sqrt(coupling) * t
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): tau,
             ("o1", "o3"): kappa * bend,
@@ -254,7 +257,7 @@ def grating_coupler(
     loss: float = GRATING_LOSS_DB,
     bandwidth: float = GRATING_BANDWIDTH,
     cross_section: str = "rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of the grating coupler (student-batch datasheet).
 
     Args:
@@ -274,7 +277,7 @@ def grating_coupler(
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns a dictionary of all models in this module."""
     return _sdict_models(globals())
 

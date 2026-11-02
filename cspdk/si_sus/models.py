@@ -15,11 +15,13 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
-import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import (
+    SDict,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk._models import _euler_length, _optical_model
 from cspdk.si_sus.tech import TECH
 
@@ -50,7 +52,7 @@ def straight(
     length: float = 10.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight suspended waveguide.
 
     Args:
@@ -71,7 +73,7 @@ def taper(
     length: float = 10.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a taper (phase of the 1.5um core, no mode mismatch).
 
     Args:
@@ -95,7 +97,7 @@ def bend_circular(
     angle: float = 90.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a circular bend (straight-waveguide propagation).
 
     Args:
@@ -118,7 +120,7 @@ def bend_euler(
     p: float = 0.5,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an euler bend (straight-waveguide propagation).
 
     Args:
@@ -147,7 +149,7 @@ def bend_s(
     size: tuple[float, float] = (40.0, 8.0),
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of the cosine S-bend (straight-waveguide propagation).
 
     Args:
@@ -171,7 +173,7 @@ def grating_coupler_rectangular(
     loss: float = GRATING_LOSS_DB,
     bandwidth: float = GRATING_BANDWIDTH,
     cross_section: str = "xs_sus",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of the foundry grating coupler (placeholder).
 
     o1 is the waveguide port and o2 the fiber port. The foundry library has
@@ -192,7 +194,7 @@ def grating_coupler_rectangular(
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns the models of the suspended-Si cells, keyed by cell name."""
     return {
         "straight": straight,

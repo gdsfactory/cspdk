@@ -25,11 +25,14 @@ from collections.abc import Callable
 from functools import partial
 from typing import NamedTuple
 
-import jax.numpy as jnp
-import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3
@@ -85,7 +88,7 @@ def straight(
     length: float = 10.0,
     loss: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight waveguide.
 
     Args:
@@ -115,10 +118,10 @@ straight_n520 = partial(straight, cross_section="xs_n520", wl=0.52)
 ################
 
 
-def wire_corner(*, wl: Float = 0.78) -> sax.SDict:
+def wire_corner(*, wl: Float = 0.78) -> SDict:
     """Returns the S-matrix of a wire corner (electrical, no optical path)."""
     zero = jnp.zeros_like(jnp.asarray(wl))
-    return sax.reciprocal({("e1", "e2"): zero})
+    return reciprocal({("e1", "e2"): zero})
 
 
 def bend_euler(
@@ -130,7 +133,7 @@ def bend_euler(
     length: float | None = None,
     loss: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an euler bend, modelled as a straight.
 
     Layout netlists pass ``radius``, ``angle`` and ``p`` but not the path
@@ -165,7 +168,7 @@ def bend_s(
     length: float | None = None,
     loss: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an S-bend, modelled as a straight.
 
     Args:
@@ -192,7 +195,7 @@ def taper(
     length: float = 10.0,
     loss: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a taper, modelled as a straight of the band.
 
     Args:
@@ -220,7 +223,7 @@ def mmi1x2(
     loss_dB: Float = 0.3,
     fwhm: float = 0.2,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 1x2 MMI centred on the band wavelength.
 
     Args:
@@ -248,7 +251,7 @@ def mmi2x2(
     loss_dB: Float = 0.3,
     fwhm: float = 0.2,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 2x2 MMI centred on the band wavelength.
 
     Args:
@@ -281,7 +284,7 @@ def coupler(
     loss_dB: Float = 0.3,
     fwhm: float = 0.2,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a directional coupler as an ideal 50/50 splitter.
 
     The default coupler gap and length are not foundry components, so the
@@ -313,7 +316,7 @@ def grating_coupler_rectangular(
     loss: float | None = None,
     bandwidth: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a foundry rectangular grating coupler.
 
     Defaults are the standard-components PDF values: 9 / 15.06 / 13.25 dB
@@ -351,7 +354,7 @@ def grating_coupler_elliptical(
     loss: float | None = None,
     bandwidth: float | None = None,
     cross_section: str = "xs_n780",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an elliptical grating coupler.
 
     The elliptical cells share the foundry rectangular pitch and fibre angle;
@@ -384,7 +387,7 @@ grating_coupler_elliptical_n520 = partial(
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns a dictionary of all models in this module."""
     return _sdict_models(globals())
 

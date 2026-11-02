@@ -4,27 +4,30 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import jax
-import jax.numpy as jnp
-import sax
 import xarray as xr
-from jaxtyping import ArrayLike
 
+from cspdk._host import (
+    ArrayLike,
+    ensure_compile_time_eval,
+    interpolate,
+    reciprocal,
+)
+from cspdk._host import xp as jnp
 from cspdk.si220.tech import TECH
 
 from . import oband
 from .waveguides import _bend_euler, _straight_rib, _straight_strip
 
 if TYPE_CHECKING:
-    SDict = sax.SDict
+    from cspdk._host import SDict
 else:
-    SDict = "sax.SDict"
+    SDict = "SDict"
 
 CWD = Path(__file__).resolve().parent
 
 
 def _load(name: str) -> xr.DataArray:
-    with jax.ensure_compile_time_eval():
+    with ensure_compile_time_eval():
         return (
             xr.open_dataarray(CWD / f"{name}.nc")
             .load()
@@ -75,7 +78,7 @@ def _interpolate_kappa(xarr: xr.DataArray, **kwargs: ArrayLike) -> jnp.ndarray:
     interp_args = {dim: arr.ravel() for dim, arr in zip(dims, broadcasted, strict=True)}
 
     # Interpolate
-    result = sax.interpolate_xarray(xarr, **interp_args)["kappa"]
+    result = interpolate(xarr, **interp_args)["kappa"]
     return result.reshape(shape)
 
 
@@ -132,7 +135,7 @@ def _directional_coupler_no_phase(
 
     tau = jnp.sqrt(1 - jnp.array(kappa) ** 2)
 
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): tau,
             ("o1", "o3"): 1j * kappa,
@@ -198,7 +201,7 @@ def _directional_coupler(
         cross_section=cross_section,
         band=band,
     )
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): dc["o1", "o4"] * arms,
             ("o1", "o3"): dc["o1", "o3"] * arms,
@@ -256,7 +259,7 @@ def _coupler_ring_coupling_area(
     kappa = kappa * t
     tau = tau * t
 
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): tau,
             ("o1", "o3"): 1j * kappa,
@@ -310,7 +313,7 @@ def _coupler_ring(  # this is not the complete model!!!!
         cross_section=cross_section,
         band=band,
     )
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o4"): c["o1", "o4"],
             ("o1", "o3"): c["o1", "o3"] * bend,
@@ -320,7 +323,7 @@ def _coupler_ring(  # this is not the complete model!!!!
     )
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Return the C-band coupler models keyed by model name."""
     return {
         "directional_coupler_no_phase": _directional_coupler_no_phase,

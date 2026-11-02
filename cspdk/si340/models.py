@@ -43,12 +43,15 @@ from __future__ import annotations
 from collections.abc import Callable
 from functools import partial
 
-import jax.numpy as jnp
 import numpy as np
-import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3
@@ -104,7 +107,7 @@ def straight(
     length: float = 10.0,
     loss: float = 0.0,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight waveguide.
 
     Args:
@@ -134,10 +137,10 @@ straight_rc = partial(straight, cross_section="xs_rc340")
 ################
 
 
-def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+def wire_corner(*, wl: Float = 1.55) -> SDict:
     """Returns the S-matrix of a wire corner."""
     zero = jnp.zeros_like(jnp.asarray(wl))
-    return sax.reciprocal({("e1", "e2"): zero})
+    return reciprocal({("e1", "e2"): zero})
 
 
 def bend_circular(
@@ -147,7 +150,7 @@ def bend_circular(
     angle: float = 90.0,
     loss: float = 0.0,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a circular bend (arc length radius * angle).
 
     Args:
@@ -175,7 +178,7 @@ def bend_euler(
     p: float = 0.5,
     loss: float = 0.0,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an Euler bend from its path length.
 
     Args:
@@ -202,7 +205,7 @@ def bend_s(
     size: tuple[float, float] = (20.0, 1.8),
     loss: float = 0.0,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an S-bend from its Bezier path length.
 
     Args:
@@ -228,7 +231,7 @@ def taper(
     length: float = 10.0,
     loss: float = 0.0,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a taper, using the cross-section index.
 
     Args:
@@ -250,7 +253,7 @@ def taper_rib_to_strip(
     wl: Float = 1.55,
     length: float = 200.0,
     loss: float = 0.0,
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of the rib-to-strip transition.
 
     Lossless by default, with the mean of the rib and strip C-band indices.
@@ -286,7 +289,7 @@ def mmi1x2(
     wl: Float = 1.55,
     loss_dB: Float = MMI_LOSS_DB,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 1x2 MMI (placeholder loss and bandwidth).
 
     Args:
@@ -309,7 +312,7 @@ def mmi2x2(
     wl: Float = 1.55,
     loss_dB: Float = MMI_LOSS_DB,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 2x2 MMI (placeholder loss and bandwidth).
 
     Args:
@@ -336,7 +339,7 @@ def coupler(
     wl: Float = 1.55,
     loss_dB: Float = MMI_LOSS_DB,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a coupler (placeholder 50/50 splitter).
 
     Args:
@@ -366,7 +369,7 @@ grating_coupler_rectangular_rc = partial(
 def grating_coupler_rectangular(
     wl: Float = 1.55,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a foundry rectangular grating coupler.
 
     Args:
@@ -384,7 +387,7 @@ grating_coupler_elliptical_rc = partial(_grating_model, wl=1.55, **GRATINGS["xs_
 def grating_coupler_elliptical(
     wl: Float = 1.55,
     cross_section: str = "xs_sc340",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an elliptical grating (placeholder data).
 
     Args:
@@ -399,7 +402,7 @@ def grating_coupler_elliptical(
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns a dictionary of all models in this module."""
     return _sdict_models(globals())
 

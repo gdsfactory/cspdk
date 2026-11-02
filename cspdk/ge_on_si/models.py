@@ -29,11 +29,13 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
-import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import (
+    SDict,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 FloatArray = NDArray[jnp.floating]
@@ -60,7 +62,7 @@ def straight(
     length: float = 10.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight Ge rib waveguide.
 
     Args:
@@ -92,7 +94,7 @@ def bend_circular(
     angle: float = 90.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a circular bend (the foundry 90 deg bend).
 
     Args:
@@ -115,7 +117,7 @@ def bend_euler(
     p: float = 0.5,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an euler bend.
 
     Args:
@@ -137,7 +139,7 @@ def bend_s(
     size: tuple[float, float] = (100.0, 5.0),
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a Bezier S-bend.
 
     Args:
@@ -161,7 +163,7 @@ def taper(
     length: float = 10.0,
     loss: float = LOSS_DB_CM,
     cross_section: str = "xs_rib",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a taper, modelled as a 3.2 um rib straight.
 
     Args:
@@ -178,7 +180,7 @@ def taper(
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns a dictionary of all models in this module."""
     return _sdict_models(globals())
 

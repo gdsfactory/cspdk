@@ -15,10 +15,13 @@ from __future__ import annotations
 import math
 from collections.abc import Callable
 
-import jax.numpy as jnp
-import sax
-import sax.models as sm
 
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
+from cspdk._host import xp as jnp
 from cspdk.si220.tech import TECH
 
 from . import oband, waveguides
@@ -91,7 +94,7 @@ def _amplitude(loss_dB) -> jnp.ndarray:
     return 10 ** (-jnp.asarray(loss_dB) / 20)
 
 
-def _mmi2x2_asymmetric(*, wl, wl0, fwhm, loss_dB_thru, loss_dB_cross) -> sax.SDict:
+def _mmi2x2_asymmetric(*, wl, wl0, fwhm, loss_dB_thru, loss_dB_cross) -> SDict:
     """``sax.models.mmi2x2`` with separate bar and cross losses.
 
     ``sax.models.mmi2x2`` cannot take them itself under ``jax.jit``.
@@ -105,7 +108,7 @@ def _mmi2x2_asymmetric(*, wl, wl0, fwhm, loss_dB_thru, loss_dB_cross) -> sax.SDi
     }
 
 
-def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
+def _band_models(band: str, wl0: float) -> dict[str, Callable[..., SDict]]:
     """Models of the foundry components for ``band``, whose centre is ``wl0``."""
     straight = (oband if band == "oband" else waveguides)._straight
 
@@ -115,8 +118,8 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             wl=wl, length=length, loss_dB_cm=0.0, cross_section=cross_section
         )
 
-    def _two_port(s21, loss_dB) -> sax.SDict:
-        return sax.reciprocal({("o1", "o2"): s21 * _amplitude(loss_dB)})
+    def _two_port(s21, loss_dB) -> SDict:
+        return reciprocal({("o1", "o2"): s21 * _amplitude(loss_dB)})
 
     def _mmi1x2(
         *,
@@ -124,7 +127,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         loss_dB=None,
         fwhm=0.2,
         cross_section: str = "strip",
-    ) -> sax.SDict:
+    ) -> SDict:
         """1x2 MMI with the foundry's measured excess loss unless ``loss_dB`` is set."""
         if loss_dB is None:
             loss_dB = MMI1X2_EXCESS_DB[band, cross_section]
@@ -136,7 +139,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         loss_dB=None,
         fwhm=0.2,
         cross_section: str = "strip",
-    ) -> sax.SDict:
+    ) -> SDict:
         """2x2 MMI with the foundry's measured excess losses unless ``loss_dB`` is set."""
         if loss_dB is None:
             thru, cross = MMI2X2_EXCESS_DB[band, cross_section]
@@ -146,10 +149,10 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             wl=wl, wl0=wl0, fwhm=fwhm, loss_dB_thru=thru, loss_dB_cross=cross
         )
 
-    def _crossing(*, wl=wl0, cross_section: str = "strip") -> sax.SDict:
+    def _crossing(*, wl=wl0, cross_section: str = "strip") -> SDict:
         """Crossing with the foundry's measured insertion loss and no crosstalk."""
         t = jnp.asarray(wl) * 0 + _amplitude(CROSSING_LOSS_DB[band, cross_section])
-        return sax.reciprocal({("o1", "o3"): t, ("o2", "o4"): t})
+        return reciprocal({("o1", "o3"): t, ("o2", "o4"): t})
 
     def _bend_circular(
         *,
@@ -157,7 +160,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         radius=None,
         angle=90.0,
         cross_section: str = "strip",
-    ) -> sax.SDict:
+    ) -> SDict:
         """Circular bend: arc-length propagation plus the measured loss per 90 deg."""
         if radius is None:
             radius = TECH.radius_rib if cross_section == "rib" else TECH.radius
@@ -170,7 +173,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         wl=wl0,
         length=450.0,
         cross_section: str = "strip",
-    ) -> sax.SDict:
+    ) -> SDict:
         """Multimode-to-single-mode taper with the measured loss for its length."""
         loss = _interp(length, MM2SM_LOSS_DB[cross_section])
         return _two_port(_phase(wl, length, cross_section)["o1", "o2"], loss)
@@ -181,16 +184,16 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         length=50.0,
         length_rib=5.0,
         length_strip=5.0,
-    ) -> sax.SDict:
+    ) -> SDict:
         """Rib-to-strip taper with the measured loss for its slab taper length."""
         total = length + length_rib + length_strip
         loss = _interp(length, RIB_TO_STRIP_LOSS_DB)
         return _two_port(_phase(wl, total, "rib")["o1", "o2"], loss)
 
-    def _heater(*, wl=wl0) -> sax.SDict:
+    def _heater(*, wl=wl0) -> SDict:
         """Heater pads: an ideal electrical connection (the filament is not modelled)."""
         one = jnp.ones_like(jnp.asarray(wl, dtype=float))
-        return sax.reciprocal({("e1", "e2"): one})
+        return reciprocal({("e1", "e2"): one})
 
     def _mzi_heater_loop(
         *,
@@ -203,7 +206,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         vpi=1.0,
         loss_dB_cm=3.0,
         cross_section: str = "strip",
-    ) -> sax.SDict:
+    ) -> SDict:
         """MZI of ``cells.mzi_heater_loop``: 1x2 MMI, two looped arms, 2x2 MMI.
 
         The arm straights lose ``loss_dB_cm`` like the straight model; the bends
@@ -230,7 +233,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
         # The splitter is rotated: its o3 feeds the upper arm, o2 the lower one.
         upper = splitter["o1", "o3"] * top
         lower = splitter["o1", "o2"] * bottom
-        return sax.reciprocal(
+        return reciprocal(
             {
                 ("o1", "o2"): upper * combiner["o3", "o1"]
                 + lower * combiner["o4", "o1"],
@@ -240,7 +243,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             }
         )
 
-    def _ysplitter(*, wl=wl0, loss_dB=None) -> sax.SDict:
+    def _ysplitter(*, wl=wl0, loss_dB=None) -> SDict:
         """Ideal 50/50 Y-splitter, flat in wavelength, with the measured excess loss.
 
         ``loss_dB`` overrides the excess loss on top of the 3 dB split.
@@ -249,7 +252,7 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
             loss_dB = YSPLITTER_EXCESS_DB[band]
         one = jnp.ones_like(jnp.asarray(wl, dtype=float))
         t = jnp.sqrt(0.5) * _amplitude(loss_dB) * one
-        return sax.reciprocal({("o1", "o2"): t, ("o1", "o3"): t})
+        return reciprocal({("o1", "o2"): t, ("o1", "o3"): t})
 
     return {
         "mmi1x2": _mmi1x2,
@@ -264,6 +267,6 @@ def _band_models(band: str, wl0: float) -> dict[str, Callable[..., sax.SDict]]:
     }
 
 
-def get_models(band: str) -> dict[str, Callable[..., sax.SDict]]:
+def get_models(band: str) -> dict[str, Callable[..., SDict]]:
     """Return the foundry component models of ``band`` keyed by model name."""
     return _band_models(band, 1.31 if band == "oband" else 1.55)

@@ -18,8 +18,12 @@ is 0.5764 times its FWHM, giving 35 / 0.5764 = 60.7 nm (C) and 30 / 0.5764 = 52.
 from __future__ import annotations
 
 import numpy as np
-import sax
-import sax.models as sm
+
+from cspdk._host import (
+    FloatArrayLike,
+    SDict,
+    sm,
+)
 
 nm = 1e-3
 
@@ -32,11 +36,11 @@ GRATINGS: dict[str, dict[str, float]] = {
 }
 
 
-def _grating_coupler_cband(*, wl: sax.FloatArrayLike = 1.55) -> sax.SDict:
+def _grating_coupler_cband(*, wl: FloatArrayLike = 1.55) -> SDict:
     """C-band grating coupler model."""
     return sm.grating_coupler(wl=wl, **GRATINGS["cband"])
 
 
-def _grating_coupler_oband(*, wl: sax.FloatArrayLike = 1.31) -> sax.SDict:
+def _grating_coupler_oband(*, wl: FloatArrayLike = 1.31) -> SDict:
     """O-band grating coupler model."""
     return sm.grating_coupler(wl=wl, **GRATINGS["oband"])
