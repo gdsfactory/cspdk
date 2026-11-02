@@ -99,6 +99,31 @@ def test_set_host_switches_the_resolved_host() -> None:
         host.set_host(previous)
 
 
+def test_no_engine_name_registry_and_dotted_default() -> None:
+    """cspdk keeps no engine-name registry; hosts are objects or dotted module paths."""
+    assert not hasattr(host, "_HOSTS")
+    assert host._DEFAULT == "sax.host"
+
+
+def test_dotted_module_path_is_imported() -> None:
+    """A dotted module path resolves to the imported module (object form also works)."""
+    import sys
+    import types
+
+    module_name = "cspdk_test_fake_host_module"
+    fake = types.ModuleType(module_name)
+    setattr(fake, "differentiable", False)  # noqa: B010
+    sys.modules[module_name] = fake
+    previous = host._explicit
+    try:
+        host.set_host(module_name)
+        assert host.get_host() is fake
+        assert host.differentiable() is False
+    finally:
+        host.set_host(previous)
+        del sys.modules[module_name]
+
+
 def test_proxies_forward_attribute_access_and_calls() -> None:
     """A proxy forwards attribute access (and calls) to the resolved host."""
     fake = _FakeHost()

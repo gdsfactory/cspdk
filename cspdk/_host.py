@@ -1,13 +1,13 @@
 """Model-host selector: pick which S-parameter engine the cspdk models run on.
 
 cspdk's model library is written against one small, structural (duck-typed) protocol so
-the *same* model code can drive several engines -- sax, sox, socklu -- instead of a hard
-``sax`` dependency. An engine exposes a *host* module (``sax.host``, ``sox_py.host``,
-``socklu.host``) carrying:
+the *same* model code can drive several engines instead of a hard ``sax`` dependency. An
+engine exposes a *host* module (``sax.host`` for the default host, or another engine's)
+carrying:
 
 ``xp``
-    the array module the models are written against (``jax.numpy`` for sax, ``numpy``
-    for the others);
+    the array module the models are written against (``jax.numpy`` on the default host,
+    ``numpy`` elsewhere);
 ``sm``
     the engine's model library;
 ``solve(connections, ports, instances)``
@@ -24,8 +24,8 @@ the *same* model code can drive several engines -- sax, sox, socklu -- instead o
 ``reciprocal``
     the engine's S-matrix reciprocity helper, so a model module never imports ``sax``;
 ``set_port_naming_strategy(strategy)``
-    apply a port-naming strategy to the engine's *own* models (the module global for
-    sax/socklu, the model default for sox), so a model module never imports ``sax``;
+    apply a port-naming strategy to the engine's *own* models (however that host
+    carries it), so a model module never imports ``sax``;
 ``SDict`` / ``SCoo`` / ``SType`` / ``FloatArrayLike`` / ``FloatArray`` / ``ArrayLike``
     the type aliases the models annotate with.
 
@@ -41,7 +41,7 @@ Resolution order (first hit wins):
 1. an explicit host set with :func:`set_host`;
 2. a host set for the current :func:`host_scope` (a ``contextvars`` scope);
 3. the ``GFP_MODEL_HOST`` environment variable (read **once**, at import);
-4. the lazy default: ``sax``.
+4. the lazy default: the host shipped by ``sax``.
 
 ``sm``/``xp``/``solve``/``port_namer``/``interpolate``/``jit``/``ensure_compile_time_eval``/
 ``reciprocal``/``set_port_naming_strategy`` and the type aliases are thin proxy objects that
@@ -84,16 +84,13 @@ __all__ = [
 ENV_VAR = "GFP_MODEL_HOST"
 
 # The env var is read once, at import, and used as the *initial* value; later reads of the
-# environment do not change an already-resolved host.
+# environment do not change an already-resolved host. Its value is a dotted module path.
 _ENV_INITIAL: str | None = os.environ.get(ENV_VAR) or None
 
-# Engine short-name -> host module path.
-_HOSTS: dict[str, str] = {
-    "sax": "sax.host",
-    "sox": "sox_py.host",
-    "socklu": "socklu.host",
-}
-_DEFAULT = "sax"
+# The lazy default: the host module shipped by sax. cspdk knows no engine names, so a host
+# is supplied either as an object (``set_host``) or as a dotted module path (the env var,
+# ``set_host`` or ``host_scope``).
+_DEFAULT = "sax.host"
 
 _explicit: Any = None
 _scope: contextvars.ContextVar[Any] = contextvars.ContextVar(
@@ -103,12 +100,11 @@ _resolved: Any = None
 
 
 def _load(host: Any) -> Any:
-    """Turn a host reference (module/object, or a name) into a host module."""
+    """Turn a host reference (object, or a dotted module path) into a host module."""
     if host is None:
         return None
     if isinstance(host, str):
-        path = _HOSTS.get(host, host)  # a short name, or a dotted module path
-        return importlib.import_module(path)
+        return importlib.import_module(host)  # a dotted module path
     return host  # already a host module or object
 
 
@@ -138,9 +134,9 @@ def set_host(host: Any) -> Any:
     """Set the process-wide model host.
 
     Args:
-        host: a host module / object, or an engine name (``"sax"``, ``"sox"``,
-            ``"socklu"``) or a dotted module path. ``None`` clears the override, so
-            resolution falls back to the scope, then the env var, then sax.
+        host: a host module / object, or a dotted module path (``"my.engine.host"``).
+            ``None`` clears the override, so resolution falls back to the scope, then
+            the env var, then the default host.
 
     Returns:
         The host argument, for chaining. Resolution is lazy: nothing is imported here.
