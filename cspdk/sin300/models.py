@@ -5,10 +5,13 @@ from __future__ import annotations
 from collections.abc import Callable
 from functools import partial
 
-import sax
 from numpy.typing import NDArray
 
-from cspdk._host import sm
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
 from cspdk._host import xp as jnp
 from cspdk._models import _optical_model, _sdict_models
 
@@ -32,7 +35,7 @@ def _straight(
     wl0: float = 1.55,
     neff: float = 1.60,
     ng: float = 1.95,
-) -> sax.SDict:
+) -> SDict:
     """Adapt the legacy SiN loss argument (dB/cm) to the SAX API."""
     return _straight_model(
         wl=wl, length=length, loss_dB_cm=loss, wl0=wl0, neff=neff, ng=ng
@@ -69,7 +72,7 @@ def straight(
     length: float = 10.0,
     loss: float = 0.0,
     cross_section: str = "xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a straight waveguide.
 
     Args:
@@ -96,11 +99,11 @@ def straight(
 ################
 
 
-def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+def wire_corner(*, wl: Float = 1.55) -> SDict:
     """Returns the S-matrix of a wire corner."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
-    return sax.reciprocal({("e1", "e2"): zero})
+    return reciprocal({("e1", "e2"): zero})
 
 
 def bend_s(
@@ -109,7 +112,7 @@ def bend_s(
     length: float = 10.0,
     loss: float = 0.03,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a bend with a spline curve.
 
     NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
@@ -135,7 +138,7 @@ def bend_euler(
     length: float = 10.0,
     loss: float = 0.03,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a bend with an Euler curve.
 
      NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
@@ -169,7 +172,7 @@ def taper(
     length: float = 10.0,
     loss: float = 0.0,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a taper.
 
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
@@ -205,7 +208,7 @@ def mmi1x2(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 1x2 MMI.
 
     Args:
@@ -233,7 +236,7 @@ def mmi2x2(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a 2x2 MMI.
 
     Args:
@@ -258,13 +261,13 @@ def mmi2x2(
 ##############################
 
 
-def coupler_straight() -> sax.SDict:
+def coupler_straight() -> SDict:
     """Returns the S-matrix of a straight coupler."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_straight'")
 
 
-def coupler_symmetric() -> sax.SDict:
+def coupler_symmetric() -> SDict:
     """Returns the S-matrix of a symmetric coupler."""
     # we should not need this model...
     raise NotImplementedError("No model for 'coupler_symmetric'")
@@ -278,7 +281,7 @@ def coupler(
     wl: Float = 1.55,
     loss_dB: Float = 0.3,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a coupler.
 
     # TODO: take more coupler arguments into account
@@ -316,7 +319,7 @@ grating_coupler_rectangular_nc = partial(
 def grating_coupler_rectangular(
     wl: Float = 1.55,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of a rectangular grating coupler."""
     # TODO: take more grating_coupler_rectangular arguments into account
     wl = jnp.asarray(wl)  # type: ignore
@@ -345,7 +348,7 @@ def grating_coupler_elliptical(
     wl: Float = 1.55,
     bandwidth: float = 35e-3,
     cross_section="xs_nc",
-) -> sax.SDict:
+) -> SDict:
     """Returns the S-matrix of an elliptical grating coupler."""
     # TODO: take more grating_coupler_elliptical arguments into account
     wl = jnp.asarray(wl)  # type: ignore
@@ -377,7 +380,7 @@ def grating_coupler_elliptical(
 ################
 
 
-def heater() -> sax.SDict:
+def heater() -> SDict:
     """Returns the S-matrix of a heater."""
     raise NotImplementedError("No model for 'heater'")
 
@@ -390,7 +393,7 @@ crossing_no = partial(_optical_model(sm.crossing_ideal, 2, 2), wl=1.31)
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Returns a dictionary of all models in this module."""
     return _sdict_models(
         globals(), exclude={"heater", "coupler_straight", "coupler_symmetric"}

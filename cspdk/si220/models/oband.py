@@ -5,10 +5,13 @@ from __future__ import annotations
 from collections.abc import Callable
 from functools import partial
 
-import sax
 from numpy.typing import NDArray
 
-from cspdk._host import sm
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    sm,
+)
 from cspdk._host import xp as jnp
 from cspdk.si220.tech import TECH
 
@@ -47,7 +50,7 @@ def _straight(
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
     cross_section: str = "strip",
-) -> sax.SDict:
+) -> SDict:
     """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -67,11 +70,11 @@ def _straight(
 ################
 
 
-def _wire_corner(*, wl: Float = 1.31) -> sax.SDict:
+def _wire_corner(*, wl: Float = 1.31) -> SDict:
     """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
-    return sax.reciprocal({("e1", "e2"): zero})
+    return reciprocal({("e1", "e2"): zero})
 
 
 def _bend_s(
@@ -80,7 +83,7 @@ def _bend_s(
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Bend S model."""
     # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
     return _straight(
@@ -97,7 +100,7 @@ def _bend_euler(
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
     return _straight(
@@ -123,7 +126,7 @@ def _taper(
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper model."""
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
     # TODO: take width1 and width2 into account.
@@ -144,7 +147,7 @@ def _taper_strip_to_ridge(
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper strip to ridge model."""
     # NOTE: it is assumed that `taper_strip_to_ridge` exposes it's length in its info dictionary!
     # TODO: take w_slab1 and w_slab2 into account.
@@ -178,7 +181,7 @@ def _directional_coupler(
     offset: float | None = None,
     bend_radius: float | None = None,
     cross_section: str = "strip",
-) -> sax.SDict:
+) -> SDict:
     """Directional coupler model (see couplers.directional_coupler)."""
     from cspdk.si220.models import couplers
 
@@ -206,7 +209,7 @@ def _coupler_ring_coupling_area(
     length_x: float = 1.0,
     loss_dB: float = 0.0,
     cross_section: str = "strip",
-) -> sax.SDict:
+) -> SDict:
     """Ring coupler coupling-region model (see couplers.coupler_ring_coupling_area)."""
     from cspdk.si220.models import couplers
 
@@ -230,7 +233,7 @@ def _coupler_ring(
     p: float = 0,
     loss_dB: float = 0.0,
     cross_section: str = "strip",
-) -> sax.SDict:
+) -> SDict:
     """Ring coupler model (see couplers.coupler_ring)."""
     from cspdk.si220.models import couplers
 
@@ -263,7 +266,7 @@ _straight_heater_meander = _straight_heater_metal
 ################
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Return the O-band models keyed by model name."""
     return {
         "straight_strip": _straight_strip,

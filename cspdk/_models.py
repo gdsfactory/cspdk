@@ -12,9 +12,32 @@ from functools import partial, wraps
 from typing import Any
 
 import numpy as np
-import sax
 
+from cspdk._host import get_host
 from cspdk._host import xp as jnp
+
+# Names a model module now imports from ``cspdk._host``: they are helpers, not models, so
+# ``_sdict_models`` must never pick them up (``reciprocal`` in particular carries an
+# ``-> SDict`` annotation, like a model, but is not one).
+_HOST_HELPERS = frozenset(
+    {
+        "ArrayLike",
+        "FloatArray",
+        "FloatArrayLike",
+        "SCoo",
+        "SDict",
+        "SType",
+        "ensure_compile_time_eval",
+        "interpolate",
+        "jit",
+        "port_namer",
+        "reciprocal",
+        "set_port_naming_strategy",
+        "sm",
+        "solve",
+        "xp",
+    }
+)
 
 # 32-point Gauss-Legendre rule for the Fresnel integrals of the Euler bend.
 _GL_NODES, _GL_WEIGHTS = np.polynomial.legendre.leggauss(32)
@@ -110,7 +133,7 @@ def _sdict_models(
         namespace: the module's ``globals()``.
         exclude: public names to leave out.
     """
-    exclude = set(exclude)
+    exclude = set(exclude) | _HOST_HELPERS
     models = {}
     for name, func in list(namespace.items()):
         if name.startswith("_") or name in exclude or not callable(func):
@@ -123,7 +146,7 @@ def _sdict_models(
         except (ValueError, TypeError):
             continue
         if (
-            sig.return_annotation == sax.SDict
+            sig.return_annotation == get_host().SDict
             or str(sig.return_annotation).lower().split(".")[-1] == "sdict"
         ):
             models[name] = func

@@ -4,13 +4,17 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import sax
 from numpy.typing import NDArray
 
-from cspdk._host import sm
+from cspdk._host import (
+    SDict,
+    reciprocal,
+    set_port_naming_strategy,
+    sm,
+)
 from cspdk._host import xp as jnp
 
-sax.set_port_naming_strategy("optical")
+set_port_naming_strategy("optical")
 
 nm = 1e-3
 
@@ -27,7 +31,7 @@ def _straight_strip(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
-) -> sax.SDict:
+) -> SDict:
     """Straight strip waveguide model."""
     return sm.straight(
         wl=wl,
@@ -44,7 +48,7 @@ def _straight_rib(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
-) -> sax.SDict:
+) -> SDict:
     """Straight rib waveguide model."""
     # 450 nm x 220 nm rib with 100 nm slab, from samples/mode_solver_r.py
     return sm.straight(
@@ -63,7 +67,7 @@ def _straight(
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
     cross_section: str = "strip",
-) -> sax.SDict:
+) -> SDict:
     """Straight waveguide model."""
     wl = jnp.asarray(wl)  # type: ignore
     fs = {
@@ -83,11 +87,11 @@ def _straight(
 ################
 
 
-def _wire_corner(*, wl: Float = 1.55) -> sax.SDict:
+def _wire_corner(*, wl: Float = 1.55) -> SDict:
     """Wire corner model."""
     wl = jnp.asarray(wl)  # type: ignore
     zero = jnp.zeros_like(wl)
-    return sax.reciprocal({("e1", "e2"): zero})
+    return reciprocal({("e1", "e2"): zero})
 
 
 def _bend_s(
@@ -96,7 +100,7 @@ def _bend_s(
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Bend S model."""
     # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
     return _straight(
@@ -113,7 +117,7 @@ def _bend_euler(
     length: float = 10.0,
     loss_dB_cm: float = 3,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Euler bend model."""
     # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
     return _straight(
@@ -126,7 +130,7 @@ def _bend_euler(
 
 def _bend_euler_strip(
     *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
-) -> sax.SDict:
+) -> SDict:
     """Euler bend strip model."""
     return _bend_euler(
         wl=wl,
@@ -138,7 +142,7 @@ def _bend_euler_strip(
 
 def _bend_euler_rib(
     *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
-) -> sax.SDict:
+) -> SDict:
     """Euler bend rib model."""
     return _bend_euler(
         wl=wl,
@@ -159,7 +163,7 @@ def _taper(
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper model."""
     # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
     # TODO: take width1 and width2 into account.
@@ -176,7 +180,7 @@ def _taper_rib(
     wl: Float = 1.55,
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
-) -> sax.SDict:
+) -> SDict:
     """Taper rib model."""
     return _taper(
         wl=wl,
@@ -192,7 +196,7 @@ def _taper_strip_to_ridge(
     length: float = 10.0,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper strip to ridge model."""
     # NOTE: it is assumed that `taper_strip_to_ridge` exposes it's length in its info dictionary!
     # TODO: take w_slab1 and w_slab2 into account.
@@ -209,7 +213,7 @@ def _trans_rib10(
     wl: Float = 1.55,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper strip to ridge 10um model."""
     return _taper_strip_to_ridge(
         wl=wl,
@@ -224,7 +228,7 @@ def _trans_rib20(
     wl: Float = 1.55,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper strip to ridge 20um model."""
     return _taper_strip_to_ridge(
         wl=wl,
@@ -239,7 +243,7 @@ def _trans_rib50(
     wl: Float = 1.55,
     loss_dB_cm: float = 0.0,
     cross_section="strip",
-) -> sax.SDict:
+) -> SDict:
     """Taper strip to ridge 50um model."""
     return _taper_strip_to_ridge(
         wl=wl,
@@ -259,7 +263,7 @@ def _straight_heater_metal(
     vpi: float = 1.0,
     length: float = 10.0,
     loss_dB_cm: float = 3.0,
-) -> sax.SDict:
+) -> SDict:
     """Thermo-optic phase shifter on a strip waveguide.
 
     Propagation is the strip waveguide's, dispersive through ``neff`` and ``ng`` at
@@ -281,7 +285,7 @@ def _straight_heater_metal(
         wl=wl, wl0=wl0, neff=neff, ng=ng, length=length, loss_dB_cm=loss_dB_cm
     )
     transmission = straight["o1", "o2"] * jnp.exp(1j * jnp.pi * (voltage / vpi) ** 2)
-    return sax.reciprocal(
+    return reciprocal(
         {
             ("o1", "o2"): transmission,
             ("l_e1", "r_e1"): 0.0,
@@ -297,7 +301,7 @@ def _straight_heater_metal(
 _straight_heater_meander = _straight_heater_metal
 
 
-def get_models() -> dict[str, Callable[..., sax.SDict]]:
+def get_models() -> dict[str, Callable[..., SDict]]:
     """Return the C-band waveguide models keyed by model name."""
     return {
         "straight_strip": _straight_strip,

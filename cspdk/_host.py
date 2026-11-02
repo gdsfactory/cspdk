@@ -17,7 +17,17 @@ the *same* model code can drive several engines -- sax, sox, socklu -- instead o
 ``differentiable``
     whether the engine traces differentiably;
 ``interpolate``
-    the engine's table reader.
+    the engine's table reader;
+``jit`` / ``ensure_compile_time_eval``
+    the engine's tracing decorator / compile-time guard (a passthrough / no-op where the
+    engine does not trace), so a model module never imports ``jax``;
+``reciprocal``
+    the engine's S-matrix reciprocity helper, so a model module never imports ``sax``;
+``set_port_naming_strategy(strategy)``
+    apply a port-naming strategy to the engine's *own* models (the module global for
+    sax/socklu, the model default for sox), so a model module never imports ``sax``;
+``SDict`` / ``SCoo`` / ``SType`` / ``FloatArrayLike`` / ``FloatArray`` / ``ArrayLike``
+    the type aliases the models annotate with.
 
 This module is a **selector only**. It resolves the current host on demand, never at
 import time, so:
@@ -33,11 +43,12 @@ Resolution order (first hit wins):
 3. the ``GFP_MODEL_HOST`` environment variable (read **once**, at import);
 4. the lazy default: ``sax``.
 
-``sm``/``xp``/``solve``/``port_namer``/``interpolate`` are thin proxy objects that forward
-attribute access to the resolved host, so model modules keep their existing call sites
-(``sm.straight(...)``, ``jnp.sin(...)``) and nothing binds at import time. The resolved
-host is cached, so the forwarding cost is a single attribute hop per access, not per array
-operation.
+``sm``/``xp``/``solve``/``port_namer``/``interpolate``/``jit``/``ensure_compile_time_eval``/
+``reciprocal``/``set_port_naming_strategy`` and the type aliases are thin proxy objects that
+forward attribute access to the resolved host, so model modules keep their existing call
+sites (``sm.straight(...)``, ``jnp.sin(...)``, ``reciprocal(...)``) and nothing binds at
+import time. The resolved host is cached, so the forwarding cost is a single attribute hop
+per access, not per array operation.
 """
 
 from __future__ import annotations
@@ -49,12 +60,22 @@ import os
 from typing import Any
 
 __all__ = [
+    "ArrayLike",
+    "FloatArray",
+    "FloatArrayLike",
+    "SCoo",
+    "SDict",
+    "SType",
     "differentiable",
+    "ensure_compile_time_eval",
     "get_host",
     "host_scope",
     "interpolate",
+    "jit",
     "port_namer",
+    "reciprocal",
     "set_host",
+    "set_port_naming_strategy",
     "sm",
     "solve",
     "xp",
@@ -179,6 +200,19 @@ xp = _Proxy("xp")
 solve = _Proxy("solve")
 port_namer = _Proxy("port_namer")
 interpolate = _Proxy("interpolate")
+
+# The model-writing surface: tracing, reciprocity, port-naming on the engine's own models,
+# and the type aliases -- all forwarded, so a model module never imports jax or sax.
+jit = _Proxy("jit")
+ensure_compile_time_eval = _Proxy("ensure_compile_time_eval")
+reciprocal = _Proxy("reciprocal")
+set_port_naming_strategy = _Proxy("set_port_naming_strategy")
+SDict = _Proxy("SDict")
+SCoo = _Proxy("SCoo")
+SType = _Proxy("SType")
+FloatArrayLike = _Proxy("FloatArrayLike")
+FloatArray = _Proxy("FloatArray")
+ArrayLike = _Proxy("ArrayLike")
 
 
 def differentiable() -> bool:

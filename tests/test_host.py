@@ -39,11 +39,52 @@ def test_importing_the_selector_does_not_import_engines() -> None:
 
 def test_protocol_members_exist() -> None:
     """Every protocol member is exposed, and the controls are callable."""
-    for name in ("sm", "xp", "solve", "port_namer", "interpolate"):
+    for name in (
+        "sm",
+        "xp",
+        "solve",
+        "port_namer",
+        "interpolate",
+        "jit",
+        "ensure_compile_time_eval",
+        "reciprocal",
+        "set_port_naming_strategy",
+        "SDict",
+        "SCoo",
+        "SType",
+        "FloatArrayLike",
+        "FloatArray",
+        "ArrayLike",
+    ):
         assert hasattr(host, name)
     assert callable(host.differentiable)
     assert callable(host.set_host)
     assert callable(host.get_host)
+
+
+def test_no_model_module_imports_sax_or_jax_at_module_level() -> None:
+    """The model layer is fully routed: no ``import sax`` / ``import jax`` anywhere.
+
+    The motivating invariant: a cspdk model module must be importable on an engine that
+    is not sax, so it may never take ``sax`` or ``jax`` at module level. This scans the
+    source (samples/demo scripts are excluded -- they are standalone entry points that
+    choose their own engine, not part of the reusable model layer).
+    """
+    import pathlib
+    import re
+
+    import cspdk
+
+    root = pathlib.Path(cspdk.__file__).resolve().parent
+    offenders: list[str] = []
+    pattern = re.compile(r"^\s*(?:import\s+(?:sax|jax)\b|from\s+(?:sax|jax)\b)")
+    for path in sorted(root.rglob("*.py")):
+        if "samples" in path.parts or path.name == "_host.py":
+            continue
+        for lineno, line in enumerate(path.read_text().splitlines(), start=1):
+            if pattern.match(line):
+                offenders.append(f"{path.relative_to(root)}:{lineno}: {line.strip()}")
+    assert not offenders, "model modules still import sax/jax:\n" + "\n".join(offenders)
 
 
 def test_set_host_switches_the_resolved_host() -> None:

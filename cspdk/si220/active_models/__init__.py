@@ -8,7 +8,7 @@ schematic metadata (``circulax_model`` entries in ``cspdk.si220._schematic``).
 
 from __future__ import annotations
 
-import jax.numpy as jnp
+from cspdk._host import xp as jnp
 from circulax.components.base_component import (
     PhysicsReturn,
     Signals,
