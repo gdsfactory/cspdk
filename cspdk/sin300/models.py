@@ -5,11 +5,11 @@ from __future__ import annotations
 from collections.abc import Callable
 from functools import partial
 
-import jax.numpy as jnp
 import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 from cspdk._models import _optical_model, _sdict_models
 
 nm = 1e-3

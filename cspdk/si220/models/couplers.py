@@ -5,11 +5,11 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 import jax
-import jax.numpy as jnp
 import sax
 import xarray as xr
 from jaxtyping import ArrayLike
 
+from cspdk._host import xp as jnp
 from cspdk.si220.tech import TECH
 
 from . import oband

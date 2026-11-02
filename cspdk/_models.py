@@ -11,9 +11,10 @@ from collections.abc import Callable, Iterable, Mapping
 from functools import partial, wraps
 from typing import Any
 
-import jax.numpy as jnp
 import numpy as np
 import sax
+
+from cspdk._host import xp as jnp
 
 # 32-point Gauss-Legendre rule for the Fresnel integrals of the Euler bend.
 _GL_NODES, _GL_WEIGHTS = np.polynomial.legendre.leggauss(32)

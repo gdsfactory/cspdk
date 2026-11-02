@@ -15,11 +15,11 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 from cspdk._models import _euler_length, _optical_model
 from cspdk.si_sus.tech import TECH
 

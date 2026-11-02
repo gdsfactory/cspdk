@@ -5,11 +5,11 @@ from __future__ import annotations
 import inspect
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import sax
 from gdsfactory.typings import CrossSectionSpec
 from numpy.typing import NDArray
 
+from cspdk._host import xp as jnp
 from cspdk.si220.tech import get_band, is_rib
 
 from . import couplers, foundry, gratings, oband, waveguides

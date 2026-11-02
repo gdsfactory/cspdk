@@ -25,11 +25,11 @@ from collections.abc import Callable
 from functools import partial
 from typing import NamedTuple
 
-import jax.numpy as jnp
 import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 
 nm = 1e-3

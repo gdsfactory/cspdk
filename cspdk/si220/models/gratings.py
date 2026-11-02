@@ -19,7 +19,8 @@ from __future__ import annotations
 
 import numpy as np
 import sax
-import sax.models as sm
+
+from cspdk._host import sm
 
 nm = 1e-3
 

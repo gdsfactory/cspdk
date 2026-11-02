@@ -15,10 +15,10 @@ from __future__ import annotations
 import math
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import sax
-import sax.models as sm
 
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 from cspdk.si220.tech import TECH
 
 from . import oband, waveguides

@@ -15,12 +15,12 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import numpy as np
 import sax
-import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
 from cspdk.si220_ebeam_event.tech import TECH, nm
 

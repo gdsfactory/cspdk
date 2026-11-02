@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import jax.numpy as jnp
 import sax
-import sax.models as sm
 from numpy.typing import NDArray
+
+from cspdk._host import sm
+from cspdk._host import xp as jnp
 
 sax.set_port_naming_strategy("optical")
 
