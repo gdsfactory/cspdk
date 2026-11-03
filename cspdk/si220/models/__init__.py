@@ -140,44 +140,70 @@ def wire_corner(
 def bend_s(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    size: tuple[float, float] = (11.0, 1.8),
+    length: float | None = None,
     loss_dB_cm: float = 3.0,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """Bend S model."""
+    """Bend S model.
+
+    ``length=None`` is the drawn S-bend's path length; pass ``length`` to override.
+    """
     return _dispatch("bend_s", **locals())
 
 
 def bend_euler(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
     loss_dB_cm: float = 3,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """Euler bend model."""
+    """Euler bend model.
+
+    ``radius=None`` is the cross-section radius and ``length=None`` is the drawn Euler
+    bend's path length (``gf.path.euler(radius, angle, p, use_eff=True)``); pass
+    ``length`` to override.
+    """
     return _dispatch("bend_euler", **locals())
 
 
 def bend_euler_strip(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
     loss_dB_cm: float = 3,
     cross_section: CrossSectionSpec = "strip_cband",
 ) -> sax.SDict:
-    """Euler bend strip model."""
+    """Euler bend strip model.
+
+    ``radius=None`` is the cross-section radius and ``length=None`` is the drawn Euler
+    bend's path length; pass ``length`` to override.
+    """
     return _dispatch("bend_euler_strip", **locals())
 
 
 def bend_euler_rib(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
     loss_dB_cm: float = 3,
     cross_section: CrossSectionSpec = "rib_cband",
 ) -> sax.SDict:
-    """Euler bend rib model."""
+    """Euler bend rib model.
+
+    ``radius=None`` is the cross-section radius and ``length=None`` is the drawn Euler
+    bend's path length; pass ``length`` to override.
+    """
     return _dispatch("bend_euler_rib", **locals())
 
 
