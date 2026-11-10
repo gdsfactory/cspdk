@@ -11,6 +11,7 @@
     "irl_y": -0.0,
     "model": "cspdk.si220.cells.waveguides.straight",
     "name": "wg1",
+    "nets": {},
     "type": "straight",
     "x": 0.0,
     "y": -0.0
@@ -27,6 +28,7 @@
     "irl_y": -0.5,
     "model": "cspdk.si220.cells.waveguides.straight",
     "name": "wg2",
+    "nets": {},
     "type": "straight",
     "x": 4.0,
     "y": -0.0

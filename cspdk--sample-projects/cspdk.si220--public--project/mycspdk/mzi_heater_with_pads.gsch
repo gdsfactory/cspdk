@@ -58,7 +58,7 @@
       "o2": "net4"
     },
     "type": "ckt",
-    "x": 7.0,
+    "x": 6.0,
     "y": 6.0
   },
   "b4": {
@@ -78,25 +78,8 @@
       "o2": "net5"
     },
     "type": "ckt",
-    "x": 11.0,
+    "x": 10.0,
     "y": 3.0
-  },
-  "btm": {
-    "id": "btm",
-    "name": "btm",
-    "net": "net7",
-    "routing_strategy": "route_bundle",
-    "terminals": {
-      "finish": {
-        "device": "c1",
-        "port": "o4"
-      },
-      "start": {
-        "device": "c2",
-        "port": "o1"
-      }
-    },
-    "type": "polyline"
   },
   "c1": {
     "bbox_height": 4.45,
@@ -196,10 +179,10 @@
     "id": "connection_3",
     "name": "pic_net3",
     "net": "net3",
-    "rx": -3.0,
+    "rx": -2.0,
     "ry": -1.0,
     "type": "wire",
-    "x": 7.0,
+    "x": 6.0,
     "y": 7.0
   },
   "connection_4": {
@@ -209,17 +192,17 @@
     "rx": 3.0,
     "ry": -2.0,
     "type": "wire",
-    "x": 8.0,
+    "x": 7.0,
     "y": 6.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
-    "rx": -9.0,
+    "rx": -8.0,
     "ry": -6.0,
     "type": "wire",
-    "x": 12.0,
+    "x": 11.0,
     "y": 3.0
   },
   "connection_6": {
@@ -227,7 +210,7 @@
     "name": "pic_net6",
     "net": "net6",
     "rx": 3.0,
-    "ry": 4.0,
+    "ry": 2.0,
     "type": "wire",
     "x": -2.0,
     "y": 4.0
@@ -385,6 +368,7 @@
     "irl_y": -137.71,
     "model": "cspdk.si220.cells.die_with_pads.pad",
     "name": "p1",
+    "nets": {},
     "type": "ckt",
     "x": -3.0,
     "y": 10.0
@@ -401,8 +385,25 @@
     "irl_y": -138.309,
     "model": "cspdk.si220.cells.die_with_pads.pad",
     "name": "p2",
+    "nets": {},
     "type": "ckt",
-    "x": 7.0,
+    "x": 1.0,
     "y": 10.0
+  },
+  "route_0": {
+    "name": "route_0",
+    "net": "net7",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "component_id": "c1",
+        "port_name": "o4"
+      },
+      "start": {
+        "component_id": "c2",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline"
   }
 }

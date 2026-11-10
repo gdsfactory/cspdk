@@ -11,6 +11,7 @@
     "irl_y": -149.473,
     "model": "cspdk.si220.cells.containers.pack_doe_grid",
     "name": "mzis",
+    "nets": {},
     "props": {
       "do_permutations": true,
       "doe": "mzi",
@@ -44,6 +45,7 @@
     "irl_y": -709.0305,
     "model": "cspdk.si220.cells.containers.pack_doe",
     "name": "rings",
+    "nets": {},
     "props": {
       "do_permutations": true,
       "doe": "ring_single",

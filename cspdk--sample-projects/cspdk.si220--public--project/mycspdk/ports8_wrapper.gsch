@@ -11,6 +11,7 @@
     "irl_y": 56.379,
     "model": "mycspdk.ports8.ports8",
     "name": "p8",
+    "nets": {},
     "type": "ckt",
     "x": -1.0,
     "y": 1.0

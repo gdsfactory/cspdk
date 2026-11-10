@@ -18,14 +18,18 @@ the ``.gsch`` build a different layout from its ``.pic.yml``:
 * No layout placement. Without ``irl_*`` fields GDSFactory+ places each
   instance at its schematic grid position, so butt connections fail and get
   dropped. The ``irl_*`` and cell-bbox fields are taken from the ``.pic.yml``
-  layout, so every instance lands where the ``.pic.yml`` puts it.
+  layout, so every instance, and every element of an instance array, lands
+  where the ``.pic.yml`` puts it.
+* Unresolved routes. Port ranges (``o3-4``) stay unexpanded. Routes are
+  rewritten as one polyline per route the ``.pic.yml`` made, between the
+  ports gdsfactory actually routed.
 
 ``--verify`` builds each ``.gsch`` with GDSFactory+ (``buildNyancirGds``) and
 XORs it against the ``.pic.yml`` layout on every layer.
 
 Route settings other than cross-section, width, radius, bend type and
-waypoints, instance arrays and ``o1-4``-style port ranges don't survive the
-conversion yet; ``--verify`` reports those samples as different.
+waypoints (e.g. ``sort_ports``, ``start_straight_length``, bundle spacing)
+don't survive the conversion; ``--verify`` reports those samples as different.
 
 The ``gfp`` binary ships inside the GDSFactory+ VS Code extension; set
 ``GFP_BIN`` if it isn't found automatically.
@@ -170,25 +174,109 @@ def activate_pdk(project: Path) -> tuple[str, Any]:
 def qualified_model(pdk_name: str, pdk: Any, name: str) -> str | None:
     """Dotted name of the module attribute that *is* the PDK cell ``name``."""
     cell = pdk.cells.get(name)
+    if not cell:
+        return None
     modules = [
         m
         for m, mod in list(sys.modules.items())
-        if (
-            m == pdk_name or m.startswith(f"{pdk_name}.") or m.startswith(f"{PACKAGE}.")
-        )
+        if (m == pdk_name or m.startswith((f"{pdk_name}.", f"{PACKAGE}.")))
         and getattr(mod, name, None) is cell
     ]
-    if not (cell and modules):
+    if not modules:
         return None
     # The defining module is the deepest one; packages only re-export.
     return f"{max(modules, key=lambda m: m.count('.'))}.{name}"
 
 
+def placements(
+    component: Any, names: set[str]
+) -> dict[str, tuple[Any, kdb.DCplxTrans]]:
+    """Cell and transform of each named instance; array elements as ``name<col.row>``.
+
+    Only the .pic.yml's own instances count: the component also holds the
+    straights, bends and tapers its routes added.
+    """
+    placed = {}
+    for inst in component.insts:
+        if inst.name not in names:
+            continue
+        trans = inst.dcplx_trans
+        array = inst.instance
+        if not array.is_regular_array():
+            placed[inst.name] = (inst.cell, trans)
+            continue
+        for col in range(array.na):
+            for row in range(array.nb):
+                shift = kdb.DCplxTrans(array.da * col + array.db * row)
+                placed[f"{inst.name}<{col}.{row}>"] = (inst.cell, shift * trans)
+    return placed
+
+
+def routes_as_polylines(
+    component: Any,
+    bundles: dict[str, Any],
+    placed: dict[str, tuple[Any, kdb.DCplxTrans]],
+    nets: dict[tuple[str, str], str],
+) -> dict[str, dict[str, Any]] | None:
+    """One polyline per route the .pic.yml actually made, between its real ports.
+
+    The endpoints come from each route's backbone, so ``o1-4`` port ranges and
+    ``sort_ports`` resolve to the pairs gdsfactory routed. Returns None when a
+    routing strategy doesn't return its backbone (the A* strategies).
+
+    Pinning the backbone as ``vertices`` doesn't reproduce the layout: with
+    ``route_bundle`` waypoints, or doroutes' corner router, the bends differ
+    from the original route.
+    """
+    pins = [
+        (name, port.name, trans * kdb.DPoint(*port.center))
+        for name, (cell, trans) in placed.items()
+        for port in cell.ports
+    ]
+
+    def pin_at(point: kdb.DPoint) -> tuple[str, str]:
+        name, port, _ = min(pins, key=lambda pin: pin[2].distance(point))
+        return name, port
+
+    dbu = component.kcl.dbu
+    polylines = {}
+    routes = component.routes if isinstance(component.routes, dict) else {}
+    for index, (route_name, route) in enumerate(routes.items()):
+        if not getattr(route, "backbone", None):
+            return None
+        bundle = bundles[
+            max((b for b in bundles if route_name.startswith(f"{b}-")), key=len)
+        ]
+        ends = route.backbone[0], route.backbone[-1]
+        start, finish = (pin_at(kdb.DPoint(p.x * dbu, p.y * dbu)) for p in ends)
+        key = f"route_{index}"
+        polyline = {
+            "type": "polyline",
+            "name": key,
+            "routing_strategy": bundle.get("routing_strategy", "route_bundle"),
+            "terminals": {
+                "start": {"component_id": start[0], "port_name": start[1]},
+                "finish": {"component_id": finish[0], "port_name": finish[1]},
+            },
+        }
+        if cross_section := (bundle.get("settings") or {}).get("cross_section"):
+            polyline["cross_section"] = cross_section
+        if net := nets.get(start) or nets.get(finish):
+            polyline["net"] = net
+        polylines[key] = polyline
+    return polylines
+
+
 def fix_gsch(gsch: Path, stems: set[str], pdk_name: str, pdk: Any) -> list[str]:
-    """Qualify models and write .pic.yml layout placement into one .gsch."""
-    layout = {inst.name: inst for inst in gf.get_component(gsch.stem).insts}
+    """Qualify models, and write .pic.yml placement and routes into one .gsch."""
+    netlist = gsch.with_name(f"{gsch.stem}.pic.yml")
+    component = gf.read.from_yaml(netlist)
+    source = yaml.safe_load(netlist.read_text())
+    bundles = source.get("routes") or {}
+    placed = placements(component, set(source["instances"]))
     doc = json.loads(gsch.read_text())
     problems = []
+    nets = {}
     for key, dev in doc.items():
         if not dev.get("model"):
             continue
@@ -200,11 +288,16 @@ def fix_gsch(gsch: Path, stems: set[str], pdk_name: str, pdk: Any) -> list[str]:
         else:
             problems.append(f"unresolved model {dev['model']!r}")
         name = dev.get("name", key)
-        inst = layout.get(name)
-        if inst is None:
+        if name not in placed:
             problems.append(f"{name!r} has no .pic.yml instance")
             continue
-        local, world, trans = inst.cell.dbbox(), inst.dbbox(), inst.dcplx_trans
+        cell, trans = placed[name]
+        # The converter keeps unexpanded port ranges (``o3-4``) as pins.
+        ports = {port.name for port in cell.ports}
+        dev["nets"] = {p: n for p, n in (dev.get("nets") or {}).items() if p in ports}
+        nets |= {(name, port): net for port, net in dev["nets"].items()}
+        local = cell.dbbox()
+        world = local.transformed(trans)
         # gdsfactoryplus.convert._placement: bbox centre at (irl_x, -irl_y),
         # y-down orientation, x-axis mirror.
         dev.update(
@@ -217,6 +310,9 @@ def fix_gsch(gsch: Path, stems: set[str], pdk_name: str, pdk: Any) -> list[str]:
             bbox_width=round(local.width(), 6),
             bbox_height=round(local.height(), 6),
         )
+    # A* strategies return no backbone; their routes stay as converted.
+    if (polylines := routes_as_polylines(component, bundles, placed, nets)) is not None:
+        doc = {k: v for k, v in doc.items() if v.get("type") != "polyline"} | polylines
     gsch.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n")  # stable diffs
     return problems
 
@@ -227,14 +323,16 @@ def xor_area(a: Path, b: Path) -> dict[str, float]:
     la.read(str(a))
     lb.read(str(b))
     ta, tb = la.top_cells()[0], lb.top_cells()[0]
+
+    def region(layout: kdb.Layout, top: kdb.Cell, info: tuple[int, int]) -> kdb.Region:
+        idx = layout.find_layer(*info)
+        if idx is None:
+            return kdb.Region()
+        return kdb.Region(top.begin_shapes_rec(idx))
+
     diffs = {}
     for info in {(i.layer, i.datatype) for lay in (la, lb) for i in lay.layer_infos()}:
-        ra, rb = (
-            kdb.Region(top.begin_shapes_rec(idx))
-            if (idx := lay.find_layer(*info)) is not None
-            else kdb.Region()
-            for lay, top in ((la, ta), (lb, tb))
-        )
+        ra, rb = region(la, ta, info), region(lb, tb, info)
         area = (ra ^ rb).merged().sized(-1).sized(1).area() * la.dbu**2
         if area > 0.01:
             diffs[f"{info[0]}/{info[1]}"] = round(area, 2)

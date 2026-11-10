@@ -11,6 +11,7 @@
     "irl_y": -150.198,
     "model": "cspdk.si220.cells.die_with_pads.pad",
     "name": "p1",
+    "nets": {},
     "type": "ckt",
     "x": -2.0,
     "y": 3.0
@@ -27,6 +28,7 @@
     "irl_y": -0.0,
     "model": "cspdk.si220.cells.heaters.straight_heater_metal",
     "name": "s1",
+    "nets": {},
     "type": "ckt",
     "x": 2.0,
     "y": 0.0

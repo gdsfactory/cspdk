@@ -1,22 +1,4 @@
 {
-  "loop": {
-    "cross_section": "xs_sus",
-    "id": "loop",
-    "name": "loop",
-    "net": "net1",
-    "routing_strategy": "route_bundle",
-    "terminals": {
-      "finish": {
-        "device": "upper",
-        "port": "o2"
-      },
-      "start": {
-        "device": "lower",
-        "port": "o2"
-      }
-    },
-    "type": "polyline"
-  },
   "lower": {
     "bbox_height": 8.5,
     "bbox_width": 500.0,
@@ -68,6 +50,23 @@
     "type": "port",
     "x": 0.0,
     "y": 0.0
+  },
+  "route_0": {
+    "cross_section": "xs_sus",
+    "name": "route_0",
+    "net": "net1",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "component_id": "upper",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "lower",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline"
   },
   "upper": {
     "bbox_height": 8.5,

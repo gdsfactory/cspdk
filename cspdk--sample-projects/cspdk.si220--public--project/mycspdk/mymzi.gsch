@@ -11,6 +11,7 @@
     "irl_y": 2.14,
     "model": "cspdk.si220.cells.mzis.mzi",
     "name": "mzi",
+    "nets": {},
     "type": "ckt",
     "x": 0.0,
     "y": 0.0

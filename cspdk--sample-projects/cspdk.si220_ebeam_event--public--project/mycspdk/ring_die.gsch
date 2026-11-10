@@ -44,40 +44,6 @@
     "x": 5.0,
     "y": 0.0
   },
-  "loopback_in": {
-    "id": "loopback_in",
-    "name": "loopback_in",
-    "net": "net3",
-    "routing_strategy": "route_bundle",
-    "terminals": {
-      "finish": {
-        "device": "loopback",
-        "port": "o1"
-      },
-      "start": {
-        "device": "die",
-        "port": "o2"
-      }
-    },
-    "type": "polyline"
-  },
-  "loopback_out": {
-    "id": "loopback_out",
-    "name": "loopback_out",
-    "net": "net4",
-    "routing_strategy": "route_bundle",
-    "terminals": {
-      "finish": {
-        "device": "die",
-        "port": "o15"
-      },
-      "start": {
-        "device": "loopback",
-        "port": "o2"
-      }
-    },
-    "type": "polyline"
-  },
   "ring": {
     "bbox_height": 51.75,
     "bbox_width": 64.0,
@@ -102,36 +68,66 @@
     "x": 10.0,
     "y": 0.0
   },
-  "ring_in": {
-    "id": "ring_in",
-    "name": "ring_in",
+  "route_0": {
+    "name": "route_0",
     "net": "net1",
     "routing_strategy": "route_bundle",
     "terminals": {
       "finish": {
-        "device": "ring",
-        "port": "o1"
+        "component_id": "ring",
+        "port_name": "o1"
       },
       "start": {
-        "device": "die",
-        "port": "o1"
+        "component_id": "die",
+        "port_name": "o1"
       }
     },
     "type": "polyline"
   },
-  "ring_out": {
-    "id": "ring_out",
-    "name": "ring_out",
+  "route_1": {
+    "name": "route_1",
     "net": "net2",
     "routing_strategy": "route_bundle",
     "terminals": {
       "finish": {
-        "device": "die",
-        "port": "o16"
+        "component_id": "die",
+        "port_name": "o16"
       },
       "start": {
-        "device": "ring",
-        "port": "o2"
+        "component_id": "ring",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "route_2": {
+    "name": "route_2",
+    "net": "net3",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "component_id": "loopback",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "die",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "route_3": {
+    "name": "route_3",
+    "net": "net4",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "component_id": "die",
+        "port_name": "o15"
+      },
+      "start": {
+        "component_id": "loopback",
+        "port_name": "o2"
       }
     },
     "type": "polyline"

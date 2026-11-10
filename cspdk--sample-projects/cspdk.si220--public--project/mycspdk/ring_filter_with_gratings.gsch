@@ -23,21 +23,21 @@
     "id": "connection_3",
     "name": "port_net_o1",
     "net": "port_net_o1",
-    "rx": 0.0,
-    "ry": -3.0,
+    "rx": 5.0,
+    "ry": 0.0,
     "type": "wire",
-    "x": 4.0,
-    "y": -1.0
+    "x": 5.0,
+    "y": 0.0
   },
   "connection_4": {
     "id": "connection_4",
     "name": "port_net_o2",
     "net": "port_net_o2",
-    "rx": 0.0,
-    "ry": -3.0,
+    "rx": 3.0,
+    "ry": 0.0,
     "type": "wire",
-    "x": 8.0,
-    "y": 1.0
+    "x": 9.0,
+    "y": 2.0
   },
   "g1": {
     "bbox_height": 22.418,
@@ -90,16 +90,16 @@
       "P": "port_net_o1"
     },
     "transform": [
-      0.0,
-      1.0,
       -1.0,
       0.0,
+      -0.0,
+      -1.0,
       0.0,
       0.0
     ],
     "type": "port",
-    "x": 4.0,
-    "y": -4.0
+    "x": 10.0,
+    "y": 0.0
   },
   "o2": {
     "attached_port": {
@@ -112,16 +112,16 @@
       "P": "port_net_o2"
     },
     "transform": [
-      0.0,
-      1.0,
       -1.0,
       0.0,
+      -0.0,
+      -1.0,
       0.0,
       0.0
     ],
     "type": "port",
-    "x": 8.0,
-    "y": -2.0
+    "x": 12.0,
+    "y": 2.0
   },
   "r1": {
     "bbox_height": 21.77,

@@ -45,6 +45,23 @@ def _devices(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {dev.get("name", key): dev for key, dev in doc.items() if dev.get("model")}
 
 
+def _terminal(end: dict[str, str]) -> str:
+    """``instance,port`` of a polyline end, in either the Mosaic or Livewire shape."""
+    instance = end.get("component_id") or end.get("device")
+    return f"{instance},{end.get('port_name') or end.get('port')}"
+
+
+def _instance_names(name: str, inst: dict[str, Any]) -> list[str]:
+    """An instance's name, or ``name<col.row>`` for each element of an array."""
+    if not (array := inst.get("array")):
+        return [name]
+    return [
+        f"{name}<{col}.{row}>"
+        for col in range(array.get("columns", 1))
+        for row in range(array.get("rows", 1))
+    ]
+
+
 def _gsch_circuit(doc: dict[str, Any]) -> dict[str, Any]:
     by_net: dict[str, set[str]] = defaultdict(set)
     ports = {}
@@ -52,9 +69,8 @@ def _gsch_circuit(doc: dict[str, Any]) -> dict[str, Any]:
         if dev.get("type") == "port" and (attached := dev.get("attached_port")):
             ports[dev["name"]] = f"{attached['component_id']},{attached['port_name']}"
         elif dev.get("type") == "polyline":
-            ends = dev.get("terminals") or {}
             by_net[f"route:{key}"] = {
-                f"{ends[e]['device']},{ends[e]['port']}" for e in ("start", "finish")
+                _terminal(end) for end in dev["terminals"].values()
             }
     devices = _devices(doc)
     for name, dev in devices.items():
@@ -77,7 +93,9 @@ def _pic_yml_circuit(doc: dict[str, Any]) -> dict[str, Any]:
         links.update(route.get("links") or {})
     return {
         "instances": {
-            name: inst["component"] for name, inst in doc["instances"].items()
+            element: inst["component"]
+            for name, inst in doc["instances"].items()
+            for element in _instance_names(name, inst)
         },
         "connections": sorted({tuple(sorted(pair)) for pair in links.items()}),
         "ports": dict(doc.get("ports") or {}),

@@ -641,6 +641,7 @@
     "irl_y": -0.0,
     "model": "cspdk.si220.cells.mmis.mmi1x2",
     "name": "mmi3x",
+    "nets": {},
     "transform": [
       -0.9999999999999962,
       8.742278000372475e-08,

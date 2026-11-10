@@ -74,7 +74,7 @@
       0.0
     ],
     "type": "ckt",
-    "x": 5.0,
+    "x": 4.0,
     "y": 5.0
   },
   "b4": {
@@ -102,25 +102,8 @@
       0.0
     ],
     "type": "ckt",
-    "x": 9.0,
+    "x": 8.0,
     "y": 2.0
-  },
-  "btm": {
-    "id": "btm",
-    "name": "btm",
-    "net": "net9",
-    "routing_strategy": "route_bundle",
-    "terminals": {
-      "finish": {
-        "device": "c1",
-        "port": "o4"
-      },
-      "start": {
-        "device": "c2",
-        "port": "o1"
-      }
-    },
-    "type": "polyline"
   },
   "c1": {
     "bbox_height": 6.0,
@@ -230,10 +213,10 @@
     "id": "connection_3",
     "name": "pic_net3",
     "net": "net3",
-    "rx": -5.0,
+    "rx": -4.0,
     "ry": 3.0,
     "type": "wire",
-    "x": 7.0,
+    "x": 6.0,
     "y": 6.0
   },
   "connection_4": {
@@ -243,17 +226,17 @@
     "rx": 4.0,
     "ry": 1.0,
     "type": "wire",
-    "x": 11.0,
+    "x": 10.0,
     "y": 3.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
-    "rx": -4.0,
+    "rx": -3.0,
     "ry": -5.0,
     "type": "wire",
-    "x": 10.0,
+    "x": 9.0,
     "y": 2.0
   },
   "connection_6": {
@@ -261,7 +244,7 @@
     "name": "pic_net6",
     "net": "net6",
     "rx": 3.0,
-    "ry": 6.0,
+    "ry": 4.0,
     "type": "wire",
     "x": -4.0,
     "y": 5.0
@@ -283,7 +266,7 @@
     "rx": 7.0,
     "ry": -1.0,
     "type": "wire",
-    "x": 6.0,
+    "x": 5.0,
     "y": 5.0
   },
   "connection_9": {
@@ -407,6 +390,22 @@
     "x": 11.0,
     "y": -1.0
   },
+  "route_0": {
+    "name": "route_0",
+    "net": "net9",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "component_id": "c1",
+        "port_name": "o4"
+      },
+      "start": {
+        "component_id": "c2",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline"
+  },
   "sl": {
     "bbox_height": 0.45,
     "bbox_width": 10.0,
@@ -444,7 +443,7 @@
       "o2": "net4"
     },
     "type": "straight",
-    "x": 13.0,
+    "x": 12.0,
     "y": 3.0
   }
 }

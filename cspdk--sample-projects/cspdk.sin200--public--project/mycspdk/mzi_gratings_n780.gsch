@@ -73,23 +73,6 @@
     "x": 0.0,
     "y": 0.0
   },
-  "input": {
-    "id": "input",
-    "name": "input",
-    "net": "net1",
-    "routing_strategy": "route_bundle_n780",
-    "terminals": {
-      "finish": {
-        "device": "mzi",
-        "port": "o1"
-      },
-      "start": {
-        "device": "gc_in",
-        "port": "o1"
-      }
-    },
-    "type": "polyline"
-  },
   "mzi": {
     "bbox_height": 296.75,
     "bbox_width": 509.7,
@@ -142,36 +125,50 @@
     "x": 0.0,
     "y": 0.0
   },
-  "outputs_0_0": {
-    "id": "outputs_0_0",
-    "name": "outputs_0_0",
-    "net": "net2",
+  "route_0": {
+    "name": "route_0",
+    "net": "net1",
     "routing_strategy": "route_bundle_n780",
     "terminals": {
       "finish": {
-        "device": "gc_out2",
-        "port": "o1"
+        "component_id": "mzi",
+        "port_name": "o1"
       },
       "start": {
-        "device": "mzi",
-        "port": "o2"
+        "component_id": "gc_in",
+        "port_name": "o1"
       }
     },
     "type": "polyline"
   },
-  "outputs_1_0": {
-    "id": "outputs_1_0",
-    "name": "outputs_1_0",
+  "route_1": {
+    "name": "route_1",
+    "net": "net2",
+    "routing_strategy": "route_bundle_n780",
+    "terminals": {
+      "finish": {
+        "component_id": "gc_out2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "route_2": {
+    "name": "route_2",
     "net": "net3",
     "routing_strategy": "route_bundle_n780",
     "terminals": {
       "finish": {
-        "device": "gc_out1",
-        "port": "o1"
+        "component_id": "gc_out1",
+        "port_name": "o1"
       },
       "start": {
-        "device": "mzi",
-        "port": "o3"
+        "component_id": "mzi",
+        "port_name": "o3"
       }
     },
     "type": "polyline"
