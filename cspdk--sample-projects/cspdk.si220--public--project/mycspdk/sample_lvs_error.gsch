@@ -15,6 +15,42 @@
       "o1": "net1",
       "o2": "net3"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.1125,
+        "irl_ry": 4.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4.8875,
+        "irl_ry": -5.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "ckt",
     "x": 0.0,
     "y": 0.0
@@ -64,10 +100,10 @@
     "name": "pic_net3",
     "net": "net3",
     "rx": 9.0,
-    "ry": 1.0,
+    "ry": -1.0,
     "type": "wire",
     "x": 1.0,
-    "y": 0.0
+    "y": 2.0
   },
   "s1": {
     "bbox_height": 0.45,
@@ -85,6 +121,42 @@
       "o1": "net2",
       "o2": "net1"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "straight",
     "x": 4.0,
     "y": 0.0
@@ -105,6 +177,42 @@
       "o1": "net2",
       "o2": "net3"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "straight",
     "x": 8.0,
     "y": 0.0

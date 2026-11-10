@@ -15,6 +15,42 @@
       "o1": "port_net_o1",
       "o2": "net1"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": -250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.5
+      },
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": 250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.5
+      }
+    ],
     "props": {
       "cross_section": "xs_sus",
       "length": 500
@@ -84,6 +120,42 @@
       "o1": "port_net_o2",
       "o2": "net1"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": -250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.5
+      },
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": 250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.5
+      }
+    ],
     "props": {
       "cross_section": "xs_sus",
       "length": 500

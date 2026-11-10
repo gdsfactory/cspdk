@@ -12,6 +12,136 @@
     "model": "mycspdk.ports8.ports8",
     "name": "p8",
     "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -5.0,
+        "irl_ry": 2.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -5.0,
+        "irl_ry": -2.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2.0,
+        "irl_ry": -5.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o3",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2.0,
+        "irl_ry": -5.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o4",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 5.0,
+        "irl_ry": -2.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o5",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 5.0,
+        "irl_ry": 2.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o6",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2.0,
+        "irl_ry": 5.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o7",
+        "orientation": 270.0,
+        "port_type": "optical",
+        "width": 1.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2.0,
+        "irl_ry": 5.0,
+        "layer": [
+          1,
+          0
+        ],
+        "layer_name": "0",
+        "name": "o8",
+        "orientation": 270.0,
+        "port_type": "optical",
+        "width": 1.0
+      }
+    ],
     "type": "ckt",
     "x": -1.0,
     "y": 1.0

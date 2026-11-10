@@ -35,16 +35,6 @@
   },
   "connection_1": {
     "id": "connection_1",
-    "name": "pic_net2",
-    "net": "net2",
-    "rx": 6.0,
-    "ry": -1.0,
-    "type": "wire",
-    "x": 3.0,
-    "y": -1.0
-  },
-  "connection_2": {
-    "id": "connection_2",
     "name": "port_net_o1",
     "net": "port_net_o1",
     "rx": -2.0,
@@ -53,35 +43,15 @@
     "x": 1.0,
     "y": -2.0
   },
-  "connection_3": {
-    "id": "connection_3",
+  "connection_2": {
+    "id": "connection_2",
     "name": "port_net_o2",
     "net": "port_net_o2",
-    "rx": 4.0,
-    "ry": -1.0,
-    "type": "wire",
-    "x": 3.0,
-    "y": -3.0
-  },
-  "connection_4": {
-    "id": "connection_4",
-    "name": "port_net_o2",
-    "net": "port_net_o2",
-    "rx": 5.0,
-    "ry": 1.0,
-    "type": "wire",
-    "x": 7.0,
-    "y": -4.0
-  },
-  "connection_5": {
-    "id": "connection_5",
-    "name": "port_net_o3",
-    "net": "port_net_o3",
-    "rx": 3.0,
+    "rx": 9.0,
     "ry": 0.0,
     "type": "wire",
-    "x": 9.0,
-    "y": 0.0
+    "x": 3.0,
+    "y": -2.0
   },
   "mzi1": {
     "bbox_height": 51.48,
@@ -101,6 +71,72 @@
       "o3": "net2",
       "o4": "net1"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -102.55,
+        "irl_ry": -1.485,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -102.55,
+        "irl_ry": -3.515,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 102.55,
+        "irl_ry": -1.485,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 102.55,
+        "irl_ry": -3.515,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "props": {
       "splitter": "mmi2x2"
     },
@@ -126,6 +162,72 @@
       "o3": "port_net_o3",
       "o4": "port_net_o4"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -102.55,
+        "irl_ry": -23.985,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -102.55,
+        "irl_ry": -26.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 102.55,
+        "irl_ry": -23.985,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 102.55,
+        "irl_ry": -26.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "props": {
       "delta_length": 100,
       "splitter": "mmi2x2"
@@ -176,7 +278,7 @@
     ],
     "type": "port",
     "x": 12.0,
-    "y": -3.0
+    "y": -2.0
   },
   "o3": {
     "attached_port": {
@@ -188,17 +290,9 @@
     "nets": {
       "P": "port_net_o3"
     },
-    "transform": [
-      -1.0,
-      0.0,
-      -0.0,
-      -1.0,
-      0.0,
-      0.0
-    ],
     "type": "port",
-    "x": 12.0,
-    "y": 0.0
+    "x": 10.0,
+    "y": -3.0
   },
   "o4": {
     "attached_port": {

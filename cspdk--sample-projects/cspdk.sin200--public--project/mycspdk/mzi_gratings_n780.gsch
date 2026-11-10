@@ -15,6 +15,41 @@
       "o1": "net1",
       "o2": "port_net_in"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
     "type": "ckt",
     "x": 5.0,
     "y": 0.0
@@ -35,6 +70,41 @@
       "o1": "net3",
       "o2": "port_net_out1"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
     "type": "ckt",
     "x": 10.0,
     "y": 0.0
@@ -55,6 +125,41 @@
       "o1": "net2",
       "o2": "port_net_out2"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
     "type": "ckt",
     "x": 15.0,
     "y": 0.0
@@ -90,6 +195,59 @@
       "o2": "net2",
       "o3": "net3"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -254.85,
+        "irl_ry": -25.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": 254.85,
+        "irl_ry": -23.875,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": 254.85,
+        "irl_ry": -26.125,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.5
+      }
+    ],
     "props": {
       "delta_length": 100
     },

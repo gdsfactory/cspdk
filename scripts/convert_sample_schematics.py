@@ -20,6 +20,9 @@ the ``.gsch`` build a different layout from its ``.pic.yml``:
   dropped. The ``irl_*`` and cell-bbox fields are taken from the ``.pic.yml``
   layout, so every instance, and every element of an instance array, lands
   where the ``.pic.yml`` puts it.
+* No ports. The schematic editor only uses that placement when the instance
+  also lists its ports, and draws pins from that list; each instance gets its
+  cell's ports in the editor's own format.
 * Unresolved routes. Port ranges (``o3-4``) stay unexpanded. Routes are
   rewritten as one polyline per route the ``.pic.yml`` made, between the
   ports gdsfactory actually routed.
@@ -267,6 +270,40 @@ def routes_as_polylines(
     return polylines
 
 
+def device_ports(cell: Any, pdk: Any) -> list[dict[str, Any]]:
+    """The pins the schematic editor draws for an instance of ``cell``.
+
+    Without a ``ports`` list the editor ignores the stored placement and draws
+    a default-size box with no pins. Same convention as the editor writes
+    (gdsfactoryplus UI): offsets from the cell's bbox centre in the cell's own
+    frame with y pointing down, and GDS angles.
+    """
+    centre = cell.dbbox().center()
+    records = []
+    for port in cell.ports:
+        x, y = port.center
+        layer = port.layer_info
+        record = {
+            "name": port.name,
+            "irl_rx": round(x - centre.x, 6),
+            "irl_ry": round(centre.y - y, 6),
+            "orientation": round(port.orientation % 360.0, 6),
+            "port_type": port.port_type,
+            "width": round(port.width, 6),
+            "layer": [layer.layer, layer.datatype],
+            "layer_name": getattr(port.layer, "name", str(port.layer)),
+            # The editor's own fallback bend radius.
+            "bendRadii": [5],
+        }
+        # Routed or modified cross-sections get derived names the PDK doesn't
+        # register (e.g. ``metal_routing_5d1ef7b9``); the editor can't look those up.
+        if (cross_section := port.info.get("cross_section")) in pdk.cross_sections:
+            record["cross_section"] = cross_section
+            record["bendRadii"] = [pdk.get_cross_section(cross_section).radius or 5]
+        records.append(record)
+    return records
+
+
 def fix_gsch(gsch: Path, stems: set[str], pdk_name: str, pdk: Any) -> list[str]:
     """Qualify models, and write .pic.yml placement and routes into one .gsch."""
     netlist = gsch.with_name(f"{gsch.stem}.pic.yml")
@@ -309,6 +346,7 @@ def fix_gsch(gsch: Path, stems: set[str], pdk_name: str, pdk: Any) -> list[str]:
             bbox_ymin=round(local.bottom, 6),
             bbox_width=round(local.width(), 6),
             bbox_height=round(local.height(), 6),
+            ports=device_ports(cell, pdk),
         )
     # A* strategies return no backbone; their routes stay as converted.
     if (polylines := routes_as_polylines(component, bundles, placed, nets)) is not None:

@@ -12,6 +12,392 @@
     "model": "cspdk.si220.cells.containers.pack_doe_grid",
     "name": "mzis",
     "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1191.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1064.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -937.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o4",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -810.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o3",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1318.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -683.627,
+        "irl_ry": 56.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -524.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -397.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -270.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o4",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -143.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o3",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -651.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -16.209,
+        "irl_ry": 59.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 143.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 270.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 397.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o4",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 524.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o3",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 16.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 651.209,
+        "irl_ry": 61.925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 810.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 937.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1064.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o4",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1191.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o3",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 683.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1318.627,
+        "irl_ry": 64.425,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      }
+    ],
     "props": {
       "do_permutations": true,
       "doe": "mzi",
@@ -46,6 +432,584 @@
     "model": "cspdk.si220.cells.containers.pack_doe",
     "name": "rings",
     "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -476.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -349.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -603.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -222.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "0_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -476.91,
+        "irl_ry": 289.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -349.91,
+        "irl_ry": 289.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -603.91,
+        "irl_ry": 289.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -222.91,
+        "irl_ry": 289.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "1_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -476.91,
+        "irl_ry": -44.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -349.91,
+        "irl_ry": -44.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -603.91,
+        "irl_ry": -44.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -222.91,
+        "irl_ry": -44.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "2_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -476.91,
+        "irl_ry": -379.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -349.91,
+        "irl_ry": -379.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -603.91,
+        "irl_ry": -379.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -222.91,
+        "irl_ry": -379.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "3_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -63.5,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "4_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 63.5,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "4_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -190.5,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "4_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 190.5,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "4_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -63.5,
+        "irl_ry": 309.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "5_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 63.5,
+        "irl_ry": 309.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "5_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -190.5,
+        "irl_ry": 309.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "5_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 190.5,
+        "irl_ry": 309.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "5_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -63.5,
+        "irl_ry": -4.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "6_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 63.5,
+        "irl_ry": -4.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "6_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -190.5,
+        "irl_ry": -4.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "6_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 190.5,
+        "irl_ry": -4.9975,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "6_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -63.5,
+        "irl_ry": -309.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "7_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 63.5,
+        "irl_ry": -309.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "7_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -190.5,
+        "irl_ry": -309.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "7_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 190.5,
+        "irl_ry": -309.4875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "7_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 349.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "8_o2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 476.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "8_o1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 222.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "8_loopback1",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 603.91,
+        "irl_ry": 623.9825,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "8_loopback2",
+        "orientation": 270.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      }
+    ],
     "props": {
       "do_permutations": true,
       "doe": "ring_single",

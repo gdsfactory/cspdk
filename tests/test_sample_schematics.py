@@ -32,6 +32,8 @@ PLACEMENT_FIELDS = (
     "irl_flip",
     "bbox_xmin",
     "bbox_ymin",
+    "bbox_width",
+    "bbox_height",
 )
 
 
@@ -158,4 +160,18 @@ def test_gsch_instances_are_placed(gsch: Path) -> None:
         missing = [field for field in PLACEMENT_FIELDS if field not in dev]
         assert not missing, (
             f"{name} lacks {missing}; reconvert with scripts/convert_sample_schematics.py"
+        )
+
+
+def test_gsch_instances_list_their_ports(gsch: Path) -> None:
+    """Each instance lists its ports, the editor's only source for drawing pins.
+
+    Without the list the editor ignores the stored placement and draws a
+    default-size box with no pins.
+    """
+    for name, dev in _devices(json.loads(gsch.read_text())).items():
+        ports = {port["name"] for port in dev.get("ports") or []}
+        assert ports, f"{name} lists no ports"
+        assert set(dev.get("nets") or {}) <= ports, (
+            f"{name}: nets use ports it doesn't list"
         )

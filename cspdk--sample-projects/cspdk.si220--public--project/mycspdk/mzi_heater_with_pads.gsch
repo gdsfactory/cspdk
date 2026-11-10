@@ -15,6 +15,42 @@
       "o1": "net1",
       "o2": "net2"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.1125,
+        "irl_ry": 4.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4.8875,
+        "irl_ry": -5.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "ckt",
     "x": -7.0,
     "y": 1.0
@@ -36,6 +72,42 @@
       "o1": "net2",
       "o2": "net6"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.1125,
+        "irl_ry": 4.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4.8875,
+        "irl_ry": -5.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "ckt",
     "x": -3.0,
     "y": 4.0
@@ -57,6 +129,42 @@
       "o1": "net3",
       "o2": "net4"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.1125,
+        "irl_ry": 4.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4.8875,
+        "irl_ry": -5.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "ckt",
     "x": 6.0,
     "y": 6.0
@@ -77,6 +185,42 @@
       "o1": "net4",
       "o2": "net5"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.1125,
+        "irl_ry": 4.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4.8875,
+        "irl_ry": -5.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "ckt",
     "x": 10.0,
     "y": 3.0
@@ -99,6 +243,76 @@
       "o3": "net1",
       "o4": "net7"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -17.25,
+        "irl_ry": 2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -17.25,
+        "irl_ry": -2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 17.25,
+        "irl_ry": -2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 17.25,
+        "irl_ry": 2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "coupler",
     "x": -3.0,
     "y": -3.0
@@ -121,6 +335,76 @@
       "o3": "port_net_o3",
       "o4": "port_net_o4"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -17.25,
+        "irl_ry": 2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -17.25,
+        "irl_ry": -2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 17.25,
+        "irl_ry": -2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 17.25,
+        "irl_ry": 2.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
     "type": "coupler",
     "x": 3.0,
     "y": -4.0
@@ -170,10 +454,10 @@
     "name": "pic_net2",
     "net": "net2",
     "rx": 3.0,
-    "ry": 4.0,
+    "ry": 2.0,
     "type": "wire",
     "x": -6.0,
-    "y": 1.0
+    "y": 3.0
   },
   "connection_3": {
     "id": "connection_3",
@@ -190,30 +474,30 @@
     "name": "pic_net4",
     "net": "net4",
     "rx": 3.0,
-    "ry": -2.0,
+    "ry": -4.0,
     "type": "wire",
     "x": 7.0,
-    "y": 6.0
+    "y": 8.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
     "rx": -8.0,
-    "ry": -6.0,
+    "ry": -8.0,
     "type": "wire",
     "x": 11.0,
-    "y": 3.0
+    "y": 5.0
   },
   "connection_6": {
     "id": "connection_6",
     "name": "pic_net6",
     "net": "net6",
     "rx": 3.0,
-    "ry": 2.0,
+    "ry": 0.0,
     "type": "wire",
     "x": -2.0,
-    "y": 4.0
+    "y": 6.0
   },
   "connection_7": {
     "id": "connection_7",
@@ -261,6 +545,74 @@
       "o1": "net6",
       "o2": "net3"
     },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -50.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 50.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -64.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "l_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 64.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "r_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      }
+    ],
     "props": {
       "length": 100
     },
@@ -369,6 +721,88 @@
     "model": "cspdk.si220.cells.die_with_pads.pad",
     "name": "p1",
     "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e1",
+        "orientation": 180.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": -45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e3",
+        "orientation": 0.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e4",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "pad",
+        "orientation": 0.0,
+        "port_type": "pad",
+        "width": 90.0
+      }
+    ],
     "type": "ckt",
     "x": -3.0,
     "y": 10.0
@@ -386,6 +820,88 @@
     "model": "cspdk.si220.cells.die_with_pads.pad",
     "name": "p2",
     "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e1",
+        "orientation": 180.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": -45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e3",
+        "orientation": 0.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e4",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "pad",
+        "orientation": 0.0,
+        "port_type": "pad",
+        "width": 90.0
+      }
+    ],
     "type": "ckt",
     "x": 1.0,
     "y": 10.0
