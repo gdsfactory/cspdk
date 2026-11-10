@@ -26,6 +26,9 @@ import yaml
 
 SAMPLES = Path(__file__).resolve().parents[1] / "cspdk--sample-projects"
 GSCH_FILES = sorted(SAMPLES.glob("*/mycspdk/*.gsch"))
+# Simulation samples: their sources and test ports have no layout, so there is
+# no .pic.yml to compare against.
+SIMULATION_ONLY = {"mzi_heater_sweep"}
 PLACEMENT_FIELDS = (
     "irl_x",
     "irl_y",
@@ -147,6 +150,8 @@ def test_samples_have_schematics() -> None:
 
 def test_gsch_matches_pic_yml(gsch: Path) -> None:
     """Instances, components, connections and ports agree with the .pic.yml."""
+    if gsch.stem in SIMULATION_ONLY:
+        pytest.skip("simulation sample: no .pic.yml")
     pic_yml = gsch.with_name(f"{gsch.stem}.pic.yml")
     assert pic_yml.is_file(), f"{gsch.name} has no {pic_yml.name}"
     assert _gsch_circuit(json.loads(gsch.read_text())) == _pic_yml_circuit(
@@ -196,3 +201,28 @@ def test_gsch_instances_list_their_ports(gsch: Path) -> None:
         assert set(dev.get("nets") or {}) <= ports, (
             f"{name}: nets use ports it doesn't list"
         )
+
+
+@pytest.mark.parametrize("stem", sorted(SIMULATION_ONLY))
+def test_simulation_sample_is_wired(stem: str) -> None:
+    """A simulation sample has one optical source, swept sources, and no open pins.
+
+    GDSFactory+'s circulax simulation needs every instance pin on a net, one
+    ``emitter`` port for the light, and ``dc`` sweeps as ``start;stop;points``.
+    """
+    (gsch,) = (path for path in GSCH_FILES if path.stem == stem)
+    doc = json.loads(gsch.read_text())
+    for name, dev in _devices(doc).items():
+        open_pins = {port["name"] for port in dev["ports"]} - set(dev.get("nets") or {})
+        assert not open_pins, f"{name} leaves {sorted(open_pins)} unconnected"
+    emitters = [
+        d
+        for d in doc.values()
+        if d.get("type") == "port" and d.get("variant") == "emitter"
+    ]
+    assert len(emitters) == 1
+    sources = [d for d in doc.values() if d.get("type") in ("isource", "vsource")]
+    assert sources
+    for source in sources:
+        start, stop, points = source["props"]["dc"].split(";")
+        assert float(start) < float(stop) and int(points) > 1

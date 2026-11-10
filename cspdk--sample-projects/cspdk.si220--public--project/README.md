@@ -14,6 +14,11 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
   MZIs, ring filters, lattice filters, routing bundles, pads, instance arrays
   and die frames. The `astar*` schematics are `.pic.yml` only for now: their
   A* routes need bundle settings the `.gsch` format doesn't carry yet.
+- **Thermal MZI simulation** (`mycspdk/mzi_heater_sweep.gsch`): two MMIs and
+  two `straight_heater_metal` arms, the upper one driven by a 0-40 mA current
+  sweep. Simulate it with Circulax in GDSFactory+: the light moves from `cross`
+  to `bar` at about 25.8 mA, where the 120 Ohm heater dissipates the 80 mW that
+  shifts the phase by pi.
 - **Python cells** (`mycspdk/*.py`, `mycspdk/samples/`): routed MZIs, splitter
   trees, an OPA-style MZI tree and a Clements mesh with heater-to-pad routing.
 - **A\* routing** (`astar*.pic.yml`, `lattice.pic.yml`): bundles routed with the
