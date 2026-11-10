@@ -51,7 +51,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": -5.0,
     "y": -4.0
   },
@@ -108,7 +116,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": 1.0,
     "y": -5.0
   },
@@ -165,7 +181,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": 3.0,
     "y": -1.0
   },
@@ -221,7 +245,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": 7.0,
     "y": 2.0
   },
@@ -312,6 +344,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "coupler",
     "x": -9.0,
@@ -405,6 +445,14 @@
         "width": 0.45
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "coupler",
     "x": 11.0,
     "y": 3.0
@@ -416,6 +464,7 @@
     "rx": -2.0,
     "ry": 11.0,
     "type": "wire",
+    "variant": "hv",
     "x": -5.0,
     "y": -3.0
   },
@@ -426,6 +475,7 @@
     "rx": 6.0,
     "ry": -3.0,
     "type": "wire",
+    "variant": "hv",
     "x": 13.0,
     "y": 5.0
   },
@@ -434,40 +484,44 @@
     "name": "pic_net2",
     "net": "net2",
     "rx": 3.0,
-    "ry": 0.0,
+    "ry": 2.0,
     "type": "wire",
+    "variant": "hv",
     "x": 8.0,
-    "y": 4.0
+    "y": 2.0
   },
   "connection_3": {
     "id": "connection_3",
     "name": "pic_net3",
     "net": "net3",
     "rx": 5.0,
-    "ry": -2.0,
+    "ry": 0.0,
     "type": "wire",
+    "variant": "hv",
     "x": -4.0,
-    "y": -2.0
+    "y": -4.0
   },
   "connection_4": {
     "id": "connection_4",
     "name": "pic_net4",
     "net": "net4",
     "rx": 1.0,
-    "ry": 3.0,
+    "ry": 5.0,
     "type": "wire",
+    "variant": "hv",
     "x": 2.0,
-    "y": -3.0
+    "y": -5.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
     "rx": 3.0,
-    "ry": 2.0,
+    "ry": 4.0,
     "type": "wire",
+    "variant": "hv",
     "x": 4.0,
-    "y": 1.0
+    "y": -1.0
   },
   "connection_6": {
     "id": "connection_6",
@@ -476,6 +530,7 @@
     "rx": 18.0,
     "ry": -4.0,
     "type": "wire",
+    "variant": "hv",
     "x": -7.0,
     "y": 9.0
   },
@@ -486,6 +541,7 @@
     "rx": -4.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": -9.0,
     "y": 9.0
   },
@@ -496,6 +552,7 @@
     "rx": -5.0,
     "ry": -2.0,
     "type": "wire",
+    "variant": "hv",
     "x": -9.0,
     "y": 8.0
   },
@@ -506,6 +563,7 @@
     "rx": 2.0,
     "ry": 2.0,
     "type": "wire",
+    "variant": "hv",
     "x": 13.0,
     "y": 4.0
   },
@@ -516,6 +574,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o1"
     },
@@ -538,6 +597,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o2"
     },
@@ -560,6 +620,7 @@
     },
     "id": null,
     "name": "o3",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o3"
     },
@@ -582,6 +643,7 @@
     },
     "id": null,
     "name": "o4",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o4"
     },
@@ -598,9 +660,11 @@
     "y": 2.0
   },
   "route_0": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
     "name": "route_0",
     "net": "net6",
-    "routing_strategy": "route_bundle",
+    "radius": 10.0,
     "terminals": {
       "finish": {
         "component_id": "c1",
@@ -611,6 +675,17 @@
         "port_name": "o1"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        64.5,
+        1.64
+      ],
+      [
+        24.5,
+        1.64
+      ]
+    ],
+    "width": 0.45
   }
 }

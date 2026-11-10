@@ -51,7 +51,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": -7.0,
     "y": 1.0
   },
@@ -108,7 +116,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": -3.0,
     "y": 4.0
   },
@@ -165,8 +181,16 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
-    "x": 6.0,
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
+    "x": 7.0,
     "y": 6.0
   },
   "b4": {
@@ -221,8 +245,16 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
-    "x": 10.0,
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
+    "x": 11.0,
     "y": 3.0
   },
   "c1": {
@@ -312,6 +344,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "coupler",
     "x": -3.0,
@@ -405,6 +445,14 @@
         "width": 0.45
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "coupler",
     "x": 3.0,
     "y": -4.0
@@ -416,6 +464,7 @@
     "rx": 6.0,
     "ry": -4.0,
     "type": "wire",
+    "variant": "hv",
     "x": -7.0,
     "y": 2.0
   },
@@ -426,6 +475,7 @@
     "rx": 1.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 5.0,
     "y": -3.0
   },
@@ -436,6 +486,7 @@
     "rx": 2.0,
     "ry": 1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 6.0,
     "y": -4.0
   },
@@ -446,6 +497,7 @@
     "rx": 2.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 5.0,
     "y": -2.0
   },
@@ -454,19 +506,21 @@
     "name": "pic_net2",
     "net": "net2",
     "rx": 3.0,
-    "ry": 2.0,
+    "ry": 4.0,
     "type": "wire",
+    "variant": "hv",
     "x": -6.0,
-    "y": 3.0
+    "y": 1.0
   },
   "connection_3": {
     "id": "connection_3",
     "name": "pic_net3",
     "net": "net3",
-    "rx": -2.0,
+    "rx": -3.0,
     "ry": -1.0,
     "type": "wire",
-    "x": 6.0,
+    "variant": "hv",
+    "x": 7.0,
     "y": 7.0
   },
   "connection_4": {
@@ -474,30 +528,33 @@
     "name": "pic_net4",
     "net": "net4",
     "rx": 3.0,
-    "ry": -4.0,
+    "ry": -2.0,
     "type": "wire",
-    "x": 7.0,
-    "y": 8.0
+    "variant": "hv",
+    "x": 8.0,
+    "y": 6.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
-    "rx": -8.0,
-    "ry": -8.0,
+    "rx": -9.0,
+    "ry": -6.0,
     "type": "wire",
-    "x": 11.0,
-    "y": 5.0
+    "variant": "hv",
+    "x": 12.0,
+    "y": 3.0
   },
   "connection_6": {
     "id": "connection_6",
     "name": "pic_net6",
     "net": "net6",
     "rx": 3.0,
-    "ry": 0.0,
+    "ry": 4.0,
     "type": "wire",
+    "variant": "hv",
     "x": -2.0,
-    "y": 6.0
+    "y": 4.0
   },
   "connection_7": {
     "id": "connection_7",
@@ -506,6 +563,7 @@
     "rx": 4.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": -1.0,
     "y": -1.0
   },
@@ -516,6 +574,7 @@
     "rx": -5.0,
     "ry": -2.0,
     "type": "wire",
+    "variant": "hv",
     "x": -3.0,
     "y": -1.0
   },
@@ -526,6 +585,7 @@
     "rx": -5.0,
     "ry": -3.0,
     "type": "wire",
+    "variant": "hv",
     "x": -3.0,
     "y": -2.0
   },
@@ -616,6 +676,14 @@
     "props": {
       "length": 100
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": 1.0,
     "y": 5.0
@@ -627,6 +695,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o1"
     },
@@ -649,6 +718,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o2"
     },
@@ -671,6 +741,7 @@
     },
     "id": null,
     "name": "o3",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o3"
     },
@@ -693,6 +764,7 @@
     },
     "id": null,
     "name": "o4",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o4"
     },
@@ -803,7 +875,15 @@
         "width": 90.0
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "pad",
     "x": -3.0,
     "y": 10.0
   },
@@ -902,14 +982,24 @@
         "width": 90.0
       }
     ],
-    "type": "ckt",
-    "x": 1.0,
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "pad",
+    "x": 7.0,
     "y": 10.0
   },
   "route_0": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
     "name": "route_0",
     "net": "net7",
-    "routing_strategy": "route_bundle",
+    "radius": 10.0,
     "terminals": {
       "finish": {
         "component_id": "c1",
@@ -920,6 +1010,17 @@
         "port_name": "o1"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        164.5,
+        1.64
+      ],
+      [
+        24.5,
+        1.64
+      ]
+    ],
+    "width": 0.45
   }
 }

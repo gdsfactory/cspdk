@@ -5,7 +5,7 @@ stays as the plain-gdsfactory source the layout was checked against. Both were
 converted and layout-verified with ``scripts/convert_sample_schematics.py``.
 These checks keep the pair in step without needing GDSFactory+:
 
-* the same instances, components, connections (including route links) and ports;
+* the same instances, components, butt connections, routed ports and ports;
 * every ``model`` names the flavour PDK's own cell by its dotted Python name, so
   GDSFactory+ can't pick another flavour's or gdsfactory's same-named cell;
 * every instance carries the layout placement taken from the ``.pic.yml``.
@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import importlib
 import json
+import re
 import tomllib
 from collections import defaultdict
 from pathlib import Path
@@ -65,41 +66,61 @@ def _instance_names(name: str, inst: dict[str, Any]) -> list[str]:
 
 
 def _gsch_circuit(doc: dict[str, Any]) -> dict[str, Any]:
+    routed = {
+        _terminal(end)
+        for dev in doc.values()
+        if dev.get("type") == "polyline"
+        for end in dev["terminals"].values()
+    }
+    ports = {
+        dev["name"]: f"{attached['component_id']},{attached['port_name']}"
+        for dev in doc.values()
+        if dev.get("type") == "port" and (attached := dev.get("attached_port"))
+    }
     by_net: dict[str, set[str]] = defaultdict(set)
-    ports = {}
-    for key, dev in doc.items():
-        if dev.get("type") == "port" and (attached := dev.get("attached_port")):
-            ports[dev["name"]] = f"{attached['component_id']},{attached['port_name']}"
-        elif dev.get("type") == "polyline":
-            by_net[f"route:{key}"] = {
-                _terminal(end) for end in dev["terminals"].values()
-            }
     devices = _devices(doc)
     for name, dev in devices.items():
         for port, net in (dev.get("nets") or {}).items():
             if not net.startswith("port_net_"):
                 by_net[net].add(f"{name},{port}")
+    pairs = {tuple(sorted(pins)) for pins in by_net.values() if len(pins) > 1}
     return {
         "instances": {name: _short_name(dev["model"]) for name, dev in devices.items()},
-        # A routed pair appears both as the route's terminals and as a net.
-        "connections": sorted(
-            {tuple(sorted(pins)) for pins in by_net.values() if len(pins) > 1}
-        ),
+        # Routed pairs share a net too; only the rest are butt connections.
+        "connections": sorted(pair for pair in pairs if not set(pair) <= routed),
+        "routed": sorted(routed),
         "ports": ports,
     }
 
 
+def _expand(link: str) -> list[str]:
+    """``c1,o3-4`` -> ``c1,o3`` and ``c1,o4``; other links unchanged."""
+    instance, port = link.split(",")
+    if match := re.fullmatch(r"([A-Za-z_]+)(\d+)-(\d+)", port):
+        prefix, first, last = match[1], int(match[2]), int(match[3])
+        return [f"{instance},{prefix}{i}" for i in range(first, last + 1)]
+    return [link]
+
+
 def _pic_yml_circuit(doc: dict[str, Any]) -> dict[str, Any]:
-    links = dict(doc.get("connections") or {})
-    for route in (doc.get("routes") or {}).values():
-        links.update(route.get("links") or {})
+    connections = doc.get("connections") or {}
+    # Routes are compared by the ports they route: with sort_ports or port
+    # ranges, gdsfactory decides the pairing.
+    routed = {
+        port
+        for route in (doc.get("routes") or {}).values()
+        for pair in (route.get("links") or {}).items()
+        for end in pair
+        for port in _expand(end)
+    }
     return {
         "instances": {
             element: inst["component"]
             for name, inst in doc["instances"].items()
             for element in _instance_names(name, inst)
         },
-        "connections": sorted({tuple(sorted(pair)) for pair in links.items()}),
+        "connections": sorted({tuple(sorted(pair)) for pair in connections.items()}),
+        "routed": sorted(routed),
         "ports": dict(doc.get("ports") or {}),
     }
 

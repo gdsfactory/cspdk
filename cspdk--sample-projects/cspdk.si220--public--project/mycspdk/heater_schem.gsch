@@ -94,7 +94,15 @@
         "width": 90.0
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "pad",
     "x": -2.0,
     "y": 3.0
   },
@@ -178,6 +186,14 @@
         "port_type": "electrical",
         "width": 20.0
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "ckt",
     "x": 2.0,

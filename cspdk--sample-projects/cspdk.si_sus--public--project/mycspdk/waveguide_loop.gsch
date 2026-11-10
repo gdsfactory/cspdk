@@ -55,6 +55,14 @@
       "cross_section": "xs_sus",
       "length": 500
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": 5.0,
     "y": -0.0
@@ -66,6 +74,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o1"
     },
@@ -80,6 +89,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o2"
     },
@@ -88,10 +98,12 @@
     "y": 0.0
   },
   "route_0": {
+    "bend_type": "bend_circular",
     "cross_section": "xs_sus",
+    "layer": "WG_MARK",
     "name": "route_0",
     "net": "net1",
-    "routing_strategy": "route_bundle",
+    "radius": 40.75,
     "terminals": {
       "finish": {
         "component_id": "upper",
@@ -102,7 +114,26 @@
         "port_name": "o2"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        500.0,
+        -0.0
+      ],
+      [
+        575.75,
+        -0.0
+      ],
+      [
+        575.75,
+        -163.0
+      ],
+      [
+        500.0,
+        -163.0
+      ]
+    ],
+    "width": 1.5
   },
   "upper": {
     "bbox_height": 8.5,
@@ -160,6 +191,14 @@
       "cross_section": "xs_sus",
       "length": 500
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": 0.0,
     "y": -3.0

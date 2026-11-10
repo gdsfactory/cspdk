@@ -51,7 +51,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": -4.0,
     "y": 0.0
   },
@@ -116,7 +124,7 @@
       0.0,
       0.0
     ],
-    "type": "ckt",
+    "type": "bend",
     "x": -5.0,
     "y": 5.0
   },
@@ -181,8 +189,8 @@
       0.0,
       0.0
     ],
-    "type": "ckt",
-    "x": 4.0,
+    "type": "bend",
+    "x": 5.0,
     "y": 5.0
   },
   "b4": {
@@ -245,8 +253,8 @@
       0.0,
       0.0
     ],
-    "type": "ckt",
-    "x": 8.0,
+    "type": "bend",
+    "x": 9.0,
     "y": 2.0
   },
   "c1": {
@@ -333,7 +341,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mmi-2x2",
     "x": 0.0,
     "y": -3.0
   },
@@ -421,7 +437,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mmi-2x2",
     "x": 6.0,
     "y": -4.0
   },
@@ -432,56 +456,51 @@
     "rx": 6.0,
     "ry": -3.0,
     "type": "wire",
+    "variant": "hv",
     "x": -4.0,
     "y": 1.0
   },
   "connection_10": {
     "id": "connection_10",
-    "name": "pic_net9",
-    "net": "net9",
-    "rx": 4.0,
-    "ry": -1.0,
-    "type": "wire",
-    "x": 2.0,
-    "y": 0.0
-  },
-  "connection_11": {
-    "id": "connection_11",
     "name": "port_net_o1",
     "net": "port_net_o1",
     "rx": -8.0,
     "ry": -5.0,
     "type": "wire",
+    "variant": "hv",
     "x": 0.0,
     "y": 0.0
   },
-  "connection_12": {
-    "id": "connection_12",
+  "connection_11": {
+    "id": "connection_11",
     "name": "port_net_o2",
     "net": "port_net_o2",
     "rx": -9.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 0.0,
     "y": -2.0
   },
-  "connection_13": {
-    "id": "connection_13",
+  "connection_12": {
+    "id": "connection_12",
     "name": "port_net_o3",
     "net": "port_net_o3",
     "rx": 3.0,
     "ry": 0.0,
     "type": "wire",
+    "variant": "hv",
     "x": 8.0,
     "y": -3.0
   },
-  "connection_14": {
-    "id": "connection_14",
+  "connection_13": {
+    "id": "connection_13",
     "name": "port_net_o4",
     "net": "port_net_o4",
     "rx": 3.0,
     "ry": 0.0,
     "type": "wire",
+    "variant": "hv",
     "x": 8.0,
     "y": -1.0
   },
@@ -492,6 +511,7 @@
     "rx": -3.0,
     "ry": -4.0,
     "type": "wire",
+    "variant": "hv",
     "x": -3.0,
     "y": 6.0
   },
@@ -499,10 +519,11 @@
     "id": "connection_3",
     "name": "pic_net3",
     "net": "net3",
-    "rx": -4.0,
+    "rx": -5.0,
     "ry": 3.0,
     "type": "wire",
-    "x": 6.0,
+    "variant": "hv",
+    "x": 7.0,
     "y": 6.0
   },
   "connection_4": {
@@ -512,58 +533,64 @@
     "rx": 4.0,
     "ry": 1.0,
     "type": "wire",
-    "x": 10.0,
+    "variant": "hv",
+    "x": 11.0,
     "y": 3.0
   },
   "connection_5": {
     "id": "connection_5",
     "name": "pic_net5",
     "net": "net5",
-    "rx": -3.0,
-    "ry": -7.0,
+    "rx": -4.0,
+    "ry": -5.0,
     "type": "wire",
-    "x": 9.0,
-    "y": 4.0
+    "variant": "hv",
+    "x": 10.0,
+    "y": 2.0
   },
   "connection_6": {
     "id": "connection_6",
     "name": "pic_net6",
     "net": "net6",
     "rx": 3.0,
-    "ry": 2.0,
+    "ry": 6.0,
     "type": "wire",
+    "variant": "hv",
     "x": -4.0,
-    "y": 7.0
+    "y": 5.0
   },
   "connection_7": {
     "id": "connection_7",
     "name": "pic_net7",
     "net": "net7",
-    "rx": -3.0,
-    "ry": -1.0,
+    "rx": -5.0,
+    "ry": 2.0,
     "type": "wire",
+    "variant": "hv",
     "x": -3.0,
-    "y": 2.0
+    "y": 0.0
   },
   "connection_8": {
     "id": "connection_8",
-    "name": "pic_net7",
-    "net": "net7",
-    "rx": -2.0,
-    "ry": 1.0,
-    "type": "wire",
-    "x": -6.0,
-    "y": 1.0
-  },
-  "connection_9": {
-    "id": "connection_9",
     "name": "pic_net8",
     "net": "net8",
     "rx": 7.0,
-    "ry": -3.0,
+    "ry": -1.0,
     "type": "wire",
-    "x": 5.0,
-    "y": 7.0
+    "variant": "hv",
+    "x": 6.0,
+    "y": 5.0
+  },
+  "connection_9": {
+    "id": "connection_9",
+    "name": "pic_net9",
+    "net": "net9",
+    "rx": 4.0,
+    "ry": -1.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 2.0,
+    "y": 0.0
   },
   "h": {
     "bbox_height": 10.0,
@@ -652,6 +679,14 @@
     "props": {
       "length": 100
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": -1.0,
     "y": 8.0
@@ -663,6 +698,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o1"
     },
@@ -685,6 +721,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o2"
     },
@@ -707,6 +744,7 @@
     },
     "id": null,
     "name": "o3",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o3"
     },
@@ -729,6 +767,7 @@
     },
     "id": null,
     "name": "o4",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o4"
     },
@@ -747,7 +786,6 @@
   "route_0": {
     "name": "route_0",
     "net": "net9",
-    "routing_strategy": "route_bundle",
     "terminals": {
       "finish": {
         "component_id": "c1",
@@ -758,7 +796,17 @@
         "port_name": "o1"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        202.5,
+        1.015
+      ],
+      [
+        62.5,
+        1.015
+      ]
+    ]
   },
   "sl": {
     "bbox_height": 0.45,
@@ -811,6 +859,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "straight",
     "x": -8.0,
@@ -868,8 +924,16 @@
         "width": 0.45
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
-    "x": 12.0,
+    "x": 13.0,
     "y": 3.0
   }
 }

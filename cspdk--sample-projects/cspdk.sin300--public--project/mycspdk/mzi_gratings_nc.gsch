@@ -50,6 +50,14 @@
         "width": 11.0
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": 5.0,
     "y": 0.0
@@ -104,6 +112,14 @@
         "port_type": "vertical_te",
         "width": 11.0
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "ckt",
     "x": 10.0,
@@ -160,6 +176,14 @@
         "width": 11.0
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": 15.0,
     "y": 0.0
@@ -171,6 +195,7 @@
     },
     "id": null,
     "name": "in",
+    "nature": "vertical_te",
     "nets": {
       "P": "port_net_in"
     },
@@ -251,6 +276,14 @@
     "props": {
       "delta_length": 100
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": 0.0,
     "y": -0.0
@@ -262,6 +295,7 @@
     },
     "id": null,
     "name": "out1",
+    "nature": "vertical_te",
     "nets": {
       "P": "port_net_out1"
     },
@@ -276,6 +310,7 @@
     },
     "id": null,
     "name": "out2",
+    "nature": "vertical_te",
     "nets": {
       "P": "port_net_out2"
     },
@@ -284,9 +319,11 @@
     "y": 0.0
   },
   "route_0": {
+    "cross_section": "xs_nc",
+    "layer": "NITRIDE",
     "name": "route_0",
     "net": "net1",
-    "routing_strategy": "route_bundle_nc",
+    "radius": 30.0,
     "terminals": {
       "finish": {
         "component_id": "mzi",
@@ -297,12 +334,25 @@
         "port_name": "o1"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        -150.0,
+        -0.0
+      ],
+      [
+        -50.0,
+        -0.0
+      ]
+    ],
+    "width": 1.2
   },
   "route_1": {
+    "cross_section": "xs_nc",
+    "layer": "NITRIDE",
     "name": "route_1",
     "net": "net2",
-    "routing_strategy": "route_bundle_nc",
+    "radius": 30.0,
     "terminals": {
       "finish": {
         "component_id": "gc_out2",
@@ -313,12 +363,33 @@
         "port_name": "o2"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        566.8,
+        -3.05
+      ],
+      [
+        596.8,
+        -3.05
+      ],
+      [
+        596.8,
+        -63.5
+      ],
+      [
+        800.0,
+        -63.5
+      ]
+    ],
+    "width": 1.2
   },
   "route_2": {
+    "cross_section": "xs_nc",
+    "layer": "NITRIDE",
     "name": "route_2",
     "net": "net3",
-    "routing_strategy": "route_bundle_nc",
+    "radius": 30.0,
     "terminals": {
       "finish": {
         "component_id": "gc_out1",
@@ -329,6 +400,25 @@
         "port_name": "o3"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        566.8,
+        3.05
+      ],
+      [
+        596.8,
+        3.05
+      ],
+      [
+        596.8,
+        63.5
+      ],
+      [
+        800.0,
+        63.5
+      ]
+    ],
+    "width": 1.2
   }
 }

@@ -51,7 +51,15 @@
         "width": 0.45
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "bend",
     "x": 0.0,
     "y": 0.0
   },
@@ -62,6 +70,7 @@
     "rx": 3.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 0.0,
     "y": 1.0
   },
@@ -72,6 +81,7 @@
     "rx": 3.0,
     "ry": 1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 3.0,
     "y": 0.0
   },
@@ -82,6 +92,7 @@
     "rx": 2.0,
     "ry": -1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 4.0,
     "y": 1.0
   },
@@ -92,6 +103,7 @@
     "rx": 2.0,
     "ry": 1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 6.0,
     "y": 0.0
   },
@@ -100,10 +112,11 @@
     "name": "pic_net3",
     "net": "net3",
     "rx": 9.0,
-    "ry": -1.0,
+    "ry": 1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 1.0,
-    "y": 2.0
+    "y": 0.0
   },
   "s1": {
     "bbox_height": 0.45,
@@ -156,6 +169,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "straight",
     "x": 4.0,
@@ -212,6 +233,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "straight",
     "x": 8.0,

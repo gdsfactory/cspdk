@@ -61,7 +61,7 @@
       0.0,
       0.0
     ],
-    "type": "ckt",
+    "type": "bend",
     "x": 6.0,
     "y": 4.0
   },
@@ -72,6 +72,7 @@
     "rx": 6.0,
     "ry": -3.0,
     "type": "wire",
+    "variant": "hv",
     "x": 6.0,
     "y": 5.0
   },
@@ -128,6 +129,14 @@
       "cross_section": "strip_cband",
       "length": 10
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": -2.0,
     "y": 1.0
@@ -185,6 +194,14 @@
       "cross_section": "strip_cband",
       "length": 10
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": 2.0,
     "y": 1.0
@@ -244,6 +261,14 @@
       "cross_section": "strip_cband",
       "length": 10
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": 10.0,
     "y": 1.0

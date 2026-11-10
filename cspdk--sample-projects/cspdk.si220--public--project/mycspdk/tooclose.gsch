@@ -48,6 +48,14 @@
         "width": 0.45
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
     "x": 0.0,
     "y": -0.0
@@ -100,6 +108,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "straight",
     "x": 4.0,

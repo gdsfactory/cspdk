@@ -291,6 +291,14 @@
         "width": 0.45
       }
     ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ckt",
     "x": 0.0,
     "y": -0.0
@@ -350,8 +358,16 @@
     "props": {
       "length": 100
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "straight",
-    "x": 5.0,
+    "x": 4.0,
     "y": 0.0
   },
   "ring": {
@@ -410,14 +426,24 @@
       "gap": 0.25,
       "radius": 25
     },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "type": "ring-single",
-    "x": 10.0,
+    "x": 8.0,
     "y": 0.0
   },
   "route_0": {
+    "cross_section": "rib",
+    "layer": "WG",
     "name": "route_0",
     "net": "net1",
-    "routing_strategy": "route_bundle",
+    "radius": 25.0,
     "terminals": {
       "finish": {
         "component_id": "ring",
@@ -428,12 +454,25 @@
         "port_name": "o1"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        -2505.972,
+        875.0
+      ],
+      [
+        -100.0,
+        875.0
+      ]
+    ],
+    "width": 0.45
   },
   "route_1": {
+    "cross_section": "rib",
+    "layer": "WG",
     "name": "route_1",
     "net": "net2",
-    "routing_strategy": "route_bundle",
+    "radius": 25.0,
     "terminals": {
       "finish": {
         "component_id": "die",
@@ -444,12 +483,25 @@
         "port_name": "o2"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        -36.0,
+        875.0
+      ],
+      [
+        2505.972,
+        875.0
+      ]
+    ],
+    "width": 0.45
   },
   "route_2": {
+    "cross_section": "rib",
+    "layer": "WG",
     "name": "route_2",
     "net": "net3",
-    "routing_strategy": "route_bundle",
+    "radius": 25.0,
     "terminals": {
       "finish": {
         "component_id": "loopback",
@@ -460,12 +512,25 @@
         "port_name": "o2"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        -2505.972,
+        625.0
+      ],
+      [
+        -50.0,
+        625.0
+      ]
+    ],
+    "width": 0.45
   },
   "route_3": {
+    "cross_section": "rib",
+    "layer": "WG",
     "name": "route_3",
     "net": "net4",
-    "routing_strategy": "route_bundle",
+    "radius": 25.0,
     "terminals": {
       "finish": {
         "component_id": "die",
@@ -476,6 +541,17 @@
         "port_name": "o2"
       }
     },
-    "type": "polyline"
+    "type": "polyline",
+    "vertices": [
+      [
+        50.0,
+        625.0
+      ],
+      [
+        2505.972,
+        625.0
+      ]
+    ],
+    "width": 0.45
   }
 }

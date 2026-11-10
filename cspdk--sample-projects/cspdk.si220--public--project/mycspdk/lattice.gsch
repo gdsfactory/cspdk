@@ -1,57 +1,58 @@
 {
-  "bundle_0_0": {
-    "id": "bundle_0_0",
-    "name": "bundle_0_0",
-    "net": "net2",
-    "routing_strategy": "route_astar",
-    "terminals": {
-      "finish": {
-        "device": "mzi2",
-        "port": "o2"
-      },
-      "start": {
-        "device": "mzi1",
-        "port": "o3"
-      }
-    },
-    "type": "polyline"
-  },
-  "bundle_1_0": {
-    "id": "bundle_1_0",
-    "name": "bundle_1_0",
-    "net": "net1",
-    "routing_strategy": "route_astar",
-    "terminals": {
-      "finish": {
-        "device": "mzi2",
-        "port": "o1"
-      },
-      "start": {
-        "device": "mzi1",
-        "port": "o4"
-      }
-    },
-    "type": "polyline"
-  },
   "connection_1": {
     "id": "connection_1",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 6.0,
+    "ry": -1.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 3.0,
+    "y": -1.0
+  },
+  "connection_2": {
+    "id": "connection_2",
     "name": "port_net_o1",
     "net": "port_net_o1",
     "rx": -2.0,
     "ry": -2.0,
     "type": "wire",
+    "variant": "hv",
     "x": 1.0,
     "y": -2.0
   },
-  "connection_2": {
-    "id": "connection_2",
+  "connection_3": {
+    "id": "connection_3",
     "name": "port_net_o2",
     "net": "port_net_o2",
-    "rx": 9.0,
+    "rx": 4.0,
+    "ry": -1.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 3.0,
+    "y": -3.0
+  },
+  "connection_4": {
+    "id": "connection_4",
+    "name": "port_net_o2",
+    "net": "port_net_o2",
+    "rx": 5.0,
+    "ry": 1.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 7.0,
+    "y": -4.0
+  },
+  "connection_5": {
+    "id": "connection_5",
+    "name": "port_net_o3",
+    "net": "port_net_o3",
+    "rx": 3.0,
     "ry": 0.0,
     "type": "wire",
-    "x": 3.0,
-    "y": -2.0
+    "variant": "hv",
+    "x": 9.0,
+    "y": 0.0
   },
   "mzi1": {
     "bbox_height": 51.48,
@@ -140,7 +141,15 @@
     "props": {
       "splitter": "mmi2x2"
     },
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mzi-2x2",
     "x": 1.0,
     "y": -4.0
   },
@@ -232,7 +241,15 @@
       "delta_length": 100,
       "splitter": "mmi2x2"
     },
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mzi-2x2",
     "x": 7.0,
     "y": -3.0
   },
@@ -243,6 +260,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o1"
     },
@@ -265,6 +283,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o2"
     },
@@ -278,7 +297,7 @@
     ],
     "type": "port",
     "x": 12.0,
-    "y": -2.0
+    "y": -3.0
   },
   "o3": {
     "attached_port": {
@@ -287,12 +306,21 @@
     },
     "id": null,
     "name": "o3",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o3"
     },
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
     "type": "port",
-    "x": 10.0,
-    "y": -3.0
+    "x": 12.0,
+    "y": 0.0
   },
   "o4": {
     "attached_port": {
@@ -301,11 +329,44 @@
     },
     "id": null,
     "name": "o4",
+    "nature": "photonic",
     "nets": {
       "P": "port_net_o4"
     },
     "type": "port",
     "x": 10.0,
     "y": -3.0
+  },
+  "route_0": {
+    "name": "route_0",
+    "net": "net2",
+    "routing_strategy": "route_astar",
+    "terminals": {
+      "finish": {
+        "component_id": "mzi2",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "mzi1",
+        "port_name": "o3"
+      }
+    },
+    "type": "polyline"
+  },
+  "route_1": {
+    "name": "route_1",
+    "net": "net1",
+    "routing_strategy": "route_astar",
+    "terminals": {
+      "finish": {
+        "component_id": "mzi2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi1",
+        "port_name": "o4"
+      }
+    },
+    "type": "polyline"
   }
 }

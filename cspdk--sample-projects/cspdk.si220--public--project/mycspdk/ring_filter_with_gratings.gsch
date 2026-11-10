@@ -6,6 +6,7 @@
     "rx": -5.0,
     "ry": 3.0,
     "type": "wire",
+    "variant": "hv",
     "x": 3.0,
     "y": 0.0
   },
@@ -16,6 +17,7 @@
     "rx": -7.0,
     "ry": 1.0,
     "type": "wire",
+    "variant": "hv",
     "x": 7.0,
     "y": 2.0
   },
@@ -26,6 +28,7 @@
     "rx": 5.0,
     "ry": 0.0,
     "type": "wire",
+    "variant": "hv",
     "x": 5.0,
     "y": 0.0
   },
@@ -36,6 +39,7 @@
     "rx": 3.0,
     "ry": 0.0,
     "type": "wire",
+    "variant": "hv",
     "x": 9.0,
     "y": 2.0
   },
@@ -90,7 +94,15 @@
         "width": 10.0
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "grating-coupler",
     "x": 7.0,
     "y": 1.0
   },
@@ -145,7 +157,15 @@
         "width": 10.0
       }
     ],
-    "type": "ckt",
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "grating-coupler",
     "x": 3.0,
     "y": -1.0
   },
@@ -156,6 +176,7 @@
     },
     "id": null,
     "name": "o1",
+    "nature": "vertical_te",
     "nets": {
       "P": "port_net_o1"
     },
@@ -178,6 +199,7 @@
     },
     "id": null,
     "name": "o2",
+    "nature": "vertical_te",
     "nets": {
       "P": "port_net_o2"
     },
@@ -244,6 +266,14 @@
         "port_type": "optical",
         "width": 0.45
       }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
     ],
     "type": "ring-single",
     "x": -2.0,
