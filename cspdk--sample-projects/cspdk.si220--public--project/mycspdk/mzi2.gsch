@@ -1,0 +1,333 @@
+{
+  "b1": {
+    "bbox_height": 10.225,
+    "bbox_width": 10.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 29.6125,
+    "irl_y": -7.2475,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "b1",
+    "nets": {
+      "o1": "net1",
+      "o2": "net3"
+    },
+    "type": "ckt",
+    "x": -5.0,
+    "y": -4.0
+  },
+  "b2": {
+    "bbox_height": 10.225,
+    "bbox_width": 10.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": true,
+    "irl_orientation": 270.0,
+    "irl_x": 39.3875,
+    "irl_y": -17.4725,
+    "mirror": true,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "b2",
+    "nets": {
+      "o1": "net3",
+      "o2": "net4"
+    },
+    "type": "ckt",
+    "x": 1.0,
+    "y": -5.0
+  },
+  "b3": {
+    "bbox_height": 10.225,
+    "bbox_width": 10.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": true,
+    "irl_orientation": 0.0,
+    "irl_x": 49.6125,
+    "irl_y": -17.4725,
+    "mirror": true,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "b3",
+    "nets": {
+      "o1": "net4",
+      "o2": "net5"
+    },
+    "type": "ckt",
+    "x": 3.0,
+    "y": -1.0
+  },
+  "b4": {
+    "bbox_height": 10.225,
+    "bbox_width": 10.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 90.0,
+    "irl_x": 59.3875,
+    "irl_y": -7.2475,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "b4",
+    "nets": {
+      "o1": "net5",
+      "o2": "net2"
+    },
+    "type": "ckt",
+    "x": 7.0,
+    "y": 2.0
+  },
+  "btm": {
+    "id": "btm",
+    "name": "btm",
+    "net": "net6",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "c1",
+        "port": "o4"
+      },
+      "start": {
+        "device": "c2",
+        "port": "o1"
+      }
+    },
+    "type": "polyline"
+  },
+  "c1": {
+    "bbox_height": 4.45,
+    "bbox_width": 34.5,
+    "bbox_xmin": -10.0,
+    "bbox_ymin": -1.865,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 7.25,
+    "irl_y": -0.36,
+    "model": "cspdk.si220.cells.couplers.coupler",
+    "name": "c1",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "port_net_o2",
+      "o3": "net1",
+      "o4": "net6"
+    },
+    "type": "coupler",
+    "x": -9.0,
+    "y": 7.0
+  },
+  "c2": {
+    "bbox_height": 4.45,
+    "bbox_width": 34.5,
+    "bbox_xmin": -10.0,
+    "bbox_ymin": -1.865,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 81.75,
+    "irl_y": -0.36,
+    "model": "cspdk.si220.cells.couplers.coupler",
+    "name": "c2",
+    "nets": {
+      "o1": "net6",
+      "o2": "net2",
+      "o3": "port_net_o3",
+      "o4": "port_net_o4"
+    },
+    "type": "coupler",
+    "x": 11.0,
+    "y": 3.0
+  },
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": -2.0,
+    "ry": 11.0,
+    "type": "wire",
+    "x": -5.0,
+    "y": -3.0
+  },
+  "connection_10": {
+    "id": "connection_10",
+    "name": "port_net_o4",
+    "net": "port_net_o4",
+    "rx": 6.0,
+    "ry": -3.0,
+    "type": "wire",
+    "x": 13.0,
+    "y": 5.0
+  },
+  "connection_2": {
+    "id": "connection_2",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 3.0,
+    "ry": 2.0,
+    "type": "wire",
+    "x": 8.0,
+    "y": 2.0
+  },
+  "connection_3": {
+    "id": "connection_3",
+    "name": "pic_net3",
+    "net": "net3",
+    "rx": 5.0,
+    "ry": 0.0,
+    "type": "wire",
+    "x": -4.0,
+    "y": -4.0
+  },
+  "connection_4": {
+    "id": "connection_4",
+    "name": "pic_net4",
+    "net": "net4",
+    "rx": 1.0,
+    "ry": 5.0,
+    "type": "wire",
+    "x": 2.0,
+    "y": -5.0
+  },
+  "connection_5": {
+    "id": "connection_5",
+    "name": "pic_net5",
+    "net": "net5",
+    "rx": 3.0,
+    "ry": 4.0,
+    "type": "wire",
+    "x": 4.0,
+    "y": -1.0
+  },
+  "connection_6": {
+    "id": "connection_6",
+    "name": "pic_net6",
+    "net": "net6",
+    "rx": 18.0,
+    "ry": -4.0,
+    "type": "wire",
+    "x": -7.0,
+    "y": 9.0
+  },
+  "connection_7": {
+    "id": "connection_7",
+    "name": "port_net_o1",
+    "net": "port_net_o1",
+    "rx": -4.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": -9.0,
+    "y": 9.0
+  },
+  "connection_8": {
+    "id": "connection_8",
+    "name": "port_net_o2",
+    "net": "port_net_o2",
+    "rx": -5.0,
+    "ry": -2.0,
+    "type": "wire",
+    "x": -9.0,
+    "y": 8.0
+  },
+  "connection_9": {
+    "id": "connection_9",
+    "name": "port_net_o3",
+    "net": "port_net_o3",
+    "rx": 2.0,
+    "ry": 2.0,
+    "type": "wire",
+    "x": 13.0,
+    "y": 4.0
+  },
+  "o1": {
+    "attached_port": {
+      "component_id": "c1",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o1",
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": -13.0,
+    "y": 8.0
+  },
+  "o2": {
+    "attached_port": {
+      "component_id": "c1",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "o2",
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": -14.0,
+    "y": 6.0
+  },
+  "o3": {
+    "attached_port": {
+      "component_id": "c2",
+      "port_name": "o3"
+    },
+    "id": null,
+    "name": "o3",
+    "nets": {
+      "P": "port_net_o3"
+    },
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": 15.0,
+    "y": 6.0
+  },
+  "o4": {
+    "attached_port": {
+      "component_id": "c2",
+      "port_name": "o4"
+    },
+    "id": null,
+    "name": "o4",
+    "nets": {
+      "P": "port_net_o4"
+    },
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": 19.0,
+    "y": 2.0
+  }
+}

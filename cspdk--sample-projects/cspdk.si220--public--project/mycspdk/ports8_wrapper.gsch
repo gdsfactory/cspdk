@@ -1,0 +1,18 @@
+{
+  "p8": {
+    "bbox_height": 10.0,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": 0.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -73.947,
+    "irl_y": 56.379,
+    "model": "mycspdk.ports8.ports8",
+    "name": "p8",
+    "type": "ckt",
+    "x": -1.0,
+    "y": 1.0
+  }
+}

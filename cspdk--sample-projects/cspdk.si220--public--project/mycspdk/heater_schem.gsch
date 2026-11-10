@@ -1,0 +1,34 @@
+{
+  "p1": {
+    "bbox_height": 90.0,
+    "bbox_width": 90.0,
+    "bbox_xmin": -45.0,
+    "bbox_ymin": -45.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -37.754,
+    "irl_y": -150.198,
+    "model": "cspdk.si220.cells.die_with_pads.pad",
+    "name": "p1",
+    "type": "ckt",
+    "x": -2.0,
+    "y": 3.0
+  },
+  "s1": {
+    "bbox_height": 10.0,
+    "bbox_width": 369.8,
+    "bbox_xmin": -24.9,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 160.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.heaters.straight_heater_metal",
+    "name": "s1",
+    "type": "ckt",
+    "x": 2.0,
+    "y": 0.0
+  }
+}

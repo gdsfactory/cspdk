@@ -1,0 +1,133 @@
+{
+  "bundle1": {
+    "id": "bundle1",
+    "name": "bundle1",
+    "net": "net1",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "r2",
+        "port": "o1"
+      },
+      "start": {
+        "device": "r1",
+        "port": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 3.0,
+    "ry": 0.0,
+    "type": "wire",
+    "x": -3.0,
+    "y": -1.0
+  },
+  "connection_2": {
+    "id": "connection_2",
+    "name": "port_net_o1",
+    "net": "port_net_o1",
+    "rx": -3.0,
+    "ry": 0.0,
+    "type": "wire",
+    "x": -5.0,
+    "y": -1.0
+  },
+  "connection_3": {
+    "id": "connection_3",
+    "name": "port_net_o2",
+    "net": "port_net_o2",
+    "rx": 3.0,
+    "ry": 0.0,
+    "type": "wire",
+    "x": 2.0,
+    "y": -1.0
+  },
+  "o1": {
+    "attached_port": {
+      "component_id": "r1",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o1",
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": -8.0,
+    "y": -1.0
+  },
+  "o2": {
+    "attached_port": {
+      "component_id": "r2",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "o2",
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": 5.0,
+    "y": -1.0
+  },
+  "r1": {
+    "bbox_height": 21.77,
+    "bbox_width": 24.45,
+    "bbox_xmin": -14.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 48.121,
+    "irl_y": -63.317,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "r1",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "net1"
+    },
+    "type": "ring-single",
+    "x": -5.0,
+    "y": -3.0
+  },
+  "r2": {
+    "bbox_height": 21.77,
+    "bbox_width": 24.45,
+    "bbox_xmin": -14.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 126.26,
+    "irl_y": -1.283,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "r2",
+    "nets": {
+      "o1": "net1",
+      "o2": "port_net_o2"
+    },
+    "type": "ring-single",
+    "x": 0.0,
+    "y": -3.0
+  }
+}

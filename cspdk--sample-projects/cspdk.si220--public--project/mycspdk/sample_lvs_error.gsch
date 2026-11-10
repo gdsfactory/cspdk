@@ -1,0 +1,112 @@
+{
+  "bend": {
+    "bbox_height": 10.225,
+    "bbox_width": 10.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 5.1125,
+    "irl_y": -4.8875,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "bend",
+    "nets": {
+      "o1": "net1",
+      "o2": "net3"
+    },
+    "type": "ckt",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 3.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": 0.0,
+    "y": 1.0
+  },
+  "connection_2": {
+    "id": "connection_2",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 3.0,
+    "ry": 1.0,
+    "type": "wire",
+    "x": 3.0,
+    "y": 0.0
+  },
+  "connection_3": {
+    "id": "connection_3",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 2.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": 4.0,
+    "y": 1.0
+  },
+  "connection_4": {
+    "id": "connection_4",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 2.0,
+    "ry": 1.0,
+    "type": "wire",
+    "x": 6.0,
+    "y": 0.0
+  },
+  "connection_5": {
+    "id": "connection_5",
+    "name": "pic_net3",
+    "net": "net3",
+    "rx": 9.0,
+    "ry": 1.0,
+    "type": "wire",
+    "x": 1.0,
+    "y": 0.0
+  },
+  "s1": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "s1",
+    "nets": {
+      "o1": "net2",
+      "o2": "net1"
+    },
+    "type": "straight",
+    "x": 4.0,
+    "y": 0.0
+  },
+  "s2": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 90.0,
+    "irl_x": 10.0,
+    "irl_y": -15.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "s2",
+    "nets": {
+      "o1": "net2",
+      "o2": "net3"
+    },
+    "type": "straight",
+    "x": 8.0,
+    "y": 0.0
+  }
+}

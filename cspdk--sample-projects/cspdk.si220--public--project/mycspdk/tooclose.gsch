@@ -1,0 +1,34 @@
+{
+  "wg1": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "wg1",
+    "type": "straight",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "wg2": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 5.0,
+    "irl_y": -0.5,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "wg2",
+    "type": "straight",
+    "x": 4.0,
+    "y": -0.0
+  }
+}

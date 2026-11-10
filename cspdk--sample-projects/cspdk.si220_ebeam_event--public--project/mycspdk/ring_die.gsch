@@ -1,0 +1,139 @@
+{
+  "die": {
+    "bbox_height": 3000.0,
+    "bbox_width": 6000.0,
+    "bbox_xmin": -3000.0,
+    "bbox_ymin": -1500.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220_ebeam_event.cells.die",
+    "name": "die",
+    "nets": {
+      "o1": "net1",
+      "o15": "net4",
+      "o16": "net2",
+      "o2": "net3"
+    },
+    "type": "ckt",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "loopback": {
+    "bbox_height": 0.45,
+    "bbox_width": 100.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": 625.0,
+    "model": "cspdk.si220_ebeam_event.cells.straight",
+    "name": "loopback",
+    "nets": {
+      "o1": "net3",
+      "o2": "net4"
+    },
+    "props": {
+      "length": 100
+    },
+    "type": "straight",
+    "x": 5.0,
+    "y": 0.0
+  },
+  "loopback_in": {
+    "id": "loopback_in",
+    "name": "loopback_in",
+    "net": "net3",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "loopback",
+        "port": "o1"
+      },
+      "start": {
+        "device": "die",
+        "port": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "loopback_out": {
+    "id": "loopback_out",
+    "name": "loopback_out",
+    "net": "net4",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "die",
+        "port": "o15"
+      },
+      "start": {
+        "device": "loopback",
+        "port": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "ring": {
+    "bbox_height": 51.75,
+    "bbox_width": 64.0,
+    "bbox_xmin": -34.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -68.0,
+    "irl_y": 849.35,
+    "model": "cspdk.si220_ebeam_event.cells.ring_single",
+    "name": "ring",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2"
+    },
+    "props": {
+      "gap": 0.25,
+      "radius": 25
+    },
+    "type": "ring-single",
+    "x": 10.0,
+    "y": 0.0
+  },
+  "ring_in": {
+    "id": "ring_in",
+    "name": "ring_in",
+    "net": "net1",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "ring",
+        "port": "o1"
+      },
+      "start": {
+        "device": "die",
+        "port": "o1"
+      }
+    },
+    "type": "polyline"
+  },
+  "ring_out": {
+    "id": "ring_out",
+    "name": "ring_out",
+    "net": "net2",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "die",
+        "port": "o16"
+      },
+      "start": {
+        "device": "ring",
+        "port": "o2"
+      }
+    },
+    "type": "polyline"
+  }
+}

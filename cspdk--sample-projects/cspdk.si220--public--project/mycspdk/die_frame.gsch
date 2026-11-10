@@ -1,0 +1,818 @@
+{
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": -8.0,
+    "ry": -7.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 9.0
+  },
+  "connection_10": {
+    "id": "connection_10",
+    "name": "pic_net20",
+    "net": "net20",
+    "rx": -20.0,
+    "ry": -7.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 4.0
+  },
+  "connection_11": {
+    "id": "connection_11",
+    "name": "pic_net21",
+    "net": "net21",
+    "rx": -13.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 2.0
+  },
+  "connection_12": {
+    "id": "connection_12",
+    "name": "pic_net21",
+    "net": "net21",
+    "rx": -13.0,
+    "ry": 1.0,
+    "type": "wire",
+    "x": 6.0,
+    "y": 1.0
+  },
+  "connection_13": {
+    "id": "connection_13",
+    "name": "pic_net22",
+    "net": "net22",
+    "rx": -20.0,
+    "ry": -10.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 1.0
+  },
+  "connection_14": {
+    "id": "connection_14",
+    "name": "pic_net23",
+    "net": "net23",
+    "rx": -26.0,
+    "ry": -8.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 3.0
+  },
+  "connection_15": {
+    "id": "connection_15",
+    "name": "pic_net3",
+    "net": "net3",
+    "rx": -8.0,
+    "ry": -3.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": -1.0
+  },
+  "connection_16": {
+    "id": "connection_16",
+    "name": "pic_net4",
+    "net": "net4",
+    "rx": -46.0,
+    "ry": -3.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": -1.0
+  },
+  "connection_17": {
+    "id": "connection_17",
+    "name": "pic_net5",
+    "net": "net5",
+    "rx": -28.0,
+    "ry": -9.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 2.0
+  },
+  "connection_18": {
+    "id": "connection_18",
+    "name": "pic_net6",
+    "net": "net6",
+    "rx": -64.0,
+    "ry": -3.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 3.0
+  },
+  "connection_19": {
+    "id": "connection_19",
+    "name": "pic_net7",
+    "net": "net7",
+    "rx": 58.0,
+    "ry": -8.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 7.0
+  },
+  "connection_2": {
+    "id": "connection_2",
+    "name": "pic_net10",
+    "net": "net10",
+    "rx": 20.0,
+    "ry": -6.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 7.0
+  },
+  "connection_20": {
+    "id": "connection_20",
+    "name": "pic_net8",
+    "net": "net8",
+    "rx": 2.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 5.0
+  },
+  "connection_21": {
+    "id": "connection_21",
+    "name": "pic_net9",
+    "net": "net9",
+    "rx": 32.0,
+    "ry": -4.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 6.0
+  },
+  "connection_3": {
+    "id": "connection_3",
+    "name": "pic_net11",
+    "net": "net11",
+    "rx": 38.0,
+    "ry": -7.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 8.0
+  },
+  "connection_4": {
+    "id": "connection_4",
+    "name": "pic_net12",
+    "net": "net12",
+    "rx": -31.0,
+    "ry": 1.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 8.0
+  },
+  "connection_5": {
+    "id": "connection_5",
+    "name": "pic_net13",
+    "net": "net13",
+    "rx": 50.0,
+    "ry": -8.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 9.0
+  },
+  "connection_6": {
+    "id": "connection_6",
+    "name": "pic_net14",
+    "net": "net14",
+    "rx": 14.0,
+    "ry": -10.0,
+    "type": "wire",
+    "x": 51.0,
+    "y": 10.0
+  },
+  "connection_7": {
+    "id": "connection_7",
+    "name": "pic_net18",
+    "net": "net18",
+    "rx": -14.0,
+    "ry": -1.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 6.0
+  },
+  "connection_8": {
+    "id": "connection_8",
+    "name": "pic_net19",
+    "net": "net19",
+    "rx": -20.0,
+    "ry": -2.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 5.0
+  },
+  "connection_9": {
+    "id": "connection_9",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": -2.0,
+    "ry": -2.0,
+    "type": "wire",
+    "x": 19.0,
+    "y": 0.0
+  },
+  "die_template": {
+    "bbox_height": 4900.0,
+    "bbox_width": 11470.0,
+    "bbox_xmin": -5735.0,
+    "bbox_ymin": -2450.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.die_with_pads.die_with_pads",
+    "name": "die_template",
+    "nets": {
+      "o10": "net22",
+      "o11": "net2",
+      "o12": "net3",
+      "o13": "net4",
+      "o16": "net5",
+      "o17": "net6",
+      "o19": "net8",
+      "o2": "net1",
+      "o20": "net9",
+      "o21": "net10",
+      "o22": "net11",
+      "o23": "net13",
+      "o24": "net14",
+      "o25": "net15",
+      "o26": "net16",
+      "o27": "net17",
+      "o3": "net12",
+      "o4": "net7",
+      "o5": "net18",
+      "o6": "net19",
+      "o7": "net20",
+      "o8": "net23",
+      "o9": "net21"
+    },
+    "type": "ckt",
+    "x": 19.0,
+    "y": -2.0
+  },
+  "mmi10x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -875.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi10x",
+    "nets": {
+      "o1": "net2"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 13.0,
+    "y": -4.0
+  },
+  "mmi11x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -1125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi11x",
+    "nets": {
+      "o1": "net3"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 7.0,
+    "y": -6.0
+  },
+  "mmi12x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -1375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi12x",
+    "nets": {
+      "o1": "net4"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 1.0,
+    "y": -6.0
+  },
+  "mmi13x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": -1375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi13x",
+    "nets": {
+      "o1": "net5"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 19.0,
+    "y": -9.0
+  },
+  "mmi14x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": -1125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi14x",
+    "nets": {
+      "o1": "net6"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -17.0,
+    "y": -2.0
+  },
+  "mmi15x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 875.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi15x",
+    "nets": {
+      "o1": "net7"
+    },
+    "type": "ckt",
+    "x": 77.0,
+    "y": -3.0
+  },
+  "mmi16x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": -625.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi16x",
+    "nets": {
+      "o1": "net8"
+    },
+    "type": "ckt",
+    "x": 53.0,
+    "y": 2.0
+  },
+  "mmi17x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": -375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi17x",
+    "nets": {
+      "o1": "net9"
+    },
+    "type": "ckt",
+    "x": 83.0,
+    "y": -0.0
+  },
+  "mmi18x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": -125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi18x",
+    "nets": {
+      "o1": "net10"
+    },
+    "type": "ckt",
+    "x": 71.0,
+    "y": -1.0
+  },
+  "mmi19x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi19x",
+    "nets": {
+      "o1": "net11"
+    },
+    "type": "ckt",
+    "x": 89.0,
+    "y": -1.0
+  },
+  "mmi1x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 1375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi1x",
+    "nets": {
+      "o1": "net1"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 7.0,
+    "y": -0.0
+  },
+  "mmi20x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi20x",
+    "nets": {
+      "o1": "net13"
+    },
+    "type": "ckt",
+    "x": 101.0,
+    "y": -1.0
+  },
+  "mmi21x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 625.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi21x",
+    "nets": {
+      "o1": "net14"
+    },
+    "type": "ckt",
+    "x": 65.0,
+    "y": -2.0
+  },
+  "mmi22x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 875.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi22x",
+    "nets": {
+      "o1": "net15"
+    },
+    "type": "ckt",
+    "x": 95.0,
+    "y": -3.0
+  },
+  "mmi23x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 1125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi23x",
+    "nets": {
+      "o1": "net16"
+    },
+    "type": "ckt",
+    "x": 59.0,
+    "y": -3.0
+  },
+  "mmi24x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4887.1,
+    "irl_y": 1375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi24x",
+    "nets": {
+      "o1": "net17"
+    },
+    "type": "ckt",
+    "x": 53.0,
+    "y": -5.0
+  },
+  "mmi2x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 1125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi2x",
+    "nets": {
+      "o1": "net12"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -16.0,
+    "y": 7.0
+  },
+  "mmi3x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 15.9,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi3x",
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -10.0,
+    "y": 7.0
+  },
+  "mmi4x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 625.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi4x",
+    "nets": {
+      "o1": "net18"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": 1.0,
+    "y": 3.0
+  },
+  "mmi5x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi5x",
+    "nets": {
+      "o1": "net19"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -5.0,
+    "y": 1.0
+  },
+  "mmi6x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": 125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi6x",
+    "nets": {
+      "o1": "net20"
+    },
+    "transform": [
+      -1.0,
+      -1.2246467991473532e-16,
+      1.2246467991473532e-16,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -5.0,
+    "y": -5.0
+  },
+  "mmi7x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -125.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi7x",
+    "nets": {
+      "o1": "net23"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -11.0,
+    "y": -7.0
+  },
+  "mmi8x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -375.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi8x",
+    "nets": {
+      "o1": "net21"
+    },
+    "transform": [
+      -0.9999999999999962,
+      8.742278000372475e-08,
+      -8.742278000372475e-08,
+      -0.9999999999999962,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -11.0,
+    "y": 0.0
+  },
+  "mmi9x": {
+    "bbox_height": 6.0,
+    "bbox_width": 71.8,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": 4887.1,
+    "irl_y": -625.0,
+    "model": "cspdk.si220.cells.mmis.mmi1x2",
+    "name": "mmi9x",
+    "nets": {
+      "o1": "net22"
+    },
+    "transform": [
+      -1.0,
+      -1.2246467991473532e-16,
+      1.2246467991473532e-16,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "ckt",
+    "x": -5.0,
+    "y": -11.0
+  }
+}

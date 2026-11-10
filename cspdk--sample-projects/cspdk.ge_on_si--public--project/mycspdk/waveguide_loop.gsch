@@ -1,0 +1,96 @@
+{
+  "loop": {
+    "cross_section": "xs_rib",
+    "id": "loop",
+    "name": "loop",
+    "net": "net1",
+    "routing_strategy": "route_bundle",
+    "terminals": {
+      "finish": {
+        "device": "upper",
+        "port": "o2"
+      },
+      "start": {
+        "device": "lower",
+        "port": "o2"
+      }
+    },
+    "type": "polyline"
+  },
+  "lower": {
+    "bbox_height": 3.2,
+    "bbox_width": 500.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 250.0,
+    "irl_y": -0.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "lower",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "net1"
+    },
+    "props": {
+      "cross_section": "xs_rib",
+      "length": 500
+    },
+    "type": "straight",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "o1": {
+    "attached_port": {
+      "component_id": "lower",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o1",
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "o2": {
+    "attached_port": {
+      "component_id": "upper",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o2",
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "upper": {
+    "bbox_height": 3.2,
+    "bbox_width": 500.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 250.0,
+    "irl_y": -1200.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "upper",
+    "nets": {
+      "o1": "port_net_o2",
+      "o2": "net1"
+    },
+    "props": {
+      "cross_section": "xs_rib",
+      "length": 500
+    },
+    "type": "straight",
+    "x": 0.0,
+    "y": -24.0
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "mzis": {
+    "bbox_height": 188.85,
+    "bbox_width": 2659.672,
+    "bbox_xmin": 5.0,
+    "bbox_ymin": 5.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 2715.12,
+    "irl_y": -149.473,
+    "model": "cspdk.si220.cells.containers.pack_doe_grid",
+    "name": "mzis",
+    "props": {
+      "do_permutations": true,
+      "doe": "mzi",
+      "function": "add_fiber_array",
+      "settings": {
+        "delta_length": [
+          10,
+          20,
+          30,
+          40
+        ]
+      },
+      "spacing": [
+        10,
+        10
+      ]
+    },
+    "type": "ckt",
+    "x": 53.0,
+    "y": -3.0
+  },
+  "rings": {
+    "bbox_height": 1307.965,
+    "bbox_width": 1230.238,
+    "bbox_xmin": 5.046,
+    "bbox_ymin": 5.048,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 670.165,
+    "irl_y": -709.0305,
+    "model": "cspdk.si220.cells.containers.pack_doe",
+    "name": "rings",
+    "props": {
+      "do_permutations": true,
+      "doe": "ring_single",
+      "function": {
+        "function": "add_fiber_array",
+        "settings": {
+          "fanout_length": 200
+        }
+      },
+      "settings": {
+        "length_x": [
+          1,
+          2,
+          3
+        ],
+        "radius": [
+          5,
+          10,
+          20
+        ]
+      }
+    },
+    "type": "ckt",
+    "x": 14.0,
+    "y": -14.0
+  }
+}
