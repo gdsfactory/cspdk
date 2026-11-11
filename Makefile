@@ -35,8 +35,7 @@ git-rm-merged:
 
 build:
 	rm -rf dist
-	pip install build
-	python -m build
+	uv build
 
 jupytext:
 	jupytext docs/**/*.ipynb --to py
