@@ -9,12 +9,21 @@ import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
+from cspdk._models import _bend_s_length, _euler_length
+from cspdk.si220.tech import TECH
+
 sax.set_port_naming_strategy("optical")
 
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
+
+# Bend radius the cell uses when ``radius`` is not given -- ``bend_euler`` passes
+# ``radius=None`` through to the cross-section, whose radius is this
+# (``strip_cband`` -> ``TECH.radius_strip``, ``rib_cband`` -> ``TECH.radius_rib``).
+# Keyed by this module's cross-section vocabulary, which ``_dispatch`` settles.
+_BEND_RADIUS = {"strip": TECH.radius_strip, "rib": TECH.radius_rib}
 
 ################
 # Straights
@@ -92,15 +101,28 @@ def _wire_corner(*, wl: Float = 1.55) -> sax.SDict:
 def _bend_s(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    size: tuple[float, float] = (11.0, 1.8),
+    length: float | None = None,
     loss_dB_cm: float = 3.0,
     cross_section="strip",
 ) -> sax.SDict:
-    """Bend S model."""
-    # NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
+    """Bend S model.
+
+    Layout netlists pass ``size`` but not the path length, so the length defaults to
+    that of the drawn Bezier S-bend (``gf.components.bend_s``'s 99-point polyline,
+    reproduced by ``_bend_s_length``). Pass ``length`` to override.
+
+    Args:
+        wl: wavelength in um.
+        size: S-bend (dx, dy) in um.
+        length: path length in um (overrides ``size``).
+        loss_dB_cm: propagation loss in dB/cm.
+        cross_section: this module's cross-section vocabulary (``strip`` or ``rib``).
+    """
+    path_length = length if length is not None else _bend_s_length(size[0], size[1])
     return _straight(
         wl=wl,
-        length=length,
+        length=path_length,
         loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
@@ -109,26 +131,54 @@ def _bend_s(
 def _bend_euler(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
     loss_dB_cm: float = 3,
     cross_section="strip",
 ) -> sax.SDict:
-    """Euler bend model."""
-    # NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
+    """Euler bend model.
+
+    Layout netlists pass ``radius``, ``angle`` and ``p`` but not the path length, so
+    the length defaults to that of the drawn Euler bend
+    (``gf.path.euler(radius, angle, p, use_eff=True)``, the ``with_arc_floorplan=True``
+    curve the cell draws, reproduced by ``_euler_length``). Pass ``length`` to override.
+
+    Args:
+        wl: wavelength in um.
+        radius: effective bend radius in um (defaults to the cross-section radius).
+        angle: bend angle in degrees.
+        p: fraction of the bend that is an euler curve.
+        length: path length in um (overrides ``radius``, ``angle`` and ``p``).
+        loss_dB_cm: propagation loss in dB/cm.
+        cross_section: this module's cross-section vocabulary (``strip`` or ``rib``).
+    """
+    r = _BEND_RADIUS[cross_section] if radius is None else radius
+    path_length = length if length is not None else _euler_length(r, angle, p)
     return _straight(
         wl=wl,
-        length=length,
+        length=path_length,
         loss_dB_cm=loss_dB_cm,
         cross_section=cross_section,
     )
 
 
 def _bend_euler_strip(
-    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
+    *,
+    wl: Float = 1.55,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
+    loss_dB_cm: float = 3,
 ) -> sax.SDict:
     """Euler bend strip model."""
     return _bend_euler(
         wl=wl,
+        radius=radius,
+        angle=angle,
+        p=p,
         length=length,
         loss_dB_cm=loss_dB_cm,
         cross_section="strip",
@@ -136,11 +186,20 @@ def _bend_euler_strip(
 
 
 def _bend_euler_rib(
-    *, wl: Float = 1.55, length: float = 10.0, loss_dB_cm: float = 3
+    *,
+    wl: Float = 1.55,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
+    loss_dB_cm: float = 3,
 ) -> sax.SDict:
     """Euler bend rib model."""
     return _bend_euler(
         wl=wl,
+        radius=radius,
+        angle=angle,
+        p=p,
         length=length,
         loss_dB_cm=loss_dB_cm,
         cross_section="rib",
@@ -160,7 +219,8 @@ def _taper(
     cross_section="strip",
 ) -> sax.SDict:
     """Taper model."""
-    # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
+    # ``length`` is a cell setting (``taper(length=...)``), so a layout netlist carries it
+    # and this default is only the fallback for a circuit that sets nothing.
     # TODO: take width1 and width2 into account.
     return _straight(
         wl=wl,
@@ -193,7 +253,8 @@ def _taper_strip_to_ridge(
     cross_section="strip",
 ) -> sax.SDict:
     """Taper strip to ridge model."""
-    # NOTE: it is assumed that `taper_strip_to_ridge` exposes it's length in its info dictionary!
+    # ``length`` is a cell setting (``taper_strip_to_ridge(length=...)``), so a layout
+    # netlist carries it; this default is the fallback for a circuit that sets nothing.
     # TODO: take w_slab1 and w_slab2 into account.
     return _straight(
         wl=wl,
