@@ -1388,7 +1388,7 @@ wheels = [
 
 [[package]]
 name = "gdsfactoryplus"
-version = "2.2.485"
+version = "2.2.492"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "circulax" },
@@ -1408,10 +1408,10 @@ dependencies = [
     { name = "vlsirtools" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f8/80/b790672537a3f7d78b354188c89afc4759ce4acc36254df7578c516fa6cb/gdsfactoryplus-2.2.485-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:9a7b68f48415c165f8d4d6b0af722f8665b518198b825fe7ea5fdd0adeb8fcc1", size = 2749948, upload-time = "2026-10-19T18:00:42.867Z" },
-    { url = "https://files.pythonhosted.org/packages/3c/f9/49efa21be845f51a535ced03267ce33b56c081371d0115f5164da34676b3/gdsfactoryplus-2.2.485-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:d7f17e8bf62381055a3da4c63cff3d06c066883c4c8497678013379efbf143d7", size = 3011556, upload-time = "2026-10-19T18:00:45.665Z" },
-    { url = "https://files.pythonhosted.org/packages/69/3a/439e2cf78d1b3737711e8a40004c29dc175c36d5966c307a64c74c284741/gdsfactoryplus-2.2.485-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:aa9d0295969067faf605681e59618c816b9ffcd260e9c993bbbf8cea586eabf3", size = 3058201, upload-time = "2026-10-19T18:00:47.388Z" },
-    { url = "https://files.pythonhosted.org/packages/0a/b6/53cb8daad783ba14f125ceb6d95d6b68f260d55f3cc35a82d583a2ca5814/gdsfactoryplus-2.2.485-cp312-cp312-win_amd64.whl", hash = "sha256:5b637eb9b8a9911102aea1cbfbd488f9a0ca25880465846107492ecdc15d0d37", size = 2553361, upload-time = "2026-10-19T18:00:49.294Z" },
+    { url = "https://files.pythonhosted.org/packages/8a/4a/014a46fbc2206aeaad3e6ee52dfa4c6c2f5fa821a18a2293d9004372f971/gdsfactoryplus-2.2.492-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:d0d27557f9464890b5068823a4da6618ad7744d3a8c77bd10144300691c3bbe3", size = 2750585, upload-time = "2026-10-22T10:33:13.581Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/e4/66044ed76f45688b9b6e42a217b280b4fdb67de196d732b14ed54076640b/gdsfactoryplus-2.2.492-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:f4825f183bf279bb2a96701ac9e1f61a227d104d0a7473e3f493d3d89295a18c", size = 3012189, upload-time = "2026-10-22T10:33:15.599Z" },
+    { url = "https://files.pythonhosted.org/packages/1a/e0/e606bcd413105e35eadc9d276c14823426743d739e9b3be2fb909f8d07ad/gdsfactoryplus-2.2.492-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:7b322475240ba7ac5429fc1e275c22c57d84a9e92229cbb3fa2485357ed8b7ec", size = 3058831, upload-time = "2026-10-22T10:33:17.181Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/96/f4f934939c1c7b64fc69ed73d71c180aee990a34010071284f73a551694d/gdsfactoryplus-2.2.492-cp312-cp312-win_amd64.whl", hash = "sha256:8e20354e3bb2f1bdcbcf73ef919bdb4c3828da5b86b886ee43e5f6e11ea3ec54", size = 2554001, upload-time = "2026-10-22T10:33:18.842Z" },
 ]
 
 [[package]]
