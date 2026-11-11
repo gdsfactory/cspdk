@@ -170,3 +170,6 @@ test_diffs/
 gds_run/
 .pre-commit-config.yaml
 tests/gds_run/
+
+# Schematic previews the GDSFactory+ editor writes next to each .gsch
+*.gsch.svg

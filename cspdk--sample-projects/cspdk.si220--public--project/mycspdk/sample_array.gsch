@@ -1,0 +1,276 @@
+{
+  "b1": {
+    "bbox_height": 20.225,
+    "bbox_width": 20.225,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 10.1125,
+    "irl_y": -9.8875,
+    "model": "cspdk.si220.cells.waveguides.bend_euler",
+    "name": "b1",
+    "nets": {
+      "o1": "net1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -10.1125,
+        "irl_ry": 9.8875,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 9.8875,
+        "irl_ry": -10.1125,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 90.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "radius": 20
+    },
+    "transform": [
+      0.9999996000000202,
+      0.00089442707896115,
+      -0.00089442707896115,
+      0.9999996000000202,
+      0.0,
+      0.0
+    ],
+    "type": "bend",
+    "x": 6.0,
+    "y": 4.0
+  },
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 6.0,
+    "ry": -3.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 6.0,
+    "y": 5.0
+  },
+  "s1<0.0>": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -205.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "s1<0.0>",
+    "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "cross_section": "strip_cband",
+      "length": 10
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": -2.0,
+    "y": 1.0
+  },
+  "s1<1.0>": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -105.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "s1<1.0>",
+    "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "cross_section": "strip_cband",
+      "length": 10
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": 2.0,
+    "y": 1.0
+  },
+  "s1<2.0>": {
+    "bbox_height": 0.45,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.waveguides.straight",
+    "name": "s1<2.0>",
+    "nets": {
+      "o2": "net1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 5.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "cross_section": "strip_cband",
+      "length": 10
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": 10.0,
+    "y": 1.0
+  }
+}

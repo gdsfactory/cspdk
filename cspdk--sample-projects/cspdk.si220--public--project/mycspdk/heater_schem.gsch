@@ -1,0 +1,202 @@
+{
+  "p1": {
+    "bbox_height": 90.0,
+    "bbox_width": 90.0,
+    "bbox_xmin": -45.0,
+    "bbox_ymin": -45.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -37.754,
+    "irl_y": -150.198,
+    "model": "cspdk.si220.cells.die_with_pads.pad",
+    "name": "p1",
+    "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e1",
+        "orientation": 180.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": -45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 45.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e3",
+        "orientation": 0.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 45.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e4",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 90.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 0.0,
+        "irl_ry": 0.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "pad",
+        "orientation": 0.0,
+        "port_type": "pad",
+        "width": 90.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "pad",
+    "x": -2.0,
+    "y": 3.0
+  },
+  "s1": {
+    "bbox_height": 10.0,
+    "bbox_width": 369.8,
+    "bbox_xmin": -24.9,
+    "bbox_ymin": -5.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 160.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.heaters.straight_heater_metal",
+    "name": "s1",
+    "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "l_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "r_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 2.0,
+    "y": 0.0
+  }
+}
