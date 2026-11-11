@@ -2,3 +2,9 @@
 # latest release, pins protobuf<5 and comes in via gdsfactoryplus -> vlsirtools.
 # Remove once vlsir allows protobuf>=5.29.6.
 CVE-2026-0994
+
+# filelock ReadWriteLock SQLite file overwrite (GHSA-v4x8-3wr5-3wq8, fixed in
+# 4.2.1). Not fixable here: tidy3d (latest 2.12.2, via gplugins[tidy3d]) pins
+# filelock<4. Nothing in the environment uses ReadWriteLock, only FileLock.
+# Remove once tidy3d allows filelock>=4.2.1.
+CVE-2026-112940
