@@ -1,0 +1,691 @@
+{
+  "C": {
+    "bbox_height": 6.0,
+    "bbox_width": 82.5,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 552.3,
+    "irl_y": 0.0,
+    "model": "cspdk.si220.cells.mmis.mmi2x2",
+    "name": "C",
+    "nets": {
+      "o1": "lower_out",
+      "o2": "upper_out",
+      "o3": "cross",
+      "o4": "bar"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -41.25,
+        "irl_ry": 1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -41.25,
+        "irl_ry": -1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 41.25,
+        "irl_ry": -1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 41.25,
+        "irl_ry": 1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mmi-2x2",
+    "x": 6,
+    "y": 0
+  },
+  "GND": {
+    "name": "GND",
+    "nature": "electric",
+    "nets": {
+      "P": "GND"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "ground",
+    "x": 2,
+    "y": -6
+  },
+  "GND_ref_l": {
+    "name": "GND_ref_l",
+    "nature": "electric",
+    "nets": {
+      "P": "GND_ref_l"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "ground",
+    "x": -2,
+    "y": 6
+  },
+  "GND_ref_r": {
+    "name": "GND_ref_r",
+    "nature": "electric",
+    "nets": {
+      "P": "GND_ref_r"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "ground",
+    "x": 2,
+    "y": 6
+  },
+  "H": {
+    "bbox_height": 10.0,
+    "bbox_width": 369.8,
+    "bbox_xmin": -24.9,
+    "bbox_ymin": -5.0,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 276.15,
+    "irl_y": -60.0,
+    "model": "cspdk.si220.cells.heaters.straight_heater_metal",
+    "name": "H",
+    "nets": {
+      "l_e2": "drive",
+      "o1": "upper_in",
+      "o2": "upper_out",
+      "r_e2": "GND"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "l_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "r_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 0,
+    "y": -3
+  },
+  "I": {
+    "name": "I",
+    "nets": {
+      "N": "GND",
+      "P": "drive"
+    },
+    "props": {
+      "dc": "0;0.04;161"
+    },
+    "transform": [
+      0,
+      -1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "type": "isource",
+    "x": 0,
+    "y": -6
+  },
+  "R": {
+    "bbox_height": 10.0,
+    "bbox_width": 369.8,
+    "bbox_xmin": -24.9,
+    "bbox_ymin": -5.0,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 276.15,
+    "irl_y": 60.0,
+    "model": "cspdk.si220.cells.heaters.straight_heater_metal",
+    "name": "R",
+    "nets": {
+      "l_e2": "GND_ref_l",
+      "o1": "lower_in",
+      "o2": "lower_out",
+      "r_e2": "GND_ref_r"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 160.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "l_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.9,
+        "irl_ry": -5.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "r_e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 20.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 0,
+    "y": 3
+  },
+  "S": {
+    "bbox_height": 6.0,
+    "bbox_width": 82.5,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": 0.0,
+    "model": "cspdk.si220.cells.mmis.mmi2x2",
+    "name": "S",
+    "nets": {
+      "o1": "input",
+      "o2": "dark",
+      "o3": "upper_in",
+      "o4": "lower_in"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -41.25,
+        "irl_ry": 1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -41.25,
+        "irl_ry": -1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 41.25,
+        "irl_ry": -1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 41.25,
+        "irl_ry": 1.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mmi-2x2",
+    "x": -6,
+    "y": 0
+  },
+  "bar": {
+    "name": "bar",
+    "nature": "photonic",
+    "nets": {
+      "P": "bar"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "detector",
+    "x": 9,
+    "y": 1
+  },
+  "cross": {
+    "name": "cross",
+    "nature": "photonic",
+    "nets": {
+      "P": "cross"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "detector",
+    "x": 9,
+    "y": -1
+  },
+  "dark": {
+    "name": "dark",
+    "nature": "photonic",
+    "nets": {
+      "P": "dark"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "detector",
+    "x": -9,
+    "y": 1
+  },
+  "input": {
+    "name": "input",
+    "nature": "photonic",
+    "nets": {
+      "P": "input"
+    },
+    "props": {
+      "wl": "1.55"
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "port",
+    "variant": "emitter",
+    "x": -9,
+    "y": -1
+  },
+  "route_lower_in": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_lower_in",
+    "net": "lower_in",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "R",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "S",
+        "port_name": "o4"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        41.25,
+        1.015
+      ],
+      [
+        78.7,
+        1.015
+      ],
+      [
+        78.7,
+        60.0
+      ],
+      [
+        116.15,
+        60.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_lower_out": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_lower_out",
+    "net": "lower_out",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "C",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "R",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        436.15,
+        60.0
+      ],
+      [
+        473.6,
+        60.0
+      ],
+      [
+        473.6,
+        1.015
+      ],
+      [
+        511.05,
+        1.015
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_upper_in": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_upper_in",
+    "net": "upper_in",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "H",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "S",
+        "port_name": "o3"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        41.25,
+        -1.015
+      ],
+      [
+        78.7,
+        -1.015
+      ],
+      [
+        78.7,
+        -60.0
+      ],
+      [
+        116.15,
+        -60.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_upper_out": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_upper_out",
+    "net": "upper_out",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "C",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "H",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        436.15,
+        -60.0
+      ],
+      [
+        473.6,
+        -60.0
+      ],
+      [
+        473.6,
+        -1.015
+      ],
+      [
+        511.05,
+        -1.015
+      ]
+    ],
+    "width": 0.45
+  }
+}
