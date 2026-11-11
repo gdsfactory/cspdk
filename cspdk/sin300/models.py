@@ -10,12 +10,29 @@ import sax
 import sax.models as sm
 from numpy.typing import NDArray
 
-from cspdk._models import _optical_model, _sdict_models
+from cspdk._models import _bend_s_length, _euler_length, _optical_model, _sdict_models
+from cspdk.sin300.tech import Tech
 
 nm = 1e-3
 
 FloatArray = NDArray[jnp.floating]
 Float = float | FloatArray
+
+# Bend radius the cell uses when ``radius`` is not given: ``bend_euler`` passes
+# ``radius=None`` through to the cross-section, whose radius is this.
+_BEND_RADIUS = {"xs_nc": Tech.radius_nc, "xs_no": Tech.radius_no}
+
+
+def _bend_radius(cross_section: str) -> float:
+    """Radius of ``cross_section``, or a clear error if this flavour has no bend for it."""
+    try:
+        return _BEND_RADIUS[cross_section]
+    except KeyError:
+        msg = (
+            f"No SiN300 bend radius for cross_section={cross_section!r}; "
+            f"expected one of {sorted(_BEND_RADIUS)}."
+        )
+        raise ValueError(msg) from None
 
 
 _straight_model = _optical_model(sm.straight, 1, 1)
@@ -106,24 +123,28 @@ def wire_corner(*, wl: Float = 1.55) -> sax.SDict:
 def bend_s(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    size: tuple[float, float] = (15.0, 1.8),
+    length: float | None = None,
     loss: float = 0.03,
     cross_section="xs_nc",
 ) -> sax.SDict:
     """Returns the S-matrix of a bend with a spline curve.
 
-    NOTE: it is assumed that `bend_s` exposes it's length in its info dictionary!
+    Layout netlists pass ``size`` but not the path length, so the length defaults to
+    that of the drawn Bezier S-bend (``gf.components.bend_s``'s 99-point polyline,
+    reproduced by ``_bend_s_length``). Pass ``length`` to override.
 
     Args:
         wl: Wavelength of the simulation.
-        length: Length of the bend.
+        size: S-bend (dx, dy) in um.
+        length: Path length in um (overrides ``size``).
         loss: Propagation loss in dB/cm.
         cross_section: Cross section of the bend.
-
     """
+    path_length = length if length is not None else _bend_s_length(size[0], size[1])
     return straight(
         wl=wl,
-        length=length,
+        length=path_length,
         loss=loss,
         cross_section=cross_section,
     )
@@ -132,23 +153,34 @@ def bend_s(
 def bend_euler(
     *,
     wl: Float = 1.55,
-    length: float = 10.0,
+    radius: float | None = None,
+    angle: float = 90.0,
+    p: float = 0.5,
+    length: float | None = None,
     loss: float = 0.03,
     cross_section="xs_nc",
 ) -> sax.SDict:
     """Returns the S-matrix of a bend with an Euler curve.
 
-     NOTE: it is assumed that `bend_euler` exposes it's length in its info dictionary!
+    Layout netlists pass ``radius``, ``angle`` and ``p`` but not the path length, so the
+    length defaults to that of the drawn Euler bend
+    (``gf.path.euler(radius, angle, p, use_eff=True)``, reproduced by ``_euler_length``).
+    Pass ``length`` to override.
 
     Args:
         wl: Wavelength of the simulation.
-        length: Length of the bend.
+        radius: Effective bend radius in um (``None`` is the cross-section radius).
+        angle: Bend angle in degrees.
+        p: Fraction of the bend that is an euler curve.
+        length: Path length in um (overrides ``radius``, ``angle`` and ``p``).
         loss: Propagation loss in dB/cm.
         cross_section: Cross section of the bend.
     """
+    r = _bend_radius(cross_section) if radius is None else radius
+    path_length = length if length is not None else _euler_length(r, angle, p)
     return straight(
         wl=wl,
-        length=length,
+        length=path_length,
         loss=loss,
         cross_section=cross_section,
     )
@@ -172,7 +204,8 @@ def taper(
 ) -> sax.SDict:
     """Returns the S-matrix of a taper.
 
-    # NOTE: it is assumed that `taper` exposes it's length in its info dictionary!
+    # ``length`` is a cell setting (``taper(length=...)``), so a layout netlist carries it
+    # and this default is only the fallback for a circuit that sets nothing.
     # TODO: take width1 and width2 into account.
 
     Args:

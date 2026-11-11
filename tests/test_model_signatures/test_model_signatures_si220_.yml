@@ -4,24 +4,36 @@ bend_circular:
   radius: null
   wl: 1.55
 bend_euler:
+  angle: 90.0
   cross_section: strip_cband
-  length: 10.0
+  length: null
   loss_dB_cm: 3
+  p: 0.5
+  radius: null
   wl: 1.55
 bend_euler_rib:
+  angle: 90.0
   cross_section: rib_cband
-  length: 10.0
+  length: null
   loss_dB_cm: 3
+  p: 0.5
+  radius: null
   wl: 1.55
 bend_euler_strip:
+  angle: 90.0
   cross_section: strip_cband
-  length: 10.0
+  length: null
   loss_dB_cm: 3
+  p: 0.5
+  radius: null
   wl: 1.55
 bend_s:
   cross_section: strip_cband
-  length: 10.0
+  length: null
   loss_dB_cm: 3.0
+  size:
+  - 11.0
+  - 1.8
   wl: 1.55
 coupler:
   bend_radius: null
