@@ -637,24 +637,26 @@ wheels = [
 
 [[package]]
 name = "circulax"
-version = "0.2.3"
+version = "0.2.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "diffrax" },
     { name = "equinox" },
     { name = "jax" },
-    { name = "jaxlib" },
     { name = "kfnetlist" },
     { name = "klujax" },
     { name = "lineax" },
     { name = "matplotlib" },
     { name = "numpy" },
+    { name = "optimistix" },
     { name = "sax" },
+    { name = "scikit-rf" },
+    { name = "scipy" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ae/d7/d4838228e30a54ab4dbc78682364a7fbeb8e9031db3180ef7cc10e269943/circulax-0.2.3.tar.gz", hash = "sha256:3ea8f6f5a0b175a034de3bdae64dc77ea121b9a758524d5c50ccfaaed22aecaa", size = 3492258, upload-time = "2026-07-31T08:16:00.09Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d5/42/38f2fd6daff3313d77bb366599eabbe0c0b9055b8f787b87715a585fb062/circulax-0.2.5.tar.gz", hash = "sha256:d464169711d0129f13c4bdba52b2cbdf825f87cf6a3f9539ed8abc2feb4ed576", size = 4236482, upload-time = "2026-10-17T11:20:40.554Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/bf/0ad8b46152e90699af38df5c063fc999269c56c4290d626579f91a41a563/circulax-0.2.3-py3-none-any.whl", hash = "sha256:d5a99d207ce6053acb5adfc17fd35ed057ff13d6a1264de0523d9c995c4c9c15", size = 190958, upload-time = "2026-07-31T08:15:57.505Z" },
+    { url = "https://files.pythonhosted.org/packages/46/89/4cd7d3760e4e462651702eee503c382044e90fb42f614d634f0f2fd8be5a/circulax-0.2.5-py3-none-any.whl", hash = "sha256:02e61dc3c85085a3b9f959cfe2fc307da23ee2c043e53ce9c33d1a642db887dd", size = 323740, upload-time = "2026-10-17T11:20:38.147Z" },
 ]
 
 [[package]]
