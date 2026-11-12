@@ -1,0 +1,243 @@
+{
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "pic_net5",
+    "x": 36.0,
+    "y": -2.0,
+    "rx": 3.0,
+    "ry": 1.0,
+    "net": "net5"
+  },
+  "d": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.die_with_pads.die_with_pads",
+    "name": "d",
+    "nets": {
+      "o2": "net1",
+      "o26": "net3",
+      "o27": "net4",
+      "o3": "net2"
+    },
+    "x": 0.0,
+    "y": 0.0
+  },
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "pic_net2",
+    "x": 0.0,
+    "y": 12.0,
+    "rx": 44.0,
+    "ry": -13.0,
+    "net": "net2"
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net1",
+    "x": 0.0,
+    "y": 13.0,
+    "rx": 31.0,
+    "ry": -15.0,
+    "net": "net1"
+  },
+  "o2": {
+    "type": "port",
+    "id": null,
+    "name": "o2",
+    "x": 44.0,
+    "y": -1.0,
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "net2"
+    },
+    "attached_port": {
+      "component_id": "ring2",
+      "port_name": "o2"
+    }
+  },
+  "m2": {
+    "type": "ckt",
+    "id": null,
+    "irl_x": -4382.262,
+    "irl_y": 1872.71,
+    "model": "mzi_heater",
+    "name": "m2",
+    "nets": {
+      "o1": "net4",
+      "o2": "net3"
+    },
+    "x": -88.0,
+    "y": 37.0
+  },
+  "route1": {
+    "type": "polyline",
+    "id": "route1",
+    "name": "route1",
+    "terminals": {
+      "start": {
+        "device": "ring1",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "ring2",
+        "port": "o1"
+      }
+    },
+    "net": "net5"
+  },
+  "ring1": {
+    "type": "ring-single",
+    "bbox_height": 41.77,
+    "bbox_width": 44.45,
+    "bbox_xmin": -24.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_x": 57.207,
+    "irl_y": -202.954,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "ring1",
+    "nets": {
+      "o1": "net1",
+      "o2": "net5"
+    },
+    "props": {
+      "radius": 20
+    },
+    "x": 34.0,
+    "y": -4.0
+  },
+  "bundle6_1_0": {
+    "type": "polyline",
+    "id": "bundle6_1_0",
+    "name": "bundle6_1_0",
+    "terminals": {
+      "start": {
+        "device": "d",
+        "port": "o27"
+      },
+      "finish": {
+        "device": "m2",
+        "port": "o1"
+      }
+    },
+    "net": "net4"
+  },
+  "bundle5_1_0": {
+    "type": "polyline",
+    "id": "bundle5_1_0",
+    "name": "bundle5_1_0",
+    "terminals": {
+      "start": {
+        "device": "ring2",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "d",
+        "port": "o3"
+      }
+    },
+    "net": "net2"
+  },
+  "bundle6_0_0": {
+    "type": "polyline",
+    "id": "bundle6_0_0",
+    "name": "bundle6_0_0",
+    "terminals": {
+      "start": {
+        "device": "d",
+        "port": "o26"
+      },
+      "finish": {
+        "device": "m2",
+        "port": "o2"
+      }
+    },
+    "net": "net3"
+  },
+  "ring2": {
+    "type": "ring-single",
+    "bbox_height": 21.770000000000003,
+    "bbox_width": 24.45,
+    "bbox_xmin": -14.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_x": 214.855,
+    "irl_y": -168.309,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "ring2",
+    "nets": {
+      "o1": "net5",
+      "o2": "net2"
+    },
+    "x": 39.0,
+    "y": -3.0
+  },
+  "bundle5_0_0": {
+    "type": "polyline",
+    "id": "bundle5_0_0",
+    "name": "bundle5_0_0",
+    "terminals": {
+      "start": {
+        "device": "ring1",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "d",
+        "port": "o2"
+      }
+    },
+    "net": "net1"
+  },
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "pic_net2",
+    "x": 0.0,
+    "y": 12.0,
+    "rx": 41.0,
+    "ry": -13.0,
+    "net": "net2"
+  },
+  "o1": {
+    "type": "port",
+    "id": null,
+    "name": "o1",
+    "x": 31.0,
+    "y": -2.0,
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "net1"
+    },
+    "attached_port": {
+      "component_id": "ring1",
+      "port_name": "o1"
+    }
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 0.0,
+    "y": 13.0,
+    "rx": 34.0,
+    "ry": -15.0,
+    "net": "net1"
+  }
+}

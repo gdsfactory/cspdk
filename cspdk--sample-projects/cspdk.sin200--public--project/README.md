@@ -9,7 +9,7 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
 
 ## What's inside
 
-- **`mycspdk/mzi_gratings_n780.pic.yml`**: an MZI between an input grating
+- **`mycspdk/mzi_gratings_n780.gsch`**: an MZI between an input grating
   coupler and two output grating couplers (780 nm).
 - **`mycspdk/samples/mzi_with_gratings.py`**: the same circuit in Python for every
   band, plus `mzi_spectrum()`, which simulates both outputs with SAX.

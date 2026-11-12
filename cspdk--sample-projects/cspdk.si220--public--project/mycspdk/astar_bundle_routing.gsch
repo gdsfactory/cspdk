@@ -1,0 +1,328 @@
+{
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "pic_net3",
+    "x": 2.0,
+    "y": 3.0,
+    "rx": 11.0,
+    "ry": -1.0,
+    "net": "net3"
+  },
+  "o3": {
+    "type": "straight",
+    "bbox_height": 20.0,
+    "bbox_width": 100.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -10.0,
+    "id": null,
+    "irl_x": 113.663,
+    "irl_y": 95.996,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "o3",
+    "props": {
+      "length": 100,
+      "width": 20
+    },
+    "x": 16.0,
+    "y": 2.0
+  },
+  "my_bundle_0": {
+    "type": "polyline",
+    "id": "my_bundle_0",
+    "name": "my_bundle_0",
+    "terminals": {
+      "start": {
+        "device": "r1",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "l1",
+        "port": "o2"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net1"
+  },
+  "l1": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -100.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "l1",
+    "nets": {
+      "o2": "net1"
+    },
+    "x": 0.0,
+    "y": -2.0
+  },
+  "o4": {
+    "type": "straight",
+    "bbox_height": 100.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -50.0,
+    "id": null,
+    "irl_x": 135.473,
+    "irl_y": 414.797,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "o4",
+    "props": {
+      "length": 20,
+      "width": 100
+    },
+    "x": 3.0,
+    "y": 8.0
+  },
+  "my_bundle_2": {
+    "type": "polyline",
+    "id": "my_bundle_2",
+    "name": "my_bundle_2",
+    "terminals": {
+      "start": {
+        "device": "r3",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "l3",
+        "port": "o2"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net3"
+  },
+  "my_bundle_3": {
+    "type": "polyline",
+    "id": "my_bundle_3",
+    "name": "my_bundle_3",
+    "terminals": {
+      "start": {
+        "device": "r4",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "l4",
+        "port": "o2"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net4"
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net2",
+    "x": 6.0,
+    "y": 1.0,
+    "rx": 14.0,
+    "ry": 0.0,
+    "net": "net2"
+  },
+  "my_bundle_1": {
+    "type": "polyline",
+    "id": "my_bundle_1",
+    "name": "my_bundle_1",
+    "terminals": {
+      "start": {
+        "device": "r2",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "l2",
+        "port": "o2"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net2"
+  },
+  "o1": {
+    "type": "straight",
+    "bbox_height": 100.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -50.0,
+    "id": null,
+    "irl_x": 73.051,
+    "irl_y": 36.701,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "o1",
+    "props": {
+      "length": 20,
+      "width": 100
+    },
+    "x": 8.0,
+    "y": 1.0
+  },
+  "r1": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": -100.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1",
+    "nets": {
+      "o1": "net1"
+    },
+    "x": 12.0,
+    "y": -2.0
+  },
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "pic_net3",
+    "x": 13.0,
+    "y": 2.0,
+    "rx": 11.0,
+    "ry": 1.0,
+    "net": "net3"
+  },
+  "l3": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": 100.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "l3",
+    "nets": {
+      "o2": "net3"
+    },
+    "x": 0.0,
+    "y": 2.0
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 2.0,
+    "y": -1.0,
+    "rx": 10.0,
+    "ry": 0.0,
+    "net": "net1"
+  },
+  "l2": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "l2",
+    "nets": {
+      "o2": "net2"
+    },
+    "x": 4.0,
+    "y": -0.0
+  },
+  "l4": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": 200.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "l4",
+    "nets": {
+      "o2": "net4"
+    },
+    "x": 4.0,
+    "y": 4.0
+  },
+  "r3": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 100.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r3",
+    "nets": {
+      "o1": "net3"
+    },
+    "x": 24.0,
+    "y": 2.0
+  },
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "pic_net4",
+    "x": 6.0,
+    "y": 5.0,
+    "rx": 14.0,
+    "ry": 0.0,
+    "net": "net4"
+  },
+  "r2": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": -0.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2",
+    "nets": {
+      "o1": "net2"
+    },
+    "x": 20.0,
+    "y": -0.0
+  },
+  "r4": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 200.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r4",
+    "nets": {
+      "o1": "net4"
+    },
+    "x": 20.0,
+    "y": 4.0
+  },
+  "o2": {
+    "type": "straight",
+    "bbox_height": 20.0,
+    "bbox_width": 20.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -10.0,
+    "id": null,
+    "irl_x": 104.60300000000001,
+    "irl_y": 113.32,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "o2",
+    "props": {
+      "length": 20,
+      "width": 20
+    },
+    "x": 12.0,
+    "y": 2.0
+  }
+}

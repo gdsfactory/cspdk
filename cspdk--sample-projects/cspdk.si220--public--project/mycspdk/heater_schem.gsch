@@ -1,0 +1,24 @@
+{
+  "s1": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.si220.cells.heaters.straight_heater_metal",
+    "name": "s1",
+    "x": 2.0,
+    "y": 0.0
+  },
+  "p1": {
+    "type": "ckt",
+    "bbox_height": 90.0,
+    "bbox_width": 90.0,
+    "bbox_xmin": -45.0,
+    "bbox_ymin": -45.0,
+    "id": null,
+    "irl_x": -37.754,
+    "irl_y": -150.198,
+    "model": "cspdk.si220.cells.die_with_pads.pad",
+    "name": "p1",
+    "x": -2.0,
+    "y": 3.0
+  }
+}

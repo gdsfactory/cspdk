@@ -1,0 +1,362 @@
+{
+  "bundle1_2_0": {
+    "type": "polyline",
+    "id": "bundle1_2_0",
+    "name": "bundle1_2_0",
+    "terminals": {
+      "start": {
+        "device": "s2<0.0>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r2<0.0>",
+        "port": "o1"
+      }
+    },
+    "net": "net3"
+  },
+  "r2<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 27.582,
+    "irl_y": 22.593,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.2>",
+    "nets": {
+      "o1": "net2"
+    },
+    "x": 1.0,
+    "y": 19.0
+  },
+  "bundle1_1_0": {
+    "type": "polyline",
+    "id": "bundle1_1_0",
+    "name": "bundle1_1_0",
+    "terminals": {
+      "start": {
+        "device": "s2<0.2>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r2<0.2>",
+        "port": "o1"
+      }
+    },
+    "net": "net2"
+  },
+  "r1<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.981014251708984,
+    "irl_y": 97.50064849853516,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.1>",
+    "nets": {
+      "o1": "net5"
+    },
+    "x": 0.0,
+    "y": 4.0
+  },
+  "r1<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.981014251708984,
+    "irl_y": 99.50064849853516,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.0>",
+    "nets": {
+      "o1": "net4"
+    },
+    "x": 0.0,
+    "y": 0.0
+  },
+  "s2<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -49.45162582397461,
+    "irl_y": 81.87503051757812,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.1>",
+    "nets": {
+      "o2": "net1"
+    },
+    "x": -7.0,
+    "y": 15.0
+  },
+  "bundle2_0_0": {
+    "type": "polyline",
+    "id": "bundle2_0_0",
+    "name": "bundle2_0_0",
+    "terminals": {
+      "start": {
+        "device": "s1<0.0>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r1<0.0>",
+        "port": "o1"
+      }
+    },
+    "net": "net4"
+  },
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "pic_net4",
+    "x": 0.0,
+    "y": 1.0,
+    "rx": -5.0,
+    "ry": 0.0,
+    "net": "net4"
+  },
+  "r2<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 27.582,
+    "irl_y": 26.593,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.0>",
+    "nets": {
+      "o1": "net3"
+    },
+    "x": 5.0,
+    "y": 11.0
+  },
+  "r2<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 27.582,
+    "irl_y": 24.593,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.1>",
+    "nets": {
+      "o1": "net1"
+    },
+    "x": 1.0,
+    "y": 15.0
+  },
+  "s2<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -49.45162582397461,
+    "irl_y": 83.87503051757812,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.0>",
+    "nets": {
+      "o2": "net3"
+    },
+    "x": -3.0,
+    "y": 11.0
+  },
+  "bundle2_2_0": {
+    "type": "polyline",
+    "id": "bundle2_2_0",
+    "name": "bundle2_2_0",
+    "terminals": {
+      "start": {
+        "device": "s1<0.2>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r1<0.2>",
+        "port": "o1"
+      }
+    },
+    "net": "net6"
+  },
+  "s1<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -22.636,
+    "irl_y": 32.354,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.2>",
+    "nets": {
+      "o2": "net6"
+    },
+    "x": -7.0,
+    "y": 8.0
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net2",
+    "x": 1.0,
+    "y": 20.0,
+    "rx": -6.0,
+    "ry": 0.0,
+    "net": "net2"
+  },
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "pic_net5",
+    "x": 0.0,
+    "y": 5.0,
+    "rx": -5.0,
+    "ry": 0.0,
+    "net": "net5"
+  },
+  "s2<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -49.45162582397461,
+    "irl_y": 79.87503051757812,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.2>",
+    "nets": {
+      "o2": "net2"
+    },
+    "x": -7.0,
+    "y": 19.0
+  },
+  "s1<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -22.636,
+    "irl_y": 36.354,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.0>",
+    "nets": {
+      "o2": "net4"
+    },
+    "x": -7.0,
+    "y": 0.0
+  },
+  "r1<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.981014251708984,
+    "irl_y": 95.50064849853516,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.2>",
+    "nets": {
+      "o1": "net6"
+    },
+    "x": 1.0,
+    "y": 8.0
+  },
+  "bundle2_1_0": {
+    "type": "polyline",
+    "id": "bundle2_1_0",
+    "name": "bundle2_1_0",
+    "terminals": {
+      "start": {
+        "device": "s1<0.1>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r1<0.1>",
+        "port": "o1"
+      }
+    },
+    "net": "net5"
+  },
+  "s1<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": -22.636,
+    "irl_y": 34.354,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.1>",
+    "nets": {
+      "o2": "net5"
+    },
+    "x": -7.0,
+    "y": 4.0
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 1.0,
+    "y": 16.0,
+    "rx": -6.0,
+    "ry": 0.0,
+    "net": "net1"
+  },
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "pic_net3",
+    "x": 5.0,
+    "y": 12.0,
+    "rx": -6.0,
+    "ry": 0.0,
+    "net": "net3"
+  },
+  "connection_6": {
+    "type": "wire",
+    "id": "connection_6",
+    "name": "pic_net6",
+    "x": 1.0,
+    "y": 9.0,
+    "rx": -6.0,
+    "ry": 0.0,
+    "net": "net6"
+  },
+  "bundle1_0_0": {
+    "type": "polyline",
+    "id": "bundle1_0_0",
+    "name": "bundle1_0_0",
+    "terminals": {
+      "start": {
+        "device": "s2<0.1>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r2<0.1>",
+        "port": "o1"
+      }
+    },
+    "net": "net1"
+  }
+}

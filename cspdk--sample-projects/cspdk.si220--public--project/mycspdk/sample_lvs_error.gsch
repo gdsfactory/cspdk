@@ -1,0 +1,88 @@
+{
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "pic_net2",
+    "x": 6.0,
+    "y": 0.0,
+    "rx": 2.0,
+    "ry": 1.0,
+    "net": "net2"
+  },
+  "s2": {
+    "type": "straight",
+    "id": null,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2",
+    "nets": {
+      "o1": "net2",
+      "o2": "net3"
+    },
+    "x": 8.0,
+    "y": 0.0
+  },
+  "bend": {
+    "type": "ckt",
+    "id": null,
+    "model": "cspdk.ge_on_si.cells.bend_euler",
+    "name": "bend",
+    "nets": {
+      "o1": "net1",
+      "o2": "net3"
+    },
+    "x": 0.0,
+    "y": 0.0
+  },
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "pic_net2",
+    "x": 4.0,
+    "y": 1.0,
+    "rx": 2.0,
+    "ry": -1.0,
+    "net": "net2"
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 0.0,
+    "y": 1.0,
+    "rx": 3.0,
+    "ry": -1.0,
+    "net": "net1"
+  },
+  "s1": {
+    "type": "straight",
+    "id": null,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1",
+    "nets": {
+      "o1": "net2",
+      "o2": "net1"
+    },
+    "x": 4.0,
+    "y": 0.0
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net1",
+    "x": 3.0,
+    "y": 0.0,
+    "rx": 3.0,
+    "ry": 1.0,
+    "net": "net1"
+  },
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "pic_net3",
+    "x": 1.0,
+    "y": 0.0,
+    "rx": 9.0,
+    "ry": 1.0,
+    "net": "net3"
+  }
+}

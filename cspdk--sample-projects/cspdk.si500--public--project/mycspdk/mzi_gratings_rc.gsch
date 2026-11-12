@@ -1,0 +1,149 @@
+{
+  "outputs_0_0": {
+    "type": "polyline",
+    "id": "outputs_0_0",
+    "name": "outputs_0_0",
+    "terminals": {
+      "start": {
+        "device": "mzi",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "gc_out2",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_bundle_rc",
+    "net": "net2"
+  },
+  "in": {
+    "type": "port",
+    "id": null,
+    "name": "in",
+    "x": 0.0,
+    "y": 0.0,
+    "nets": {
+      "P": "port_net_in"
+    },
+    "attached_port": {
+      "component_id": "gc_in",
+      "port_name": "o2"
+    }
+  },
+  "out2": {
+    "type": "port",
+    "id": null,
+    "name": "out2",
+    "x": 0.0,
+    "y": 0.0,
+    "nets": {
+      "P": "port_net_out2"
+    },
+    "attached_port": {
+      "component_id": "gc_out2",
+      "port_name": "o2"
+    }
+  },
+  "outputs_1_0": {
+    "type": "polyline",
+    "id": "outputs_1_0",
+    "name": "outputs_1_0",
+    "terminals": {
+      "start": {
+        "device": "mzi",
+        "port": "o3"
+      },
+      "finish": {
+        "device": "gc_out1",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_bundle_rc",
+    "net": "net3"
+  },
+  "out1": {
+    "type": "port",
+    "id": null,
+    "name": "out1",
+    "x": 0.0,
+    "y": 0.0,
+    "nets": {
+      "P": "port_net_out1"
+    },
+    "attached_port": {
+      "component_id": "gc_out1",
+      "port_name": "o2"
+    }
+  },
+  "gc_out1": {
+    "type": "ckt",
+    "id": null,
+    "model": "grating_coupler_rectangular_rc",
+    "name": "gc_out1",
+    "nets": {
+      "o1": "net3",
+      "o2": "port_net_out1"
+    },
+    "x": 10.0,
+    "y": 0.0
+  },
+  "input": {
+    "type": "polyline",
+    "id": "input",
+    "name": "input",
+    "terminals": {
+      "start": {
+        "device": "gc_in",
+        "port": "o1"
+      },
+      "finish": {
+        "device": "mzi",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_bundle_rc",
+    "net": "net1"
+  },
+  "mzi": {
+    "type": "ckt",
+    "id": null,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "mzi_rc",
+    "name": "mzi",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2",
+      "o3": "net3"
+    },
+    "props": {
+      "delta_length": 100
+    },
+    "x": 0.0,
+    "y": -0.0
+  },
+  "gc_in": {
+    "type": "ckt",
+    "id": null,
+    "model": "grating_coupler_rectangular_rc",
+    "name": "gc_in",
+    "nets": {
+      "o1": "net1",
+      "o2": "port_net_in"
+    },
+    "x": 5.0,
+    "y": 0.0
+  },
+  "gc_out2": {
+    "type": "ckt",
+    "id": null,
+    "model": "grating_coupler_rectangular_rc",
+    "name": "gc_out2",
+    "nets": {
+      "o1": "net2",
+      "o2": "port_net_out2"
+    },
+    "x": 15.0,
+    "y": 0.0
+  }
+}
