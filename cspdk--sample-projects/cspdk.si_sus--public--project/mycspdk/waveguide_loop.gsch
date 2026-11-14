@@ -1,0 +1,206 @@
+{
+  "lower": {
+    "bbox_height": 8.5,
+    "bbox_width": 500.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -4.25,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 250.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si_sus.cells.straight",
+    "name": "lower",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "net1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": -250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.5
+      },
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": 250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.5
+      }
+    ],
+    "props": {
+      "cross_section": "xs_sus",
+      "length": 500
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": 5.0,
+    "y": -0.0
+  },
+  "o1": {
+    "attached_port": {
+      "component_id": "lower",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o1",
+    "nature": "photonic",
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "o2": {
+    "attached_port": {
+      "component_id": "upper",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o2",
+    "nature": "photonic",
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "route_0": {
+    "bend_type": "bend_circular",
+    "cross_section": "xs_sus",
+    "layer": "WG_MARK",
+    "name": "route_0",
+    "net": "net1",
+    "radius": 40.75,
+    "terminals": {
+      "finish": {
+        "component_id": "upper",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "lower",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        500.0,
+        -0.0
+      ],
+      [
+        575.75,
+        -0.0
+      ],
+      [
+        575.75,
+        -163.0
+      ],
+      [
+        500.0,
+        -163.0
+      ]
+    ],
+    "width": 1.5
+  },
+  "upper": {
+    "bbox_height": 8.5,
+    "bbox_width": 500.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -4.25,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 250.0,
+    "irl_y": -163.0,
+    "model": "cspdk.si_sus.cells.straight",
+    "name": "upper",
+    "nets": {
+      "o1": "port_net_o2",
+      "o2": "net1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": -250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 1.5
+      },
+      {
+        "bendRadii": [
+          40.75
+        ],
+        "cross_section": "xs_sus",
+        "irl_rx": 250.0,
+        "irl_ry": 0.0,
+        "layer": [
+          404,
+          10
+        ],
+        "layer_name": "WG_MARK",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 1.5
+      }
+    ],
+    "props": {
+      "cross_section": "xs_sus",
+      "length": 500
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": 0.0,
+    "y": -3.0
+  }
+}

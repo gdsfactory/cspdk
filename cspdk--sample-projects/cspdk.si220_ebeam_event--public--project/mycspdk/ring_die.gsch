@@ -1,0 +1,557 @@
+{
+  "die": {
+    "bbox_height": 3000.0,
+    "bbox_width": 6000.0,
+    "bbox_xmin": -3000.0,
+    "bbox_ymin": -1500.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220_ebeam_event.cells.die",
+    "name": "die",
+    "nets": {
+      "o1": "net1",
+      "o15": "net4",
+      "o16": "net2",
+      "o2": "net3"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": 875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": 625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": 375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": 125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": -125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o5",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": -375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o6",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": -625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o7",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -2505.972,
+        "irl_ry": -875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o8",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": -875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o9",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": -625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o10",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": -375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o11",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": -125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o12",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": 125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o13",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": 375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o14",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": 625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o15",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 2505.972,
+        "irl_ry": 875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o16",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "loopback": {
+    "bbox_height": 0.45,
+    "bbox_width": 100.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": 625.0,
+    "model": "cspdk.si220_ebeam_event.cells.straight",
+    "name": "loopback",
+    "nets": {
+      "o1": "net3",
+      "o2": "net4"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -50.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 50.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "length": 100
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "straight",
+    "x": 4.0,
+    "y": 0.0
+  },
+  "ring": {
+    "bbox_height": 51.75,
+    "bbox_width": 64.0,
+    "bbox_xmin": -34.0,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -68.0,
+    "irl_y": 849.35,
+    "model": "cspdk.si220_ebeam_event.cells.ring_single",
+    "name": "ring",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": 32.0,
+        "irl_ry": 25.65,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          25.0
+        ],
+        "cross_section": "rib",
+        "irl_rx": -32.0,
+        "irl_ry": 25.65,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "gap": 0.25,
+      "radius": 25
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ring-single",
+    "x": 8.0,
+    "y": 0.0
+  },
+  "route_0": {
+    "cross_section": "rib",
+    "layer": "WG",
+    "name": "route_0",
+    "net": "net1",
+    "radius": 25.0,
+    "terminals": {
+      "finish": {
+        "component_id": "ring",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "die",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -2505.972,
+        875.0
+      ],
+      [
+        -100.0,
+        875.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_1": {
+    "cross_section": "rib",
+    "layer": "WG",
+    "name": "route_1",
+    "net": "net2",
+    "radius": 25.0,
+    "terminals": {
+      "finish": {
+        "component_id": "die",
+        "port_name": "o16"
+      },
+      "start": {
+        "component_id": "ring",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -36.0,
+        875.0
+      ],
+      [
+        2505.972,
+        875.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_2": {
+    "cross_section": "rib",
+    "layer": "WG",
+    "name": "route_2",
+    "net": "net3",
+    "radius": 25.0,
+    "terminals": {
+      "finish": {
+        "component_id": "loopback",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "die",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -2505.972,
+        625.0
+      ],
+      [
+        -50.0,
+        625.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_3": {
+    "cross_section": "rib",
+    "layer": "WG",
+    "name": "route_3",
+    "net": "net4",
+    "radius": 25.0,
+    "terminals": {
+      "finish": {
+        "component_id": "die",
+        "port_name": "o15"
+      },
+      "start": {
+        "component_id": "loopback",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        50.0,
+        625.0
+      ],
+      [
+        2505.972,
+        625.0
+      ]
+    ],
+    "width": 0.45
+  }
+}

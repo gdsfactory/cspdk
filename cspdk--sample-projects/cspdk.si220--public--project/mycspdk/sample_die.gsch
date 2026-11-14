@@ -1,0 +1,2013 @@
+{
+  "connection_1": {
+    "id": "connection_1",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 34.0,
+    "ry": -13.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 0.0,
+    "y": 11.0
+  },
+  "connection_2": {
+    "id": "connection_2",
+    "name": "pic_net1",
+    "net": "net1",
+    "rx": 31.0,
+    "ry": -13.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 0.0,
+    "y": 11.0
+  },
+  "connection_3": {
+    "id": "connection_3",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 41.0,
+    "ry": -12.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 0.0,
+    "y": 10.0
+  },
+  "connection_4": {
+    "id": "connection_4",
+    "name": "pic_net2",
+    "net": "net2",
+    "rx": 44.0,
+    "ry": -12.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 0.0,
+    "y": 10.0
+  },
+  "connection_5": {
+    "id": "connection_5",
+    "name": "pic_net5",
+    "net": "net5",
+    "rx": 3.0,
+    "ry": 0.0,
+    "type": "wire",
+    "variant": "hv",
+    "x": 36.0,
+    "y": -2.0
+  },
+  "d": {
+    "bbox_height": 4900.0,
+    "bbox_width": 11470.0,
+    "bbox_xmin": -5735.0,
+    "bbox_ymin": -2450.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si220.cells.die_with_pads.die_with_pads",
+    "name": "d",
+    "nets": {
+      "o2": "net1",
+      "o26": "net3",
+      "o27": "net4",
+      "o3": "net2"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 1625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o28",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 1375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o27",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 1125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o26",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o25",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o24",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o23",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": 125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o22",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o21",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o20",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o19",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o18",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -1125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o17",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -1375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o16",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -4923.0,
+        "irl_ry": -1625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o15",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 1625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 1375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 1125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o5",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o6",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": 125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o7",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o8",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o9",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o10",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -875.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o11",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -1125.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o12",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -1375.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o13",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 4923.0,
+        "irl_ry": -1625.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o14",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4615.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e62",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4315.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e61",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4015.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e60",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3715.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e59",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3415.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e58",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3115.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e57",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2815.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e56",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2515.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e55",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2215.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e54",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1915.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e53",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1615.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e52",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1315.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e51",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1015.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e50",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -715.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e49",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -415.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e48",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -115.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e47",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 185.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e46",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 485.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e45",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 785.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e44",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1085.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e43",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1385.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e42",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1685.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e41",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1985.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e40",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2285.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e39",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2585.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e38",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2885.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e37",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3185.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e36",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3485.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e35",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3785.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e34",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 4085.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e33",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 4385.0,
+        "irl_ry": -2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e32",
+        "orientation": 270.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4615.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e1",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4315.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e2",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -4015.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e3",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3715.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e4",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3415.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e5",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -3115.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e6",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2815.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e7",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2515.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e8",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -2215.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e9",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1915.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e10",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1615.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e11",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1315.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e12",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -1015.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e13",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -715.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e14",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -415.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e15",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -115.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e16",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 185.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e17",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 485.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e18",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 785.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e19",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1085.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e20",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1385.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e21",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1685.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e22",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 1985.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e23",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2285.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e24",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2585.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e25",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 2885.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e26",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3185.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e27",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3485.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e28",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 3785.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e29",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 4085.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e30",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 4385.0,
+        "irl_ry": 2200.0,
+        "layer": [
+          41,
+          0
+        ],
+        "layer_name": "PAD",
+        "name": "e31",
+        "orientation": 90.0,
+        "port_type": "electrical",
+        "width": 150.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "die",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "m2": {
+    "bbox_height": 39.015,
+    "bbox_width": 305.0,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -3.0,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": -4249.762,
+    "irl_y": 1856.2025,
+    "model": "mycspdk/mzi_heater.gsch",
+    "name": "m2",
+    "nets": {
+      "o1": "net4",
+      "o2": "net3"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -152.5,
+        "irl_ry": 17.5225,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": -152.5,
+        "irl_ry": 15.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 152.5,
+        "irl_ry": 15.4925,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 152.5,
+        "irl_ry": 17.5225,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": -88.0,
+    "y": 37.0
+  },
+  "o1": {
+    "attached_port": {
+      "component_id": "ring1",
+      "port_name": "o1"
+    },
+    "id": null,
+    "name": "o1",
+    "nature": "photonic",
+    "nets": {
+      "P": "net1"
+    },
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": 31.0,
+    "y": -2.0
+  },
+  "o2": {
+    "attached_port": {
+      "component_id": "ring2",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "o2",
+    "nature": "photonic",
+    "nets": {
+      "P": "net2"
+    },
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "type": "port",
+    "x": 44.0,
+    "y": -2.0
+  },
+  "ring1": {
+    "bbox_height": 41.77,
+    "bbox_width": 44.45,
+    "bbox_xmin": -24.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 57.207,
+    "irl_y": -202.954,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "ring1",
+    "nets": {
+      "o1": "net1",
+      "o2": "net5"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 12.0,
+        "irl_ry": 20.66,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -12.0,
+        "irl_ry": 20.66,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "radius": 20
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ring-single",
+    "x": 34.0,
+    "y": -4.0
+  },
+  "ring2": {
+    "bbox_height": 21.77,
+    "bbox_width": 24.45,
+    "bbox_xmin": -14.225,
+    "bbox_ymin": -0.225,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 214.855,
+    "irl_y": -168.309,
+    "model": "cspdk.si220.cells.rings.ring_single",
+    "name": "ring2",
+    "nets": {
+      "o1": "net5",
+      "o2": "net2"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 12.0,
+        "irl_ry": 10.66,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -12.0,
+        "irl_ry": 10.66,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ring-single",
+    "x": 39.0,
+    "y": -4.0
+  },
+  "route_0": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_0",
+    "net": "net1",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "d",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "ring1",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        45.207,
+        -182.294
+      ],
+      [
+        -464.793,
+        -182.294
+      ],
+      [
+        -464.793,
+        1375.0
+      ],
+      [
+        4923.0,
+        1375.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_1": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_1",
+    "net": "net2",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "d",
+        "port_name": "o3"
+      },
+      "start": {
+        "component_id": "ring2",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        226.855,
+        -157.649
+      ],
+      [
+        736.855,
+        -157.649
+      ],
+      [
+        736.855,
+        1125.0
+      ],
+      [
+        4923.0,
+        1125.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_2": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_2",
+    "net": "net3",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "m2",
+        "port_name": "o2"
+      },
+      "start": {
+        "component_id": "d",
+        "port_name": "o26"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -4923.0,
+        1125.0
+      ],
+      [
+        -4889.55,
+        1125.0
+      ],
+      [
+        -4889.55,
+        1871.695
+      ],
+      [
+        -4402.262,
+        1871.695
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_3": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_3",
+    "net": "net4",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "m2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "d",
+        "port_name": "o27"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -4923.0,
+        1375.0
+      ],
+      [
+        -4893.0,
+        1375.0
+      ],
+      [
+        -4893.0,
+        1873.725
+      ],
+      [
+        -4402.262,
+        1873.725
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_4": {
+    "cross_section": "strip_cband",
+    "layer": "WG",
+    "name": "route_4",
+    "net": "net5",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "ring2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "ring1",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        69.207,
+        -182.294
+      ],
+      [
+        79.207,
+        -182.294
+      ],
+      [
+        79.207,
+        -157.649
+      ],
+      [
+        202.855,
+        -157.649
+      ]
+    ],
+    "width": 0.45
+  }
+}

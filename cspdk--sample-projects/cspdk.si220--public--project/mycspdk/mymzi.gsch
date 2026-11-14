@@ -1,0 +1,97 @@
+{
+  "mzi": {
+    "bbox_height": 53.45,
+    "bbox_width": 109.1,
+    "bbox_xmin": -10.0,
+    "bbox_ymin": -28.865,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 44.55,
+    "irl_y": 2.14,
+    "model": "cspdk.si220.cells.mzis.mzi",
+    "name": "mzi",
+    "nets": {},
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -54.55,
+        "irl_ry": -0.5,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": -54.55,
+        "irl_ry": -4.5,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 54.55,
+        "irl_ry": -0.5,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o4",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "strip_cband",
+        "irl_rx": 54.55,
+        "irl_ry": -4.5,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "mzi-2x2",
+    "x": 0.0,
+    "y": 0.0
+  }
+}
