@@ -140,7 +140,7 @@ strict = true
 
 [tool.pytest.ini_options]
 # addopts = --tb=no
-addopts = '--tb=short'
+addopts = '--tb=short --ignore=cspdk/_pex.py --ignore-glob=*/cspdk/*/pex/*'  # gfpex is optional: tests/gfpex skips without it
 norecursedirs = ["extra/*.py"]
 python_files = ["test_*.py"]
 testpaths = ["tests"]

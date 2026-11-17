@@ -18,6 +18,9 @@ gf-main:
 test:
 	uv run pytest -s
 
+test-pex:
+	uv run pytest tests/gfpex/ -v
+
 test-ports:
 	uv run pytest -s tests/test_si220_unified_regressions.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
 
@@ -73,4 +76,4 @@ docs-serve:
 update-changelog:
 	claude -p "remove links and make a user friendly changelog from @CHANGELOG.md to @docs/changelog.md"
 
-.PHONY: drc drc-sample doc docs docs-pdf build update-changelog
+.PHONY: drc drc-sample doc docs docs-pdf build update-changelog test-pex
