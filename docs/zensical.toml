@@ -7,6 +7,7 @@ nav = [
   ] },
   { "Reference" = [
     { "Layer Stack" = "layer_stack.md" },
+    { "PEX rules (gfpex)" = "gfpex-pex.md" },
     { "Cells Si220" = "cells_si220.md" },
     { "Cells Si340" = "cells_si340.md" },
     { "Cells Si500" = "cells_si500.md" },
