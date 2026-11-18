@@ -19,6 +19,7 @@ test:
 	uv run pytest -s
 
 test-pex:
+	uv run --no-sync python -c "import gfpex.gfpex"  # fail here, not skip in pytest, if gfpex or a dependency is missing
 	uv run --no-sync pytest tests/test_pex_cspdk.py -v
 
 test-ports:

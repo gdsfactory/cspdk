@@ -60,6 +60,7 @@ def test_metals_stack_upwards(platform: tuple) -> None:
         for layer in config.process_stack.layers
         if layer.metal_layer is not None
     ]
+    assert len(metals) > 1
     for lower, upper in zip(metals, metals[1:]):
         assert upper.z >= lower.z + lower.thickness - 1e-9
     assert config.build_layer_z_lookup()["HEATER_PAD_CON"]
