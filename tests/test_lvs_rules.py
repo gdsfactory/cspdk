@@ -166,14 +166,7 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
             {"length": 109.8},
         ),
         ("heater", {"length": 150}, "straight_heater", 2, {"length": 150.0}),
-        pytest.param(
-            "spiral_racetrack_heater",
-            {},
-            "straight_heater",
-            19,
-            {},
-            marks=pytest.mark.xfail(strict=True, reason="needs flatten, Task 2"),
-        ),
+        ("spiral_racetrack_heater", {}, "straight_heater", 3, {}),
     ],
 )
 def test_pcell_extracts(

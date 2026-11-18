@@ -93,7 +93,7 @@ def spiral_racetrack_heater(
         straight_length: length of the straight segments.
         cross_section: cross_section.
     """
-    return gf.c.spiral_racetrack_heater_metal(
+    c = gf.c.spiral_racetrack_heater_metal(
         straight_length=straight_length,
         min_radius=None,
         spacing=spacing,
@@ -103,4 +103,6 @@ def spiral_racetrack_heater(
         bend_s=gf.get_cell("bend_s"),
         waveguide_cross_section=cross_section,
         via_stack="via_stack_heater_mtop",
-    )
+    ).dup()
+    c.flatten()  # gflvs extracts the heater only from the cell's own polygons
+    return c
