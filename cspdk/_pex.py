@@ -76,8 +76,13 @@ def build_heater_pad_techfile(
     cladding_thickness_um: float,
     heater_thickness_um: float,
     pad_thickness_um: float,
+    palace_fit: dict[str, dict[str, float]],
 ) -> Techfile:
-    """Return the gfpex techfile of one CORNERSTONE heater platform from its sourced stack thicknesses."""
+    """Return the gfpex techfile of one CORNERSTONE heater platform from its sourced stack thicknesses.
+
+    ``palace_fit`` maps HEATER / PAD to their Palace-fitted ``perimeter`` (aF/µm), ``sidewall`` (aF/µm at 1 µm) and
+    ``sidewall_offset`` (µm), from doplaydo/pdk-gfpex-testdata ``cspdk/<platform>/outputs/fit.json``.
+    """
     tech = Techfile(name=name)
     tech.layers = [
         LayerInfo(
@@ -194,32 +199,26 @@ def build_heater_pad_techfile(
         ),
         capacitance=CapacitanceInfo(
             # the pad mostly sits on the cladding, so it shares the heater's oxide path (the 0.15 µm filament step is
-            # ignored). TODO(palace): perimeter (fringe) capacitance
+            # ignored); area DERIVED, perimeter (fringe) PALACE-FIT
             substrates=[
                 SubstrateCapacitance(
-                    layer_name=HEATER, area_capacitance=substrate_area_af_um2
-                ),
-                SubstrateCapacitance(
-                    layer_name=PAD, area_capacitance=substrate_area_af_um2
-                ),
+                    layer_name=metal,
+                    area_capacitance=substrate_area_af_um2,
+                    perimeter_capacitance=palace_fit[metal]["perimeter"],
+                )
+                for metal in (HEATER, PAD)
             ],
-            # no overlap entry: a pad over a filament is the direct contact, both on one net
-            # DERIVED parallel plate through air beside the metal (nothing above the lift-off), 8.854·k·t, offset 0
+            # no overlap or side-overlap entry: a pad over a filament is the direct contact, both on one net
+            # PALACE-FIT: the coupling at the ≥ 5-10 µm DRC spacings decays faster than 1/s (the substrate is closer
+            # than the spacing), so the fit sits on the two closest spacings with a negative offset
             sidewalls=[
                 SidewallCapacitance(
-                    layer_name=HEATER,
-                    capacitance=VACUUM_PERMITTIVITY_AF_PER_UM
-                    * AIR_K
-                    * heater_thickness_um,
-                ),
-                SidewallCapacitance(
-                    layer_name=PAD,
-                    capacitance=VACUUM_PERMITTIVITY_AF_PER_UM
-                    * AIR_K
-                    * pad_thickness_um,
-                ),
+                    layer_name=metal,
+                    capacitance=palace_fit[metal]["sidewall"],
+                    offset=palace_fit[metal]["sidewall_offset"],
+                )
+                for metal in (HEATER, PAD)
             ],
-            # TODO(palace): side-overlap (HEATER edge to PAD) and the fringe through the cladding below the sidewalls
         ),
     )
     return tech

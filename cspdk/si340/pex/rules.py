@@ -28,6 +28,13 @@ PAD_THICKNESS_UM = LAYER_STACK.layers[
     "metal"
 ].thickness  # ASSUMED cspdk.si340.tech.get_layer_stack placeholder
 
+# PALACE-FIT doplaydo/pdk-gfpex-testdata cspdk/si340/outputs/fit.json (Palace 0.16.0, gf-pex
+# benchmarks/palace_benchmark.py): substrate perimeter (aF/µm), sidewall (aF/µm at 1 µm) and its offset (µm)
+PALACE_FIT = {
+    "HEATER": {"perimeter": 20.716, "sidewall": 0.760, "sidewall_offset": -9.000},
+    "PAD": {"perimeter": 19.944, "sidewall": 1.088, "sidewall_offset": -9.000},
+}
+
 DEFAULT_PEX_RULES_CONFIG = build_heater_pad_techfile(
     name="cspdk-si340",
     heater_gds=tuple(LAYER.HEATER),
@@ -37,4 +44,5 @@ DEFAULT_PEX_RULES_CONFIG = build_heater_pad_techfile(
     cladding_thickness_um=CLADDING_THICKNESS_UM,
     heater_thickness_um=HEATER_THICKNESS_UM,
     pad_thickness_um=PAD_THICKNESS_UM,
+    palace_fit=PALACE_FIT,
 )
