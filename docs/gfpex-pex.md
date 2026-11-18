@@ -44,4 +44,7 @@ uv pip install <gfpex wheel> networkx "kfnetlist @ git+https://github.com/gdsfac
 make test-pex
 ```
 
+gfpex is private: installing it needs read access to `doplaydo/gf-pex`, git authenticated for github.com
+(for example `gh auth login && gh auth setup-git`) and a Rust toolchain to build it.
+
 The `Test PEX rules with gfpex` workflow runs the same tests on demand. It needs a `GFPEX_TOKEN` secret.
