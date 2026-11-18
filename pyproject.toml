@@ -141,6 +141,7 @@ strict = true
 [tool.pytest.ini_options]
 # addopts = --tb=no
 addopts = '--tb=short'
+markers = ["slow: long-running gflvs waveguide fits (deselect with -m 'not slow')"]
 norecursedirs = ["extra/*.py"]
 python_files = ["test_*.py"]
 testpaths = ["tests"]
