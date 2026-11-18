@@ -142,6 +142,7 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
         cfg = rules.build_lvs_config()
         assert {t.device_name for t in cfg.device_templates} == heater_names
         assert not cfg.waveguide_device_extraction_config.pcell_generators
+        assert cfg.parameter_relative_tolerance == rules.PARAMETER_RELATIVE_TOLERANCE
 
     with monkeypatch.context() as m:
         m.setattr(rules, "HIERARCHICAL_RUN", True)
@@ -154,6 +155,13 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
             (203, 0),
             (204, 0),
         }
+
+
+# pcell -> why its PIN terminal names differ from its logical pins (TODO in rules.py)
+PIN_NAME_MISMATCH = {
+    "heater": "no logical pins; ports e1/e2",
+    "spiral_racetrack_heater": "pins top/bot",
+}
 
 
 @pytest.mark.parametrize(
@@ -190,9 +198,11 @@ def test_pcell_extracts(
     pdk = rules.process_rules(rules.PROCESS).pdk
     pdk.activate()  # build_lvs_config() has no side effects
     component = pdk.get_component(pcell, **kwargs)
+    assert not component.name.lower().startswith(rules.PASSTHROUGH_DEVICE_CLASS_NAMES)
     gds = tmp_path / "cell.gds"
     component.write_gds(gds)
     top = next(c for c in gdstk.read_gds(str(gds)).cells if c.name == component.name)
+    assert isinstance(top, gdstk.Cell)
     results = ElectricalDeviceExtractionPolicy().execute(
         top, rules.DEVICE_TEMPLATES, cfg.electrical_device_extraction_config
     )
@@ -204,6 +214,13 @@ def test_pcell_extracts(
     values = {p.name: p.value for p in extracted.parameters}
     for name, expected in params.items():
         assert math.isclose(values[name], expected, rel_tol=1e-3), values
+    if pcell not in PIN_NAME_MISMATCH:  # pins: terminal names are the logical pin names
+        assert {
+            t.name for t in extracted.terminals if t.terminal_type == rules.PIN
+        } == (
+            {p.name for p in component.pins}
+            or {p.name for p in component.ports if p.port_type == "electrical"}
+        )
 
 
 def test_heater_terminals_on_traced_nets(

@@ -75,6 +75,8 @@ SKIP_COARSE_SEARCH = (
 )
 HIERARCHICAL_RUN = False  # True → LVS_RUN_MODE_HIERARCHICAL, else FLAT
 VERBOSE = False  # True → LvsConfig.verbose=1
+PARAMETER_RELATIVE_TOLERANCE = 1e-3  # relative tolerance for parameter comparison
+# used instead of PARAMETER_RELATIVE_TOLERANCE while fitting is on
 # ponytail: loosened until gflvs snaps fitted values (gflvs B4: 1 nm on a 0.2 um gap is 5e-3)
 PHOTONIC_PARAMETER_RELATIVE_TOLERANCE = 5e-3
 REFINEMENT_EVALUATIONS = (
@@ -452,6 +454,8 @@ def process_rules(process: str) -> ProcessRules:
         # (length=150 → 150, no waveguide: the filament span); MEDIUM for the meander/spiral.
         # TODO: straight_heater_meander/spiral_racetrack_heater length is a bounding box
         # (166.358 / 156.302), not the length kwarg; needs a path-length extractor
+        # TODO(issue: pending): terminal ↔ pin name mismatch: heater() has no logical pins (ports e1/e2) and
+        # spiral_racetrack_heater's pins are top/bot; one "l/r" name can't follow all three PCells.
         heater_templates = [
             tpl(
                 "heater",
@@ -593,7 +597,9 @@ def build_lvs_config() -> LvsConfig:
             parameter_extractors=PARAMETER_EXTRACTORS,
         ),
         waveguide_device_extraction_config=waveguide_config(rules),
-        parameter_relative_tolerance=PHOTONIC_PARAMETER_RELATIVE_TOLERANCE,
+        parameter_relative_tolerance=PHOTONIC_PARAMETER_RELATIVE_TOLERANCE
+        if ENABLE_DEVICE_EXTRACTION and ENABLE_WAVEGUIDE_DEVICE_FITTING
+        else PARAMETER_RELATIVE_TOLERANCE,
         run_mode=LvsRunMode.LVS_RUN_MODE_HIERARCHICAL
         if HIERARCHICAL_RUN
         else LvsRunMode.LVS_RUN_MODE_FLAT,
