@@ -454,7 +454,7 @@ def process_rules(process: str) -> ProcessRules:
         # (length=150 → 150, no waveguide: the filament span); MEDIUM for the meander/spiral.
         # TODO: straight_heater_meander/spiral_racetrack_heater length is a bounding box
         # (166.358 / 156.302), not the length kwarg; needs a path-length extractor
-        # TODO(issue: pending): terminal ↔ pin name mismatch: heater() has no logical pins (ports e1/e2) and
+        # TODO(https://github.com/gdsfactory/cspdk/issues/460): terminal ↔ pin name mismatch: heater() has no logical pins (ports e1/e2) and
         # spiral_racetrack_heater's pins are top/bot; one "l/r" name can't follow all three PCells.
         heater_templates = [
             tpl(
@@ -479,7 +479,7 @@ def process_rules(process: str) -> ProcessRules:
             )
         ]
         # PAD only: the PDK's ("HEATER", "HEATER", "PAD") would short every heater pad to pad
-        # TODO(issue: pending): tech.CONNECTIVITY ("HEATER", "HEATER", "PAD") shorts every heater
+        # TODO(https://github.com/gdsfactory/cspdk/issues/460): tech.CONNECTIVITY ("HEATER", "HEATER", "PAD") shorts every heater
         connectivity = {_key(LAYER.PAD): []}
 
     waveguide_layers = {_key(core)}
