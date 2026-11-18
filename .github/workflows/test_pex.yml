@@ -23,4 +23,4 @@ jobs:
             "gfpex @ git+https://github.com/doplaydo/gf-pex@dev/diogo-main"
       - name: Run PEX tests
         # --no-sync: uv.lock pins PyPI kfnetlist, which lacks the morphnet module gfpex imports
-        run: uv run --no-sync pytest tests/gfpex/ -v
+        run: uv run --no-sync pytest tests/test_pex_cspdk.py -v

@@ -19,7 +19,7 @@ test:
 	uv run pytest -s
 
 test-pex:
-	uv run --no-sync pytest tests/gfpex/ -v
+	uv run --no-sync pytest tests/test_pex_cspdk.py -v
 
 test-ports:
 	uv run pytest -s tests/test_si220_unified_regressions.py::test_optical_port_positions tests/test_si500.py::test_optical_port_positions tests/test_sin300.py::test_optical_port_positions
