@@ -10,9 +10,9 @@ Usage::
     rules.PROCESS = "sin300"  # any of rules.PROCESSES
     gflvs.lvs(netlist, lib, rules.build_lvs_config())
 
-``build_lvs_config()`` reads the flags below at call time and activates the
-sub-PDK picked by ``PROCESS``; the waveguide generators re-activate it on every
-call, as the cspdk sub-PDKs share cell names.
+``build_lvs_config()`` reads the flags below at call time. Building it has no
+side effects: the waveguide generators activate the sub-PDK picked by
+``PROCESS`` on every call, as the cspdk sub-PDKs share cell names.
 
 Targets the gflvs ``dev`` API (``gflvs.gflvs_refactor``: ``LvsConfig``,
 ``NetlistTracerConfig``, ``ElectricalDeviceExtractionConfig``,
@@ -47,6 +47,7 @@ from gflvs.gflvs_schema import (
     DeviceTerminalTemplate,
     DeviceTerminalType,
     LayerGds,
+    LayerOffsetOperation,
     LayerOperation,
     LayerRef,
     LvsRunMode,
@@ -108,6 +109,14 @@ def L(layer: Any) -> LayerRef:
 def op(x: LayerRef | LayerOperation) -> LayerOperation:
     """Wrap a bare layer as a LayerOperation."""
     return x if isinstance(x, LayerOperation) else LayerOperation(layer_ref_left=x)
+
+
+def grow(x: LayerRef | LayerOperation, d: float) -> LayerOperation:
+    """Isotropic sizing of *x* by *d* um."""
+    side = "layer_ref_left" if isinstance(x, LayerRef) else "layer_op_left"
+    return LayerOperation(
+        **{side: x}, offset_op=LayerOffsetOperation(offset_x=d, offset_y=d)
+    )
 
 
 def pin(name: str, x: LayerRef | LayerOperation) -> DeviceTerminalTemplate:
@@ -245,14 +254,23 @@ def check_bounds(devices: Iterable[WaveguideDevice]) -> None:
             (p.param_bound_min, p.param_bound_max)
             for p in template.device_parameter_template
         ]
+        # every integer of an n_* range (each variant), the two ends of the others
+        axes = [
+            range(int(lo), int(hi) + 1) if name.startswith("n_") else (lo, hi)
+            for name, (lo, hi) in zip(names, box)
+        ]
         for point in [
-            *itertools.product(*box),
+            *itertools.product(*axes),
             tuple((lo + hi) / 2 for lo, hi in box),
         ]:
             generator(**dict(zip(names, point)))
 
 
 # ── Per-process rules ───────────────────────────────────────────────
+# ponytail: tuned on PCell geometry; re-measure if PCell rules change.
+# Farthest HEATER - PAD point from the waveguide: 10.0 um (spiral_racetrack_heater),
+# 5.0 um (straight_heater_metal, both bands, with/without undercut), 3.0 um (meander).
+HEATER_WG_REACH = 15.0
 # Bounds: waveguide-cspdk.md, widened to cover every registered variant of
 # the current sub-PDK (PDK defaults x ~0.5-2). Lower bounds are then raised to
 # the sub-PDK's design-rule minimums, below which the cells raise (_RULE_MINIMUMS).
@@ -325,8 +343,9 @@ def process_rules(process: str) -> ProcessRules:
         strip, rib = f"strip_{band}", f"rib_{band}"
         devices = [
             # *_rib MMIs differ only on SLAB, which is not compared: one template each
-            # CONFIDENCE: HIGH — every si220 template below fitted back exactly
-            # (test_waveguide_fit, C-band; O-band mmi1x2 too)
+            # CONFIDENCE: HIGH on C-band (all six fitted back exactly, test_waveguide_fit);
+            # on O-band HIGH for mmi1x2, MEDIUM for the rest (all corners build, not fitted)
+            # TODO: a si220 layout mixing C- and O-band cells misfits under one PROCESS
             wd("mmi1x2", partial(cells.mmi1x2, cross_section=strip), **SI_MMI_BOUNDS),
             wd("mmi2x2", partial(cells.mmi2x2, cross_section=strip), **SI_MMI_BOUNDS),
             wd(
@@ -429,8 +448,10 @@ def process_rules(process: str) -> ProcessRules:
     connectivity: dict[LayerKey, list[LayerKey]] = {}
     if hasattr(LAYER, "HEATER"):
         WG, HEATER, PAD = L(core), L(LAYER.HEATER), L(LAYER.PAD)
-        # CONFIDENCE: HIGH — straight_heater_metal L=320 → length 329.8 (pad to pad),
-        # heater(length=200) → 200; meander/spiral lengths are bounding boxes, not path lengths
+        # CONFIDENCE: HIGH for straight_heater_metal (L=320 → length 320) and heater()
+        # (length=150 → 150, no waveguide: the filament span); MEDIUM for the meander/spiral.
+        # TODO: straight_heater_meander/spiral_racetrack_heater length is a bounding box
+        # (166.358 / 156.302), not the length kwarg; needs a path-length extractor
         heater_templates = [
             tpl(
                 "heater",
@@ -441,8 +462,16 @@ def process_rules(process: str) -> ProcessRules:
                 # along x. heater() calls them e1/e2, the flat spiral top/bot.
                 # "o": one WG & HEATER piece spans the PCell's o1..o2, so no port name fits.
                 [pin("l/r", PAD & HEATER), port("o", WG & HEATER)],
-                # filament between the pads; it also glues l, o and r into one device
-                [par("length", HEATER - PAD)],
+                [
+                    # heater over the waveguide; a waveguide-less heater() falls back to
+                    # its filament (HEATER - PAD beyond HEATER_WG_REACH of any WG)
+                    par(
+                        "length", HEATER & WG | HEATER - PAD - grow(WG, HEATER_WG_REACH)
+                    ),
+                    # filament between the pads: glues l, o and r into one device;
+                    # gflvs compares only parameters the reference netlist names
+                    par("span", HEATER - PAD),
+                ],
             )
         ]
         # PAD only: the PDK's ("HEATER", "HEATER", "PAD") would short every heater pad to pad
@@ -480,7 +509,8 @@ DEVICE_TEMPLATES = HEATER_TEMPLATES  # electrical templates
 MARKER_LAYERS = _DEFAULT.marker_layers
 NO_MARKER_TEMPLATES: frozenset[str] = frozenset()  # the heater uses HEATER
 PARAMETER_EXTRACTORS: dict[tuple[str, str], Callable[[list[gdstk.Polygon]], float]] = {
-    ("heater", "length"): bbox_long
+    ("heater", "length"): bbox_long,
+    ("heater", "span"): bbox_long,
 }
 WAVEGUIDE_DEVICES = _DEFAULT.waveguide_devices
 WAVEGUIDE_TEMPLATES = [t for t, _ in WAVEGUIDE_DEVICES]
@@ -537,7 +567,6 @@ def _blackboxed(template: DeviceTemplate) -> DeviceTemplate:
 def build_lvs_config() -> LvsConfig:
     """LvsConfig for PROCESS from the module flags, read at call time."""
     rules = process_rules(PROCESS)
-    rules.pdk.activate()
     templates: list[DeviceTemplate] = []
     if ENABLE_DEVICE_EXTRACTION:
         if ENABLE_HEATER_TEMPLATES:

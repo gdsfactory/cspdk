@@ -64,18 +64,26 @@ def test_terminals_use_markers(process: str) -> None:
 
 
 def _positive_leaves(op: Any) -> set[tuple[int, int]]:
-    """Leaf layers a region must lie on: the right operand of a NOT is excluded."""
-    if op.WhichOneof("layer_left") == "layer_ref_left":
-        left = {(op.layer_ref_left.layer.layer, op.layer_ref_left.layer.datatype)}
-    else:
-        left = _positive_leaves(op.layer_op_left)
-    if op.bool_op == LayerBooleanOperation.LAYER_BOOLEAN_OPERATION_NOT:
+    """Leaf layers every point of the region lies on.
+
+    AND adds both sides, OR keeps the layers common to both, NOT and sizing keep
+    the left side only.
+    """
+
+    def leaves(side: str) -> set[tuple[int, int]]:
+        if op.WhichOneof(f"layer_{side}") == f"layer_ref_{side}":
+            ref = getattr(op, f"layer_ref_{side}")
+            return {(ref.layer.layer, ref.layer.datatype)}
+        return _positive_leaves(getattr(op, f"layer_op_{side}"))
+
+    left = leaves("left")
+    if op.WhichOneof("operation") != "bool_op":
         return left
-    which = op.WhichOneof("layer_right")
-    if which == "layer_ref_right":
-        ref = op.layer_ref_right
-        return left | {(ref.layer.layer, ref.layer.datatype)}
-    return left | (_positive_leaves(op.layer_op_right) if which else set())
+    if op.bool_op == LayerBooleanOperation.LAYER_BOOLEAN_OPERATION_AND:
+        return left | leaves("right")
+    if op.bool_op == LayerBooleanOperation.LAYER_BOOLEAN_OPERATION_OR:
+        return left & leaves("right")
+    return left
 
 
 def test_unknown_process_raises(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -122,6 +130,7 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
         assert cfg.device_templates
         assert all(t.properties["blackbox"] == "true" for t in cfg.device_templates)
     assert all("blackbox" not in t.properties for t in rules.HEATER_TEMPLATES)
+    assert all("blackbox" not in t.properties for t in rules.WAVEGUIDE_TEMPLATES)
 
     with monkeypatch.context() as m:
         m.setattr(rules, "ENABLE_HEATER_TEMPLATES", False)
@@ -145,7 +154,6 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
             (203, 0),
             (204, 0),
         }
-    rules.build_lvs_config()  # re-activate the default sub-PDK
 
 
 @pytest.mark.parametrize(
@@ -156,14 +164,14 @@ def test_flags_toggle(monkeypatch: pytest.MonkeyPatch) -> None:
             {"length": 320},
             "straight_heater",
             3,
-            {"length": 329.8},
+            {"length": 320.0},
         ),
         (
             "straight_heater_metal",
             {"length": 100},
             "straight_heater",
             3,
-            {"length": 109.8},
+            {"length": 100.0},
         ),
         ("heater", {"length": 150}, "straight_heater", 2, {"length": 150.0}),
         ("spiral_racetrack_heater", {}, "straight_heater", 3, {}),
@@ -178,8 +186,10 @@ def test_pcell_extracts(
     tmp_path: Path,
 ) -> None:
     """A heater PCell extracts exactly one device with the verified terminals and parameters."""
-    cfg = rules.build_lvs_config()  # si220_cband, activates the sub-PDK
-    component = rules.process_rules(rules.PROCESS).pdk.get_component(pcell, **kwargs)
+    cfg = rules.build_lvs_config()  # si220_cband
+    pdk = rules.process_rules(rules.PROCESS).pdk
+    pdk.activate()  # build_lvs_config() has no side effects
+    component = pdk.get_component(pcell, **kwargs)
     gds = tmp_path / "cell.gds"
     component.write_gds(gds)
     top = next(c for c in gdstk.read_gds(str(gds)).cells if c.name == component.name)
@@ -202,9 +212,9 @@ def test_heater_terminals_on_traced_nets(
     """Tracer plus extraction: the heater's two pins sit on two distinct PAD nets."""
     monkeypatch.setattr(rules, "ENABLE_WAVEGUIDE_DEVICE_FITTING", False)
     cfg = rules.build_lvs_config()
-    component = rules.process_rules(rules.PROCESS).pdk.get_component(
-        "straight_heater_metal"
-    )
+    pdk = rules.process_rules(rules.PROCESS).pdk
+    pdk.activate()
+    component = pdk.get_component("straight_heater_metal")
     gds = tmp_path / "heater.gds"
     component.write_gds(gds)
     _, l2n, _ = gflvs.layout_to_netlist(
