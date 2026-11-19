@@ -7,3 +7,4 @@ __pycache__/
 !mycspdk/gds/*.gds
 *.oas
 *.html
+uv.lock
