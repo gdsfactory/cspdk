@@ -29,6 +29,7 @@ requires-python = ">=3.12,<3.15"
 version = "2.1.0"
 
 [project.optional-dependencies]
+lvs = ["gflvs", "kfnetlist", "pymoo>=0.6.0"]  # pymoo: gflvs imports it but only lists it as a dev dep
 dev = [
   "doroutes",
   "jsondiff",
@@ -241,3 +242,14 @@ start_string = "<!-- towncrier release notes start -->\n"
 template = ".changelog.d/changelog_template.jinja"
 title_format = "## [{version}](https://github.com/gdsfactory/cspdk/releases/tag/v{version}) - {project_date}"
 underlines = ["", "", ""]
+
+[tool.uv]
+# gflvs (`lvs` extra) needs kfnetlist main (0.4.x, protobuf>=7.36) and numpy>=2.5.1. These lift circulax's
+# kfnetlist<0.4 pin, vlsir's protobuf cap and tidy3d's numpy<2.5 cap for the whole project; protobuf>=7.36
+# also covers CVE-2026-0994.
+override-dependencies = ["protobuf>=7.36", "kfnetlist>=0.4.1", "numpy>=2.5.1"]
+
+[tool.uv.sources]
+gflvs = { git = "https://github.com/doplaydo/gflvs.git", branch = "dev" }
+# rev (not branch) must match gflvs's own kfnetlist source, or uv sees two URLs
+kfnetlist = { git = "https://github.com/gdsfactory/kfnetlist.git", rev = "main" }
