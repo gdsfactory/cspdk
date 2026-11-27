@@ -1,0 +1,213 @@
+{
+  "r2<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 405.0,
+    "irl_y": -54.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.2>",
+    "x": 1.0,
+    "y": 20.0
+  },
+  "s1<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 29.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.5,
+    "irl_y": 58.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.1>",
+    "props": {
+      "length": 29
+    },
+    "x": -9.0,
+    "y": -2.0
+  },
+  "s1<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 29.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.5,
+    "irl_y": 56.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.2>",
+    "props": {
+      "length": 29
+    },
+    "x": -9.0,
+    "y": 2.0
+  },
+  "bundle1": {
+    "type": "polyline",
+    "id": "bundle1",
+    "name": "bundle1",
+    "terminals": {
+      "start": {
+        "device": "s2<0.0-2>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r2<0.0-2>",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net1"
+  },
+  "r1<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 98.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.1>",
+    "x": 1.0,
+    "y": 5.0
+  },
+  "s2<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -4.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.2>",
+    "x": -11.0,
+    "y": 19.0
+  },
+  "s1<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 29.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 14.5,
+    "irl_y": 60.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s1<0.0>",
+    "props": {
+      "length": 29
+    },
+    "x": -9.0,
+    "y": -6.0
+  },
+  "s2<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -0.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.0>",
+    "x": -11.0,
+    "y": 11.0
+  },
+  "s2<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 5.0,
+    "irl_y": -2.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "s2<0.1>",
+    "x": -11.0,
+    "y": 15.0
+  },
+  "r2<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 405.0,
+    "irl_y": -50.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.0>",
+    "x": 5.0,
+    "y": 12.0
+  },
+  "r1<0.0>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 100.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.0>",
+    "x": 1.0,
+    "y": 1.0
+  },
+  "r1<0.2>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 205.0,
+    "irl_y": 96.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r1<0.2>",
+    "x": 1.0,
+    "y": 9.0
+  },
+  "r2<0.1>": {
+    "type": "straight",
+    "bbox_height": 3.2,
+    "bbox_width": 10.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -1.6,
+    "id": null,
+    "irl_x": 405.0,
+    "irl_y": -52.0,
+    "model": "cspdk.ge_on_si.cells.straight",
+    "name": "r2<0.1>",
+    "x": 1.0,
+    "y": 16.0
+  },
+  "bundle2": {
+    "type": "polyline",
+    "id": "bundle2",
+    "name": "bundle2",
+    "terminals": {
+      "start": {
+        "device": "s1<0.0-2>",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "r1<0.0-2>",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net2"
+  }
+}

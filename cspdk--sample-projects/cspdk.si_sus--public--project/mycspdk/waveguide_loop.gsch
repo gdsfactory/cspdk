@@ -1,0 +1,83 @@
+{
+  "o1": {
+    "type": "port",
+    "id": null,
+    "name": "o1",
+    "x": 0.0,
+    "y": 0.0,
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "attached_port": {
+      "component_id": "lower",
+      "port_name": "o1"
+    }
+  },
+  "upper": {
+    "type": "straight",
+    "id": null,
+    "irl_x": 0.0,
+    "irl_y": -163.0,
+    "model": "straight",
+    "name": "upper",
+    "nets": {
+      "o1": "port_net_o2",
+      "o2": "net1"
+    },
+    "props": {
+      "cross_section": "xs_sus",
+      "length": 500
+    },
+    "x": 0.0,
+    "y": -3.0
+  },
+  "lower": {
+    "type": "straight",
+    "id": null,
+    "irl_x": 0.0,
+    "irl_y": -0.0,
+    "model": "straight",
+    "name": "lower",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "net1"
+    },
+    "props": {
+      "cross_section": "xs_sus",
+      "length": 500
+    },
+    "x": 5.0,
+    "y": -0.0
+  },
+  "loop": {
+    "type": "polyline",
+    "id": "loop",
+    "name": "loop",
+    "terminals": {
+      "start": {
+        "device": "lower",
+        "port": "o2"
+      },
+      "finish": {
+        "device": "upper",
+        "port": "o2"
+      }
+    },
+    "cross_section": "xs_sus",
+    "net": "net1"
+  },
+  "o2": {
+    "type": "port",
+    "id": null,
+    "name": "o2",
+    "x": 0.0,
+    "y": 0.0,
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "attached_port": {
+      "component_id": "upper",
+      "port_name": "o1"
+    }
+  }
+}

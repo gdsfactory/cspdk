@@ -1,0 +1,231 @@
+{
+  "connection_5": {
+    "type": "wire",
+    "id": "connection_5",
+    "name": "port_net_o3",
+    "x": 9.0,
+    "y": -2.0,
+    "rx": 3.0,
+    "ry": 0.0,
+    "net": "port_net_o3"
+  },
+  "bundle_1_0": {
+    "type": "polyline",
+    "id": "bundle_1_0",
+    "name": "bundle_1_0",
+    "terminals": {
+      "start": {
+        "device": "mzi1",
+        "port": "o4"
+      },
+      "finish": {
+        "device": "mzi2",
+        "port": "o1"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net1"
+  },
+  "mzi1": {
+    "type": "ckt",
+    "bbox_height": 51.48,
+    "bbox_width": 205.1,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -28.24,
+    "id": null,
+    "irl_x": 82.55,
+    "irl_y": 2.5,
+    "model": "cspdk.si220.cells.mzis.mzi",
+    "name": "mzi1",
+    "nets": {
+      "o1": "port_net_o1",
+      "o2": "port_net_o2",
+      "o3": "net2",
+      "o4": "net1"
+    },
+    "props": {
+      "splitter": "mmi2x2"
+    },
+    "x": 1.0,
+    "y": -4.0
+  },
+  "connection_3": {
+    "type": "wire",
+    "id": "connection_3",
+    "name": "port_net_o1",
+    "x": 1.0,
+    "y": -1.0,
+    "rx": -2.0,
+    "ry": -3.0,
+    "net": "port_net_o1"
+  },
+  "mzi2": {
+    "type": "ckt",
+    "bbox_height": 96.48,
+    "bbox_width": 205.1,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -73.24,
+    "id": null,
+    "irl_x": 387.65000000000003,
+    "irl_y": 24.99999999999999,
+    "model": "cspdk.si220.cells.mzis.mzi",
+    "name": "mzi2",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2",
+      "o3": "port_net_o3",
+      "o4": "port_net_o4"
+    },
+    "props": {
+      "delta_length": 100,
+      "splitter": "mmi2x2"
+    },
+    "x": 7.0,
+    "y": -3.0
+  },
+  "o4": {
+    "type": "port",
+    "id": null,
+    "name": "o4",
+    "x": 12.0,
+    "y": 0.0,
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "port_net_o4"
+    },
+    "attached_port": {
+      "component_id": "mzi2",
+      "port_name": "o4"
+    }
+  },
+  "o2": {
+    "type": "port",
+    "id": null,
+    "name": "o2",
+    "x": -2.0,
+    "y": -3.0,
+    "transform": [
+      1.0,
+      0.0,
+      -0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "port_net_o2"
+    },
+    "attached_port": {
+      "component_id": "mzi1",
+      "port_name": "o2"
+    }
+  },
+  "bundle_0_0": {
+    "type": "polyline",
+    "id": "bundle_0_0",
+    "name": "bundle_0_0",
+    "terminals": {
+      "start": {
+        "device": "mzi1",
+        "port": "o3"
+      },
+      "finish": {
+        "device": "mzi2",
+        "port": "o2"
+      }
+    },
+    "routing_strategy": "route_astar",
+    "net": "net2"
+  },
+  "connection_1": {
+    "type": "wire",
+    "id": "connection_1",
+    "name": "pic_net1",
+    "x": 3.0,
+    "y": -1.0,
+    "rx": 4.0,
+    "ry": 1.0,
+    "net": "net1"
+  },
+  "connection_2": {
+    "type": "wire",
+    "id": "connection_2",
+    "name": "pic_net2",
+    "x": 3.0,
+    "y": -3.0,
+    "rx": 4.0,
+    "ry": 1.0,
+    "net": "net2"
+  },
+  "o1": {
+    "type": "port",
+    "id": null,
+    "name": "o1",
+    "x": -1.0,
+    "y": -4.0,
+    "transform": [
+      0.0,
+      1.0,
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "port_net_o1"
+    },
+    "attached_port": {
+      "component_id": "mzi1",
+      "port_name": "o1"
+    }
+  },
+  "o3": {
+    "type": "port",
+    "id": null,
+    "name": "o3",
+    "x": 12.0,
+    "y": -2.0,
+    "transform": [
+      -1.0,
+      0.0,
+      -0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "nets": {
+      "P": "port_net_o3"
+    },
+    "attached_port": {
+      "component_id": "mzi2",
+      "port_name": "o3"
+    }
+  },
+  "connection_4": {
+    "type": "wire",
+    "id": "connection_4",
+    "name": "port_net_o2",
+    "x": 1.0,
+    "y": -3.0,
+    "rx": -3.0,
+    "ry": 0.0,
+    "net": "port_net_o2"
+  },
+  "connection_6": {
+    "type": "wire",
+    "id": "connection_6",
+    "name": "port_net_o4",
+    "x": 9.0,
+    "y": 0.0,
+    "rx": 3.0,
+    "ry": 0.0,
+    "net": "port_net_o4"
+  }
+}
