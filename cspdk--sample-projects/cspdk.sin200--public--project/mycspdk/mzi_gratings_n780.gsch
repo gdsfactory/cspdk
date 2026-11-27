@@ -1,0 +1,436 @@
+{
+  "gc_in": {
+    "bbox_height": 7.0,
+    "bbox_width": 233.288,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -3.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": -266.644,
+    "irl_y": -0.0,
+    "model": "cspdk.sin200.cells.grating_coupler_rectangular_n780",
+    "name": "gc_in",
+    "nets": {
+      "o1": "net1",
+      "o2": "port_net_in"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 5.0,
+    "y": 0.0
+  },
+  "gc_out1": {
+    "bbox_height": 7.0,
+    "bbox_width": 233.288,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -3.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 916.644,
+    "irl_y": 63.5,
+    "model": "cspdk.sin200.cells.grating_coupler_rectangular_n780",
+    "name": "gc_out1",
+    "nets": {
+      "o1": "net3",
+      "o2": "port_net_out1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 10.0,
+    "y": 0.0
+  },
+  "gc_out2": {
+    "bbox_height": 7.0,
+    "bbox_width": 233.288,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -3.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 916.644,
+    "irl_y": -63.5,
+    "model": "cspdk.sin200.cells.grating_coupler_rectangular_n780",
+    "name": "gc_out2",
+    "nets": {
+      "o1": "net2",
+      "o2": "port_net_out2"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -116.644,
+        "irl_ry": 0.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 96.803,
+        "irl_ry": 0.0,
+        "layer": [
+          204,
+          0
+        ],
+        "layer_name": "NITRIDE_ETCH",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 7.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 15.0,
+    "y": 0.0
+  },
+  "in": {
+    "attached_port": {
+      "component_id": "gc_in",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "in",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_in"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "mzi": {
+    "bbox_height": 296.75,
+    "bbox_width": 509.7,
+    "bbox_xmin": -40.0,
+    "bbox_ymin": -173.375,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 214.85,
+    "irl_y": 25.0,
+    "model": "cspdk.sin200.cells.mzi_n780",
+    "name": "mzi",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2",
+      "o3": "net3"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": -254.85,
+        "irl_ry": -25.0,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": 254.85,
+        "irl_ry": -23.875,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.5
+      },
+      {
+        "bendRadii": [
+          60.0
+        ],
+        "cross_section": "xs_n780",
+        "irl_rx": 254.85,
+        "irl_ry": -26.125,
+        "layer": [
+          203,
+          0
+        ],
+        "layer_name": "NITRIDE",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.5
+      }
+    ],
+    "props": {
+      "delta_length": 100
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "out1": {
+    "attached_port": {
+      "component_id": "gc_out1",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "out1",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_out1"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "out2": {
+    "attached_port": {
+      "component_id": "gc_out2",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "out2",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_out2"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "route_0": {
+    "cross_section": "xs_n780",
+    "layer": "NITRIDE",
+    "name": "route_0",
+    "net": "net1",
+    "radius": 60.0,
+    "terminals": {
+      "finish": {
+        "component_id": "mzi",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "gc_in",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -150.0,
+        -0.0
+      ],
+      [
+        -40.0,
+        -0.0
+      ]
+    ],
+    "width": 0.5
+  },
+  "route_1": {
+    "cross_section": "xs_n780",
+    "layer": "NITRIDE",
+    "name": "route_1",
+    "net": "net2",
+    "radius": 60.0,
+    "sbend_segments": {
+      "1": {
+        "cross_section": "xs_n780",
+        "factory": "bend_s"
+      }
+    },
+    "terminals": {
+      "finish": {
+        "component_id": "gc_out2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        469.7,
+        -1.125
+      ],
+      [
+        634.85,
+        -1.125
+      ],
+      [
+        634.85,
+        -63.5
+      ],
+      [
+        800.0,
+        -63.5
+      ]
+    ],
+    "width": 0.5
+  },
+  "route_2": {
+    "cross_section": "xs_n780",
+    "layer": "NITRIDE",
+    "name": "route_2",
+    "net": "net3",
+    "radius": 60.0,
+    "sbend_segments": {
+      "1": {
+        "cross_section": "xs_n780",
+        "factory": "bend_s"
+      }
+    },
+    "terminals": {
+      "finish": {
+        "component_id": "gc_out1",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi",
+        "port_name": "o3"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        469.7,
+        1.125
+      ],
+      [
+        634.85,
+        1.125
+      ],
+      [
+        634.85,
+        63.5
+      ],
+      [
+        800.0,
+        63.5
+      ]
+    ],
+    "width": 0.5
+  }
+}

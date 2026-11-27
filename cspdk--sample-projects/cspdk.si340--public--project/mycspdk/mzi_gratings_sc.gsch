@@ -1,0 +1,426 @@
+{
+  "gc_in": {
+    "bbox_height": 11.0,
+    "bbox_width": 392.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 180.0,
+    "irl_x": -346.0,
+    "irl_y": -0.0,
+    "model": "cspdk.si340.cells.grating_coupler_rectangular_sc",
+    "name": "gc_in",
+    "nets": {
+      "o1": "net1",
+      "o2": "port_net_in"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": -196.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.265,
+        "irl_ry": 0.0,
+        "layer": [
+          6,
+          0
+        ],
+        "layer_name": "GRA",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 5.0,
+    "y": 0.0
+  },
+  "gc_out1": {
+    "bbox_height": 11.0,
+    "bbox_width": 392.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 996.0,
+    "irl_y": 63.5,
+    "model": "cspdk.si340.cells.grating_coupler_rectangular_sc",
+    "name": "gc_out1",
+    "nets": {
+      "o1": "net3",
+      "o2": "port_net_out1"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": -196.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.265,
+        "irl_ry": 0.0,
+        "layer": [
+          6,
+          0
+        ],
+        "layer_name": "GRA",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 10.0,
+    "y": 0.0
+  },
+  "gc_out2": {
+    "bbox_height": 11.0,
+    "bbox_width": 392.0,
+    "bbox_xmin": 0.0,
+    "bbox_ymin": -5.5,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 996.0,
+    "irl_y": -63.5,
+    "model": "cspdk.si340.cells.grating_coupler_rectangular_sc",
+    "name": "gc_out2",
+    "nets": {
+      "o1": "net2",
+      "o2": "port_net_out2"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": -196.0,
+        "irl_ry": 0.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          5
+        ],
+        "irl_rx": 174.265,
+        "irl_ry": 0.0,
+        "layer": [
+          6,
+          0
+        ],
+        "layer_name": "GRA",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "vertical_te",
+        "width": 10.0
+      }
+    ],
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 15.0,
+    "y": 0.0
+  },
+  "in": {
+    "attached_port": {
+      "component_id": "gc_in",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "in",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_in"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "mzi": {
+    "bbox_height": 95.6,
+    "bbox_width": 201.3,
+    "bbox_xmin": -20.0,
+    "bbox_ymin": -72.8,
+    "id": null,
+    "irl_flip": false,
+    "irl_orientation": 0.0,
+    "irl_x": 80.65,
+    "irl_y": 25.0,
+    "model": "cspdk.si340.cells.mzi_sc",
+    "name": "mzi",
+    "nets": {
+      "o1": "net1",
+      "o2": "net2",
+      "o3": "net3"
+    },
+    "ports": [
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": -100.65,
+        "irl_ry": -25.0,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o1",
+        "orientation": 180.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": 100.65,
+        "irl_ry": -23.985,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o3",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      },
+      {
+        "bendRadii": [
+          10.0
+        ],
+        "cross_section": "xs_sc340",
+        "irl_rx": 100.65,
+        "irl_ry": -26.015,
+        "layer": [
+          3,
+          0
+        ],
+        "layer_name": "WG",
+        "name": "o2",
+        "orientation": 0.0,
+        "port_type": "optical",
+        "width": 0.45
+      }
+    ],
+    "props": {
+      "delta_length": 100
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "type": "ckt",
+    "x": 0.0,
+    "y": -0.0
+  },
+  "out1": {
+    "attached_port": {
+      "component_id": "gc_out1",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "out1",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_out1"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "out2": {
+    "attached_port": {
+      "component_id": "gc_out2",
+      "port_name": "o2"
+    },
+    "id": null,
+    "name": "out2",
+    "nature": "vertical_te",
+    "nets": {
+      "P": "port_net_out2"
+    },
+    "type": "port",
+    "x": 0.0,
+    "y": 0.0
+  },
+  "route_0": {
+    "cross_section": "xs_sc340",
+    "layer": "WG",
+    "name": "route_0",
+    "net": "net1",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "mzi",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "gc_in",
+        "port_name": "o1"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        -150.0,
+        -0.0
+      ],
+      [
+        -20.0,
+        -0.0
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_1": {
+    "bend_type": "bend_circular",
+    "cross_section": "xs_sc340",
+    "layer": "WG",
+    "name": "route_1",
+    "net": "net2",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "gc_out2",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi",
+        "port_name": "o2"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        181.3,
+        -1.015
+      ],
+      [
+        191.3,
+        -1.015
+      ],
+      [
+        191.3,
+        -63.5
+      ],
+      [
+        800.0,
+        -63.5
+      ]
+    ],
+    "width": 0.45
+  },
+  "route_2": {
+    "bend_type": "bend_circular",
+    "cross_section": "xs_sc340",
+    "layer": "WG",
+    "name": "route_2",
+    "net": "net3",
+    "radius": 10.0,
+    "terminals": {
+      "finish": {
+        "component_id": "gc_out1",
+        "port_name": "o1"
+      },
+      "start": {
+        "component_id": "mzi",
+        "port_name": "o3"
+      }
+    },
+    "type": "polyline",
+    "vertices": [
+      [
+        181.3,
+        1.015
+      ],
+      [
+        191.3,
+        1.015
+      ],
+      [
+        191.3,
+        63.5
+      ],
+      [
+        800.0,
+        63.5
+      ]
+    ],
+    "width": 0.45
+  }
+}

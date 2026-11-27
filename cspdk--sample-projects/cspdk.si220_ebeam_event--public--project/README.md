@@ -14,7 +14,7 @@ To learn more, visit **[GDSFactory.com](https://GDSFactory.com)**.
 The 6 x 3 mm design area with a ring on the bottom I/O row and a loopback on
 the next, for normalising the grating response.
 
-- **`mycspdk/ring_die.pic.yml`**: the design as a schematic.
+- **`mycspdk/ring_die.gsch`** (with the same netlist in `ring_die.pic.yml`): the design as a schematic.
 - **`mycspdk/samples/ring_die.py`**: the design in Python, plus
   `ring_transmission()`, which simulates the ring with SAX.
 
